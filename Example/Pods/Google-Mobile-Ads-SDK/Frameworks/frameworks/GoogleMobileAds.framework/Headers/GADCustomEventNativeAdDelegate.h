@@ -12,7 +12,7 @@
 #import <GoogleMobileAds/Mediation/GADMediatedNativeAd.h>
 #import <GoogleMobileAds/Mediation/GADMediatedUnifiedNativeAd.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// The delegate of the GADCustomEventNativeAd object must adopt the GADCustomEventNativeAdDelegate
 /// protocol. Methods in this protocol are used for native ad's custom event communication with the
@@ -33,4 +33,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

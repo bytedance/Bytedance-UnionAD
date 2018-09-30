@@ -8,7 +8,7 @@
 #import <GoogleMobileAds/GADAdLoader.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Native ad image orientation preference.
 typedef NS_ENUM(NSInteger, GADNativeAdImageAdLoaderOptionsOrientation) {
@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, GADNativeAdImageAdLoaderOptionsOrientation) {
 };
 
 /// Ad loader options for native ad image settings.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADNativeAdImageAdLoaderOptions : GADAdLoaderOptions
 
 /// Indicates if image asset content should be loaded by the SDK. If set to YES, the SDK will not
@@ -34,4 +35,4 @@ typedef NS_ENUM(NSInteger, GADNativeAdImageAdLoaderOptionsOrientation) {
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

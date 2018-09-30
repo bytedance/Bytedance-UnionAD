@@ -12,7 +12,7 @@
 
 @class GADBannerView;
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// The class implementing this protocol will be notified when the DFPBannerView changes ad size.
 /// Any views that may be affected by the banner size change will have time to adjust.
@@ -23,4 +23,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

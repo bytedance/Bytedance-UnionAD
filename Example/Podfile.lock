@@ -1,9 +1,9 @@
 PODS:
-  - Bytedance_UnionAd (0.1.0)
-  - Google-Mobile-Ads-SDK (7.31.0)
+  - Bytedance-UnionAD (1.0.0)
+  - Google-Mobile-Ads-SDK (7.34.0)
 
 DEPENDENCIES:
-  - Bytedance_UnionAd (from `../`)
+  - Bytedance-UnionAD (from `../`)
   - Google-Mobile-Ads-SDK
 
 SPEC REPOS:
@@ -11,13 +11,13 @@ SPEC REPOS:
     - Google-Mobile-Ads-SDK
 
 EXTERNAL SOURCES:
-  Bytedance_UnionAd:
+  Bytedance-UnionAD:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Bytedance_UnionAd: 1f1fa7ae3aa3c4f6753b449829350a543bbcaa7f
-  Google-Mobile-Ads-SDK: 6e529e748b45507a2ca904e0b5a52669ba3920c4
+  Bytedance-UnionAD: d42a582e5931b9511182c82da88b7035941be6d7
+  Google-Mobile-Ads-SDK: a1cbce28c0c78ca1fb0b6c4f213485f55527c99f
 
-PODFILE CHECKSUM: 446e78201aedd96f04f5d22cdd7d14261e00ac72
+PODFILE CHECKSUM: 286c5690707200fd8c81c323c91bdde83d9bd125
 
 COCOAPODS: 1.5.3

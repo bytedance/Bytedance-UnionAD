@@ -12,7 +12,7 @@
 @class DFPBannerView;
 @class DFPCustomRenderedAd;
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// The DFPCustomRenderedAd banner view delegate protocol for notifying the delegate of changes to
 /// custom rendered banners.
@@ -25,4 +25,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

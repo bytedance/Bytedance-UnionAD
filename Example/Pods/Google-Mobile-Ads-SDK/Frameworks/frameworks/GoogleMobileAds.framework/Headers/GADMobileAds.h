@@ -8,11 +8,13 @@
 #import <Foundation/Foundation.h>
 
 #import <GoogleMobileAds/GADAudioVideoManager.h>
+#import <GoogleMobileAds/GADRequestConfiguration.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Google Mobile Ads SDK settings.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADMobileAds : NSObject
 
 /// Returns the shared GADMobileAds instance.
@@ -45,6 +47,9 @@ GAD_ASSUME_NONNULL_BEGIN
 /// Manages the Google Mobile Ads SDK's audio and video settings.
 @property(nonatomic, readonly, strong) GADAudioVideoManager *audioVideoManager;
 
+/// Request configuration common to all ad requests.
+@property(nonatomic, readonly, strong) GADRequestConfiguration *requestConfiguration;
+
 /// Returns YES if the current SDK version is at least |major|.|minor|.|patch|. This method can be
 /// used by libraries that depend on a specific minimum version of the Google Mobile Ads SDK to warn
 /// developers if they have an incompatible version.
@@ -56,4 +61,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

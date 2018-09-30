@@ -12,25 +12,28 @@
 
 @class GADDebugOptionsViewController;
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Delegate for the GADDebugOptionsViewController.
 @protocol GADDebugOptionsViewControllerDelegate<NSObject>
+
 /// Called when the debug options flow is finished.
 - (void)debugOptionsViewControllerDidDismiss:(GADDebugOptionsViewController *)controller;
+
 @end
 
 /// Displays debug options to the user.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADDebugOptionsViewController : UIViewController
 
 /// Creates and returns a GADDebugOptionsViewController object initialized with the ad unit ID.
-/// @param adUnitID An ad unit ID for the DFP account that is being configured with debug options.
+/// @param adUnitID An ad unit ID for the Google Ad Manager account that is being configured with
+/// debug options.
 + (instancetype)debugOptionsViewControllerWithAdUnitID:(NSString *)adUnitID;
 
 /// Delegate for the debug options view controller.
-@property(nonatomic, weak, GAD_NULLABLE)
-    IBOutlet id<GADDebugOptionsViewControllerDelegate> delegate;
+@property(nonatomic, weak, nullable) IBOutlet id<GADDebugOptionsViewControllerDelegate> delegate;
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

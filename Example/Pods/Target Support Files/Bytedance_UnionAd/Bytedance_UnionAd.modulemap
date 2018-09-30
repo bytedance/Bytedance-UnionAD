@@ -1,6 +1,0 @@
-framework module Bytedance_UnionAd {
-  umbrella header "Bytedance_UnionAd-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -11,47 +11,48 @@
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 #import <GoogleMobileAds/Mediation/GADMediatedNativeAd.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Provides methods used for constructing native app install ads. The adapter must return an object
 /// conforming to this protocol for native app install requests.
+GAD_DEPRECATED_MSG_ATTRIBUTE("Use GADMediatedUnifiedNativeAd instead.")
 @protocol GADMediatedNativeAppInstallAd<GADMediatedNativeAd>
 
 /// App title.
-- (NSString *GAD_NULLABLE_TYPE)headline;
+- (nullable NSString *)headline;
 
 /// Array of GADNativeAdImage objects related to the advertised application.
-- (NSArray *GAD_NULLABLE_TYPE)images;
+- (nullable NSArray *)images;
 
 /// App description.
-- (NSString *GAD_NULLABLE_TYPE)body;
+- (nullable NSString *)body;
 
 /// Application icon.
-- (GADNativeAdImage *GAD_NULLABLE_TYPE)icon;
+- (nullable GADNativeAdImage *)icon;
 
 /// Text that encourages user to take some action with the ad. For example "Install".
-- (NSString *GAD_NULLABLE_TYPE)callToAction;
+- (nullable NSString *)callToAction;
 
 /// App store rating (0 to 5).
-- (NSDecimalNumber *GAD_NULLABLE_TYPE)starRating;
+- (nullable NSDecimalNumber *)starRating;
 
 /// The app store name. For example, "App Store".
-- (NSString *GAD_NULLABLE_TYPE)store;
+- (nullable NSString *)store;
 
 /// String representation of the app's price.
-- (NSString *GAD_NULLABLE_TYPE)price;
+- (nullable NSString *)price;
 
 @optional
 
 /// AdChoices view.
-- (UIView *GAD_NULLABLE_TYPE)adChoicesView;
+- (nullable UIView *)adChoicesView;
 
 /// Media view.
-- (UIView *GAD_NULLABLE_TYPE)mediaView;
+- (nullable UIView *)mediaView;
 
 /// Returns YES if the ad has video content.
 - (BOOL)hasVideoContent;
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

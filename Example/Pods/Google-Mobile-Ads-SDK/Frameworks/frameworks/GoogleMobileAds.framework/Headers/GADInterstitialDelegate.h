@@ -12,7 +12,7 @@
 
 @class GADInterstitial;
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Delegate for receiving state change messages from a GADInterstitial such as interstitial ad
 /// requests succeeding/failing.
@@ -55,4 +55,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

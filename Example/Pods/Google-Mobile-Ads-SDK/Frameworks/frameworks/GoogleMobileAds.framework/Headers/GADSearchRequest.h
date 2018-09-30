@@ -11,7 +11,7 @@
 #import <GoogleMobileAds/GADRequest.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Search ad border types.
 typedef NS_ENUM(NSUInteger, GADSearchBorderType) {
@@ -29,34 +29,35 @@ typedef NS_ENUM(NSUInteger, GADSearchCallButtonColor) {
 };
 
 /// Specifies parameters for search ads.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADSearchRequest : GADRequest
 
 /// The search ad query.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *query;
+@property(nonatomic, copy, nullable) NSString *query;
 /// The search ad background color.
-@property(nonatomic, readonly, copy, GAD_NULLABLE) UIColor *backgroundColor;
+@property(nonatomic, readonly, copy, nullable) UIColor *backgroundColor;
 /// The search ad gradient "from" color.
-@property(nonatomic, readonly, copy, GAD_NULLABLE) UIColor *gradientFrom;
+@property(nonatomic, readonly, copy, nullable) UIColor *gradientFrom;
 /// The search ad gradient "to" color.
-@property(nonatomic, readonly, copy, GAD_NULLABLE) UIColor *gradientTo;
+@property(nonatomic, readonly, copy, nullable) UIColor *gradientTo;
 /// The search ad header color.
-@property(nonatomic, copy, GAD_NULLABLE) UIColor *headerColor;
+@property(nonatomic, copy, nullable) UIColor *headerColor;
 /// The search ad description text color.
-@property(nonatomic, copy, GAD_NULLABLE) UIColor *descriptionTextColor;
+@property(nonatomic, copy, nullable) UIColor *descriptionTextColor;
 /// The search ad anchor text color.
-@property(nonatomic, copy, GAD_NULLABLE) UIColor *anchorTextColor;
+@property(nonatomic, copy, nullable) UIColor *anchorTextColor;
 /// The search ad text font family.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *fontFamily;
+@property(nonatomic, copy, nullable) NSString *fontFamily;
 /// The search ad header text size.
 @property(nonatomic, assign) NSUInteger headerTextSize;
 /// The search ad border color.
-@property(nonatomic, copy, GAD_NULLABLE) UIColor *borderColor;
+@property(nonatomic, copy, nullable) UIColor *borderColor;
 /// The search ad border type.
 @property(nonatomic, assign) GADSearchBorderType borderType;
 /// The search ad border thickness.
 @property(nonatomic, assign) NSUInteger borderThickness;
 /// The search ad custom channels.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *customChannels;
+@property(nonatomic, copy, nullable) NSString *customChannels;
 /// The search ad call button color.
 @property(nonatomic, assign) GADSearchCallButtonColor callButtonColor;
 
@@ -74,4 +75,4 @@ typedef NS_ENUM(NSUInteger, GADSearchCallButtonColor) {
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

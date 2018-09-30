@@ -8,11 +8,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import <GoogleMobileAds/GADUnifiedNativeAdUnconfirmedClickDelegate.h>
 #import <GoogleMobileAds/GADUnifiedNativeAd.h>
+#import <GoogleMobileAds/GADUnifiedNativeAdUnconfirmedClickDelegate.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 @interface GADUnifiedNativeAd (ConfirmationClick)
 
@@ -31,4 +31,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

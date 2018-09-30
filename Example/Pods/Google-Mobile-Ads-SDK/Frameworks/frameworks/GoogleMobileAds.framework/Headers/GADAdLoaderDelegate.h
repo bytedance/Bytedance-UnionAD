@@ -12,7 +12,7 @@
 
 @class GADAdLoader;
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Base ad loader delegate protocol. Ad types provide extended protocols that declare methods to
 /// handle successful ad loads.
@@ -28,4 +28,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

@@ -9,10 +9,11 @@
 
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Represents a correlation between multiple ads. Set an instance of this object on multiple ads to
 /// indicate they are being used in a common context.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADCorrelator : NSObject
 
 /// Resets the correlator to force a new set of correlated ads.
@@ -20,4 +21,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

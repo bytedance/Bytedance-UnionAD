@@ -12,7 +12,7 @@
 
 @class GADNativeExpressAdView;
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Delegate methods for receiving GADNativeExpressAdView state change messages such as ad request
 /// status and ad click lifecycle.
@@ -51,4 +51,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

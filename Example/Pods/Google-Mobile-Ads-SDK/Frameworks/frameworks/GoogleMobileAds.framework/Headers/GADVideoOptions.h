@@ -8,9 +8,10 @@
 #import <GoogleMobileAds/GADAdLoader.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Video ad options.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADVideoOptions : GADAdLoaderOptions
 
 /// Indicates if videos should start muted. By default this property value is YES.
@@ -24,4 +25,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

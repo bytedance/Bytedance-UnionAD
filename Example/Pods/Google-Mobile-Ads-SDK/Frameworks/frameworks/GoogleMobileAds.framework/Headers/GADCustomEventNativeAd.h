@@ -10,7 +10,7 @@
 #import <GoogleMobileAds/GADCustomEventRequest.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol GADCustomEventNativeAdDelegate;
 
@@ -51,8 +51,8 @@ GAD_ASSUME_NONNULL_BEGIN
 - (BOOL)handlesUserImpressions;
 
 /// Delegate object used for receiving custom native ad load request progress.
-@property(nonatomic, weak, GAD_NULLABLE) id<GADCustomEventNativeAdDelegate> delegate;
+@property(nonatomic, weak, nullable) id<GADCustomEventNativeAdDelegate> delegate;
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

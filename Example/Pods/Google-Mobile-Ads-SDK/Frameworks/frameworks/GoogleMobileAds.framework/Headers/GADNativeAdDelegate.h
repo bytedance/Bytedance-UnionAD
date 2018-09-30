@@ -11,7 +11,7 @@
 
 @class GADNativeAd;
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Identifies native ad assets.
 @protocol GADNativeAdDelegate<NSObject>
@@ -54,4 +54,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

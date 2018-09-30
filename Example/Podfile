@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'Bytedance_UnionAd_Example' do
-  pod 'Bytedance-UnionAd', :path => '../'
+  pod 'Bytedance-UnionAD', :path => '../'
   pod 'Google-Mobile-Ads-SDK'
 
   target 'Bytedance_UnionAd_Tests' do

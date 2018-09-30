@@ -15,7 +15,7 @@
 #import <GoogleMobileAds/GADVideoController.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Native ad custom click handler block. |assetID| is the ID of asset that has received a click.
 typedef void (^GADNativeAdCustomClickHandler)(NSString *assetID);
@@ -27,6 +27,7 @@ GAD_EXTERN NSString *const GADNativeCustomTemplateAdMediaViewKey;
 /// kGADAdLoaderAdTypeNativeCustomTemplate (see GADAdLoaderAdTypes.h) to the |adTypes| parameter in
 /// GADAdLoader's initializer method. If you request this ad type, your delegate must conform to the
 /// GADNativeCustomTemplateAdLoaderDelegate protocol.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADNativeCustomTemplateAd : GADNativeAd
 
 /// The ad's custom template ID.
@@ -40,20 +41,20 @@ GAD_EXTERN NSString *const GADNativeCustomTemplateAdMediaViewKey;
 
 /// Returns media view for rendering video loaded by the receiver. Returns nil if receiver doesn't
 /// has a video.
-@property(nonatomic, readonly, strong, GAD_NULLABLE) GADMediaView *mediaView;
+@property(nonatomic, readonly, strong, nullable) GADMediaView *mediaView;
 
 /// Custom click handler. Set this property only if this template ad is configured with a custom
 /// click action, otherwise set it to nil. If this property is set to a non-nil value, the ad's
 /// built-in click actions are ignored and |customClickHandler| is executed when a click on the
 /// asset is received.
-@property(atomic, copy, GAD_NULLABLE) GADNativeAdCustomClickHandler customClickHandler;
+@property(atomic, copy, nullable) GADNativeAdCustomClickHandler customClickHandler;
 
 /// Returns the native ad image corresponding to the specified key or nil if the image is not
 /// available.
-- (GADNativeAdImage *GAD_NULLABLE_TYPE)imageForKey:(NSString *)key;
+- (nullable GADNativeAdImage *)imageForKey:(NSString *)key;
 
 /// Returns the string corresponding to the specified key or nil if the string is not available.
-- (NSString *GAD_NULLABLE_TYPE)stringForKey:(NSString *)key;
+- (nullable NSString *)stringForKey:(NSString *)key;
 
 /// Call when the user clicks on the ad. Provide the asset key that best matches the asset the user
 /// interacted with. If this ad is configured with a custom click action, ensure the receiver's
@@ -71,7 +72,7 @@ GAD_EXTERN NSString *const GADNativeCustomTemplateAdMediaViewKey;
 ///
 /// This method is deprecated. See performClickOnAssetWithKey: API.
 - (void)performClickOnAssetWithKey:(NSString *)assetKey
-                customClickHandler:(dispatch_block_t GAD_NULLABLE_TYPE)customClickHandler
+                customClickHandler:(nullable dispatch_block_t)customClickHandler
     GAD_DEPRECATED_MSG_ATTRIBUTE("Use performClickOnAssetWithKey:.");
 
 @end
@@ -91,4 +92,4 @@ GAD_EXTERN NSString *const GADNativeCustomTemplateAdMediaViewKey;
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

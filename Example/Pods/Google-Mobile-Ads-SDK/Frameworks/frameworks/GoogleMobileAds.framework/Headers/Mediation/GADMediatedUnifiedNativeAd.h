@@ -11,7 +11,7 @@
 #import <GoogleMobileAds/GADUnifiedNativeAdAssetIdentifiers.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Provides methods used for constructing native ads. The adapter must return an object conforming
 /// to this protocol for native ad requests.
@@ -87,4 +87,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

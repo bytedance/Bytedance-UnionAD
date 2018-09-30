@@ -10,13 +10,14 @@
 
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Native ad image.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADNativeAdImage : NSObject
 
 /// The image. If image autoloading is disabled, this property will be nil.
-@property(nonatomic, readonly, strong, GAD_NULLABLE) UIImage *image;
+@property(nonatomic, readonly, strong, nullable) UIImage *image;
 
 /// The image's URL.
 @property(nonatomic, readonly, copy) NSURL *imageURL;
@@ -26,4 +27,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

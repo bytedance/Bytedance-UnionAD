@@ -12,7 +12,7 @@
 @class DFPCustomRenderedAd;
 @class DFPInterstitial;
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// The DFPCustomRenderedAd interstitial delegate protocol for notifying the delegate of changes to
 /// custom rendered interstitials.
@@ -26,4 +26,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

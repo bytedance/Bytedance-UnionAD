@@ -72,7 +72,8 @@
 /// ad object using the receiver's connector method
 /// adapter:didReceiveNativeAdDataSource:mediationDelegate or adapter:didFailAd: if the ad request
 /// encountered an error.
-- (void)getNativeAdWithAdTypes:(NSArray *)adTypes options:(NSArray *)options;
+- (void)getNativeAdWithAdTypes:(NSArray<GADAdLoaderAdType> *)adTypes
+                       options:(NSArray<GADAdLoaderOptions *> *)options;
 
 /// Indicates if the adapter handles user clicks. If this method returns YES, the adapter must
 /// handle user clicks and notify the Google Mobile Ads SDK of clicks using

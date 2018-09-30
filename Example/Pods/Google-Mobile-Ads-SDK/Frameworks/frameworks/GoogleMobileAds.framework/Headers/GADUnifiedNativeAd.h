@@ -11,18 +11,20 @@
 #import <GoogleMobileAds/GADAdChoicesView.h>
 #import <GoogleMobileAds/GADAdLoaderDelegate.h>
 #import <GoogleMobileAds/GADMediaView.h>
+#import <GoogleMobileAds/GADMuteThisAdReason.h>
 #import <GoogleMobileAds/GADNativeAdImage.h>
-#import <GoogleMobileAds/GADVideoController.h>
 #import <GoogleMobileAds/GADUnifiedNativeAdAssetIdentifiers.h>
 #import <GoogleMobileAds/GADUnifiedNativeAdDelegate.h>
+#import <GoogleMobileAds/GADVideoController.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Unified native ad. To request this ad type, pass kGADAdLoaderAdTypeUnifiedNative
 /// (see GADAdLoaderAdTypes.h) to the |adTypes| parameter in GADAdLoader's initializer method. If
 /// you request this ad type, your delegate must conform to the GADUnifiedNativeAdLoaderDelegate
 /// protocol.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADUnifiedNativeAd : NSObject
 
 #pragma mark - Must be displayed if available
@@ -65,6 +67,13 @@ GAD_ASSUME_NONNULL_BEGIN
 /// custom events, this method returns @"GADMAdapterCustomEvents".
 @property(nonatomic, readonly, copy, nullable) NSString *adNetworkClassName;
 
+/// Indicates whether custom Mute This Ad is available for the native ad.
+@property(nonatomic, readonly, getter=isCustomMuteThisAdAvailable) BOOL customMuteThisAdAvailable;
+
+/// An array of Mute This Ad reasons used to render customized mute ad survey. Use this array to
+/// implement your own Mute This Ad feature only when customMuteThisAdAvailable is YES.
+@property(nonatomic, readonly, nullable) NSArray<GADMuteThisAdReason *> *muteThisAdReasons;
+
 /// Registers ad view, clickable asset views, and nonclickable asset views with this native ad.
 /// Media view shouldn't be registered as clickable.
 /// @param clickableAssetViews Dictionary of asset views that are clickable, keyed by asset IDs.
@@ -79,6 +88,10 @@ GAD_ASSUME_NONNULL_BEGIN
 /// Unregisters ad view from this native ad. The corresponding asset views will also be
 /// unregistered.
 - (void)unregisterAdView;
+
+/// Reports the mute event with the mute reason selected by user. Use nil if no reason was selected.
+/// Call this method only if customMuteThisAdAvailable is YES.
+- (void)muteThisAdWithReason:(nullable GADMuteThisAdReason *)reason;
 
 @end
 
@@ -120,10 +133,10 @@ GAD_ASSUME_NONNULL_BEGIN
 /// Weak reference to your ad view's media asset view.
 @property(nonatomic, weak, nullable) IBOutlet GADMediaView *mediaView;
 /// Weak reference to your ad view's AdChoices view. Must set adChoicesView before setting
-/// nativeAd, otherwise AdChoices will be rendered in the publisher's preferredAdChoicesPosition as
+/// nativeAd, otherwise AdChoices will be rendered according to the preferredAdChoicesPosition
 /// defined in GADNativeAdViewAdOptions.
 @property(nonatomic, weak, nullable) IBOutlet GADAdChoicesView *adChoicesView;
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

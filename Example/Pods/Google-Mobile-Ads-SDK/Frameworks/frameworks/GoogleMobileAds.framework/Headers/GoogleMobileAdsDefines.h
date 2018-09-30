@@ -31,22 +31,20 @@
 #define GAD_DEPRECATED_MSG_ATTRIBUTE(s)
 #endif  // defined(__has_feature) && defined(__has_attribute)
 
-#ifndef IBInspectable
-#define IBInspectable
-#endif
+#if __has_attribute(objc_subclassing_restricted)
+#define GAD_SUBCLASSING_RESTRICTED __attribute__((objc_subclassing_restricted))
+#else
+#define GAD_SUBCLASSING_RESTRICTED
+#endif // __has_attribute(objc_subclassing_restricted)
 
 #if __has_feature(nullability)  // Available starting in Xcode 6.3.
 #define GAD_NULLABLE_TYPE __nullable
 #define GAD_NONNULL_TYPE __nonnull
 #define GAD_NULLABLE nullable
-#define GAD_ASSUME_NONNULL_BEGIN NS_ASSUME_NONNULL_BEGIN
-#define GAD_ASSUME_NONNULL_END NS_ASSUME_NONNULL_END
 #else
 #define GAD_NULLABLE_TYPE
 #define GAD_NONNULL_TYPE
 #define GAD_NULLABLE
-#define GAD_ASSUME_NONNULL_BEGIN
-#define GAD_ASSUME_NONNULL_END
 #endif  // __has_feature(nullability)
 
 #if __has_attribute(objc_boxable)  // Available starting in Xcode 7.3.

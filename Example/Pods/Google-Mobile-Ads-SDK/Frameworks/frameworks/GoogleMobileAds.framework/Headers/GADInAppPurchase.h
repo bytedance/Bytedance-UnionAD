@@ -10,7 +10,7 @@
 
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol GADDefaultInAppPurchaseDelegate;
 
@@ -23,6 +23,7 @@ GAD_ASSUME_NONNULL_BEGIN
 /// and then call the didCompletePurchase method to finish the transaction.
 
 GAD_DEPRECATED_ATTRIBUTE
+GAD_SUBCLASSING_RESTRICTED
 @interface GADDefaultInAppPurchase : NSObject
 
 /// Enables the default consumable product in-app purchase flow handled by the Google Mobile Ads
@@ -72,6 +73,7 @@ typedef NS_ENUM(NSInteger, GADInAppPurchaseStatus) {
 /// users click a buy button. It is important to report the result of the purchase back to the SDK
 /// in order to track metrics about the transaction.
 GAD_DEPRECATED_ATTRIBUTE
+GAD_SUBCLASSING_RESTRICTED
 @interface GADInAppPurchase : NSObject
 
 /// The in-app purchase product ID.
@@ -87,4 +89,4 @@ GAD_DEPRECATED_ATTRIBUTE
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

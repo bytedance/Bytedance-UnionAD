@@ -8,12 +8,13 @@
 #import <GoogleMobileAds/GADRequest.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Use to configure Custom Search Ad (CSA) ad requests. A dynamic height search banner can contain
 /// multiple ads and the height is set dynamically based on the ad contents. Please cross-reference
 /// the property sections and properties with the official reference document:
 /// https://developers.google.com/custom-search-ads/docs/reference
+GAD_SUBCLASSING_RESTRICTED
 @interface GADDynamicHeightSearchRequest : GADRequest
 
 #pragma mark - Page Level Parameters
@@ -21,7 +22,7 @@ GAD_ASSUME_NONNULL_BEGIN
 #pragma mark Required
 
 /// The CSA "query" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *query;
+@property(nonatomic, copy, nullable) NSString *query;
 
 /// The CSA "adPage" parameter.
 @property(nonatomic, assign) NSInteger adPage;
@@ -32,15 +33,15 @@ GAD_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL adTestEnabled;
 
 /// The CSA "channel" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *channel;
+@property(nonatomic, copy, nullable) NSString *channel;
 
 /// The CSA "hl" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *hostLanguage;
+@property(nonatomic, copy, nullable) NSString *hostLanguage;
 
 #pragma mark Layout and Styling
 
 /// The CSA "colorLocation" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *locationExtensionTextColor;
+@property(nonatomic, copy, nullable) NSString *locationExtensionTextColor;
 
 /// The CSA "fontSizeLocation" parameter.
 @property(nonatomic, assign) CGFloat locationExtensionFontSize;
@@ -67,7 +68,7 @@ GAD_ASSUME_NONNULL_BEGIN
 #pragma mark Required
 
 /// The CSA "width" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *CSSWidth;
+@property(nonatomic, copy, nullable) NSString *CSSWidth;
 
 /// Configuration Settings
 
@@ -77,10 +78,10 @@ GAD_ASSUME_NONNULL_BEGIN
 #pragma mark Font
 
 /// The CSA "fontFamily" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *fontFamily;
+@property(nonatomic, copy, nullable) NSString *fontFamily;
 
 /// The CSA "fontFamilyAttribution" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *attributionFontFamily;
+@property(nonatomic, copy, nullable) NSString *attributionFontFamily;
 
 /// The CSA "fontSizeAnnotation" parameter.
 @property(nonatomic, assign) CGFloat annotationFontSize;
@@ -100,36 +101,36 @@ GAD_ASSUME_NONNULL_BEGIN
 #pragma mark Color
 
 /// The CSA "colorAdBorder" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *adBorderColor;
+@property(nonatomic, copy, nullable) NSString *adBorderColor;
 
 /// The CSA "colorAdSeparator" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *adSeparatorColor;
+@property(nonatomic, copy, nullable) NSString *adSeparatorColor;
 
 /// The CSA "colorAnnotation" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *annotationTextColor;
+@property(nonatomic, copy, nullable) NSString *annotationTextColor;
 
 /// The CSA "colorAttribution" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *attributionTextColor;
+@property(nonatomic, copy, nullable) NSString *attributionTextColor;
 
 /// The CSA "colorBackground" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *backgroundColor;
+@property(nonatomic, copy, nullable) NSString *backgroundColor;
 
 /// The CSA "colorBorder" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *borderColor;
+@property(nonatomic, copy, nullable) NSString *borderColor;
 
 /// The CSA "colorDomainLink" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *domainLinkColor;
+@property(nonatomic, copy, nullable) NSString *domainLinkColor;
 
 /// The CSA "colorText" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *textColor;
+@property(nonatomic, copy, nullable) NSString *textColor;
 
 /// The CSA "colorTitleLink" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *titleLinkColor;
+@property(nonatomic, copy, nullable) NSString *titleLinkColor;
 
 #pragma mark General Formatting
 
 /// The CSA "adBorderSelections" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *adBorderCSSSelections;
+@property(nonatomic, copy, nullable) NSString *adBorderCSSSelections;
 
 /// The CSA "adjustableLineHeight" parameter.
 @property(nonatomic, assign) CGFloat adjustableLineHeight;
@@ -138,7 +139,7 @@ GAD_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) CGFloat attributionBottomSpacing;
 
 /// The CSA "borderSelections" parameter.
-@property(nonatomic, copy, GAD_NULLABLE) NSString *borderCSSSelections;
+@property(nonatomic, copy, nullable) NSString *borderCSSSelections;
 
 /// Indicates if the CSA "noTitleUnderline" parameter is enabled.
 @property(nonatomic, assign) BOOL titleUnderlineHidden;
@@ -162,4 +163,4 @@ GAD_ASSUME_NONNULL_BEGIN
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

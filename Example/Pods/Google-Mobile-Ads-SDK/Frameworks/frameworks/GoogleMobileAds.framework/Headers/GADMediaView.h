@@ -10,7 +10,7 @@
 #import <GoogleMobileAds/GADNativeAd.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Displays native ad media assets.
 ///
@@ -22,8 +22,9 @@ GAD_ASSUME_NONNULL_BEGIN
 ///
 /// If the native ad doesn't contain a video and image loading is disabled, the GADMediaView object
 /// is empty.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADMediaView : UIView
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

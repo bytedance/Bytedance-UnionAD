@@ -9,7 +9,7 @@
 
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// An object implementing this protocol contains information set by the publisher on the client
 /// device for a particular ad network.
@@ -19,4 +19,4 @@ GAD_ASSUME_NONNULL_BEGIN
 @protocol GADAdNetworkExtras<NSObject>
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

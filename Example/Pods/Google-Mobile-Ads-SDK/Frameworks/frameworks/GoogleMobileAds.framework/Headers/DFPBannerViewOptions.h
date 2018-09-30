@@ -10,20 +10,21 @@
 #import <GoogleMobileAds/GADAdSizeDelegate.h>
 #import <GoogleMobileAds/GADAppEventDelegate.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Ad loader options for banner ads.
+GAD_SUBCLASSING_RESTRICTED
 @interface DFPBannerViewOptions : GADAdLoaderOptions
 
 /// Optional delegate that is notified if the loaded banner sends app events.
-@property(nonatomic, weak, GAD_NULLABLE) id<GADAppEventDelegate> appEventDelegate;
+@property(nonatomic, weak, nullable) id<GADAppEventDelegate> appEventDelegate;
 
 /// Optional delegate that is notified if the loaded banner changes size.
-@property(nonatomic, weak, GAD_NULLABLE) id<GADAdSizeDelegate> adSizeDelegate;
+@property(nonatomic, weak, nullable) id<GADAdSizeDelegate> adSizeDelegate;
 
 /// Whether the publisher will record impressions manually when the ad becomes visible to the user.
 @property(nonatomic, assign) BOOL enableManualImpressions;
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

@@ -10,7 +10,7 @@
 
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// A valid GADAdSize is considered to be one of the predefined GADAdSize constants or a GADAdSize
 /// constructed by GADAdSizeFromCGSize, GADAdSizeFullWidthPortraitWithHeight,
@@ -114,4 +114,4 @@ GAD_EXTERN GADAdSize GADAdSizeFromNSValue(NSValue *value);
 #define GAD_SIZE_728x90 CGSizeFromGADAdSize(kGADAdSizeLeaderboard)
 #define GAD_SIZE_120x600 CGSizeFromGADAdSize(kGADAdSizeSkyscraper)
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

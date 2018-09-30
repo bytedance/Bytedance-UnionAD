@@ -4,21 +4,23 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Bytedance_UnionAd.xcscheme</key>
+		<key>Bytedance-UnionAD-Bytedance-UnionAd.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-Bytedance_UnionAd_Example.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-Bytedance_UnionAd_Tests.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict/>
 </dict>
 </plist>

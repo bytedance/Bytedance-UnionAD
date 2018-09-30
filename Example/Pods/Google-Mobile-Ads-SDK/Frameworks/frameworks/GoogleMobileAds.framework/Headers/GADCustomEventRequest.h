@@ -12,10 +12,11 @@
 
 @class GADCustomEventExtras;
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Specifies optional ad request targeting parameters that are provided by the publisher and are
 /// forwarded to custom events for purposes of populating an ad request to a 3rd party ad network.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADCustomEventRequest : NSObject
 
 /// If the user's latitude, longitude, and accuracy are not specified, userHasLocation returns NO,
@@ -33,17 +34,17 @@ GAD_ASSUME_NONNULL_BEGIN
 
 /// Description of the user's location, in free form text, set in GADRequest. If not available,
 /// returns nil. This may be set even if userHasLocation is NO.
-@property(nonatomic, readonly, copy, GAD_NULLABLE) NSString *userLocationDescription;
+@property(nonatomic, readonly, copy, nullable) NSString *userLocationDescription;
 
 /// Keywords set in GADRequest. Returns nil if no keywords are set.
-@property(nonatomic, readonly, copy, GAD_NULLABLE) NSArray *userKeywords;
+@property(nonatomic, readonly, copy, nullable) NSArray *userKeywords;
 
 /// The additional parameters set by the application. This property allows you to pass additional
 /// information from your application to your Custom Event object. To do so, create an instance of
 /// GADCustomEventExtras to pass to GADRequest -registerAdNetworkExtras:. The instance should have
 /// an NSDictionary set for a particular custom event label. That NSDictionary becomes the
 /// additionalParameters here.
-@property(nonatomic, readonly, copy, GAD_NULLABLE) NSDictionary *additionalParameters;
+@property(nonatomic, readonly, copy, nullable) NSDictionary *additionalParameters;
 
 /// Indicates if the testing property has been set in GADRequest.
 @property(nonatomic, readonly, assign) BOOL isTesting;
@@ -54,8 +55,8 @@ GAD_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly, assign) GADGender userGender GAD_DEPRECATED_ATTRIBUTE;
 
 /// Deprecated. User's birthday set in GADRequest. If not specified, returns nil.
-@property(nonatomic, readonly, copy, GAD_NULLABLE) NSDate *userBirthday GAD_DEPRECATED_ATTRIBUTE;
+@property(nonatomic, readonly, copy, nullable) NSDate *userBirthday GAD_DEPRECATED_ATTRIBUTE;
 
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

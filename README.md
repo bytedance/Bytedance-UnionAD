@@ -2,9 +2,9 @@
 
 ## How To Get Started
 
-1.Download Bytedance-UnionAD and try out the included [example app](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Example/BUAdSDKDemo)
++ Download Bytedance-UnionAD and try out the included [example app](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Example/BUAdSDKDemo)
 
-2.Check out the [documentation](https://github.com/bytedance/Bytedance-UnionAD/blob/master/Bytedance-UnionAd/Document/UnioniOSSDK.md) for a comprehensive look at all of the APIs available in Bytedance-UnionAD
++ Check out the [documentation](https://github.com/bytedance/Bytedance-UnionAD/blob/master/Bytedance-UnionAd/Document/UnioniOSSDK.md) for a comprehensive look at all of the APIs available in Bytedance-UnionAD
 
 
 ## Installation with CocoaPods

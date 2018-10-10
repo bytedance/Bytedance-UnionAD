@@ -1,0 +1,867 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7877564C212AC4C400C472C3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7877564B212AC4C400C472C3 /* AdSupport.framework */; };
+		7877564E212AC4CA00C472C3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7877564D212AC4CA00C472C3 /* CoreMotion.framework */; };
+		78775650212AC4D100C472C3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7877564F212AC4D100C472C3 /* libc++.tbd */; };
+		78775652212AC4E000C472C3 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 78775651212AC4E000C472C3 /* libresolv.9.tbd */; };
+		DE575276215F77A500A5A109 /* BUDRewardCustomEventAdapterDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575229215F77A400A5A109 /* BUDRewardCustomEventAdapterDelegate.m */; };
+		DE575277215F77A500A5A109 /* BUDRewardVideoCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57522A215F77A400A5A109 /* BUDRewardVideoCusEventVC.m */; };
+		DE575278215F77A500A5A109 /* BUDRewardCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57522E215F77A400A5A109 /* BUDRewardCustomEventAdapter.m */; };
+		DE575279215F77A500A5A109 /* BUDBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575231215F77A400A5A109 /* BUDBannerViewController.m */; };
+		DE57527A215F77A500A5A109 /* BUDExampleDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575232215F77A400A5A109 /* BUDExampleDefine.m */; };
+		DE57527B215F77A500A5A109 /* BUDRewardedVideoAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575236215F77A400A5A109 /* BUDRewardedVideoAdViewController.m */; };
+		DE57527C215F77A500A5A109 /* BUDNativeBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575237215F77A400A5A109 /* BUDNativeBannerViewController.m */; };
+		DE57527D215F77A500A5A109 /* BUDNativeInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57523B215F77A400A5A109 /* BUDNativeInterstitialViewController.m */; };
+		DE57527E215F77A500A5A109 /* BUDViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57523C215F77A400A5A109 /* BUDViewModel.m */; };
+		DE57527F215F77A500A5A109 /* BUDSlotViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57523E215F77A400A5A109 /* BUDSlotViewModel.m */; };
+		DE575280215F77A500A5A109 /* BUDBaseExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57523F215F77A400A5A109 /* BUDBaseExampleViewController.m */; };
+		DE575281215F77A500A5A109 /* BUDDrawVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575240215F77A400A5A109 /* BUDDrawVideoViewController.m */; };
+		DE575282215F77A500A5A109 /* BUDAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575241215F77A400A5A109 /* BUDAdManager.m */; };
+		DE575283215F77A500A5A109 /* BUDSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575244215F77A400A5A109 /* BUDSettingViewController.m */; };
+		DE575284215F77A500A5A109 /* BUDInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575245215F77A400A5A109 /* BUDInterstitialViewController.m */; };
+		DE575285215F77A500A5A109 /* BUDFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575247215F77A400A5A109 /* BUDFeedViewController.m */; };
+		DE575286215F77A500A5A109 /* BUDNativeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575249215F77A400A5A109 /* BUDNativeViewController.m */; };
+		DE575287215F77A500A5A109 /* BUDFeedStyleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57524C215F77A400A5A109 /* BUDFeedStyleHelper.m */; };
+		DE575288215F77A500A5A109 /* BUDDrawTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57524D215F77A400A5A109 /* BUDDrawTableViewCell.m */; };
+		DE575289215F77A500A5A109 /* BUDActionAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57524F215F77A400A5A109 /* BUDActionAreaView.m */; };
+		DE57528A215F77A500A5A109 /* BUDFeedAdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575250215F77A400A5A109 /* BUDFeedAdTableViewCell.m */; };
+		DE57528B215F77A500A5A109 /* BUDFullscreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575254215F77A400A5A109 /* BUDFullscreenViewController.m */; };
+		DE57528D215F77A500A5A109 /* BUDSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575259215F77A400A5A109 /* BUDSplashViewController.m */; };
+		DE57528E215F77A500A5A109 /* BUDActionCellDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57525B215F77A400A5A109 /* BUDActionCellDefine.m */; };
+		DE57528F215F77A500A5A109 /* BUDActionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57525C215F77A400A5A109 /* BUDActionCellView.m */; };
+		DE575290215F77A500A5A109 /* BUDMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575260215F77A400A5A109 /* BUDMainViewController.m */; };
+		DE575291215F77A500A5A109 /* UIImageView+BUNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575262215F77A400A5A109 /* UIImageView+BUNetWorking.m */; };
+		DE575292215F77A500A5A109 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE575265215F77A400A5A109 /* LaunchScreen.storyboard */; };
+		DE575293215F77A500A5A109 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE575267215F77A400A5A109 /* Main.storyboard */; };
+		DE575294215F77A500A5A109 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE575269215F77A400A5A109 /* main.m */; };
+		DE575296215F77A500A5A109 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE57526B215F77A400A5A109 /* AppDelegate.m */; };
+		DE575297215F77A500A5A109 /* BUAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE57526D215F77A400A5A109 /* BUAdSDK.framework */; };
+		DE575298215F77A500A5A109 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE57526F215F77A400A5A109 /* README.txt */; };
+		DE575299215F77A500A5A109 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE575272215F77A400A5A109 /* GoogleMobileAds.framework */; };
+		DE57529A215F77A500A5A109 /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE575273215F77A400A5A109 /* BUAdSDK.bundle */; };
+		DE57529B215F77A500A5A109 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE575275215F77A400A5A109 /* Assets.xcassets */; };
+		DE57529F215F7B7D00A5A109 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE57529E215F7B7D00A5A109 /* Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C35272E81F24CAC70054ACB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2E32C48A1EE91C4800D7C242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E32C4911EE91C4800D7C242;
+			remoteInfo = WMAdSDKDemo;
+		};
+		C35272F61F24CAD40054ACB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2E32C48A1EE91C4800D7C242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E32C4911EE91C4800D7C242;
+			remoteInfo = WMAdSDKDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2E32C4921EE91C4800D7C242 /* BUAdSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUAdSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7877564B212AC4C400C472C3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		7877564D212AC4CA00C472C3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		7877564F212AC4D100C472C3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		78775651212AC4E000C472C3 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
+		78CEA328215E0BD4009819CC /* BUAdSDKDemoUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUAdSDKDemoUITests.m; sourceTree = "<group>"; };
+		78CEA329215E0BD4009819CC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78CEA37B215E0BD4009819CC /* BUAdSDKDemoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUAdSDKDemoTests.m; sourceTree = "<group>"; };
+		78CEA37C215E0BD4009819CC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C35272E31F24CAC70054ACB9 /* BUAdSDKDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BUAdSDKDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C35272F11F24CAD30054ACB9 /* BUAdSDKDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BUAdSDKDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE575226215F77A400A5A109 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DE575229215F77A400A5A109 /* BUDRewardCustomEventAdapterDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDRewardCustomEventAdapterDelegate.m; sourceTree = "<group>"; };
+		DE57522A215F77A400A5A109 /* BUDRewardVideoCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDRewardVideoCusEventVC.m; sourceTree = "<group>"; };
+		DE57522B215F77A400A5A109 /* BUDRewardCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDRewardCustomEventAdapter.h; sourceTree = "<group>"; };
+		DE57522C215F77A400A5A109 /* BUDRewardCustomEventAdapterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDRewardCustomEventAdapterDelegate.h; sourceTree = "<group>"; };
+		DE57522D215F77A400A5A109 /* BUDRewardVideoCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDRewardVideoCusEventVC.h; sourceTree = "<group>"; };
+		DE57522E215F77A400A5A109 /* BUDRewardCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDRewardCustomEventAdapter.m; sourceTree = "<group>"; };
+		DE575230215F77A400A5A109 /* BUDNativeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDNativeViewController.h; sourceTree = "<group>"; };
+		DE575231215F77A400A5A109 /* BUDBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDBannerViewController.m; sourceTree = "<group>"; };
+		DE575232215F77A400A5A109 /* BUDExampleDefine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDExampleDefine.m; sourceTree = "<group>"; };
+		DE575233215F77A400A5A109 /* BUDFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDFeedViewController.h; sourceTree = "<group>"; };
+		DE575234215F77A400A5A109 /* BUDInterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDInterstitialViewController.h; sourceTree = "<group>"; };
+		DE575235215F77A400A5A109 /* BUDSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSettingViewController.h; sourceTree = "<group>"; };
+		DE575236215F77A400A5A109 /* BUDRewardedVideoAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDRewardedVideoAdViewController.m; sourceTree = "<group>"; };
+		DE575237215F77A400A5A109 /* BUDNativeBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDNativeBannerViewController.m; sourceTree = "<group>"; };
+		DE575238215F77A400A5A109 /* BUDAdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdManager.h; sourceTree = "<group>"; };
+		DE575239215F77A400A5A109 /* BUDDrawVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDDrawVideoViewController.h; sourceTree = "<group>"; };
+		DE57523A215F77A400A5A109 /* BUDFullscreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDFullscreenViewController.h; sourceTree = "<group>"; };
+		DE57523B215F77A400A5A109 /* BUDNativeInterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDNativeInterstitialViewController.m; sourceTree = "<group>"; };
+		DE57523C215F77A400A5A109 /* BUDViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDViewModel.m; sourceTree = "<group>"; };
+		DE57523D215F77A400A5A109 /* BUDSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSplashViewController.h; sourceTree = "<group>"; };
+		DE57523E215F77A400A5A109 /* BUDSlotViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSlotViewModel.m; sourceTree = "<group>"; };
+		DE57523F215F77A400A5A109 /* BUDBaseExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDBaseExampleViewController.m; sourceTree = "<group>"; };
+		DE575240215F77A400A5A109 /* BUDDrawVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDDrawVideoViewController.m; sourceTree = "<group>"; };
+		DE575241215F77A400A5A109 /* BUDAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdManager.m; sourceTree = "<group>"; };
+		DE575242215F77A400A5A109 /* BUDNativeBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDNativeBannerViewController.h; sourceTree = "<group>"; };
+		DE575243215F77A400A5A109 /* BUDRewardedVideoAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDRewardedVideoAdViewController.h; sourceTree = "<group>"; };
+		DE575244215F77A400A5A109 /* BUDSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSettingViewController.m; sourceTree = "<group>"; };
+		DE575245215F77A400A5A109 /* BUDInterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDInterstitialViewController.m; sourceTree = "<group>"; };
+		DE575246215F77A400A5A109 /* BUDExampleDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDExampleDefine.h; sourceTree = "<group>"; };
+		DE575247215F77A400A5A109 /* BUDFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDFeedViewController.m; sourceTree = "<group>"; };
+		DE575248215F77A400A5A109 /* BUDBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDBannerViewController.h; sourceTree = "<group>"; };
+		DE575249215F77A400A5A109 /* BUDNativeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDNativeViewController.m; sourceTree = "<group>"; };
+		DE57524B215F77A400A5A109 /* BUDActionAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDActionAreaView.h; sourceTree = "<group>"; };
+		DE57524C215F77A400A5A109 /* BUDFeedStyleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDFeedStyleHelper.m; sourceTree = "<group>"; };
+		DE57524D215F77A400A5A109 /* BUDDrawTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDDrawTableViewCell.m; sourceTree = "<group>"; };
+		DE57524E215F77A400A5A109 /* BUDFeedAdTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDFeedAdTableViewCell.h; sourceTree = "<group>"; };
+		DE57524F215F77A400A5A109 /* BUDActionAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDActionAreaView.m; sourceTree = "<group>"; };
+		DE575250215F77A400A5A109 /* BUDFeedAdTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDFeedAdTableViewCell.m; sourceTree = "<group>"; };
+		DE575251215F77A400A5A109 /* BUDDrawTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDDrawTableViewCell.h; sourceTree = "<group>"; };
+		DE575252215F77A400A5A109 /* BUDFeedStyleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDFeedStyleHelper.h; sourceTree = "<group>"; };
+		DE575253215F77A400A5A109 /* BUDNativeInterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDNativeInterstitialViewController.h; sourceTree = "<group>"; };
+		DE575254215F77A400A5A109 /* BUDFullscreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDFullscreenViewController.m; sourceTree = "<group>"; };
+		DE575255215F77A400A5A109 /* BUDViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDViewModel.h; sourceTree = "<group>"; };
+		DE575257215F77A400A5A109 /* BUDBaseExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDBaseExampleViewController.h; sourceTree = "<group>"; };
+		DE575258215F77A400A5A109 /* BUDSlotViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSlotViewModel.h; sourceTree = "<group>"; };
+		DE575259215F77A400A5A109 /* BUDSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSplashViewController.m; sourceTree = "<group>"; };
+		DE57525B215F77A400A5A109 /* BUDActionCellDefine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDActionCellDefine.m; sourceTree = "<group>"; };
+		DE57525C215F77A400A5A109 /* BUDActionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDActionCellView.m; sourceTree = "<group>"; };
+		DE57525D215F77A400A5A109 /* BUDMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDMainViewController.h; sourceTree = "<group>"; };
+		DE57525E215F77A400A5A109 /* BUDActionCellDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDActionCellDefine.h; sourceTree = "<group>"; };
+		DE57525F215F77A400A5A109 /* BUDActionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDActionCellView.h; sourceTree = "<group>"; };
+		DE575260215F77A400A5A109 /* BUDMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDMainViewController.m; sourceTree = "<group>"; };
+		DE575262215F77A400A5A109 /* UIImageView+BUNetWorking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BUNetWorking.m"; sourceTree = "<group>"; };
+		DE575263215F77A400A5A109 /* UIImageView+BUNetWorking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+BUNetWorking.h"; sourceTree = "<group>"; };
+		DE575266215F77A400A5A109 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DE575268215F77A400A5A109 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DE575269215F77A400A5A109 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DE57526B215F77A400A5A109 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DE57526D215F77A400A5A109 /* BUAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUAdSDK.framework; sourceTree = "<group>"; };
+		DE57526F215F77A400A5A109 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		DE575272215F77A400A5A109 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		DE575273215F77A400A5A109 /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BUAdSDK.bundle; sourceTree = "<group>"; };
+		DE575275215F77A400A5A109 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DE57529E215F7B7D00A5A109 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2E32C48F1EE91C4800D7C242 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE575299215F77A500A5A109 /* GoogleMobileAds.framework in Frameworks */,
+				78775652212AC4E000C472C3 /* libresolv.9.tbd in Frameworks */,
+				78775650212AC4D100C472C3 /* libc++.tbd in Frameworks */,
+				DE575297215F77A500A5A109 /* BUAdSDK.framework in Frameworks */,
+				7877564E212AC4CA00C472C3 /* CoreMotion.framework in Frameworks */,
+				7877564C212AC4C400C472C3 /* AdSupport.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C35272E01F24CAC70054ACB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C35272EE1F24CAD30054ACB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2E32C4891EE91C4800D7C242 = {
+			isa = PBXGroup;
+			children = (
+				DE575225215F77A400A5A109 /* BUAdSDKDemo */,
+				78CEA37A215E0BD4009819CC /* BUAdSDKDemoTests */,
+				78CEA327215E0BD4009819CC /* BUAdSDKDemoUITests */,
+				2E32C4931EE91C4800D7C242 /* Products */,
+				7877564A212AC4C400C472C3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2E32C4931EE91C4800D7C242 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2E32C4921EE91C4800D7C242 /* BUAdSDKDemo.app */,
+				C35272E31F24CAC70054ACB9 /* BUAdSDKDemoTests.xctest */,
+				C35272F11F24CAD30054ACB9 /* BUAdSDKDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7877564A212AC4C400C472C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				78775651212AC4E000C472C3 /* libresolv.9.tbd */,
+				7877564F212AC4D100C472C3 /* libc++.tbd */,
+				7877564D212AC4CA00C472C3 /* CoreMotion.framework */,
+				7877564B212AC4C400C472C3 /* AdSupport.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		78CEA327215E0BD4009819CC /* BUAdSDKDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				78CEA328215E0BD4009819CC /* BUAdSDKDemoUITests.m */,
+				78CEA329215E0BD4009819CC /* Info.plist */,
+			);
+			path = BUAdSDKDemoUITests;
+			sourceTree = "<group>";
+		};
+		78CEA37A215E0BD4009819CC /* BUAdSDKDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				78CEA37B215E0BD4009819CC /* BUAdSDKDemoTests.m */,
+				78CEA37C215E0BD4009819CC /* Info.plist */,
+			);
+			path = BUAdSDKDemoTests;
+			sourceTree = "<group>";
+		};
+		DE575225215F77A400A5A109 /* BUAdSDKDemo */ = {
+			isa = PBXGroup;
+			children = (
+				DE57529E215F7B7D00A5A109 /* Info.plist */,
+				DE575226215F77A400A5A109 /* AppDelegate.h */,
+				DE57526B215F77A400A5A109 /* AppDelegate.m */,
+				DE575227215F77A400A5A109 /* App */,
+				DE575261215F77A400A5A109 /* Util */,
+				DE575264215F77A400A5A109 /* Support */,
+				DE57526C215F77A400A5A109 /* Frameworks */,
+				DE575274215F77A400A5A109 /* Resource */,
+			);
+			path = BUAdSDKDemo;
+			sourceTree = "<group>";
+		};
+		DE575227215F77A400A5A109 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				DE575228215F77A400A5A109 /* RewardVideoCustomEventAdapter */,
+				DE57522F215F77A400A5A109 /* Example */,
+				DE57525A215F77A400A5A109 /* Menu */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DE575228215F77A400A5A109 /* RewardVideoCustomEventAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				DE57522B215F77A400A5A109 /* BUDRewardCustomEventAdapter.h */,
+				DE57522E215F77A400A5A109 /* BUDRewardCustomEventAdapter.m */,
+				DE57522C215F77A400A5A109 /* BUDRewardCustomEventAdapterDelegate.h */,
+				DE575229215F77A400A5A109 /* BUDRewardCustomEventAdapterDelegate.m */,
+				DE57522D215F77A400A5A109 /* BUDRewardVideoCusEventVC.h */,
+				DE57522A215F77A400A5A109 /* BUDRewardVideoCusEventVC.m */,
+			);
+			path = RewardVideoCustomEventAdapter;
+			sourceTree = "<group>";
+		};
+		DE57522F215F77A400A5A109 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				DE57524A215F77A400A5A109 /* View */,
+				DE575257215F77A400A5A109 /* BUDBaseExampleViewController.h */,
+				DE57523F215F77A400A5A109 /* BUDBaseExampleViewController.m */,
+				DE575238215F77A400A5A109 /* BUDAdManager.h */,
+				DE575241215F77A400A5A109 /* BUDAdManager.m */,
+				DE575248215F77A400A5A109 /* BUDBannerViewController.h */,
+				DE575231215F77A400A5A109 /* BUDBannerViewController.m */,
+				DE575246215F77A400A5A109 /* BUDExampleDefine.h */,
+				DE575232215F77A400A5A109 /* BUDExampleDefine.m */,
+				DE575233215F77A400A5A109 /* BUDFeedViewController.h */,
+				DE575247215F77A400A5A109 /* BUDFeedViewController.m */,
+				DE575239215F77A400A5A109 /* BUDDrawVideoViewController.h */,
+				DE575240215F77A400A5A109 /* BUDDrawVideoViewController.m */,
+				DE575234215F77A400A5A109 /* BUDInterstitialViewController.h */,
+				DE575245215F77A400A5A109 /* BUDInterstitialViewController.m */,
+				DE575230215F77A400A5A109 /* BUDNativeViewController.h */,
+				DE575249215F77A400A5A109 /* BUDNativeViewController.m */,
+				DE575242215F77A400A5A109 /* BUDNativeBannerViewController.h */,
+				DE575237215F77A400A5A109 /* BUDNativeBannerViewController.m */,
+				DE575253215F77A400A5A109 /* BUDNativeInterstitialViewController.h */,
+				DE57523B215F77A400A5A109 /* BUDNativeInterstitialViewController.m */,
+				DE57523A215F77A400A5A109 /* BUDFullscreenViewController.h */,
+				DE575254215F77A400A5A109 /* BUDFullscreenViewController.m */,
+				DE575235215F77A400A5A109 /* BUDSettingViewController.h */,
+				DE575244215F77A400A5A109 /* BUDSettingViewController.m */,
+				DE575258215F77A400A5A109 /* BUDSlotViewModel.h */,
+				DE57523E215F77A400A5A109 /* BUDSlotViewModel.m */,
+				DE57523D215F77A400A5A109 /* BUDSplashViewController.h */,
+				DE575259215F77A400A5A109 /* BUDSplashViewController.m */,
+				DE575243215F77A400A5A109 /* BUDRewardedVideoAdViewController.h */,
+				DE575236215F77A400A5A109 /* BUDRewardedVideoAdViewController.m */,
+				DE575255215F77A400A5A109 /* BUDViewModel.h */,
+				DE57523C215F77A400A5A109 /* BUDViewModel.m */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		DE57524A215F77A400A5A109 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DE57524B215F77A400A5A109 /* BUDActionAreaView.h */,
+				DE57524F215F77A400A5A109 /* BUDActionAreaView.m */,
+				DE575252215F77A400A5A109 /* BUDFeedStyleHelper.h */,
+				DE57524C215F77A400A5A109 /* BUDFeedStyleHelper.m */,
+				DE57524E215F77A400A5A109 /* BUDFeedAdTableViewCell.h */,
+				DE575250215F77A400A5A109 /* BUDFeedAdTableViewCell.m */,
+				DE575251215F77A400A5A109 /* BUDDrawTableViewCell.h */,
+				DE57524D215F77A400A5A109 /* BUDDrawTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DE57525A215F77A400A5A109 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				DE57525E215F77A400A5A109 /* BUDActionCellDefine.h */,
+				DE57525B215F77A400A5A109 /* BUDActionCellDefine.m */,
+				DE57525F215F77A400A5A109 /* BUDActionCellView.h */,
+				DE57525C215F77A400A5A109 /* BUDActionCellView.m */,
+				DE57525D215F77A400A5A109 /* BUDMainViewController.h */,
+				DE575260215F77A400A5A109 /* BUDMainViewController.m */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		DE575261215F77A400A5A109 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				DE575263215F77A400A5A109 /* UIImageView+BUNetWorking.h */,
+				DE575262215F77A400A5A109 /* UIImageView+BUNetWorking.m */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		DE575264215F77A400A5A109 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				DE575265215F77A400A5A109 /* LaunchScreen.storyboard */,
+				DE575267215F77A400A5A109 /* Main.storyboard */,
+				DE575269215F77A400A5A109 /* main.m */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		DE57526C215F77A400A5A109 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE57526D215F77A400A5A109 /* BUAdSDK.framework */,
+				DE57526E215F77A400A5A109 /* Google-Mobile-Ads-SDK */,
+				DE575273215F77A400A5A109 /* BUAdSDK.bundle */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE57526E215F77A400A5A109 /* Google-Mobile-Ads-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				DE57526F215F77A400A5A109 /* README.txt */,
+				DE575270215F77A400A5A109 /* Frameworks */,
+			);
+			path = "Google-Mobile-Ads-SDK";
+			sourceTree = "<group>";
+		};
+		DE575270215F77A400A5A109 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE575271215F77A400A5A109 /* frameworks */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE575271215F77A400A5A109 /* frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE575272215F77A400A5A109 /* GoogleMobileAds.framework */,
+			);
+			path = frameworks;
+			sourceTree = "<group>";
+		};
+		DE575274215F77A400A5A109 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				DE575275215F77A400A5A109 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2E32C4911EE91C4800D7C242 /* BUAdSDKDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2E32C4B41EE91C4800D7C242 /* Build configuration list for PBXNativeTarget "BUAdSDKDemo" */;
+			buildPhases = (
+				2E32C48E1EE91C4800D7C242 /* Sources */,
+				2E32C48F1EE91C4800D7C242 /* Frameworks */,
+				2E32C4901EE91C4800D7C242 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BUAdSDKDemo;
+			productName = WMAdSDKDemo;
+			productReference = 2E32C4921EE91C4800D7C242 /* BUAdSDKDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C35272E21F24CAC70054ACB9 /* BUAdSDKDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C35272EA1F24CAC70054ACB9 /* Build configuration list for PBXNativeTarget "BUAdSDKDemoTests" */;
+			buildPhases = (
+				C35272DF1F24CAC70054ACB9 /* Sources */,
+				C35272E01F24CAC70054ACB9 /* Frameworks */,
+				C35272E11F24CAC70054ACB9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C35272E91F24CAC70054ACB9 /* PBXTargetDependency */,
+			);
+			name = BUAdSDKDemoTests;
+			productName = WMAdSDKDemoTests;
+			productReference = C35272E31F24CAC70054ACB9 /* BUAdSDKDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C35272F01F24CAD30054ACB9 /* BUAdSDKDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C35272F81F24CAD40054ACB9 /* Build configuration list for PBXNativeTarget "BUAdSDKDemoUITests" */;
+			buildPhases = (
+				C35272ED1F24CAD30054ACB9 /* Sources */,
+				C35272EE1F24CAD30054ACB9 /* Frameworks */,
+				C35272EF1F24CAD30054ACB9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C35272F71F24CAD40054ACB9 /* PBXTargetDependency */,
+			);
+			name = BUAdSDKDemoUITests;
+			productName = WMAdSDKDemoUITests;
+			productReference = C35272F11F24CAD30054ACB9 /* BUAdSDKDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2E32C48A1EE91C4800D7C242 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = WMD;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = bytedance;
+				TargetAttributes = {
+					2E32C4911EE91C4800D7C242 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = PPH273ZC3D;
+						ProvisioningStyle = Automatic;
+					};
+					C35272E21F24CAC70054ACB9 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = XXHND5J98K;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2E32C4911EE91C4800D7C242;
+					};
+					C35272F01F24CAD30054ACB9 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = XXHND5J98K;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2E32C4911EE91C4800D7C242;
+					};
+				};
+			};
+			buildConfigurationList = 2E32C48D1EE91C4800D7C242 /* Build configuration list for PBXProject "BUAdSDKDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2E32C4891EE91C4800D7C242;
+			productRefGroup = 2E32C4931EE91C4800D7C242 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2E32C4911EE91C4800D7C242 /* BUAdSDKDemo */,
+				C35272E21F24CAC70054ACB9 /* BUAdSDKDemoTests */,
+				C35272F01F24CAD30054ACB9 /* BUAdSDKDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2E32C4901EE91C4800D7C242 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE575293215F77A500A5A109 /* Main.storyboard in Resources */,
+				DE575292215F77A500A5A109 /* LaunchScreen.storyboard in Resources */,
+				DE57529F215F7B7D00A5A109 /* Info.plist in Resources */,
+				DE57529B215F77A500A5A109 /* Assets.xcassets in Resources */,
+				DE57529A215F77A500A5A109 /* BUAdSDK.bundle in Resources */,
+				DE575298215F77A500A5A109 /* README.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C35272E11F24CAC70054ACB9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C35272EF1F24CAD30054ACB9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2E32C48E1EE91C4800D7C242 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE575285215F77A500A5A109 /* BUDFeedViewController.m in Sources */,
+				DE57527F215F77A500A5A109 /* BUDSlotViewModel.m in Sources */,
+				DE575286215F77A500A5A109 /* BUDNativeViewController.m in Sources */,
+				DE57527E215F77A500A5A109 /* BUDViewModel.m in Sources */,
+				DE575279215F77A500A5A109 /* BUDBannerViewController.m in Sources */,
+				DE57528D215F77A500A5A109 /* BUDSplashViewController.m in Sources */,
+				DE575278215F77A500A5A109 /* BUDRewardCustomEventAdapter.m in Sources */,
+				DE57527A215F77A500A5A109 /* BUDExampleDefine.m in Sources */,
+				DE575287215F77A500A5A109 /* BUDFeedStyleHelper.m in Sources */,
+				DE57527B215F77A500A5A109 /* BUDRewardedVideoAdViewController.m in Sources */,
+				DE575277215F77A500A5A109 /* BUDRewardVideoCusEventVC.m in Sources */,
+				DE57528A215F77A500A5A109 /* BUDFeedAdTableViewCell.m in Sources */,
+				DE575280215F77A500A5A109 /* BUDBaseExampleViewController.m in Sources */,
+				DE575288215F77A500A5A109 /* BUDDrawTableViewCell.m in Sources */,
+				DE575282215F77A500A5A109 /* BUDAdManager.m in Sources */,
+				DE575283215F77A500A5A109 /* BUDSettingViewController.m in Sources */,
+				DE57527D215F77A500A5A109 /* BUDNativeInterstitialViewController.m in Sources */,
+				DE575296215F77A500A5A109 /* AppDelegate.m in Sources */,
+				DE575289215F77A500A5A109 /* BUDActionAreaView.m in Sources */,
+				DE57527C215F77A500A5A109 /* BUDNativeBannerViewController.m in Sources */,
+				DE575284215F77A500A5A109 /* BUDInterstitialViewController.m in Sources */,
+				DE57528E215F77A500A5A109 /* BUDActionCellDefine.m in Sources */,
+				DE575290215F77A500A5A109 /* BUDMainViewController.m in Sources */,
+				DE575281215F77A500A5A109 /* BUDDrawVideoViewController.m in Sources */,
+				DE575276215F77A500A5A109 /* BUDRewardCustomEventAdapterDelegate.m in Sources */,
+				DE57528F215F77A500A5A109 /* BUDActionCellView.m in Sources */,
+				DE57528B215F77A500A5A109 /* BUDFullscreenViewController.m in Sources */,
+				DE575294215F77A500A5A109 /* main.m in Sources */,
+				DE575291215F77A500A5A109 /* UIImageView+BUNetWorking.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C35272DF1F24CAC70054ACB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C35272ED1F24CAD30054ACB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C35272E91F24CAC70054ACB9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E32C4911EE91C4800D7C242 /* BUAdSDKDemo */;
+			targetProxy = C35272E81F24CAC70054ACB9 /* PBXContainerItemProxy */;
+		};
+		C35272F71F24CAD40054ACB9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E32C4911EE91C4800D7C242 /* BUAdSDKDemo */;
+			targetProxy = C35272F61F24CAD40054ACB9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DE575265215F77A400A5A109 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE575266215F77A400A5A109 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DE575267215F77A400A5A109 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE575268215F77A400A5A109 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2E32C4B21EE91C4800D7C242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2E32C4B31EE91C4800D7C242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2E32C4B51EE91C4800D7C242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PPH273ZC3D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BUAdSDKDemo",
+					"$(PROJECT_DIR)/BUAdSDKDemo/Frameworks/**",
+					"$(PROJECT_DIR)/BUAdSDKDemo/Frameworks",
+					"$(PROJECT_DIR)/BUAdSDKDemo/Frameworks/Google-Mobile-Ads-SDK/Frameworks/frameworks",
+				);
+				INFOPLIST_FILE = BUAdSDKDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BUAdSDKDemo111;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2E32C4B61EE91C4800D7C242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PPH273ZC3D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BUAdSDKDemo",
+					"$(PROJECT_DIR)/BUAdSDKDemo/Frameworks/**",
+					"$(PROJECT_DIR)/BUAdSDKDemo/Frameworks",
+					"$(PROJECT_DIR)/BUAdSDKDemo/Frameworks/Google-Mobile-Ads-SDK/Frameworks/frameworks",
+				);
+				INFOPLIST_FILE = BUAdSDKDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BUAdSDKDemo111;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		C35272EB1F24CAC70054ACB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = XXHND5J98K;
+				INFOPLIST_FILE = BUAdSDKDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BUAdSDKDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BUAdSDKDemo.app/BUAdSDKDemo";
+			};
+			name = Debug;
+		};
+		C35272EC1F24CAC70054ACB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = XXHND5J98K;
+				INFOPLIST_FILE = BUAdSDKDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BUAdSDKDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BUAdSDKDemo.app/BUAdSDKDemo";
+			};
+			name = Release;
+		};
+		C35272F91F24CAD40054ACB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = XXHND5J98K;
+				INFOPLIST_FILE = BUAdSDKDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BUAdSDKDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BUAdSDKDemo;
+			};
+			name = Debug;
+		};
+		C35272FA1F24CAD40054ACB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = XXHND5J98K;
+				INFOPLIST_FILE = BUAdSDKDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BUAdSDKDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BUAdSDKDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2E32C48D1EE91C4800D7C242 /* Build configuration list for PBXProject "BUAdSDKDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E32C4B21EE91C4800D7C242 /* Debug */,
+				2E32C4B31EE91C4800D7C242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2E32C4B41EE91C4800D7C242 /* Build configuration list for PBXNativeTarget "BUAdSDKDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E32C4B51EE91C4800D7C242 /* Debug */,
+				2E32C4B61EE91C4800D7C242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C35272EA1F24CAC70054ACB9 /* Build configuration list for PBXNativeTarget "BUAdSDKDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C35272EB1F24CAC70054ACB9 /* Debug */,
+				C35272EC1F24CAC70054ACB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C35272F81F24CAD40054ACB9 /* Build configuration list for PBXNativeTarget "BUAdSDKDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C35272F91F24CAD40054ACB9 /* Debug */,
+				C35272FA1F24CAD40054ACB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2E32C48A1EE91C4800D7C242 /* Project object */;
+}

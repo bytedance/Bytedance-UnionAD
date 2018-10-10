@@ -1,6 +1,0 @@
-framework module WMAdSDK {
-  umbrella header "WMAdSDK.h"
-
-  export *
-  module * { export * }
-}

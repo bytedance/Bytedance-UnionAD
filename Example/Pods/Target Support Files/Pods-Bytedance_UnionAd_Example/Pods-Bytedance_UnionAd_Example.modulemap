@@ -1,6 +1,0 @@
-framework module Pods_Bytedance_UnionAd_Example {
-  umbrella header "Pods-Bytedance_UnionAd_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

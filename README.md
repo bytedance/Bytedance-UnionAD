@@ -1,19 +1,32 @@
 # Bytedance-UnionAD
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
 ## Installation
 
-Bytedance-UnionAD is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+Bytedance-UnionAD supports multiple methods for installing the library in a project.
 
+## Installation with CocoaPods
+
+[CocoaPods](https://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like Bytedance-UnionAD in your projects. You can install it with the following command:
 ```ruby
-pod 'Bytedance-UnionAD'
+$ gem install cocoapods
 ```
+
+### Podfile
+
+To integrate Bytedance-UnionAD into your Xcode project using CocoaPods, specify it in your Podfile:
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+
+target 'TargetName' do
+pod 'Bytedance-UnionAD'
+end
+```
+Then, run the following command:
+```ruby
+$ pod install
+```
+
 
 ## Author
 

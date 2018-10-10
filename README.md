@@ -6,6 +6,7 @@
 
 + Check out the [documentation](https://github.com/bytedance/Bytedance-UnionAD/blob/master/Bytedance-UnionAd/Document/UnioniOSSDK.md) for a comprehensive look at all of the APIs available in Bytedance-UnionAD
 
++ If you have other questions, please read [FAQ](https://github.com/bytedance/Bytedance-UnionAD/blob/master/Bytedance-UnionAd/Document/UnioniOSSDK.md#faq) first
 
 ## Installation with CocoaPods
 

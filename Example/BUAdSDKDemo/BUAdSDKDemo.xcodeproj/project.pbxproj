@@ -47,7 +47,6 @@
 		DE575299215F77A500A5A109 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE575272215F77A400A5A109 /* GoogleMobileAds.framework */; };
 		DE57529A215F77A500A5A109 /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE575273215F77A400A5A109 /* BUAdSDK.bundle */; };
 		DE57529B215F77A500A5A109 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE575275215F77A400A5A109 /* Assets.xcassets */; };
-		DE57529F215F7B7D00A5A109 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE57529E215F7B7D00A5A109 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		2E32C4921EE91C4800D7C242 /* BUAdSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUAdSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		782C6ADA216F41C5002BDA9B /* BUDMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUDMacros.h; sourceTree = "<group>"; };
 		7877564B212AC4C400C472C3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		7877564D212AC4CA00C472C3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		7877564F212AC4D100C472C3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -198,6 +198,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		782C6AD9216F4195002BDA9B /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				782C6ADA216F41C5002BDA9B /* BUDMacros.h */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
 		7877564A212AC4C400C472C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +253,7 @@
 		DE575227215F77A400A5A109 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				782C6AD9216F4195002BDA9B /* Macros */,
 				DE575228215F77A400A5A109 /* RewardVideoCustomEventAdapter */,
 				DE57522F215F77A400A5A109 /* Example */,
 				DE57525A215F77A400A5A109 /* Menu */,
@@ -507,7 +516,6 @@
 			files = (
 				DE575293215F77A500A5A109 /* Main.storyboard in Resources */,
 				DE575292215F77A500A5A109 /* LaunchScreen.storyboard in Resources */,
-				DE57529F215F7B7D00A5A109 /* Info.plist in Resources */,
 				DE57529B215F77A500A5A109 /* Assets.xcassets in Resources */,
 				DE57529A215F77A500A5A109 /* BUAdSDK.bundle in Resources */,
 				DE575298215F77A500A5A109 /* README.txt in Resources */,

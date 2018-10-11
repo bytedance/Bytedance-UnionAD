@@ -12,6 +12,7 @@
 #import <BUAdSDK/BUNativeAd.h>
 #import "UIImageView+BUNetworking.h"
 #import <BUAdSDK/BUNativeAdRelatedView.h>
+#import "BUDMacros.h"
 
 @interface BUDNativeViewController () <BUNativeAdDelegate>
 
@@ -83,17 +84,10 @@
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:self.button];
     const CGFloat buttonHeight = 36;
-    if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_9_0) {
-        self.button.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.button.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
-        [self.button.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
-        [self.button.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
-        [self.button.heightAnchor constraintEqualToConstant:buttonHeight];
-    } else {
-        CGFloat height = CGRectGetHeight(self.view.bounds);
-        CGFloat width = CGRectGetWidth(self.view.bounds);
-        self.button.frame = CGRectMake(0, height - buttonHeight,width , buttonHeight);
-    }
+    
+    CGFloat height = CGRectGetHeight(self.view.bounds);
+    CGFloat width = CGRectGetWidth(self.view.bounds);
+    self.button.frame = CGRectMake(0, height - buttonHeight - BottomMargin, width , buttonHeight);
     
     [self.button setBackgroundColor:[UIColor orangeColor]];
     [self.button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];

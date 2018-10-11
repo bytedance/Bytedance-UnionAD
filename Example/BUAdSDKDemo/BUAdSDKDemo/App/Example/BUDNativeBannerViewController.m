@@ -11,15 +11,12 @@
 #import <BUAdSDK/BUDislikeViewController.h>
 #import "UIImageView+BUNetWorking.h"
 #import <BUAdSDK/BUNativeAdRelatedView.h>
+#import "BUDMacros.h"
 
 static CGSize const dislikeSize = {15, 15};
 static CGSize const logoSize = {20, 20};
 static CGFloat const RefreshHeight = 36;
 
-#define iPhoneX (MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) == 812.0)
-#define NavigationBarHeight (iPhoneX? 88: 64)      // 导航条高度
-#define TopMargin        (iPhoneX? 24: 0)
-#define BottomMargin     (iPhoneX? 40: 0)      // 状态栏高度
 
 @interface BUDNativeBannerViewController () <BUNativeAdDelegate>
 @property (nonatomic, strong) BUNativeAd *nativeAd;

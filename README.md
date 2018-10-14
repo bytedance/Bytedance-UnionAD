@@ -2,7 +2,7 @@
 
 ## How To Get Started
 
-+ [Download Bytedance-UnionAD](https://codeload.github.com/bytedance/Bytedance-UnionAD/tree/master/Bytedance-UnionAd) and try out the included [example app](https://codeload.github.com/bytedance/Bytedance-UnionAD/tree/master/Example/BUAdSDKDemo)
++ [Download Bytedance-UnionAD](https://github.com/bytedance/Bytedance-UnionAD/tree/master) and try out the included [example app](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Example/BUAdSDKDemo)
 
 + Check out the [documentation](https://github.com/bytedance/Bytedance-UnionAD/blob/master/Bytedance-UnionAd/Document/UnioniOSSDK.md) for a comprehensive look at all of the APIs available in Bytedance-UnionAD
 
@@ -34,7 +34,7 @@ $ pod install
 
 ## Author
 
-cuiyanan02, cuiyanan.cui@bytedance.com
+Siwant
 
 ## License
 

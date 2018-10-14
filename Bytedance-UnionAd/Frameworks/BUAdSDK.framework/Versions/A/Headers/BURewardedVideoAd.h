@@ -33,19 +33,16 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /**
- rewardedVideoAd 激励视频广告物料加载成功
- 
+ rewardedVideoAd 激励视频广告-物料-加载成功
  @param rewardedVideoAd 当前激励视频素材
  */
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd;
 
 /**
- rewardedVideoAd 激励视频广告视频加载成功
- 
+ rewardedVideoAd 激励视频广告-视频-加载成功
  @param rewardedVideoAd 当前激励视频素材
  */
 - (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd;
-
 
 /**
  rewardedVideoAd 广告位即将展示
@@ -53,6 +50,20 @@ NS_ASSUME_NONNULL_BEGIN
  @param rewardedVideoAd 当前激励视频对象
  */
 - (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+ rewardedVideoAd 广告位已经展示
+ 
+ @param rewardedVideoAd 当前激励视频对象
+ */
+- (void)rewardedVideoAdDidVisible:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+ rewardedVideoAd 激励视频广告即将关闭
+ 
+ @param rewardedVideoAd 当前激励视频对象
+ */
+- (void)rewardedVideoAdWillClose:(BURewardedVideoAd *)rewardedVideoAd;
 
 /**
  rewardedVideoAd 激励视频广告关闭

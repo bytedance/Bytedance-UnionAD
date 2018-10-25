@@ -68,7 +68,7 @@
 
 /* Begin PBXFileReference section */
 		2E32C4921EE91C4800D7C242 /* BUAdSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUAdSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		782C6ADA216F41C5002BDA9B /* BUDMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUDMacros.h; sourceTree = "<group>"; };
+		782C6AE1216F62D1002BDA9B /* BUDMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDMacros.h; sourceTree = "<group>"; };
 		7877564B212AC4C400C472C3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		7877564D212AC4CA00C472C3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		7877564F212AC4D100C472C3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -198,10 +198,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		782C6AD9216F4195002BDA9B /* Macros */ = {
+		782C6AE0216F62D1002BDA9B /* Macros */ = {
 			isa = PBXGroup;
 			children = (
-				782C6ADA216F41C5002BDA9B /* BUDMacros.h */,
+				782C6AE1216F62D1002BDA9B /* BUDMacros.h */,
 			);
 			path = Macros;
 			sourceTree = "<group>";
@@ -253,10 +253,10 @@
 		DE575227215F77A400A5A109 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				782C6AD9216F4195002BDA9B /* Macros */,
 				DE575228215F77A400A5A109 /* RewardVideoCustomEventAdapter */,
 				DE57522F215F77A400A5A109 /* Example */,
 				DE57525A215F77A400A5A109 /* Menu */,
+				782C6AE0216F62D1002BDA9B /* Macros */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -751,7 +751,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BUAdSDKDemo111;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BUAdSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -775,7 +775,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BUAdSDKDemo111;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BUAdSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -84,7 +84,6 @@
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:self.button];
     const CGFloat buttonHeight = 36;
-    
     CGFloat height = CGRectGetHeight(self.view.bounds);
     CGFloat width = CGRectGetWidth(self.view.bounds);
     self.button.frame = CGRectMake(0, height - buttonHeight - BottomMargin, width , buttonHeight);

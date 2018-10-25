@@ -25,14 +25,14 @@
 
 - (void)buildupView {
     self.titleLabel = [UILabel new];
-    self.titleLabel.frame = CGRectMake(13, GlobleHeight-200, GlobleWidth-26, 30);
-    self.titleLabel.font = [UIFont systemFontOfSize:17];
+    self.titleLabel.frame = CGRectMake(13, GlobleHeight-180, GlobleWidth-26, 30);
+    self.titleLabel.font = [UIFont boldSystemFontOfSize:19];
     self.titleLabel.numberOfLines = 0;
     self.titleLabel.textAlignment = NSTextAlignmentLeft;
     [self.contentView addSubview:self.titleLabel];
     
     self.descriptionLabel = [UILabel new];
-    self.descriptionLabel.frame = CGRectMake(13, GlobleHeight-200+40, GlobleWidth-26, 50);
+    self.descriptionLabel.frame = CGRectMake(13, GlobleHeight-180+40, GlobleWidth-26, 50);
     self.descriptionLabel.font = [UIFont systemFontOfSize:13];
     self.descriptionLabel.numberOfLines = 0;
     [self.contentView addSubview:self.descriptionLabel];
@@ -49,7 +49,7 @@
 -(void)refreshUIAtIndex:(NSUInteger)index{
     self.titleLabel.textColor = [UIColor blackColor];
     self.descriptionLabel.textColor = [UIColor blackColor];
-    self.titleLabel.text = [NSString stringWithFormat:@"Draw视频标题，写长一点，这是第 【%lu】 页视频",(unsigned long)index];
+    self.titleLabel.text = [NSString stringWithFormat:@"第 【%lu】 页，[Draw]模拟视频标题",(unsigned long)index];
     self.descriptionLabel.text = @"沉浸式视频，超强体验，你值得拥有。沉浸式视频，超强体验，你值得拥有。沉浸式视频，超强体验，你值得拥有。沉浸式视频，超强体验，你值得拥有。";
     self.backgroundColor = randomColor;
 }
@@ -74,11 +74,13 @@
     if (!self.nativeAdRelatedView.videoAdView.superview) {
         self.nativeAdRelatedView.videoAdView.frame = CGRectMake(0, 0, GlobleWidth, GlobleHeight);
         [self.nativeAdRelatedView.videoAdView playerPlayIncon:[UIImage imageNamed:@"adPlay.png"] playInconSize:CGSizeMake(80, 80)];
+        //更改视频是否可以点击暂停
+        self.nativeAdRelatedView.videoAdView.drawVideoClickEnable = YES;
         [self.contentView addSubview:self.nativeAdRelatedView.videoAdView];
     }
     
     if (!self.nativeAdRelatedView.adLabel.superview) {
-        self.nativeAdRelatedView.adLabel.frame = CGRectMake(13, GlobleHeight-200-30, 26, 14);
+        self.nativeAdRelatedView.adLabel.frame = CGRectMake(13, GlobleHeight-180-30, 30, 16);
         [self.contentView addSubview:self.nativeAdRelatedView.adLabel];
     }
     

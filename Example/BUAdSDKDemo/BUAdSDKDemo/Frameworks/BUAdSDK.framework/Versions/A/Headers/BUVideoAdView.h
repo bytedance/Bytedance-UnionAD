@@ -41,6 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, readwrite) UIViewController *rootViewController;
 
 /**
+ Draw视频支持点击暂停，默认NO，该字段仅对Draw竖版原生视频有效
+ **/
+@property (nonatomic, assign) BOOL drawVideoClickEnable;
+
+/**
  materialMeta 物料信息
  */
 @property (nonatomic, strong, readwrite, nullable) BUMaterialMeta *materialMeta;
@@ -57,14 +62,14 @@ NS_ASSUME_NONNULL_BEGIN
  播放暂停按钮支持配置
  
  @param playImg 播放按钮
- @param playSize 播放按钮大小
+ @param playSize 播放按钮大小 设置CGSizeZero则为默认图标大小
  */
 - (void)playerPlayIncon:(UIImage *)playImg playInconSize:(CGSize)playSize;
 /**
  播放，暂停功能
  */
-- (void)play;
-- (void)pause;
+- (void)tapPlay;
+- (void)tapPause;
 @end
 
 @protocol BUVideoAdViewDelegate <NSObject>

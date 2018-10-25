@@ -55,7 +55,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         BUDDrawVideoViewController *vc = [BUDDrawVideoViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546910";
+        viewModel.slotID = @"900546588";
         vc.viewModel = viewModel;
         [strongSelf presentViewController:vc animated:YES completion:nil];
     }];

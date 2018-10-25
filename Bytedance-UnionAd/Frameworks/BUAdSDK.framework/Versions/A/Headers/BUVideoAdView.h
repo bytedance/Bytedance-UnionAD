@@ -68,8 +68,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  播放，暂停功能
  */
-- (void)play;
-- (void)pause;
+- (void)tapPlay;
+- (void)tapPause;
 @end
 
 @protocol BUVideoAdViewDelegate <NSObject>

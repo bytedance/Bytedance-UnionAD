@@ -30,6 +30,16 @@
 - (void)fullscreenVideoAdWillVisible:(BUFullscreenVideoAd *)fullscreenVideoAd;
 
 /**
+ 广告位已经展示
+ */
+- (void)fullscreenVideoAdDidVisible:(BUFullscreenVideoAd *)fullscreenVideoAd;
+
+/**
+ 视频广告即将关闭
+ */
+- (void)fullscreenVideoAdWillClose:(BUFullscreenVideoAd *)fullscreenVideoAd;
+
+/**
  视频广告关闭
  */
 - (void)fullscreenVideoAdDidClose:(BUFullscreenVideoAd *)fullscreenVideoAd;

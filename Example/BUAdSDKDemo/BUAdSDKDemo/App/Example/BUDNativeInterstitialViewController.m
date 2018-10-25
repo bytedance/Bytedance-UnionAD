@@ -42,7 +42,7 @@ static CGFloat const RefreshHeight = 36;
     CGFloat height = CGRectGetHeight(self.view.bounds);
     CGFloat width = CGRectGetWidth(self.view.bounds);
     self.refreshbutton.frame = CGRectMake(0, height - RefreshHeight - BottomMargin, width, RefreshHeight);
-    
+
     [self.refreshbutton setBackgroundColor:[UIColor orangeColor]];
     [self.refreshbutton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.refreshbutton setTitle:NSLocalizedString(@"刷新原生插屏广告", @"刷新原生插屏广告")  forState:UIControlStateNormal];

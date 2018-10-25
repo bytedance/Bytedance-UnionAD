@@ -24,6 +24,10 @@
 | v1.9.4.1 | 2018-08-23 |【1】增加反作弊策略|
 | v1.9.5 | 2018-08-31 |【1】新增全屏视频广告类型【2】原生广告新增banner和插屏模板，支持原生banner样式，原生插屏样式【3】兼容iOS6、iOS7，但不支持iOS6与iOS7中展现广告【4】原生广告（视频、图文）通用性扩充，不依赖于WMTableViewCell，支持在UIView中展示，同时也支持UITableView、UICollectionView、UIScrollView等列表视图中展示|
 | v1.9.6.0 | 2018-09-13 |【1】修改开屏代理回调的命名,spalsh改为splash【2】插屏样式微调【3】新增开屏超时策略的埋点|
+| v1.9.6.1 | 2018-09-25 |【1】修复激励视频预加载转屏问题|
+| v1.9.6.2 | 2018-10-17 |【1】修复webView落地页横屏不支持问题|
+| v1.9.7.0 | 2018-10-17 |【1】激励视频和全屏视频增加回调时机，已经展示、即将关闭【2】添加原生视频预缓存的功能【3】增加激励视频预缓存功能【4】增加AppStore预缓存功能【5】增加竖版原生视频(draw视频)【6】支持pod方式接入【7】修改原生banner Logo大小【8】修复广告落地页present弹出方式下没有title的问题【9】支持开屏展示大小外部设定【10】品牌升级，SDK的前缀WM替换成BU（BytedanceUnion）|
+
 
 <!-- TOC -->
 
@@ -37,11 +41,11 @@
             - [1.2.2 运行环境配置](#122-运行环境配置)
             - [1.2.3 添加依赖库](#123-添加依赖库)
     - [2. SDK接口类介绍与广告接入](#2-sdk接口类介绍与广告接入)
-        - [2.1 全局设置(BUAdSDKManager)](#21-全局设置buAdsdkmanager)
+        - [2.1 全局设置(BUAdSDKManager)](#21-全局设置buadsdkmanager)
             - [2.1.1 接口说明](#211-接口说明)
             - [2.1.2 使用](#212-使用)
         - [2.2 原生广告](#22-原生广告)
-            - [2.2.1广告类(BUNativeAd)](#221广告类BUNativead)
+            - [2.2.1广告类(BUNativeAd)](#221广告类bunativead)
                 - [2.2.1.1 BUNativeAd接口说明](#2211-bunativead接口说明)
                 - [2.2.1.2 接口实例](#2212-接口实例)
                 - [2.2.1.3 BUNativeAdDelegate回调说明](#2213-bunativeaddelegate回调说明)
@@ -61,38 +65,43 @@
                 - [2.2.5.5 在 BUNativeAd 的 delegate 中处理各种回调协议方法](#2255-在-bunativead-的-delegate-中处理各种回调协议方法)
         - [2.3 原生信息流广告(BUNativeAdsManager)](#23-原生信息流广告bunativeadsmanager)
             - [2.3.1 BUNativeAdsManager接口说明](#231-bunativeadsmanager接口说明)
-            - [2.3.1.1 实例说明](#2311-实例说明)
-        - [2.4 原生banner广告](#24-原生banner广告)
-        - [2.5 原生插屏广告](#25-原生插屏广告)
-        - [2.6 视频广告(BUVideoAdView)](#26-视频广告buvideoadview)
-            - [2.6.1 BUVideoAdView接口说明](#261-buvideoadview接口说明)
-            - [2.6.2 BUVideoAdView回调说明](#262-buvideoadview回调说明)
-            - [2.6.3 实例](#263-实例)
-        - [2.7 Banner广告(BUBannerAdViewDelegate)](#27-banner广告bubanneradviewdelegate)
-            - [2.7.1  BUBannerAdViewDelegate接口说明](#271--bubanneradviewdelegate接口说明)
-            - [2.7.2 接口实例](#272-接口实例)
-        - [2.8 开屏广告(BUSplashAdView)](#28-开屏广告busplashadview)
-            - [2.8.1 BUSplashAdView接口说明](#281-busplashadview接口说明)
-            - [2.8.2 BUSplashAdView回调说明](#282-busplashadview回调说明)
-            - [2.8.3 实例](#283-实例)
-        - [2.9 插屏广告(BUInterstitialAd)](#29-插屏广告buinterstitialad)
-            - [2.9.1 BUInterstitialAd接口说明](#291-buinterstitialad接口说明)
-            - [2.9.2 BUInterstitialAd回调说明](#292-buinterstitialad回调说明)
+            - [2.3.2 实例说明](#232-实例说明)
+        - [2.4 原生Draw视频信息流广告](#24-原生draw视频信息流广告)
+            - [2.4.1 BUNativeAdsManager接口说明](#241-bunativeadsmanager接口说明)
+            - [2.4.2 实例说明](#242-实例说明)
+            - [2.4.3 个性设置接口说明](#243-个性设置接口说明)
+            - [2.4.4 接口实例](#244-接口实例)
+        - [2.5 原生banner广告](#25-原生banner广告)
+        - [2.6 原生插屏广告](#26-原生插屏广告)
+        - [2.7 视频广告(BUVideoAdView)](#27-视频广告buvideoadview)
+            - [2.7.1 BUVideoAdView接口说明](#271-buvideoadview接口说明)
+            - [2.7.2 BUVideoAdView回调说明](#272-buvideoadview回调说明)
+            - [2.7.3 实例](#273-实例)
+        - [2.8 Banner广告(BUBannerAdViewDelegate)](#28-banner广告bubanneradviewdelegate)
+            - [2.8.1  BUBannerAdViewDelegate接口说明](#281--bubanneradviewdelegate接口说明)
+            - [2.8.2 接口实例](#282-接口实例)
+        - [2.9 开屏广告(BUSplashAdView)](#29-开屏广告busplashadview)
+            - [2.9.1 BUSplashAdView接口说明](#291-busplashadview接口说明)
+            - [2.9.2 BUSplashAdView回调说明](#292-busplashadview回调说明)
             - [2.9.3 实例](#293-实例)
-        - [2.10 激励视频(BURewardedVideoAd)](#210-激励视频burewardedvideoad)
-            - [2.10.1 BURewardedVideoAd接口说明](#2101-burewardedvideoad接口说明)
-            - [2.10.2 BURewardedVideoAd回调说明](#2102-burewardedvideoad回调说明)
+        - [2.10 插屏广告(BUInterstitialAd)](#210-插屏广告buinterstitialad)
+            - [2.10.1 BUInterstitialAd接口说明](#2101-buinterstitialad接口说明)
+            - [2.10.2 BUInterstitialAd回调说明](#2102-buinterstitialad回调说明)
             - [2.10.3 实例](#2103-实例)
-            - [2.10.4 BURewardedVideoModel](#2104-burewardedvideomodel)
-            - [2.10.5 服务器到服务器回调](#2105-服务器到服务器回调)
+        - [2.11 激励视频(BURewardedVideoAd)](#211-激励视频burewardedvideoad)
+            - [2.11.1 BURewardedVideoAd接口说明](#2111-burewardedvideoad接口说明)
+            - [2.11.2 BURewardedVideoAd回调说明](#2112-burewardedvideoad回调说明)
+            - [2.11.3 实例](#2113-实例)
+            - [2.11.4 BURewardedVideoModel](#2114-burewardedvideomodel)
+            - [2.11.5 服务器到服务器回调](#2115-服务器到服务器回调)
                 - [回调方式说明](#回调方式说明)
                 - [签名生成方式](#签名生成方式)
                 - [返回约定](#返回约定)
-            - [2.10.6 AdMob通过CustomEvent Adapter方式聚合激励视频](#2106-admob通过customevent-adapter方式聚合激励视频)
-        - [2.11 全屏视频(BUFullscreenVideoAd)](#211-全屏视频bufullscreenvideoad)
-            - [2.11.1 BUFullscreenVideoAd接口说明](#2111-bufullscreenvideoad接口说明)
-            - [2.11.2 BUFullscreenVideoAd回调说明](#2112-bufullscreenvideoad回调说明)
-            - [2.11.3 实例](#2113-实例)
+            - [2.11.6 AdMob通过CustomEvent Adapter方式聚合激励视频](#2116-admob通过customevent-adapter方式聚合激励视频)
+        - [2.12 全屏视频(BUFullscreenVideoAd)](#212-全屏视频bufullscreenvideoad)
+            - [2.12.1 BUFullscreenVideoAd接口说明](#2121-bufullscreenvideoad接口说明)
+            - [2.12.2 BUFullscreenVideoAd回调说明](#2122-bufullscreenvideoad回调说明)
+            - [2.12.3 实例](#2123-实例)
     - [附录](#附录)
         - [SDK错误码](#sdk错误码)
         - [FAQ](#faq)
@@ -152,6 +161,8 @@
 + AdSupport.framework
 
 ## 2. SDK接口类介绍与广告接入
+
+**Note：由于品牌升级自1.9.7.0版本SDK的前缀WM替换成BU（BytedanceUnion），若SDK需要升级，辛苦接入时统一替换**
 
 ### 2.1 全局设置(BUAdSDKManager)
 
@@ -693,7 +704,7 @@ BUNativeAdsManager 类可以一次请求获取多个广告数据，其对象声�
 @end
 ```
 
-#### 2.3.1.1 实例说明
+#### 2.3.2 实例说明
 
 使用方法类似 BUNativeAd，初始化 BUNativeAdsManager 对象之后，设置好 BUAdSlot，通过loadAdDataWithCount: 方法来获取一组广告数据，其中loadAdDataWithCount: 方法能够根据 count 次数请求数据，数据获取后，同样通过 delegate 来处理回调参见下面代码示例：
 
@@ -794,8 +805,132 @@ BUNativeAdsManager请求结果可获取到一组BUNativeAd，每一个BUNativeAd
 }
 ```
 **从V1.9.5之前（< 1.9.5）升级到1.9.5后续版本（>=1.9.5）的开发者请仔细阅读本段，新接入请略过。在1.9.5之前（< 1.9.5）版本中，需要使用继承自WMTableViewCell 的 UITableViewCell来实现feed流广告，并且只适用于UITableView中展示信息流。WMTableViewCell提供了广告数据 BUMaterialMeta 并能够帮助在cell里注册用户自定义的事件。在1.9.5后续版本（>=1.9.5）中，可直接使用BUNativeAd替代WMTableViewCell的相关功能，获取视图组件部分可以参考BUNativeAdRelatedView**  
+### 2.4 原生Draw视频信息流广告
++ **类型说明：** Draw视频信息流广告即全屏视频播放下的信息流视频广告，是在全屏feed流场景下的原生广告。
++ **使用说明：** 在SDK里只需要使用 BUNativeAdsManager 就可以获取信息流广告。SDK 提供信息流广告的数据绑定、点击事件的上报，用户可自行定义信息流广告展示形态与布局。
+Draw视频信息流广告和feed信息流广告用法基本相同，不同点在于Draw视频信息流增加对视频支持暂停播放，设置播放incon的图标样式和大小的接口，详细使用参见2.4.3。
 
-### 2.4 原生banner广告
+#### 2.4.1 BUNativeAdsManager接口说明
+
+BUNativeAdsManager 类可以一次请求获取多个广告数据，其对象声明如下：
+
+```Objective-C
+
+@interface BUNativeAdsManager : NSObject
+
+@property (nonatomic, strong, nullable) BUAdSlot *adslot;
+@property (nonatomic, strong, nullable) NSArray<BUNativeAd *> *data;
+/// 广告位加载展示响应的代理回调，可以设置为遵循<BUNativeAdDelegate>的任何类型，不限于Viewcontroller
+@property (nonatomic, weak, nullable) id<BUNativeAdsManagerDelegate> delegate;
+
+- (instancetype)initWithSlot:(BUAdSlot * _Nullable) slot;
+
+/**
+ 请求广告素材数量，建议不超过3个，
+ 一次最多不超过10个
+ @param count 最多广告返回的广告素材的数量
+ */
+- (void)loadAdDataWithCount:(NSInteger)count;
+
+@end
+```
+
+#### 2.4.2 实例说明
+
+使用方法类似 BUNativeAd，初始化 BUNativeAdsManager 对象之后，设置好 BUAdSlot，通过loadAdDataWithCount: 方法来获取一组广告数据，其中loadAdDataWithCount: 方法能够根据 count 次数请求数据，数据获取后，同样通过 delegate 来处理回调参见下面代码示例：
+
+```Objective-C
+- (void)loadNativeAds {
+    BUNativeAdsManager *nad = [BUNativeAdsManager new];
+    BUAdSlot *slot1 = [[BUAdSlot alloc] init];
+    slot1.ID = self.viewModel.slotID;
+    slot1.AdType = BUAdSlotAdTypeDrawVideo; //必须
+    slot1.isOriginAd = YES; //必须
+    slot1.position = BUAdSlotPositionTop;
+    slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
+    slot1.isSupportDeepLink = YES;
+    nad.adslot = slot1;
+    nad.delegate = self;
+    self.adManager = nad;
+    
+    [nad loadAdDataWithCount:3];}
+
+- (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
+  
+    NSMutableArray *dataSources = [self.dataSource mutableCopy];
+    for (BUNativeAd *model in nativeAdDataArray) {
+        NSUInteger index = rand() % dataSources.count;
+        [dataSources insertObject:model atIndex:index];
+    }
+    self.dataSource = [dataSources copy];
+    
+    [self.tableView reloadData];
+}
+
+- (void)nativeAdsManager:(BUNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error {
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
+}
+```
+BUNativeAdsManager请求结果可获取到一组BUNativeAd，每一个BUNativeAd实则对应一条广告位。BUNativeAd需要按照自身用法，注册视图、设置delegate和rootviewController，请参考原生广告。
+
+```Objective-C
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSUInteger index = indexPath.row;
+    id model = self.dataSource[index];
+    if ([model isKindOfClass:[BUNativeAd class]]) {
+        BUNativeAd *nativeAd = (BUNativeAd *)model;
+        nativeAd.rootViewController = self;
+        BUDDrawAdTableViewCell *cell = nil;
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BUDDrawAdTableViewCell" forIndexPath:indexPath];
+        cell.nativeAdRelatedView.videoAdView.delegate = self;
+        [cell refreshUIWithModel:nativeAd];
+        [model registerContainer:cell withClickableViews:@[cell.creativeButton]];
+        
+        return cell;
+    }else{
+        BUDDrawNormalTableViewCell *cell = nil;
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BUDDrawNormalTableViewCell" forIndexPath:indexPath];
+        [cell refreshUIAtIndex:index];
+        return cell;
+    }
+}
+```
+
+#### 2.4.3 个性设置接口说明
+Draw视频信息流广告可以在BUNativeAdRelatedView的videoAdview设置视频播放incon的图标样式和大小，还可以设置是否允许点击暂停。
+
+```
+/**
+ Draw视频支持点击暂停，默认NO，该字段仅对Draw竖版原生视频有效
+ **/
+@property (nonatomic, assign) BOOL drawVideoClickEnable;
+/**
+播放暂停按钮支持配置
+
+@param playImg 播放按钮
+@param playSize 播放按钮大小 设置CGSizeZero则为默认图标大小
+*/
+- (void)playerPlayIncon:(UIImage *)playImg playInconSize:(CGSize)playSize;
+/**
+播放，暂停功能
+*/
+- (void)play;
+- (void)pause;
+```
+#### 2.4.4 接口实例
+
+```
+if (!self.nativeAdRelatedView.videoAdView.superview) {
+        self.nativeAdRelatedView.videoAdView.frame = CGRectMake(0, 0, GlobleWidth, GlobleHeight);
+        [self.nativeAdRelatedView.videoAdView playerPlayIncon:[UIImage imageNamed:@"adPlay.png"] playInconSize:CGSizeMake(80, 80)];
+        //更改视频是否可以点击暂停
+        self.nativeAdRelatedView.videoAdView.drawVideoClickEnable = YES;
+        [self.contentView addSubview:self.nativeAdRelatedView.videoAdView];
+    }
+```
+
+
+### 2.5 原生banner广告
 + **类型说明：**原生banner广告是为满足媒体多元化需求而开发的一种原生广告。
 + **使用说明：**SDK可提供数据绑定、点击事件的上报、响应回调，开发者进行自渲染，接入方式同原生广告相同。不同点在于，slot的AdType类型需要设置为 BUAdSlotAdTypeBanner，示例如下。具体可参考Demo中BUDnNativeBannerViewController部分示例代码
 
@@ -829,7 +964,7 @@ BUNativeAdsManager请求结果可获取到一组BUNativeAd，每一个BUNativeAd
     [self.nativeAd loadAdData];
 }
 ```
-### 2.5 原生插屏广告
+### 2.6 原生插屏广告
 + **类型说明：**原生插屏广告是为满足媒体多元化需求而开发的一种原生广告。
 +  **使用说明：**SDK可提供数据绑定、点击事件的上报、响应回调，开发者进行自渲染，接入方式同原生广告相同。不同点在于，slot的AdType类型需要设置为 BUAdSlotAdTypeInterstitial，示例如下。具体可参考Demo中BUDNativeInterstitialViewController部分示例代码
 
@@ -856,12 +991,12 @@ BUNativeAdsManager请求结果可获取到一组BUNativeAd，每一个BUNativeAd
 }
 ```
 
-### 2.6 视频广告(BUVideoAdView)
+### 2.7 视频广告(BUVideoAdView)
 
 + **类型说明：**视频广告是原生广告的一种形式，网盟 SDK 提供视频播放视图 BUVideoAdView，开发只要参照信息流广告接入即可。
 + **使用说明：**BUVideoAdView 提供了 play、pause、currentPlayTime 等方法，开发者可用于在信息流中实现划入屏幕自动播放，划出屏幕暂停，点击传入已播放时间用于续播等。
 
-#### 2.6.1 BUVideoAdView接口说明
+#### 2.7.1 BUVideoAdView接口说明
 
 ```Objective-C
 /**
@@ -912,7 +1047,7 @@ BUNativeAdsManager请求结果可获取到一组BUNativeAd，每一个BUNativeAd
 @end
 ```
 
-#### 2.6.2 BUVideoAdView回调说明
+#### 2.7.2 BUVideoAdView回调说明
 
 ```Objective-C
 @protocol BUVideoAdViewDelegate <NSObject>
@@ -943,7 +1078,7 @@ BUNativeAdsManager请求结果可获取到一组BUNativeAd，每一个BUNativeAd
 
 @end
 ```
-#### 2.6.3 实例
+#### 2.7.3 实例
 ```Objective-C
 self.videoAdView = [[BUVideoAdView alloc] init];
 self.videoAdView.materialMeta = (BUMaterialMeta *)self.material;
@@ -953,7 +1088,7 @@ self.videoAdView.rootViewController = self;
 
 ```
 
-### 2.7 Banner广告(BUBannerAdViewDelegate)
+### 2.8 Banner广告(BUBannerAdViewDelegate)
 
 直接调用loadAdData方法
 
@@ -963,7 +1098,7 @@ self.videoAdView.rootViewController = self;
 -(void)loadAdData;
 ```
 
-#### 2.7.1  BUBannerAdViewDelegate接口说明
+#### 2.8.1  BUBannerAdViewDelegate接口说明
 
 ```Objective-C
 /**
@@ -1009,7 +1144,7 @@ self.videoAdView.rootViewController = self;
 @end
 ```
 
-#### 2.7.2 接口实例
+#### 2.8.2 接口实例
 
 + 1. 在需要展示banner广告的viewcontroller中导入头文件
 
@@ -1066,11 +1201,11 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
 
 ```
 
-### 2.8 开屏广告(BUSplashAdView)
+### 2.9 开屏广告(BUSplashAdView)
 
 + **类型说明：**开屏广告主要是 APP 启动时展示的全屏广告视图，开发只要按照接入标准就能够展示设计好的视图。
 
-#### 2.8.1 BUSplashAdView接口说明
+#### 2.9.1 BUSplashAdView接口说明
 
 ```Objective-C
 @interface BUSplashAdView : UIView
@@ -1107,7 +1242,7 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
 @end
 ```
 
-#### 2.8.2 BUSplashAdView回调说明
+#### 2.9.2 BUSplashAdView回调说明
 
 ```Objective-C
 @protocol BUSplashAdDelegate <NSObject>
@@ -1153,7 +1288,7 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
 @end
 ```
 
-#### 2.8.3 实例
+#### 2.9.3 实例
 
 ```Objective-C
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -1180,11 +1315,11 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
 
 ```
 
-### 2.9 插屏广告(BUInterstitialAd)
+### 2.10 插屏广告(BUInterstitialAd)
 
 + **类型说明：**插屏广告主要是用户暂停某个操作时展示的全屏广告视图，开发只要按照接入标准就能够展示设计好的视图。
 
-#### 2.9.1 BUInterstitialAd接口说明
+#### 2.10.1 BUInterstitialAd接口说明
 
 ```Objctive-C
 @interface BUInterstitialAd : NSObject
@@ -1204,7 +1339,7 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
 @end
 ```
 
-#### 2.9.2 BUInterstitialAd回调说明
+#### 2.10.2 BUInterstitialAd回调说明
 
 ```Objctive-C
 @protocol BUInterstitialAdDelegate <NSObject>
@@ -1253,7 +1388,7 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
 @end
 ```
 
-#### 2.9.3 实例
+#### 2.10.3 实例
 
 ```Objctive-C
     self.interstitialAd = [[BUInterstitialAd alloc] initWithSlotID:@"900721489" size:[BUSize sizeBy:BUProposalSize_Interstitial600_900]];
@@ -1261,11 +1396,11 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
     [self.interstitialAd showAdFromRootViewController:self.navigationController];
 ```
 
-### 2.10 激励视频(BURewardedVideoAd)
+### 2.11 激励视频(BURewardedVideoAd)
 
 + **类型说明：**激励视频广告是一种全新的广告形式，用户可选择观看视频广告以换取有价物，例如虚拟货币、应用内物品和独家内容等等；这类广告的长度为 15-30 秒，不可跳过，且广告的结束画面会显示结束页面，引导用户进行后续动作。
 
-#### 2.10.1 BURewardedVideoAd接口说明
+#### 2.11.1 BURewardedVideoAd接口说明
 
 **每次需要生成新的BURewardedVideoAd对象调用loadAdData方法请求最新激励视频，请勿重复使用本地缓存激励视频多次展示**
 
@@ -1285,7 +1420,7 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
 @end
 ```
 
-#### 2.10.2 BURewardedVideoAd回调说明
+#### 2.11.2 BURewardedVideoAd回调说明
 
 ```Objective-C
 @protocol BURewardedVideoAdDelegate <NSObject>
@@ -1353,7 +1488,7 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
 @end
 ```
 
-#### 2.10.3 实例
+#### 2.11.3 实例
 
 ```Objctive-C
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
@@ -1364,7 +1499,7 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
     [self.rewardedVideoAd loadAdData];
 ```
 
-#### 2.10.4 BURewardedVideoModel
+#### 2.11.4 BURewardedVideoModel
 
 ```Objctive-C
 @interface BURewardedVideoModel : NSObject
@@ -1387,7 +1522,7 @@ BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
 @end
 ```
 
-#### 2.10.5 服务器到服务器回调
+#### 2.11.5 服务器到服务器回调
 
 服务器到服务器回调让您判定是否提供奖励给观看广告的用户。当用户成功看完广告时，您可以在头条媒体平台配置从头条服务器到您自己的服务器的回调链接，以通知您用户完成了操作。
 
@@ -1440,7 +1575,7 @@ if __name__ == "__main__":
 }
 ```
 
-#### 2.10.6 AdMob通过CustomEvent Adapter方式聚合激励视频
+#### 2.11.6 AdMob通过CustomEvent Adapter方式聚合激励视频
 通过AdMob聚合激励视频有两种方式，第一种是通过AdMob广告联盟方式，第二种是通过CustomEvent Adapter方式聚合。目前今日头条暂支持第二种方式，需要您配置CustomEvent并实现CustomEvent Adapter。请参考[Rewarded Video Adapters](https://developers.google.com/admob/ios/rewarded-video-adapters?hl=zh-CN)官网指南
 
 请求激励视频方式请参考[Rewarded Video](https://developers.google.com/admob/ios/rewarded-video?hl=zh-CN)官方指南
@@ -1452,11 +1587,11 @@ if __name__ == "__main__":
 + **配置CustomEvent时，Class Name与实现的Adapter类名要保持统一，否则无法调起adapter**
 + **iOS simulator默认是 Enable test device类型设备，只能获取到Google Test Ads，无法取得今日头条测试广告，若要测试今日头条广告，请使用iOS真机设备，并且不要添加成AdMob TestDevices**
 
-### 2.11 全屏视频(BUFullscreenVideoAd)
+### 2.12 全屏视频(BUFullscreenVideoAd)
 
 + **类型说明：** 全屏视频是全屏展示视频广告的广告形式，用户可选择在不同场景插入对应广告；这类广告的长度为 15-30 秒，可以跳过，且广告会显示结束endCard页面，引导用户进行后续动作。
 
-#### 2.11.1 BUFullscreenVideoAd接口说明
+#### 2.12.1 BUFullscreenVideoAd接口说明
 **每次需要生成新的BUFullscreenVideoAd对象调用loadAdData方法请求最新激励视频，请勿重复使用本地缓存激励视频多次展示.**
 
 ```Objctive-C
@@ -1488,7 +1623,7 @@ if __name__ == "__main__":
 @end
 ```
 
-#### 2.11.2 BUFullscreenVideoAd回调说明
+#### 2.12.2 BUFullscreenVideoAd回调说明
 
 ```Objective-C
 /**
@@ -1541,7 +1676,7 @@ if __name__ == "__main__":
 
 @end
 ```
-#### 2.11.3 实例
+#### 2.12.3 实例
 
 ```Objctive-C
 - (void)viewDidLoad {

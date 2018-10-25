@@ -30,6 +30,7 @@
     // Do any additional setup after loading the view.
     
     self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.pagingEnabled = YES;
     [self.view addSubview:self.tableView];
     
@@ -72,7 +73,7 @@
     slot1.AdType = BUAdSlotAdTypeDrawVideo; //必须
     slot1.isOriginAd = YES; //必须
     slot1.position = BUAdSlotPositionTop;
-    slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
+    slot1.imgSize = [BUSize sizeBy:BUProposalSize_DrawFullScreen];
     slot1.isSupportDeepLink = YES;
     nad.adslot = slot1;
     nad.delegate = self;
@@ -133,10 +134,6 @@
         [cell refreshUIAtIndex:index];
         return cell;
     }
-    NSString *text = [NSString stringWithFormat:@"%@", model];
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = text;
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

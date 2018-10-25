@@ -17,7 +17,6 @@ static CGSize const dislikeSize = {15, 15};
 static CGSize const logoSize = {20, 20};
 static CGFloat const RefreshHeight = 36;
 
-
 @interface BUDNativeBannerViewController () <BUNativeAdDelegate>
 @property (nonatomic, strong) BUNativeAd *nativeAd;
 @property (nonatomic, strong) UIScrollView *scrollView;

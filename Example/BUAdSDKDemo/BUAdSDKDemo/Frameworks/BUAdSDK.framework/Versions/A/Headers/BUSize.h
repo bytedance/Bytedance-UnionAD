@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, BUProposalSize) {
     BUProposalSize_Interstitial600_400,
     BUProposalSize_Interstitial600_600,
     BUProposalSize_Interstitial600_900,
+    BUProposalSize_DrawFullScreen
 };
 
 @interface BUSize : NSObject

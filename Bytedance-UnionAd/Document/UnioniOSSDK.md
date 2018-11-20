@@ -147,7 +147,7 @@
 + 支持架构：i386, x86-64, armv7, armv7s, arm64
 
 #### 1.2.3 添加依赖库
-如果你的工程中使用了Cocoapods工程，需要在TARGETS -> Build Phases中找到Link Binary With Libraries，点击“+”，依次添加下列 framework
+工程需要在TARGETS -> Build Phases中找到Link Binary With Libraries，点击“+”，依次添加下列依赖库	
 
 + StoreKit.framework
 + MobileCoreServices.framework
@@ -159,6 +159,9 @@
 + CoreTelephony.framework
 + SystemConfiguration.framework
 + AdSupport.framework
++ libresolv.9.tbd
++ libc++.tbd
++ CoreMotion.framework
 
 ## 2. SDK接口类介绍与广告接入
 
@@ -524,7 +527,10 @@ BUAdSlot 对象为加载广告时需要设置的广告位描述信息，在BUNat
  logoImageView 网盟广告标识，需要主动添加到 View
  */
 @property (nonatomic, strong, readonly, nullable) UIImageView *logoImageView;
-
+/**
+logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
+*/
+@property (nonatomic, strong, readonly, nullable) UIImageView *logoADImageView;
 /**
  BUPlayer View 需要主动添加到 View
  */
@@ -604,6 +610,12 @@ BUNativeAd 对象设置好 BUAdSlot 对象和 delegate（>= V1.8.2 不必一定�
     // 添加广告标签
     self.relatedView.adLabel.frame = CGRectZero;
     [_customview addSubview:self.relatedView.adLabel];
+    //添加AD广告标签
+    UIImageView *logoADImageView = [[UIImageView alloc] initWithImage:self.relatedView.logoADImageView.image];
+    CGFloat logoIconX = CGRectGetWidth(adImageView.bounds) - logoSize.width - margin;
+    CGFloat logoIconY = imageViewHeight - logoSize.height - margin;
+    logoADImageView.frame = CGRectMake(logoIconX, logoIconY, logoSize.width, logoSize.height);
+    [_customview addSubview:logoADImageView];
 ```
     
 ##### 2.2.5.4 广告数据获取后，更新View并注册可点击的View

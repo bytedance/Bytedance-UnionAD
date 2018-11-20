@@ -1,0 +1,185 @@
+//
+//  BUDSettingViewController.m
+//  BUDemo
+//
+//  Created by carl on 2017/8/31.
+//  Copyright © 2017年 bytedance. All rights reserved.
+//
+
+#import "BUDSettingViewController.h"
+#import "BUDActionCellView.h"
+#import <CoreLocation/CoreLocation.h>
+#import <FLEX/FLEXManager.h>
+#import <AdSupport/AdSupport.h>
+#import "BUDApplogDescryptViewController.h"
+#import "BUDMacros.h"
+
+#define LeftMargin 10
+#define RightMargin 10
+#define Top_Margin 20
+
+
+@interface BUDSettingViewController () <CLLocationManagerDelegate>
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray<BUDActionModel *> *items;
+
+@property (nonatomic, strong) UIButton *locationBtn;
+@property (nonatomic, strong) UITextField *locationText;
+
+@property (nonatomic, strong) UIButton *idfaBtn;
+@property (nonatomic, strong) UITextField *idfaText;
+
+@property (nonatomic, strong) UIButton *decryptLogBtn;
+
+@end
+
+@implementation BUDSettingViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.items = [NSMutableArray array];
+    
+    [self buildupView];
+}
+
+- (void)buildupView {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Flex" style:UIBarButtonItemStylePlain target:self action:@selector(rightItemTapped:)];
+    self.navigationItem.rightBarButtonItem = item;
+    
+    [self.view addSubview:self.locationBtn];
+    [self.view addSubview:self.locationText];
+    [self.view addSubview:self.idfaBtn];
+    [self.view addSubview:self.idfaText];
+    [self.view addSubview:self.decryptLogBtn];
+}
+
+- (void)rightItemTapped:(id)sender {
+    [[FLEXManager sharedManager] showExplorer];
+}
+
+#pragma mark - Target
+- (void)authoid {
+    self.locationText.text = @"开始定位";
+    if (![self serviceEnable]) {
+        self.locationText.text = @"没有权限";
+        return;
+    }
+    CLLocationManager *locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    [locationManager startUpdatingLocation];
+    self.locationManager = locationManager;
+}
+
+- (void)setIDFA {
+    self.idfaText.text = [NSString stringWithFormat:@"  %@",[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
+}
+
+- (void)decryptLogVC {
+    BUDApplogDescryptViewController *vc = [[BUDApplogDescryptViewController alloc] init];;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - Private methed
+- (BOOL)serviceEnable {
+    if (![CLLocationManager locationServicesEnabled]) {
+        return NO;
+    }
+    CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
+    if (authorizationStatus != kCLAuthorizationStatusAuthorizedAlways
+        && authorizationStatus != kCLAuthorizationStatusAuthorizedWhenInUse) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    CLLocationCoordinate2D coordinate = locations.firstObject.coordinate;
+    self.locationText.text = [NSString stringWithFormat:@"  经度:%f,纬度:%f",coordinate.longitude,coordinate.latitude];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    self.locationText.text = @"定位失败";
+}
+
+- (UIButton *)locationBtn {
+    if (!_locationBtn) {
+        _locationBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, NavigationBarHeight + Top_Margin, 100, 30)];
+        [_locationBtn setTitle:@"开启定位" forState:UIControlStateNormal];
+        [_locationBtn addTarget:self action:@selector(authoid) forControlEvents:UIControlEventTouchUpInside];
+        [self designButton:_locationBtn];
+    }
+    return _locationBtn;
+}
+
+- (UITextField *)locationText {
+    if (!_locationText) {
+        _locationText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.locationBtn.frame) + 10, NavigationBarHeight + Top_Margin, self.view.frame.size.width - CGRectGetMaxX(self.locationBtn.frame) - LeftMargin-RightMargin, 30)];
+        _locationText  .font = [UIFont systemFontOfSize:10];
+        [self designLayer:[_locationText layer]];
+    }
+    return _locationText;
+}
+
+- (UIButton *)idfaBtn {
+    if (!_idfaBtn) {
+        _idfaBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.locationBtn.frame) + 10, 100, 30)];
+        [_idfaBtn setTitle:@"获取IDFA" forState:UIControlStateNormal];
+        [_idfaBtn addTarget:self action:@selector(setIDFA) forControlEvents:UIControlEventTouchUpInside];
+        [self designButton:_idfaBtn];
+    }
+    return _idfaBtn;
+}
+
+- (UITextField *)idfaText {
+    if (!_idfaText) {
+        _idfaText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.locationBtn.frame) + 10, CGRectGetMaxY(self.locationBtn.frame) + 10, self.view.frame.size.width - CGRectGetMaxX(self.locationBtn.frame) - LeftMargin-RightMargin, 30)];
+        _idfaText.font = [UIFont systemFontOfSize:10];
+        [self designLayer:[_idfaText layer]];
+    }
+    return _idfaText;
+}
+
+- (UIButton *)decryptLogBtn {
+    if (!_decryptLogBtn) {
+        _decryptLogBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.idfaBtn.frame) + 10, 100, 30)];
+        [_decryptLogBtn setTitle:@"log解密" forState:UIControlStateNormal];
+        [_decryptLogBtn addTarget:self action:@selector(decryptLogVC) forControlEvents:UIControlEventTouchUpInside];
+        [self designButton:_decryptLogBtn];
+    }
+    return _decryptLogBtn;
+}
+
+- (void)designButton:(UIButton *)btn {
+    // Set the button Text Color
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    
+    // Set default backgrond color
+    [btn setBackgroundColor:[UIColor whiteColor]];
+    
+    // Add Custom Font
+    [[btn titleLabel] setFont:[UIFont fontWithName:@"Knewave" size:18.0f]];
+    
+    CALayer *btnLayer = [btn layer];
+    [self designLayer:btnLayer];
+}
+
+- (void)designLayer:(CALayer *)layer {
+    CALayer *btnLayer = layer;
+    [btnLayer setMasksToBounds:YES];
+    [btnLayer setCornerRadius:5.0f];
+    
+    // Apply a 1 pixel, black border around Buy Button
+    [btnLayer setBorderWidth:1.0f];
+    [btnLayer setBorderColor:[[UIColor blackColor] CGColor]];
+}
+
+@end

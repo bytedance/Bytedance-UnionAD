@@ -66,6 +66,11 @@
             case BUDCellType_video:
                 imageString = @"demo_video.png";
                 break;
+                
+            case BUDCellType_CustomEvent:
+                imageString = @"demo_CustomEvent.png";
+                break;
+                
             default:
                 imageString = @"demo_setting.png";
                 break;

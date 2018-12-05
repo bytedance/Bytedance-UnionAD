@@ -7,17 +7,16 @@
 //
 
 #import "AppDelegate.h"
-
 #import "BUDAdManager.h"
 #import <BUAdSDK/BUAdSDKManager.h>
 #import "BUAdSDK/BUSplashAdView.h"
 #import "BUDConfigHelper.h"
-
 #import "BUDSettingViewController.h"
 #import "BUDMainViewController.h"
 #import "BUDMainViewModel.h"
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import "RRFPSBar.h"
+#import "Mopub.h"
 
 #pragma mark - 展示FPS的开关
 #ifdef DEBUG
@@ -25,6 +24,9 @@
 #else
 #define BUFPS_OPEN 0
 #endif
+
+static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
+
 
 @interface AppDelegate () <BUSplashAdDelegate>
 @property (nonatomic, assign) CFTimeInterval startTime;
@@ -34,6 +36,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self configCustomEvent];
     
     UIViewController *rootViewController = [self rootViewControllerStyleTwo];
     if (self.window == nil) {
@@ -45,7 +49,6 @@
     
     [BUAdSDKManager setAppID:[BUDAdManager appKey]];
     [BUAdSDKManager setIsPaidApp:NO];
-    [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
 #if DEBUG
     //是否打开log信息，默认没有
 //    [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
@@ -57,23 +60,12 @@
     splashView.tolerateTimeout = 10;
     splashView.delegate = self;
 
-    UIWindow *keyWindow = [UIApplication sharedApplication].windows.firstObject;
+    UIWindow *keyWindow = self.window;
     self.startTime = CACurrentMediaTime();
     [splashView loadAdData];
     [keyWindow.rootViewController.view addSubview:splashView];
     splashView.rootViewController = keyWindow.rootViewController;
 
-    [[BUDConfigHelper sharedInstance] readingPreference];
-
-    ///如果使用adMob聚合配置appId
-    [GADMobileAds configureWithApplicationID:@"ca-app-pub-1436854326312437~2076774018"];
-    
-    // 展示FPS监测栏
-    if (BUFPS_OPEN == 1) {
-        [RRFPSBar sharedInstance].showsAverage = YES;
-        [[RRFPSBar sharedInstance] setHidden:NO];
-    }
-    
     return YES;
 }
 
@@ -104,6 +96,32 @@
     BUDMainViewController *mainViewController = [[BUDMainViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     return nav;
+}
+
+- (void)configCustomEvent {
+    
+    [[BUDConfigHelper sharedInstance] readingPreference];
+    
+    ///如果使用adMob聚合配置appId
+    [GADMobileAds configureWithApplicationID:@"ca-app-pub-9206388280072239~5099042698"];
+    
+    // 展示FPS监测栏
+    if (BUFPS_OPEN == 1) {
+        [RRFPSBar sharedInstance].showsAverage = YES;
+        [[RRFPSBar sharedInstance] setHidden:NO];
+    }
+    
+    
+    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:MopubADUnitID];
+    sdkConfig.globalMediationSettings = @[];
+    Class<MPMediationSdkInitializable> BURewardCusEvent = NSClassFromString(@"WMRewardedVideoCustomEvent");
+    if (BURewardCusEvent != nil) {
+        sdkConfig.mediatedNetworks = @[BURewardCusEvent];
+    }
+    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
+        NSLog(@"Mopub");
+    }];
+    [MoPub sharedInstance].logLevel = MPLogLevelInfo;
 }
 
 - (void)splashAdDidClose:(BUSplashAdView *)splashAd {

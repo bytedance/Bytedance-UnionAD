@@ -36,6 +36,11 @@
     [self.interstitialAd loadAdData];
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    self.button.center = CGPointMake(self.view.center.x, self.view.center.y*1.5);
+}
+
 - (void)buttonTapped:(UIButton *)sender {
     [self.interstitialAd showAdFromRootViewController:self.navigationController];
 }

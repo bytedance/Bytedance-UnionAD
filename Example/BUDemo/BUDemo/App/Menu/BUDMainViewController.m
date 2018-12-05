@@ -17,11 +17,11 @@
 #import "BUDSlotViewModel.h"
 #import "BUDSplashViewController.h"
 #import "BUDRewardedVideoAdViewController.h"
-#import "BUDRewardVideoCusEventVC.h"
-#import <FLEX/FLEXManager.h>
+#import "BUDCustomEventViewController.h"
 #import "BUDFullscreenViewController.h"
 #import "BUNativeSettingViewController.h"
 #import "BUDMacros.h"
+#import <BUAdSDK/BUAdSDK.h>
 
 @interface BUDMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -29,11 +29,6 @@
 @end
 
 @implementation BUDMainViewController
-
-- (void)flexOn
-{
-    [[FLEXManager sharedManager] showExplorer];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,14 +38,17 @@
     }
     
     self.title = @"BytedanceUnion Demo";
-    UIBarButtonItem *flexBtn = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(flexOn)];
-
-    self.navigationItem.leftBarButtonItem = flexBtn;
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    UILabel *versionLable = [[UILabel alloc]initWithFrame:CGRectMake(0, self.tableView.frame.size.height - 150, self.tableView.frame.size.width, 40)];
+    versionLable.textAlignment = NSTextAlignmentCenter;
+    versionLable.text = [NSString stringWithFormat:@"V%@",[BUAdSDKManager SDKVersion]];
+    versionLable.textColor = [UIColor grayColor];
+    [self.tableView addSubview:versionLable];
     
     Class plainActionCellClass = [BUDActionCellView class];
     [self.tableView registerClass:plainActionCellClass forCellReuseIdentifier:NSStringFromClass(plainActionCellClass)];
@@ -116,8 +114,8 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *item12 = [BUDActionModel plainTitleActionModel:@"激励视频（CustomEventAdapter）" type:BUDCellType_video action:^{
-        BUDRewardVideoCusEventVC *vc = [BUDRewardVideoCusEventVC new];
+    BUDActionModel *item12 = [BUDActionModel plainTitleActionModel:@"CustomEventAdapter" type:BUDCellType_CustomEvent action:^{
+        BUDCustomEventViewController *vc = [BUDCustomEventViewController new];
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
@@ -128,7 +126,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.items = @[@[settingVC], @[item4, item6, item7], @[fullscreenItem,item10, item12], @[item8]];
+    self.items = @[@[settingVC], @[item4, item6, item7], @[fullscreenItem,item10], @[item12], @[item8]];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -141,12 +139,14 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setBarTintColor:nil];
     [self.navigationController.navigationBar setTintColor:nil];
     [self.navigationController.navigationBar setTitleTextAttributes:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:NO];
     
     [self.navigationController.navigationBar setBarTintColor:titleBGColor];

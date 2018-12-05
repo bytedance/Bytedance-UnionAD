@@ -37,6 +37,7 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
+    self.button.center = CGPointMake(self.view.center.x, self.view.center.y*1.5);
 }
 
 #pragma mark 延迟加载
@@ -60,7 +61,7 @@
 #pragma mark BURewardedVideoAdDelegate
 
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-    
+    NSLog(@"reawrded material load success");
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.offset = CGPointMake(0, -100);

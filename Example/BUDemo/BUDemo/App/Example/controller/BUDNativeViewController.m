@@ -46,6 +46,12 @@
     [self bulidSettingBtn];
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    self.collectionBtn.center = CGPointMake(self.view.center.x, self.view.center.y*0.8);
+    self.normalBtn.center = CGPointMake(self.view.center.x, self.view.center.y*1.2);
+}
+
 - (void)bulidSettingBtn {
     CGSize size = [UIScreen mainScreen].bounds.size;
     self.collectionBtn = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height * 0.4, 0, 0)];

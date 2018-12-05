@@ -31,13 +31,19 @@
     [super viewDidLoad];
     [self buildView];
     
-    self.textFieldWidth.text = [NSString stringWithFormat:@"%f",self.view.bounds.size.width];
-    self.textFieldHeight.text = [NSString stringWithFormat:@"%f",self.view.bounds.size.height];
+    self.textFieldWidth.text = [NSString stringWithFormat:@"  %.0f",self.view.bounds.size.width];
+    self.textFieldHeight.text = [NSString stringWithFormat:@"  %.0f",self.view.bounds.size.height];
     self.splashFrame = self.view.bounds;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    self.button.center = CGPointMake(self.view.center.x, self.view.center.y*0.8);
+    self.button1.center = CGPointMake(self.view.center.x, self.view.center.y*1.2);
 }
 
 - (void)buildView {

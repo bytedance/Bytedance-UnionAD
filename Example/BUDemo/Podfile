@@ -5,14 +5,14 @@ workspace 'BUDemo.xcworkspace'
 
 abstract_target 'Demo' do
     pod 'AFNetworking', '~> 3.0', :subspecs => ['UIKit'], :inhibit_warnings => false
-    pod 'FLEX', '~> 2.0', :inhibit_warnings => false
     pod 'KVOController'
     pod 'Masonry'
     pod 'Google-Mobile-Ads-SDK'
     pod 'MLeaksFinder'
     pod 'MBProgressHUD'
     pod 'libwebp', '~> 0.5.1'
-    
+    pod 'mopub-ios-sdk/Core'
+
     target 'BUADDemo' do
       project 'BUADDemo.xcodeproj'
 

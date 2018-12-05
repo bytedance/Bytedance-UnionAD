@@ -33,6 +33,7 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
+    self.button.center = CGPointMake(self.view.center.x, self.view.center.y*1.5);
 }
 
 #pragma mark 延迟加载

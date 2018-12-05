@@ -9,9 +9,7 @@
 #import "BUDSettingViewController.h"
 #import "BUDActionCellView.h"
 #import <CoreLocation/CoreLocation.h>
-#import <FLEX/FLEXManager.h>
 #import <AdSupport/AdSupport.h>
-#import "BUDApplogDescryptViewController.h"
 #import "BUDMacros.h"
 
 #define LeftMargin 10
@@ -29,9 +27,6 @@
 
 @property (nonatomic, strong) UIButton *idfaBtn;
 @property (nonatomic, strong) UITextField *idfaText;
-
-@property (nonatomic, strong) UIButton *decryptLogBtn;
-
 @end
 
 @implementation BUDSettingViewController
@@ -46,25 +41,17 @@
 }
 
 - (void)buildupView {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Flex" style:UIBarButtonItemStylePlain target:self action:@selector(rightItemTapped:)];
-    self.navigationItem.rightBarButtonItem = item;
-    
     [self.view addSubview:self.locationBtn];
     [self.view addSubview:self.locationText];
     [self.view addSubview:self.idfaBtn];
     [self.view addSubview:self.idfaText];
-    [self.view addSubview:self.decryptLogBtn];
-}
-
-- (void)rightItemTapped:(id)sender {
-    [[FLEXManager sharedManager] showExplorer];
 }
 
 #pragma mark - Target
 - (void)authoid {
-    self.locationText.text = @"开始定位";
+    self.locationText.text = @"  开始定位";
     if (![self serviceEnable]) {
-        self.locationText.text = @"没有权限";
+        self.locationText.text = @"  没有权限";
         return;
     }
     CLLocationManager *locationManager = [[CLLocationManager alloc] init];
@@ -75,11 +62,6 @@
 
 - (void)setIDFA {
     self.idfaText.text = [NSString stringWithFormat:@"  %@",[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
-}
-
-- (void)decryptLogVC {
-    BUDApplogDescryptViewController *vc = [[BUDApplogDescryptViewController alloc] init];;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Private methed
@@ -145,16 +127,6 @@
         [self designLayer:[_idfaText layer]];
     }
     return _idfaText;
-}
-
-- (UIButton *)decryptLogBtn {
-    if (!_decryptLogBtn) {
-        _decryptLogBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.idfaBtn.frame) + 10, 100, 30)];
-        [_decryptLogBtn setTitle:@"log解密" forState:UIControlStateNormal];
-        [_decryptLogBtn addTarget:self action:@selector(decryptLogVC) forControlEvents:UIControlEventTouchUpInside];
-        [self designButton:_decryptLogBtn];
-    }
-    return _decryptLogBtn;
 }
 
 - (void)designButton:(UIButton *)btn {

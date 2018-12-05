@@ -59,6 +59,10 @@ static CGSize const logoSize = {20, 20};
     [self.backgroundView addSubview:_dislikeButton];
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    self.refreshbutton.center = CGPointMake(self.view.center.x, self.view.center.y*1.5);
+}
 
 - (void)loadNativeAd {
     BUSize *imgSize1 = [[BUSize alloc] init];

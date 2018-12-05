@@ -15,11 +15,7 @@
 #import "BUDNativeInterstitialViewController.h"
 #import "BUDDrawVideoViewController.h"
 #import "BUDSettingTableView.h"
-
-#define BUMAXScreenSide                   MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)
-#define BUiPhoneX ((BUMAXScreenSide == 812.0) || (BUMAXScreenSide == 896))
-#define kBUDefaultNavigationBarHeight  (BUiPhoneX?88:64)      // 导航条高度
-
+#import "BUDMacros.h"
 
 @interface BUNativeSettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -121,7 +117,7 @@
 }
 
 - (void)layoutFrame {
-    self.textView.frame = CGRectMake(18, kBUDefaultNavigationBarHeight, self.view.bounds.size.width, 50);
+    self.textView.frame = CGRectMake(18, NavigationBarHeight, self.view.bounds.size.width, 50);
     self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.textView.frame), self.view.bounds.size.width, self.view.bounds.size.height - CGRectGetMaxY(self.textView.frame));
 }
 
@@ -182,6 +178,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:NO];
 }
 

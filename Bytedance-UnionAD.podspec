@@ -26,8 +26,6 @@ Pod::Spec.new do |s|
   #s.public_header_files = 'Bytedance-UnionAd/Classes/*.h'
   #s.source_files = 'Bytedance-UnionAd/Classes/*'
   s.vendored_frameworks =  'Bytedance-UnionAd/Frameworks/BUAdSDK.framework'
-  s.resource_bundles = {
-    'BUAdSDK' => ['Bytedance-UnionAd/Frameworks/BUAdSDK.bundle']
-  }
+  s.resource = 'Bytedance-UnionAd/Frameworks/BUAdSDK.bundle'
   # s.dependency 'AFNetworking', '~> 2.3'
 end

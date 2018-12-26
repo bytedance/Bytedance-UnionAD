@@ -31,6 +31,9 @@ Then, run the following command:
 $ pod install
 ```
 
+Pod access is only supported after **version 1982**
+
+If you want to get Bytedance-UnionAD before version 1982 ，Please go to [http://ad.toutiao.com/union/media] for more information.
 
 ## Author
 

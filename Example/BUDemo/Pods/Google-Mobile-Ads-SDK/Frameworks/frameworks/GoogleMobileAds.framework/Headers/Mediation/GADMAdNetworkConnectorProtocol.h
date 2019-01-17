@@ -21,7 +21,7 @@
 /// When you need to show a landing page or any other modal view, such as when a user clicks or when
 /// your Ads SDK needs to show an interstitial, use this method to obtain a UIViewController that
 /// you can use to show your modal view. Call the -presentViewController:animated:completion: method
-/// of the returned UIViewController .
+/// of the returned UIViewController.
 - (UIViewController *)viewControllerForPresentingModalView;
 
 /// Returns the preferred ad volume as a fraction of system volume (0.0 to 1.0).

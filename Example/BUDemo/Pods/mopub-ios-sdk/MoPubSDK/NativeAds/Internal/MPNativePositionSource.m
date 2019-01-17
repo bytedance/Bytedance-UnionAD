@@ -100,6 +100,12 @@ static const CGFloat kRetryIntervalBackoffMultiplier = 2.0;
     } errorHandler:^(NSError * _Nonnull error) {
         __typeof__(self) strongSelf = weakSelf;
 
+        // MPNativePositionSource was deallocated during a networking
+        // operation. Do nothing.
+        if (strongSelf == nil) {
+            return;
+        }
+
         if (strongSelf.retryInterval >= strongSelf.maximumRetryInterval) {
             strongSelf.completionHandler(nil, error);
             strongSelf.completionHandler = nil;

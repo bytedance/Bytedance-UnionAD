@@ -18,6 +18,7 @@
 #import "MPBannerCustomEventDelegate.h"
 #import "MPBool.h"
 #import "MPConsentChangedNotification.h"
+#import "MPConsentChangedReason.h"
 #import "MPConsentError.h"
 #import "MPConsentStatus.h"
 #import "MPError.h"

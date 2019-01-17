@@ -56,7 +56,9 @@ GAD_SUBCLASSING_RESTRICTED
 /// Optional delegate to receive state change notifications.
 @property(nonatomic, weak, nullable) id<GADUnifiedNativeAdDelegate> delegate;
 
-/// Root view controller for handling ad actions.
+/// Reference to the root view controller for the native ad. This is the view controller the ad will
+/// present from if necessary (for example, presenting a landing page after a user click). Most
+/// Most commonly, this is the view controller the ad is displayed in.
 @property(nonatomic, weak, nullable) UIViewController *rootViewController;
 
 /// Dictionary of assets which aren't processed by the receiver.

@@ -8,7 +8,7 @@
 
 #import "BUDMopub_FullscreenVideoCustomEvent.h"
 #import <BUAdSDK/BUFullscreenVideoAd.h>
-
+#import "BUDMacros.h"
 
 @interface BUDMopub_FullscreenVideoCustomEvent ()<BUFullscreenVideoAdDelegate>
 @property (strong, nonatomic) BUFullscreenVideoAd *fullScreenVideo;
@@ -44,7 +44,7 @@
 }
 
 - (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)fullscreenVideoAdWillVisible:(BUFullscreenVideoAd *)fullscreenVideoAd {
@@ -66,11 +66,11 @@
 }
 
 - (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)fullscreenVideoAdDidClickSkip:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 @synthesize description;

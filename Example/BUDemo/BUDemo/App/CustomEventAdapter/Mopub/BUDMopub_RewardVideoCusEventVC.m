@@ -11,6 +11,7 @@
 #import "MPRewardedVideo.h"
 #import "BUDMopub_RewardedVideoCustomEvent.h"
 #import "BUDNormalButton.h"
+#import "BUDMacros.h"
 
 static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 
@@ -50,11 +51,11 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 # pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        NSLog(@"取消");
+        BUD_Log(@"取消");
     } else if (buttonIndex == 1){
         [self.view addSubview:self.button];
     }
-    NSLog(@"%ld", (long)buttonIndex);
+    BUD_Log(@"%ld", (long)buttonIndex);
 }
 
 #pragma mark 事件处理
@@ -73,50 +74,50 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"视频加载成功" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alertView show];
     }
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 
 - (void)rewardedVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID error:(NSError *)error {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 
 - (void)rewardedVideoAdDidExpireForAdUnitID:(NSString *)adUnitID {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 
 - (void)rewardedVideoAdDidFailToPlayForAdUnitID:(NSString *)adUnitID error:(NSError *)error {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 
 - (void)rewardedVideoAdWillAppearForAdUnitID:(NSString *)adUnitID {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)rewardedVideoAdDidAppearForAdUnitID:(NSString *)adUnitID {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)rewardedVideoAdWillDisappearForAdUnitID:(NSString *)adUnitID {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)rewardedVideoAdDidDisappearForAdUnitID:(NSString *)adUnitID {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)rewardedVideoAdDidReceiveTapEventForAdUnitID:(NSString *)adUnitID {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)rewardedVideoAdWillLeaveApplicationForAdUnitID:(NSString *)adUnitID {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)rewardedVideoAdShouldRewardForAdUnitID:(NSString *)adUnitID reward:(MPRewardedVideoReward *)reward {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 @end

@@ -57,31 +57,34 @@
 #pragma mark BURewardedVideoAdDelegate
 
 - (void)fullscreenVideoMaterialMetaAdDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
+    BUD_Log(@"fullscreenVideoAd data load success");
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"material load success";
+    hud.label.text = @"fullscreen data load success";
     [hud hideAnimated:YES afterDelay:1];
 }
 
 - (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {
+    BUD_Log(@"fullscreenVideoAd data load fail");
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"material load fail";
+    hud.label.text = @"fullscreen data load fail";
     [hud hideAnimated:YES afterDelay:1];
 }
 
 - (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
+    BUD_Log(@"fullscreenVideoAd video load success");
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"video data load success";
+    hud.label.text = @"fullscreen video load success";
     [hud hideAnimated:YES afterDelay:1];
 }
 
 - (void)fullscreenVideoAdDidClickSkip:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    NSLog(@"fullscreenVideoAd click skip");
+    BUD_Log(@"fullscreenVideoAd click skip");
 }
 
 @end

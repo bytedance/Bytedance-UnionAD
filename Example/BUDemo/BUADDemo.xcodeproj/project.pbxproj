@@ -81,6 +81,8 @@
 		DE84BDBF21A2E9600090D866 /* drawLocal_07.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE84BD8321A2E9600090D866 /* drawLocal_07.mp4 */; };
 		DE84BDC021A2E9600090D866 /* drawLocal_05.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE84BD8421A2E9600090D866 /* drawLocal_05.mp4 */; };
 		DE84BDC121A2E9600090D866 /* drawLocal_04.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE84BD8521A2E9600090D866 /* drawLocal_04.mp4 */; };
+		DEB95B1921CA28D30025570E /* BUDNativeDislikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB95B1721CA28D30025570E /* BUDNativeDislikeViewController.m */; };
+		DECC5C9F21CF4BB100268877 /* BUDdemoDislikeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DECC5C9E21CF4BB100268877 /* BUDdemoDislikeCollectionCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -217,6 +219,10 @@
 		DE84BD8421A2E9600090D866 /* drawLocal_05.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = drawLocal_05.mp4; sourceTree = "<group>"; };
 		DE84BD8521A2E9600090D866 /* drawLocal_04.mp4 */ = {isa = PBXFileReference; lastKnownFileType = text; path = drawLocal_04.mp4; sourceTree = "<group>"; };
 		DE84BD8621A2E9600090D866 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEB95B1721CA28D30025570E /* BUDNativeDislikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDNativeDislikeViewController.m; sourceTree = "<group>"; };
+		DEB95B1821CA28D30025570E /* BUDNativeDislikeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDNativeDislikeViewController.h; sourceTree = "<group>"; };
+		DECC5C9D21CF4BB100268877 /* BUDdemoDislikeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDdemoDislikeCollectionCell.h; sourceTree = "<group>"; };
+		DECC5C9E21CF4BB100268877 /* BUDdemoDislikeCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDdemoDislikeCollectionCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +416,8 @@
 		DE84BD2B21A2E9600090D866 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				DEB95B1821CA28D30025570E /* BUDNativeDislikeViewController.h */,
+				DEB95B1721CA28D30025570E /* BUDNativeDislikeViewController.m */,
 				DE84BD4821A2E9600090D866 /* BUDBaseExampleViewController.h */,
 				DE84BD3A21A2E9600090D866 /* BUDBaseExampleViewController.m */,
 				DE84BD2C21A2E9600090D866 /* BUDNativeViewController.h */,
@@ -456,6 +464,8 @@
 		DE84BD4E21A2E9600090D866 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				DECC5C9D21CF4BB100268877 /* BUDdemoDislikeCollectionCell.h */,
+				DECC5C9E21CF4BB100268877 /* BUDdemoDislikeCollectionCell.m */,
 				DE84BD5821A2E9600090D866 /* BUDFeedAdTableViewCell.h */,
 				DE84BD6221A2E9600090D866 /* BUDFeedAdTableViewCell.m */,
 				DE84BD5B21A2E9600090D866 /* BUDFeedNormalTableViewCell.h */,
@@ -733,6 +743,7 @@
 				7859972621A560EB00CB726E /* BUDMopub_BannerViewController.m in Sources */,
 				7859972E21A560EB00CB726E /* BUDMopub_RewardVideoCustomEventDelegate.m in Sources */,
 				DE84BDA321A2E9600090D866 /* BUDFeedNormalTableViewCell.m in Sources */,
+				DEB95B1921CA28D30025570E /* BUDNativeDislikeViewController.m in Sources */,
 				DE84BD9321A2E9600090D866 /* BUDNativeFeedCollectionViewController.m in Sources */,
 				DE84BD9F21A2E9600090D866 /* BUDFullscreenViewController.m in Sources */,
 				DE84BD8B21A2E9600090D866 /* BUDBase64.m in Sources */,
@@ -758,6 +769,7 @@
 				7859972B21A560EB00CB726E /* BUDMopub_FullScreenVideoCusEventVC.m in Sources */,
 				DE84BDB021A2E9600090D866 /* BUDActionCellDefine.m in Sources */,
 				DE84BDAA21A2E9600090D866 /* BUDNativeBannerTableViewCell.m in Sources */,
+				DECC5C9F21CF4BB100268877 /* BUDdemoDislikeCollectionCell.m in Sources */,
 				DE84BD9D21A2E9600090D866 /* BUDFeedViewController.m in Sources */,
 				DE84BDAB21A2E9600090D866 /* BUDFeedNativeTableViewCell.m in Sources */,
 				DE84BD9A21A2E9600090D866 /* BUDDrawVideoViewController.m in Sources */,

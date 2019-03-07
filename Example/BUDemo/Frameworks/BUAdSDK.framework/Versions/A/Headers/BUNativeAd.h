@@ -55,12 +55,13 @@ NS_ASSUME_NONNULL_BEGIN
  定义原生广告视图中，注册可点击视图
  @param containerView 注册原生广告的容器视图，必传参数，交互类型在平台配置，包括查看视频详情、打电话、落地页、下载、外部浏览器打开等
  @param clickableViews 注册创意按钮，可选参数，交互类型在平台配置，包括电话、落地页、下载、外部浏览器打开、短信、email、视频详情页等
- @note 同一nativeAd对象请勿重复注册同一视图
  */
 - (void)registerContainer:(__kindof UIView *)containerView
        withClickableViews:(NSArray<__kindof UIView *> *_Nullable)clickableViews;
 
-/// 广告类解除和view的绑定
+/**
+ 广告类解除和view的绑定
+ */
 - (void)unregisterView;
 
 /**
@@ -103,9 +104,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *_Nullable)view;
 
 /**
- 用户点击 dislike功能
+ 用户点击 dislike功能 (用SDK自带的dislikeButton)
  @param nativeAd 被点击的 广告位
- @param filterWords 不喜欢的原因， 可能为空
+ @param filterWords 不喜欢的原因
  */
 - (void)nativeAd:(BUNativeAd *)nativeAd dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords;
 @end

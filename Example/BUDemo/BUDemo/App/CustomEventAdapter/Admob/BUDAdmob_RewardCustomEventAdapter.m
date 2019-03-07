@@ -10,6 +10,7 @@
 #import "BUDAdmob_RewardCustomEventAdapterDelegate.h"
 #import <BUAdSDK/BURewardedVideoModel.h>
 #import <BUAdSDK/BURewardedVideoAd.h>
+#import "BUDMacros.h"
 
 @interface BUDAdmob_RewardCustomEventAdapter ()
 {
@@ -83,7 +84,7 @@
         // Because publishers are expected to check that an ad is available before trying to show one,
         // the above conditional should always hold true. If for any reason the adapter is not ready to
         // present an ad, however, it should log an error with reason for failure.
-        NSLog(@"No ads to show.");
+        BUD_Log(@"No ads to show.");
     }
 }
 

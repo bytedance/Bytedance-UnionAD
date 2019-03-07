@@ -47,25 +47,17 @@
 
 - (void)interstitialAdDidClose:(BUInterstitialAd *)interstitialAd {
     [self.interstitialAd loadAdData];
+     BUD_Log(@"interstitialAd AdDidClose");
 }
 
-/**
- BUInterstitialAd 广告加载成功
- 
- - Parameter interstitialAd: 产生该事件的 BUInterstitialAd 对象.
- */
+
 - (void)interstitialAdDidLoad:(BUInterstitialAd *)interstitialAd {
-    NSLog(@"[插屏广告] 物料加载成功");
+    BUD_Log(@"interstitialAd data load sucess");
 }
 
-/**
- BUInterstitialAd 加载失败
- 
- - Parameter interstitialAd: 产生该事件的 BUInterstitialAd 对象.
- - Parameter error: 包含详细是失败信息.
- */
+
 - (void)interstitialAd:(BUInterstitialAd *)interstitialAd didFailWithError:(NSError *)error {
-    NSLog(@"[插屏广告] 物料加载失败");
+     BUD_Log(@"interstitialAd data load fail");
 }
 
 - (void)didReceiveMemoryWarning {

@@ -53,9 +53,6 @@ typedef NS_ENUM(NSInteger, BUFeedADMode) {
 /// 创意按钮显示文字
 @property (nonatomic, copy) NSString *buttonText;
 
-/// 不喜欢广告原因。“不感兴趣”本地拼接，其他服务端下发
-@property (nonatomic, copy) NSArray<BUDislikeWords *> *filterWords;
-
 /// feed广告的展示类型，banner广告忽略
 @property (nonatomic, assign) BUFeedADMode imageMode;
 
@@ -67,6 +64,9 @@ typedef NS_ENUM(NSInteger, BUFeedADMode) {
 
 /// 广告安装包大小,单位byte
 @property (nonatomic, assign) NSInteger appSize;
+
+/// 媒体配置参数
+@property (nonatomic, strong) NSDictionary *mediaExt;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict error:(NSError * __autoreleasing *)error;
 

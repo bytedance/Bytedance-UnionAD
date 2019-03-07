@@ -14,6 +14,7 @@
 #import "BUDNativeBannerViewController.h"
 #import "BUDNativeInterstitialViewController.h"
 #import "BUDDrawVideoViewController.h"
+#import "BUDNativeDislikeViewController.h"
 #import "BUDSettingTableView.h"
 #import "BUDMacros.h"
 
@@ -28,7 +29,7 @@
 @implementation BUNativeSettingViewController
 
 - (void)dealloc {
-    NSLog(@"NativeSetting - dealloc");
+    BUD_Log(@"NativeSetting - dealloc");
 }
 
 - (void)viewDidLoad {
@@ -95,6 +96,7 @@
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
+    
     BUDActionModel *drawfeedCellItem = [BUDActionModel plainTitleActionModel:@"native Draw Feed" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDDrawVideoViewController *vc = [BUDDrawVideoViewController new];
@@ -107,7 +109,19 @@
         [strongSelf presentViewController:vc animated:YES completion:nil];
     }];
     
-    self.items = @[feedCellItem,drawfeedCellItem,nativeBanner,nativeInterstitial,nativeCustomItem].mutableCopy;
+    BUDActionModel *dislikeCell = [BUDActionModel plainTitleActionModel:@"Native dislike" type:BUDCellType_native action:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        BUDNativeDislikeViewController *vc = [BUDNativeDislikeViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = @"900546687";
+        if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
+            viewModel.slotID = strongSelf.textView.text;
+        }
+        vc.viewModel = viewModel;
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    self.items = @[feedCellItem,drawfeedCellItem,nativeBanner,nativeInterstitial,nativeCustomItem,dislikeCell].mutableCopy;
 
 }
 

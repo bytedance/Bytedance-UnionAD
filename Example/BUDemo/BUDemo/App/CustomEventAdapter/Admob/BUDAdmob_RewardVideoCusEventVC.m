@@ -58,79 +58,79 @@
 # pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        NSLog(@"取消");
+        BUD_Log(@"取消");
     } else if (buttonIndex == 1){
         [self.view addSubview:self.button];
     }
-    NSLog(@"%ld", (long)buttonIndex);
+    BUD_Log(@"%ld", (long)buttonIndex);
 }
 
 - (void)rewardBasedVideoAd:(nonnull GADRewardBasedVideoAd *)rewardBasedVideoAd didRewardUserWithReward:(nonnull GADAdReward *)reward {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)rewardBasedVideoAdDidReceiveAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"视频加载成功" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alertView show];
 }
 
 - (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd
     didFailToLoadWithError:(NSError *)error {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     
 }
 
 - (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     
 }
 
 - (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     
 }
 
 - (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
 }
 
 - (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     
 }
 
 - (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     
 }
 
 - (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator  API_AVAILABLE(ios(9.0)){
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     
 }
 
 - (void)setNeedsFocusUpdate {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     
 }
 
 - (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context  API_AVAILABLE(ios(9.0)){
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
     return YES;
 }
 
 - (void)updateFocusIfNeeded {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 @end

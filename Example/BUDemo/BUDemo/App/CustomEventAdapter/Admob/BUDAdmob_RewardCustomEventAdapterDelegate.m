@@ -9,6 +9,7 @@
 #import "BUDAdmob_RewardCustomEventAdapterDelegate.h"
 #import <BUAdSDK/BURewardedVideoModel.h>
 #import <GoogleMobileAds/Mediation/GADMRewardBasedVideoAdNetworkConnectorProtocol.h>
+#import "BUDMacros.h"
 
 @interface BUDAdmob_RewardCustomEventAdapterDelegate ()
 {
@@ -34,56 +35,55 @@
 
 
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"reawrded video Ad did load");
-    NSLog(@"激励视频物料加载成功");
+    BUD_Log(@"reawrded video data did load");
     [_rewardBasedVideoAdConnector adapterDidSetUpRewardBasedVideoAd:_rewardBasedVideoAdAdapter];
 }
 
 - (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"reawrded video did load");
+    BUD_Log(@"reawrded video did load");
     [_rewardBasedVideoAdConnector adapterDidReceiveRewardBasedVideoAd:_rewardBasedVideoAdAdapter];
 }
 
 - (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"rewarded video will visible");
+    BUD_Log(@"rewarded video will visible");
 }
 
 - (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"rewarded video did close");
+    BUD_Log(@"rewarded video did close");
     [_rewardBasedVideoAdConnector adapterDidCloseRewardBasedVideoAd:_rewardBasedVideoAdAdapter];
 }
 
 - (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"rewarded video did click");
+    BUD_Log(@"rewarded video did click");
     [_rewardBasedVideoAdConnector adapterDidGetAdClick:_rewardBasedVideoAdAdapter];
 }
 
 - (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
-    NSLog(@"rewarded video material load fail");
+    BUD_Log(@"rewarded video material load fail");
     [_rewardBasedVideoAdConnector adapter:_rewardBasedVideoAdAdapter didFailToSetUpRewardBasedVideoAdWithError:error];
 }
 
 - (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
     if (error) {
-        NSLog(@"rewarded play error");
+        BUD_Log(@"rewarded play error");
     } else {
-        NSLog(@"rewarded play finish");
+        BUD_Log(@"rewarded play finish");
         [_rewardBasedVideoAdConnector adapterDidCompletePlayingRewardBasedVideoAd:_rewardBasedVideoAdAdapter];
     }
 }
 
 - (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"rewarded verify failed");
+    BUD_Log(@"rewarded verify failed");
     
-    NSLog(@"Demo CustomEventAdapter RewardName == %@", rewardedVideoAd.rewardedVideoModel.rewardName);
-    NSLog(@"Demo CustomEventAdapter RewardAmount == %ld", (long)rewardedVideoAd.rewardedVideoModel.rewardAmount);
+    BUD_Log(@"Demo CustomEventAdapter RewardName == %@", rewardedVideoAd.rewardedVideoModel.rewardName);
+    BUD_Log(@"Demo CustomEventAdapter RewardAmount == %ld", (long)rewardedVideoAd.rewardedVideoModel.rewardAmount);
 }
 
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify{
-    NSLog(@"rewarded verify succeed");
-    NSLog(@"verify result: %@", verify ? @"success" : @"fail");
+    BUD_Log(@"rewarded verify succeed");
+    BUD_Log(@"verify result: %@", verify ? @"success" : @"fail");
     
-    NSLog(@"Demo CustomEventAdapter RewardName == %@", rewardedVideoAd.rewardedVideoModel.rewardName);
-    NSLog(@"Demo CustomEventAdapter RewardAmount == %ld", (long)rewardedVideoAd.rewardedVideoModel.rewardAmount);
+    BUD_Log(@"Demo CustomEventAdapter RewardName == %@", rewardedVideoAd.rewardedVideoModel.rewardName);
+    BUD_Log(@"Demo CustomEventAdapter RewardAmount == %ld", (long)rewardedVideoAd.rewardedVideoModel.rewardAmount);
 }
 @end

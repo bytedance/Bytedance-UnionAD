@@ -23,11 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (CGFloat)currentPlayTime;
 
-/**
- 设置是否静音
- */
-- (void)setMute:(BOOL)isMute;
-
 @end
 
 @protocol BUVideoAdViewDelegate;
@@ -65,11 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param playSize 播放按钮大小 设置CGSizeZero则为默认图标大小
  */
 - (void)playerPlayIncon:(UIImage *)playImg playInconSize:(CGSize)playSize;
-/**
- 播放，暂停功能
- */
-- (void)tapPlay;
-- (void)tapPause;
+
 @end
 
 @protocol BUVideoAdViewDelegate <NSObject>

@@ -9,6 +9,7 @@
 #import "BUDMopub_BannerViewController.h"
 #import "MPAdView.h"
 #import "BUDNormalButton.h"
+#import "BUDMacros.h"
 
 @interface BUDMopub_BannerViewController () <MPAdViewDelegate>
 @property(nonatomic, strong) BUDNormalButton *refreshbutton;
@@ -57,7 +58,7 @@
 }
 
 - (void)adViewDidFailToLoadAd:(MPAdView *)view {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

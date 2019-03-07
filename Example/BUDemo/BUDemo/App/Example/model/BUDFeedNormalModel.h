@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *source;
 @property (nonatomic, strong) NSString *incon;
-@property (nonatomic, strong) NSArray *imgs;
+@property (nonatomic, copy) NSArray *imgs;
 @property (nonatomic, assign) float cellHeight;
 - (instancetype)initWithDict:(NSDictionary *)dict;
 @end

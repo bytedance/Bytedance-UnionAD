@@ -12,7 +12,7 @@
 #import "NSString+Json.h"
 #import "BUDFeedNormalModel.h"
 #import "BUDFeedNormalTableViewCell.h"
-
+#import "BUDMacros.h"
 
 @interface BUDFeedViewController () <UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -90,7 +90,7 @@
 }
 
 - (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
-    
+    BUD_Log(@"feed datas load success");
     for (BUNativeAd *model in nativeAdDataArray) {
         NSUInteger index = rand() % (self.dataSource.count-3)+2;
         [self.dataSource insertObject:model atIndex:index];
@@ -100,7 +100,7 @@
 }
 
 - (void)nativeAdsManager:(BUNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
+    BUD_Log(@"DrawVideo datas load fail");
 }
 
 #pragma mark - tableView
@@ -241,6 +241,7 @@
 
 #pragma mark 
 - (void)nativeAd:(BUNativeAd *)nativeAd dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords {
+    BUD_Log(@"click dislike");
     NSMutableArray *dataSources = [self.dataSource mutableCopy];
     [dataSources removeObject:nativeAd];
     self.dataSource = [dataSources copy];
@@ -248,15 +249,15 @@
 }
 
 - (void)videoAdView:(BUVideoAdView *)videoAdView stateDidChanged:(BUPlayerPlayState)playerState {
-    NSLog(@"videoAdView state change to %ld", (long)playerState);
+    BUD_Log(@"videoAdView state change to %ld", (long)playerState);
 }
 
 - (void)videoAdView:(BUVideoAdView *)videoAdView didLoadFailWithError:(NSError *)error {
-    NSLog(@"videoAdView didLoadFailWithError");
+    BUD_Log(@"videoAdView didLoadFailWithError");
 }
 
 - (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView {
-    NSLog(@"videoAdView didPlayFinish");
+    BUD_Log(@"videoAdView didPlayFinish");
 }
 
 @end

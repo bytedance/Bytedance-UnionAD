@@ -30,7 +30,6 @@
 | v1.9.7.1 | 2018-11-29 | 【1】激励视频和全屏视频同时请求，后者覆盖前者【2】激励视频奖励回调失败【3】激励视频缓存优化|
 | v1.9.8.0 | 2018-11-30 | 【1】新增对外字段，app评分、评论人数、安装包大小等【2】开屏广告支持gif【3】全屏视频支持跳过时间配置【4】CustomEvent聚合Mopub、Admob，输出demo【5】激励视频、全屏视频落地页类型广告增加点击回调【6】强化安全性
 | v1.9.8.1 | 2018-11-30 | 【1】支持横屏落地页模式
-
 <!-- TOC -->
 
 - [头条联盟 iOS SDK 接入说明](#头条联盟-ios-sdk-接入说明)
@@ -38,6 +37,8 @@
         - [1.1 iOS SDK导入framework](#11-ios-sdk导入framework)
             - [1.1.1 申请应用的AppID和SlotID](#111-申请应用的appid和slotid)
             - [1.1.2 工程设置导入framework](#112-工程设置导入framework)
+            - [方法一：](#方法一)
+            - [方法二：](#方法二)
         - [1.2 Xcode编译选项设置](#12-xcode编译选项设置)
             - [1.2.1 添加权限](#121-添加权限)
             - [1.2.2 运行环境配置](#122-运行环境配置)
@@ -59,12 +60,14 @@
                 - [2.2.3.1 BUMaterialMeta接口说明](#2231-bumaterialmeta接口说明)
             - [2.2.4 相关视图类(BUNativeAdRelatedView)](#224-相关视图类bunativeadrelatedview)
                 - [2.2.4.1 BUNativeAdRelatedView接口说明](#2241-bunativeadrelatedview接口说明)
-            - [2.2.5 原生广告使用](#225-原生广告使用)
-                - [2.2.5.1 原生广告接口与加载](#2251-原生广告接口与加载)
-                - [2.2.5.2 初始化需要绑定广告数据的View](#2252-初始化需要绑定广告数据的view)
-                - [2.2.5.3 添加相关视图](#2253-添加相关视图)
-                - [2.2.5.4 广告数据获取后，更新View并注册可点击的View](#2254-广告数据获取后更新view并注册可点击的view)
-                - [2.2.5.5 在 BUNativeAd 的 delegate 中处理各种回调协议方法](#2255-在-bunativead-的-delegate-中处理各种回调协议方法)
+            - [2.2.5 不感兴趣类(BUDislike)](#225-不感兴趣类budislike)
+                - [2.2.5.1 BUDislike接口说明](#2251-budislike接口说明)
+            - [2.2.6 原生广告使用](#226-原生广告使用)
+                - [2.2.6.1 原生广告接口与加载](#2261-原生广告接口与加载)
+                - [2.2.6.2 初始化需要绑定广告数据的View](#2262-初始化需要绑定广告数据的view)
+                - [2.2.6.3 添加相关视图](#2263-添加相关视图)
+                - [2.2.6.4 广告数据获取后，更新View并注册可点击的View](#2264-广告数据获取后更新view并注册可点击的view)
+                - [2.2.6.5 在 BUNativeAd 的 delegate 中处理各种回调协议方法](#2265-在-bunativead-的-delegate-中处理各种回调协议方法)
         - [2.3 原生信息流广告(BUNativeAdsManager)](#23-原生信息流广告bunativeadsmanager)
             - [2.3.1 BUNativeAdsManager接口说明](#231-bunativeadsmanager接口说明)
             - [2.3.2 实例说明](#232-实例说明)
@@ -110,6 +113,7 @@
 
 <!-- /TOC -->
 
+
 ## 1. 网盟iOS SDK接入
 
 ### 1.1 iOS SDK导入framework
@@ -119,8 +123,25 @@
 请向头条联盟穿山甲平台申请AppID 和广告 SlotID。
 
 #### 1.1.2 工程设置导入framework
+#### 方法一：
 
 获取 framework 文件后直接将 {BUAdSDK.framework, BUAdSDK.bundle}文件拖入工程即可。
+
+拖入时请按以下方式选择：
+
+![image](images/bu_1.png)
+
+拖入完请确保Copy Bundle Resources中有BUAdSDK.bundle，否则可能出现incon图片加载不出来的情况。
+
+![image](images/bu_5.png)
+
+#### 方法二：
+
+SDK1982版本以后支持pod方式接入，只需配置pod环境，在podfile文件中加入以下代码即可接入成功。
+```
+pod 'Bytedance-UnionAD', '~> 1.9.8.2'
+```
+更多关于pod方式的接入请参考 [gitthub地址](https://github.com/bytedance/Bytedance-UnionAD)
 
 ### 1.2 Xcode编译选项设置
 
@@ -139,8 +160,15 @@
          <true/>
     </dict>
 ```
+具体操作如图：
+
+![image](images/bu_2.png)
 
 + Build Settings中Other Linker Flags **增加参数-ObjC**，SDK同时支持-all_load
+
+具体操作如图：
+
+![image](images/bu_3.png)
 
 #### 1.2.2 运行环境配置
 
@@ -161,9 +189,15 @@
 + CoreTelephony.framework
 + SystemConfiguration.framework
 + AdSupport.framework
++ CoreMotion.framework
 + libresolv.9.tbd
 + libc++.tbd
-+ CoreMotion.framework
++ libz.tbd
+
+
+具体操作如图所示：
+
+![image](images/bu_4.png)
 
 ## 2. SDK接口类介绍与广告接入
 
@@ -547,13 +581,41 @@ logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
 ```
 **添加logo、广告标签、视频视图、不喜欢按钮请参考BUNativeAdRelatedView类,每次获取物料信息后需要刷新调用-(void)refreshData:(BUNativeAd \*)nativeAd 方法刷新对应的视图绑定的数据.**
 
+#### 2.2.5 不感兴趣类(BUDislike)
 
-#### 2.2.5 原生广告使用
-##### 2.2.5.1 原生广告接口与加载
+通过不感兴趣类可以为原生广告自定义不感兴趣的样式渲染。
+
+##### 2.2.5.1 BUDislike接口说明
+
+```
+/**
+用户点击选择后请将原因上报给SDK，否则模型不准会导致广告投放效果差
+*/
+@interface BUDislike : NSObject
+/**
+获取到的不感兴趣原因 filterWords.options存在说明可以点击进入二级页面
+*/
+@property (nonatomic, copy, readonly) NSArray<BUDislikeWords *> *filterWords;
+/**
+用nativeAd初始化后即可获取filterWords
+*/
+- (instancetype)initWithNativeAd:(BUNativeAd *)nativeAd;
+
+/**
+用户点击 dislike选项后上报的接口（仅限使用filterWords自己拼接不感兴趣原因时用）
+@param filterWord 不喜欢的原因
+@note 存在二级页面时一级不感兴趣的原因不需要上报
+@note 获取到的上报原因BUDislikeWords请不要更改、直接上报即可，否则会被过滤
+*/
+- (void)didSelectedFilterWordWithReason:(BUDislikeWords *)filterWord;
+```
+**使用不感兴趣类必须确保用户点击后调用接口将原因上报**
+#### 2.2.6 原生广告使用
+##### 2.2.6.1 原生广告接口与加载
 
 BUNativeAd 对象设置好 BUAdSlot 对象和 delegate（>= V1.8.2 不必一定是 UIViewController）之后，就可以调用 loadAdData 方法异步获取广告数据；获取数据后，delegate 会负责处理回调方法。
 
-##### 2.2.5.2 初始化需要绑定广告数据的View
+##### 2.2.6.2 初始化需要绑定广告数据的View
 
 **在使用原生广告数据时，我们先创建我们需要展示广告数据的 View。**
 
@@ -596,7 +658,7 @@ BUNativeAd 对象设置好 BUAdSlot 对象和 delegate（>= V1.8.2 不必一定�
 
     [self loadNativeAd];
 ```
-##### 2.2.5.3 添加相关视图
+##### 2.2.6.3 添加相关视图
 视情况为广告视图添加logo，广告标签，不喜欢按钮等view。
 示例代码：
 
@@ -620,7 +682,7 @@ BUNativeAd 对象设置好 BUAdSlot 对象和 delegate（>= V1.8.2 不必一定�
     [_customview addSubview:logoADImageView];
 ```
     
-##### 2.2.5.4 广告数据获取后，更新View并注册可点击的View
+##### 2.2.6.4 广告数据获取后，更新View并注册可点击的View
 
 在用户获取到 BUNativeAd 广告数据后，如有需要可以注册绑定点击的 View，包含图片、按钮等等。
 
@@ -681,7 +743,7 @@ BUNativeAd 类提供了如下方法，供开发者使用处理不同的事件响
 }
 ```
 
-##### 2.2.5.5 在 BUNativeAd 的 delegate 中处理各种回调协议方法
+##### 2.2.6.5 在 BUNativeAd 的 delegate 中处理各种回调协议方法
 
 BUNativeAd 的 delegate 里可以处理几种代理方法，参见上面的示例代码
 
@@ -925,11 +987,6 @@ Draw视频信息流广告可以在BUNativeAdRelatedView的videoAdview设置视�
 @param playSize 播放按钮大小 设置CGSizeZero则为默认图标大小
 */
 - (void)playerPlayIncon:(UIImage *)playImg playInconSize:(CGSize)playSize;
-/**
-播放，暂停功能
-*/
-- (void)play;
-- (void)pause;
 ```
 #### 2.4.4 接口实例
 
@@ -1018,25 +1075,12 @@ if (!self.nativeAdRelatedView.videoAdView.superview) {
  */
 @protocol BUVideoEngine <NSObject>
 
-/**
- 开始播放
- */
-- (void)play;
-
-/**
- 暂停播放
- */
-- (void)pause;
 
 /**
  获取当前已播放时间
  */
 - (CGFloat)currentPlayTime;
 
-/**
- 设置是否静音
- */
-- (void)setMute:(Boolean)isMute;
 
 @end
 

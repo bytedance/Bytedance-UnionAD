@@ -133,11 +133,12 @@
 }
 
 - (void)splashAdDidClose:(BUSplashAdView *)splashAd {
+    BUD_Log(@"splashAdView AdDidClose");
     [splashAd removeFromSuperview];
 }
 
 - (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error {
-    NSLog(@"%@", error.localizedDescription);
+    BUD_Log(@"splashAdView load data fail");
     [splashAd removeFromSuperview];
 }
 

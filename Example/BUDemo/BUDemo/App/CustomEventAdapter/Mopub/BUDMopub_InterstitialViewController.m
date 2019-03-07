@@ -9,6 +9,7 @@
 #import "BUDMopub_InterstitialViewController.h"
 #import "MPInterstitialAdController.h"
 #import "BUDNormalButton.h"
+#import "BUDMacros.h"
 
 @interface BUDMopub_InterstitialViewController () <MPInterstitialAdControllerDelegate>
 @property (nonatomic, strong) BUDNormalButton *button;
@@ -52,36 +53,36 @@
 
 #pragma mark - MPInterstitialAdControllerDelegate
 - (void)interstitialDidLoadAd:(MPInterstitialAdController *)interstitial {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)interstitialDidFailToLoadAd:(MPInterstitialAdController *)interstitial
                           withError:(NSError *)error {
-   NSLog(@"%s", __func__);
+   BUD_Log(@"%s", __func__);
 }
 
 - (void)interstitialWillAppear:(MPInterstitialAdController *)interstitial {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)interstitialDidAppear:(MPInterstitialAdController *)interstitial {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)interstitialWillDisappear:(MPInterstitialAdController *)interstitial {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)interstitialDidDisappear:(MPInterstitialAdController *)interstitial {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)interstitialDidExpire:(MPInterstitialAdController *)interstitial {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 - (void)interstitialDidReceiveTapEvent:(MPInterstitialAdController *)interstitial {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 @end

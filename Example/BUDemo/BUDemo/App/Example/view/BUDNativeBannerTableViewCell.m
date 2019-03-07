@@ -10,13 +10,30 @@
 #import <BUAdSDK/BUNativeAdRelatedView.h>
 #import "UIImageView+AFNetworking.h"
 #import "BUDMacros.h"
+#import "UIView+Draw.h"
 
 static CGSize const logoSize = {58, 18.5};
-static CGFloat const margin = 5;
+
+@implementation BUDBannerModel
+
+- (instancetype)initWithNativeAd:(BUNativeAd *)nativeAd {
+    self = [super init];
+    if (self) {
+        self.nativeAd = nativeAd;
+        BUImage *adImage = nativeAd.data.imageAry.firstObject;
+        CGFloat contentWidth = [UIScreen mainScreen].bounds.size.width;
+        self.imgeViewHeight = contentWidth * adImage.height/ adImage.width;
+    }
+    return self;
+}
+
+@end
 
 @interface BUDNativeBannerTableViewCell ()
 @property (nonatomic, strong) BUNativeAdRelatedView *relatedView;
 @property (nonatomic, strong, nullable) UIScrollView *horizontalScrollView;
+@property (nonatomic, strong) UIButton *closeButton;
+@property (nonatomic,strong) UIImageView *adLogo;
 @end
 
 @implementation BUDNativeBannerTableViewCell
@@ -33,28 +50,37 @@ static CGFloat const margin = 5;
 - (void)buildupView {
     self.relatedView = [[BUNativeAdRelatedView alloc] init];
     
-    CGRect screenRect = [UIScreen mainScreen].bounds;
-    self.horizontalScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.width*0.56)];
+    self.horizontalScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
     self.horizontalScrollView.pagingEnabled = YES;
     [self addSubview:self.horizontalScrollView];
+    
+    self.relatedView = [[BUNativeAdRelatedView alloc] init];
+    self.closeButton = self.relatedView.dislikeButton;
+    self.closeButton.accessibilityIdentifier = @"banner_close";
+    [self addSubview:self.closeButton];
+    
+    self.adLogo = self.relatedView.logoADImageView;
+    self.adLogo.accessibilityIdentifier = @"banner_logo";
+    [self addSubview:self.adLogo];
 }
 
--(void)refreshUIWithModel:(BUNativeAd *)model {
-    self.nativeAd = model;
-    [self.relatedView refreshData:model];
+-(void)refreshUIWithModel:(BUDBannerModel *)model {
+    self.bannerModel = model;
+    [self.relatedView refreshData:model.nativeAd];
     
     for (UIView *view in self.horizontalScrollView.subviews) {
         [view removeFromSuperview];
     }
     
-    BUMaterialMeta *materialMeta = model.data;
+    CGFloat contentWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
+    self.horizontalScrollView.frame = CGRectMake(0, 0, contentWidth, model.imgeViewHeight);
+    
+    BUMaterialMeta *materialMeta = model.nativeAd.data;
     CGFloat x = 0.0;
     for (int i = 0; i < materialMeta.imageAry.count; i++) {
         BUImage *adImage = [materialMeta.imageAry objectAtIndex:i];
-        CGFloat contentWidth = CGRectGetWidth(self.horizontalScrollView.bounds);
-        CGFloat imageViewHeight = contentWidth*0.56;
-        
-        UIImageView *adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, 0, contentWidth, imageViewHeight)];
+
+        UIImageView *adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, 0, contentWidth, model.imgeViewHeight)];
         adImageView.contentMode =  UIViewContentModeScaleAspectFill;
         adImageView.clipsToBounds = YES;
         if (adImage.imageURL.length) {
@@ -66,31 +92,25 @@ static CGFloat const margin = 5;
         gradientLayer.colors = @[
                                  (id)[[UIColor blackColor] colorWithAlphaComponent:0].CGColor,
                                  (id)[[UIColor blackColor] colorWithAlphaComponent:0.7].CGColor];
-        gradientLayer.frame = CGRectMake(0, imageViewHeight -60, contentWidth, 60);
+        gradientLayer.frame = CGRectMake(0, model.imgeViewHeight -60, contentWidth, 60);
         [adImageView.layer addSublayer:gradientLayer];
         
         NSString * titleString = [NSString stringWithFormat:@"【左右滑动】第%d张广告，共%lu张",i+1,(unsigned long)materialMeta.imageAry.count];
         UILabel *titleLable = [UILabel new];
-        titleLable.frame = CGRectMake(10, imageViewHeight-10-20, contentWidth-100, 20);
+        titleLable.frame = CGRectMake(10, model.imgeViewHeight-10-20, contentWidth-100, 20);
         titleLable.textColor = BUD_RGB(0xff, 0xff, 0xff);
         titleLable.font = [UIFont boldSystemFontOfSize:18];
         titleLable.text = titleString;
         [adImageView addSubview:titleLable];
         
-        UIImageView *logoADImageView = [[UIImageView alloc] initWithImage:self.relatedView.logoADImageView.image];
-        CGFloat logoIconX = CGRectGetWidth(adImageView.bounds) - logoSize.width - margin;
-        CGFloat logoIconY = imageViewHeight - logoSize.height - margin;
-        logoADImageView.frame = CGRectMake(logoIconX, logoIconY, logoSize.width, logoSize.height);
-        logoADImageView.hidden = NO;
-        [adImageView addSubview:logoADImageView];
-        
-        [self.nativeAd registerContainer:adImageView withClickableViews:nil];
+        [self.bannerModel.nativeAd registerContainer:adImageView withClickableViews:nil];
         
         x += contentWidth;
         //addAccessibilityIdentifierForQA
         adImageView.accessibilityIdentifier = @"banner_view";
-        logoADImageView.accessibilityIdentifier = @"banner_logo";
     }
-    self.horizontalScrollView.contentSize = CGSizeMake(x, [UIScreen mainScreen].bounds.size.width*0.56);
+    self.horizontalScrollView.contentSize = CGSizeMake(x, model.imgeViewHeight);
+    self.closeButton.frame = CGRectMake(self.width-self.closeButton.width-5, self.horizontalScrollView.height +(bottomHeight-self.closeButton.width)/2, self.closeButton.width, self.closeButton.height);
+    self.adLogo.frame = CGRectMake(self.closeButton.left-logoSize.width - 10, self.horizontalScrollView.height +(bottomHeight-logoSize.height)/2, logoSize.width, logoSize.height);
 }
 @end

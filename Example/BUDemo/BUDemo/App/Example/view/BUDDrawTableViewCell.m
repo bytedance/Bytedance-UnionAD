@@ -19,7 +19,6 @@
 #define bu_textFont 14
 
 @interface BUDDrawBaseTableViewCell()
-@property (nonatomic, strong, nullable) UIImageView *headImg;
 @property (nonatomic, strong, nullable) UIImageView *likeImg;
 @property (nonatomic, strong, nullable) UILabel *likeLable;
 @property (nonatomic, strong, nullable) UIImageView *commentImg;
@@ -202,7 +201,6 @@
         _creativeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _creativeButton.accessibilityIdentifier = @"button";
         [_creativeButton setTitle:@"查看详情 >" forState:UIControlStateNormal];
-        _creativeButton.tintColor = [UIColor darkGrayColor];
         _creativeButton.backgroundColor = BUD_RGB(0x80,0xbb,0x41);
         _creativeButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     }

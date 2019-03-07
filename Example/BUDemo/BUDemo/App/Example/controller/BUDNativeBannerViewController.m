@@ -8,7 +8,6 @@
 
 #import "BUDNativeBannerViewController.h"
 #import <BUAdSDK/BUNativeAd.h>
-#import <BUAdSDK/BUDislikeViewController.h>
 #import <BUAdSDK/BUNativeAdRelatedView.h>
 #import "BUDMacros.h"
 #import "BUDRefreshButton.h"
@@ -19,16 +18,12 @@
 #import "NSString+Json.h"
 #import "BUDNativeBannerTableViewCell.h"
 
-static CGSize const dislikeSize = {15, 15};
-
 @interface BUDNativeBannerViewController () <BUNativeAdDelegate,UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong) BUNativeAd *nativeAd;
+@property (nonatomic, strong) BUDBannerModel *bannerModel;
+@property (nonatomic, strong) BUNativeAd *nativeAd_load;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) BUDRefreshButton *refreshbutton;
-
-@property (nonatomic, strong) BUNativeAdRelatedView *relatedView;
-@property (nonatomic, strong, nullable) UIButton *closeButton;
 @end
 
 @implementation BUDNativeBannerViewController
@@ -73,21 +68,13 @@ static CGSize const dislikeSize = {15, 15};
     }
     [self.tableView reloadData];
     
-    self.relatedView = [[BUNativeAdRelatedView alloc] init];
-    CGFloat margin = 5;
-    self.closeButton = self.relatedView.dislikeButton;
-    self.closeButton.accessibilityIdentifier = @"banner_close";
-    CGFloat dislikeX = CGRectGetWidth([UIScreen mainScreen].bounds) - dislikeSize.width - margin;
-    self.closeButton.frame = CGRectMake(dislikeX,margin, dislikeSize.width, dislikeSize.height);
-    [self.tableView addSubview:self.closeButton];
-    
     self.refreshbutton = [[BUDRefreshButton alloc] init];
     [self.refreshbutton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.refreshbutton];
 }
 
 - (void)loadNativeAd {
-    if (!self.nativeAd) {
+    if (!self.nativeAd_load) {
         BUSize *imgSize1 = [[BUSize alloc] init];
         imgSize1.width = 1080;
         imgSize1.height = 1920;
@@ -104,23 +91,24 @@ static CGSize const dislikeSize = {15, 15};
         nad.adslot = slot1;
         nad.rootViewController = self;
         nad.delegate = self;
-        self.nativeAd = nad;
+        self.nativeAd_load = nad;
     }
-    [self.nativeAd loadAdData];
+    [self.nativeAd_load loadAdData];
 }
 
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
     if (!nativeAd.data) { return; }
-    if (!(nativeAd == self.nativeAd)) { return; }
+    if (!(nativeAd == self.nativeAd_load)) { return; }
     
-    self.closeButton.hidden = NO;
-    [self.relatedView refreshData:nativeAd];
+    self.nativeAd_load = nil;
+    self.bannerModel = [[BUDBannerModel alloc]initWithNativeAd:nativeAd];
+
     NSMutableArray *dataSources = [self.dataSource mutableCopy];
     id model = [dataSources objectAtIndex:0];
-    if ([model isKindOfClass:[BUNativeAd class]]) {
+    if ([model isKindOfClass:[BUDBannerModel class]]) {
         [dataSources removeObject:model];
     }
-    [dataSources insertObject:nativeAd atIndex:0];
+    [dataSources insertObject:self.bannerModel atIndex:0];
     self.dataSource = [dataSources copy];
     [self.tableView reloadData];
 }
@@ -142,11 +130,12 @@ static CGSize const dislikeSize = {15, 15};
 
 - (void)nativeAd:(BUNativeAd *)nativeAd  dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords {
     NSMutableArray *dataSources = [self.dataSource mutableCopy];
-    [dataSources removeObject:nativeAd];
+    id model = [dataSources objectAtIndex:0];
+    if ([model isKindOfClass:[BUDBannerModel class]] && [[(BUDBannerModel *)model nativeAd] isEqual:nativeAd]) {
+        [dataSources removeObject:model];
+    }
     self.dataSource = [dataSources copy];
     [self.tableView reloadData];
-    
-    self.closeButton.hidden = YES;
 }
 
 #pragma mark - Events
@@ -158,7 +147,7 @@ static CGSize const dislikeSize = {15, 15};
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath { 
     NSUInteger index = indexPath.row;
     id model = self.dataSource[index];
-    if ([model isKindOfClass:[BUNativeAd class]]) {
+    if ([model isKindOfClass:[BUDBannerModel class]]) {
         BUDNativeBannerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BUDNativeBannerTableViewCell" forIndexPath:indexPath];
         if(!cell){
             cell = [[BUDNativeBannerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BUDNativeBannerTableViewCell"];
@@ -170,9 +159,6 @@ static CGSize const dislikeSize = {15, 15};
         BUDFeedNormalTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:clazz forIndexPath:indexPath];
         if(!cell){
             cell = [(BUDFeedNormalTableViewCell *)[NSClassFromString(clazz) alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:clazz];
-        }
-        if (indexPath.row == 0) {
-            cell.separatorLine.hidden = YES;
         }
         [cell refreshUIWithModel:model];
         return cell;
@@ -194,11 +180,11 @@ static CGSize const dislikeSize = {15, 15};
     }
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger index = indexPath.row;
     id model = self.dataSource[index];
-    if ([model isKindOfClass:[BUNativeAd class]]) {
-       return [UIScreen mainScreen].bounds.size.width * 0.56;
+    if ([model isKindOfClass:[BUDBannerModel class]]) {
+        return [(BUDBannerModel *)model imgeViewHeight] + bottomHeight;
     }else{
         return [(BUDFeedNormalModel *)model cellHeight];
     }

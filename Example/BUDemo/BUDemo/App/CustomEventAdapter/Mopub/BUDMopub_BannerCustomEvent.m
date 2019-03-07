@@ -8,6 +8,7 @@
 
 #import "BUDMopub_BannerCustomEvent.h"
 #import <BUAdSDK/BUBannerAdView.h>
+#import "BUDMacros.h"
 
 @interface BUDMopub_BannerCustomEvent ()<BUBannerAdViewDelegate>
 @property (strong, nonatomic)BUBannerAdView *bannerView;
@@ -46,7 +47,7 @@
 }
 
 - (void)bannerAdView:(BUBannerAdView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *_Nullable)filterwords {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 @end

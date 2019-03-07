@@ -13,6 +13,7 @@
 #import "BUDMopub_FullScreenVideoCusEventVC.h"
 #import "BUDMopub_InterstitialViewController.h"
 #import "BUDMopub_RewardVideoCusEventVC.h"
+#import "BUDMacros.h"
 
 @interface BUDCustomEventViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -22,7 +23,7 @@
 @implementation BUDCustomEventViewController
 
 - (void)dealloc {
-    NSLog(@"CustomEvent - dealloc");
+    BUD_Log(@"CustomEvent - dealloc");
 }
 
 - (void)viewDidLoad {

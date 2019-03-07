@@ -134,15 +134,12 @@
     self.tableView.frame = self.view.bounds;
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setBarTintColor:nil];
     [self.navigationController.navigationBar setTintColor:nil];
     [self.navigationController.navigationBar setTitleTextAttributes:nil];
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -152,6 +149,7 @@
     [self.navigationController.navigationBar setBarTintColor:titleBGColor];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
 -(BOOL)shouldAutorotate

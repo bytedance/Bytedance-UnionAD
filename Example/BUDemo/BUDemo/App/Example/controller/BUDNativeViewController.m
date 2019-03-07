@@ -25,6 +25,7 @@
 @property (nonatomic, strong) UIButton *actionButton;
 @property (nonatomic, strong) UILabel *adLabel;
 @property (nonatomic, strong) BUNativeAd *ad;
+@property (nonatomic, strong) BUNativeAd *ad_load;
 @property (nonatomic, strong) BUDRefreshButton *button;
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -188,12 +189,15 @@
     nad.rootViewController = self;
     nad.delegate = self;
     
-    self.ad = nad;
+    self.ad_load = nad;
     
     [nad loadAdData];
 }
 
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
+    self.ad_load = nil;
+    self.ad = nativeAd;
+    
     self.infoLabel.text = nativeAd.data.AdDescription;
     self.titleLabel.text = nativeAd.data.AdTitle;
     BUMaterialMeta *adMeta = nativeAd.data;

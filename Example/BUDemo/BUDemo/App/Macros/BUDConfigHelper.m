@@ -7,6 +7,7 @@
 //
 
 #import "BUDConfigHelper.h"
+#import "BUDMacros.h"
 
 @implementation BUDConfigHelper
 
@@ -24,7 +25,7 @@
     NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
     if(!settingsBundle)
     {
-        NSLog(@"找不到Settings.bundle文件");
+        BUD_Log(@"找不到Settings.bundle文件");
         return;
     }
     //读取Settings.bundle里面的配置信息

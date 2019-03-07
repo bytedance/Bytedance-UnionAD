@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <BUAdSDK/BUNativeAd.h>
+static CGFloat const bottomHeight = 30;
+
+@interface BUDBannerModel : NSObject
+@property (nonatomic,strong) BUNativeAd *nativeAd;
+@property (nonatomic,assign) CGFloat imgeViewHeight;
+- (instancetype)initWithNativeAd:(BUNativeAd *)nativeAd;
+@end
 
 @interface BUDNativeBannerTableViewCell : UITableViewCell
-@property (nonatomic, strong) BUNativeAd *nativeAd;
-- (void)refreshUIWithModel:(BUNativeAd *_Nonnull)model;
+@property (nonatomic, strong) BUDBannerModel *bannerModel;
+- (void)refreshUIWithModel:(BUDBannerModel *_Nonnull)model;
 @end

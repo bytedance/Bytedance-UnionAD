@@ -8,6 +8,7 @@
 
 #import "BUDMopub_RewardVideoCustomEventDelegate.h"
 #import <BUAdSDK/BUAdSDK.h>
+#import "BUDMacros.h"
 
 @implementation BUDMopub_RewardVideoCustomEventDelegate
 
@@ -16,7 +17,7 @@
 }
     
 - (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
     
 - (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
@@ -38,15 +39,15 @@
 }
     
 - (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
     
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
     
 - (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"%s", __func__);
+    BUD_Log(@"%s", __func__);
 }
 
 @end

@@ -17,6 +17,7 @@
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import "RRFPSBar.h"
 #import "Mopub.h"
+#import "BUDMacros.h"
 
 #pragma mark - 展示FPS的开关
 #ifdef DEBUG
@@ -51,7 +52,7 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
     [BUAdSDKManager setIsPaidApp:NO];
 #if DEBUG
     //是否打开log信息，默认没有
-//    [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
+    [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
 #endif
     
     CGRect frame = [UIScreen mainScreen].bounds;
@@ -114,12 +115,12 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
     
     MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:MopubADUnitID];
     sdkConfig.globalMediationSettings = @[];
-    Class<MPMediationSdkInitializable> BURewardCusEvent = NSClassFromString(@"WMRewardedVideoCustomEvent");
+    Class<MPMediationSdkInitializable> BURewardCusEvent = NSClassFromString(@"BUDMopub_RewardedVideoCustomEvent");
     if (BURewardCusEvent != nil) {
         sdkConfig.mediatedNetworks = @[BURewardCusEvent];
     }
     [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
-        NSLog(@"Mopub");
+        BUD_Log(@"Mopub");
     }];
     [MoPub sharedInstance].logLevel = MPLogLevelInfo;
 }
@@ -127,13 +128,13 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 - (void)splashAdDidClose:(BUSplashAdView *)splashAd {
     [splashAd removeFromSuperview];
     CFTimeInterval endTime = CACurrentMediaTime();
-    NSLog(@"Total Runtime: %g s", endTime - self.startTime);
+    BUD_Log(@"Total Runtime: %g s", endTime - self.startTime);
 }
 
 - (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error {
     [splashAd removeFromSuperview];
     CFTimeInterval endTime = CACurrentMediaTime();
-    NSLog(@"Total Runtime: %g s error=%@", endTime - self.startTime, error);
+    BUD_Log(@"Total Runtime: %g s error=%@", endTime - self.startTime, error);
 }
 
 

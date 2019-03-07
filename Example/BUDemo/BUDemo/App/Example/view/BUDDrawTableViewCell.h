@@ -17,6 +17,7 @@
 @interface BUDDrawBaseTableViewCell : UITableViewCell<BUDDrawCellProtocol>
 @property (nonatomic, strong, nullable) UILabel *titleLabel;
 @property (nonatomic, strong, nullable) UILabel *descriptionLabel;
+@property (nonatomic, strong, nullable) UIImageView *headImg;
 @end
 
 @interface BUDDrawNormalTableViewCell : BUDDrawBaseTableViewCell<BUDDrawCellProtocol>

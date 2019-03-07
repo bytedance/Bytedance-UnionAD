@@ -61,38 +61,38 @@
 #pragma mark BURewardedVideoAdDelegate
 
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"reawrded material load success");
+    BUD_Log(@"rewardedVideoAd data load success");
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"reawrded material load success";
+    hud.label.text = @"reawrded data load success";
     [hud hideAnimated:YES afterDelay:0.1];
 }
 
 - (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"reawrded video did load");
+    BUD_Log(@"rewardedVideoAd video load success");
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"reawrded video data load success";
+    hud.label.text = @"reawrded video load success";
     [hud hideAnimated:YES afterDelay:1];
 }
 
 - (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"rewarded video will visible");
+    BUD_Log(@"rewardedVideoAd video will visible");
 }
 
 - (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
-     NSLog(@"rewarded video did close");
+     BUD_Log(@"rewardedVideoAd video did close");
 }
 
 - (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"rewarded video did click");
+    BUD_Log(@"rewardedVideoAd video did click");
 }
 
 - (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
-    NSLog(@"rewarded video material load fail");
+    BUD_Log(@"rewardedVideoAd data load fail");
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.offset = CGPointMake(0, -100);
@@ -102,25 +102,25 @@
 
 - (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
     if (error) {
-        NSLog(@"rewarded play error");
+        BUD_Log(@"rewardedVideoAd play error");
     } else {
-        NSLog(@"rewarded play finish");
+        BUD_Log(@"rewardedVideoAd play finish");
     }
 }
 
 - (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"rewarded verify failed");
+    BUD_Log(@"rewardedVideoAd verify failed");
     
-    NSLog(@"Demo RewardName == %@", rewardedVideoAd.rewardedVideoModel.rewardName);
-    NSLog(@"Demo RewardAmount == %ld", (long)rewardedVideoAd.rewardedVideoModel.rewardAmount);
+    BUD_Log(@"Demo RewardName == %@", rewardedVideoAd.rewardedVideoModel.rewardName);
+    BUD_Log(@"Demo RewardAmount == %ld", (long)rewardedVideoAd.rewardedVideoModel.rewardAmount);
 }
 
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify{
-    NSLog(@"rewarded verify succeed");
-    NSLog(@"verify result: %@", verify ? @"success" : @"fail");
+    BUD_Log(@"rewardedVideoAd verify succeed");
+    BUD_Log(@"verify result: %@", verify ? @"success" : @"fail");
     
-    NSLog(@"Demo RewardName == %@", rewardedVideoAd.rewardedVideoModel.rewardName);
-    NSLog(@"Demo RewardAmount == %ld", (long)rewardedVideoAd.rewardedVideoModel.rewardAmount);
+    BUD_Log(@"Demo RewardName == %@", rewardedVideoAd.rewardedVideoModel.rewardName);
+    BUD_Log(@"Demo RewardAmount == %ld", (long)rewardedVideoAd.rewardedVideoModel.rewardAmount);
 }
 
 -(BOOL)shouldAutorotate{

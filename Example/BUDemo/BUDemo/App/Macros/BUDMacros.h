@@ -26,4 +26,9 @@
 #define TopMargin        (BUDiPhoneX? 24: 0)
 #define BottomMargin     (BUDiPhoneX? 40: 0)      // 状态栏高度
 
+#define BUD_Log(frmt, ...)   \
+do {                                                      \
+NSLog(@"【BUAdDemo】%@", [NSString stringWithFormat:frmt,##__VA_ARGS__]);  \
+} while(0)
+
 #endif /* BUDMacros_h */

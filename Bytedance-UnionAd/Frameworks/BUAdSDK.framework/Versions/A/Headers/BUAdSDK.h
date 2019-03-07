@@ -7,13 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
-//! Project version number for BUAdSDK.
-FOUNDATION_EXPORT double BUAdSDKVersionNumber;
-
-//! Project version string for BUAdSDK.
-FOUNDATION_EXPORT const unsigned char BUAdSDKVersionString[];
-
 // In this header, you should import all the public headers of your framework using statements like #import <BUAdSDK/PublicHeader.h>
 
 #import <BUAdSDK/BUAdSDKDefines.h>
@@ -25,7 +18,9 @@ FOUNDATION_EXPORT const unsigned char BUAdSDKVersionString[];
 #import <BUAdSDK/BUMaterialMeta.h>
 #import <BUAdSDK/BUPlayerPublicDefine.h>
 #import <BUAdSDK/BUVideoAdView.h>
-#import <BUAdSDK/BUDislikeViewController.h>
+
+///自定义dislike样式
+#import <BUAdSDK/BUDislike.h>
 #import <BUAdSDK/BUDislikeWords.h>
 
 /// 原生广告

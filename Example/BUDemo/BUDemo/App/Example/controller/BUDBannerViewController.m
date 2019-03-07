@@ -79,7 +79,7 @@
         const CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
         const CGFloat screenHeight = CGRectGetHeight([UIScreen mainScreen].bounds);
         
-        NSLog(@"%f", [UIApplication sharedApplication].statusBarFrame.size.height);
+        BUD_Log(@"%f", [UIApplication sharedApplication].statusBarFrame.size.height);
         CGFloat bannerHeight = screenWidth * size.height / size.width;
         self.carouselBannerView.frame = CGRectMake(0, screenHeight*0.4, screenWidth, bannerHeight);
         self.carouselBannerView.delegate = self;
@@ -98,19 +98,19 @@
 #pragma mark -  BUBannerAdViewDelegate implementation
 
 - (void)bannerAdViewDidLoad:(BUBannerAdView * _Nonnull)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)admodel {
-    NSLog(@"***********banner load**************");
+    BUD_Log(@"banner data load sucess");
 }
 
 - (void)bannerAdViewDidBecomVisible:(BUBannerAdView *_Nonnull)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)admodel {
-    
+    BUD_Log(@"banner becomVisible");
 }
 
 - (void)bannerAdViewDidClick:(BUBannerAdView *_Nonnull)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)admodel {
-    
+    BUD_Log(@"banner AdViewDidClick");
 }
 
 - (void)bannerAdView:(BUBannerAdView *_Nonnull)bannerAdView didLoadFailWithError:(NSError *_Nullable)error {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, error.localizedDescription);
+    BUD_Log(@"banner data load faiule");
 }
 
 - (void)bannerAdView:(BUBannerAdView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterwords {

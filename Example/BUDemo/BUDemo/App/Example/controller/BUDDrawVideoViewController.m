@@ -10,11 +10,12 @@
 #import <BUAdSDK/BUNativeAdsManager.h>
 #import "BUDDrawTableViewCell.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "BUDMacros.h"
 
 @interface BUDDrawVideoViewController ()<UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) BUNativeAdsManager *adManager;
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, copy) NSArray *dataSource;
 @property (nonatomic ,strong)BUDDrawBaseTableViewCell *lastCell;
 @end
 
@@ -111,6 +112,7 @@
 }
 - (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
     
+    BUD_Log(@"DrawVideo datas load success");
     NSMutableArray *dataSources = [self.dataSource mutableCopy];
     for (BUNativeAd *model in nativeAdDataArray) {
         NSUInteger index = rand() % dataSources.count;
@@ -126,23 +128,23 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"Draw video load faiule";
+    hud.label.text = @"DrawVideo datas load faiule";
     [hud hideAnimated:YES afterDelay:1];
     
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
+    BUD_Log(@"DrawVideo datas load faiule");
 }
 
 #pragma mark --- BUVideoAdViewDelegate
 - (void)videoAdView:(BUVideoAdView *)videoAdView stateDidChanged:(BUPlayerPlayState)playerState {
-    NSLog(@"videoAdView state change to %ld", (long)playerState);
+
 }
 
 - (void)videoAdView:(BUVideoAdView *)videoAdView didLoadFailWithError:(NSError *)error {
-    NSLog(@"videoAdView didLoadFailWithError");
+    BUD_Log(@"videoAdView didLoadFailWithError");
 }
 
 - (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView {
-    NSLog(@"videoAdView didPlayFinish");
+    BUD_Log(@"videoAdView didPlayFinish");
 }
 
 #pragma mark --- tableView dataSource&delegate
@@ -160,7 +162,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"BUDDrawAdTableViewCell" forIndexPath:indexPath];
         cell.nativeAdRelatedView.videoAdView.delegate = self;
         [cell refreshUIWithModel:nativeAd];
-        [model registerContainer:cell withClickableViews:@[cell.creativeButton]];
+        [model registerContainer:cell withClickableViews:@[cell.creativeButton,cell.titleLabel,cell.descriptionLabel,cell.headImg]];
         
         return cell;
     }else{

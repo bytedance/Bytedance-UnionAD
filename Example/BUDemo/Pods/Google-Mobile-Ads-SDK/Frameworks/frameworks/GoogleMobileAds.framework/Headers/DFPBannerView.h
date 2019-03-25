@@ -32,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// To request this ad type using GADAdLoader, you need to pass kGADAdLoaderAdTypeDFPBanner (see
 /// GADAdLoaderAdTypes.h) to the |adTypes| parameter in GADAdLoader's initializer method. If you
 /// request this ad type, your delegate must conform to the DFPBannerAdLoaderDelegate protocol.
-GAD_SUBCLASSING_RESTRICTED
 @interface DFPBannerView : GADBannerView
 
 /// Required value created on the Ad Manager website. Create a new ad unit for every unique

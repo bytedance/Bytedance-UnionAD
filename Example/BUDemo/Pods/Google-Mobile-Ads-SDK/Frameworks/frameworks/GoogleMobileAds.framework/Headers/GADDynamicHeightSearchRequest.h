@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// multiple ads and the height is set dynamically based on the ad contents. Please cross-reference
 /// the property sections and properties with the official reference document:
 /// https://developers.google.com/custom-search-ads/docs/reference
-GAD_SUBCLASSING_RESTRICTED
 @interface GADDynamicHeightSearchRequest : GADRequest
 
 #pragma mark - Page Level Parameters

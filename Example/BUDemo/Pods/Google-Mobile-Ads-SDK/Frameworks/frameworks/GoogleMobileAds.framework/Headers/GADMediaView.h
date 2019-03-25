@@ -2,28 +2,32 @@
 //  GADMediaView.h
 //  Google Mobile Ads SDK
 //
-//  Copyright 2016 Google Inc. All rights reserved.
+//  Copyright 2019 Google Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-#import <GoogleMobileAds/GADNativeAd.h>
-#import <GoogleMobileAds/GoogleMobileAdsDefines.h>
+#import <GoogleMobileAds/GADMediaContent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Displays native ad media assets.
+/// Displays native ad media content.
 ///
-/// To display media assets in GADNativeAppInstallAdView instances, add a GADMediaView subview and
-/// assign the native ad view's mediaView property.
+/// To display media content in GADUnifiedNativeAdView instances, add a GADMediaView subview, assign
+/// the native ad view's mediaView property, and set the native ad's mediaContent property to the
+/// media view.
 ///
-/// If the native ad doesn't contain a video and image loading is enabled, the GADMediaView displays
-/// the native ad's |images| asset's first image.
+/// If the native ad contains video content, the media view displays the video content.
 ///
-/// If the native ad doesn't contain a video and image loading is disabled, the GADMediaView object
-/// is empty.
-GAD_SUBCLASSING_RESTRICTED
+/// If the native ad doesn't have video content and image loading is enabled, the media view
+/// displays the first image from the native ad's |images| property.
+///
+/// If the native ad doesn't have video content and image loading is disabled, the media view is
+/// empty.
 @interface GADMediaView : UIView
+
+/// The media content displayed in the media view.
+@property(nonatomic, nullable) GADMediaContent *mediaContent;
 
 @end
 

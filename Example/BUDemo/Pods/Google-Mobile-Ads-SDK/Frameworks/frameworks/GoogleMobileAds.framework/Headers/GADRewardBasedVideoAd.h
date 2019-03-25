@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import <GoogleMobileAds/GADAdMetadataKeys.h>
 #import <GoogleMobileAds/GADRequest.h>
 #import <GoogleMobileAds/GADRewardBasedVideoAdDelegate.h>
 
@@ -15,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The GADRewardBasedVideoAd class is used for requesting and presenting a reward based video ad.
 /// This class isn't thread safe.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADRewardBasedVideoAd : NSObject
 
 /// Delegate for receiving video notifications.
@@ -37,6 +37,11 @@ GAD_SUBCLASSING_RESTRICTED
 
 /// Optional custom reward string to include in the server-to-server callback.
 @property(nonatomic, copy, nullable) NSString *customRewardString;
+
+/// The loaded ad's metadata. Is nil if no ad is loaded or the loaded ad doesn't have metadata. Ad
+/// metadata may update after loading. Use the rewardBasedVideoAdMetadataDidChange: delegate method
+/// on GADRewardBasedVideoAdDelegate to listen for updates.
+@property(nonatomic, readonly, nullable) NSDictionary<GADAdMetadataKey, id> *adMetadata;
 
 /// Returns the shared GADRewardBasedVideoAd instance.
 + (GADRewardBasedVideoAd *)sharedInstance;

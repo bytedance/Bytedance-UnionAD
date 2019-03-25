@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// calling -setNativeAppInstallAd: or -setNativeContentAd:, AdChoices content will render inside
 /// the GADAdChoicesView. By default, AdChoices is placed in the top right corner of
 /// GADNativeAppInstallAdView and GADNativeContentAdView.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADAdChoicesView : UIView
 
 @end

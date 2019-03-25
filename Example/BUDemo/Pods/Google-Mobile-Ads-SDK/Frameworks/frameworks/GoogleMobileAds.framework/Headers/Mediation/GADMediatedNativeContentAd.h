@@ -24,7 +24,7 @@ GAD_DEPRECATED_MSG_ATTRIBUTE("Use GADMediatedUnifiedNativeAd instead.")
 - (nullable NSString *)body;
 
 /// List of large images. Each object is an instance of GADNativeAdImage.
-- (nullable NSArray *)images;
+- (nullable NSArray<GADNativeAdImage *> *)images;
 
 /// Small logo image.
 - (nullable GADNativeAdImage *)logo;

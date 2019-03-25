@@ -30,7 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///   // Request an ad without any additional targeting information.
 ///   [adView loadRequest:[GADRequest request]];
 ///   </pre>
-GAD_SUBCLASSING_RESTRICTED
 @interface GADBannerView : UIView
 
 #pragma mark Initialization

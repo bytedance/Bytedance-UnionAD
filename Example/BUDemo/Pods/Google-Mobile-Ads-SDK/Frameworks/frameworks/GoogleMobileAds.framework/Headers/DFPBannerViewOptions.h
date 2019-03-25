@@ -13,7 +13,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// Ad loader options for banner ads.
-GAD_SUBCLASSING_RESTRICTED
 @interface DFPBannerViewOptions : GADAdLoaderOptions
 
 /// Optional delegate that is notified if the loaded banner sends app events.

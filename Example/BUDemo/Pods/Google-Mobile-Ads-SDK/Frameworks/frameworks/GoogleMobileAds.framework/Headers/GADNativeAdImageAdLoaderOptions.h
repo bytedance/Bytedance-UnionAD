@@ -18,7 +18,6 @@ typedef NS_ENUM(NSInteger, GADNativeAdImageAdLoaderOptionsOrientation) {
 };
 
 /// Ad loader options for native ad image settings.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADNativeAdImageAdLoaderOptions : GADAdLoaderOptions
 
 /// Indicates if image asset content should be loaded by the SDK. If set to YES, the SDK will not

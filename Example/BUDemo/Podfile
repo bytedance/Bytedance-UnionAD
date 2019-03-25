@@ -11,7 +11,7 @@ abstract_target 'Demo' do
     pod 'MLeaksFinder'
     pod 'MBProgressHUD'
     pod 'libwebp', '~> 0.5.1'
-    pod 'mopub-ios-sdk/Core'
+    pod 'mopub-ios-sdk/Core', '~> 5.4.0'
 
     target 'BUADDemo' do
       project 'BUADDemo.xcodeproj'

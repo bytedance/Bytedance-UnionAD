@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Specifies optional ad request targeting parameters that are provided by the publisher and are
 /// forwarded to custom events for purposes of populating an ad request to a 3rd party ad network.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADCustomEventRequest : NSObject
 
 /// If the user's latitude, longitude, and accuracy are not specified, userHasLocation returns NO,

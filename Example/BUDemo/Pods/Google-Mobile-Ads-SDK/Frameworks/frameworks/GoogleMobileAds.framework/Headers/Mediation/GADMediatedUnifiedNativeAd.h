@@ -59,6 +59,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Indicates whether the ad has video content.
 @property(nonatomic, assign, readonly) BOOL hasVideoContent;
 
+/// Media content aspect ratio (width/height) or 0 if there's no media content.
+@property(nonatomic, readonly) CGFloat mediaContentAspectRatio;
+
 /// Tells the receiver that it has been rendered in |view| with clickable asset views and
 /// nonclickable asset views. viewController should be used to present modal views for the ad.
 - (void)didRenderInView:(UIView *)view

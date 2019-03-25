@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		784471B3223A6C4E00C2515D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 784471B2223A6C4E00C2515D /* Photos.framework */; };
 		785996AC21A5387F00CB726E /* BUDCustomEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785996AB21A5387F00CB726E /* BUDCustomEventViewController.m */; };
 		785996CA21A54E7000CB726E /* BUDAdmob_RewardVideoCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 785996C721A54E7000CB726E /* BUDAdmob_RewardVideoCusEventVC.m */; };
 		785996CB21A54E7000CB726E /* BUDAdmob_RewardCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 785996C821A54E7000CB726E /* BUDAdmob_RewardCustomEventAdapter.m */; };
@@ -89,6 +90,7 @@
 		05C4E22FADCD2F7815223297 /* Pods-Demo-BUADDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		12EFB7EDD6E2C6DC1D7875A1 /* Pods-Demo-BUADDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo.release.xcconfig"; sourceTree = "<group>"; };
 		2209523E35A5A34BE85EF785 /* libPods-Demo-BUADDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo-BUADDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		784471B2223A6C4E00C2515D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		785996AA21A5387F00CB726E /* BUDCustomEventViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUDCustomEventViewController.h; sourceTree = "<group>"; };
 		785996AB21A5387F00CB726E /* BUDCustomEventViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUDCustomEventViewController.m; sourceTree = "<group>"; };
 		785996C421A54E7000CB726E /* BUDAdmob_RewardVideoCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_RewardVideoCusEventVC.h; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				784471B3223A6C4E00C2515D /* Photos.framework in Frameworks */,
 				78E073AB21A2CFF1006D71EE /* AdSupport.framework in Frameworks */,
 				78E073A921A2CFE9006D71EE /* CoreMotion.framework in Frameworks */,
 				DE84972621A2E2C7007007FA /* BUAdSDK.framework in Frameworks */,
@@ -310,6 +313,7 @@
 		A9BB8904F5E2E508722AB9C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				784471B2223A6C4E00C2515D /* Photos.framework */,
 				DE700D5E21A3B4100054DBCB /* libPods-Demo-BUADDemo.a */,
 				DE84972521A2E2C7007007FA /* BUAdSDK.bundle */,
 				DE84972421A2E2C7007007FA /* BUAdSDK.framework */,

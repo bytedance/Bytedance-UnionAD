@@ -24,7 +24,6 @@ typedef NS_ENUM(NSInteger, GADGender) {
 };
 
 /// Specifies optional parameters for ad requests.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADRequest : NSObject<NSCopying>
 
 /// Returns a default request.

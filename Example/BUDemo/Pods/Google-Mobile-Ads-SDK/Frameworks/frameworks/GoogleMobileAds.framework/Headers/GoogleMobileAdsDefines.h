@@ -31,12 +31,6 @@
 #define GAD_DEPRECATED_MSG_ATTRIBUTE(s)
 #endif  // defined(__has_feature) && defined(__has_attribute)
 
-#if __has_attribute(objc_subclassing_restricted)
-#define GAD_SUBCLASSING_RESTRICTED __attribute__((objc_subclassing_restricted))
-#else
-#define GAD_SUBCLASSING_RESTRICTED
-#endif // __has_attribute(objc_subclassing_restricted)
-
 #if __has_feature(nullability)  // Available starting in Xcode 6.3.
 #define GAD_NULLABLE_TYPE __nullable
 #define GAD_NONNULL_TYPE __nonnull

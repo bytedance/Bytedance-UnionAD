@@ -8,13 +8,17 @@
 #import <Foundation/Foundation.h>
 
 #import <GoogleMobileAds/GADAudioVideoManager.h>
+#import <GoogleMobileAds/GADInitializationStatus.h>
 #import <GoogleMobileAds/GADRequestConfiguration.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// A block called with the initialization status when [GADMobileAds startWithCompletionHandler:]
+/// completes or times out.
+typedef void (^GADInitializationCompletionHandler)(GADInitializationStatus *_Nonnull status);
+
 /// Google Mobile Ads SDK settings.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADMobileAds : NSObject
 
 /// Returns the shared GADMobileAds instance.
@@ -50,6 +54,9 @@ GAD_SUBCLASSING_RESTRICTED
 /// Request configuration common to all ad requests.
 @property(nonatomic, readonly, strong) GADRequestConfiguration *requestConfiguration;
 
+/// Initialization status of the ad networks available to the Google Mobile Ads SDK.
+@property(nonatomic, nonnull, readonly) GADInitializationStatus *initializationStatus;
+
 /// Returns YES if the current SDK version is at least |major|.|minor|.|patch|. This method can be
 /// used by libraries that depend on a specific minimum version of the Google Mobile Ads SDK to warn
 /// developers if they have an incompatible version.
@@ -58,6 +65,12 @@ GAD_SUBCLASSING_RESTRICTED
 /// GADMobileAds's shared instance responds to this method. Calling this method on a Google Mobile
 /// Ads SDK lower than 7.10 can crash the app.
 - (BOOL)isSDKVersionAtLeastMajor:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch;
+
+/// Starts the Google Mobile Ads SDK. Call this method as early as possible to reduce latency on the
+/// session's first ad request. Calls completionHandler when the GMA SDK and all mediation networks
+/// are fully set up or if set-up times out. The Google Mobile Ads SDK starts on the first ad
+/// request if this method is not called.
+- (void)startWithCompletionHandler:(nullable GADInitializationCompletionHandler)completionHandler;
 
 @end
 

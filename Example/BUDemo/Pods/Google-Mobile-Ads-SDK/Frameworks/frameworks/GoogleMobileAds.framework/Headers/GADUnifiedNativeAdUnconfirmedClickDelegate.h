@@ -14,6 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// Delegate methods for handling unified native ad unconfirmed clicks.
 @protocol GADUnifiedNativeAdUnconfirmedClickDelegate<NSObject>
 
 /// Tells the delegate that native ad receives an unconfirmed click on view with asset ID. You

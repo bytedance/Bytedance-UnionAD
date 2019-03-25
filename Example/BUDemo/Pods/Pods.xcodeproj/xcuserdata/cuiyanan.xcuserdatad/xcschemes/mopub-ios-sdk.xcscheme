@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A014868941CA6B85E580A48B0516E91E"
+               BlueprintIdentifier = "DBA6839AF297F52A141A7F6781DA9E58"
+               BuildableName = "libmopub-ios-sdk.a"
                BlueprintName = "mopub-ios-sdk"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libmopub-ios-sdk.a">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

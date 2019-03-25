@@ -11,7 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Ad loader options for requesting multiple ads. Requesting multiple ads in a single request is
 /// currently only available for native app install ads and native content ads.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADMultipleAdsAdLoaderOptions : GADAdLoaderOptions
 
 /// Number of ads the GADAdLoader should attempt to return for the request. By default, numberOfAds

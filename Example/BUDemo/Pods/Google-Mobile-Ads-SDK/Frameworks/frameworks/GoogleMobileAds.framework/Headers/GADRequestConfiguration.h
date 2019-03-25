@@ -22,7 +22,6 @@ GAD_EXTERN GADMaxAdContentRating _Nonnull const GADMaxAdContentRatingTeen;
 GAD_EXTERN GADMaxAdContentRating _Nonnull const GADMaxAdContentRatingMatureAudience;
 
 /// Request configuration. The settings in this class will apply to all ad requests.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADRequestConfiguration : NSObject
 
 /// The maximum ad content rating. All Google ads will have this content rating or lower.

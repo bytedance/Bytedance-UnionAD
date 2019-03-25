@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// An interstitial ad. This is a full-screen advertisement shown at natural transition points in
 /// your application such as between game levels or news stories.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADInterstitial : NSObject
 
 /// Initializes an interstitial with an ad unit created on the AdMob website. Create a new ad unit

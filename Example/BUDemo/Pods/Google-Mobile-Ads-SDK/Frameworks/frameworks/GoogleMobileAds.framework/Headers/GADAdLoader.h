@@ -22,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// Loads ads. See GADAdLoaderAdTypes.h for available ad types.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADAdLoader : NSObject
 
 /// Object notified when an ad request succeeds or fails. Must conform to requested ad types'

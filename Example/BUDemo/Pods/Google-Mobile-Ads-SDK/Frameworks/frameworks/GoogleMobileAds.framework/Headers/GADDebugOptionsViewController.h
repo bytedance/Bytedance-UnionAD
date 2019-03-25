@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /// Displays debug options to the user.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADDebugOptionsViewController : UIViewController
 
 /// Creates and returns a GADDebugOptionsViewController object initialized with the ad unit ID.

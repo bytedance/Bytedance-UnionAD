@@ -10,6 +10,7 @@
 
 #import <GoogleMobileAds/GADAdChoicesView.h>
 #import <GoogleMobileAds/GADAdLoaderDelegate.h>
+#import <GoogleMobileAds/GADMediaContent.h>
 #import <GoogleMobileAds/GADMediaView.h>
 #import <GoogleMobileAds/GADMuteThisAdReason.h>
 #import <GoogleMobileAds/GADNativeAdImage.h>
@@ -24,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// (see GADAdLoaderAdTypes.h) to the |adTypes| parameter in GADAdLoader's initializer method. If
 /// you request this ad type, your delegate must conform to the GADUnifiedNativeAdLoaderDelegate
 /// protocol.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADUnifiedNativeAd : NSObject
 
 #pragma mark - Must be displayed if available
@@ -75,6 +75,10 @@ GAD_SUBCLASSING_RESTRICTED
 /// An array of Mute This Ad reasons used to render customized mute ad survey. Use this array to
 /// implement your own Mute This Ad feature only when customMuteThisAdAvailable is YES.
 @property(nonatomic, readonly, nullable) NSArray<GADMuteThisAdReason *> *muteThisAdReasons;
+
+/// Media content. Set the associated media view's mediaContent property to this object to display
+/// this content.
+@property(nonatomic, readonly, nonnull) GADMediaContent *mediaContent;
 
 /// Registers ad view, clickable asset views, and nonclickable asset views with this native ad.
 /// Media view shouldn't be registered as clickable.

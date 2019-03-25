@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Used by mediation adapters to notify the Google Mobile Ads SDK about events occurring in the
 /// lifecycle of a GADMediatedNativeAd.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADMediatedNativeAdNotificationSource : NSObject
 
 /// Called by the adapter when it has registered an impression on the tracked view. Adapter should

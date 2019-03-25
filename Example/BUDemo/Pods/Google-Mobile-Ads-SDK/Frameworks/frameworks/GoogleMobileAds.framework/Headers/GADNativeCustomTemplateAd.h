@@ -27,7 +27,6 @@ GAD_EXTERN NSString *const GADNativeCustomTemplateAdMediaViewKey;
 /// kGADAdLoaderAdTypeNativeCustomTemplate (see GADAdLoaderAdTypes.h) to the |adTypes| parameter in
 /// GADAdLoader's initializer method. If you request this ad type, your delegate must conform to the
 /// GADNativeCustomTemplateAdLoaderDelegate protocol.
-GAD_SUBCLASSING_RESTRICTED
 @interface GADNativeCustomTemplateAd : GADNativeAd
 
 /// The ad's custom template ID.

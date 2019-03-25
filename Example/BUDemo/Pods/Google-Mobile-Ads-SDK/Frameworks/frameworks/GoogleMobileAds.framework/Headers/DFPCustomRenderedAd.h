@@ -12,7 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// Custom rendered ad. Your application renders the ad.
-GAD_SUBCLASSING_RESTRICTED
 @interface DFPCustomRenderedAd : NSObject
 
 /// The ad's HTML.

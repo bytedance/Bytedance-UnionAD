@@ -22,7 +22,7 @@ GAD_DEPRECATED_MSG_ATTRIBUTE("Use GADMediatedUnifiedNativeAd instead.")
 - (nullable NSString *)headline;
 
 /// Array of GADNativeAdImage objects related to the advertised application.
-- (nullable NSArray *)images;
+- (nullable NSArray<GADNativeAdImage *> *)images;
 
 /// App description.
 - (nullable NSString *)body;

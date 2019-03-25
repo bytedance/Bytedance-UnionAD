@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD'
   s.source           = { :git => 'https://github.com/bytedance/Bytedance-UnionAD.git', :tag => s.version.to_s }
   s.platform     = :ios, "8.0"  
-  s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion'
+  s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion','Photos'
   s.libraries = 'c++', 'resolv', 'z'
 
   #s.public_header_files = 'Bytedance-UnionAd/Classes/*.h'

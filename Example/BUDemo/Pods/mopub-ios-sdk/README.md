@@ -25,7 +25,7 @@ If you do not remove or disable IAS's and/or Moat’s technology in accordance w
 
 The MoPub SDK supports multiple methods for installing the library in a project.
 
-The current version of the SDK is 5.4.1
+The current version of the SDK is 5.4.0
 
 ### Installation with CocoaPods
 
@@ -84,10 +84,15 @@ Integration instructions are available on the [wiki](https://github.com/mopub/mo
 
 Please view the [changelog](https://github.com/mopub/mopub-ios-sdk/blob/master/CHANGELOG.md) for details.
 
+- **Features**
+  - SDK distribution as a dynamic framework is now available.
+  - Local extras are now supported for all ad formats.
+
 - **Bug Fixes**
-  - Changed the MoPubSampleApp+Framework target to MoPubSampleApp in the Objective-C Sample App.
-  - Fixed crash when `MPTableViewAdPlacer` makes multiple ad requests within a short amount of time.
-  - Fixed bug with the internal state of rewarded video when the video fails to play.
+  - HTTP error codes now include the localized error description.
+  - Added missing mraid.js file protections when showing MRAID ads.
+  - Fixed native video crash.
+  - Fixed native ad timeout timer invalidation. 
 
 See the [Getting Started Guide](https://github.com/mopub/mopub-ios-sdk/wiki/Getting-Started#app-transport-security-settings) for instructions on setting up ATS in your app.
 

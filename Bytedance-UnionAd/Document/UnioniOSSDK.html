@@ -535,6 +535,41 @@ blockquote {
 <td>2018-11-30</td>
 <td>【1】支持横屏落地页模式</td>
 </tr>
+<tr>
+<td>v1.9.8.2</td>
+<td>2018-12-19</td>
+<td>【1】支持落地页横屏</td>
+</tr>
+<tr>
+<td>v1.9.8.5</td>
+<td>2019-01-11</td>
+<td>【1】修复32bit机型，落地页偶现crash情况</td>
+</tr>
+<tr>
+<td>v1.9.9.0</td>
+<td>2019-01-11</td>
+<td>【1】dislike【2】双端增加打开落地页增加loading状态【3】接口加密升级【4】激励视频配置bar</td>
+</tr>
+<tr>
+<td>v1.9.9.1</td>
+<td>2019-01-12</td>
+<td>【1】修复32bit机型，落地页偶现crash情况</td>
+</tr>
+<tr>
+<td>v1.9.9.2</td>
+<td>2019-03-01</td>
+<td>【1】优化UA【2】激励视频声音场景优化</td>
+</tr>
+<tr>
+<td>v1.9.9.3</td>
+<td>2019-03-22</td>
+<td>【1】增强稳定性和安全性</td>
+</tr>
+<tr>
+<td>v1.9.9.5</td>
+<td>2019-04-09</td>
+<td>【1】修复字段，增强安全性</td>
+</tr>
 </tbody>
 </table>
 <!-- TOC -->
@@ -2219,6 +2254,8 @@ sign = sha256(appSecurityKey:transId)</p>
     BUErrorCodeAdSlotSizeEmpty  = 40005,  // 广告位尺寸 不合法
     BUErrorCodeAdSlotIDError    = 40006,  // 广告位 ID 不合法
     BUErrorCodeAdCountError     = 40007,  // 请求广告数量 错误
+    BUErrorCodeAdPackageIncomplete = 40025, // 引入SDK包不完整，建议校验SDK包完整性或联系技术支持
+    
     BUErrorCodeSysError         = 50001   // 广告服务器错误
     服务器错误码
     ERROR_CODE_SIZE_ERROR     		      = 40008 //没有填写素材尺寸，或者素材尺寸大于 10000

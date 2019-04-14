@@ -31,5 +31,7 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
     BUErrorCodeAdSlotSizeEmpty  = 40005,  // 广告位尺寸 不合法
     BUErrorCodeAdSlotIDError    = 40006,  // 广告位 ID 不合法
     BUErrorCodeAdCountError     = 40007,  // 请求广告数量 错误
+    BUErrorCodeAdPackageIncomplete = 40025, // 引入SDK包不完整，建议校验SDK包完整性或联系技术支持
+    
     BUErrorCodeSysError         = 50001   // 广告服务器错误
 };

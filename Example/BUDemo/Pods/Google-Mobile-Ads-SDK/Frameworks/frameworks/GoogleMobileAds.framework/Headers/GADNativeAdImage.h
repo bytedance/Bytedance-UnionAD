@@ -13,13 +13,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// Native ad image.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADNativeAdImage : NSObject
 
 /// The image. If image autoloading is disabled, this property will be nil.
 @property(nonatomic, readonly, strong, nullable) UIImage *image;
 
 /// The image's URL.
-@property(nonatomic, readonly, copy, nullable) NSURL *imageURL;
+@property(nonatomic, readonly, copy) NSURL *imageURL;
 
 /// The image's scale.
 @property(nonatomic, readonly, assign) CGFloat scale;

@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// you request this ad type, your delegate must conform to the GADNativeContentAdLoaderDelegate
 /// protocol.
 GAD_DEPRECATED_MSG_ATTRIBUTE("Use GADUnifiedNativeAd instead.")
+GAD_SUBCLASSING_RESTRICTED
 @interface GADNativeContentAd : GADNativeAd
 
 #pragma mark - Must be displayed
@@ -38,7 +39,7 @@ GAD_DEPRECATED_MSG_ATTRIBUTE("Use GADUnifiedNativeAd instead.")
 #pragma mark - Recommended to display
 
 /// Large images.
-@property(nonatomic, readonly, copy, nullable) NSArray<GADNativeAdImage *> *images;
+@property(nonatomic, readonly, copy, nullable) NSArray *images;
 /// Small logo image.
 @property(nonatomic, readonly, strong, nullable) GADNativeAdImage *logo;
 /// Text that encourages user to take some action with the ad.

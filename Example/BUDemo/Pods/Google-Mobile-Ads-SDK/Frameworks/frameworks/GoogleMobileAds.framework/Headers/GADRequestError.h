@@ -64,6 +64,7 @@ typedef NS_ENUM(NSInteger, GADErrorCode) {
 };
 
 /// Represents the error generated due to invalid request parameters.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADRequestError : NSError
 @end
 

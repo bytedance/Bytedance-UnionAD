@@ -13,6 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// Ad network extras sent to Google networks.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADExtras : NSObject<GADAdNetworkExtras>
 
 /// Additional parameters to be sent to Google networks.

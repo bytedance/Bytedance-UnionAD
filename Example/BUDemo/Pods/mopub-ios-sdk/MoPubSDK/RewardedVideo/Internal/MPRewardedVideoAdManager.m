@@ -303,11 +303,6 @@
 
 - (void)rewardedVideoDidFailToPlayForAdapter:(MPRewardedVideoAdapter *)adapter error:(NSError *)error
 {
-    // Playback of the rewarded video failed; reset the internal played state
-    // so that a new rewarded video ad can be loaded.
-    self.ready = NO;
-    self.playedAd = YES;
-
     [self.delegate rewardedVideoDidFailToPlayForAdManager:self error:error];
 }
 
@@ -328,7 +323,6 @@
 
 - (void)rewardedVideoDidDisappearForAdapter:(MPRewardedVideoAdapter *)adapter
 {
-    // Successful playback of the rewarded video; reset the internal played state.
     self.ready = NO;
     self.playedAd = YES;
     [self.delegate rewardedVideoDidDisappearForAdManager:self];

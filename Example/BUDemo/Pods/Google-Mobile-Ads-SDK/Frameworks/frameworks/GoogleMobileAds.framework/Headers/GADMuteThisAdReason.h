@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-/// Reason for muting the ad.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADMuteThisAdReason : NSObject
 
 /// Text that describes the reason for muting this ad. For example "Ad Covered Content".

@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///   // Request an ad without any additional targeting information.
 ///   [adView loadRequest:[GADRequest request]];
 ///   </pre>
+GAD_SUBCLASSING_RESTRICTED
 @interface GADBannerView : UIView
 
 #pragma mark Initialization
@@ -51,9 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Example AdMob ad unit ID: @"ca-app-pub-0123456789012345/0123456789"
 @property(nonatomic, copy, nullable) IBInspectable NSString *adUnitID;
 
-/// Required reference to the root view controller for the banner view. This is the view controller
-/// the banner will present from if necessary (for example, presenting a landing page after a user
-/// click). Most commonly, this is the view controller the banner is displayed in.
+/// Required reference to the current root view controller. For example the root view controller in
+/// tab-based application would be the UITabViewController.
 @property(nonatomic, weak, nullable) IBOutlet UIViewController *rootViewController;
 
 /// Required to set this banner view to a proper size. Never create your own GADAdSize directly. Use

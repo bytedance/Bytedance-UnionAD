@@ -11,7 +11,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// A set of methods to inform the delegate of audio video manager events.
 @protocol GADAudioVideoManagerDelegate<NSObject>
 
 @optional

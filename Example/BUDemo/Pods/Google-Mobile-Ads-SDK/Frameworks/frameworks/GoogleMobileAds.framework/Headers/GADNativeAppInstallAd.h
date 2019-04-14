@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// GADAdLoader's initializer method. If you request this ad type, your delegate must conform to the
 /// GADNativeAppInstallAdLoaderDelegate protocol.
 GAD_DEPRECATED_MSG_ATTRIBUTE("Use GADUnifiedNativeAd instead.")
+GAD_SUBCLASSING_RESTRICTED
 @interface GADNativeAppInstallAd : GADNativeAd
 
 #pragma mark - Must be displayed
@@ -44,7 +45,7 @@ GAD_DEPRECATED_MSG_ATTRIBUTE("Use GADUnifiedNativeAd instead.")
 /// String representation of the app's price.
 @property(nonatomic, readonly, copy, nullable) NSString *price;
 /// Array of GADNativeAdImage objects related to the advertised application.
-@property(nonatomic, readonly, strong, nullable) NSArray<GADNativeAdImage *> *images;
+@property(nonatomic, readonly, strong, nullable) NSArray *images;
 /// App store rating (0 to 5).
 @property(nonatomic, readonly, copy, nullable) NSDecimalNumber *starRating;
 /// Video controller for controlling video playback in GADNativeAppInstallAdView's mediaView.

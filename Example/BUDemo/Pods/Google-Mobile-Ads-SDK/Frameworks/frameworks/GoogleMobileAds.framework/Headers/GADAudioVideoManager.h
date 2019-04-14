@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Don't create an instance of this class and use the one available from GADMobileAds
 /// sharedInstace's audioVideoManager.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADAudioVideoManager : NSObject
 
 /// Delegate for receiving video and audio updates.

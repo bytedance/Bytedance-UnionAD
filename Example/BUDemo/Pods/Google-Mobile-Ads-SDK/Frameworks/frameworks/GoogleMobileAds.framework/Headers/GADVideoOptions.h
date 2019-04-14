@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// Video ad options.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADVideoOptions : GADAdLoaderOptions
 
 /// Indicates if videos should start muted. By default this property value is YES.

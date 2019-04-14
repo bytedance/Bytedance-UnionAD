@@ -60,7 +60,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Google-Mobile-Ads-SDK
 
-Copyright 2019 Google
+Copyright 2018 Google
 
 ## KVOController
 

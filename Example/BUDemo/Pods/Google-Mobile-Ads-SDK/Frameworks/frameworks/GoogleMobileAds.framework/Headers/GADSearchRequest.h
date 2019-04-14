@@ -29,6 +29,7 @@ typedef NS_ENUM(NSUInteger, GADSearchCallButtonColor) {
 };
 
 /// Specifies parameters for search ads.
+GAD_SUBCLASSING_RESTRICTED
 @interface GADSearchRequest : GADRequest
 
 /// The search ad query.

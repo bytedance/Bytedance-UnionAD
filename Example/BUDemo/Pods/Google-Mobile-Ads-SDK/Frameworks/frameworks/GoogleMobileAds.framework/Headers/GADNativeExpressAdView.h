@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///   [adView loadRequest:[GADRequest request]];
 ///   </pre>
 GAD_DEPRECATED_ATTRIBUTE
+GAD_SUBCLASSING_RESTRICTED
 @interface GADNativeExpressAdView : UIView
 
 #pragma mark - Initialization

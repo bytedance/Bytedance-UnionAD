@@ -14,7 +14,7 @@
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) UIButton *playBtn;
-@property (nonatomic, assign) bool isPlaying;
+@property (nonatomic, assign) BOOL isPlaying;
 @end
 
 @implementation BUDPlayerController

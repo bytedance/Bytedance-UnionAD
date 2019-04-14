@@ -48,8 +48,9 @@
 
 - (void)buildView {
     // 宽
-    UILabel *lableWidth = [[UILabel alloc] initWithFrame:CGRectMake(20, NavigationBarHeight + 20, 30, 30)];
-    lableWidth.text = @"宽:";
+    UILabel *lableWidth = [[UILabel alloc] initWithFrame:CGRectMake(20, NavigationBarHeight + 20, 40, 30)];
+    lableWidth.text = [NSString localizedStringForKey:Width];
+    lableWidth.textAlignment = NSTextAlignmentLeft;
     lableWidth.font = [UIFont systemFontOfSize:17];
     [self.view addSubview:lableWidth];
     self.textFieldWidth = [[UITextField alloc] init];
@@ -58,8 +59,9 @@
     [self.textFieldWidth.layer setBorderColor:[UIColor blackColor].CGColor];
     [self.view addSubview:self.textFieldWidth];
     // 高
-    UILabel *lableHeight = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(lableWidth.frame) + 10, 30, 30)];
-    lableHeight.text = @"高:";
+    UILabel *lableHeight = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(lableWidth.frame) + 10, 80, 30)];
+    lableHeight.text = [NSString localizedStringForKey:Height];
+    lableHeight.textAlignment = NSTextAlignmentLeft;
     lableHeight.font = [UIFont systemFontOfSize:17];
     [self.view addSubview:lableHeight];
     self.textFieldHeight = [[UITextField alloc] init];
@@ -72,13 +74,13 @@
     self.button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
     self.button.showRefreshIncon = YES;
     [self.button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [self.button setTitle:NSLocalizedString(@"开屏", @"开屏")  forState:UIControlStateNormal];
+    [self.button setTitle:[NSString localizedStringForKey:Splash]  forState:UIControlStateNormal];
     [self.view addSubview:self.button];
     
     self.button1 = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.6, 0, 0)];
     self.button1.showRefreshIncon = YES;
     [self.button1 addTarget:self action:@selector(button1Tapped:) forControlEvents:UIControlEventTouchUpInside];
-    [self.button1 setTitle:NSLocalizedString(@"自定义关闭按钮开屏", @"自定义关闭按钮开屏")  forState:UIControlStateNormal];
+    [self.button1 setTitle:[NSString localizedStringForKey:CustomCloseBtn]  forState:UIControlStateNormal];
     [self.view addSubview:self.button1];
 }
 
@@ -106,7 +108,7 @@
     splashView.rootViewController = self;
 
     UIButton *custormSkipButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [custormSkipButton setTitle:@"跳过" forState:UIControlStateNormal];
+    [custormSkipButton setTitle:[NSString localizedStringForKey:Skip] forState:UIControlStateNormal];
     [custormSkipButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     [custormSkipButton addTarget:self action:@selector(skipButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     CGFloat width = CGRectGetWidth(frame);

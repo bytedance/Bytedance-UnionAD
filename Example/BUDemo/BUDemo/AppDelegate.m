@@ -19,7 +19,7 @@
 #import "Mopub.h"
 #import "BUDMacros.h"
 
-#pragma mark - 展示FPS的开关
+#pragma mark - show FPS
 #ifdef DEBUG
 #define BUFPS_OPEN 0
 #else
@@ -48,16 +48,16 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
     }
     self.window.rootViewController = rootViewController;
     
-    [BUAdSDKManager setAppID:[BUDAdManager appKey]];
-    [BUAdSDKManager setIsPaidApp:NO];
 #if DEBUG
-    //是否打开log信息，默认没有
+    //Whether to open log. default is none.
     [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
 #endif
+    [BUAdSDKManager setAppID:[BUDAdManager appKey]];
+    [BUAdSDKManager setIsPaidApp:NO];
     
     CGRect frame = [UIScreen mainScreen].bounds;
     BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:@"800546808" frame:frame];
-    // tolerateTimeout = CGFLOAT_MAX , 转换时间时间毫秒会越界 等效于 0
+    // tolerateTimeout = CGFLOAT_MAX , The conversion time to milliseconds will be equal to 0
     splashView.tolerateTimeout = 10;
     splashView.delegate = self;
 
@@ -84,7 +84,7 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
     
     NSMutableArray *items = @[].mutableCopy;
     for (NSInteger index = 0; index < viewControllers.count; index++) {
-        UITabBarItem *barItem = [[UITabBarItem alloc] initWithTitle:@"主页" image:nil tag:0];
+        UITabBarItem *barItem = [[UITabBarItem alloc] initWithTitle:@"Main" image:nil tag:0];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewControllers[index]];
         nav.tabBarItem = barItem;
         [items addObject:nav];
@@ -103,10 +103,10 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
     
     [[BUDConfigHelper sharedInstance] readingPreference];
     
-    ///如果使用adMob聚合配置appId
+    ///configure appId using adMob
     [GADMobileAds configureWithApplicationID:@"ca-app-pub-9206388280072239~5099042698"];
     
-    // 展示FPS监测栏
+    // show FPS
     if (BUFPS_OPEN == 1) {
         [RRFPSBar sharedInstance].showsAverage = YES;
         [[RRFPSBar sharedInstance] setHidden:NO];

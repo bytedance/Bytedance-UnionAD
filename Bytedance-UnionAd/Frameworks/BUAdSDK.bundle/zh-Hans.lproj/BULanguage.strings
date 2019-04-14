@@ -1,0 +1,29 @@
+/* 
+  BULanguage.strings
+  BUAdSDK
+
+  Created by 李盛 on 2019/1/7.
+  Copyright © 2019 bytedance. All rights reserved.
+*/
+
+// String
+
+"Click" = "点击";
+"AD" = "广告";
+"PlayConsumed" = "播放将消耗%.2fMB流量";
+"Evaluation" = "评价";
+"Score" = "%@个评分";
+"Select" = "选择";
+"Back" = "返回";
+"Replay" = "点击重播";
+"Continue" = "继续播放";
+"Skip" = "跳过";
+"ViewNow" = "立即查看";
+"Download" = "立即下载";
+"LoadFailure" = "加载失败,点击重试";
+"GetRewardAfterWatching" = "观看完整视频才能获得奖励";
+"GiveUpReward" = "放弃奖励";
+"ContinueWatching" = "继续观看";
+"CanbeTurnedOffAfter" = "%ds后可关闭";
+
+// Icon

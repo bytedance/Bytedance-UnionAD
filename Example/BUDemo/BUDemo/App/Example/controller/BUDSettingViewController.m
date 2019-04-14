@@ -49,9 +49,9 @@
 
 #pragma mark - Target
 - (void)authoid {
-    self.locationText.text = @"  开始定位";
+    self.locationText.text = [NSString localizedStringForKey:StartLocation];
     if (![self serviceEnable]) {
-        self.locationText.text = @"  没有权限";
+        self.locationText.text = [NSString localizedStringForKey:PermissionDenied];
         return;
     }
     CLLocationManager *locationManager = [[CLLocationManager alloc] init];
@@ -84,17 +84,20 @@
 #pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     CLLocationCoordinate2D coordinate = locations.firstObject.coordinate;
-    self.locationText.text = [NSString stringWithFormat:@"  经度:%f,纬度:%f",coordinate.longitude,coordinate.latitude];
+    self.locationText.text = [NSString localizedStringWithFormat:
+                              [NSString localizedStringForKey:Coordinate],
+                              coordinate.longitude,
+                              coordinate.latitude];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    self.locationText.text = @"定位失败";
+    self.locationText.text = [NSString localizedStringForKey:LocationFailure];
 }
 
 - (UIButton *)locationBtn {
     if (!_locationBtn) {
         _locationBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, NavigationBarHeight + Top_Margin, 100, 30)];
-        [_locationBtn setTitle:@"开启定位" forState:UIControlStateNormal];
+        [_locationBtn setTitle:[NSString localizedStringForKey:StartLocation] forState:UIControlStateNormal];
         [_locationBtn addTarget:self action:@selector(authoid) forControlEvents:UIControlEventTouchUpInside];
         [self designButton:_locationBtn];
     }
@@ -113,7 +116,7 @@
 - (UIButton *)idfaBtn {
     if (!_idfaBtn) {
         _idfaBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.locationBtn.frame) + 10, 100, 30)];
-        [_idfaBtn setTitle:@"获取IDFA" forState:UIControlStateNormal];
+        [_idfaBtn setTitle:[NSString localizedStringForKey:GetIDFA] forState:UIControlStateNormal];
         [_idfaBtn addTarget:self action:@selector(setIDFA) forControlEvents:UIControlEventTouchUpInside];
         [self designButton:_idfaBtn];
     }

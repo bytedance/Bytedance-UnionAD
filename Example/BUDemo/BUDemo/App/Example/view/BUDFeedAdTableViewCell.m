@@ -49,7 +49,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.adDescriptionLabel.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:self.adDescriptionLabel];
     
-    // 添加自定义点击按钮
+    // Add custom button
     [self.contentView addSubview:self.customBtn];
     
     self.nativeAdRelatedView = [[BUNativeAdRelatedView alloc] init];
@@ -81,7 +81,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 - (UIButton *)customBtn {
     if (!_customBtn) {
         _customBtn = [[UIButton alloc] init];
-        [_customBtn setTitle:@"自定义点击" forState:UIControlStateNormal];
+        [_customBtn setTitle:[NSString localizedStringForKey:CustomClick] forState:UIControlStateNormal];
         [_customBtn setTitleColor:BUD_RGB(0x47, 0x8f, 0xd2) forState:UIControlStateNormal];
         _customBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     }
@@ -288,7 +288,6 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
 @end
 
-// 视频广告 cell
 @interface BUDFeedVideoAdTableViewCell ()
 
 @end
@@ -297,7 +296,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
 - (void)buildupView {
     [super buildupView];
-    // 视频广告没有使用 iv1，暂时隐藏...
+    // Video ad did not use iv1, temporarily hidden...
     self.iv1.hidden = YES;
     
     self.bgView = [UIView new];
@@ -339,12 +338,11 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
     y += 10;
     
-    // 创意按钮
+    // creativeButton
     [self.creativeButton setTitle:self.nativeAd.data.buttonText forState:UIControlStateNormal];
     [self.creativeButton sizeToFit];
     CGSize buttonSize = self.creativeButton.frame.size;
     self.creativeButton.frame = CGRectMake(contentWidth - buttonSize.width + 10, y, buttonSize.width, buttonSize.height);
-    // 创意按钮结束
     
     // source
     CGFloat maxInfoWidth = width - 2 * margin - buttonSize.width - 10 - 15;
@@ -376,7 +374,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 {
     if (!_creativeButton) {
         _creativeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_creativeButton setTitle:@"点击下载" forState:UIControlStateNormal];
+        [_creativeButton setTitle:[NSString localizedStringForKey:ClickDownload] forState:UIControlStateNormal];
         [_creativeButton setContentEdgeInsets:UIEdgeInsetsMake(4.0, 8.0, 4.0, 8.0)];
         [_creativeButton setTitleColor:[UIColor colorWithRed:0.165 green:0.565 blue:0.843 alpha:1] forState:UIControlStateNormal];
         _creativeButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];

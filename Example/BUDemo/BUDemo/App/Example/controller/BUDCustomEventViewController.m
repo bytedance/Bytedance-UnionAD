@@ -124,9 +124,8 @@
     return YES;
 }
 
-// 支持哪些屏幕方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskAll; // 避免有些只有横屏情况
+    return UIInterfaceOrientationMaskAll; 
 }
 @end

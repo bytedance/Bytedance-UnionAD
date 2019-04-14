@@ -46,7 +46,7 @@ static CGSize const nextImgSize = {20, 20};
 - (void)refleshUIWithModel:(BUDislikeWords *)dislikeWord {
     self.nextImg.frame = CGRectMake(self.bounds.size.width-nextImgSize.width-13, (self.bounds.size.height-nextImgSize.height)/2, nextImgSize.width, nextImgSize.height);
     self.titleLable.text = dislikeWord.name;
-    //是否可以进入二级页
+    //whether to show the secondary pages
     self.nextImg.hidden = dislikeWord.options.count?NO:YES;
 }
 @end

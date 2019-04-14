@@ -2,7 +2,6 @@
 //  BUBannerAdView.h
 //  BUAdSDK
 //
-//  Created by 曹清然 on 2017/5/25.
 //  Copyright © 2017年 bytedance. All rights reserved.
 //
 
@@ -20,12 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id<BUBannerAdViewDelegate> delegate;
 
 /**
- 轮播间隔，单位秒，设置时间在 30~120s 范围内，初始化时传入。若不符合，则不轮播。
+ The carousel interval, in seconds, is set in the range of 30~120s, and is passed during initialization. If it does not meet the requirements, it will not be in carousel ad.
  */
 @property (nonatomic, assign, readonly) NSInteger interval;
 
 /**
- dislikeButton 默认已添加到 BannerView 的右上角， 响应 dislike原因
+ The dislikeButton has been added to the upper right corner of the BannerView by default, it will respond to dislike reasons.
  */
 @property (nonatomic, strong, readonly, nonnull) UIButton *dislikeButton;
 
@@ -61,42 +60,31 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /**
- bannerAdView 广告位加载成功
-
- @param bannerAdView 视图
- @param nativeAd 内部使用的NativeAd
+ This method is called when bannerAdView ad slot loaded successfully.
+ @param bannerAdView : view for bannerAdView
+ @param nativeAd : nativeAd for bannerAdView
  */
 - (void)bannerAdViewDidLoad:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd;
 
 /**
- bannerAdView 广告位展示新的广告
-
- @param bannerAdView 当前展示的Banner视图
- @param nativeAd 内部使用的NativeAd
- */
-- (void)bannerAdViewDidBecomVisible:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd;
-
-/**
- bannerAdView 广告位点击
-
- @param bannerAdView 当前展示的Banner视图
- @param nativeAd 内部使用的NativeAd
- */
-- (void)bannerAdViewDidClick:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd;
-
-/**
- bannerAdView 广告位发生错误
-
- @param bannerAdView 当前展示的Banner视图
- @param error 错误原因
+ This method is called when bannerAdView ad slot failed to load.
+ @param error : the reason of error
  */
 - (void)bannerAdView:(BUBannerAdView *)bannerAdView didLoadFailWithError:(NSError *_Nullable)error;
 
 /**
- bannerAdView 广告位点击不喜欢
+ This method is called when bannerAdView ad slot showed new ad.
+ */
+- (void)bannerAdViewDidBecomVisible:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd;
 
- @param bannerAdView 当前展示的Banner视图
- @param filterwords 选择不喜欢理由
+/**
+ This method is called when bannerAdView is clicked.
+ */
+- (void)bannerAdViewDidClick:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd;
+
+/**
+ This method is called when the user clicked dislike button and chose dislike reasons.
+ @param filterwords : the array of reasons for dislike.
  */
 - (void)bannerAdView:(BUBannerAdView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *_Nullable)filterwords;
 

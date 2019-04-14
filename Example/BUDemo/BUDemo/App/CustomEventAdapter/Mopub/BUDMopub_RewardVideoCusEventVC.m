@@ -42,7 +42,7 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
     if (!_button) {
         CGSize size = [UIScreen mainScreen].bounds.size;
         _button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
-        [_button setTitle:@"展示激励视频" forState:UIControlStateNormal];
+        [_button setTitle:[NSString localizedStringForKey:ShowRewardVideo] forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _button;
@@ -51,7 +51,7 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 # pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        BUD_Log(@"取消");
+        BUD_Log(@"cancel");
     } else if (buttonIndex == 1){
         [self.view addSubview:self.button];
     }
@@ -71,7 +71,7 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 
 - (void)rewardedVideoAdDidLoadForAdUnitID:(NSString *)adUnitID {
     if ([adUnitID isEqualToString:MopubADUnitID]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"视频加载成功" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"video load success" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
         [alertView show];
     }
     BUD_Log(@"%s", __func__);

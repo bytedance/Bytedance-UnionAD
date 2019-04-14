@@ -34,7 +34,7 @@
     CGSize size = [UIScreen mainScreen].bounds.size;
     self.button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
     [self.button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [self.button setTitle:@"展示全屏视频" forState:UIControlStateNormal];
+    [self.button setTitle:[NSString localizedStringForKey:ShowFullScreenVideo] forState:UIControlStateNormal];
     [self.view addSubview:self.button];
     
     [self loadInterstitial];

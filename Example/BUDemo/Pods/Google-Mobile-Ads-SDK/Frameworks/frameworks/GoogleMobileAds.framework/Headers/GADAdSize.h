@@ -52,11 +52,11 @@ GAD_EXTERN GADAdSize const kGADAdSizeLeaderboard;
 GAD_EXTERN GADAdSize const kGADAdSizeSkyscraper;
 
 /// An ad size that spans the full width of the application in portrait orientation. The height is
-/// typically 50 pixels on an iPhone/iPod UI, and 90 pixels tall on an iPad UI.
+/// typically 50 points on an iPhone/iPod UI, and 90 points tall on an iPad UI.
 GAD_EXTERN GADAdSize const kGADAdSizeSmartBannerPortrait;
 
 /// An ad size that spans the full width of the application in landscape orientation. The height is
-/// typically 32 pixels on an iPhone/iPod UI, and 90 pixels tall on an iPad UI.
+/// typically 32 points on an iPhone/iPod UI, and 90 points tall on an iPad UI.
 GAD_EXTERN GADAdSize const kGADAdSizeSmartBannerLandscape;
 
 /// An ad size that spans the full width of its container, with a height dynamically determined by

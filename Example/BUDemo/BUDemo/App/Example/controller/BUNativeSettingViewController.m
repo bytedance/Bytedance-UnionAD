@@ -2,7 +2,7 @@
 //  BUNativeSettingViewController.m
 //  BUDemo
 //
-//  Created by 李盛 on 2018/8/21.
+//  Created by lee on 2018/8/21.
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 #import "BUDNativeDislikeViewController.h"
 #import "BUDSettingTableView.h"
 #import "BUDMacros.h"
+#import "BUDImagePortraitViewController.h"
 
 @interface BUNativeSettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -49,10 +50,10 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *slotId =  [defaults objectForKey:@"feed_slot_id"];
         viewModel.slotID = slotId;
-        viewModel.slotID = @"900546910";    //不配预览随机出
-//        viewModel.slotID = @"900546608";  // 落地页
-//        viewModel.slotID = @"900546311";  // 下载应用
-//        viewModel.slotID = @"900546238";  //落地页
+        viewModel.slotID = @"900546910";    //random
+//        viewModel.slotID = @"900546608";  // landing pages
+//        viewModel.slotID = @"900546311";  // downloading
+//        viewModel.slotID = @"900546238";  //landing pages
         if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
             viewModel.slotID = strongSelf.textView.text;
         }
@@ -60,12 +61,12 @@
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *nativeCustomItem = [BUDActionModel plainTitleActionModel:@"native 自定义样式" type:BUDCellType_native action:^{
+    BUDActionModel *nativeCustomItem = [BUDActionModel plainTitleActionModel:@"Native custom" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDNativeViewController *vc = [BUDNativeViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546910";    // 视频
-        //        viewModel.slotID = @"900546238";    // 非视频
+        viewModel.slotID = @"900546910";    // video
+//        viewModel.slotID = @"900546238";    // landing pages
         if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
             viewModel.slotID = strongSelf.textView.text;
         }
@@ -121,7 +122,19 @@
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.items = @[feedCellItem,drawfeedCellItem,nativeBanner,nativeInterstitial,nativeCustomItem,dislikeCell].mutableCopy;
+    BUDActionModel *imagePortraitCell = [BUDActionModel plainTitleActionModel:@"native ImagePortrait" type:BUDCellType_native action:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        BUDImagePortraitViewController *vc = [BUDImagePortraitViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = @"900546264";
+        if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
+            viewModel.slotID = strongSelf.textView.text;
+        }
+        vc.viewModel = viewModel;
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    self.items = @[feedCellItem,drawfeedCellItem,nativeBanner,nativeInterstitial,nativeCustomItem,dislikeCell,imagePortraitCell].mutableCopy;
 
 }
 
@@ -146,10 +159,9 @@
     return YES;
 }
 
-// 支持哪些屏幕方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskAll; // 避免有些只有横屏情况
+    return UIInterfaceOrientationMaskAll;
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -212,7 +224,7 @@
     if (!_textView) {
         _textView = [[UITextField alloc] init];
         _textView.textColor = [UIColor redColor];
-        _textView.placeholder = @"请输入对应广告位id 如: 900546910";
+        _textView.placeholder = @"Please enter slot id,for example:900546910";
         _textView.accessibilityIdentifier = @"rit_edit";
     }
     return _textView;

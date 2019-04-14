@@ -27,7 +27,7 @@
     CGSize size = [UIScreen mainScreen].bounds.size;
     self.button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
     self.button.showRefreshIncon = YES;
-    [self.button setTitle:@"展示插屏" forState:UIControlStateNormal];
+    [self.button setTitle:[NSString localizedStringForKey:ShowInterstitial] forState:UIControlStateNormal];
     [self.button addTarget:self action:@selector(buttonTapped:)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.button];
     

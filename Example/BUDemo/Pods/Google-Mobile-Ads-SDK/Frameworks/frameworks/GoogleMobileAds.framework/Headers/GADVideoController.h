@@ -39,11 +39,12 @@ GAD_SUBCLASSING_RESTRICTED
 /// Returns the video's aspect ratio (width/height) or 0 if no video is present.
 - (double)aspectRatio;
 
-/// Indicates if video custom controls (i.e. play/pause/mute/unmute) are enabled.
+/// Indicates whether video custom controls (i.e. play/pause/mute/unmute) are enabled.
 - (BOOL)customControlsEnabled;
 
-/// Indicates if video click to expand behavior is enabled.
+/// Indicates whether video click to expand behavior is enabled.
 - (BOOL)clickToExpandEnabled;
+
 @end
 
 NS_ASSUME_NONNULL_END

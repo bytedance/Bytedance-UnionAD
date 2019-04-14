@@ -9,7 +9,7 @@
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
 #define buttonHeight 40
-#define leftEdge 50
+#define leftEdge 30
 
 @implementation BUDNormalButton
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -23,7 +23,7 @@
     return self;
 }
 
--(void)setShowRefreshIncon:(bool)showRefreshIncon {
+-(void)setShowRefreshIncon:(BOOL)showRefreshIncon {
     _showRefreshIncon = showRefreshIncon;
     if (showRefreshIncon) {
         [self setImage:[UIImage imageNamed:@"shuaxin.png"] forState:UIControlStateNormal];

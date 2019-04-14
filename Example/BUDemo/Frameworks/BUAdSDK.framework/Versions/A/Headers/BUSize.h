@@ -2,15 +2,14 @@
 //  BUSize.h
 //  BUAdSDK
 //
-//  Created by chenren on 10/05/2017.
 //  Copyright © 2017 bytedance. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 /**
- 按照这个尺寸获取广告能够获取到最佳效果的视图，单位为像素，
- 具体到视图展示时， 建议采用相同的比例缩放
+ Get the view with the best results by using the predefined size in pixels.
+ When it comes to view display, it is recommended to use the same scaling.
 */
 typedef NS_ENUM(NSInteger, BUProposalSize) {
     BUProposalSize_Banner600_90,
@@ -32,10 +31,10 @@ typedef NS_ENUM(NSInteger, BUProposalSize) {
 
 @interface BUSize : NSObject
 
-// 宽度 像素pixel
+// width unit pixel.
 @property (nonatomic, assign) NSInteger width;
 
-// 高度 像素pixel
+// height unit pixel.
 @property (nonatomic, assign) NSInteger height;
 
 - (NSDictionary *)dictionaryValue;

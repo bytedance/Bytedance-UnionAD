@@ -2,12 +2,11 @@
 //  BUNativeAdsManager.h
 //  BUAdSDK
 //
-//  Created by chenren on 24/05/2017.
 //  Copyright © 2017 bytedance. All rights reserved.
 //
 
 /**
- BUNativeAdsManager适用于同时请求多条广告，
+ BUNativeAdsManager : for multiple requests at the same time.
  */
 
 #import <Foundation/Foundation.h>
@@ -19,20 +18,20 @@
 @protocol BUNativeAdsManagerDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
-
+/// Bunativeadsmanager class can request multiple ad data per time.
 @interface BUNativeAdsManager : NSObject
 
 @property (nonatomic, strong, nullable) BUAdSlot *adslot;
 @property (nonatomic, strong, nullable) NSArray<BUNativeAd *> *data;
-/// 广告位加载展示响应的代理回调，可以设置为遵循<BUNativeAdDelegate>的任何类型，不限于Viewcontroller
+/// The delegate for receiving state change messages such as requests succeeding/failing.
+/// The delegate can be set to any object which conforming to <BUNativeAdsManagerDelegate>.
 @property (nonatomic, weak, nullable) id<BUNativeAdsManagerDelegate> delegate;
 
 - (instancetype)initWithSlot:(BUAdSlot * _Nullable) slot;
 
 /**
- 请求广告素材数量，建议不超过3个，
- 一次最多不超过10个
- @param count 最多广告返回的广告素材的数量
+ It is recommended to request no more than 3 ads.
+ The maximum is 10.
  */
 - (void)loadAdDataWithCount:(NSInteger)count;
 

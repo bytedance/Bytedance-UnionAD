@@ -2,7 +2,7 @@
 //  BUDDrawAdTableViewCell.m
 //  BUDemo
 //
-//  Created by 崔亚楠 on 2018/9/20.
+//  Created by iCuiCui on 2018/9/20.
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 
@@ -154,8 +154,8 @@
 }
 
 -(void)refreshUIAtIndex:(NSUInteger)index{
-    self.titleLabel.text = [NSString stringWithFormat:@"第 【%lu】 页，[Draw]模拟视频标题",(unsigned long)index];
-    self.descriptionLabel.text = @"沉浸式视频，超强体验，你值得拥有。";
+    self.titleLabel.text = [NSString localizedStringWithFormat:[NSString localizedStringForKey:DrawTitle],(unsigned long)index];
+    self.descriptionLabel.text = [NSString localizedStringForKey:DrawDescription];
     self.backgroundColor = [UIColor blackColor];
 }
 
@@ -179,7 +179,7 @@
     if (!self.nativeAdRelatedView.videoAdView.superview) {
         self.nativeAdRelatedView.videoAdView.frame = CGRectMake(0, 0, GlobleWidth, GlobleHeight);
         [self.nativeAdRelatedView.videoAdView playerPlayIncon:[UIImage imageNamed:@"adPlay.png"] playInconSize:CGSizeMake(60, 60)];
-        //更改视频是否可以点击暂停
+        //Whether to support click pause
         self.nativeAdRelatedView.videoAdView.drawVideoClickEnable = YES;
         [self.contentView insertSubview:self.nativeAdRelatedView.videoAdView atIndex:0];
     }
@@ -200,7 +200,7 @@
     if (!_creativeButton) {
         _creativeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _creativeButton.accessibilityIdentifier = @"button";
-        [_creativeButton setTitle:@"查看详情 >" forState:UIControlStateNormal];
+        [_creativeButton setTitle:[NSString localizedStringForKey:Detail] forState:UIControlStateNormal];
         _creativeButton.backgroundColor = BUD_RGB(0x80,0xbb,0x41);
         _creativeButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     }

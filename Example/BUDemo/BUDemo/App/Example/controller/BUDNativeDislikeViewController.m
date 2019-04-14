@@ -22,9 +22,9 @@ static CGSize const dislikeSize = {20, 20};
 
 @property (nonatomic, strong) UIImageView *imgView;
 @property (nonatomic, strong, nullable) UIButton *closeButton;
-@property (nonatomic, strong) UIView *dislikeBgView;//黑色背景图
+@property (nonatomic, strong) UIView *dislikeBgView;//black background
 @property (nonatomic, strong) UIImageView *cornerView;
-@property (nonatomic, strong) UICollectionView *collectionView;//自定义不感兴趣样式
+@property (nonatomic, strong) UICollectionView *collectionView;//custom dislike view
 
 @end
 
@@ -131,8 +131,8 @@ static CGSize const dislikeSize = {20, 20};
 }
 
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error {
-    NSString *info = @"banner素材加载失败";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"native" message:info delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    NSString *info = @"banner material load failed";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"native" message:info delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
     
     [alert show];
 }
@@ -167,14 +167,14 @@ static CGSize const dislikeSize = {20, 20};
     return self.collectionDataSource.count;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {//！！！重要：此处上报用户点击的不感兴趣数据，请保证此方法可执行
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {//！！！important：The uninterested data clicked by the user is reported here. Please ensure that this method can be executed.
     BUDislikeWords *word = [self.collectionDataSource objectAtIndex:indexPath.row];
-    if (word.options.count) {//点击进入二级页
+    if (word.options.count) {//Click to enter the second page
         [self reloadCollectionViewAtIndexPath:indexPath];
     }else {
         [self.dislikeModel didSelectedFilterWordWithReason:word];
         [self tapBgView];
-        //移除视图
+        //remove the views
         self.closeButton.hidden = YES;
         self.imgView.hidden = YES;
     }

@@ -34,7 +34,7 @@
     CGSize size = [UIScreen mainScreen].bounds.size;
     _refreshbutton = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height *0.2, 0, 0)];
     _refreshbutton.showRefreshIncon = YES;
-    [_refreshbutton setTitle:@"展示Banner" forState:UIControlStateNormal];
+    [_refreshbutton setTitle:[NSString localizedStringForKey:ShowBanner] forState:UIControlStateNormal];
     [_refreshbutton addTarget:self action:@selector(refreshBanner) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_refreshbutton];
 }

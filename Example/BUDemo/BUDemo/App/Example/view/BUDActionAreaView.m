@@ -23,8 +23,8 @@
     if (![model isKindOfClass:[BUMaterialMeta class]]) {
         return;
     }
-    self.subTitleLabel.text = @"测试文案描述";
-    [self.actionButton setTitle:@"立即下载" forState:UIControlStateNormal];
+    self.subTitleLabel.text = [NSString localizedStringForKey:TestDescription];
+    [self.actionButton setTitle:[NSString localizedStringForKey:Download] forState:UIControlStateNormal];
     [self.actionButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
 }
 

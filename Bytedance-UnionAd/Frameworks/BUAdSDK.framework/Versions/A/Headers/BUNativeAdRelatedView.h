@@ -2,7 +2,6 @@
 //  BUNativeAdRelatedView.h
 //  BUAdSDK
 //
-//  Created by 李盛 on 2018/8/29.
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 
@@ -13,32 +12,31 @@
 @interface BUNativeAdRelatedView : NSObject
 
 /**
- dislike 按钮懒加载，需要主动添加到 View，处理反馈
- 提高广告信息推荐精度
+ Need to actively add to the view in order to deal with the feedback and improve the accuracy of ad.
  */
 @property (nonatomic, strong, readonly, nullable) UIButton *dislikeButton;
 
 /**
- adLabel 推广标签懒加载， 需要主动添加到 View
+ Promotion label.Need to actively add to the view.
  */
 @property (nonatomic, strong, readonly, nullable) UILabel *adLabel;
 
 /**
- logoImageView 网盟广告标识，需要主动添加到 View
+ Ad logo.Need to actively add to the view.
  */
 @property (nonatomic, strong, readonly, nullable) UIImageView *logoImageView;
 /**
- logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
+ Ad logo + Promotion label.Need to actively add to the view.
  */
 @property (nonatomic, strong, readonly, nullable) UIImageView *logoADImageView;
 
 /**
- BUPlayer View 需要主动添加到 View
+ Video ad view. Need to actively add to the view.
  */
 @property (nonatomic, strong, readonly, nullable) BUVideoAdView *videoAdView;
 
 /**
- 刷新数据,每次获取数据刷新对应的视图
+ Refresh the data every time you get new datas in order to show ad perfectly.
  */
 - (void)refreshData:(BUNativeAd *)nativeAd;
 

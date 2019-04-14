@@ -2,7 +2,6 @@
 //  BUAdSDK.h
 //  BUAdSDK
 //
-//  Created by carl on 2017/7/22.
 //  Copyright © 2017年 bytedance. All rights reserved.
 //
 
@@ -19,27 +18,31 @@
 #import <BUAdSDK/BUPlayerPublicDefine.h>
 #import <BUAdSDK/BUVideoAdView.h>
 
-///自定义dislike样式
+///customize dislike style
 #import <BUAdSDK/BUDislike.h>
 #import <BUAdSDK/BUDislikeWords.h>
 
-/// 原生广告
+/// native ads
 #import <BUAdSDK/BUNativeAd.h>
 #import <BUAdSDK/BUNativeAdRelatedView.h>
 #import <BUAdSDK/BUNativeAdsManager.h>
 
-/// 激励视频
+/// native express ads
+#import <BUAdSDK/BUNativeExpressAdManager.h>
+#import <BUAdSDK/BUNativeExpressAdView.h>
+
+/// banner ads
+#import <BUAdSDK/BUBannerAdView.h>
+
+/// splash ads
+#import <BUAdSDK/BUSplashAdView.h>
+
+/// interstitial ads
+#import <BUAdSDK/BUInterstitialAd.h>
+
+/// rewarded video ads
 #import <BUAdSDK/BURewardedVideoModel.h>
 #import <BUAdSDK/BURewardedVideoAd.h>
 
-/// Banner
-#import <BUAdSDK/BUBannerAdView.h>
-
-/// 开屏
-#import <BUAdSDK/BUSplashAdView.h>
-
-/// 插屏
-#import <BUAdSDK/BUInterstitialAd.h>
-
-/// 全屏视频
+/// full-screen video ads
 #import <BUAdSDK/BUFullscreenVideoAd.h>

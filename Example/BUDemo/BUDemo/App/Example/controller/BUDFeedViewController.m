@@ -28,7 +28,6 @@
     _adManager.delegate = nil;
 }
 
-// 页面消失时候
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
@@ -120,13 +119,13 @@
         UITableViewCell<BUDFeedCellProtocol> *cell = nil;
         if (nativeAd.data.imageMode == BUFeedADModeSmallImage) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdLeftTableViewCell" forIndexPath:indexPath];
-        } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage) {
+        } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage || nativeAd.data.imageMode == BUFeedADModeImagePortrait) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdLargeTableViewCell" forIndexPath:indexPath];
         } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdGroupTableViewCell" forIndexPath:indexPath];
         } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedVideoAdTableViewCell" forIndexPath:indexPath];
-            // 设置代理，用于监听播放状态
+            // Set the delegate to listen for status of video
             isVideoCell = YES;
         }
         
@@ -139,19 +138,19 @@
                 [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
             } else {
                 if (type == BUInteractionTypeDownload) {
-                    [cell.customBtn setTitle:@"点击下载" forState:UIControlStateNormal];
+                    [cell.customBtn setTitle:[NSString localizedStringForKey:ClickDownload] forState:UIControlStateNormal];
                     [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
                 } else if (type == BUInteractionTypePhone) {
-                    [cell.customBtn setTitle:@"拨打电话" forState:UIControlStateNormal];
+                    [cell.customBtn setTitle:[NSString localizedStringForKey:Call] forState:UIControlStateNormal];
                     [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
                 } else if (type == BUInteractionTypeURL) {
-                    [cell.customBtn setTitle:@"外部拉起" forState:UIControlStateNormal];
+                    [cell.customBtn setTitle:[NSString localizedStringForKey:ExternalLink] forState:UIControlStateNormal];
                     [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
                 } else if (type == BUInteractionTypePage) {
-                    [cell.customBtn setTitle:@"内部拉起" forState:UIControlStateNormal];
+                    [cell.customBtn setTitle:[NSString localizedStringForKey:InternalLink] forState:UIControlStateNormal];
                     [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
                 } else {
-                    [cell.customBtn setTitle:@"无点击" forState:UIControlStateNormal];
+                    [cell.customBtn setTitle:[NSString localizedStringForKey:NoClick] forState:UIControlStateNormal];
                 }
             }
             return cell;
@@ -170,7 +169,7 @@
         
     }
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = @"未知的展示类型";
+    cell.textLabel.text = [NSString localizedStringForKey:Unknown];
     return cell;
 }
 - (NSString *)classNameWithCellType:(NSString *)type {
@@ -204,7 +203,7 @@
         CGFloat width = CGRectGetWidth(self.tableView.bounds);
         if (nativeAd.data.imageMode == BUFeedADModeSmallImage) {
             return [BUDFeedAdLeftTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage) {
+        } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage || nativeAd.data.imageMode == BUFeedADModeImagePortrait) {
             return [BUDFeedAdLargeTableViewCell cellHeightWithModel:nativeAd width:width];
         } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
             return [BUDFeedAdGroupTableViewCell cellHeightWithModel:nativeAd width:width];
@@ -226,7 +225,7 @@
         CGFloat width = CGRectGetWidth(self.tableView.bounds);
         if (nativeAd.data.imageMode == BUFeedADModeSmallImage) {
             return [BUDFeedAdLeftTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage) {
+        } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage || nativeAd.data.imageMode == BUFeedADModeImagePortrait) {
             return [BUDFeedAdLargeTableViewCell cellHeightWithModel:nativeAd width:width];
         } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
             return [BUDFeedAdGroupTableViewCell cellHeightWithModel:nativeAd width:width];

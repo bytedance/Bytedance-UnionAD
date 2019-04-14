@@ -40,14 +40,14 @@
     CGSize size = [UIScreen mainScreen].bounds.size;
     _refreshbutton = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height *0.2, 0, 0)];
     _refreshbutton.showRefreshIncon = YES;
-    [_refreshbutton setTitle:@"展示Banner" forState:UIControlStateNormal];
+    [_refreshbutton setTitle:[NSString localizedStringForKey:ShowBanner] forState:UIControlStateNormal];
     [_refreshbutton addTarget:self action:@selector(refreshBanner) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_refreshbutton];
     
     //refresh Button
     _refreshCarouselbutton = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height *0.6, 0, 0)];
     _refreshCarouselbutton.showRefreshIncon = YES;
-    [_refreshCarouselbutton setTitle:@"展示轮播Banner" forState:UIControlStateNormal];
+    [_refreshCarouselbutton setTitle:[NSString localizedStringForKey:ShowScrollBanner] forState:UIControlStateNormal];
     [_refreshCarouselbutton addTarget:self action:@selector(refreshCarouselBanner) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_refreshCarouselbutton];
     

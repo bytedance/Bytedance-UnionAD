@@ -533,7 +533,7 @@ blockquote {
 <tr>
 <td>v1.9.8.1</td>
 <td>2018-11-30</td>
-<td>【1】支持横屏落地页模式</td>
+<td>【1】支持appstore横屏</td>
 </tr>
 <tr>
 <td>v1.9.8.2</td>
@@ -561,14 +561,19 @@ blockquote {
 <td>【1】优化UA【2】激励视频声音场景优化</td>
 </tr>
 <tr>
-<td>v1.9.9.3</td>
-<td>2019-03-22</td>
-<td>【1】增强稳定性和安全性</td>
-</tr>
-<tr>
 <td>v1.9.9.5</td>
 <td>2019-04-09</td>
-<td>【1】修复字段，增强安全性</td>
+<td>【1】安全校验</td>
+</tr>
+<tr>
+<td>v2.0.0.0</td>
+<td>2019-03-20</td>
+<td>【1】海外版激励视频+全屏视频【2】原生模板广告【3】激励视频支持关闭可配、延迟关闭【4】支持原生广告竖版图片样式</td>
+</tr>
+<tr>
+<td>v2.0.1.1</td>
+<td>2019-04-12</td>
+<td>【1】动态布局</td>
 </tr>
 </tbody>
 </table>
@@ -661,54 +666,61 @@ blockquote {
 </li>
 <li><a href="#25-%E5%8E%9F%E7%94%9Fbanner%E5%B9%BF%E5%91%8A">2.5 原生banner广告</a></li>
 <li><a href="#26-%E5%8E%9F%E7%94%9F%E6%8F%92%E5%B1%8F%E5%B9%BF%E5%91%8A">2.6 原生插屏广告</a></li>
-<li><a href="#27-%E8%A7%86%E9%A2%91%E5%B9%BF%E5%91%8Abuvideoadview">2.7 视频广告(BUVideoAdView)</a>
+<li><a href="#27-%E5%8E%9F%E7%94%9F%E6%A8%A1%E6%9D%BF%E5%B9%BF%E5%91%8A">2.7 原生模板广告</a>
 <ul>
-<li><a href="#271-buvideoadview%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.7.1 BUVideoAdView接口说明</a></li>
-<li><a href="#272-buvideoadview%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.7.2 BUVideoAdView回调说明</a></li>
-<li><a href="#273-%E5%AE%9E%E4%BE%8B">2.7.3 实例</a></li>
+<li><a href="#271-bunativeexpressadmanager%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.7.1 BUNativeExpressAdManager接口说明</a></li>
+<li><a href="#272-bunativeexpressadviewdelegate%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.7.2 BUNativeExpressAdViewDelegate回调说明</a></li>
+<li><a href="#272-bunativeexpressadmanager%E5%AE%9E%E4%BE%8B%E8%AF%B4%E6%98%8E">2.7.2 BUNativeExpressAdManager实例说明</a></li>
 </ul>
 </li>
-<li><a href="#28-banner%E5%B9%BF%E5%91%8Abubanneradviewdelegate">2.8 Banner广告(BUBannerAdViewDelegate)</a>
+<li><a href="#28-%E8%A7%86%E9%A2%91%E5%B9%BF%E5%91%8Abuvideoadview">2.8 视频广告(BUVideoAdView)</a>
 <ul>
-<li><a href="#281--bubanneradviewdelegate%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.8.1  BUBannerAdViewDelegate接口说明</a></li>
-<li><a href="#282-%E6%8E%A5%E5%8F%A3%E5%AE%9E%E4%BE%8B">2.8.2 接口实例</a></li>
+<li><a href="#281-buvideoadview%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.8.1 BUVideoAdView接口说明</a></li>
+<li><a href="#282-buvideoadview%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.8.2 BUVideoAdView回调说明</a></li>
+<li><a href="#283-%E5%AE%9E%E4%BE%8B">2.8.3 实例</a></li>
 </ul>
 </li>
-<li><a href="#29-%E5%BC%80%E5%B1%8F%E5%B9%BF%E5%91%8Abusplashadview">2.9 开屏广告(BUSplashAdView)</a>
+<li><a href="#29-banner%E5%B9%BF%E5%91%8Abubanneradviewdelegate">2.9 Banner广告(BUBannerAdViewDelegate)</a>
 <ul>
-<li><a href="#291-busplashadview%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.9.1 BUSplashAdView接口说明</a></li>
-<li><a href="#292-busplashadview%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.9.2 BUSplashAdView回调说明</a></li>
-<li><a href="#293-%E5%AE%9E%E4%BE%8B">2.9.3 实例</a></li>
+<li><a href="#291--bubanneradviewdelegate%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.9.1  BUBannerAdViewDelegate接口说明</a></li>
+<li><a href="#292-%E6%8E%A5%E5%8F%A3%E5%AE%9E%E4%BE%8B">2.9.2 接口实例</a></li>
 </ul>
 </li>
-<li><a href="#210-%E6%8F%92%E5%B1%8F%E5%B9%BF%E5%91%8Abuinterstitialad">2.10 插屏广告(BUInterstitialAd)</a>
+<li><a href="#210-%E5%BC%80%E5%B1%8F%E5%B9%BF%E5%91%8Abusplashadview">2.10 开屏广告(BUSplashAdView)</a>
 <ul>
-<li><a href="#2101-buinterstitialad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.10.1 BUInterstitialAd接口说明</a></li>
-<li><a href="#2102-buinterstitialad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.10.2 BUInterstitialAd回调说明</a></li>
+<li><a href="#2101-busplashadview%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.10.1 BUSplashAdView接口说明</a></li>
+<li><a href="#2102-busplashadview%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.10.2 BUSplashAdView回调说明</a></li>
 <li><a href="#2103-%E5%AE%9E%E4%BE%8B">2.10.3 实例</a></li>
 </ul>
 </li>
-<li><a href="#211-%E6%BF%80%E5%8A%B1%E8%A7%86%E9%A2%91burewardedvideoad">2.11 激励视频(BURewardedVideoAd)</a>
+<li><a href="#211-%E6%8F%92%E5%B1%8F%E5%B9%BF%E5%91%8Abuinterstitialad">2.11 插屏广告(BUInterstitialAd)</a>
 <ul>
-<li><a href="#2111-burewardedvideoad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.11.1 BURewardedVideoAd接口说明</a></li>
-<li><a href="#2112-burewardedvideoad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.11.2 BURewardedVideoAd回调说明</a></li>
+<li><a href="#2111-buinterstitialad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.11.1 BUInterstitialAd接口说明</a></li>
+<li><a href="#2112-buinterstitialad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.11.2 BUInterstitialAd回调说明</a></li>
 <li><a href="#2113-%E5%AE%9E%E4%BE%8B">2.11.3 实例</a></li>
-<li><a href="#2114-burewardedvideomodel">2.11.4 BURewardedVideoModel</a></li>
-<li><a href="#2115-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9B%9E%E8%B0%83">2.11.5 服务器到服务器回调</a>
+</ul>
+</li>
+<li><a href="#212-%E6%BF%80%E5%8A%B1%E8%A7%86%E9%A2%91burewardedvideoad">2.12 激励视频(BURewardedVideoAd)</a>
+<ul>
+<li><a href="#2121-burewardedvideoad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.12.1 BURewardedVideoAd接口说明</a></li>
+<li><a href="#2122-burewardedvideoad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.12.2 BURewardedVideoAd回调说明</a></li>
+<li><a href="#2123-%E5%AE%9E%E4%BE%8B">2.12.3 实例</a></li>
+<li><a href="#2124-burewardedvideomodel">2.12.4 BURewardedVideoModel</a></li>
+<li><a href="#2125-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9B%9E%E8%B0%83">2.12.5 服务器到服务器回调</a>
 <ul>
 <li><a href="#%E5%9B%9E%E8%B0%83%E6%96%B9%E5%BC%8F%E8%AF%B4%E6%98%8E">回调方式说明</a></li>
 <li><a href="#%E7%AD%BE%E5%90%8D%E7%94%9F%E6%88%90%E6%96%B9%E5%BC%8F">签名生成方式</a></li>
 <li><a href="#%E8%BF%94%E5%9B%9E%E7%BA%A6%E5%AE%9A">返回约定</a></li>
 </ul>
 </li>
-<li><a href="#2116-admob%E9%80%9A%E8%BF%87customevent-adapter%E6%96%B9%E5%BC%8F%E8%81%9A%E5%90%88%E6%BF%80%E5%8A%B1%E8%A7%86%E9%A2%91">2.11.6 AdMob通过CustomEvent Adapter方式聚合激励视频</a></li>
+<li><a href="#2126-admob%E9%80%9A%E8%BF%87customevent-adapter%E6%96%B9%E5%BC%8F%E8%81%9A%E5%90%88%E6%BF%80%E5%8A%B1%E8%A7%86%E9%A2%91">2.12.6 AdMob通过CustomEvent Adapter方式聚合激励视频</a></li>
 </ul>
 </li>
-<li><a href="#212-%E5%85%A8%E5%B1%8F%E8%A7%86%E9%A2%91bufullscreenvideoad">2.12 全屏视频(BUFullscreenVideoAd)</a>
+<li><a href="#213-%E5%85%A8%E5%B1%8F%E8%A7%86%E9%A2%91bufullscreenvideoad">2.13 全屏视频(BUFullscreenVideoAd)</a>
 <ul>
-<li><a href="#2121-bufullscreenvideoad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.12.1 BUFullscreenVideoAd接口说明</a></li>
-<li><a href="#2122-bufullscreenvideoad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.12.2 BUFullscreenVideoAd回调说明</a></li>
-<li><a href="#2123-%E5%AE%9E%E4%BE%8B">2.12.3 实例</a></li>
+<li><a href="#2131-bufullscreenvideoad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.13.1 BUFullscreenVideoAd接口说明</a></li>
+<li><a href="#2132-bufullscreenvideoad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.13.2 BUFullscreenVideoAd回调说明</a></li>
+<li><a href="#2133-%E5%AE%9E%E4%BE%8B">2.13.3 实例</a></li>
 </ul>
 </li>
 </ul>
@@ -777,6 +789,7 @@ blockquote {
 <li>CoreLocation.framework</li>
 <li>CoreTelephony.framework</li>
 <li>SystemConfiguration.framework</li>
+<li>Photos.framework</li>
 <li>AdSupport.framework</li>
 <li>CoreMotion.framework</li>
 <li>libresolv.9.tbd</li>
@@ -791,16 +804,36 @@ blockquote {
 <p>BUAdSDKManager 类是整个 SDK 设置的入口和接口，可以设置 SDK 的一些全局信息，提供类方法获取设置结果。</p>
 <h4 id="211-%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.1.1 接口说明</h4>
 <p>目前接口提供以下几个类方法</p>
-<pre class="hljs"><code><div>+ (void)setAppID:(NSString *)appID; // 设置应用的 appID，这里的 appID 是在头条联盟穿山甲平台的申请注册的 appID
+<pre class="hljs"><code><div>/**
+Register the App key that’s already been applied before requesting an ad from Tiktok Ad Network.
+@param appID : the unique identifier of the App
+*/
++ (void)setAppID:(NSString *)appID;
 
-/*
- *	以下为可选配置项，用于构建用户画像与广告定向
- */
-+ (void)setUserGender:(BUUserGender)userGender;   // 设置用户的性别
-+ (void)setUserAge:(NSUInteger)userAge;           // 设置用户的年龄
-+ (void)setUserKeywords:(NSString *)keywords;     // 设置用户的关键字，比如兴趣和爱好等等
-+ (void)setUserExtData:(NSString *)data;          // 设置用户的额外信息
-+ (void)setIsPaidApp:(BOOL)isPaidApp;             // 设置本app是否是付费app，默认为非付费app
+/**
+Configure development mode.
+@param level : default BUAdSDKLogLevelNone
+*/
++ (void)setLoglevel:(BUAdSDKLogLevel)level;
+
+/// Set the gender of the user.
++ (void)setUserGender:(BUUserGender)userGender;
+
+/// Set the age of the user.
++ (void)setUserAge:(NSUInteger)userAge;
+
+/// Set the user's keywords, such as interests and hobbies, etc.
++ (void)setUserKeywords:(NSString *)keywords;
+
+/// set additional user information.
++ (void)setUserExtData:(NSString *)data;
+
+/// Set whether the app is a paid app, the default is a non-paid app
++ (void)setIsPaidApp:(BOOL)isPaidApp;
+
++ (NSString *)appID;
++ (BOOL)isPaidApp;
+
 </div></code></pre>
 <h4 id="212-%E4%BD%BF%E7%94%A8">2.1.2 使用</h4>
 <p>SDK 需要在 AppDelegate 的方法 <code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions</code> 里进行初始化</p>
@@ -821,55 +854,69 @@ blockquote {
 <p>BUNativeAd 类为加载广告的接口类，可以通过数据接口每次请求一个广告数据，并能协助 UIView 注册处理各种广告点击事件，设置delegate后可获取数据。rootViewController是必传参数，是弹出落地页广告ViewController的。</p>
 <p>备注:一次请求多条广告数据请使用BUNativeAdsManager，参考2.3</p>
 <h5 id="2211-bunativead%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.2.1.1 BUNativeAd接口说明</h5>
-<pre class="hljs"><code><div>/**
- 抽象的广告位，包含广告数据加载、响应回调
- 目前Native支持原生广告，原生广告包括信息流（多条广告，图文+视频形式）、一般原生广告（单条广告，图文+视频形式），原生banner、原生插屏
- 同时支持插屏、Banner、开屏、激励视频、全屏视频
- */
+<pre class="hljs"><code><div>
+/**
+Abstract ad slot containing ad data loading, response callbacks.
+BUNativeAd currently supports native ads.
+Native ads include in-feed ad (multiple ads, image + video), general native ad (single ad, image + video), native banner ad, and native interstitial ad.
+Support interstitial ad, banner ad, splash ad, rewarded video ad, full-screen video ad.
+*/
 @interface BUNativeAd : NSObject
 
 /**
- 广告位的描述说明
- */
+Ad slot description.
+*/
 @property (nonatomic, strong, readwrite, nullable) BUAdSlot *adslot;
 
 /**
- 广告位的素材资源
- */
+Ad slot material.
+*/
 @property (nonatomic, strong, readonly, nullable) BUMaterialMeta *data;
 
 /**
- 广告位加载展示响应的代理回调，可以设置为遵循&lt;BUNativeAdDelegate&gt;的任何类型，不限于Viewcontroller
- */
+The delegate for receiving state change messages.
+The delegate is not limited to viewcontroller.
+The delegate can be set to any object which conforming to &lt;BUNativeAdDelegate&gt;.
+*/
 @property (nonatomic, weak, readwrite, nullable) id&lt;BUNativeAdDelegate&gt; delegate;
 
 /**
- 广告位展示落地页通过rootviewController进行跳转，必传参数，跳转方式分为pushViewController和presentViewController两种方式
- */
+required.
+Root view controller for handling ad actions.
+Action method includes 'pushViewController' and 'presentViewController'.
+*/
 @property (nonatomic, weak, readwrite) UIViewController *rootViewController;
 
 /**
- 创建一个Native广告的推荐构造函数
- @param slot 广告位描述信息
- @return Native广告位
- */
+Initializes native ad with ad slot.
+@param slot : ad slot description.
+including slotID,adType,adPosition,etc.
+@return BUNativeAd
+*/
 - (instancetype)initWithSlot:(BUAdSlot *)slot;
 
 /**
- 定义原生广告视图中，注册可点击视图
- @param containerView 注册原生广告的容器视图，必传参数，交互类型在平台配置，包括查看视频详情、打电话、落地页、下载、外部浏览器打开等
- @param clickableViews 注册创意按钮，可选参数，交互类型在平台配置，包括电话、落地页、下载、外部浏览器打开、短信、email、视频详情页等
- */
+Register clickable views in native ads view.
+Interaction types can be configured on Tiktok Ad Network.
+Interaction types include view video ad details page, make a call, send email, download the app, open the webpage using a browser,open the webpage within the app, etc.
+@param containerView : required.
+container view of the native ad.
+@param clickableViews : optional.
+Array of views that are clickable.
+*/
 - (void)registerContainer:(__kindof UIView *)containerView
-       withClickableViews:(NSArray&lt;__kindof UIView *&gt; *_Nullable)clickableViews;
+withClickableViews:(NSArray&lt;__kindof UIView *&gt; *_Nullable)clickableViews;
 
-/// 广告类解除和view的绑定
+/**
+Unregister ad view from the native ad.
+*/
 - (void)unregisterView;
 
 /**
- 主动 请求广告数据
- */
+Actively request nativeAd datas.
+*/
 - (void)loadAdData;
+
 @end
 </div></code></pre>
 <h5 id="2212-%E6%8E%A5%E5%8F%A3%E5%AE%9E%E4%BE%8B">2.2.1.2 接口实例</h5>
@@ -902,41 +949,33 @@ blockquote {
 @optional
 
 /**
- nativeAd 网络加载成功
- @param nativeAd 加载成功
- */
+This method is called when native ad material loaded successfully.
+*/
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd;
 
 /**
- nativeAd 出现错误
- @param nativeAd 错误的广告
- @param error 错误原因
- */
+This method is called when native ad materia failed to load.
+@param error : the reason of error
+*/
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error;
 
 /**
- nativeAd 即将进入可视区域
- @param nativeAd 广告位即将出现在可视区域
- */
+This method is called when native ad slot has been shown.
+*/
 - (void)nativeAdDidBecomeVisible:(BUNativeAd *)nativeAd;
 
 /**
- nativeAd 被点击
-
- @param nativeAd 被点击的 广告位
- @param view 被点击的视图
- */
+This method is called when native ad is clicked.
+*/
 - (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *_Nullable)view;
 
 /**
- 用户点击 dislike功能
- @param nativeAd 被点击的 广告位
- @param filterWords 不喜欢的原因， 可能为空
- */
+This method is called when the user clicked dislike reasons.
+Only used for dislikeButton in BUNativeAdRelatedView.h
+@param filterWords : reasons for dislike
+*/
 - (void)nativeAd:(BUNativeAd *)nativeAd dislikeWithReason:(NSArray&lt;BUDislikeWords *&gt; *)filterWords;
-
 @end
-
 </div></code></pre>
 <h5 id="2214-%E5%9B%9E%E8%B0%83%E5%AE%9E%E4%BE%8B">2.2.1.4 回调实例</h5>
 <p>BUNativeAd 设置 delegate 后，我们可以在 delegate 里添加如下回调方法，负责处理广告数据返回以及各种自定义的点击事件。</p>
@@ -949,7 +988,6 @@ blockquote {
     const CGFloat imageHeight = contentWidth * (image.height / image.width);
     CGRect rect = CGRectMake(10, CGRectGetMaxY(_phoneButton.frame) + 5, contentWidth, imageHeight);
     
-    // imageMode来决定是否展示视频
     if (adMeta.imageMode == BUFeedVideoAdModeImage) {
         self.imageView.hidden = YES;
         self.relatedView.videoAdView.hidden = NO;
@@ -975,11 +1013,6 @@ blockquote {
 }
 
 - (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *)view {
-    NSString *str = NSStringFromClass([view class]);
-    NSString *info = [NSString stringWithFormat:@&quot;点击了 %@&quot;, str];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;广告&quot; message:info delegate:nil cancelButtonTitle:@&quot;取消&quot; otherButtonTitles:@&quot;确定&quot;, nil];
-
-    [alert show];
 }
 
 - (void)nativeAdDidBecomeVisible:(BUNativeAd *)nativeAd {
@@ -989,36 +1022,41 @@ blockquote {
 <h4 id="222-%E5%B9%BF%E5%91%8A%E4%BD%8D%E7%B1%BBbuadslot">2.2.2 广告位类(BUAdSlot)</h4>
 <p>BUAdSlot 对象为加载广告时需要设置的广告位描述信息，在BUNativeAd、BUNativeAdsManager、BUBannerAdView、BUInterstitialAd、BUSplashAdView、BUFullscreenVideoAd、BURewardedVideoAd中均需要初始化阶段传入。<strong>在加载广告前，必须须设置好</strong>。</p>
 <h5 id="2221-buadslot%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.2.2.1 BUAdSlot接口说明</h5>
-<pre class="hljs"><code><div>// 代码位ID required
+<pre class="hljs"><code><div>@interface BUAdSlot : NSObject
+
+/// required. The unique identifier of a native ad.
 @property (nonatomic, copy) NSString *ID;
 
-// 广告类型 required
+/// required. Ad type.
 @property (nonatomic, assign) BUAdSlotAdType AdType;
 
-// 广告展现位置 required
+/// required. Ad display location.
 @property (nonatomic, assign) BUAdSlotPosition position;
 
-// 接受一组图片尺寸，数组请传入BUSize对象
+/// Accept a set of image sizes, please pass in the BUSize object.
 @property (nonatomic, strong) NSMutableArray&lt;BUSize *&gt; *imgSizeArray;
 
-// 图片尺寸 required
+/// required. Image size.
 @property (nonatomic, strong) BUSize *imgSize;
 
-// 图标尺寸
+/// Icon size.
 @property (nonatomic, strong) BUSize *iconSize;
 
-// 标题的最大长度
+/// Maximum length of the title.
 @property (nonatomic, assign) NSInteger titleLengthLimit;
 
-// 描述的最大长度
+/// Maximum length of description.
 @property (nonatomic, assign) NSInteger descLengthLimit;
 
-// 是否支持deeplink
+/// Whether to support deeplink.
 @property (nonatomic, assign) BOOL isSupportDeepLink;
 
-// 1.9.5 原生banner、插屏广告
+/// Native banner ads and native interstitial ads are set to 1, other ad types are 0, the default is 0.
 @property (nonatomic, assign) BOOL isOriginAd;
 
+- (NSDictionary *)dictionaryValue;
+
+@end
 
 </div></code></pre>
 <h5 id="2222-%E6%8E%A5%E5%8F%A3%E5%AE%9E%E4%BE%8B">2.2.2.2 接口实例</h5>
@@ -1050,37 +1088,43 @@ blockquote {
 <p>广告数据的载体类 BUMaterialMeta ，访问可以获取所有的广告属性。</p>
 <h5 id="2231-bumaterialmeta%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.2.3.1 BUMaterialMeta接口说明</h5>
 <pre class="hljs"><code><div>
-@interface BUMaterialMeta : NSObject
-/// 广告支持的交互类型
+@interface BUMaterialMeta : NSObject &lt;NSCoding&gt;
+
+/// interaction types supported by ads.
 @property (nonatomic, assign) BUInteractionType interactionType;
 
-/// 素材图片
+/// material pictures.
 @property (nonatomic, strong) NSArray&lt;BUImage *&gt; *imageAry;
 
-/// 图标图片
+/// ad logo icon.
 @property (nonatomic, strong) BUImage *icon;
 
-/// 广告标题
+/// ad headline.
 @property (nonatomic, copy) NSString *AdTitle;
 
-/// 广告描述
+/// ad description.
 @property (nonatomic, copy) NSString *AdDescription;
 
-/// 广告来源
+/// ad source.
 @property (nonatomic, copy) NSString *source;
 
-/// 创意按钮显示文字
+/// text displayed on the creative button.
 @property (nonatomic, copy) NSString *buttonText;
 
-/// 客户不喜欢广告，关闭时， 提示不喜欢原因
-@property (nonatomic, copy) NSArray&lt;BUDislikeWords *&gt; *filterWords;
-
-/// feed广告的展示类型，banner广告忽略
+/// display format of the in-feed ad, other ads ignores it.
 @property (nonatomic, assign) BUFeedADMode imageMode;
 
-… …
+/// Star rating, range from 1 to 5.
+@property (nonatomic, assign) NSInteger score;
 
-@end
+/// Number of comments.
+@property (nonatomic, assign) NSInteger commentNum;
+
+/// ad installation package size, unit byte.
+@property (nonatomic, assign) NSInteger appSize;
+
+/// media configuration parameters.
+@property (nonatomic, strong) NSDictionary *mediaExt;
 
 </div></code></pre>
 <p>另外我们还需要 BUNativeAd 实例，通过 loadData 方法获取信息流广告的数据。</p>
@@ -1091,60 +1135,68 @@ blockquote {
 @interface BUNativeAdRelatedView : NSObject
 
 /**
- dislike 按钮懒加载，需要主动添加到 View，处理 materialMeta.filterWords反馈
- 提高广告信息推荐精度
- */
+Need to actively add to the view in order to deal with the feedback and improve the accuracy of ad.
+*/
 @property (nonatomic, strong, readonly, nullable) UIButton *dislikeButton;
 
 /**
- adLabel 推广标签懒加载， 需要主动添加到 View
- */
+Promotion label.Need to actively add to the view.
+*/
 @property (nonatomic, strong, readonly, nullable) UILabel *adLabel;
 
 /**
- logoImageView 网盟广告标识，需要主动添加到 View
- */
+Ad logo.Need to actively add to the view.
+*/
 @property (nonatomic, strong, readonly, nullable) UIImageView *logoImageView;
 /**
-logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
+Ad logo + Promotion label.Need to actively add to the view.
 */
 @property (nonatomic, strong, readonly, nullable) UIImageView *logoADImageView;
+
 /**
- BUPlayer View 需要主动添加到 View
- */
+Video ad view. Need to actively add to the view.
+*/
 @property (nonatomic, strong, readonly, nullable) BUVideoAdView *videoAdView;
 
 /**
- 刷新数据,每次获取数据刷新对应的视图
- */
+Refresh the data every time you get new datas in order to show ad perfectly.
+*/
 - (void)refreshData:(BUNativeAd *)nativeAd;
 
 @end
+
 </div></code></pre>
 <p><strong>添加logo、广告标签、视频视图、不喜欢按钮请参考BUNativeAdRelatedView类,每次获取物料信息后需要刷新调用-(void)refreshData:(BUNativeAd *)nativeAd 方法刷新对应的视图绑定的数据.</strong></p>
 <h4 id="225-%E4%B8%8D%E6%84%9F%E5%85%B4%E8%B6%A3%E7%B1%BBbudislike">2.2.5 不感兴趣类(BUDislike)</h4>
 <p>通过不感兴趣类可以为原生广告自定义不感兴趣的样式渲染。</p>
 <h5 id="2251-budislike%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.2.5.1 BUDislike接口说明</h5>
 <pre class="hljs"><code><div>/**
-用户点击选择后请将原因上报给SDK，否则模型不准会导致广告投放效果差
+!!! important :
+Please report to the sdk the user’s selection, inaccurate model will result in poor ad performance.
 */
 @interface BUDislike : NSObject
 /**
-获取到的不感兴趣原因 filterWords.options存在说明可以点击进入二级页面
+The array of BUDislikeWords which have reasons for dislike.
+The application can show the secondary page for dislike if '[filterWords.options count] &gt; 0'.
 */
 @property (nonatomic, copy, readonly) NSArray&lt;BUDislikeWords *&gt; *filterWords;
+
 /**
-用nativeAd初始化后即可获取filterWords
+Initialize with nativeAd to get filterWords.
+return BUDislike
 */
 - (instancetype)initWithNativeAd:(BUNativeAd *)nativeAd;
 
 /**
-用户点击 dislike选项后上报的接口（仅限使用filterWords自己拼接不感兴趣原因时用）
-@param filterWord 不喜欢的原因
-@note 存在二级页面时一级不感兴趣的原因不需要上报
-@note 获取到的上报原因BUDislikeWords请不要更改、直接上报即可，否则会被过滤
+Call this method after the user chose dislike reasons.
+(Only for object which uses 'BUDislike.filterWords')
+@param filterWord : reasons for dislike
+@note : don't need to call this method if '[filterWords.options count] &gt; 0'.
+@note :please dont't change 'BUDislike.filterWords'.
+'filterWord' must be one of 'BUDislike.filterWords', otherwise it will be filtered.
 */
 - (void)didSelectedFilterWordWithReason:(BUDislikeWords *)filterWord;
+
 </div></code></pre>
 <p><strong>使用不感兴趣类必须确保用户点击后调用接口将原因上报</strong></p>
 <h4 id="226-%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8A%E4%BD%BF%E7%94%A8">2.2.6 原生广告使用</h4>
@@ -1153,57 +1205,53 @@ logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
 <h5 id="2262-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%9C%80%E8%A6%81%E7%BB%91%E5%AE%9A%E5%B9%BF%E5%91%8A%E6%95%B0%E6%8D%AE%E7%9A%84view">2.2.6.2 初始化需要绑定广告数据的View</h5>
 <p><strong>在使用原生广告数据时，我们先创建我们需要展示广告数据的 View。</strong></p>
 <p>示例代码：</p>
-<pre class="hljs"><code><div> // Custom 视图测试
-    CGFloat swidth = [[UIScreen mainScreen] bounds].size.width;
-    _customview = [[UIView alloc] initWithFrame:CGRectMake(20, 50, swidth - 40, 200)];
-    _customview.backgroundColor = [UIColor grayColor];
-    [self.view addSubview:_customview];
+<pre class="hljs"><code><div>CGFloat swidth = [[UIScreen mainScreen] bounds].size.width;
+_customview = [[UIView alloc] initWithFrame:CGRectMake(20, 0, swidth - 40, 240)];
+_customview.backgroundColor = [UIColor grayColor];
+[self.contentView addSubview:_customview];
 
-    _infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, swidth - 60, 30)];
-    _infoLabel.backgroundColor = [UIColor magentaColor];
-    _infoLabel.text = @&quot;test ads&quot;;
-    [_customview addSubview:_infoLabel];
+_titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, swidth - 60, 30)];
+_titleLabel.text = [NSString localizedStringForKey:Testads];
+[_customview addSubview:_titleLabel];
 
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 60, 160, 120)];
-    _imageView.userInteractionEnabled = YES;
-    _imageView.backgroundColor = [UIColor redColor];
-    [_customview addSubview:_imageView];
+_adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 75, 160, 120)];
+_adImageView.userInteractionEnabled = YES;
+_adImageView.backgroundColor = [UIColor redColor];
+[_customview addSubview:_adImageView];
 
-    _phoneButton = [[UIButton alloc] initWithFrame:CGRectMake(swidth - 50, 60, -80, 30)];
-    [_phoneButton setTitle:@&quot;打电话&quot; forState:UIControlStateNormal];
-    _phoneButton.userInteractionEnabled = YES;
-    _phoneButton.backgroundColor = [UIColor orangeColor];
-    [_customview addSubview:_phoneButton];
+_phoneButton = [[UIButton alloc] initWithFrame:CGRectMake(swidth - 50, 75, -80, 30)];
+[_phoneButton setTitle:[NSString localizedStringForKey:Call] forState:UIControlStateNormal];
+_phoneButton.userInteractionEnabled = YES;
+_phoneButton.backgroundColor = [UIColor orangeColor];
+[_customview addSubview:_phoneButton];
 
-    _downloadButton = [[UIButton alloc] initWithFrame:CGRectMake(swidth - 50, 105, -80, 30)];
-    [_downloadButton setTitle:@&quot;下载跳转&quot; forState:UIControlStateNormal];
-    _downloadButton.userInteractionEnabled = YES;
-    _downloadButton.backgroundColor = [UIColor orangeColor];
-    [_customview addSubview:_downloadButton];
+_downloadButton = [[UIButton alloc] initWithFrame:CGRectMake(swidth - 50, 120, -80, 30)];
+[_downloadButton setTitle:[NSString localizedStringForKey:DownloadLinks] forState:UIControlStateNormal];
+_downloadButton.userInteractionEnabled = YES;
+_downloadButton.backgroundColor = [UIColor orangeColor];
+[_customview addSubview:_downloadButton];
 
-    _urlButton = [[UIButton alloc] initWithFrame:CGRectMake(swidth - 50, 150, -80, 30)];
-    [_urlButton setTitle:@&quot;URL跳转&quot; forState:UIControlStateNormal];
-    _urlButton.userInteractionEnabled = YES;
-    _urlButton.backgroundColor = [UIColor orangeColor];
-    [_customview addSubview:_urlButton];
-
-    [self loadNativeAd];
+_urlButton = [[UIButton alloc] initWithFrame:CGRectMake(swidth - 50, 165, -80, 30)];
+[_urlButton setTitle:[NSString localizedStringForKey:URLLinks] forState:UIControlStateNormal];
+_urlButton.userInteractionEnabled = YES;
+_urlButton.backgroundColor = [UIColor orangeColor];
+[_customview addSubview:_urlButton];
 </div></code></pre>
 <h5 id="2263-%E6%B7%BB%E5%8A%A0%E7%9B%B8%E5%85%B3%E8%A7%86%E5%9B%BE">2.2.6.3 添加相关视图</h5>
 <p>视情况为广告视图添加logo，广告标签，不喜欢按钮等view。
 示例代码：</p>
-<pre class="hljs"><code><div>    // 添加视频视图
+<pre class="hljs"><code><div>    // add video view
     [_customview addSubview:self.relatedView.videoAdView];
-    // 添加logo视图
+    // add logo view
     self.relatedView.logoImageView.frame = CGRectZero;
     [_customview addSubview:self.relatedView.logoImageView];
-    // 添加dislike按钮
+    // add dislike view
     self.relatedView.dislikeButton.frame = CGRectMake(CGRectGetMaxX(_infoLabel.frame) - 20, CGRectGetMaxY(_infoLabel.frame)+5, 24, 20);
     [_customview addSubview:self.relatedView.dislikeButton];
-    // 添加广告标签
+    // add ad lable
     self.relatedView.adLabel.frame = CGRectZero;
     [_customview addSubview:self.relatedView.adLabel];
-    //添加AD广告标签
+    // add ad lable+logo
     UIImageView *logoADImageView = [[UIImageView alloc] initWithImage:self.relatedView.logoADImageView.image];
     CGFloat logoIconX = CGRectGetWidth(adImageView.bounds) - logoSize.width - margin;
     CGFloat logoIconY = imageViewHeight - logoSize.height - margin;
@@ -1225,7 +1273,6 @@ logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
     self.relatedView.logoImageView.frame = CGRectMake(CGRectGetMaxX(rect) - 15 , CGRectGetMaxY(rect) - 15, 15, 15);
     self.relatedView.adLabel.frame = CGRectMake(CGRectGetMinX(rect), CGRectGetMaxY(rect) - 14, 26, 14);
     
-    // imageMode来决定是否展示视频
     if (adMeta.imageMode == BUFeedVideoAdModeImage) {
         self.imageView.hidden = YES;
         self.relatedView.videoAdView.hidden = NO;
@@ -1252,11 +1299,7 @@ logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
 }
 
 - (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *)view {
-    NSString *str = NSStringFromClass([view class]);
-    NSString *info = [NSString stringWithFormat:@&quot;点击了 %@&quot;, str];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;广告&quot; message:info delegate:nil cancelButtonTitle:@&quot;取消&quot; otherButtonTitles:@&quot;确定&quot;, nil];
-
-    [alert show];
+    
 }
 
 - (void)nativeAdDidBecomeVisible:(BUNativeAd *)nativeAd {
@@ -1277,16 +1320,16 @@ logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
 
 @property (nonatomic, strong, nullable) BUAdSlot *adslot;
 @property (nonatomic, strong, nullable) NSArray&lt;BUNativeAd *&gt; *data;
-/// 广告位加载展示响应的代理回调，可以设置为遵循&lt;BUNativeAdDelegate&gt;的任何类型，不限于Viewcontroller
+/// The delegate for receiving state change messages such as requests succeeding/failing.
+/// The delegate can be set to any object which conforming to &lt;BUNativeAdsManagerDelegate&gt;.
 @property (nonatomic, weak, nullable) id&lt;BUNativeAdsManagerDelegate&gt; delegate;
 
 - (instancetype)initWithSlot:(BUAdSlot * _Nullable) slot;
 
 /**
- 请求广告素材数量，建议不超过3个，
- 一次最多不超过10个
- @param count 最多广告返回的广告素材的数量
- */
+It is recommended to request no more than 3 ads.
+The maximum is 10.
+*/
 - (void)loadAdDataWithCount:(NSInteger)count;
 
 @end
@@ -1296,37 +1339,30 @@ logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
 <pre class="hljs"><code><div>- (void)loadNativeAds {
     BUNativeAdsManager *nad = [BUNativeAdsManager new];
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
-    slot1.ID = @&quot;900480107&quot;;
+    slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeFeed;
     slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
     slot1.isSupportDeepLink = YES;
     nad.adslot = slot1;
-
     nad.delegate = self;
     self.adManager = nad;
 
-    [nad loadAdData];
+    [nad loadAdDataWithCount:3];
 }
 
 - (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray&lt;BUNativeAd *&gt; *_Nullable)nativeAdDataArray {
-    NSString *info = [NSString stringWithFormat:@&quot;获取了%lu条广告&quot;, nativeAdDataArray.count];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;广告&quot; message:info delegate:nil cancelButtonTitle:@&quot;取消&quot; otherButtonTitles:@&quot;确定&quot;, nil];
-    
-    [alert show];
-    
-    NSMutableArray *dataSources = [self.dataSource mutableCopy];
+    BUD_Log(@&quot;feed datas load success&quot;);
     for (BUNativeAd *model in nativeAdDataArray) {
-        NSUInteger index = rand() % dataSources.count;
-        [dataSources insertObject:model atIndex:index];
+        NSUInteger index = rand() % (self.dataSource.count-3)+2;
+        [self.dataSource insertObject:model atIndex:index];
     }
-    self.dataSource = [dataSources copy];
-    
+
     [self.tableView reloadData];
 }
 
 - (void)nativeAdsManager:(BUNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error {
-    NSLog(@&quot;%s %@&quot;, __PRETTY_FUNCTION__, error);
+    BUD_Log(@&quot;DrawVideo datas load fail&quot;);
 }
 </div></code></pre>
 <p>BUNativeAdsManager请求结果可获取到一组BUNativeAd，每一个BUNativeAd实则对应一条广告位。BUNativeAd需要按照自身用法，注册视图、设置delegate和rootviewController，请参考原生广告。</p>
@@ -1348,10 +1384,10 @@ logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
             cell = [tableView dequeueReusableCellWithIdentifier:@&quot;BUDFeedAdGroupTableViewCell&quot; forIndexPath:indexPath];
         } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage) {
             cell = [tableView dequeueReusableCellWithIdentifier:@&quot;BUDFeedVideoAdTableViewCell&quot; forIndexPath:indexPath];
-            // 设置代理，用于监听播放状态
+            // Set the delegate to listen for status of video
             isVideoCell = YES;
         }
-        
+    
         BUInteractionType type = nativeAd.data.interactionType;
         if (cell) {
             [cell refreshUIWithModel:nativeAd];
@@ -1361,28 +1397,53 @@ logoADImageView 网盟广告+广告字样标识，需要主动添加到 View
                 [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
             } else {
                 if (type == BUInteractionTypeDownload) {
-                    [cell.customBtn setTitle:@&quot;点击下载&quot; forState:UIControlStateNormal];
-                    [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
-                } else if (type == BUInteractionTypePhone) {
-                    [cell.customBtn setTitle:@&quot;拨打电话&quot; forState:UIControlStateNormal];
-                    [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
-                } else if (type == BUInteractionTypeURL) {
-                    [cell.customBtn setTitle:@&quot;外部拉起&quot; forState:UIControlStateNormal];
-                    [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
-                } else if (type == BUInteractionTypePage) {
-                    [cell.customBtn setTitle:@&quot;内部拉起&quot; forState:UIControlStateNormal];
-                    [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
-                } else {
-                    [cell.customBtn setTitle:@&quot;无点击&quot; forState:UIControlStateNormal];
-                }
+                [cell.customBtn setTitle:[NSString localizedStringForKey:ClickDownload] forState:UIControlStateNormal];
+                [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
+            } else if (type == BUInteractionTypePhone) {
+                [cell.customBtn setTitle:[NSString localizedStringForKey:Call] forState:UIControlStateNormal];
+                [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
+            } else if (type == BUInteractionTypeURL) {
+                [cell.customBtn setTitle:[NSString localizedStringForKey:ExternalLink] forState:UIControlStateNormal];
+                [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
+            } else if (type == BUInteractionTypePage) {
+                [cell.customBtn setTitle:[NSString localizedStringForKey:InternalLink] forState:UIControlStateNormal];
+                [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
+            } else {
+                [cell.customBtn setTitle:[NSString localizedStringForKey:NoClick] forState:UIControlStateNormal];
             }
+            }
+                return cell;
+        }
+        } else if ([model isKindOfClass:[BUDFeedNormalModel class]]) {
+            NSString *clazz=[self classNameWithCellType:[(BUDFeedNormalModel *)model type]];
+            BUDFeedNormalTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:clazz forIndexPath:indexPath];
+            if(!cell){
+                cell = [(BUDFeedNormalTableViewCell *)[NSClassFromString(clazz) alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:clazz];
+            }
+            if (indexPath.row == 0) {
+                cell.separatorLine.hidden = YES;
+            }
+            [cell refreshUIWithModel:model];
             return cell;
         }
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        cell.textLabel.text = [NSString localizedStringForKey:Unknown];
+        return cell;
+}
+- (NSString *)classNameWithCellType:(NSString *)type {
+    if ([type isEqualToString: @&quot;title&quot;]) {
+        return @&quot;BUDFeedNormalTitleTableViewCell&quot;;
+    }else if ([type isEqualToString: @&quot;titleImg&quot;]){
+        return @&quot;BUDFeedNormalTitleImgTableViewCell&quot;;
+    }else if ([type isEqualToString: @&quot;bigImg&quot;]){
+        return @&quot;BUDFeedNormalBigImgTableViewCell&quot;;
+    }else if ([type isEqualToString: @&quot;threeImgs&quot;]){
+        return @&quot;BUDFeedNormalthreeImgsableViewCell&quot;;
+    }else{
+        return @&quot;unkownCell&quot;;
     }
-    NSString *text = [NSString stringWithFormat:@&quot;%@&quot;, model];
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = text;
-    return cell;
+}
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
 }
 </div></code></pre>
 <p><strong>从V1.9.5之前（&lt; 1.9.5）升级到1.9.5后续版本（&gt;=1.9.5）的开发者请仔细阅读本段，新接入请略过。在1.9.5之前（&lt; 1.9.5）版本中，需要使用继承自WMTableViewCell 的 UITableViewCell来实现feed流广告，并且只适用于UITableView中展示信息流。WMTableViewCell提供了广告数据 BUMaterialMeta 并能够帮助在cell里注册用户自定义的事件。在1.9.5后续版本（&gt;=1.9.5）中，可直接使用BUNativeAd替代WMTableViewCell的相关功能，获取视图组件部分可以参考BUNativeAdRelatedView</strong></p>
@@ -1399,19 +1460,20 @@ Draw视频信息流广告和feed信息流广告用法基本相同，不同点在
 
 @property (nonatomic, strong, nullable) BUAdSlot *adslot;
 @property (nonatomic, strong, nullable) NSArray&lt;BUNativeAd *&gt; *data;
-/// 广告位加载展示响应的代理回调，可以设置为遵循&lt;BUNativeAdDelegate&gt;的任何类型，不限于Viewcontroller
+/// The delegate for receiving state change messages such as requests succeeding/failing.
+/// The delegate can be set to any object which conforming to &lt;BUNativeAdsManagerDelegate&gt;.
 @property (nonatomic, weak, nullable) id&lt;BUNativeAdsManagerDelegate&gt; delegate;
 
 - (instancetype)initWithSlot:(BUAdSlot * _Nullable) slot;
 
 /**
- 请求广告素材数量，建议不超过3个，
- 一次最多不超过10个
- @param count 最多广告返回的广告素材的数量
- */
+It is recommended to request no more than 3 ads.
+The maximum is 10.
+*/
 - (void)loadAdDataWithCount:(NSInteger)count;
 
 @end
+
 </div></code></pre>
 <h4 id="242-%E5%AE%9E%E4%BE%8B%E8%AF%B4%E6%98%8E">2.4.2 实例说明</h4>
 <p>使用方法类似 BUNativeAd，初始化 BUNativeAdsManager 对象之后，设置好 BUAdSlot，通过loadAdDataWithCount: 方法来获取一组广告数据，其中loadAdDataWithCount: 方法能够根据 count 次数请求数据，数据获取后，同样通过 delegate 来处理回调参见下面代码示例：</p>
@@ -1419,8 +1481,8 @@ Draw视频信息流广告和feed信息流广告用法基本相同，不同点在
     BUNativeAdsManager *nad = [BUNativeAdsManager new];
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
-    slot1.AdType = BUAdSlotAdTypeDrawVideo; //必须
-    slot1.isOriginAd = YES; //必须
+    slot1.AdType = BUAdSlotAdTypeDrawVideo; //must
+    slot1.isOriginAd = YES; //must
     slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
     slot1.isSupportDeepLink = YES;
@@ -1471,14 +1533,13 @@ Draw视频信息流广告和feed信息流广告用法基本相同，不同点在
 <h4 id="243-%E4%B8%AA%E6%80%A7%E8%AE%BE%E7%BD%AE%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.4.3 个性设置接口说明</h4>
 <p>Draw视频信息流广告可以在BUNativeAdRelatedView的videoAdview设置视频播放incon的图标样式和大小，还可以设置是否允许点击暂停。</p>
 <pre class="hljs"><code><div>/**
- Draw视频支持点击暂停，默认NO，该字段仅对Draw竖版原生视频有效
- **/
+Whether to allow pausing the video by clicking, default NO. Only for draw video(vertical video ads).
+**/
 @property (nonatomic, assign) BOOL drawVideoClickEnable;
 /**
-播放暂停按钮支持配置
-
-@param playImg 播放按钮
-@param playSize 播放按钮大小 设置CGSizeZero则为默认图标大小
+Support configuration for pause button.
+@param playImg : the image of the button
+@param playSize : the size of the button. Set as cgsizezero to use default icon size.
 */
 - (void)playerPlayIncon:(UIImage *)playImg playInconSize:(CGSize)playSize;
 </div></code></pre>
@@ -1486,7 +1547,6 @@ Draw视频信息流广告和feed信息流广告用法基本相同，不同点在
 <pre class="hljs"><code><div>if (!self.nativeAdRelatedView.videoAdView.superview) {
         self.nativeAdRelatedView.videoAdView.frame = CGRectMake(0, 0, GlobleWidth, GlobleHeight);
         [self.nativeAdRelatedView.videoAdView playerPlayIncon:[UIImage imageNamed:@&quot;adPlay.png&quot;] playInconSize:CGSizeMake(80, 80)];
-        //更改视频是否可以点击暂停
         self.nativeAdRelatedView.videoAdView.drawVideoClickEnable = YES;
         [self.contentView addSubview:self.nativeAdRelatedView.videoAdView];
     }
@@ -1551,132 +1611,255 @@ Draw视频信息流广告和feed信息流广告用法基本相同，不同点在
     [nad loadAdData];
 }
 </div></code></pre>
-<h3 id="27-%E8%A7%86%E9%A2%91%E5%B9%BF%E5%91%8Abuvideoadview">2.7 视频广告(BUVideoAdView)</h3>
+<h3 id="27-%E5%8E%9F%E7%94%9F%E6%A8%A1%E6%9D%BF%E5%B9%BF%E5%91%8A">2.7 原生模板广告</h3>
+<ul>
+<li>**类型说明：**原生模板广告是一种具备动态渲染能力的一种原生广告。即通过开发者在媒体平台编辑渲染模板，SDK支持实时更新广告布局，SDK进行渲染并为开发者提供渲染视图。</li>
+<li>**使用说明：**原生模板广告可通过BUNativeExpressAdManager配置广告基本信息。例如期望尺寸，为避免渲染过程产生广告视图形变，建议和媒体平台配置相同尺寸。此外可以配置需要的广告条数，每次最多请求三条。通过设置BUNativeExpressAdViewDelegate代理，获取广告、展示、点击、关闭等回调。开发者可以通过BUNativeExpressAdView获取到展示的广告视图，其中通过调用render方法，触发广告视图渲染，出发时间为在获取到广告物料后，详情参考demo。通过isReady方法可以查询到试图是否渲染成功。值得注意的是一定要设置rootViewController，即跳转落地页需要的viewController。</li>
+</ul>
+<h4 id="271-bunativeexpressadmanager%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.7.1 BUNativeExpressAdManager接口说明</h4>
+<pre class="hljs"><code><div>@interface BUNativeExpressAdManager : NSObject
+
+@property (nonatomic, strong, nullable) BUAdSlot *adslot;
+
+@property (nonatomic, assign, readwrite) CGSize adSize;
+
+/**
+ The delegate for receiving state change messages from a BUNativeExpressAdManager
+ */
+@property (nonatomic, weak, nullable) id&lt;BUNativeExpressAdViewDelegate&gt; delegate;
+
+
+/**
+ @param size expected ad view size，when size.height is zero, acture height will match size.width
+ */
+- (instancetype)initWithSlot:(BUAdSlot * _Nullable)slot adSize:(CGSize)size;
+
+/**
+ The number of ads requested,The maximum is 3
+ */
+- (void)loadAd:(NSInteger)count;
+@end
+</div></code></pre>
+<h4 id="272-bunativeexpressadviewdelegate%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.7.2 BUNativeExpressAdViewDelegate回调说明</h4>
+<pre class="hljs"><code><div>@protocol BUNativeExpressAdViewDelegate &lt;NSObject&gt;
+
+@optional
+/**
+ * Sent when views successfully load ad
+ */
+- (void)nativeExpressAdSuccessToLoad:(BUNativeExpressAdManager *)nativeExpressAd views:(NSArray&lt;__kindof BUNativeExpressAdView *&gt; *)views;
+
+/**
+ * Sent when views fail to load ad
+ */
+- (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error;
+
+/**
+ * This method is called when rendering a nativeExpressAdView successed, and nativeExpressAdView.size.height has been updated
+ */
+- (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView;
+
+/**
+ * This method is called when a nativeExpressAdView failed to render
+ */
+- (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error;
+
+/**
+ * Sent when an ad view is about to present modal content
+ */
+- (void)nativeExpressAdViewWillShow:(BUNativeExpressAdView *)nativeExpressAdView;
+
+/**
+ * Sent when an ad view is clicked
+ */
+- (void)nativeExpressAdViewDidClick:(BUNativeExpressAdView *)nativeExpressAdView;
+
+/**
+ * Sent when a user clicked dislike reasons.
+ * @param filterWords : the array of reasons why the user dislikes the ad
+ */
+- (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView dislikeWithReason:(NSArray&lt;BUDislikeWords *&gt; *)filterWords;
+
+/**
+ * Sent after an ad view is clicked, a ad landscape view will present modal content
+ */
+- (void)nativeExpressAdViewWillPresentScreen:(BUNativeExpressAdView *)nativeExpressAdView;
+
+@end
+
+</div></code></pre>
+<h4 id="272-bunativeexpressadmanager%E5%AE%9E%E4%BE%8B%E8%AF%B4%E6%98%8E">2.7.2 BUNativeExpressAdManager实例说明</h4>
+<pre class="hljs"><code><div>- (void)loadData {
+    
+    BUAdSlot *slot1 = [[BUAdSlot alloc] init];
+    slot1.ID = self.viewModel.slotID;
+    slot1.AdType = BUAdSlotAdTypeFeed;
+    BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Feed228_150];
+    slot1.imgSize = imgSize;
+    slot1.position = BUAdSlotPositionFeed;
+    slot1.isSupportDeepLink = YES;
+    
+    self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:CGSizeMake(self.widthSlider.value, self.heightSlider.value)];
+    self.nativeExpressAdManager.delegate = self;
+    
+    [self.nativeExpressAdManager loadAd:(NSInteger)self.adCountSlider.value];
+}
+
+- (void)nativeExpressAdSuccessToLoad:(BUNativeExpressAdManager *)nativeExpressAd views:(NSArray&lt;__kindof BUNativeExpressAdView *&gt; *)views {
+    self.expressAdViews = [NSMutableArray arrayWithArray:views];
+    if (self.expressAdViews.count) {
+        [self.expressAdViews enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            BUNativeExpressAdView *expressView = (BUNativeExpressAdView *)obj;
+            expressView.rootViewController = self;
+            [expressView render];
+        }];
+    }
+    [self.tableView reloadData];
+    NSLog(@&quot;【BytedanceUnion】原生模板拉取广告成功回调&quot;);
+}
+
+- (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error {
+    
+}
+
+- (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
+    [self.tableView reloadData];
+}
+
+- (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView dislikeWithReason:(NSArray&lt;BUDislikeWords *&gt; *)filterWords {
+    [self.expressAdViews removeObject:nativeExpressAdView];
+
+    NSUInteger index = [self.expressAdViews indexOfObject:nativeExpressAdView];
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+}
+</div></code></pre>
+<h3 id="28-%E8%A7%86%E9%A2%91%E5%B9%BF%E5%91%8Abuvideoadview">2.8 视频广告(BUVideoAdView)</h3>
 <ul>
 <li>**类型说明：**视频广告是原生广告的一种形式，网盟 SDK 提供视频播放视图 BUVideoAdView，开发只要参照信息流广告接入即可。</li>
 <li>**使用说明：**BUVideoAdView 提供了 play、pause、currentPlayTime 等方法，开发者可用于在信息流中实现划入屏幕自动播放，划出屏幕暂停，点击传入已播放时间用于续播等。</li>
 </ul>
-<h4 id="271-buvideoadview%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.7.1 BUVideoAdView接口说明</h4>
+<h4 id="281-buvideoadview%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.8.1 BUVideoAdView接口说明</h4>
 <pre class="hljs"><code><div>/**
- 控制网盟视频播放器
- */
+Control Tiktok Ad Network video player.
+*/
 @protocol BUVideoEngine &lt;NSObject&gt;
 
-
 /**
- 获取当前已播放时间
- */
+Get the already played time.
+*/
 - (CGFloat)currentPlayTime;
-
 
 @end
 
 @protocol BUVideoAdViewDelegate;
 
+
 @interface BUVideoAdView : UIView&lt;BUPlayerDelegate, BUVideoEngine&gt;
 
 @property (nonatomic, weak, nullable) id&lt;BUVideoAdViewDelegate&gt; delegate;
 
-/// 广告位展示落地页ViewController的rootviewController，必传参数
+/// required. Root view controller for handling ad actions.
 @property (nonatomic, weak, readwrite) UIViewController *rootViewController;
 
 /**
- materialMeta 物料信息
- */
-@property (nonatomic, strong, readwrite, nullable) BUMaterialMeta *materialMeta;
+Whether to allow pausing the video by clicking, default NO. Only for draw video(vertical video ads).
+**/
+@property (nonatomic, assign) BOOL drawVideoClickEnable;
 
-- (instancetype)init;
+/**
+material information.
+*/
+@property (nonatomic, strong, readwrite, nullable) BUMaterialMeta *materialMeta;
 
 - (instancetype)initWithMaterial:(BUMaterialMeta *)materialMeta;
 
+/**
+Resume to the corresponding time.
+*/
+- (void)playerSeekToTime:(CGFloat)time;
+
+/**
+Support configuration for pause button.
+@param playImg : the image of the button
+@param playSize : the size of the button. Set as cgsizezero to use default icon size.
+*/
+- (void)playerPlayIncon:(UIImage *)playImg playInconSize:(CGSize)playSize;
+
 @end
 </div></code></pre>
-<h4 id="272-buvideoadview%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.7.2 BUVideoAdView回调说明</h4>
+<h4 id="282-buvideoadview%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.8.2 BUVideoAdView回调说明</h4>
 <pre class="hljs"><code><div>@protocol BUVideoAdViewDelegate &lt;NSObject&gt;
 
 @optional
-/**
- videoAdView 加载失败
 
- @param videoAdView 当前展示的 videoAdView 视图
- @param error 错误原因
- */
+/**
+This method is called when videoadview failed to play.
+@param error : the reason of error
+*/
 - (void)videoAdView:(BUVideoAdView *)videoAdView didLoadFailWithError:(NSError *_Nullable)error;
 
 /**
- videoAdView 播放状态改变
-
- @param videoAdView 当前展示的 videoAdView 视图
- @param playerState 当前播放完成
- */
+This method is called when videoadview playback status changed.
+@param playerState : player state after changed
+*/
 - (void)videoAdView:(BUVideoAdView *)videoAdView stateDidChanged:(BUPlayerPlayState)playerState;
 
 /**
- videoAdView 播放结束
-
- @param videoAdView 当前展示的 videoAdView 视图
- */
+This method is called when videoadview end of play.
+*/
 - (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView;
-
 @end
 </div></code></pre>
-<h4 id="273-%E5%AE%9E%E4%BE%8B">2.7.3 实例</h4>
+<h4 id="283-%E5%AE%9E%E4%BE%8B">2.8.3 实例</h4>
 <pre class="hljs"><code><div>self.videoAdView = [[BUVideoAdView alloc] init];
 self.videoAdView.materialMeta = (BUMaterialMeta *)self.material;
 self.videoAdView.rootViewController = self;
 [self addSubview:self.videoAdView];
-
-
 </div></code></pre>
-<h3 id="28-banner%E5%B9%BF%E5%91%8Abubanneradviewdelegate">2.8 Banner广告(BUBannerAdViewDelegate)</h3>
+<h3 id="29-banner%E5%B9%BF%E5%91%8Abubanneradviewdelegate">2.9 Banner广告(BUBannerAdViewDelegate)</h3>
 <p>直接调用loadAdData方法</p>
 <p>方法声明：</p>
 <pre class="hljs"><code><div>-(void)loadAdData;
 </div></code></pre>
-<h4 id="281-bubanneradviewdelegate%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.8.1  BUBannerAdViewDelegate接口说明</h4>
-<pre class="hljs"><code><div>/**
- bannerAdView 广告位加载成功
+<h4 id="291-bubanneradviewdelegate%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.9.1  BUBannerAdViewDelegate接口说明</h4>
+<pre class="hljs"><code><div>@protocol BUBannerAdViewDelegate &lt;NSObject&gt;
 
- @param bannerAdView 视图
- @param nativeAd 内部使用的NativeAd
- */
-- (void)bannerAdViewDidLoad:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *)nativeAd;
+@optional
 
 /**
- bannerAdView 广告位展示新的广告
-
- @param bannerAdView 当前展示的Banner视图
- @param nativeAd 内部使用的NativeAd
- */
-- (void)bannerAdViewDidBecomVisible:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *)nativeAd;
-
-/**
- bannerAdView 广告位点击
-
- @param bannerAdView 当前展示的Banner视图
- @param nativeAd 内部使用的NativeAd
- */
-- (void)bannerAdViewDidClick:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *)nativeAd;
+This method is called when bannerAdView ad slot loaded successfully.
+@param bannerAdView : view for bannerAdView
+@param nativeAd : nativeAd for bannerAdView
+*/
+- (void)bannerAdViewDidLoad:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd;
 
 /**
- bannerAdView 广告位发生错误
-
- @param bannerAdView 当前展示的Banner视图
- @param error 错误原因
- */
+This method is called when bannerAdView ad slot failed to load.
+@param error : the reason of error
+*/
 - (void)bannerAdView:(BUBannerAdView *)bannerAdView didLoadFailWithError:(NSError *_Nullable)error;
 
 /**
- bannerAdView 广告位点击不喜欢
+This method is called when bannerAdView ad slot showed new ad.
+*/
+- (void)bannerAdViewDidBecomVisible:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd;
 
- @param bannerAdView 当前展示的Banner视图
- @param filterwords 选择不喜欢理由
- */
+/**
+This method is called when bannerAdView is clicked.
+*/
+- (void)bannerAdViewDidClick:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd;
+
+/**
+This method is called when the user clicked dislike button and chose dislike reasons.
+@param filterwords : the array of reasons for dislike.
+*/
 - (void)bannerAdView:(BUBannerAdView *)bannerAdView dislikeWithReason:(NSArray&lt;BUDislikeWords *&gt; *_Nullable)filterwords;
 
 @end
 </div></code></pre>
-<h4 id="282-%E6%8E%A5%E5%8F%A3%E5%AE%9E%E4%BE%8B">2.8.2 接口实例</h4>
+<h4 id="292-%E6%8E%A5%E5%8F%A3%E5%AE%9E%E4%BE%8B">2.9.2 接口实例</h4>
 <ul>
 <li>
 <ol>
@@ -1694,35 +1877,32 @@ self.videoAdView.rootViewController = self;
 </li>
 </ul>
 <pre class="hljs"><code><div>BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
-        self.bannerView = [[BUBannerAdView alloc] initWithSlotID:[BUDAdManager slotKey:BUDSlotKeyBannerTwoByOne] size:size rootViewController:self];
-        [self.bannerView loadAdData];
-        const CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
+self.bannerView = [[BUBannerAdView alloc] initWithSlotID:[BUDAdManager slotKey:BUDSlotKeyBannerTwoByOne] size:size rootViewController:self];
+[self.bannerView loadAdData];
+const CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
 
-        CGFloat bannerHeight = screenWidth * size.height / size.width;
-        self.bannerView.frame = CGRectMake(0, 50, screenWidth, bannerHeight);
-        self.bannerView.delegate = self;
-        [self.view addSubview:self.bannerView];
+CGFloat bannerHeight = screenWidth * size.height / size.width;
+self.bannerView.frame = CGRectMake(0, 50, screenWidth, bannerHeight);
+self.bannerView.delegate = self;
+[self.view addSubview:self.bannerView];
 </div></code></pre>
 <p>其中，adsize 参数为客户端要展示的banner 图片的广告尺寸，需要尽量与头条联盟穿山甲平台申请的广告尺寸比例保持一致，如果不一致，会按照请求尺寸返回，但图片会被拉抻，无法保证展示效果。
 3. 此时当网络加载完成之后会在bannerview 上展示相应的广告图片，相应的广告的点击事件以及上报处理事件已经在内部处理完成，若想添加额外的点击处理，可在下述delegate中添加
 4. delegate回调处理：</p>
-<pre class="hljs"><code><div>#pragma mark -  BUBannerAdViewDelegate implementation
-
-- (void)bannerAdViewDidLoad:(BUBannerAdView * _Nonnull)bannerAdView WithAdmodel:(BUNativeAd *) nativeAd {
-    NSLog(@&quot;***********banner load**************&quot;);
-    [self.refreshbutton setTitle:@&quot;已刷新，再刷新&quot; forState:UIControlStateNormal];
+<pre class="hljs"><code><div>- (void)bannerAdViewDidLoad:(BUBannerAdView * _Nonnull)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)admodel {
+    BUD_Log(@&quot;banner data load sucess&quot;);
 }
 
-- (void)bannerAdViewDidBecomVisible:(BUBannerAdView *_Nonnull)bannerAdView WithAdmodel:(BUNativeAd *) nativeAd {
-
+- (void)bannerAdViewDidBecomVisible:(BUBannerAdView *_Nonnull)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)admodel {
+    BUD_Log(@&quot;banner becomVisible&quot;);
 }
 
-- (void)bannerAdViewDidClick:(BUBannerAdView *_Nonnull)bannerAdView WithAdmodel:(BUNativeAd *)nativeAd {
-
+- (void)bannerAdViewDidClick:(BUBannerAdView *_Nonnull)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)admodel {
+    BUD_Log(@&quot;banner AdViewDidClick&quot;);
 }
 
 - (void)bannerAdView:(BUBannerAdView *_Nonnull)bannerAdView didLoadFailWithError:(NSError *_Nullable)error {
-
+    BUD_Log(@&quot;banner data load faiule&quot;);
 }
 
 - (void)bannerAdView:(BUBannerAdView *)bannerAdView dislikeWithReason:(NSArray&lt;BUDislikeWords *&gt; *)filterwords {
@@ -1730,93 +1910,111 @@ self.videoAdView.rootViewController = self;
         bannerAdView.alpha = 0;
     } completion:^(BOOL finished) {
         [bannerAdView removeFromSuperview];
-        self.bannerView = nil;
+        if (self.bannerView == bannerAdView) {
+            self.bannerView = nil;
+        }
+        if (self.carouselBannerView == bannerAdView) {
+            self.carouselBannerView = nil;
+        }
     }];
 }
-
 </div></code></pre>
-<h3 id="29-%E5%BC%80%E5%B1%8F%E5%B9%BF%E5%91%8Abusplashadview">2.9 开屏广告(BUSplashAdView)</h3>
+<h3 id="210-%E5%BC%80%E5%B1%8F%E5%B9%BF%E5%91%8Abusplashadview">2.10 开屏广告(BUSplashAdView)</h3>
 <ul>
 <li>**类型说明：**开屏广告主要是 APP 启动时展示的全屏广告视图，开发只要按照接入标准就能够展示设计好的视图。</li>
 </ul>
-<h4 id="291-busplashadview%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.9.1 BUSplashAdView接口说明</h4>
+<h4 id="2101-busplashadview%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.10.1 BUSplashAdView接口说明</h4>
 <pre class="hljs"><code><div>@interface BUSplashAdView : UIView
 /**
- 开屏广告位 id
- */
+The unique identifier of splash ad.
+*/
 @property (nonatomic, copy, readonly, nonnull) NSString *slotID;
 
 /**
- 允许最大的加载超时时间, 默认0.5s, 单位s
- */
+Maximum allowable load timeout, default 2s, unit s.
+*/
 @property (nonatomic, assign) NSTimeInterval tolerateTimeout;
 
+
 /**
- 开屏启动的 状态回调
- */
+Whether hide skip button, default NO.
+If you hide the skip button, you need to customize the countdown.
+*/
+@property (nonatomic, assign) BOOL hideSkipButton;
+
+/**
+The delegate for receiving state change messages.
+*/
 @property (nonatomic, weak, nullable) id&lt;BUSplashAdDelegate&gt; delegate;
 
 /*
- 广告位展示落地页ViewController的rootviewController，必传参数
- */
+required.
+Root view controller for handling ad actions.
+*/
 @property (nonatomic, weak) UIViewController *rootViewController;
 
 /**
- 开屏数据是否已经加载完成
- */
+Whether the splash ad data has been loaded.
+*/
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
+
+
+/**
+Initializes splash ad with slot id and frame.
+@param slotID : the unique identifier of splash ad
+@param frame : the frame of splashAd view. It is recommended for the mobile phone screen.
+@return BUSplashAdView
+*/
 - (instancetype)initWithSlotID:(NSString *)slotID frame:(CGRect)frame;
 
 /**
- 初始化开屏视图后需要主动 加载数据
- */
+Load splash ad datas.
+Start the countdown(@tolerateTimeout) as soon as you request datas.
+*/
 - (void)loadAdData;
+
 @end
+
 </div></code></pre>
-<h4 id="292-busplashadview%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.9.2 BUSplashAdView回调说明</h4>
+<h4 id="2102-busplashadview%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.10.2 BUSplashAdView回调说明</h4>
 <pre class="hljs"><code><div>@protocol BUSplashAdDelegate &lt;NSObject&gt;
 
 @optional
 /**
- 点击开屏广告 回调该函数， 期间可能调起 AppStore ThirdApp WebView etc.
- - Parameter splashAd: 产生该事件的 SplashView 对象.
- */
-- (void)splashAdDidClick:(BUSplashAdView *)splashAd;
-
-/**
-    关闭开屏广告， {点击广告， 点击跳过，超时}
- - Parameter splashAd: 产生该事件的 SplashView 对象.
- */
-- (void)splashAdDidClose:(BUSplashAdView *)splashAd;
-
-/**
-   splashAd 广告将要消失， 用户点击 {跳过 超时}
- - Parameter splashAd: 产生该事件的 SplashView 对象.
- */
-- (void)splashAdWillClose:(BUSplashAdView *)splashAd;
-
-/**
- splashAd 广告加载成功
- - Parameter splashAd: 产生该事件的 SplashView 对象.
- */
+This method is called when splash ad material loaded successfully.
+*/
 - (void)splashAdDidLoad:(BUSplashAdView *)splashAd;
 
 /**
- splashAd 加载失败
-
- - Parameter splashAd: 产生该事件的 SplashView 对象.
- - Parameter error: 包含详细是失败信息.
- */
+This method is called when splash ad material failed to load.
+@param error : the reason of error
+*/
 - (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error;
 
 /**
- 即将展示 开屏广告
- - Parameter splashAd: 产生该事件的 SplashView 对象.
- */
+This method is called when splash ad slot will be showing.
+*/
 - (void)splashAdWillVisible:(BUSplashAdView *)splashAd;
+
+/**
+This method is called when splash ad is clicked.
+*/
+- (void)splashAdDidClick:(BUSplashAdView *)splashAd;
+
+/**
+This method is called when splash ad is closed.
+*/
+- (void)splashAdDidClose:(BUSplashAdView *)splashAd;
+
+/**
+This method is called when splash ad is about to close.
+*/
+- (void)splashAdWillClose:(BUSplashAdView *)splashAd;
+
 @end
+
 </div></code></pre>
-<h4 id="293-%E5%AE%9E%E4%BE%8B">2.9.3 实例</h4>
+<h4 id="2103-%E5%AE%9E%E4%BE%8B">2.10.3 实例</h4>
 <pre class="hljs"><code><div>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
@@ -1840,90 +2038,92 @@ self.videoAdView.rootViewController = self;
 }
 
 </div></code></pre>
-<h3 id="210-%E6%8F%92%E5%B1%8F%E5%B9%BF%E5%91%8Abuinterstitialad">2.10 插屏广告(BUInterstitialAd)</h3>
+<h3 id="211-%E6%8F%92%E5%B1%8F%E5%B9%BF%E5%91%8Abuinterstitialad">2.11 插屏广告(BUInterstitialAd)</h3>
 <ul>
 <li>**类型说明：**插屏广告主要是用户暂停某个操作时展示的全屏广告视图，开发只要按照接入标准就能够展示设计好的视图。</li>
 </ul>
-<h4 id="2101-buinterstitialad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.10.1 BUInterstitialAd接口说明</h4>
+<h4 id="2111-buinterstitialad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.11.1 BUInterstitialAd接口说明</h4>
 <pre class="hljs"><code><div>@interface BUInterstitialAd : NSObject
 @property (nonatomic, weak, nullable) id&lt;BUInterstitialAdDelegate&gt; delegate;
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
 /**
- 初始化BUInterstitialAd
-
- @param slotID 代码位ID
- @param expectSize 自定义size,默认 600px * 400px
- @return BUInterstitialAd
- */
+Initializes interstitial ad.
+@param slotID : The unique identifier of interstitial ad.
+@param expectSize : custom size, default 600px * 400px
+@return BUInterstitialAd
+*/
 - (instancetype)initWithSlotID:(NSString *)slotID size:(BUSize *)expectSize NS_DESIGNATED_INITIALIZER;
+/**
+Load interstitial ad datas.
+*/
 - (void)loadAdData;
-- (BOOL)showAdFromRootViewController:(nullable UIViewController *)rootViewController;
+/**
+Display interstitial ad.
+@param rootViewController : root view controller for displaying ad.
+@return : whether it is successfully displayed.
+*/
+- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;
+
 @end
 </div></code></pre>
-<h4 id="2102-buinterstitialad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.10.2 BUInterstitialAd回调说明</h4>
+<h4 id="2112-buinterstitialad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.11.2 BUInterstitialAd回调说明</h4>
 <pre class="hljs"><code><div>@protocol BUInterstitialAdDelegate &lt;NSObject&gt;
 
 @optional
 /**
-    点击插屏广告 回调该函数， 期间可能调起 AppStore ThirdApp WebView etc.
- - Parameter interstitialAd: 产生该事件的 BUInterstitialAd 对象.
- */
-- (void)interstitialAdDidClick:(BUInterstitialAd *)interstitialAd;
-
-/**
-    关闭插屏广告 回调改函数，   {点击广告， 点击关闭}
- - Parameter interstitialAd: 产生该事件的 BUInterstitialAd 对象.
- */
-- (void)interstitialAdDidClose:(BUInterstitialAd *)interstitialAd;
-
-/**
-    BUInterstitialAd 广告将要消失， 用户点击关闭按钮
-
- - Parameter interstitialAd: 产生该事件的 BUInterstitialAd 对象.
- */
-- (void)interstitialAdWillClose:(BUInterstitialAd *)interstitialAd;
-* ****
-* * /**
- BUInterstitialAd 广告加载成功
-
- - Parameter interstitialAd: 产生该事件的 BUInterstitialAd 对象.
- */
+This method is called when interstitial ad material loaded successfully.
+*/
 - (void)interstitialAdDidLoad:(BUInterstitialAd *)interstitialAd;
 
 /**
-  BUInterstitialAd 加载失败
-
- - Parameter interstitialAd: 产生该事件的 BUInterstitialAd 对象.
- - Parameter error: 包含详细是失败信息.
- */
+This method is called when interstitial ad material failed to load.
+@param error : the reason of error
+*/
 - (void)interstitialAd:(BUInterstitialAd *)interstitialAd didFailWithError:(NSError *)error;
 
+/**
+This method is called when interstitial ad slot will be showing.
+*/
+- (void)interstitialAdWillVisible:(BUInterstitialAd *)interstitialAd;
 
 /**
-   即将展示 插屏广告
- - Parameter interstitialAd: 产生该事件的 BUInterstitialAd 对象.
- */
-- (void)interstitialAdWillVisible:(BUInterstitialAd *)interstitialAd;
+This method is called when interstitial ad is clicked.
+*/
+- (void)interstitialAdDidClick:(BUInterstitialAd *)interstitialAd;
+
+/**
+This method is called when interstitial ad is about to close.
+*/
+- (void)interstitialAdWillClose:(BUInterstitialAd *)interstitialAd;
+
+/**
+This method is called when interstitial ad is closed.
+*/
+- (void)interstitialAdDidClose:(BUInterstitialAd *)interstitialAd;
+
 @end
 </div></code></pre>
-<h4 id="2103-%E5%AE%9E%E4%BE%8B">2.10.3 实例</h4>
-<pre class="hljs"><code><div>    self.interstitialAd = [[BUInterstitialAd alloc] initWithSlotID:@&quot;900721489&quot; size:[BUSize sizeBy:BUProposalSize_Interstitial600_900]];
-    [self.interstitialAd loadAdData];
-    [self.interstitialAd showAdFromRootViewController:self.navigationController];
+<h4 id="2113-%E5%AE%9E%E4%BE%8B">2.11.3 实例</h4>
+<pre class="hljs"><code><div>self.interstitialAd = [[BUInterstitialAd alloc] initWithSlotID:self.viewModel.slotID size:[BUSize sizeBy:BUProposalSize_Interstitial600_600]];
+self.interstitialAd.delegate = self;
+[self.interstitialAd loadAdData];
 </div></code></pre>
-<h3 id="211-%E6%BF%80%E5%8A%B1%E8%A7%86%E9%A2%91burewardedvideoad">2.11 激励视频(BURewardedVideoAd)</h3>
+<h3 id="212-%E6%BF%80%E5%8A%B1%E8%A7%86%E9%A2%91burewardedvideoad">2.12 激励视频(BURewardedVideoAd)</h3>
 <ul>
 <li>**类型说明：**激励视频广告是一种全新的广告形式，用户可选择观看视频广告以换取有价物，例如虚拟货币、应用内物品和独家内容等等；这类广告的长度为 15-30 秒，不可跳过，且广告的结束画面会显示结束页面，引导用户进行后续动作。</li>
 </ul>
-<h4 id="2111-burewardedvideoad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.11.1 BURewardedVideoAd接口说明</h4>
+<h4 id="2121-burewardedvideoad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.12.1 BURewardedVideoAd接口说明</h4>
 <p><strong>每次需要生成新的BURewardedVideoAd对象调用loadAdData方法请求最新激励视频，请勿重复使用本地缓存激励视频多次展示</strong></p>
 <pre class="hljs"><code><div>@interface BURewardedVideoAd : NSObject
-
+@property (nonatomic, strong) BURewardedVideoModel *rewardedVideoModel;
 @property (nonatomic, weak, nullable) id&lt;BURewardedVideoAdDelegate&gt; delegate;
+
 /**
- 物料有效 数据不为空且没有展示过为 YES, 重复展示不计费.
- */
+Whether material is effective.
+Setted to YES when data is not empty and has not been displayed.
+Repeated display is not billed.
+*/
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
 - (instancetype)initWithSlotID:(NSString *)slotID rewardedVideoModel:(BURewardedVideoModel *)model;
@@ -1931,101 +2131,114 @@ self.videoAdView.rootViewController = self;
 - (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;
 
 @end
+
 </div></code></pre>
-<h4 id="2112-burewardedvideoad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.11.2 BURewardedVideoAd回调说明</h4>
+<h4 id="2122-burewardedvideoad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.12.2 BURewardedVideoAd回调说明</h4>
 <pre class="hljs"><code><div>@protocol BURewardedVideoAdDelegate &lt;NSObject&gt;
 
 @optional
 
 /**
- rewardedVideoAd 激励视频广告物料加载成功
- @param rewardedVideoAd 当前激励视频素材
- */
+This method is called when video ad material loaded successfully.
+*/
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd;
 
 /**
- rewardedVideoAd 激励视频广告视频加载成功
- @param rewardedVideoAd 当前激励视频素材
- */
-- (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd 
-*)rewardedVideoAd;
-
-/**
- rewardedVideoAd 广告位即将展示
- @param rewardedVideoAd 当前激励视频对象
- */
-- (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd;
-
-/**
- rewardedVideoAd 激励视频广告关闭
- @param rewardedVideoAd 当前激励视频对象
- */
-- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd;
-
-/**
- rewardedVideoAd 激励视频广告点击下载
- @param rewardedVideoAd 当前激励视频对象
- */
-- (void)rewardedVideoAdDidClickDownload:(BURewardedVideoAd *)rewardedVideoAd;
-
-/**
- rewardedVideoAd 激励视频广告素材加载失败
- @param rewardedVideoAd 当前激励视频对象
- @param error 错误对象
- */
+This method is called when video ad materia failed to load.
+@param error : the reason of error
+*/
 - (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error;
 
 /**
- rewardedVideoAd 激励视频广告播放完成或发生错误
- @param rewardedVideoAd 当前激励视频对象
- @param error 错误对象
- */
+This method is called when video ad creatives is cached successfully.
+*/
+- (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+This method is called when video ad slot will be showing.
+*/
+- (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+This method is called when video ad slot has been shown.
+*/
+- (void)rewardedVideoAdDidVisible:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+This method is called when video ad is about to close.
+*/
+- (void)rewardedVideoAdWillClose:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+This method is called when video ad is closed.
+*/
+- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+This method is called when video ad is clicked.
+*/
+- (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd;
+
+
+/**
+This method is called when video ad play completed or an error occurred.
+@param error : the reason of error
+*/
 - (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error;
 
 /**
- rewardedVideoAd publisher 终端返回 20000
- @param rewardedVideoAd 当前激励视频对象
- @param verify 有效性验证结果
- */
+Server verification which is requested asynchronously is succeeded.
+@param verify :return YES when return value is 2000.
+*/
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify;
 
 /**
- rewardedVideoAd publisher 终端返回非 20000
- @param rewardedVideoAd 当前激励视频对象
- */
+Server verification which is requested asynchronously is failed.
+Return value is not 2000.
+*/
 - (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd;
-
+/**
+This method is called when the user clicked skip button.
+*/
+- (void)rewardedVideoAdDidClickSkip:(BURewardedVideoAd *)rewardedVideoAd;
 @end
 </div></code></pre>
-<h4 id="2113-%E5%AE%9E%E4%BE%8B">2.11.3 实例</h4>
-<pre class="hljs"><code><div>    BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
-    model.userId = @&quot;xxx&quot;; // 接入方填入
-    model.isShowDownloadBar = YES; // 控制视频播放过程中是否展示下载Bar，默认YES
-    self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:self.viewModel.slotID rewardedVideoModel:model];
-    self.rewardedVideoAd.delegate = self;
-    [self.rewardedVideoAd loadAdData];
+<h4 id="2123-%E5%AE%9E%E4%BE%8B">2.12.3 实例</h4>
+<pre class="hljs"><code><div>BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
+model.userId = @&quot;123&quot;;
+model.isShowDownloadBar = YES;
+self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:self.viewModel.slotID rewardedVideoModel:model];
+self.rewardedVideoAd.delegate = self;
+[self.rewardedVideoAd loadAdData];
 </div></code></pre>
-<h4 id="2114-burewardedvideomodel">2.11.4 BURewardedVideoModel</h4>
+<h4 id="2124-burewardedvideomodel">2.12.4 BURewardedVideoModel</h4>
 <pre class="hljs"><code><div>@interface BURewardedVideoModel : NSObject
 
-// 第三方游戏 user_id 标识，必传 (主要是用于奖励判定过程中，服务器到服务器回调透传的参数，是游戏对用户的唯一标识；非服务器回调模式在视频播完回调时也会透传给游戏应用)
+/**
+required.
+Third-party game user_id identity.
+Mainly used in the reward issuance, it is the callback pass-through parameter from server-to-server.
+It is the unique identifier of each user.
+In the non-server callback mode, it will also be pass-through when the video is finished playing.
+Only the string can be passed in this case, not nil.
+*/
 @property (nonatomic, copy) NSString *userId;
 
-// 奖励名称，可选
+//optional. reward name.
 @property (nonatomic, copy) NSString *rewardName;
 
-// 奖励数量，可选
+//optional. number of rewards.
 @property (nonatomic, assign) NSInteger rewardAmount;
 
-// 序列化后的字符串，可选
+//optional. serialized string.
 @property (nonatomic, copy) NSString *extra;
 
-// 是否展示下载 Bar，默认 YES
+// Whether to display the download Bar, the default is YES.
 @property (nonatomic, assign) BOOL isShowDownloadBar;
 
 @end
 </div></code></pre>
-<h4 id="2115-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9B%9E%E8%B0%83">2.11.5 服务器到服务器回调</h4>
+<h4 id="2125-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9B%9E%E8%B0%83">2.12.5 服务器到服务器回调</h4>
 <p>服务器到服务器回调让您判定是否提供奖励给观看广告的用户。当用户成功看完广告时，您可以在头条媒体平台配置从头条服务器到您自己的服务器的回调链接，以通知您用户完成了操作。</p>
 <h5 id="%E5%9B%9E%E8%B0%83%E6%96%B9%E5%BC%8F%E8%AF%B4%E6%98%8E">回调方式说明</h5>
 <p>头条服务器会以 GET 方式请求第三方服务的回调链接，并拼接以下参数回传：</p>
@@ -2116,7 +2329,7 @@ sign = sha256(appSecurityKey:transId)</p>
     &quot;isValid&quot;: true
 }
 </div></code></pre>
-<h4 id="2116-admob%E9%80%9A%E8%BF%87customevent-adapter%E6%96%B9%E5%BC%8F%E8%81%9A%E5%90%88%E6%BF%80%E5%8A%B1%E8%A7%86%E9%A2%91">2.11.6 AdMob通过CustomEvent Adapter方式聚合激励视频</h4>
+<h4 id="2126-admob%E9%80%9A%E8%BF%87customevent-adapter%E6%96%B9%E5%BC%8F%E8%81%9A%E5%90%88%E6%BF%80%E5%8A%B1%E8%A7%86%E9%A2%91">2.12.6 AdMob通过CustomEvent Adapter方式聚合激励视频</h4>
 <p>通过AdMob聚合激励视频有两种方式，第一种是通过AdMob广告联盟方式，第二种是通过CustomEvent Adapter方式聚合。目前今日头条暂支持第二种方式，需要您配置CustomEvent并实现CustomEvent Adapter。请参考<a href="https://developers.google.com/admob/ios/rewarded-video-adapters?hl=zh-CN">Rewarded Video Adapters</a>官网指南</p>
 <p>请求激励视频方式请参考<a href="https://developers.google.com/admob/ios/rewarded-video?hl=zh-CN">Rewarded Video</a>官方指南</p>
 <p>广告测试请参考<a href="https://developers.google.com/admob/ios/test-ads?hl=zh-CN#enable_test_devices">Test Ads</a></p>
@@ -2125,145 +2338,169 @@ sign = sha256(appSecurityKey:transId)</p>
 <li><strong>配置CustomEvent时，Class Name与实现的Adapter类名要保持统一，否则无法调起adapter</strong></li>
 <li><strong>iOS simulator默认是 Enable test device类型设备，只能获取到Google Test Ads，无法取得今日头条测试广告，若要测试今日头条广告，请使用iOS真机设备，并且不要添加成AdMob TestDevices</strong></li>
 </ul>
-<h3 id="212-%E5%85%A8%E5%B1%8F%E8%A7%86%E9%A2%91bufullscreenvideoad">2.12 全屏视频(BUFullscreenVideoAd)</h3>
+<h3 id="213-%E5%85%A8%E5%B1%8F%E8%A7%86%E9%A2%91bufullscreenvideoad">2.13 全屏视频(BUFullscreenVideoAd)</h3>
 <ul>
 <li><strong>类型说明：</strong> 全屏视频是全屏展示视频广告的广告形式，用户可选择在不同场景插入对应广告；这类广告的长度为 15-30 秒，可以跳过，且广告会显示结束endCard页面，引导用户进行后续动作。</li>
 </ul>
-<h4 id="2121-bufullscreenvideoad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.12.1 BUFullscreenVideoAd接口说明</h4>
+<h4 id="2131-bufullscreenvideoad%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.13.1 BUFullscreenVideoAd接口说明</h4>
 <p><strong>每次需要生成新的BUFullscreenVideoAd对象调用loadAdData方法请求最新激励视频，请勿重复使用本地缓存激励视频多次展示.</strong></p>
-<pre class="hljs"><code><div>@interface BURewardedVideoAd : NSObject
+<pre class="hljs"><code><div>@interface BUFullscreenVideoAd : NSObject
+
 @property (nonatomic, weak, nullable) id&lt;BUFullscreenVideoAdDelegate&gt; delegate;
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
 /**
- 初始化 BUFullscreenVideoAd
- 
- @param slotID 代码位ID
- @return BUFullscreenVideoAd
- */
+Initializes video ad with slot id.
+@param slotID : the unique identifier of video ad.
+@return BUFullscreenVideoAd
+*/
 - (instancetype)initWithSlotID:(NSString *)slotID;
 
 /**
- 加载数据
- */
+Load video ad datas.
+*/
 - (void)loadAdData;
 
 /**
- 展示视频广告
-
- @param rootViewController 展示视频的根视图
- @return 是否成功展示
- */
+Display video ad.
+@param rootViewController : root view controller for displaying ad.
+@return : whether it is successfully displayed.
+*/
 - (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;
 
 @end
 </div></code></pre>
-<h4 id="2122-bufullscreenvideoad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.12.2 BUFullscreenVideoAd回调说明</h4>
-<pre class="hljs"><code><div>/**
- 视频广告物料加载成功
- */
+<h4 id="2132-bufullscreenvideoad%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E">2.13.2 BUFullscreenVideoAd回调说明</h4>
+<pre class="hljs"><code><div>@protocol BUFullscreenVideoAdDelegate &lt;NSObject&gt;
+
+@optional
+
+/**
+This method is called when video ad material loaded successfully.
+*/
 - (void)fullscreenVideoMaterialMetaAdDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd;
 
 /**
- 视频广告视频素材缓存成功
- */
-- (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd;
-
-/**
- 广告位即将展示
- */
-- (void)fullscreenVideoAdWillVisible:(BUFullscreenVideoAd *)fullscreenVideoAd;
-
-/**
- 视频广告关闭
- */
-- (void)fullscreenVideoAdDidClose:(BUFullscreenVideoAd *)fullscreenVideoAd;
-
-/**
- 视频广告点击下载
- */
-- (void)fullscreenVideoAdDidClickDownload:(BUFullscreenVideoAd *)fullscreenVideoAd;
-
-/**
- 视频广告素材加载失败
- 
- @param fullscreenVideoAd 当前视频对象
- @param error 错误对象
- */
+This method is called when video ad materia failed to load.
+@param error : the reason of error
+*/
 - (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error;
 
 /**
- 视频广告播放完成或发生错误
- 
- @param fullscreenVideoAd 当前视频对象
- @param error 错误对象
- */
+This method is called when video ad creatives is cached successfully.
+*/
+- (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd;
+
+/**
+This method is called when video ad slot will be showing.
+*/
+- (void)fullscreenVideoAdWillVisible:(BUFullscreenVideoAd *)fullscreenVideoAd;
+
+/**
+This method is called when video ad slot has been shown.
+*/
+- (void)fullscreenVideoAdDidVisible:(BUFullscreenVideoAd *)fullscreenVideoAd;
+
+/**
+This method is called when video ad is clicked.
+*/
+- (void)fullscreenVideoAdDidClick:(BUFullscreenVideoAd *)fullscreenVideoAd;
+
+/**
+This method is called when video ad is about to close.
+*/
+- (void)fullscreenVideoAdWillClose:(BUFullscreenVideoAd *)fullscreenVideoAd;
+
+/**
+This method is called when video ad is closed.
+*/
+- (void)fullscreenVideoAdDidClose:(BUFullscreenVideoAd *)fullscreenVideoAd;
+
+
+/**
+This method is called when video ad play completed or an error occurred.
+@param error : the reason of error
+*/
 - (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error;
 
 /**
- 视频广告播放点击跳过
-
- @param fullscreenVideoAd 当前视频对象
- */
+This method is called when the user clicked skip button.
+*/
 - (void)fullscreenVideoAdDidClickSkip:(BUFullscreenVideoAd *)fullscreenVideoAd;
 
 @end
 </div></code></pre>
-<h4 id="2123-%E5%AE%9E%E4%BE%8B">2.12.3 实例</h4>
+<h4 id="2133-%E5%AE%9E%E4%BE%8B">2.13.3 实例</h4>
 <pre class="hljs"><code><div>- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-#warning 每次请求数据 需要重新创建一个对应的 BUFullscreenVideoAd管理,不可使用同一条重复请求数据.
+    #warning----- Every time the data is requested, a new one BUFullscreenVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
     self.fullscreenVideoAd = [[BUFullscreenVideoAd alloc] initWithSlotID:self.viewModel.slotID];
     self.fullscreenVideoAd.delegate = self;
     [self.fullscreenVideoAd loadAdData];
+    [self.view addSubview:self.button];
 }
 
-// 视频数据加载完成后可以选择时机展示,保证视频流畅性
-- (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    // 物料有效 数据不为空且没有展示过为 YES, 重复展示不计费.
+- (UIButton *)button {
+    if (!_button) {
+        CGSize size = [UIScreen mainScreen].bounds.size;
+        _button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
+        [_button setTitle:[NSString localizedStringForKey:ShowFullScreenVideo] forState:UIControlStateNormal];
+        [_button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _button;
+}
+
+- (void)buttonTapped:(id)sender {
+    /**Return YES when material is effective,data is not empty and has not been displayed.
+    Repeated display is not charged.
+    */
     [self.fullscreenVideoAd showAdFromRootViewController:self.navigationController];
 }
 
 </div></code></pre>
 <h2 id="%E9%99%84%E5%BD%95">附录</h2>
 <h3 id="sdk%E9%94%99%E8%AF%AF%E7%A0%81">SDK错误码</h3>
-<p>主要在数据获取异常在回调方法中处理</p>
-<pre class="hljs"><code><div>// BUNativeAd广告加载失败后的回调方法，在delegate中处理
-
+<p>主要在数据获取异常在回调方法中处理,如下实例</p>
+<pre class="hljs"><code><div>
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError * _Nullable)error;
-
-// banner广告加载失败后的回调方法，在delegate中处理
 
 - (void)bannerAdView:(BUBannerAdView *)bannerAdView didLoadFailWithError:(NSError * _Nullable)error
 
+- (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error;
+
 </div></code></pre>
 <p>下面是各种error code的值</p>
-<pre class="hljs"><code><div>    BUErrorCodeNOAdError        = -3,     // 解析的数据没有广告
-    BUErrorCodeNetError         = -2,     // 网络请求失败
-    BUErrorCodeParseError       = -1,     // 解析失败
-    BUErrorCodeParamEroor       = 10001,  // 参数错误
-    BUErrorCodeTimeout          = 10002,
-    BUErrorCodeSuccess          = 20000,
-    BUErrorCodeNOAD             = 20001,  // 没有广告
-    BUErrorCodeContentType      = 40000,  // http conent_type错误
-    BUErrorCodeRequestPBError   = 40001,  // http request pb错误
-    BUErrorCodeAppEmpty         = 40002,  // 请求app不能为空
-    BUErrorCodeWapEMpty         = 40003,  // 请求wap不能为空
-    BUErrorCodeAdSlotEmpty      = 40004,  // 缺少广告位描述
-    BUErrorCodeAdSlotSizeEmpty  = 40005,  // 广告位尺寸 不合法
-    BUErrorCodeAdSlotIDError    = 40006,  // 广告位 ID 不合法
-    BUErrorCodeAdCountError     = 40007,  // 请求广告数量 错误
-    BUErrorCodeAdPackageIncomplete = 40025, // 引入SDK包不完整，建议校验SDK包完整性或联系技术支持
+<pre class="hljs"><code><div>    BUErrorCodeOpenAPPStoreFail = -4,       // failed to open appstore
+    BUErrorCodeNOAdError        = -3,       // parsed data has no ads
+    BUErrorCodeNetError         = -2,       // network request failed
+    BUErrorCodeParseError       = -1,       // parsing failed
     
-    BUErrorCodeSysError         = 50001   // 广告服务器错误
-    服务器错误码
-    ERROR_CODE_SIZE_ERROR     		      = 40008 //没有填写素材尺寸，或者素材尺寸大于 10000
-    ERROR_CODE_UnionAdSiteId_ERROR		  = 40009 //媒体是空，或者没有运行
-    ERROR_CODE_UnionRequestInvalid_ERROR  = 40015 //媒体已经被通知整改三次以上,进行校验,如果字段非法,则不返回广告
-    ERROR_CODE_UnionAppSiteRel_ERROR      = 40016 //请求的 appid 与媒体平台的 appid 不一致 
-    									  = 40018 //SDK包名与穿山甲配置包名不一致
+    BUErrorCodeNERenderResultError= 101,    // native Express ad, render result parse fail
+    BUErrorCodeNETempError        = 102,    // native Express ad, template is invalid
+    BUErrorCodeNETempPluginError  = 103,    // native Express ad, template plugin is invalid
+    BUErrorCodeNEDataError        = 104,    // native Express ad, data is invalid
+    BUErrorCodeNEParseError       = 105,    // native Express ad, parse fail
+    BUErrorCodeNERenderError      = 106,    // native Express ad, render fail
+    BUErrorCodeNERenderTimoutError= 107,    // native Express ad, render timeout
+    
+    BUErrorCodeParamError       = 10001,    // parameter error
+    BUErrorCodeTimeout          = 10002,
 
+    BUErrorCodeSuccess          = 20000,
+    BUErrorCodeNOAD             = 20001,    // no ads
+    
+    BUErrorCodeContentType      = 40000,    // http conent_type error
+    BUErrorCodeRequestPBError   = 40001,    // http request pb error
+    BUErrorCodeAppEmpty         = 40002,    // request app can't be empty
+    BUErrorCodeWapEMpty         = 40003,    // request wap can't be empty
+    BUErrorCodeAdSlotEmpty      = 40004,    // missing ad slot description
+    BUErrorCodeAdSlotSizeEmpty  = 40005,    // the ad slot size is invalid
+    BUErrorCodeAdSlotIDError    = 40006,    // the ad slot ID is invalid
+    BUErrorCodeAdCountError     = 40007,    // request the wrong number of ads
+    BUErrorCodeAdPackageIncomplete = 40025, // the SDK package is incomplete. It is recommended to verify the integrity of SDK package or contact technical support.
+    
+    BUErrorCodeSysError         = 50001     // ad server error
 </div></code></pre>
 <h3 id="faq">FAQ</h3>
 <ol>
@@ -2289,7 +2526,7 @@ sign = sha256(appSecurityKey:transId)</p>
 </li>
 <li>
 <p>iOS集成的包大小是多少?</p>
-<p>答	: 根据我们demo打包后的计算为580k左右. 但是具体大小会根据导入的功能有所差别. 实际情况以集成后的包大小为主.</p>
+<p>答	: 根计算方式为打包后生成.ipa文件增量,不同版本SDK大小会有差异，可以参考穿山甲平台包大小，或者下载包名字，例如union_platform_iOS_1.9.8.5_773k，包大小为773k. 但是具体大小会根据导入的功能有所差别. 实际情况以集成后的包大小为主.</p>
 </li>
 <li>
 <p>激励视频和全屏视频中物料加载成功回调和广告视频素材缓存成功回调有什么区别?</p>

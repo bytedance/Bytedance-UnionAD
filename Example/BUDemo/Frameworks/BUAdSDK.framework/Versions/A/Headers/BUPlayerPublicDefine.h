@@ -2,23 +2,19 @@
 //  BUPlayerPublicDefine.h
 //  BUAdSDK
 //
-//  Created by bytedance_yuanhuan on 2018/8/5.
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 
 #ifndef BUPlayerPublicDefine_h
 #define BUPlayerPublicDefine_h
 
-/**
- * 播放器种状态
- */
 typedef NS_ENUM(NSInteger, BUPlayerPlayState) {
-    BUPlayerStateFailed    = 0,  // 播放失败
-    BUPlayerStateBuffering = 1,  // 缓冲中
-    BUPlayerStatePlaying   = 2,  // 播放中
-    BUPlayerStateStopped   = 3,  // 停止播放
-    BUPlayerStatePause     = 4,   // 暂停播放
-    BUPlayerStateDefalt    = 5    // 初始化状态
+    BUPlayerStateFailed    = 0,
+    BUPlayerStateBuffering = 1,
+    BUPlayerStatePlaying   = 2,
+    BUPlayerStateStopped   = 3,
+    BUPlayerStatePause     = 4,
+    BUPlayerStateDefalt    = 5
 };
 
 @class BUPlayer;
@@ -27,26 +23,26 @@ typedef NS_ENUM(NSInteger, BUPlayerPlayState) {
 
 @optional
 /**
- * 播放器状态改变
+ This method is called when the player status changes.
  */
 - (void)player:(BUPlayer *)player stateDidChanged:(BUPlayerPlayState)playerState;
 /**
- * 播放器准备完成
+ This method is called when the player is ready.
  */
 - (void)playerReadyToPlay:(BUPlayer *)player;
 /**
- * 播放完成或者发生错误
+ This method is called when the player plays completion or occurrs error.
  */
 - (void)playerDidPlayFinish:(BUPlayer *)player error:(NSError *)error;
 
 /**
- * 播放器上识别的点击事件
+ This method is called when the player is clicked.
  */
 - (void)player:(BUPlayer *)player recognizeTapGesture:(UITapGestureRecognizer *)gesture;
 
 
 /**
- * 播放器播放过程中视图被点击
+ This method is called when the view is clicked during ad play.
  */
 - (void)playerTouchesBegan:(BUPlayer *)player;
 

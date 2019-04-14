@@ -2,7 +2,7 @@
 //  BUDDrawVideoViewController.m
 //  BUDemo
 //
-//  Created by 崔亚楠 on 2018/9/20.
+//  Created by iCuiCui on 2018/9/20.
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 
@@ -57,7 +57,7 @@
     
     NSMutableArray *datas = [NSMutableArray array];
     for (NSInteger i =0 ; i <= 15; i++) {
-        [datas addObject:@"App的tableViewcell"];
+        [datas addObject:@"App tableViewcell"];
     }
     self.dataSource = [datas copy];
     
@@ -86,7 +86,7 @@
     if ([cell isKindOfClass:[BUDDrawNormalTableViewCell class]]) {
         NSInteger cellIndex = [(BUDDrawNormalTableViewCell *)cell videoId];
         NSInteger lastCellIndex = [_lastCell isKindOfClass:[BUDDrawNormalTableViewCell class]]?[(BUDDrawNormalTableViewCell *)_lastCell videoId]:200;
-        if (cellIndex != lastCellIndex) {//同一屏不再重新刷新
+        if (cellIndex != lastCellIndex) {
             [(BUDDrawNormalTableViewCell *)cell autoPlay];
         }
     }else if ([_lastCell isKindOfClass:[BUDDrawNormalTableViewCell class]]){
@@ -99,8 +99,8 @@
     BUNativeAdsManager *nad = [BUNativeAdsManager new];
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
-    slot1.AdType = BUAdSlotAdTypeDrawVideo; //必须
-    slot1.isOriginAd = YES; //必须
+    slot1.AdType = BUAdSlotAdTypeDrawVideo; //required
+    slot1.isOriginAd = YES; //required
     slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_DrawFullScreen];
     slot1.isSupportDeepLink = YES;

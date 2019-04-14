@@ -10,6 +10,16 @@
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
 			<key>Title</key>
+			<string>native express id</string>
+			<key>Key</key>
+			<string>native_express_slot_id</string>
+			<key>DefaultValue</key>
+			<string>900546131</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
 			<string>splash slot id</string>
 			<key>Key</key>
 			<string>splash_slot_id</string>

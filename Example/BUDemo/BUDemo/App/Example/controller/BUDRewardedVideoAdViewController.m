@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-#warning 每次请求数据 需要重新创建一个对应的 BURewardedVideoAd管理,不可使用同一条重复请求数据.
+#warning Every time the data is requested, a new one BURewardedVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = @"123";
     model.isShowDownloadBar = YES;
@@ -40,21 +40,20 @@
     self.button.center = CGPointMake(self.view.center.x, self.view.center.y*1.5);
 }
 
-#pragma mark 延迟加载
+#pragma mark Lazy loading
 - (UIButton *)button {
     if (!_button) {
         CGSize size = [UIScreen mainScreen].bounds.size;
         _button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
-        [_button setTitle:@"展示激励视频" forState:UIControlStateNormal];
+        [_button setTitle:[NSString localizedStringForKey:ShowRewardVideo] forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _button;
 }
 
-#pragma mark 事件处理
-
 - (void)buttonTapped:(id)sender {
-    // 物料有效 数据不为空且没有展示过为 YES, 重复展示不计费.
+    // Return YES when material is effective,data is not empty and has not been displayed.
+    //Repeated display is not charged.
     [self.rewardedVideoAd showAdFromRootViewController:self.navigationController];
 }
 
@@ -127,7 +126,6 @@
     return YES;
 }
 
-// 支持哪些屏幕方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }

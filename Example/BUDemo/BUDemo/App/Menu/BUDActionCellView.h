@@ -11,10 +11,10 @@
 #import "BUDActionCellDefine.h"
 
 typedef NS_ENUM(NSInteger, BUDCellType) {
-    BUDCellType_native            = 0,       // 原生广告
-    BUDCellType_normal            = 1,       // 正常广告
-    BUDCellType_video             = 2,       // 视频广告
-    BUDCellType_setting           = 3,       // 设置
+    BUDCellType_native            = 0,       // native ad
+    BUDCellType_normal            = 1,       // non native ad
+    BUDCellType_video             = 2,       // video ad
+    BUDCellType_setting           = 3,       // setting
     BUDCellType_CustomEvent       = 4        // CustomEvent
 };
 

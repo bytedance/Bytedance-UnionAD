@@ -2,7 +2,6 @@
 //  BURewardedVideoAd.h
 //  BUAdSDK
 //
-//  Created by gdp on 2018/1/11.
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 
@@ -18,7 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id<BURewardedVideoAdDelegate> delegate;
 
 /**
- 物料有效 数据不为空且没有展示过为 YES, 重复展示不计费.
+ Whether material is effective.
+ Setted to YES when data is not empty and has not been displayed.
+ Repeated display is not billed.
  */
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
@@ -33,83 +34,68 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /**
- rewardedVideoAd 激励视频广告-物料-加载成功
- @param rewardedVideoAd 当前激励视频素材
+ This method is called when video ad material loaded successfully.
  */
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd;
 
 /**
- rewardedVideoAd 激励视频广告-视频-加载成功
- @param rewardedVideoAd 当前激励视频素材
- */
-- (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd;
-
-/**
- rewardedVideoAd 广告位即将展示
- 
- @param rewardedVideoAd 当前激励视频对象
- */
-- (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd;
-
-/**
- rewardedVideoAd 广告位已经展示
- 
- @param rewardedVideoAd 当前激励视频对象
- */
-- (void)rewardedVideoAdDidVisible:(BURewardedVideoAd *)rewardedVideoAd;
-
-/**
- rewardedVideoAd 激励视频广告即将关闭
- 
- @param rewardedVideoAd 当前激励视频对象
- */
-- (void)rewardedVideoAdWillClose:(BURewardedVideoAd *)rewardedVideoAd;
-
-/**
- rewardedVideoAd 激励视频广告关闭
- 
- @param rewardedVideoAd 当前激励视频对象
- */
-- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd;
-
-/**
- rewardedVideoAd 激励视频广告点击
- 
- @param rewardedVideoAd 当前激励视频对象
- */
-- (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd;
-
-/**
- rewardedVideoAd 激励视频广告素材加载失败
- 
- @param rewardedVideoAd 当前激励视频对象
- @param error 错误对象
+ This method is called when video ad materia failed to load.
+ @param error : the reason of error
  */
 - (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error;
 
 /**
- rewardedVideoAd 激励视频广告播放完成或发生错误
- 
- @param rewardedVideoAd 当前激励视频对象
- @param error 错误对象
+ This method is called when cached successfully.
+ */
+- (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+ This method is called when video ad slot will be showing.
+ */
+- (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+ This method is called when video ad slot has been shown.
+ */
+- (void)rewardedVideoAdDidVisible:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+ This method is called when video ad is about to close.
+ */
+- (void)rewardedVideoAdWillClose:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+ This method is called when video ad is closed.
+ */
+- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+ This method is called when video ad is clicked.
+ */
+- (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd;
+
+
+/**
+ This method is called when video ad play completed or an error occurred.
+ @param error : the reason of error
  */
 - (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error;
 
 /**
- 服务器校验后的结果,异步 rewardedVideoAd publisher 终端返回 20000
- 
- @param rewardedVideoAd 当前激励视频对象
- @param verify 有效性验证结果
+ Server verification which is requested asynchronously is succeeded.
+ @param verify :return YES when return value is 2000.
  */
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify;
 
 /**
- rewardedVideoAd publisher 终端返回非 20000
- 
- @param rewardedVideoAd 当前激励视频对象
+ Server verification which is requested asynchronously is failed.
+ Return value is not 2000.
  */
 - (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd;
-
+/**
+ This method is called when the user clicked skip button.
+ */
+- (void)rewardedVideoAdDidClickSkip:(BURewardedVideoAd *)rewardedVideoAd;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -2,7 +2,6 @@
 //  BUDislikeWords.h
 //  BUAdSDK
 //
-//  Created by carl on 2017/8/10.
 //  Copyright © 2017年 bytedance. All rights reserved.
 //
 

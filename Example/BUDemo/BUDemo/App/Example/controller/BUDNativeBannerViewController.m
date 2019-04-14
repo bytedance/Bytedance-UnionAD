@@ -114,8 +114,8 @@
 }
 
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error {
-    NSString *info = @"banner素材加载失败";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"native" message:info delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    NSString *info = @"banner material load failed";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"native" message:info delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
     
     [alert show];
 }

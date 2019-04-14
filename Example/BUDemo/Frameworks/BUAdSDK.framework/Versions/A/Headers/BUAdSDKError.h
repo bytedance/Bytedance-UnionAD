@@ -2,7 +2,6 @@
 //  BUAdSDKError.h
 //  BUAdSDK
 //
-//  Created by carl on 2017/7/29.
 //  Copyright © 2017年 bytedance. All rights reserved.
 //
 
@@ -12,26 +11,34 @@ extern NSErrorDomain BUErrorDomain ;
 
 typedef NS_ENUM(NSInteger, BUErrorCode) {
     
-    BUErrorCodeOpenAPPStoreFail = -4, // 打开appstore失败
-    BUErrorCodeNOAdError        = -3, // 解析的数据没有广告
-    BUErrorCodeNetError         = -2, // 网络请求失败
-    BUErrorCodeParseError       = -1, // 解析失败
+    BUErrorCodeOpenAPPStoreFail = -4,       // failed to open appstore
+    BUErrorCodeNOAdError        = -3,       // parsed data has no ads
+    BUErrorCodeNetError         = -2,       // network request failed
+    BUErrorCodeParseError       = -1,       // parsing failed
     
-    BUErrorCodeParamError       = 10001,  // 参数错误
+    BUErrorCodeNERenderResultError= 101,    // native Express ad, render result parse fail
+    BUErrorCodeNETempError        = 102,    // native Express ad, template is invalid
+    BUErrorCodeNETempPluginError  = 103,    // native Express ad, template plugin is invalid
+    BUErrorCodeNEDataError        = 104,    // native Express ad, data is invalid
+    BUErrorCodeNEParseError       = 105,    // native Express ad, parse fail
+    BUErrorCodeNERenderError      = 106,    // native Express ad, render fail
+    BUErrorCodeNERenderTimoutError= 107,    // native Express ad, render timeout
+    
+    BUErrorCodeParamError       = 10001,    // parameter error
     BUErrorCodeTimeout          = 10002,
 
     BUErrorCodeSuccess          = 20000,
-    BUErrorCodeNOAD             = 20001,  // 没有广告
+    BUErrorCodeNOAD             = 20001,    // no ads
     
-    BUErrorCodeContentType      = 40000,  // http conent_type错误
-    BUErrorCodeRequestPBError   = 40001,  // http request pb错误
-    BUErrorCodeAppEmpty         = 40002,  // 请求app不能为空
-    BUErrorCodeWapEMpty         = 40003,  // 请求wap不能为空
-    BUErrorCodeAdSlotEmpty      = 40004,  // 缺少广告位描述
-    BUErrorCodeAdSlotSizeEmpty  = 40005,  // 广告位尺寸 不合法
-    BUErrorCodeAdSlotIDError    = 40006,  // 广告位 ID 不合法
-    BUErrorCodeAdCountError     = 40007,  // 请求广告数量 错误
-    BUErrorCodeAdPackageIncomplete = 40025, // 引入SDK包不完整，建议校验SDK包完整性或联系技术支持
+    BUErrorCodeContentType      = 40000,    // http conent_type error
+    BUErrorCodeRequestPBError   = 40001,    // http request pb error
+    BUErrorCodeAppEmpty         = 40002,    // request app can't be empty
+    BUErrorCodeWapEMpty         = 40003,    // request wap can't be empty
+    BUErrorCodeAdSlotEmpty      = 40004,    // missing ad slot description
+    BUErrorCodeAdSlotSizeEmpty  = 40005,    // the ad slot size is invalid
+    BUErrorCodeAdSlotIDError    = 40006,    // the ad slot ID is invalid
+    BUErrorCodeAdCountError     = 40007,    // request the wrong number of ads
+    BUErrorCodeAdPackageIncomplete = 40025, // the SDK package is incomplete. It is recommended to verify the integrity of SDK package or contact technical support.
     
-    BUErrorCodeSysError         = 50001   // 广告服务器错误
+    BUErrorCodeSysError         = 50001     // ad server error
 };

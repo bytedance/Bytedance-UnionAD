@@ -30,7 +30,7 @@
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic, assign) BOOL isNormalView; // 是否为普通视图
+@property (nonatomic, assign) BOOL isNormalView;
 @property (nonatomic, strong) BUDNormalButton *collectionBtn;
 @property (nonatomic, strong) BUDNormalButton *normalBtn;
 @property (nonatomic, strong) BUNativeAdRelatedView *relatedView;
@@ -56,18 +56,18 @@
 - (void)bulidSettingBtn {
     CGSize size = [UIScreen mainScreen].bounds.size;
     self.collectionBtn = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height * 0.4, 0, 0)];
-    [_collectionBtn setTitle:@"加载Collection样式" forState:UIControlStateNormal];
+    [_collectionBtn setTitle:[NSString localizedStringForKey:LoadCollectionView] forState:UIControlStateNormal];
     [_collectionBtn addTarget:self action:@selector(buildCollection) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_collectionBtn];
     
     self.normalBtn = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height * 0.6, 0, 0)];
-    [_normalBtn setTitle:@"加载普通页面样式" forState:UIControlStateNormal];
+    [_normalBtn setTitle:[NSString localizedStringForKey:LoadView] forState:UIControlStateNormal];
     [_normalBtn addTarget:self action:@selector(buildNormalView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_normalBtn];
 }
 
 - (void)buildCollection {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"完成加载" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished loading" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
     self.collectionBtn.hidden = YES;
     self.normalBtn.hidden = YES;
@@ -78,7 +78,7 @@
 }
 
 - (void)buildNormalView {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"完成加载" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished loading" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
     self.collectionBtn.hidden = YES;
     self.normalBtn.hidden = YES;
@@ -88,23 +88,16 @@
 }
 
 - (void)buildUICollectionView {
-    //1.初始化layout
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    //设置collectionView滚动方向
     [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    //该方法也可以设置itemSize
     layout.minimumLineSpacing = 2;
     
-    //2.初始化collectionView
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 200, self.view.frame.size.width,300) collectionViewLayout:layout];
     [self.view addSubview:self.collectionView];
     self.collectionView.backgroundColor = [UIColor clearColor];
     
-    //3.注册collectionViewCell
-    //注意，此处的ReuseIdentifier 必须和 cellForItemAtIndexPath 方法中 一致 均为 cellId
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellId"];
     
-    //4.设置代理
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
 }
@@ -114,7 +107,7 @@
     CGFloat cusViewWidth = 290;
     CGFloat leftMargin = cusViewWidth/20;
     _relatedView = [[BUNativeAdRelatedView alloc] init];
-    // Custom 视图测试
+    // Custom view test
     _customview = [[UIView alloc] initWithFrame:CGRectMake(5, 5, cusViewWidth, cusViewWidth)];
     _customview.backgroundColor = [UIColor grayColor];
     [self.view addSubview:_customview];
@@ -128,13 +121,13 @@
     
     _infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin, leftMargin, swidth - leftMargin * 2, 30)];
     _infoLabel.backgroundColor = [UIColor magentaColor];
-    _infoLabel.text = @"test ads";
+    _infoLabel.text = [NSString localizedStringForKey:Testads];
     _infoLabel.adjustsFontSizeToFitWidth = YES;
     [_customview addSubview:_infoLabel];
     
     CGFloat buttonWidth = ceilf((swidth-4 * leftMargin)/3);
     _actionButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(_infoLabel.frame), CGRectGetMaxY(_infoLabel.frame)+5, buttonWidth, 30)];
-    [_actionButton setTitle:@"自定义按钮" forState:UIControlStateNormal];
+    [_actionButton setTitle:[NSString localizedStringForKey:CustomBtn] forState:UIControlStateNormal];
     _actionButton.userInteractionEnabled = YES;
     _actionButton.backgroundColor = [UIColor orangeColor];
     _actionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -142,7 +135,7 @@
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_actionButton.frame)+5, CGRectGetMaxY(_infoLabel.frame)+5, 150, 30)];
     _titleLabel.backgroundColor = [UIColor clearColor];
-    _titleLabel.text = @"ads title";
+    _titleLabel.text = [NSString localizedStringForKey:AdsTitle];
     _titleLabel.adjustsFontSizeToFitWidth = YES;
     [_customview addSubview:_titleLabel];
     
@@ -151,15 +144,15 @@
     _imageView.backgroundColor = [UIColor redColor];
     [_customview addSubview:_imageView];
     
-    // 添加视频视图
+    // add video view
     [_customview addSubview:self.relatedView.videoAdView];
-    // 添加logo视图
+    // add logo view
     self.relatedView.logoImageView.frame = CGRectZero;
     [_customview addSubview:self.relatedView.logoImageView];
-    // 添加dislike按钮
+    // add dislike view
     self.relatedView.dislikeButton.frame = CGRectMake(CGRectGetMaxX(_infoLabel.frame) - 20, CGRectGetMaxY(_infoLabel.frame)+5, 24, 20);
     [_customview addSubview:self.relatedView.dislikeButton];
-    // 添加广告标签
+    // add ad lable
     self.relatedView.adLabel.frame = CGRectZero;
     [_customview addSubview:self.relatedView.adLabel];
     
@@ -208,7 +201,7 @@
     self.relatedView.logoImageView.frame = CGRectMake(CGRectGetMaxX(rect) - 15 , CGRectGetMaxY(rect) - 15, 15, 15);
     self.relatedView.adLabel.frame = CGRectMake(CGRectGetMinX(rect), CGRectGetMaxY(rect) - 14, 26, 14);
     
-    // imageMode来决定是否展示视频
+    // imageMode decides whether to show video or not
     if (adMeta.imageMode == BUFeedVideoAdModeImage) {
         self.imageView.hidden = YES;
         self.relatedView.videoAdView.hidden = NO;
@@ -234,8 +227,8 @@
 #pragma mark - BUNativeAdDelegate
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error
 {
-    NSString *info = @"物料加载失败";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"native" message:info delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    NSString *info = @"material load failed";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"native" message:info delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
     
     [alert show];
 }
@@ -243,8 +236,8 @@
 - (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *)view
 {
     NSString *str = NSStringFromClass([view class]);
-    NSString *info = [NSString stringWithFormat:@"点击了 %@", str];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"广告" message:info delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    NSString *info = [NSString stringWithFormat:@"clicked %@", str];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ad" message:info delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
     
     [alert show];
 }
@@ -256,7 +249,6 @@
 
 #pragma mark - UICollectionViewDataSource
 
-//每个section的item个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 9;
@@ -283,7 +275,6 @@
     return cell;
 }
 
-//设置每个item的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(300, 300);

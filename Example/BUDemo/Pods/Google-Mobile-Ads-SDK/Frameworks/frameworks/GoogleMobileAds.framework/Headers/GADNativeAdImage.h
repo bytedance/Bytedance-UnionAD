@@ -20,7 +20,7 @@ GAD_SUBCLASSING_RESTRICTED
 @property(nonatomic, readonly, strong, nullable) UIImage *image;
 
 /// The image's URL.
-@property(nonatomic, readonly, copy) NSURL *imageURL;
+@property(nonatomic, readonly, copy, nullable) NSURL *imageURL;
 
 /// The image's scale.
 @property(nonatomic, readonly, assign) CGFloat scale;

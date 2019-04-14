@@ -47,7 +47,7 @@ static CGSize const logoSize = {20, 20};
     CGSize size = [UIScreen mainScreen].bounds.size;
     self.refreshbutton = [[BUDNormalButton alloc]initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
     self.refreshbutton.showRefreshIncon = YES;
-    [self.refreshbutton setTitle:@"展示原生插屏" forState:UIControlStateNormal];
+    [self.refreshbutton setTitle:[NSString localizedStringForKey:NativeInterstitial] forState:UIControlStateNormal];
     [self.refreshbutton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.refreshbutton];
     
@@ -177,8 +177,8 @@ static CGSize const logoSize = {20, 20};
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error
 {
     BUD_Log(@"nativeAd data load faiule");
-    NSString *info = @"物料加载失败";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"native" message:info delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    NSString *info = @"material load failed";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"native" message:info delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
     
     [alert show];
 }

@@ -10,9 +10,9 @@
 
 @implementation UIView (Draw)
 
-- (bool)inScreen {
+- (BOOL)inScreen {
     if (!self) { return NO; }
-    // 若view隐藏
+    // If the view hidden
     UIView *currentNode = self;
     while (currentNode.superview != nil) {
         if (currentNode.hidden) {
@@ -21,7 +21,7 @@
         currentNode = currentNode.superview;
     }
     
-    // 若没有superview
+    // If no superview
     currentNode = self;
     while (currentNode.superview != nil) {
         currentNode = currentNode.superview;
@@ -32,18 +32,17 @@
     
     CGRect screenRect = [UIScreen mainScreen].bounds;
     
-    // 转换view对应window的Rect
+
     CGRect rect = [self convertRect:self.bounds toView:[UIApplication sharedApplication].keyWindow];
     if (CGRectIsEmpty(rect) || CGRectIsNull(rect)) {
         return NO;
     }
     
-    // 若size为CGrectZero
+    // If the size is CGrectZero
     if (CGSizeEqualToSize(rect.size, CGSizeZero)) {
         return NO;
     }
     
-    // 获取view与window交叉的Rect
     CGRect intersectionRect = CGRectIntersection(rect, screenRect);
     if (CGRectIsEmpty(intersectionRect) || CGRectIsNull(intersectionRect)) {
         return NO;

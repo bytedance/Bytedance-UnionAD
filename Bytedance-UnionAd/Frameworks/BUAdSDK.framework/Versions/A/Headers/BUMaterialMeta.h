@@ -2,7 +2,6 @@
 //  BUMaterialMeta.h
 //  BUAdSDK
 //
-//  Created by chenren on 10/05/2017.
 //  Copyright © 2017 bytedance. All rights reserved.
 //
 
@@ -12,60 +11,61 @@
 
 typedef NS_ENUM(NSInteger, BUInteractionType) {
     BUInteractionTypeCustorm = 0,
-    BUInteractionTypeNO_INTERACTION = 1,        // 纯展示广告
-    BUInteractionTypeURL = 2,                   // 使用浏览器打开网页
-    BUInteractionTypePage = 3,                  // 应用内打开网页
-    BUInteractionTypeDownload = 4,              // 下载应用
-    BUInteractionTypePhone = 5,                 // 拨打电话
-    BUInteractionTypeMessage = 6,               // 发送短信
-    BUInteractionTypeEmail = 7,                 // 发邮件
-    BUInteractionTypeVideoAdDetail = 8          // 视频广告详情页
+    BUInteractionTypeNO_INTERACTION = 1,  // pure ad display
+    BUInteractionTypeURL = 2,             // open the webpage using a browser
+    BUInteractionTypePage = 3,            // open the webpage within the app
+    BUInteractionTypeDownload = 4,        // download the app
+    BUInteractionTypePhone = 5,           // make a call
+    BUInteractionTypeMessage = 6,         // send messages
+    BUInteractionTypeEmail = 7,           // send email
+    BUInteractionTypeVideoAdDetail = 8    // video ad details page
 };
 
 typedef NS_ENUM(NSInteger, BUFeedADMode) {
     BUFeedADModeSmallImage = 2,
     BUFeedADModeLargeImage = 3,
     BUFeedADModeGroupImage = 4,
-    BUFeedVideoAdModeImage = 5, // 视频广告 || 激励视频横屏
-    BUFeedVideoAdModePortrait = 15 // 激励视频竖屏
+    BUFeedVideoAdModeImage = 5, // video ad || rewarded video ad horizontal screen
+    BUFeedVideoAdModePortrait = 15, // rewarded video ad vertical screen
+    BUFeedADModeImagePortrait = 16
 };
 
 @interface BUMaterialMeta : NSObject <NSCoding>
 
-/// 广告支持的交互类型
+/// interaction types supported by ads.
 @property (nonatomic, assign) BUInteractionType interactionType;
 
-/// 素材图片
+/// material pictures.
 @property (nonatomic, strong) NSArray<BUImage *> *imageAry;
 
-/// 图标图片
+/// ad logo icon.
 @property (nonatomic, strong) BUImage *icon;
 
-/// 广告标题
+/// ad headline.
 @property (nonatomic, copy) NSString *AdTitle;
 
-/// 广告描述
+/// ad description.
 @property (nonatomic, copy) NSString *AdDescription;
 
-/// 广告来源
+/// ad source.
 @property (nonatomic, copy) NSString *source;
 
-/// 创意按钮显示文字
+/// text displayed on the creative button.
 @property (nonatomic, copy) NSString *buttonText;
 
-/// feed广告的展示类型，banner广告忽略
+/// display format of the in-feed ad, other ads ignores it.
 @property (nonatomic, assign) BUFeedADMode imageMode;
 
-/// 评分（星级），取值范围1-5
+/// Star rating, range from 1 to 5.
 @property (nonatomic, assign) NSInteger score;
 
-/// 评论人数
+/// Number of comments.
 @property (nonatomic, assign) NSInteger commentNum;
 
-/// 广告安装包大小,单位byte
+/// ad installation package size, unit byte.
 @property (nonatomic, assign) NSInteger appSize;
 
-/// 媒体配置参数
+/// media configuration parameters.
 @property (nonatomic, strong) NSDictionary *mediaExt;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict error:(NSError * __autoreleasing *)error;

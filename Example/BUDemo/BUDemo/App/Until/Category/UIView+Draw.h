@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (Draw)
-- (bool)inScreen;
+- (BOOL)inScreen;
 - (CGFloat)left;
 - (CGFloat)right;
 - (CGFloat)top;

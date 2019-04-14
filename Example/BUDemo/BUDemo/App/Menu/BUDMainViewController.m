@@ -20,8 +20,10 @@
 #import "BUDCustomEventViewController.h"
 #import "BUDFullscreenViewController.h"
 #import "BUNativeSettingViewController.h"
+#import "BUDNativeExpressViewController.h"
 #import "BUDMacros.h"
 #import <BUAdSDK/BUAdSDK.h>
+
 
 @interface BUDMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -44,17 +46,21 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    UILabel *versionLable = [[UILabel alloc]initWithFrame:CGRectMake(0, self.tableView.frame.size.height - 150, self.tableView.frame.size.width, 40)];
-    versionLable.textAlignment = NSTextAlignmentCenter;
-    versionLable.text = [NSString stringWithFormat:@"V%@",[BUAdSDKManager SDKVersion]];
-    versionLable.textColor = [UIColor grayColor];
-    [self.tableView addSubview:versionLable];
-    
     Class plainActionCellClass = [BUDActionCellView class];
     [self.tableView registerClass:plainActionCellClass forCellReuseIdentifier:NSStringFromClass(plainActionCellClass)];
     
     BUDActionModel *settingVC = [BUDActionModel plainTitleActionModel:@"Native" type:BUDCellType_native action:^{
         BUNativeSettingViewController *vc = [[BUNativeSettingViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    BUDActionModel *nativeExpressModel = [BUDActionModel plainTitleActionModel:@"NativeExpress" type:BUDCellType_native action:^{
+        BUDNativeExpressViewController *vc = [[BUDNativeExpressViewController alloc] init];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *slotId =  [defaults objectForKey:@"native_express_slot_id"];
+        viewModel.slotID = slotId;
+        vc.viewModel = viewModel;
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
@@ -64,36 +70,36 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *slotId =  [defaults objectForKey:@"banner_slot_id"];
         viewModel.slotID = slotId;
-//        viewModel.slotID = @"900546859";  //应用下载
+//        viewModel.slotID = @"900546859";  //downloading
         vc.viewModel = viewModel;
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *item6 = [BUDActionModel plainTitleActionModel:@"插屏广告" type:BUDCellType_normal action:^{
+    BUDActionModel *item6 = [BUDActionModel plainTitleActionModel:@"Interstitial" type:BUDCellType_normal action:^{
         BUDInterstitialViewController *vc = [BUDInterstitialViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *slotId =  [defaults objectForKey:@"interstitial_slot_id"];
         viewModel.slotID = slotId;
-//        viewModel.slotID = @"900546957";  //应用下载
+//        viewModel.slotID = @"900546957";  //downloading
         vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *item7 = [BUDActionModel plainTitleActionModel:@"开屏广告" type:BUDCellType_normal action:^{
+    BUDActionModel *item7 = [BUDActionModel plainTitleActionModel:@"Splash" type:BUDCellType_normal action:^{
         BUDSplashViewController *vc = [BUDSplashViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *slotId =  [defaults objectForKey:@"splash_slot_id"];
         viewModel.slotID = slotId;
-//        viewModel.slotID = @"800546808";  //落地页
+//        viewModel.slotID = @"800546808";  //landing pages
         vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *fullscreenItem = [BUDActionModel plainTitleActionModel:@"全屏视频" type:BUDCellType_video action:^{
+    BUDActionModel *fullscreenItem = [BUDActionModel plainTitleActionModel:@"FullScreen" type:BUDCellType_video action:^{
         BUDFullscreenViewController *vc = [BUDFullscreenViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
         viewModel.slotID = @"900546299";
@@ -102,13 +108,10 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *item10 = [BUDActionModel plainTitleActionModel:@"激励视频" type:BUDCellType_video action:^{
+    BUDActionModel *item10 = [BUDActionModel plainTitleActionModel:@"RewardVideo" type:BUDCellType_video action:^{
         BUDRewardedVideoAdViewController *vc = [BUDRewardedVideoAdViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-//        viewModel.slotID = @"900546311";  //应用下载
-//        viewModel.slotID = @"900546421";  //访问对方服务器
-//        viewModel.slotID = @"900546748";  //不访问对方服务器
-        viewModel.slotID = @"900546826";    //访问对方服务器 在ETCD中删除了预览，请主动建立预览
+        viewModel.slotID = @"900546826";
         vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
@@ -120,13 +123,24 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *item8 = [BUDActionModel plainTitleActionModel:@"工具" type:BUDCellType_setting action:^{
+    BUDActionModel *item8 = [BUDActionModel plainTitleActionModel:@"Tools" type:BUDCellType_setting action:^{
         BUDSettingViewController *vc = [BUDSettingViewController new];
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.items = @[@[settingVC], @[item4, item6, item7], @[fullscreenItem,item10], @[item12], @[item8]];
+    self.items = @[@[settingVC, nativeExpressModel], @[item4, item6, item7], @[fullscreenItem,item10], @[item12], @[item8]];
+    
+    CGFloat height = 22 * self.items.count;
+    for (NSArray *subItem in self.items) {
+        height += 44 * subItem.count;
+    }
+    height += 30;
+    UILabel *versionLable = [[UILabel alloc]initWithFrame:CGRectMake(0, height, self.tableView.frame.size.width, 40)];
+    versionLable.textAlignment = NSTextAlignmentCenter;
+    versionLable.text = [NSString stringWithFormat:@"v%@",[BUAdSDKManager SDKVersion]];
+    versionLable.textColor = [UIColor grayColor];
+    [self.tableView addSubview:versionLable];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -157,10 +171,9 @@
     return YES;
 }
 
-// 支持哪些屏幕方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskAll; // 避免有些只有横屏情况
+    return UIInterfaceOrientationMaskAll; // Avoid some situations where it's just landscape
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -177,7 +190,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
+    return 0.01;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

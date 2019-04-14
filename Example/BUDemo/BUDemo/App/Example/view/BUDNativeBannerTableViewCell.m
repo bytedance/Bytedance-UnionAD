@@ -95,7 +95,8 @@ static CGSize const logoSize = {58, 18.5};
         gradientLayer.frame = CGRectMake(0, model.imgeViewHeight -60, contentWidth, 60);
         [adImageView.layer addSublayer:gradientLayer];
         
-        NSString * titleString = [NSString stringWithFormat:@"【左右滑动】第%d张广告，共%lu张",i+1,(unsigned long)materialMeta.imageAry.count];
+        NSString * titleString = [NSString stringWithFormat:@"Total Page:%lu, Current page:%d",materialMeta.imageAry.count,i+1];
+
         UILabel *titleLable = [UILabel new];
         titleLable.frame = CGRectMake(10, model.imgeViewHeight-10-20, contentWidth-100, 20);
         titleLable.textColor = BUD_RGB(0xff, 0xff, 0xff);

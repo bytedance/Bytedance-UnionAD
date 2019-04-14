@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface BUDNormalButton : UIButton
-@property (nonatomic,assign) bool showRefreshIncon;
+@property (nonatomic,assign) BOOL showRefreshIncon;
 @end

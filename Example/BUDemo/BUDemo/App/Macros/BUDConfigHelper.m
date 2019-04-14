@@ -21,14 +21,14 @@
 }
 
 - (void)readingPreference {
-    //获取Settings.bundle路径
+    //Get path of Settings.bundle
     NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
     if(!settingsBundle)
     {
-        BUD_Log(@"找不到Settings.bundle文件");
+        BUD_Log(@"can't find file of Settings.bundle");
         return;
     }
-    //读取Settings.bundle里面的配置信息
+    // read Settings.bundle
     NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
     NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
     NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:[preferences count]];

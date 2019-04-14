@@ -2,7 +2,7 @@
 //  BUDDrawAdTableViewCell.h
 //  BUDemo
 //
-//  Created by 崔亚楠 on 2018/9/20.
+//  Created by iCuiCui on 2018/9/20.
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 
@@ -28,7 +28,7 @@
 @end
 
 @interface BUDDrawAdTableViewCell : BUDDrawBaseTableViewCell<BUDDrawCellProtocol>
-@property (nonatomic, strong) UIButton *creativeButton; //创意按钮
-@property (nonatomic, strong) BUNativeAdRelatedView *nativeAdRelatedView;//相关的展示控件
+@property (nonatomic, strong) UIButton *creativeButton;
+@property (nonatomic, strong) BUNativeAdRelatedView *nativeAdRelatedView;
 - (void)refreshUIWithModel:(BUNativeAd *_Nonnull)model;
 @end

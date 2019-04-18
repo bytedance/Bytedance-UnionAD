@@ -36,11 +36,11 @@ GAD_SUBCLASSING_RESTRICTED
 /// Array of available asset keys.
 @property(nonatomic, readonly) NSArray<NSString *> *availableAssetKeys;
 
-/// Video controller for controlling the ad's video content.
+/// Returns video controller for controlling receiver's video.
 @property(nonatomic, readonly, strong) GADVideoController *videoController;
 
-/// Media view for rendering the ad's video content. This property is nil if the ad doesn't have
-/// video content.
+/// Returns media view for rendering video loaded by the receiver. Returns nil if receiver doesn't
+/// has a video.
 @property(nonatomic, readonly, strong, nullable) GADMediaView *mediaView;
 
 /// Custom click handler. Set this property only if this template ad is configured with a custom

@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "BUAdSlot.h"
+
 @class BUFullscreenVideoAd;
 
 @protocol BUFullscreenVideoAdDelegate <NSObject>
@@ -91,5 +93,13 @@
  @return : whether it is successfully displayed.
  */
 - (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;
+
+/**
+ Display video ad.
+ @param rootViewController : root view controller for displaying ad.
+ @param sceneDescirbe : optional. Identifies a custom description of the presentation scenario.
+ @return : whether it is successfully displayed.
+ */
+- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController ritSceneDescribe:(NSString *_Nullable)sceneDescirbe;
 
 @end

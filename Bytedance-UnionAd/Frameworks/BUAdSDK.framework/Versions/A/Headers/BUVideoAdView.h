@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BUPlayerPublicDefine.h"
+#import "BUMaterialMeta.h"
 
 @class BUMaterialMeta;
 
@@ -80,6 +81,23 @@ NS_ASSUME_NONNULL_BEGIN
  This method is called when videoadview end of play.
  */
 - (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView;
+
+/**
+ This method is called when videoadview is clicked.
+ */
+- (void)videoAdViewDidClick:(BUVideoAdView *)videoAdView;
+
+/**
+ This method is called when videoadview's finish view is clicked.
+ */
+- (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView;
+
+/**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)videoAdViewDidCloseOtherController:(BUVideoAdView *)videoAdView interactionType:(BUInteractionType)interactionType;
+
 @end
 
 NS_ASSUME_NONNULL_END

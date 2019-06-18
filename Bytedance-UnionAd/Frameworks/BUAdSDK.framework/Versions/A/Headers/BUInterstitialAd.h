@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BUAdSDKDefines.h"
+#import "BUMaterialMeta.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -71,7 +72,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)interstitialAdDidClose:(BUInterstitialAd *)interstitialAd;
 
-
+/**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)interstitialAdDidCloseOtherController:(BUInterstitialAd *)interstitialAd interactionType:(BUInteractionType)interactionType;
 @end
 
 NS_ASSUME_NONNULL_END

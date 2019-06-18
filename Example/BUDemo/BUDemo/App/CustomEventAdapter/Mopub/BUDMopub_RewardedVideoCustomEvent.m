@@ -38,7 +38,7 @@
 }
     
 -(void)presentRewardedVideoFromViewController:(UIViewController *)viewController {
-    [self.rewardVideoAd showAdFromRootViewController:viewController];
+    [self.rewardVideoAd showAdFromRootViewController:viewController ritScene:0 ritSceneDescribe:nil];
 }
 
 -(BOOL)enableAutomaticImpressionAndClickTracking {

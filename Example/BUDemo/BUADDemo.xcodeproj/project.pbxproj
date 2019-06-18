@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A8B1A022271A25A0048DE10 /* BUDemoLanguage.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A8B1A002271A25A0048DE10 /* BUDemoLanguage.strings */; };
 		5A988611221AAE16006459BD /* NSString+LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A98860F221AAE16006459BD /* NSString+LocalizedString.m */; };
 		5AB9E0642229561F001B15CE /* BUDImagePortraitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9E0632229561F001B15CE /* BUDImagePortraitViewController.m */; };
 		5AB9E06722295644001B15CE /* BUDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9E06522295644001B15CE /* BUDCollectionViewCell.m */; };
@@ -94,6 +95,9 @@
 		05C4E22FADCD2F7815223297 /* Pods-Demo-BUADDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		12EFB7EDD6E2C6DC1D7875A1 /* Pods-Demo-BUADDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo.release.xcconfig"; sourceTree = "<group>"; };
 		2209523E35A5A34BE85EF785 /* libPods-Demo-BUADDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo-BUADDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A8B1A012271A25A0048DE10 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BUDemoLanguage.strings; sourceTree = "<group>"; };
+		5A8B1A032271A2650048DE10 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/BUDemoLanguage.strings; sourceTree = "<group>"; };
+		5A8B1A042271A26E0048DE10 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BUDemoLanguage.strings"; sourceTree = "<group>"; };
 		5A98860F221AAE16006459BD /* NSString+LocalizedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LocalizedString.m"; sourceTree = "<group>"; };
 		5A988610221AAE16006459BD /* NSString+LocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LocalizedString.h"; sourceTree = "<group>"; };
 		5A988612221AAE81006459BD /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -349,6 +353,7 @@
 				DE84BD7921A2E9600090D866 /* Resource */,
 				DE84BD7221A2E9600090D866 /* Support */,
 				DE84BD8621A2E9600090D866 /* Info.plist */,
+				5A8B1A002271A25A0048DE10 /* BUDemoLanguage.strings */,
 			);
 			path = BUDemo;
 			sourceTree = "<group>";
@@ -622,6 +627,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				"zh-Hans",
 			);
 			mainGroup = 78E0729C21A2BF41006D71EE;
 			productRefGroup = 78E072A621A2BF41006D71EE /* Products */;
@@ -650,6 +657,7 @@
 				DE84BDBB21A2E9600090D866 /* drawLocal_01.mp4 in Resources */,
 				DE84BDB421A2E9600090D866 /* Main.storyboard in Resources */,
 				DE84BDBE21A2E9600090D866 /* drawLocal_06.mp4 in Resources */,
+				5A8B1A022271A25A0048DE10 /* BUDemoLanguage.strings in Resources */,
 				DE84BDBC21A2E9600090D866 /* drawLocal_03.mp4 in Resources */,
 				DE84BDBA21A2E9600090D866 /* drawLocal_00.mp4 in Resources */,
 			);
@@ -666,7 +674,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo-resources.sh",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Internal/Common/MPAdBrowserController.xib",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn@2x.png",
@@ -717,7 +725,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D104421B1E67501A272790CF /* [CP] Check Pods Manifest.lock */ = {
@@ -811,6 +819,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		5A8B1A002271A25A0048DE10 /* BUDemoLanguage.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A8B1A012271A25A0048DE10 /* en */,
+				5A8B1A032271A2650048DE10 /* ja */,
+				5A8B1A042271A26E0048DE10 /* zh-Hans */,
+			);
+			name = BUDemoLanguage.strings;
+			sourceTree = "<group>";
+		};
 		DE84BD7321A2E9600090D866 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

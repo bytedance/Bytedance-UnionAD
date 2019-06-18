@@ -79,7 +79,7 @@
 - (void)presentRewardBasedVideoAdWithRootViewController:(UIViewController *)viewController {
     if ([_rewardedVideoAd isAdValid]) {
         // The reward based video ad is available, present the ad.
-        [_rewardedVideoAd showAdFromRootViewController:viewController];
+        [_rewardedVideoAd showAdFromRootViewController:viewController ritScene:0 ritSceneDescribe:nil];
     } else {
         // Because publishers are expected to check that an ad is available before trying to show one,
         // the above conditional should always hold true. If for any reason the adapter is not ready to

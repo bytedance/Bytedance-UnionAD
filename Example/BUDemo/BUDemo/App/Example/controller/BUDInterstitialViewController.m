@@ -60,6 +60,19 @@
      BUD_Log(@"interstitialAd data load fail");
 }
 
+- (void)interstitialAdDidCloseOtherController:(BUInterstitialAd *)interstitialAd interactionType:(BUInteractionType)interactionType {
+    NSString *str = @"";
+    if (interactionType == BUInteractionTypePage) {
+        str = @"ladingpage";
+    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
+        str = @"videoDetail";
+    } else {
+        str = @"appstoreInApp";
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
+    [alert show];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

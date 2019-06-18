@@ -127,4 +127,17 @@
     }];
 }
 
+- (void)bannerAdViewDidCloseOtherController:(BUBannerAdView *)bannerAdView interactionType:(BUInteractionType)interactionType {
+    NSString *str = @"";
+    if (interactionType == BUInteractionTypePage) {
+        str = @"ladingpage";
+    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
+        str = @"videoDetail";
+    } else {
+        str = @"appstoreInApp";
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
+    [alert show];
+}
+
 @end

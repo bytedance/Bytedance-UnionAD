@@ -54,7 +54,8 @@
 - (void)buttonTapped:(id)sender {
     // Return YES when material is effective,data is not empty and has not been displayed.
     //Repeated display is not charged.
-    [self.rewardedVideoAd showAdFromRootViewController:self.navigationController];
+    [self.rewardedVideoAd showAdFromRootViewController:self.navigationController ritScene:BURitSceneType_home_get_bonus ritSceneDescribe:nil];
+//    [self.rewardedVideoAd showAdFromRootViewController:self.navigationController ritScene:BURitSceneType_custom ritSceneDescribe:@"scene_custom"];
 }
 
 #pragma mark BURewardedVideoAdDelegate

@@ -147,6 +147,11 @@
     BUD_Log(@"videoAdView didPlayFinish");
 }
 
+- (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finishView is clicked" message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
+    [alert show];
+}
+
 #pragma mark --- tableView dataSource&delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;

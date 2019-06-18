@@ -102,6 +102,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)nativeAdDidBecomeVisible:(BUNativeAd *)nativeAd;
 
 /**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)nativeAdDidCloseOtherController:(BUNativeAd *)nativeAd interactionType:(BUInteractionType)interactionType;
+
+/**
  This method is called when native ad is clicked.
  */
 - (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *_Nullable)view;

@@ -21,7 +21,7 @@
 }
 
 - (void)showInterstitialFromRootViewController:(UIViewController *)rootViewController {
-    [self.fullScreenVideo showAdFromRootViewController:rootViewController];
+    [self.fullScreenVideo showAdFromRootViewController:rootViewController ritSceneDescribe:nil];
 }
 
 - (BOOL)enableAutomaticImpressionAndClickTracking {
@@ -56,7 +56,7 @@
     [self.delegate interstitialCustomEventDidDisappear:self];
 }
 
-- (void)fullscreenVideoAdDidClickDownload:(BUFullscreenVideoAd *)fullscreenVideoAd {
+- (void)fullscreenVideoAdDidClick:(BUFullscreenVideoAd *)fullscreenVideoAd {
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
     [self.delegate trackClick];
 }

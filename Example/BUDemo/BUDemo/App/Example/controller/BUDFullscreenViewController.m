@@ -51,7 +51,7 @@
     /**Return YES when material is effective,data is not empty and has not been displayed.
     Repeated display is not charged.
      */
-    [self.fullscreenVideoAd showAdFromRootViewController:self.navigationController];
+    [self.fullscreenVideoAd showAdFromRootViewController:self.navigationController ritSceneDescribe:@"custom"];
 }
 
 #pragma mark BURewardedVideoAdDelegate

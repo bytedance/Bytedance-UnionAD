@@ -16,7 +16,7 @@
 #import "BUDRefreshButton.h"
 #import "BUDNormalButton.h"
 
-@interface BUDNativeViewController () <BUNativeAdDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface BUDNativeViewController () <BUNativeAdDelegate,BUVideoAdViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UIView *customview;
 @property (nonatomic, strong) UILabel *infoLabel;
@@ -146,6 +146,8 @@
     
     // add video view
     [_customview addSubview:self.relatedView.videoAdView];
+    self.relatedView.videoAdView.delegate = self;
+    
     // add logo view
     self.relatedView.logoImageView.frame = CGRectZero;
     [_customview addSubview:self.relatedView.logoImageView];
@@ -164,7 +166,6 @@
 -(void)buttonTapped:(UIButton *)sender {
     [self loadNativeAd];
 }
-
 
 - (void)loadNativeAd {
     BUNativeAd *nad = [[BUNativeAd alloc] init];;
@@ -186,6 +187,8 @@
     
     [nad loadAdData];
 }
+
+#pragma mark - BUNativeAdDelegate
 
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
     self.ad_load = nil;
@@ -223,8 +226,6 @@
     [nativeAd registerContainer:self.customview withClickableViews:@[self.infoLabel, self.actionButton]];
 }
 
-
-#pragma mark - BUNativeAdDelegate
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error
 {
     NSString *info = @"material load failed";
@@ -245,6 +246,45 @@
 - (void)nativeAdDidBecomeVisible:(BUNativeAd *)nativeAd
 {
     
+}
+
+
+-(void)nativeAdDidCloseOtherController:(BUNativeAd *)nativeAd interactionType:(BUInteractionType)interactionType {
+    NSString *str = @"";
+    if (interactionType == BUInteractionTypePage) {
+        str = @"ladingpage";
+    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
+        str = @"videoDetail";
+    } else {
+        str = @"appstoreInApp";
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
+    [alert show];
+}
+
+#pragma mark - BUVideoAdViewDelegate
+
+- (void)videoAdViewDidClick:(BUVideoAdView *)videoAdView {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"click" message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
+    [alert show];
+}
+
+- (void)videoAdViewDidCloseOtherController:(BUVideoAdView *)videoAdView interactionType:(BUInteractionType)interactionType {
+    NSString *str = @"";
+    if (interactionType == BUInteractionTypePage) {
+        str = @"ladingpage";
+    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
+        str = @"videoDetail";
+    } else {
+        str = @"appstoreInApp";
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
+    [alert show];
+}
+
+- (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finishView is clicked" message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
+    [alert show];
 }
 
 #pragma mark - UICollectionViewDataSource

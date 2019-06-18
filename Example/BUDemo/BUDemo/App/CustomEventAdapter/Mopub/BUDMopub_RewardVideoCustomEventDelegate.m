@@ -33,7 +33,7 @@
     [self.adapter.delegate rewardedVideoDidDisappearForCustomEvent:self.adapter];
 }
     
-- (void)rewardedVideoAdDidClickDownload:(BURewardedVideoAd *)rewardedVideoAd {
+- (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd {
     [self.adapter.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self.adapter];
     [self.adapter.delegate trackClick];
 }

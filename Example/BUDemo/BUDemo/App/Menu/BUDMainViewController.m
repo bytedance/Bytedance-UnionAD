@@ -20,7 +20,7 @@
 #import "BUDCustomEventViewController.h"
 #import "BUDFullscreenViewController.h"
 #import "BUNativeSettingViewController.h"
-#import "BUDNativeExpressViewController.h"
+#import "BUDExpressViewController.h"
 #import "BUDMacros.h"
 #import <BUAdSDK/BUAdSDK.h>
 
@@ -55,12 +55,7 @@
     }];
     
     BUDActionModel *nativeExpressModel = [BUDActionModel plainTitleActionModel:@"NativeExpress" type:BUDCellType_native action:^{
-        BUDNativeExpressViewController *vc = [[BUDNativeExpressViewController alloc] init];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *slotId =  [defaults objectForKey:@"native_express_slot_id"];
-        viewModel.slotID = slotId;
-        vc.viewModel = viewModel;
+        BUDExpressViewController *vc = [[BUDExpressViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     

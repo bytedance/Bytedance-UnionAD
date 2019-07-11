@@ -19,7 +19,7 @@ The unique identifier of splash ad.
 @property (nonatomic, copy, readonly, nonnull) NSString *slotID;
 
 /**
- Maximum allowable load timeout, default 2s, unit s.
+ Maximum allowable load timeout, default 3s, unit s.
  */
 @property (nonatomic, assign) NSTimeInterval tolerateTimeout;
 

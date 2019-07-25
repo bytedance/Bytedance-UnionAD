@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <BUAdSDK/BUNativeAd.h>
+
+NS_ASSUME_NONNULL_BEGIN
 static CGFloat const bottomHeight = 30;
 
 @interface BUDBannerModel : NSObject
@@ -20,3 +22,4 @@ static CGFloat const bottomHeight = 30;
 @property (nonatomic, strong) BUDBannerModel *bannerModel;
 - (void)refreshUIWithModel:(BUDBannerModel *_Nonnull)model;
 @end
+NS_ASSUME_NONNULL_END

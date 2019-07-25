@@ -28,7 +28,4 @@
 //optional. serialized string.
 @property (nonatomic, copy) NSString *extra;
 
-// Whether to display the download Bar, the default is YES.
-@property (nonatomic, assign) BOOL isShowDownloadBar;
-
 @end

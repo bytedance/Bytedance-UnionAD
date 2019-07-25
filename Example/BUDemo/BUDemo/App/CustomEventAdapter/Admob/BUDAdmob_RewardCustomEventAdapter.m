@@ -51,7 +51,6 @@
 - (void)setUp {
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = @"123";
-    model.isShowDownloadBar = YES;
     ///配置slotId
     self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:@"900546748" rewardedVideoModel:model];
     self.rewardedVideoAd.delegate = _adapterDelegate;

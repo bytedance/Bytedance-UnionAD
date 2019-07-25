@@ -394,7 +394,7 @@ blockquote {
 <ul>
 <li><a href="#11-ios-sdk%E3%81%ABframework%E3%82%92%E5%B0%8E%E5%85%A5">1.1 iOS SDKにframeworkを導入</a>
 <ul>
-<li><a href="#111-%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AEappid%E3%81%A8slotid%E3%81%AE%E7%94%B3%E8%AB%8B">1.1.1 アプリケーションのAppIDとSlotIDの申請</a></li>
+<li><a href="#111-appid%E3%81%A8slotid%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B">1.1.1 AppIDとSlotIDを作成する</a></li>
 <li><a href="#112-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E8%A8%AD%E5%AE%9A%E3%81%ABframework%E3%82%92%E5%B0%8E%E5%85%A5%E3%81%99%E3%82%8B">1.1.2 プロジェクト設定にframeworkを導入する</a></li>
 <li><a href="#%E6%96%B9%E6%B3%95%E4%B8%80">方法一：</a></li>
 <li><a href="#%E6%96%B9%E6%B3%95%E4%BA%8C">方法二：</a></li>
@@ -454,15 +454,15 @@ blockquote {
 <!-- /TOC -->
 <h2 id="1-%E3%82%A6%E3%82%A7%E3%83%96%E3%82%B5%E3%82%A4%E3%83%88%E5%90%8C%E7%9B%9Fios-sdk%E3%81%AE%E6%8E%A5%E7%B6%9A">1. ウェブサイト同盟iOS SDKの接続</h2>
 <h3 id="11-ios-sdk%E3%81%ABframework%E3%82%92%E5%B0%8E%E5%85%A5">1.1 iOS SDKにframeworkを導入</h3>
-<h4 id="111-%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AEappid%E3%81%A8slotid%E3%81%AE%E7%94%B3%E8%AB%8B">1.1.1 アプリケーションのAppIDとSlotIDの申請</h4>
-<p>TikTok Audience NetworkにAppIDと広告SlotIDを申請してください。</p>
+<h4 id="111-appid%E3%81%A8slotid%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B">1.1.1 AppIDとSlotIDを作成する</h4>
+<p>TikTok Audience NetworkにアプリケーションIDと広告スロットIDを作成してください。</p>
 <h4 id="112-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E8%A8%AD%E5%AE%9A%E3%81%ABframework%E3%82%92%E5%B0%8E%E5%85%A5%E3%81%99%E3%82%8B">1.1.2 プロジェクト設定にframeworkを導入する</h4>
 <h4 id="%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A">方法一：</h4>
 <p>frameworkファイルを取得後、{BUAdSDK.framework, BUAdSDK.bundle}ファイルをプロジェクトに直接、ドラッグ&amp;ドロップすれば完了です。</p>
 <p>ドラッグ&amp;ドロップするときは、以下の方法で選択してください。</p>
-<p><img src="images/bu_1.png" alt="image"></p>
+<p><img src="http://sf1-ttcdn-tos.pstatp.com/img/union-platform/9537cbbf7a663781539ae6b07f2e646b.png~0x0_q100.webp" alt="image"></p>
 <p>ドラッグ&amp;ドロップ完了後は、Copy Bundle ResourcesにBUAdSDK.bundleが含まれていることを確認してください。含まれていないと、incon画像をロードできないことがあります。</p>
-<p><img src="images/bu_5.png" alt="image"></p>
+<p><img src="http://sf1-ttcdn-tos.pstatp.com/img/union-platform/f20b43b4fbed075820aa738ea1416bd4.png~0x0_q100.webp" alt="image"></p>
 <h4 id="%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A">方法二：</h4>
 <p>SDK2000バージョン以降はpod方式による接続をサポートしています。pod環境を設定し、podfileに以下のコードを入れるだけで接続できます。</p>
 <pre class="hljs"><code><div>pod 'Bytedance-UnionAD', '~&gt; 2.0.0.0'
@@ -482,12 +482,12 @@ blockquote {
 &lt;/dict&gt;
 </div></code></pre>
 <p>詳しい操作は図の通りです。</p>
-<p><img src="images/bu_2.png" alt="image"></p>
+<p><img src="http://sf1-ttcdn-tos.pstatp.com/img/union-platform/1944c1aad1895d2c6ab2ca7a259658d5.png~0x0_q100.webp" alt="image"></p>
 <ul>
 <li>Build SettingsのOther Linker Flags <strong>-ObjCパラメータを追加</strong>、SDKは同時に-all_loadをサポート
 詳しい操作は図の通りです。</li>
 </ul>
-<p><img src="images/bu_3.png" alt="image"></p>
+<p><img src="http://sf1-ttcdn-tos.pstatp.com/img/union-platform/e7723fa701c3ab9d9d7a787add33fdad.png~0x0_q100.webp" alt="image"></p>
 <h4 id="122-%E5%8B%95%E4%BD%9C%E7%92%B0%E5%A2%83">1.2.2 動作環境</h4>
 <ul>
 <li>iOS 8.X以上のシステムをサポート</li>
@@ -512,7 +512,7 @@ blockquote {
 <li>libz.tbd
 詳しい操作は図の通りです。</li>
 </ul>
-<p><img src="images/bu_4.png" alt="image"></p>
+<p><img src="http://sf1-ttcdn-tos.pstatp.com/img/union-platform/9729c0facdcba2a6aec2c23378e9eee7.png~0x0_q100.webp" alt="image"></p>
 <h2 id="2-sdk%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E7%B4%B9%E4%BB%8B%E3%81%A8%E5%BA%83%E5%91%8A%E3%81%AE%E6%8E%A5%E7%B6%9A">2. SDKインターフェイスクラスの紹介と広告の接続</h2>
 <h3 id="21-%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E8%A8%AD%E5%AE%9Abuadsdkmanager">2.1 グローバル設定(BUAdSDKManager)</h3>
 <p>BUAdSDKManagerクラスはSDK全体に設定されている入力ポートとインターフェイスであり、 SDKに関するグローバル情報の設定や、クラスメソッドの設定取得結果の提供が可能です。</p>
@@ -651,7 +651,6 @@ This method is called when the user clicked skip button.
 <h4 id="223-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9">2.2.3 インスタンス</h4>
 <pre class="hljs"><code><div>BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
 model.userId = @&quot;123&quot;;
-model.isShowDownloadBar = YES;
 self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:self.viewModel.slotID rewardedVideoModel:model];
 self.rewardedVideoAd.delegate = self;
 [self.rewardedVideoAd loadAdData];
@@ -677,9 +676,6 @@ Only the string can be passed in this case, not nil.
 
 //optional. serialized string.
 @property (nonatomic, copy) NSString *extra;
-
-// Whether to display the download Bar, the default is YES.
-@property (nonatomic, assign) BOOL isShowDownloadBar;
 
 @end
 
@@ -910,13 +906,14 @@ This method is called when the user clicked skip button.
 - (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error;
 </div></code></pre>
 <p>以下は各種のerror codeの値です。</p>
-<pre class="hljs"><code><div>    BUErrorCodeTempError        = -6,       // native template is invalid
+<pre class="hljs"><code><div>typedef NS_ENUM(NSInteger, BUErrorCode) {
+    BUErrorCodeTempError        = -6,       // native template is invalid
     BUErrorCodeTempAddationError= -5,       // native template addation is invalid
     BUErrorCodeOpenAPPStoreFail = -4,       // failed to open appstore
     BUErrorCodeNOAdError        = -3,       // parsed data has no ads
     BUErrorCodeNetError         = -2,       // network request failed
     BUErrorCodeParseError       = -1,       // parsing failed
-    
+
     BUErrorCodeNERenderResultError= 101,    // native Express ad, render result parse fail
     BUErrorCodeNETempError        = 102,    // native Express ad, template is invalid
     BUErrorCodeNETempPluginError  = 103,    // native Express ad, template plugin is invalid
@@ -924,15 +921,15 @@ This method is called when the user clicked skip button.
     BUErrorCodeNEParseError       = 105,    // native Express ad, parse fail
     BUErrorCodeNERenderError      = 106,    // native Express ad, render fail
     BUErrorCodeNERenderTimoutError= 107,    // native Express ad, render timeout
-    
+
     BUErrorCodeSDKStop          = 1000,     // SDK stop forcely
-    
+
     BUErrorCodeParamError       = 10001,    // parameter error
     BUErrorCodeTimeout          = 10002,
 
     BUErrorCodeSuccess          = 20000,
     BUErrorCodeNOAD             = 20001,    // no ads
-    
+
     BUErrorCodeContentType      = 40000,    // http conent_type error
     BUErrorCodeRequestPBError   = 40001,    // http request pb error
     BUErrorCodeAppEmpty         = 40002,    // request app can't be empty
@@ -956,8 +953,14 @@ This method is called when the user clicked skip button.
     BUUnionRequestLimitError    = 40020,    // The ad space registered by developers exceeds daily request limit
     BUUnionSignatureError       = 40021,    // Apk signature sha1 value is inconsistent with media platform entry
     BUUnionIncompleteError      = 40022,    // Whether the media request material is inconsistent with the media platform entry
+    BUUnionOSError              = 40023,    // The OS field is incorrectly filled
+    BUUnionLowVersion           = 40024,    // The SDK version is too low to return ads
     BUErrorCodeAdPackageIncomplete  = 40025,// the SDK package is incomplete. It is recommended to verify the integrity of SDK package or contact technical support.
+    BUUnionMedialCheckError     = 40026,    // Non-international account request for overseas delivery system
+
     BUErrorCodeSysError         = 50001     // ad server error
+};
+
 </div></code></pre>
 <h3 id="faq">FAQ</h3>
 <p>1.iOSの広告画面をappで開くと、閉じたり、戻ったりすることができません。</p>

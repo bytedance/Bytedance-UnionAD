@@ -18,6 +18,9 @@
 #import "RRFPSBar.h"
 #import "Mopub.h"
 #import "BUDMacros.h"
+#import <Bugly/Bugly.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -38,8 +41,9 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [self configAPM];
     [self configCustomEvent];
-    
+
     UIViewController *rootViewController = [self rootViewControllerStyleTwo];
     if (self.window == nil) {
         UIWindow *keyWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -47,14 +51,14 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
         self.window = keyWindow;
     }
     self.window.rootViewController = rootViewController;
-    
+
 #if DEBUG
     //Whether to open log. default is none.
     [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
 #endif
     [BUAdSDKManager setAppID:[BUDAdManager appKey]];
     [BUAdSDKManager setIsPaidApp:NO];
-    
+
     CGRect frame = [UIScreen mainScreen].bounds;
     BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:@"800546808" frame:frame];
     // tolerateTimeout = CGFLOAT_MAX , The conversion time to milliseconds will be equal to 0
@@ -69,6 +73,7 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 
     return YES;
 }
+
 
 - (UIViewController *)rootViewControllerStyleOne {
     UITabBarController *tabbarViewController = [[UITabBarController alloc] init];
@@ -97,6 +102,18 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
     BUDMainViewController *mainViewController = [[BUDMainViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     return nav;
+}
+
+- (void)configAPM {
+    //Bugly
+    BuglyConfig *buglyconfig = [[BuglyConfig alloc] init];
+    buglyconfig.debugMode = YES;
+    [Bugly startWithAppId:@"b39a3d744a" config:buglyconfig];
+    
+    //Fabric
+    [Fabric with:@[[Crashlytics class]]];
+    [Crashlytics sharedInstance].debugMode = YES;
+    [Fabric sharedSDK].debug = YES;
 }
 
 - (void)configCustomEvent {

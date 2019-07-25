@@ -9,6 +9,8 @@
 #import "BUVideoAdView.h"
 #import "BUNativeAd.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BUNativeAdRelatedView : NSObject
 
 /**
@@ -41,3 +43,5 @@
 - (void)refreshData:(BUNativeAd *)nativeAd;
 
 @end
+
+NS_ASSUME_NONNULL_END

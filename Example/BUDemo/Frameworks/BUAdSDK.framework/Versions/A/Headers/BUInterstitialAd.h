@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
  This method is called when interstitial ad material failed to load.
  @param error : the reason of error
  */
-- (void)interstitialAd:(BUInterstitialAd *)interstitialAd didFailWithError:(NSError *)error;
+- (void)interstitialAd:(BUInterstitialAd *)interstitialAd didFailWithError:(NSError * _Nullable)error;
 
 /**
  This method is called when interstitial ad slot will be showing.

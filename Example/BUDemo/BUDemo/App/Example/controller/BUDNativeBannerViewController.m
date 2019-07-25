@@ -87,8 +87,7 @@
         slot1.isSupportDeepLink = YES;
         slot1.isOriginAd = YES;
         
-        BUNativeAd *nad = [BUNativeAd new];
-        nad.adslot = slot1;
+        BUNativeAd *nad = [[BUNativeAd alloc] initWithSlot:slot1];
         nad.rootViewController = self;
         nad.delegate = self;
         self.nativeAd_load = nad;

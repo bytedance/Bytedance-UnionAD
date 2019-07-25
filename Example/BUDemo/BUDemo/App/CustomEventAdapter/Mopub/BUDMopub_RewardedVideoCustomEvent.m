@@ -25,7 +25,6 @@
     
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = @"123";
-    model.isShowDownloadBar = YES;
     
     BURewardedVideoAd *RewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:@"900546826" rewardedVideoModel:model];
     RewardedVideoAd.delegate = self.customEventDelegate;

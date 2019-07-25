@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BUDFeedNormalModel.h"
 
+NS_ASSUME_NONNULL_BEGIN
 @interface BUDFeedNormalTableViewCell : UITableViewCell
 @property (nonatomic, strong) BUDFeedNormalModel *model;
 @property (nonatomic, strong, nullable) UIView *separatorLine;
@@ -36,3 +37,4 @@
 @property (nonatomic, strong, nullable) UIImageView *img2;
 @property (nonatomic, strong, nullable) UIImageView *img3;
 @end
+NS_ASSUME_NONNULL_END

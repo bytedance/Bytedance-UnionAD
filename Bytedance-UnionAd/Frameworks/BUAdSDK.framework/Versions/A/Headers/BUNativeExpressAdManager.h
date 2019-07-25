@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Sent when views fail to load ad
  */
-- (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error;
+- (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *_Nullable)error;
 
 /**
  * This method is called when rendering a nativeExpressAdView successed, and nativeExpressAdView.size.height has been updated
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * This method is called when a nativeExpressAdView failed to render
  */
-- (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error;
+- (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *_Nullable)error;
 
 /**
  * Sent when an ad view is about to present modal content

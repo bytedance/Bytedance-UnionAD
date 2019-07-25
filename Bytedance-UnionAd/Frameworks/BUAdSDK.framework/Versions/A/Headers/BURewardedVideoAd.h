@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
  This method is called when video ad materia failed to load.
  @param error : the reason of error
  */
-- (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error;
+- (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error;
 
 /**
  This method is called when cached successfully.
@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
  This method is called when video ad play completed or an error occurred.
  @param error : the reason of error
  */
-- (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error;
+- (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error;
 
 /**
  Server verification which is requested asynchronously is succeeded.

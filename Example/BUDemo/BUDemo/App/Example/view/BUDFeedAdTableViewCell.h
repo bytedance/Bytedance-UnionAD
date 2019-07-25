@@ -12,7 +12,7 @@
 #import <BUAdSDK/BUNativeAd.h>
 #import <BUAdSDK/BUNativeAdRelatedView.h>
 
-
+NS_ASSUME_NONNULL_BEGIN
 @protocol BUDFeedCellProtocol <NSObject>
 
 @property (nonatomic, strong) UIButton *customBtn;
@@ -55,3 +55,4 @@
 @property (nonatomic, strong, nullable) UIImageView *iv3;
 @property (nonatomic, strong, nullable) BUDActionAreaView *actionView;
 @end
+NS_ASSUME_NONNULL_END

@@ -168,7 +168,7 @@
         }];
     }
     [self.tableView reloadData];
-    NSLog(@"【BytedanceUnion】原生模板拉取广告成功回调");
+    NSLog(@"【BytedanceUnion】个性化模板拉取广告成功回调");
 }
 
 - (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error {

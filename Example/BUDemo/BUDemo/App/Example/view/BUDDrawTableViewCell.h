@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <BUAdSDK/BUNativeAd.h>
 #import <BUAdSDK/BUNativeAdRelatedView.h>
-
+NS_ASSUME_NONNULL_BEGIN
 @protocol BUDDrawCellProtocol <NSObject>
 + (CGFloat)cellHeight;
 @end
@@ -32,3 +32,4 @@
 @property (nonatomic, strong) BUNativeAdRelatedView *nativeAdRelatedView;
 - (void)refreshUIWithModel:(BUNativeAd *_Nonnull)model;
 @end
+NS_ASSUME_NONNULL_END

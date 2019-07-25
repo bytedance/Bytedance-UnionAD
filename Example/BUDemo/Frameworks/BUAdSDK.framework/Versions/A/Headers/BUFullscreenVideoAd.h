@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "BUAdSlot.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class BUFullscreenVideoAd;
 
 @protocol BUFullscreenVideoAdDelegate <NSObject>
@@ -24,7 +26,7 @@
  This method is called when video ad materia failed to load.
  @param error : the reason of error
  */
-- (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error;
+- (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error;
 
 /**
  This method is called when video cached successfully.
@@ -61,7 +63,7 @@
  This method is called when video ad play completed or an error occurred.
  @param error : the reason of error
  */
-- (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error;
+- (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error;
 
 /**
  This method is called when the user clicked skip button.
@@ -103,3 +105,5 @@
 - (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController ritSceneDescribe:(NSString *_Nullable)sceneDescirbe;
 
 @end
+
+NS_ASSUME_NONNULL_END

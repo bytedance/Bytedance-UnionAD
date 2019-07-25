@@ -56,6 +56,10 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
     BUUnionRequestLimitError    = 40020,    // The ad space registered by developers exceeds daily request limit
     BUUnionSignatureError       = 40021,    // Apk signature sha1 value is inconsistent with media platform entry
     BUUnionIncompleteError      = 40022,    // Whether the media request material is inconsistent with the media platform entry
+    BUUnionOSError              = 40023,    // The OS field is incorrectly filled
+    BUUnionLowVersion           = 40024,    // The SDK version is too low to return ads
     BUErrorCodeAdPackageIncomplete  = 40025,// the SDK package is incomplete. It is recommended to verify the integrity of SDK package or contact technical support.
+    BUUnionMedialCheckError     = 40026,    // Non-international account request for overseas delivery system
+    
     BUErrorCodeSysError         = 50001     // ad server error
 };

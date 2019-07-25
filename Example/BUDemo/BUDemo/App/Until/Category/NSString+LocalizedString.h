@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString * const Testads;
 extern NSString * const AdsTitle;
 extern NSString * const Width;
@@ -44,8 +46,6 @@ extern NSString * const CustomClick;
 extern NSString * const Detail;
 extern NSString * const DownloadLinks;
 extern NSString * const URLLinks;
-
-NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (LocalizedString)
 

@@ -12,6 +12,7 @@
 #import <BUAdSDK/BUSize.h>
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDInterstitialViewController () <BUInterstitialAdDelegate>
 @property (nonatomic, strong) BUInterstitialAd *interstitialAd;

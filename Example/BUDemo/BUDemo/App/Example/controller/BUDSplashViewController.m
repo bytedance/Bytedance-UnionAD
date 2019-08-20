@@ -10,6 +10,7 @@
 #import <BUAdSDK/BUSplashAdView.h>
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDSplashViewController () <BUSplashAdDelegate>
 

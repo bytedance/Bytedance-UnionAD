@@ -13,6 +13,7 @@
 #import "BUDFeedNormalModel.h"
 #import "BUDFeedNormalTableViewCell.h"
 #import "BUDMacros.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDFeedViewController () <UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate>
 @property (strong, nonatomic) UITableView *tableView;

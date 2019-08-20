@@ -13,6 +13,7 @@
 #import "BUDMacros.h"
 #import "BUDNormalButton.h"
 #import "UIView+Draw.h"
+#import "NSString+LocalizedString.h"
 
 static CGSize const dislikeSize = {15, 15};
 static CGSize const logoSize = {20, 20};
@@ -163,14 +164,8 @@ static CGSize const logoSize = {20, 20};
         [self.nativeAd registerContainer:self.whiteBackgroundView    withClickableViews:@[self.titleLable,self.interstitialAdView,self.describeLable,self.dowloadButton]];
         [self.relatedView refreshData:nativeAd];
         
-        [self addAccessibilityIdentifierForQA];
+        [self addAccessibilityIdentifier];
     }
-}
-
-- (void)addAccessibilityIdentifierForQA {
-    self.interstitialAdView.accessibilityIdentifier = @"interaction_view";
-    self.relatedView.logoImageView.accessibilityIdentifier = @"interaction_logo";
-    self.dislikeButton.accessibilityIdentifier = @"interaction_close";
 }
 
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error
@@ -195,5 +190,13 @@ static CGSize const logoSize = {20, 20};
 -(void)buttonTapped:(UIButton *)sender {
     self.backgroundView.hidden = NO;
 }
+
+#pragma mark addAccessibilityIdentifier
+- (void)addAccessibilityIdentifier {
+    self.interstitialAdView.accessibilityIdentifier = @"interaction_view";
+    self.relatedView.logoImageView.accessibilityIdentifier = @"interaction_logo";
+    self.dislikeButton.accessibilityIdentifier = @"interaction_close";
+}
+
 
 @end

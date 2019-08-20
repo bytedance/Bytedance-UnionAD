@@ -8,6 +8,7 @@
 
 #import "BUDActionAreaView.h"
 #import <BUAdSDK/BUAdSDK.h>
+#import "NSString+LocalizedString.h"
 
 @implementation BUDActionAreaView
 

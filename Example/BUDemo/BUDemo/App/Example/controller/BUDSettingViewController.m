@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <AdSupport/AdSupport.h>
 #import "BUDMacros.h"
+#import "NSString+LocalizedString.h"
 
 #define LeftMargin 10
 #define RightMargin 10

@@ -9,6 +9,7 @@
 #import "BUDDrawTableViewCell.h"
 #import "BUDPlayerController.h"
 #import "BUDMacros.h"
+#import "NSString+LocalizedString.h"
 
 #define GlobleHeight [UIScreen mainScreen].bounds.size.height
 #define GlobleWidth [UIScreen mainScreen].bounds.size.width
@@ -194,12 +195,12 @@
         [self.creativeButton.layer setCornerRadius:3];
         [self.contentView addSubview:self.creativeButton];
     }
+    [self addAccessibilityIdentifier];
 }
 
 - (UIButton *)creativeButton{
     if (!_creativeButton) {
         _creativeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _creativeButton.accessibilityIdentifier = @"button";
         [_creativeButton setTitle:[NSString localizedStringForKey:Detail] forState:UIControlStateNormal];
         _creativeButton.backgroundColor = BUD_RGB(0x80,0xbb,0x41);
         _creativeButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -213,5 +214,14 @@
     [self.creativeButton setTitle:model.data.buttonText forState:UIControlStateNormal];
     [self.nativeAdRelatedView refreshData:model];
 }
+
+#pragma mark addAccessibilityIdentifier
+- (void)addAccessibilityIdentifier {
+    self.creativeButton.accessibilityIdentifier = @"button";
+    self.nativeAdRelatedView.videoAdView.accessibilityIdentifier = @"draw_view";
+    self.titleLabel.accessibilityIdentifier = @"draw_appname";
+    self.descriptionLabel.accessibilityIdentifier = @"draw_appdetial";
+}
+
 
 @end

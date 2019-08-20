@@ -65,6 +65,9 @@ typedef NS_ENUM(NSInteger, BUFeedADMode) {
 /// ad installation package size, unit byte.
 @property (nonatomic, assign) NSInteger appSize;
 
+// video duration
+@property (nonatomic, assign) NSInteger videoDuration;
+
 /// media configuration parameters.
 @property (nonatomic, strong) NSDictionary *mediaExt;
 

@@ -15,6 +15,7 @@
 #import "BUDMacros.h"
 #import "BUDRefreshButton.h"
 #import "BUDNormalButton.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDNativeViewController () <BUNativeAdDelegate,BUVideoAdViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
@@ -39,7 +40,9 @@
 
 @implementation BUDNativeViewController
 
-- (void)dealloc {}
+- (void)dealloc {
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -163,6 +166,10 @@
     [self.view addSubview:self.button];
 }
 
+- (void)updateLeftSeconds {
+    NSLog(@"====播放进度:%f",self.relatedView.videoAdView.currentPlayTime);
+}
+
 -(void)buttonTapped:(UIButton *)sender {
     [self loadNativeAd];
 }
@@ -210,6 +217,7 @@
         self.relatedView.videoAdView.hidden = NO;
         self.relatedView.videoAdView.frame = rect;
         [self.relatedView refreshData:nativeAd];
+        NSLog(@"====视频的时长为：%ld  %@",nativeAd.data.videoDuration,nativeAd.adslot.ID);
     } else {
         self.imageView.hidden = NO;
         self.relatedView.videoAdView.hidden = YES;
@@ -225,6 +233,7 @@
     // Register UIView with the native ad; the whole UIView will be clickable.
     [nativeAd registerContainer:self.customview withClickableViews:@[self.infoLabel, self.actionButton]];
 }
+
 
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error
 {
@@ -285,6 +294,10 @@
 - (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finishView is clicked" message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
+}
+
+- (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView {
+    NSLog(@"====视频播放完成");
 }
 
 #pragma mark - UICollectionViewDataSource

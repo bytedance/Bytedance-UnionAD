@@ -17,6 +17,9 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
     BUErrorCodeNetError         = -2,       // network request failed
     BUErrorCodeParseError       = -1,       // parsing failed
     
+    BUErrorCodePlayableError_ERR_HAS_CACHE  = -702,   // has cache
+    BUErrorCodePlayableError_ERR_UNZIP      = -704,   // unzip error
+
     BUErrorCodeNERenderResultError= 101,    // native Express ad, render result parse fail
     BUErrorCodeNETempError        = 102,    // native Express ad, template is invalid
     BUErrorCodeNETempPluginError  = 103,    // native Express ad, template plugin is invalid

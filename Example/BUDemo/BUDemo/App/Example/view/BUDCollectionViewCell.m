@@ -8,6 +8,7 @@
 
 #import "BUDCollectionViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDCollectionViewCell ()
 

@@ -25,5 +25,6 @@
 "GiveUpReward" = "リワード不要";
 "ContinueWatching" = "視聴し続ける";
 "CanbeTurnedOffAfter" = "%ds後に閉じられます";
-
+"Get" = "Get";
+"View" = "View";
 // Icon

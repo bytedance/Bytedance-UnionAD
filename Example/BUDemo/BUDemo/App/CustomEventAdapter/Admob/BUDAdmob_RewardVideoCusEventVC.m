@@ -11,6 +11,7 @@
 #import <GoogleMobileAds/GADRewardBasedVideoAd.h>
 #import "BUDMacros.h"
 #import "BUDNormalButton.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDAdmob_RewardVideoCusEventVC ()<GADRewardBasedVideoAdDelegate>
 @property (nonatomic, strong) BUDNormalButton *button;

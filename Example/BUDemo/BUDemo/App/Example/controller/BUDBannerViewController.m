@@ -11,6 +11,7 @@
 #import "BUDAdManager.h"
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDBannerViewController () <BUBannerAdViewDelegate>
 @property(nonatomic, strong) BUBannerAdView *bannerView;

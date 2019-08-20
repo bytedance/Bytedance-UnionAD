@@ -141,6 +141,7 @@
 - (void)buildUpChildView {
     [self.view addSubview:self.textView];
     [self.view addSubview:self.tableView];
+    [self addAccessibilityIdentifier];
 }
 
 - (void)layoutFrame {
@@ -225,9 +226,13 @@
         _textView = [[UITextField alloc] init];
         _textView.textColor = [UIColor redColor];
         _textView.placeholder = @"Please enter slot id,for example:900546910";
-        _textView.accessibilityIdentifier = @"rit_edit";
     }
     return _textView;
+}
+
+#pragma mark addAccessibilityIdentifier
+- (void) addAccessibilityIdentifier {
+    self.textView.accessibilityIdentifier = @"rit_edit";
 }
 
 @end

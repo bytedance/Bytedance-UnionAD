@@ -12,6 +12,7 @@
 #import "BUDMopub_RewardedVideoCustomEvent.h"
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
+#import "NSString+LocalizedString.h"
 
 static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 

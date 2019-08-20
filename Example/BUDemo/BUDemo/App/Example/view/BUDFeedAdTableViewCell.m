@@ -11,6 +11,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "BUDFeedStyleHelper.h"
 #import "BUDMacros.h"
+#import "NSString+LocalizedString.h"
 
 static CGFloat const margin = 15;
 static CGSize const logoSize = {15, 15};
@@ -54,15 +55,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     
     self.nativeAdRelatedView = [[BUNativeAdRelatedView alloc] init];
     
-    [self addAccessibilityIdentifierForQA];
-}
-
-- (void)addAccessibilityIdentifierForQA{
-    self.adTitleLabel.accessibilityIdentifier = @"feed_title";
-    self.detailTextLabel.accessibilityIdentifier = @"feed_des";
-    self.nativeAdRelatedView.dislikeButton.accessibilityIdentifier = @"dislike";
-    self.customBtn.accessibilityIdentifier = @"feed_button";
-    self.iv1.accessibilityIdentifier = @"feed_view";
+    [self addAccessibilityIdentifier];
 }
 
 + (CGFloat)cellHeightWithModel:(BUNativeAd *_Nonnull)model width:(CGFloat)width {
@@ -86,6 +79,15 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
         _customBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     }
     return _customBtn;
+}
+
+#pragma mark addAccessibilityIdentifier
+- (void)addAccessibilityIdentifier {
+    self.adTitleLabel.accessibilityIdentifier = @"feed_title";
+    self.adDescriptionLabel.accessibilityIdentifier = @"feed_des";
+    self.nativeAdRelatedView.dislikeButton.accessibilityIdentifier = @"dislike";
+    self.customBtn.accessibilityIdentifier = @"feed_button";
+    self.iv1.accessibilityIdentifier = @"feed_view";
 }
 
 @end
@@ -385,8 +387,6 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
         [_creativeButton.layer setBorderWidth:1];
         [_creativeButton.layer setCornerRadius:6];
         [_creativeButton.layer setShadowRadius:3];
-        
-        //addAccessibilityIdentifierForQA
         _creativeButton.accessibilityIdentifier = @"feed_button";
     }
     return _creativeButton;

@@ -69,6 +69,7 @@
     [btn addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view bringSubviewToFront:btn];
     [self.view addSubview:btn];
+    btn.accessibilityIdentifier = @"draw_back";
 }
 
 - (void)closeVC{

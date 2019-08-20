@@ -10,6 +10,7 @@
 #import "MPInterstitialAdController.h"
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDMopub_InterstitialViewController () <MPInterstitialAdControllerDelegate>
 @property (nonatomic, strong) BUDNormalButton *button;

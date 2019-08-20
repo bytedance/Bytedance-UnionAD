@@ -8,6 +8,7 @@
 
 #import "BUDFeedNativeTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "NSString+LocalizedString.h"
 
 @implementation BUDFeedNativeTableViewCell
 

@@ -11,6 +11,7 @@
 #import "BUDMacros.h"
 #import <BUAdSDK/BUNativeExpressBannerView.h>
 #import <BUAdSDK/BUAdSDK.h>
+#import "NSString+LocalizedString.h"
 
 @interface BUDExpressBannerViewController ()<BUNativeExpressBannerViewDelegate>
 @property(nonatomic, strong) BUDNormalButton *refreshbutton;

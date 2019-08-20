@@ -10,6 +10,7 @@
 #import "MPAdView.h"
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDMopub_BannerViewController () <MPAdViewDelegate>
 @property(nonatomic, strong) BUDNormalButton *refreshbutton;

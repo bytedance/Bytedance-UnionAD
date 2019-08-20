@@ -12,6 +12,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "BUDMacros.h"
 #import "BUDNormalButton.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDRewardedVideoAdViewController () <BURewardedVideoAdDelegate>
 

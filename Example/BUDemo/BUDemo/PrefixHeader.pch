@@ -9,7 +9,7 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-#import "NSString+LocalizedString.h"
+//#import "NSString+LocalizedString.h"
 
 
 #endif /* PrefixHeader_pch */

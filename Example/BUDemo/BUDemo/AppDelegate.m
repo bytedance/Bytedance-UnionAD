@@ -16,7 +16,7 @@
 #import "BUDMainViewModel.h"
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import "RRFPSBar.h"
-#import "Mopub.h"
+#import "MoPub.h"
 #import "BUDMacros.h"
 #import <Bugly/Bugly.h>
 #import <Fabric/Fabric.h>

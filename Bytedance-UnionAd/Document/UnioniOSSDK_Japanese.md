@@ -1,4 +1,41 @@
 # Toutiao連盟 iOS SDK の接続説明
+<!-- TOC -->
+
+- [Toutiao連盟 iOS SDK の接続説明](#toutiao連盟-ios-sdk-の接続説明)
+    - [1. ウェブサイト同盟iOS SDKの接続](#1-ウェブサイト同盟ios-sdkの接続)
+        - [1.1 iOS SDKにframeworkを導入](#11-ios-sdkにframeworkを導入)
+            - [1.1.1 AppIDとSlotIDを作成する](#111-appidとslotidを作成する)
+            - [1.1.2 プロジェクト設定にframeworkを導入する](#112-プロジェクト設定にframeworkを導入する)
+            - [方法一：](#方法一)
+            - [方法二：](#方法二)
+        - [1.2 Xcodeコンパイルオプションの設定](#12-xcodeコンパイルオプションの設定)
+            - [1.2.1 権限追加](#121-権限追加)
+            - [1.2.2 動作環境](#122-動作環境)
+            - [1.2.3 依存ライブラリの追加](#123-依存ライブラリの追加)
+    - [2. SDKインターフェイスクラスの紹介と広告の接続](#2-sdkインターフェイスクラスの紹介と広告の接続)
+        - [2.1 グローバル設定(BUAdSDKManager)](#21-グローバル設定buadsdkmanager)
+            - [2.1.1 インターフェイスの説明](#211-インターフェイスの説明)
+            - [2.1.2 使用方法](#212-使用方法)
+        - [2.2 リワード動画(BURewardedVideoAd)](#22-リワード動画burewardedvideoad)
+            - [2.2.1 BURewardedVideoAdインターフェイスの説明](#221-burewardedvideoadインターフェイスの説明)
+            - [2.2.2 BURewardedVideoAdコールバックの説明](#222-burewardedvideoadコールバックの説明)
+            - [2.2.3 インスタンス](#223-インスタンス)
+            - [2.2.4 BURewardedVideoModel](#224-burewardedvideomodel)
+            - [2.2.5 サーバからサーバへのコールバック](#225-サーバからサーバへのコールバック)
+                - [コールバック方法の説明](#コールバック方法の説明)
+                - [サイン作成方法](#サイン作成方法)
+                - [規約に戻る](#規約に戻る)
+            - [2.2.6 AdMobがCustomEvent Adapterの方法でリワード動画を統合する](#226-admobがcustomevent-adapterの方法でリワード動画を統合する)
+        - [2.3 フルスクリーン動画(BUFullscreenVideoAd)](#23-フルスクリーン動画bufullscreenvideoad)
+            - [2.3.1 BUFullscreenVideoAdインターフェイスの説明](#231-bufullscreenvideoadインターフェイスの説明)
+            - [2.3.2 BUFullscreenVideoAdコールバックの説明](#232-bufullscreenvideoadコールバックの説明)
+            - [2.3.3 インスタンス](#233-インスタンス)
+    - [付録](#付録)
+        - [SDKエラーコード](#sdkエラーコード)
+        - [FAQ](#faq)
+
+<!-- /TOC -->
+
 
 ## 1. ウェブサイト同盟iOS SDKの接続
 ### 1.1 iOS SDKにframeworkを導入

@@ -46,6 +46,8 @@ NSString * const CustomClick = @"customClick";
 NSString * const Detail = @"detail";
 NSString * const DownloadLinks = @"downloadLinks";
 NSString * const URLLinks = @"URLLinks";
+NSString * const ShowPlayable = @"ShowPlayable";
+NSString * const IsLandScape = @"IsLandScape";
 
 @implementation NSString (LocalizedString)
 

@@ -88,4 +88,8 @@
     BUD_Log(@"fullscreenVideoAd click skip");
 }
 
+- (void)fullscreenVideoAdDidClick:(BUFullscreenVideoAd *)fullscreenVideoAd {
+    BUD_Log(@"fullscreenVideoAd did click");
+}
+
 @end

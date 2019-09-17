@@ -1,7 +1,7 @@
 //
 //  MPWebView.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -66,10 +66,6 @@ typedef void (^MPWebViewJavascriptEvaluationCompletionHandler)(id result, NSErro
 
 @property (nonatomic, readonly, getter=isLoading) BOOL loading;
 
-// These methods and properties are non-functional below iOS 9. If you call or try to set them, they'll do nothing.
-// For the properties, if you try to access them, you'll get `NO` 100% of the time. They are entirely hidden when
-// compiling with iOS 8 SDK or below.
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= MP_IOS_9_0
 - (void)loadData:(NSData *)data
         MIMEType:(NSString *)MIMEType
 textEncodingName:(NSString *)encodingName
@@ -77,7 +73,6 @@ textEncodingName:(NSString *)encodingName
 
 @property (nonatomic) BOOL allowsLinkPreview;
 @property (nonatomic, readonly) BOOL allowsPictureInPictureMediaPlayback;
-#endif
 
 + (void)forceWKWebView:(BOOL)shouldForce;
 + (BOOL)isForceWKWebView;

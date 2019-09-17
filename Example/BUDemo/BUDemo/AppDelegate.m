@@ -19,8 +19,7 @@
 #import "MoPub.h"
 #import "BUDMacros.h"
 #import <Bugly/Bugly.h>
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+#import "BUAdSDKAdapterConfiguration.h"
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -31,7 +30,6 @@
 
 static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 
-
 @interface AppDelegate () <BUSplashAdDelegate>
 @property (nonatomic, assign) CFTimeInterval startTime;
 @end
@@ -39,107 +37,111 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     
-    [self configAPM];
+    // private config for demo
+    [self configDemo];
+    
+    // adaptor for Customer Event
     [self configCustomEvent];
 
-    UIViewController *rootViewController = [self rootViewControllerStyleTwo];
     if (self.window == nil) {
         UIWindow *keyWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         [keyWindow makeKeyAndVisible];
         self.window = keyWindow;
+        self.window.rootViewController = [self rootViewController];
     }
-    self.window.rootViewController = rootViewController;
-
-#if DEBUG
-    //Whether to open log. default is none.
-    [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
-#endif
-    [BUAdSDKManager setAppID:[BUDAdManager appKey]];
-    [BUAdSDKManager setIsPaidApp:NO];
-
-    CGRect frame = [UIScreen mainScreen].bounds;
-    BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:@"800546808" frame:frame];
-    // tolerateTimeout = CGFLOAT_MAX , The conversion time to milliseconds will be equal to 0
-    splashView.tolerateTimeout = 10;
-    splashView.delegate = self;
-
-    UIWindow *keyWindow = self.window;
-    self.startTime = CACurrentMediaTime();
-    [splashView loadAdData];
-    [keyWindow.rootViewController.view addSubview:splashView];
-    splashView.rootViewController = keyWindow.rootViewController;
-
+    
+    // initialize AD SDK
+    [self setupBUAdSDK];
+    
     return YES;
 }
 
-
-- (UIViewController *)rootViewControllerStyleOne {
-    UITabBarController *tabbarViewController = [[UITabBarController alloc] init];
-    
+- (UIViewController *)rootViewController {
     BUDMainViewController *mainViewController = [[BUDMainViewController alloc] init];
-    BUDMainViewModel *mainViewModel = [[BUDMainViewModel alloc] init];
-    mainViewModel.custormNavigation = YES;
-    mainViewController.viewModel = mainViewModel;
-   
-    BUDSettingViewController *settingViewController = [[BUDSettingViewController alloc] init];
-    UIViewController *viewController = [[UIViewController alloc] init];
-    NSArray<UIViewController *> *viewControllers = @[mainViewController, viewController, settingViewController];
-    
-    NSMutableArray *items = @[].mutableCopy;
-    for (NSInteger index = 0; index < viewControllers.count; index++) {
-        UITabBarItem *barItem = [[UITabBarItem alloc] initWithTitle:@"Main" image:nil tag:0];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewControllers[index]];
-        nav.tabBarItem = barItem;
-        [items addObject:nav];
-    }
-    [tabbarViewController setViewControllers:items animated:NO];
-    return tabbarViewController;
+    UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    return navigationVC;
 }
 
-- (UIViewController *)rootViewControllerStyleTwo {
-    BUDMainViewController *mainViewController = [[BUDMainViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-    return nav;
-}
-
-- (void)configAPM {
-    //Bugly
-    BuglyConfig *buglyconfig = [[BuglyConfig alloc] init];
-    buglyconfig.debugMode = YES;
-    [Bugly startWithAppId:@"b39a3d744a" config:buglyconfig];
-    
-    //Fabric
-    [Fabric with:@[[Crashlytics class]]];
-    [Crashlytics sharedInstance].debugMode = YES;
-    [Fabric sharedSDK].debug = YES;
-}
-
-- (void)configCustomEvent {
-    
+- (void)configDemo {
     [[BUDConfigHelper sharedInstance] readingPreference];
-    
-    ///configure appId using adMob
-    [GADMobileAds configureWithApplicationID:@"ca-app-pub-9206388280072239~5099042698"];
-    
+    [self configFPS];
+    [self configAPM];
+}
+
+- (void)configFPS {
     // show FPS
     if (BUFPS_OPEN == 1) {
         [RRFPSBar sharedInstance].showsAverage = YES;
         [[RRFPSBar sharedInstance] setHidden:NO];
     }
+}
+
+- (void)configAPM {
+    // bugly
+    BuglyConfig *buglyconfig = [[BuglyConfig alloc] init];
+    buglyconfig.debugMode = YES;
+    [Bugly startWithAppId:@"b39a3d744a" config:buglyconfig];
+}
+
+- (void)configCustomEvent {
     
+    // admob adaptor config
+    [GADMobileAds configureWithApplicationID:@"ca-app-pub-9206388280072239~5099042698"];
     
-    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:MopubADUnitID];
-    sdkConfig.globalMediationSettings = @[];
-    Class<MPMediationSdkInitializable> BURewardCusEvent = NSClassFromString(@"BUDMopub_RewardedVideoCustomEvent");
-    if (BURewardCusEvent != nil) {
-        sdkConfig.mediatedNetworks = @[BURewardCusEvent];
+    if (@available(iOS 9, *)) { // @"MoPub ~> 5.8.0 SDK requires iOS 9 and up"
+        // mopub adaptor initialize
+        MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:MopubADUnitID];
+        
+        NSMutableDictionary *networkConfig = [NSMutableDictionary dictionaryWithCapacity:2];
+        NSDictionary *InitConfig = @{@"appKey": [BUDAdManager appKey], @"slotId": @"900546826"};
+        NSDictionary *config = @{@"BUAdSDKAdapterConfiguration":InitConfig};
+        [networkConfig addEntriesFromDictionary:config];
+        Class<MPAdapterConfiguration> BUAdSDKAdapterConfiguration = NSClassFromString(@"BUAdSDKAdapterConfiguration");
+        sdkConfig.additionalNetworks = @[BUAdSDKAdapterConfiguration];
+        sdkConfig.mediatedNetworkConfigurations = networkConfig;
+    #if DEBUG
+        sdkConfig.loggingLevel = MPBLogLevelInfo;
+    #endif
+        sdkConfig.globalMediationSettings = @[];
+
+        [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
+            BUD_Log(@"Mopub initializeSdk");
+        }];
+    } else {
+        // @"MoPub <= 5.4.0 SDK supports iOS 8"
     }
-    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
-        BUD_Log(@"Mopub");
-    }];
-    [MoPub sharedInstance].logLevel = MPLogLevelInfo;
+}
+
+- (void)setupBUAdSDK {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [BUAdSDKManager setAppID:[BUDAdManager appKey]];
+#if DEBUG
+            // Whether to open log. default is none.
+            [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
+#endif
+            [BUAdSDKManager setIsPaidApp:NO];
+            
+            // splash AD demo
+            [self addSplashAD];
+        });
+    });
+}
+
+- (void)addSplashAD {
+    CGRect frame = [UIScreen mainScreen].bounds;
+    BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:@"800546808" frame:frame];
+    // tolerateTimeout = CGFLOAT_MAX , The conversion time to milliseconds will be equal to 0
+    splashView.tolerateTimeout = 10;
+    splashView.delegate = self;
+    
+    UIWindow *keyWindow = self.window;
+    self.startTime = CACurrentMediaTime();
+    [splashView loadAdData];
+    [keyWindow.rootViewController.view addSubview:splashView];
+    splashView.rootViewController = keyWindow.rootViewController;
 }
 
 - (void)splashAdDidClose:(BUSplashAdView *)splashAd {

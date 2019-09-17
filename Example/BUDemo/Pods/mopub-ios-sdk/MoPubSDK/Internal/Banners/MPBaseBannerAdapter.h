@@ -1,7 +1,7 @@
 //
 //  MPBaseBannerAdapter.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -81,6 +81,12 @@
 /**
  * Fires when the impression tracker has been sent.
  */
-- (void)adapter:(MPBaseBannerAdapter *)adapter didTrackImpressionForAd:(UIView *)ad;
+- (void)adapterDidTrackImpressionForAd:(MPBaseBannerAdapter *)adapter;
+
+/**
+ * Fires when the banner ad is expanding/resizing and collapsing.
+ */
+- (void)adWillExpandForAdapter:(MPBaseBannerAdapter *)adapter;
+- (void)adDidCollapseForAdapter:(MPBaseBannerAdapter *)adapter;
 
 @end

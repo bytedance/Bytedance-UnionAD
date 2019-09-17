@@ -1,7 +1,7 @@
 //
 //  MPRewardedVideoAdManager.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -81,6 +81,8 @@
 
 - (void)loadRewardedVideoAdWithCustomerId:(NSString *)customerId targeting:(MPAdTargeting *)targeting
 {
+    MPLogAdEvent(MPLogEvent.adLoadAttempt, self.adUnitID);
+
     // We will just tell the delegate that we have loaded an ad if we already have one ready. However, if we have already
     // played a video for this ad manager, we will go ahead and request another ad from the server so we aren't potentially
     // stuck playing ads from the same network for a prolonged period of time which could be unoptimal with respect to the waterfall.
@@ -93,15 +95,14 @@
         // set customerId. Other ads require customerId on presentation in which we will use this new id coming in when presenting the ad.
         self.customerId = customerId;
         self.targeting = targeting;
-        [self loadAdWithURL:[MPAdServerURLBuilder URLWithAdUnitID:self.adUnitID
-                                                         keywords:targeting.keywords
-                                                 userDataKeywords:targeting.userDataKeywords
-                                                         location:targeting.location]];
+        [self loadAdWithURL:[MPAdServerURLBuilder URLWithAdUnitID:self.adUnitID targeting:targeting]];
     }
 }
 
 - (void)presentRewardedVideoAdFromViewController:(UIViewController *)viewController withReward:(MPRewardedVideoReward *)reward customData:(NSString *)customData
 {
+    MPLogAdEvent(MPLogEvent.adShowAttempt, self.adUnitID);
+
     // Don't allow the ad to be shown if it isn't ready.
     if (!self.ready) {
         NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorNoAdReady userInfo:@{ NSLocalizedDescriptionKey: @"Rewarded video ad view is not ready to be shown"}];
@@ -166,8 +167,7 @@
     self.playedAd = NO;
 
     if (self.loading) {
-        MPLogWarn(@"Rewarded video manager is already loading an ad. "
-                  @"Wait for previous load to finish.");
+        MPLogEvent([MPLogEvent error:NSError.adAlreadyLoading message:nil]);
         return;
     }
 
@@ -239,6 +239,14 @@
     [self.delegate rewardedVideoDidFailToLoadForAdManager:self error:error];
 }
 
+- (MPAdType)adTypeForAdServerCommunicator:(MPAdServerCommunicator *)adServerCommunicator {
+    return MPAdTypeFullscreen;
+}
+
+- (NSString *)adUnitIDForAdServerCommunicator:(MPAdServerCommunicator *)adServerCommunicator {
+    return self.adUnitID;
+}
+
 #pragma mark - MPRewardedVideoAdapterDelegate
 
 - (id<MPMediationSettingsProtocol>)instanceMediationSettingsForClass:(Class)aClass
@@ -262,6 +270,7 @@
     NSTimeInterval duration = NSDate.now.timeIntervalSince1970 - self.adapterLoadStartTimestamp;
     [self.communicator sendAfterLoadUrlWithConfiguration:self.configuration adapterLoadDuration:duration adapterLoadResult:MPAfterLoadResultAdLoaded];
 
+    MPLogAdEvent(MPLogEvent.adDidLoad, self.adUnitID);
     [self.delegate rewardedVideoDidLoadForAdManager:self];
 }
 
@@ -289,57 +298,78 @@
         self.ready = NO;
         self.loading = NO;
 
-        MPLogInfo(kMPClearErrorLogFormatWithAdUnitID, self.adUnitID);
-        NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorNoAdsAvailable userInfo:nil];
-        [self.delegate rewardedVideoDidFailToLoadForAdManager:self error:error];
+        NSError * clearResponseError = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorNoAdsAvailable userInfo: @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:kMPClearErrorLogFormatWithAdUnitID, self.adUnitID] }];
+        MPLogAdEvent([MPLogEvent adFailedToLoadWithError:clearResponseError], self.adUnitID);
+        [self.delegate rewardedVideoDidFailToLoadForAdManager:self error:clearResponseError];
     }
 }
 
 - (void)rewardedVideoDidExpireForAdapter:(MPRewardedVideoAdapter *)adapter
 {
     self.ready = NO;
+
+    MPLogAdEvent([MPLogEvent adExpiredWithTimeInterval:MPConstants.adsExpirationInterval], self.adUnitID);
     [self.delegate rewardedVideoDidExpireForAdManager:self];
 }
 
 - (void)rewardedVideoDidFailToPlayForAdapter:(MPRewardedVideoAdapter *)adapter error:(NSError *)error
 {
+    // Playback of the rewarded video failed; reset the internal played state
+    // so that a new rewarded video ad can be loaded.
+    self.ready = NO;
+    self.playedAd = NO;
+
+    MPLogAdEvent([MPLogEvent adShowFailedWithError:error], self.adUnitID);
     [self.delegate rewardedVideoDidFailToPlayForAdManager:self error:error];
 }
 
 - (void)rewardedVideoWillAppearForAdapter:(MPRewardedVideoAdapter *)adapter
 {
+    MPLogAdEvent(MPLogEvent.adWillAppear, self.adUnitID);
     [self.delegate rewardedVideoWillAppearForAdManager:self];
 }
 
 - (void)rewardedVideoDidAppearForAdapter:(MPRewardedVideoAdapter *)adapter
 {
+    MPLogAdEvent(MPLogEvent.adDidAppear, self.adUnitID);
     [self.delegate rewardedVideoDidAppearForAdManager:self];
 }
 
 - (void)rewardedVideoWillDisappearForAdapter:(MPRewardedVideoAdapter *)adapter
 {
+    MPLogAdEvent(MPLogEvent.adWillDisappear, self.adUnitID);
     [self.delegate rewardedVideoWillDisappearForAdManager:self];
 }
 
 - (void)rewardedVideoDidDisappearForAdapter:(MPRewardedVideoAdapter *)adapter
 {
+    // Successful playback of the rewarded video; reset the internal played state.
     self.ready = NO;
     self.playedAd = YES;
+
+    MPLogAdEvent(MPLogEvent.adDidDisappear, self.adUnitID);
     [self.delegate rewardedVideoDidDisappearForAdManager:self];
 }
 
 - (void)rewardedVideoDidReceiveTapEventForAdapter:(MPRewardedVideoAdapter *)adapter
 {
+    MPLogAdEvent(MPLogEvent.adWillPresentModal, self.adUnitID);
     [self.delegate rewardedVideoDidReceiveTapEventForAdManager:self];
+}
+
+- (void)rewardedVideoDidReceiveImpressionEventForAdapter:(MPRewardedVideoAdapter *)adapter {
+    [self.delegate rewardedVideoAdManager:self didReceiveImpressionEventWithImpressionData:self.configuration.impressionData];
 }
 
 - (void)rewardedVideoWillLeaveApplicationForAdapter:(MPRewardedVideoAdapter *)adapter
 {
+    MPLogAdEvent(MPLogEvent.adWillLeaveApplication, self.adUnitID);
     [self.delegate rewardedVideoWillLeaveApplicationForAdManager:self];
 }
 
 - (void)rewardedVideoShouldRewardUserForAdapter:(MPRewardedVideoAdapter *)adapter reward:(MPRewardedVideoReward *)reward
 {
+    MPLogAdEvent([MPLogEvent adShouldRewardUserWithReward:reward], self.adUnitID);
     [self.delegate rewardedVideoShouldRewardUserForAdManager:self reward:reward];
 }
 

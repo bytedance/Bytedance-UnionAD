@@ -1,12 +1,14 @@
 //
 //  MPMRAIDInterstitialCustomEvent.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPMRAIDInterstitialCustomEvent.h"
+#import "MPAdConfiguration.h"
+#import "MPError.h"
 #import "MPLogging.h"
 
 @interface MPMRAIDInterstitialCustomEvent ()
@@ -17,12 +19,12 @@
 
 @implementation MPMRAIDInterstitialCustomEvent
 
-@synthesize interstitial = _interstitial;
-
 - (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info
 {
-    MPLogInfo(@"Loading MoPub MRAID interstitial");
-    self.interstitial = [[MPMRAIDInterstitialViewController alloc] initWithAdConfiguration:[self.delegate configuration]];
+    MPAdConfiguration * configuration = self.delegate.configuration;
+    MPLogAdEvent([MPLogEvent adLoadAttemptForAdapter:NSStringFromClass(self.class) dspCreativeId:configuration.dspCreativeId dspName:nil], self.adUnitId);
+
+    self.interstitial = [[MPMRAIDInterstitialViewController alloc] initWithAdConfiguration:configuration];
     self.interstitial.delegate = self;
 
     // The MRAID ad view will handle the close button so we don't need the MPInterstitialViewController's close button.
@@ -32,7 +34,15 @@
 
 - (void)showInterstitialFromRootViewController:(UIViewController *)controller
 {
-    [self.interstitial presentInterstitialFromViewController:controller];
+    MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], self.adUnitId);
+    [self.interstitial presentInterstitialFromViewController:controller complete:^(NSError * error) {
+        if (error != nil) {
+            MPLogAdEvent([MPLogEvent adShowFailedForAdapter:NSStringFromClass(self.class) error:error], self.adUnitId);
+        }
+        else {
+            MPLogAdEvent([MPLogEvent adShowSuccessForAdapter:NSStringFromClass(self.class)], self.adUnitId);
+        }
+    }];
 }
 
 #pragma mark - MPMRAIDInterstitialViewControllerDelegate
@@ -49,37 +59,36 @@
 
 - (void)interstitialDidLoadAd:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub MRAID interstitial did load");
+    MPLogAdEvent([MPLogEvent adLoadSuccessForAdapter:NSStringFromClass(self.class)], self.adUnitId);
     [self.delegate interstitialCustomEvent:self didLoadAd:self.interstitial];
 }
 
 - (void)interstitialDidFailToLoadAd:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub MRAID interstitial did fail");
-    [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:nil];
+    NSString * message = [NSString stringWithFormat:@"Failed to load creative:\n%@", self.delegate.configuration.adResponseHTMLString];
+    NSError * error = [NSError errorWithCode:MOPUBErrorAdapterFailedToLoadAd localizedDescription:message];
+
+    MPLogAdEvent([MPLogEvent adLoadFailedForAdapter:NSStringFromClass(self.class) error:error], self.adUnitId);
+    [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
 }
 
 - (void)interstitialWillAppear:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub MRAID interstitial will appear");
     [self.delegate interstitialCustomEventWillAppear:self];
 }
 
 - (void)interstitialDidAppear:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub MRAID interstitial did appear");
     [self.delegate interstitialCustomEventDidAppear:self];
 }
 
 - (void)interstitialWillDisappear:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub MRAID interstitial will disappear");
     [self.delegate interstitialCustomEventWillDisappear:self];
 }
 
 - (void)interstitialDidDisappear:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub MRAID interstitial did disappear");
     [self.delegate interstitialCustomEventDidDisappear:self];
 
     // Deallocate the interstitial as we don't need it anymore. If we don't deallocate the interstitial after dismissal,
@@ -90,13 +99,11 @@
 
 - (void)interstitialDidReceiveTapEvent:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub MRAID interstitial did receive tap event");
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
 }
 
 - (void)interstitialWillLeaveApplication:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub MRAID interstitial will leave application");
     [self.delegate interstitialCustomEventWillLeaveApplication:self];
 }
 

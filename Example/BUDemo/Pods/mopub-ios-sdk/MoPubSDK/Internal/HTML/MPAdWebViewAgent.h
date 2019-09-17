@@ -1,7 +1,7 @@
 //
 //  MPAdWebViewAgent.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -31,7 +31,6 @@ typedef NSUInteger MPAdWebViewEvent;
 
 - (id)initWithAdWebViewFrame:(CGRect)frame delegate:(id<MPAdWebViewAgentDelegate>)delegate;
 - (void)loadConfiguration:(MPAdConfiguration *)configuration;
-- (void)rotateToOrientation:(UIInterfaceOrientation)orientation;
 - (void)invokeJavaScriptForEvent:(MPAdWebViewEvent)event;
 - (void)forceRedraw;
 

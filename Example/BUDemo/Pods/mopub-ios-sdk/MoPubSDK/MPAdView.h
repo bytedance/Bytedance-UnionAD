@@ -1,7 +1,7 @@
 //
 //  MPAdView.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "MPConstants.h"
+#import "MPAdViewDelegate.h"
 
 typedef enum
 {
@@ -17,15 +18,21 @@ typedef enum
     MPNativeAdOrientationLandscape
 } MPNativeAdOrientation;
 
-@protocol MPAdViewDelegate;
-
 /**
  * The MPAdView class provides a view that can display banner advertisements.
  */
-
-@interface MPAdView : UIView
+IB_DESIGNABLE
+@interface MPAdView : UIView <MPMoPubAd>
 
 /** @name Initializing a Banner Ad */
+
+/**
+ * Initializes an MPAdView with the given ad unit ID.
+ *
+ * @param adUnitId A string representing a MoPub ad unit ID.
+ * @return A newly initialized ad view corresponding to the given ad unit ID and size.
+ */
+- (id)initWithAdUnitId:(NSString *)adUnitId;
 
 /**
  * Initializes an MPAdView with the given ad unit ID and banner size.
@@ -34,7 +41,7 @@ typedef enum
  * @param size The desired ad size. A list of standard ad sizes is available in MPConstants.h.
  * @return A newly initialized ad view corresponding to the given ad unit ID and size.
  */
-- (id)initWithAdUnitId:(NSString *)adUnitId size:(CGSize)size;
+- (id)initWithAdUnitId:(NSString *)adUnitId size:(CGSize)size __attribute__((deprecated("Use initWithAdUnitId: instead")));
 
 /** @name Setting and Getting the Delegate */
 
@@ -55,7 +62,12 @@ typedef enum
  * application set aside for advertising. If no ad unit ID is set, the ad view will use a default
  * ID that only receives test ads.
  */
-@property (nonatomic, copy) NSString *adUnitId;
+@property (nonatomic, copy) IBInspectable NSString *adUnitId;
+
+/**
+ * The maximum desired ad size. A list of standard ad sizes is available in MPConstants.h.
+ */
+@property (nonatomic, assign) IBInspectable CGSize maxAdSize;
 
 /**
  * A string representing a set of non-personally identifiable keywords that should be passed to the MoPub ad server to receive
@@ -94,7 +106,8 @@ typedef enum
 /** @name Loading a Banner Ad */
 
 /**
- * Requests a new ad from the MoPub ad server.
+ * Requests a new ad from the MoPub ad server with a maximum desired ad size equal to
+ * the size of the current @c bounds of this view.
  *
  * If the ad view is already loading an ad, this call will be ignored. You may use `forceRefreshAd`
  * if you would like cancel any existing ad requests and force a new ad to load.
@@ -102,7 +115,20 @@ typedef enum
 - (void)loadAd;
 
 /**
- * Cancels any existing ad requests and requests a new ad from the MoPub ad server.
+ * Requests a new ad from the MoPub ad server with the specified maximum desired ad size.
+ *
+ * If the ad view is already loading an ad, this call will be ignored. You may use `forceRefreshAd`
+ * if you would like cancel any existing ad requests and force a new ad to load.
+ *
+ * @param size The maximum desired ad size to request. You may specify this value manually,
+ * or use one of the presets found in @c MPConstants.h for the most common types of maximum ad sizes.
+ * If using @c kMPPresetMaxAdSizeMatchFrame, the frame will be used as the maximum ad size.
+ */
+- (void)loadAdWithMaxAdSize:(CGSize)size;
+
+/**
+ * Cancels any existing ad requests and requests a new ad from the MoPub ad server
+ * using the previously loaded maximum desired ad size.
  */
 - (void)forceRefreshAd;
 
@@ -210,91 +236,5 @@ typedef enum
  * @see stopAutomaticallyRefreshingContents
  */
 - (void)startAutomaticallyRefreshingContents;
-
-@end
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark -
-
-/**
- * The delegate of an `MPAdView` object must adopt the `MPAdViewDelegate` protocol. It must
- * implement `viewControllerForPresentingModalView` to provide a root view controller from which
- * the ad view should present modal content.
- *
- * Optional methods of this protocol allow the delegate to be notified of banner success or
- * failure, as well as other lifecycle events.
- */
-
-@protocol MPAdViewDelegate <NSObject>
-
-@required
-
-/** @name Managing Modal Content Presentation */
-
-/**
- * Asks the delegate for a view controller to use for presenting modal content, such as the in-app
- * browser that can appear when an ad is tapped.
- *
- * @return A view controller that should be used for presenting modal content.
- */
-- (UIViewController *)viewControllerForPresentingModalView;
-
-@optional
-
-/** @name Detecting When a Banner Ad is Loaded */
-
-/**
- * Sent when an ad view successfully loads an ad.
- *
- * Your implementation of this method should insert the ad view into the view hierarchy, if you
- * have not already done so.
- *
- * @param view The ad view sending the message.
- */
-- (void)adViewDidLoadAd:(MPAdView *)view;
-
-/**
- * Sent when an ad view fails to load an ad.
- *
- * To avoid displaying blank ads, you should hide the ad view in response to this message.
- *
- * @param view The ad view sending the message.
- */
-- (void)adViewDidFailToLoadAd:(MPAdView *)view;
-
-/** @name Detecting When a User Interacts With the Ad View */
-
-/**
- * Sent when an ad view is about to present modal content.
- *
- * This method is called when the user taps on the ad view. Your implementation of this method
- * should pause any application activity that requires user interaction.
- *
- * @param view The ad view sending the message.
- * @see `didDismissModalViewForAd:`
- */
-- (void)willPresentModalViewForAd:(MPAdView *)view;
-
-/**
- * Sent when an ad view has dismissed its modal content, returning control to your application.
- *
- * Your implementation of this method should resume any application activity that was paused
- * in response to `willPresentModalViewForAd:`.
- *
- * @param view The ad view sending the message.
- * @see `willPresentModalViewForAd:`
- */
-- (void)didDismissModalViewForAd:(MPAdView *)view;
-
-/**
- * Sent when a user is about to leave your application as a result of tapping
- * on an ad.
- *
- * Your application will be moved to the background shortly after this method is called.
- *
- * @param view The ad view sending the message.
- */
-- (void)willLeaveApplicationFromAd:(MPAdView *)view;
 
 @end

@@ -11,6 +11,7 @@
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
+#import <BUAdSDK/BUSize.h>
 
 @interface BUDMopub_BannerViewController () <MPAdViewDelegate>
 @property(nonatomic, strong) BUDNormalButton *refreshbutton;
@@ -22,18 +23,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.adView = [[MPAdView alloc] initWithAdUnitId:@"ca9c91eb59694afa9caef204ac622136"
-                                                size:MOPUB_BANNER_SIZE];
+    self.adView = [[MPAdView alloc] initWithAdUnitId:@"ca9c91eb59694afa9caef204ac622136"];
     self.adView.delegate = self;
-    self.adView.frame = CGRectMake((self.view.bounds.size.width - MOPUB_BANNER_SIZE.width) / 2,
-                                   self.view.bounds.size.height - MOPUB_BANNER_SIZE.height,
-                                   MOPUB_BANNER_SIZE.width, MOPUB_BANNER_SIZE.height);
+    BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
+
+    self.adView.frame = CGRectMake((self.view.bounds.size.width - size.width) / 2,
+                                   self.view.bounds.size.height - size.height,
+                                   size.width, size.height);
     [self.view addSubview:self.adView];
     [self.adView loadAd];
     
     //refresh Button
-    CGSize size = [UIScreen mainScreen].bounds.size;
-    _refreshbutton = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height *0.2, 0, 0)];
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    _refreshbutton = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, screenSize.height *0.2, 0, 0)];
     _refreshbutton.showRefreshIncon = YES;
     [_refreshbutton setTitle:[NSString localizedStringForKey:ShowBanner] forState:UIControlStateNormal];
     [_refreshbutton addTarget:self action:@selector(refreshBanner) forControlEvents:UIControlEventTouchUpInside];
@@ -50,15 +52,14 @@
     return self;
 }
 
-- (void)adViewDidLoadAd:(MPAdView *)view
-{
-    CGSize size = [view adContentViewSize];
+- (void)adViewDidLoadAd:(MPAdView *)view adSize:(CGSize)adSize {
+    CGSize size = adSize;
     CGFloat centeredX = (self.view.bounds.size.width - size.width) / 2;
     CGFloat bottomAlignedY = (self.view.bounds.size.height - size.height)/2;
     view.frame = CGRectMake(centeredX, bottomAlignedY, size.width, size.height);
 }
 
-- (void)adViewDidFailToLoadAd:(MPAdView *)view {
+- (void)adView:(MPAdView *)view didFailToLoadAdWithError:(NSError *)error {
     BUD_Log(@"%s", __func__);
 }
 

@@ -46,6 +46,8 @@ extern NSString * const CustomClick;
 extern NSString * const Detail;
 extern NSString * const DownloadLinks;
 extern NSString * const URLLinks;
+extern NSString * const ShowPlayable;
+extern NSString * const IsLandScape;
 
 @interface NSString (LocalizedString)
 

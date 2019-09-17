@@ -1,7 +1,7 @@
 //
 //  MPStreamAdPlacer.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -103,7 +103,7 @@ static const NSUInteger kIndexPathItemIndex = 1;
     MPNativeAdData *adData = [self.adPlacementData adDataAtAdjustedIndexPath:indexPath];
 
     if (!adData) {
-        MPLogError(@"-renderAdAtIndexPath: An ad does not exist at indexPath");
+        MPLogInfo(@"-renderAdAtIndexPath: An ad does not exist at indexPath");
         return;
     }
 
@@ -169,12 +169,12 @@ static const NSUInteger kIndexPathItemIndex = 1;
 
             if (error) {
                 if ([error code] == MPNativePositionSourceEmptyResponse) {
-                    MPLogError(@"ERROR: Ad placer cannot show any ads because ad positions have "
+                    MPLogInfo(@"ERROR: Ad placer cannot show any ads because ad positions have "
                                @"not been configured for your ad unit %@. You must assign positions "
                                @"by editing the ad unit's settings on the MoPub website.",
                                strongSelf.adUnitID);
                 } else {
-                    MPLogError(@"ERROR: Ad placer failed to get positions from the ad server for "
+                    MPLogInfo(@"ERROR: Ad placer failed to get positions from the ad server for "
                                @"ad unit ID %@. Error: %@", strongSelf.adUnitID, error);
                 }
             } else {
@@ -188,7 +188,7 @@ static const NSUInteger kIndexPathItemIndex = 1;
     }
 
     if (!adUnitID) {
-        MPLogError(@"Ad placer cannot load ads with a nil ad unit ID.");
+        MPLogInfo(@"Ad placer cannot load ads with a nil ad unit ID.");
         return;
     }
 
@@ -553,6 +553,14 @@ static const NSUInteger kIndexPathItemIndex = 1;
     }
 }
 
+- (void)mopubAd:(id<MPMoPubAd>)ad didTrackImpressionWithImpressionData:(MPImpressionData *)impressionData {
+    if ([self.delegate respondsToSelector:@selector(mopubAdPlacer:didTrackImpressionForAd:withImpressionData:)]) {
+        [self.delegate mopubAdPlacer:self
+             didTrackImpressionForAd:ad
+                  withImpressionData:impressionData];
+    }
+}
+
 #pragma mark - Internal
 
 - (CGSize)sizeForAd:(MPNativeAd *)ad withMaximumWidth:(CGFloat)maxWidth andIndexPath:(NSIndexPath *)indexPath
@@ -574,7 +582,7 @@ static const NSUInteger kIndexPathItemIndex = 1;
     }
 
     adSize = CGSizeMake(maxWidth, 44.0f);
-    MPLogWarn(@"WARNING: + (CGSize)viewSizeHandler is NOT implemented for native ad renderer %@ at index path %@. You MUST implement this method to ensure that ad placer native ad cells are correctly sized. Returning a default size of %@ for now.", NSStringFromClass([(id)renderer class]), indexPath, NSStringFromCGSize(adSize));
+    MPLogInfo(@"WARNING: + (CGSize)viewSizeHandler is NOT implemented for native ad renderer %@ at index path %@. You MUST implement this method to ensure that ad placer native ad cells are correctly sized. Returning a default size of %@ for now.", NSStringFromClass([(id)renderer class]), indexPath, NSStringFromCGSize(adSize));
 
     return adSize;
 }

@@ -1,7 +1,7 @@
 //
 //  MPCountdownTimerView.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -9,50 +9,85 @@
 #import "MPCountdownTimerView.h"
 #import "MPLogging.h"
 #import "MPTimer.h"
-#import "NSBundle+MPAdditions.h"
 
-// The frequency at which the internal timer is fired in seconds.
-// This value matches the step size of the jQuery knob in MPCountdownTimer.html.
-static const NSTimeInterval kCountdownTimerInterval = 0.05;
+static NSTimeInterval const kCountdownTimerInterval = 0.05; // internal timer firing frequency in seconds
+static CGFloat const kTimerStartAngle = -M_PI * 0.5; // 12 o'clock position
+static CGFloat const kOneCycle = M_PI * 2;
+static CGFloat const kRingWidth = 3;
+static CGFloat const kRingRadius = 16;
+static CGFloat const kRingPadding = 8;
+static NSString * const kAnimationKey = @"Timer";
 
-@interface MPCountdownTimerView() <UIWebViewDelegate>
-@property (nonatomic, assign, readwrite) BOOL isPaused;
+@interface MPCountdownTimerView()
 
 @property (nonatomic, copy) void(^completionBlock)(BOOL);
-@property (nonatomic, assign) NSTimeInterval currentSeconds;
-@property (nonatomic, strong) MPTimer * timer;
-@property (nonatomic, strong) UIWebView * timerView;
+@property (nonatomic, assign) NSTimeInterval remainingSeconds;
+@property (nonatomic, strong) MPTimer * timer; // timer instantiation is deferred to `start`
+@property (nonatomic, strong) CAShapeLayer * backgroundRingLayer;
+@property (nonatomic, strong) CAShapeLayer * animatingRingLayer;
+@property (nonatomic, strong) UILabel * countdownLabel;
+@property (nonatomic, strong) NSNotificationCenter *notificationCenter;
+
 @end
 
 @implementation MPCountdownTimerView
 
-#pragma mark - Initialization
+#pragma mark - Life Cycle
 
-- (instancetype)initWithFrame:(CGRect)frame duration:(NSTimeInterval)seconds {
-    if (self = [super initWithFrame:frame]) {
-        // Duration should be non-negative.
-        if (seconds < 0) {
-            MPLogDebug(@"Attempted to initialize MPCountdownTimerView with a negative duration. No timer will be created.");
+- (instancetype)initWithDuration:(NSTimeInterval)seconds timerCompletion:(void(^)(BOOL hasElapsed))completion {
+    if (self = [super initWithFrame:CGRectZero]) {
+        if (seconds <= 0) {
+            MPLogDebug(@"Attempted to initialize MPCountdownTimerView with a non-positive duration. No timer will be created.");
             return nil;
         }
 
-        _completionBlock = nil;
-        _currentSeconds = seconds;
-        _isPaused = NO;
-        _timer = nil;
-        _timerView = ({
-            UIWebView * view = [[UIWebView alloc] initWithFrame:self.bounds];
-            view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-            view.backgroundColor = [UIColor clearColor];
-            view.delegate = self;
-            view.opaque = NO;
-            view.userInteractionEnabled = NO;
-            view;
-        });
-        self.userInteractionEnabled = NO;
+        _completionBlock = completion;
+        _remainingSeconds = seconds;
+        _timer = nil; // timer instantiation is deferred to `start`
+        _notificationCenter = [NSNotificationCenter defaultCenter];
 
-        [self addSubview:_timerView];
-        [_timerView loadHTMLString:self.timerHtml baseURL:self.timerBaseUrl];
+        CGPoint ringCenter = CGPointMake([MPCountdownTimerView intrinsicContentDimension] / 2,
+                                         [MPCountdownTimerView intrinsicContentDimension] / 2);
+
+        // the actual animation is the reverse of this path
+        UIBezierPath * circularPath = [UIBezierPath bezierPathWithArcCenter:ringCenter
+                                                                     radius:kRingRadius
+                                                                 startAngle:kTimerStartAngle + kOneCycle
+                                                                   endAngle:kTimerStartAngle
+                                                                  clockwise:false];
+        _backgroundRingLayer = ({
+            CAShapeLayer * layer = [CAShapeLayer new];
+            layer.fillColor = UIColor.clearColor.CGColor;
+            layer.lineWidth = kRingWidth;
+            layer.path = [circularPath CGPath];
+            layer.strokeColor = [UIColor.whiteColor colorWithAlphaComponent:0.5].CGColor;
+            layer;
+        });
+
+        _animatingRingLayer = ({
+            CAShapeLayer * layer = [CAShapeLayer new];
+            layer.fillColor = UIColor.clearColor.CGColor;
+            layer.lineWidth = kRingWidth;
+            layer.path = [circularPath CGPath];
+            layer.strokeColor = UIColor.whiteColor.CGColor;
+            layer;
+        });
+
+        _countdownLabel = ({
+            UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [MPCountdownTimerView intrinsicContentDimension], [MPCountdownTimerView intrinsicContentDimension])];
+            label.center = ringCenter;
+            label.font = [UIFont systemFontOfSize:12 weight:UIFontWeightBold];
+            label.text = [NSString stringWithFormat:@"%.0f", ceil(seconds)];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.textColor = UIColor.whiteColor;
+            label;
+        });
+
+        [self.layer addSublayer:_backgroundRingLayer];
+        [self.layer addSublayer:_animatingRingLayer];
+        [self addSubview:_countdownLabel];
+
+        self.userInteractionEnabled = NO;
     }
 
     return self;
@@ -65,24 +100,50 @@ static const NSTimeInterval kCountdownTimerInterval = 0.05;
     [self stopAndSignalCompletion:NO];
 }
 
-#pragma mark - Timer
+#pragma mark - Dimension
 
-- (BOOL)isActive {
-    return (self.timer != nil);
++ (CGFloat)intrinsicContentDimension {
+    return (kRingRadius + kRingPadding) * 2;
 }
 
-- (void)startWithTimerCompletion:(void(^)(BOOL hasElapsed))completion {
-    if (self.isActive) {
+- (CGSize)intrinsicContentSize
+{
+    return CGSizeMake([MPCountdownTimerView intrinsicContentDimension],
+                      [MPCountdownTimerView intrinsicContentDimension]);
+}
+
+#pragma mark - Timer
+
+- (BOOL)hasStarted {
+    return self.timer != nil;
+}
+
+- (void)start {
+    if (self.hasStarted) {
+        MPLogDebug(@"MPCountdownTimerView cannot start again since it has started");
         return;
     }
 
-    // Reset any internal state that may be dirty from a previous timer run.
-    self.isPaused = NO;
+    // Observer app state for automatic pausing and resuming
+    [self.notificationCenter addObserver:self
+                                selector:@selector(pause)
+                                    name:UIApplicationDidEnterBackgroundNotification
+                                  object:nil];
+    [self.notificationCenter addObserver:self
+                                selector:@selector(resume)
+                                    name:UIApplicationWillEnterForegroundNotification
+                                  object:nil];
 
-    // Copy the completion block and set up the initial state of the timer.
-    self.completionBlock = completion;
+    // This animation is the ring disappearing clockwise from full (12 o'clock) to empty.
+    CABasicAnimation * animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    animation.fromValue = @1;
+    animation.toValue = @0;
+    animation.duration = self.remainingSeconds;
+    animation.fillMode = kCAFillModeForwards; // for keeping the completed animation
+    animation.removedOnCompletion = NO; // for keeping the completed animation
+    [self.animatingRingLayer addAnimation:animation forKey:kAnimationKey];
 
-    // Start the timer now.
+    // Fire the timer
     self.timer = [MPTimer timerWithTimeInterval:kCountdownTimerInterval
                                          target:self
                                        selector:@selector(onTimerUpdate:)
@@ -93,19 +154,20 @@ static const NSTimeInterval kCountdownTimerInterval = 0.05;
 }
 
 - (void)stopAndSignalCompletion:(BOOL)shouldSignalCompletion {
-    if (!self.isActive) {
+    if (!self.hasStarted) {
+        MPLogDebug(@"MPCountdownTimerView cannot stop since it has not started yet");
         return;
     }
 
-    // Invalidate and clear the timer to stop it completely.
+    // Invalidate and clear the timer to stop it completely. Intentionally not setting `timer` to nil
+    // so that the computed var `hasStarted` is still `YES` after the timer stops.
     [self.timer invalidate];
-    self.timer = nil;
 
     MPLogInfo(@"MPCountdownTimerView stopped");
 
     // Notify the completion block and clear it out once it's handling has finished.
     if (shouldSignalCompletion && self.completionBlock != nil) {
-        BOOL hasElapsed = (self.currentSeconds <= 0);
+        BOOL hasElapsed = (self.remainingSeconds <= 0);
         self.completionBlock(hasElapsed);
 
         MPLogInfo(@"MPCountdownTimerView completion block notified");
@@ -117,80 +179,61 @@ static const NSTimeInterval kCountdownTimerInterval = 0.05;
 }
 
 - (void)pause {
-    if (!self.isActive) {
+    if (!self.hasStarted) {
+        MPLogDebug(@"MPCountdownTimerView cannot pause since it has not started yet");
         return;
     }
 
-    self.isPaused = [self.timer pause];
-    if (self.isPaused) {
-        MPLogInfo(@"MPCountdownTimerView paused");
+    if (!self.timer.isCountdownActive) {
+        MPLogInfo(@"MPCountdownTimerView is already paused");
+        return; // avoid wrong animation timing
     }
+    [self.timer pause];
+
+    // See documentation for pausing and resuming animation:
+    // https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/AdvancedAnimationTricks/AdvancedAnimationTricks.html
+    CFTimeInterval pausedTime = [self.animatingRingLayer convertTime:CACurrentMediaTime() fromLayer:nil];
+    self.animatingRingLayer.speed = 0.0;
+    self.animatingRingLayer.timeOffset = pausedTime;
+
+    MPLogInfo(@"MPCountdownTimerView paused");
 }
 
 - (void)resume {
-    if (!self.isActive) {
+    if (!self.hasStarted) {
+        MPLogDebug(@"MPCountdownTimerView cannot resume since it has not started yet");
         return;
     }
 
-    if ([self.timer resume]) {
-        self.isPaused = NO;
-        MPLogInfo(@"MPCountdownTimerView resumed");
+    if (self.timer.isCountdownActive) {
+        MPLogInfo(@"MPCountdownTimerView is already running");
+        return; // avoid wrong animation timing
     }
-}
+    [self.timer resume];
 
-#pragma mark - Resources
+    // See documentation for pausing and resuming animation:
+    // https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/AdvancedAnimationTricks/AdvancedAnimationTricks.html
+    CFTimeInterval pausedTime = [self.animatingRingLayer timeOffset];
+    self.animatingRingLayer.speed = 1.0;
+    self.animatingRingLayer.timeOffset = 0.0;
+    self.animatingRingLayer.beginTime = 0.0;
+    CFTimeInterval timeSincePause = [self.animatingRingLayer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    self.animatingRingLayer.beginTime = timeSincePause;
 
-- (NSString *)timerHtml {
-    // Save the contents of the HTML into a static string since it will not change
-    // across instances.
-    static NSString * html = nil;
-
-    if (html == nil) {
-        NSBundle * parentBundle = [NSBundle resourceBundleForClass:self.class];
-        NSString * filepath = [parentBundle pathForResource:@"MPCountdownTimer" ofType:@"html"];
-        html = [NSString stringWithContentsOfFile:filepath encoding:NSUTF8StringEncoding error:nil];
-
-        if (html == nil) {
-            MPLogError(@"Could not find MPCountdownTimer.html in bundle %@", parentBundle.bundlePath);
-        }
-    }
-
-    return html;
-}
-
-- (NSURL *)timerBaseUrl {
-    // Save the base URL into a static string since it will not change
-    // across instances.
-    static NSURL * baseUrl = nil;
-
-    if (baseUrl == nil) {
-        NSBundle * parentBundle = [NSBundle resourceBundleForClass:self.class];
-        baseUrl = [NSURL fileURLWithPath:parentBundle.bundlePath];
-    }
-
-    return baseUrl;
+    MPLogInfo(@"MPCountdownTimerView resumed");
 }
 
 #pragma mark - MPTimer
 
 - (void)onTimerUpdate:(MPTimer *)sender {
     // Update the count.
-    self.currentSeconds -= kCountdownTimerInterval;
-
-    NSString * jsToEvaluate = [NSString stringWithFormat:@"setCounterValue(%f);", self.currentSeconds];
-    [self.timerView stringByEvaluatingJavaScriptFromString:jsToEvaluate];
+    self.remainingSeconds -= kCountdownTimerInterval;
+    self.countdownLabel.text = [NSString stringWithFormat:@"%.0f", ceil(self.remainingSeconds)];
 
     // Stop the timer and notify the completion block.
-    if (self.currentSeconds <= 0) {
+    if (self.remainingSeconds <= 0) {
         [self stopAndSignalCompletion:YES];
     }
-}
-
-#pragma mark - UIWebViewDelegate
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSString * jsToEvaluate = [NSString stringWithFormat:@"setMaxCounterValue(%f); setCounterValue(%f);", self.currentSeconds, self.currentSeconds];
-    [self.timerView stringByEvaluatingJavaScriptFromString:jsToEvaluate];
 }
 
 @end

@@ -1,7 +1,7 @@
 //
 //  MPNativeAd+Internal.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -15,6 +15,8 @@
 @property (nonatomic, readonly) NSDate *creationDate;
 @property (nonatomic) MPNativeView *associatedView;
 @property (nonatomic, readwrite, strong) id<MPNativeAdRenderer> renderer;
+@property (nonatomic, readwrite, strong) MPAdConfiguration *configuration;
+@property (nonatomic, readwrite, strong) NSString *adUnitID;
 @property (nonatomic, readonly) NSMutableSet *clickTrackerURLs;
 @property (nonatomic, readonly) NSMutableSet *impressionTrackerURLs;
 @property (nonatomic, readonly, strong) id<MPNativeAdAdapter> adAdapter;

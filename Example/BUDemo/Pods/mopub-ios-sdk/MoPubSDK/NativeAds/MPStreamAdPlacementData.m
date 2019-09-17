@@ -1,7 +1,7 @@
 //
 //  MPStreamAdPlacementData.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -170,7 +170,7 @@ static const NSUInteger kMaximumNumberOfAdsPerStream = 255;
     NSUInteger indexInDesiredArrays = [self indexOfIndexPath:adjustedIndexPath inSortedArray:desiredInsertionPositions options:NSBinarySearchingFirstEqual];
 
     if (indexInDesiredArrays == NSNotFound) {
-        MPLogWarn(@"Attempted to insert an ad at position %@, which is not in the desired array.", adjustedIndexPath);
+        MPLogInfo(@"Attempted to insert an ad at position %@, which is not in the desired array.", adjustedIndexPath);
         return;
     }
 

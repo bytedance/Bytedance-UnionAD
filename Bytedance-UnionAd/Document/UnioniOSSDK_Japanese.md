@@ -88,7 +88,7 @@ App Transport Security Settingsを追加するには、まず左側の展開矢�
 ![image](http://sf1-ttcdn-tos.pstatp.com/img/union-platform/e7723fa701c3ab9d9d7a787add33fdad.png~0x0_q100.webp)
 
 #### 1.2.2 動作環境
-+ iOS 8.X以上のシステムをサポート
++ iOS 9.X以上のシステムをサポート
 + SDKコンパイル環境Xcode 10.0
 + 対応アーキテクチャ：i386, x86-64, armv7, armv7s, arm64
 
@@ -102,12 +102,14 @@ App Transport Security Settingsを追加するには、まず左側の展開矢�
 + CoreMedia.framework
 + AVFoundation.framework
 + CoreTelephony.framework
++ CoreLocation.framework
 + SystemConfiguration.framework
 + AdSupport.framework
 + CoreMotion.framework
 + libresolv.9.tbd
 + libc++.tbd
 + libz.tbd
++ Add the imageio. framework if the above dependency library is still reporting errors.
 詳しい操作は図の通りです。
 
 ![image](http://sf1-ttcdn-tos.pstatp.com/img/union-platform/9729c0facdcba2a6aec2c23378e9eee7.png~0x0_q100.webp)
@@ -348,7 +350,7 @@ AdMobでリワード動画を統合するには二つの方法があります。
 
 広告テストは[Test Ads](https://developers.google.com/admob/ios/test-ads?hl=zh-CN#enable_test_devices)をご参照ください
 
-接続中の問題を減らすために、以下の点にご注意ください。
+以下の点にご注意ください。
 
 + **CustomEventを設定するときは、Class Nameと実現するAdapterクラス名を一致させる必要があります。一致していない場合はadapterの呼び出しができません。**
 + **iOS simulatorはデフォルトではEnable test deviceタイプのデバイスに設定されており、Google Test Adsしか取得できず、JinriToutiaoのテスト広告は取得できません。JinriToutiaoの広告をテストしたい場合はiOSの実機を使用してください。追加してAdMob TestDevicesに追加しないでください。**
@@ -358,7 +360,7 @@ AdMobでリワード動画を統合するには二つの方法があります。
 + **タイプの説明：**フルスクリーン動画はフルスクリーンで動画広告を展示する広告形式です。ユーザはシーン毎に対応する広告を入れることができます。この種の広告の長さは15～30秒で、スキップできます。また、endCard終了画面を表示し、ユーザに次の操作に移るよう誘導します。
 
 #### 2.3.1 BUFullscreenVideoAdインターフェイスの説明
-**毎回、新しいBUFullscreenVideoAdオブジェクトを生成し、loadAdDataを呼び出す方法で、最新リワード動画をリクエストする必要があります。繰り返しローカルキャッシュを使用して、何度もリワード動画を展示することはやめてください。**
+**毎回、新しいBUFullscreenVideoAdオブジェクトを生成し、loadAdDataを呼び出す方法で、最新フルスクリーン動画をリクエストする必要があります。繰り返しローカルキャッシュを使用して、何度もフルスクリーン動画を展示することはやめてください。**
 
 ```Objective-C
 @interface BUFullscreenVideoAd : NSObject
@@ -556,7 +558,7 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
 
 答え：お使いのホームページViewControllerでNavigationBarを非表示にしている場合、戻ることができません。
 
-2.ToutiaoSDKのBUWebViewControllerクラスとTTRUIWebViewクラスにメモリのリークがあります。
+2.ToutiaoSDKのBUWebViewControllerクラスとBUUIWebViewクラスにメモリのリークがあります。
 
 答え：システムによる問題です。UIWebViewではリークが発生します。WKWebViewへの取り替えを検討しています。
 

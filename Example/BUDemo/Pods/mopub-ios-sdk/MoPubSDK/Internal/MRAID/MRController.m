@@ -1,7 +1,7 @@
 //
 //  MRController.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -51,6 +51,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
 @property (nonatomic, assign) CGRect mraidDefaultAdFrameInKeyWindow;
 @property (nonatomic, assign) CGSize currentAdSize;
 @property (nonatomic, assign) NSUInteger modalViewCount;
+@property (nonatomic, assign) BOOL isAppSuspended;
 @property (nonatomic, assign) MRAdViewState currentState;
 @property (nonatomic, assign) BOOL shouldUseUIWebView;
 // Track the original super view for when we move the ad view to the key window for a 1-part expand.
@@ -61,7 +62,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
 // Whether or not an interstitial requires precaching.  Does not affect banners.
 @property (nonatomic, assign) BOOL adRequiresPrecaching;
 @property (nonatomic, assign) BOOL isAdVastVideoPlayer;
-@property (nonatomic, assign) BOOL firedReadyEventForDefaultAd;
+@property (nonatomic, assign) BOOL didConfigureOrientationNotificationObservers;
 
 // Points to mraidAdView (one-part expand) or mraidAdViewTwoPart (two-part expand) while expanded.
 @property (nonatomic, strong) MPClosableView *expansionContentView;
@@ -83,29 +84,41 @@ static NSString *const kMRAIDCommandResize = @"resize";
 // Networking
 @property (nonatomic, strong) NSURLSessionTask *task;
 
+// Previously set values used to determine if an update needs to be sent
+@property (nonatomic, assign) CGRect previousCurrentPosition;
+@property (nonatomic, assign) CGRect previousDefaultPosition;
+@property (nonatomic, assign) CGSize previousScreenSize;
+@property (nonatomic, assign) CGSize previousMaxSize;
+
+// Safe area insets
+@property (nonatomic, assign) BOOL includeSafeAreaInsetsInCalculations;
+
 @end
 
 @implementation MRController
 
 - (instancetype)initWithAdViewFrame:(CGRect)adViewFrame
+              supportedOrientations:(MPInterstitialOrientationType)orientationType
                     adPlacementType:(MRAdViewPlacementType)placementType
                            delegate:(id<MRControllerDelegate>)delegate
 {
     if (self = [super init]) {
+        _includeSafeAreaInsetsInCalculations = YES;
         _placementType = placementType;
         _currentState = MRAdViewStateDefault;
-        _forceOrientationMask = UIInterfaceOrientationMaskAll;
+        _forceOrientationMask = MPInterstitialOrientationTypeToUIInterfaceOrientationMask(orientationType);
         _isAnimatingAdSize = NO;
-        _firedReadyEventForDefaultAd = NO;
+        _didConfigureOrientationNotificationObservers = NO;
         _currentAdSize = CGSizeZero;
+        _isAppSuspended = NO;
 
         _mraidDefaultAdFrame = adViewFrame;
 
-        _adPropertyUpdateTimer = [[MPCoreInstanceProvider sharedProvider] buildMPTimerWithTimeInterval:kAdPropertyUpdateTimerInterval
-                                                                                                target:self
-                                                                                              selector:@selector(updateMRAIDProperties)
-                                                                                               repeats:YES];
-        _adPropertyUpdateTimer.runLoopMode = NSRunLoopCommonModes;
+        _adPropertyUpdateTimer = [MPTimer timerWithTimeInterval:kAdPropertyUpdateTimerInterval
+                                                         target:self
+                                                       selector:@selector(updateMRAIDProperties)
+                                                        repeats:YES
+                                                    runLoopMode:NSRunLoopCommonModes];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(viewEnteredBackground)
@@ -123,6 +136,11 @@ static NSString *const kMRAIDCommandResize = @"resize";
         _adAlertManagerTwoPart = [[MPCoreInstanceProvider sharedProvider] buildMPAdAlertManagerWithDelegate:self];
 
         _delegate = delegate;
+
+        _previousCurrentPosition = CGRectNull;
+        _previousDefaultPosition = CGRectNull;
+        _previousScreenSize = CGSizeZero;
+        _previousMaxSize = CGSizeZero;
     }
 
     return self;
@@ -180,11 +198,19 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 }
 
+- (void)handleMRAIDInterstitialWillPresentWithViewController:(MPMRAIDInterstitialViewController *)viewController
+{
+    self.interstitialViewController = viewController;
+    [self updateOrientation];
+    [self willBeginAnimatingAdSize];
+}
+
 - (void)handleMRAIDInterstitialDidPresentWithViewController:(MPMRAIDInterstitialViewController *)viewController
 {
     self.interstitialViewController = viewController;
-    [self enableRequestHandling];
-    [self checkViewability];
+    [self didEndAnimatingAdSize];
+    [self updateMRAIDProperties];
+    [self updateOrientation];
 
     // If viewability tracking has been deferred (i.e., if this is a non-banner ad), start tracking here now that the
     // ad has been presented. If viewability tracking was not deferred, we're already tracking and there's no need to
@@ -357,7 +383,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 #pragma mark - Executing Javascript
 
-- (void)initializeLoadedAdForBridge:(MRBridge *)bridge
+- (void)configureMraidEnvironmentToShowAdForBridge:(MRBridge *)bridge
 {
     // Set up some initial properties so mraid can operate.
     MPLogDebug(@"Injecting initial JavaScript state.");
@@ -382,68 +408,82 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 #pragma mark - Resize Helpers
 
-- (CGRect)adjustedFrameForFrame:(CGRect)frame allowOffscreen:(BOOL)allowOffscreen
+/**
+ If the provided frame is not fully within the application safe area, to try to adjust it's origin so
+ that the provided frame can fit into the application safe area if possible.
+
+ Note: Only the origin is adjusted. If the size doesn't fit, then the original frame is returned.
+
+ @param frame The frame to adjust.
+ @param applicationSafeArea The frame of application safe area.
+ @return The adjusted frame.
+ */
++ (CGRect)adjustedFrameForFrame:(CGRect)frame toFitIntoApplicationSafeArea:(CGRect)applicationSafeArea
 {
-    if (allowOffscreen) {
+    if (CGRectContainsRect(applicationSafeArea, frame)) {
         return frame;
-    }
-
-    CGRect applicationFrame = MPApplicationFrame();
-    CGFloat applicationWidth = CGRectGetWidth(applicationFrame);
-    CGFloat applicationHeight = CGRectGetHeight(applicationFrame);
-    CGFloat adFrameWidth = CGRectGetWidth(frame);
-    CGFloat adFrameHeight = CGRectGetHeight(frame);
-
-    //Checking that the ad's frame falls offscreen, and then it is smaller than the screen's bounds (so when
-    //moved onscreen, it will fit). If not, we bail out, and validation is done separately.
-    if (!CGRectContainsRect(applicationFrame, frame) && adFrameWidth <= applicationWidth && adFrameHeight <= applicationHeight) {
-
-        CGFloat applicationMinX = CGRectGetMinX(applicationFrame);
-        CGFloat applicationMaxX = CGRectGetMaxX(applicationFrame);
-        CGFloat adFrameMinX = CGRectGetMinX(frame);
-        CGFloat adFrameMaxX = CGRectGetMaxX(frame);
-
-        if (adFrameMinX < applicationMinX) {
-            frame.origin.x += applicationMinX - adFrameMinX;
-        } else if (adFrameMaxX > applicationMaxX) {
-            frame.origin.x -= adFrameMaxX - applicationMaxX;
+    } else if (CGRectGetWidth(frame) <= CGRectGetWidth(applicationSafeArea)
+               && CGRectGetHeight(frame) <= CGRectGetHeight(applicationSafeArea)) {
+        // given the size is fitting, we only need to move the frame by changing its origin
+        if (CGRectGetMinX(frame) < CGRectGetMinX(applicationSafeArea)) {
+            frame.origin.x = CGRectGetMinX(applicationSafeArea);
+        } else if (CGRectGetMaxX(applicationSafeArea) < CGRectGetMaxX(frame)) {
+            frame.origin.x = CGRectGetMaxX(applicationSafeArea) - CGRectGetWidth(frame);
         }
 
-        CGFloat applicationMinY = CGRectGetMinY(applicationFrame);
-        CGFloat applicationMaxY = CGRectGetMaxY(applicationFrame);
-        CGFloat adFrameMinY = CGRectGetMinY(frame);
-        CGFloat adFrameMaxY = CGRectGetMaxY(frame);
-
-        if (adFrameMinY < applicationMinY) {
-            frame.origin.y += applicationMinY - adFrameMinY;
-        } else if (adFrameMaxY > applicationMaxY) {
-            frame.origin.y -= adFrameMaxY - applicationMaxY;
+        if (CGRectGetMinY(frame) < CGRectGetMinY(applicationSafeArea)) {
+            frame.origin.y = CGRectGetMinY(applicationSafeArea);
+        } else if (CGRectGetMaxY(applicationSafeArea) < CGRectGetMaxY(frame)) {
+            frame.origin.y = CGRectGetMaxY(applicationSafeArea) - CGRectGetHeight(frame);
         }
     }
 
     return frame;
 }
 
-- (BOOL)isValidResizeFrame:(CGRect)frame allowOffscreen:(BOOL)allowOffscreen
+/**
+ Check whether the provided @c frame is valid for a resized ad.
+ @param frame The ad frame to check
+ @param applicationSafeArea The safe area of this application
+ @param allowOffscreen Per MRAID spec https://www.iab.com/wp-content/uploads/2015/08/IAB_MRAID_v2_FINAL.pdf,
+ page 35, @c is for "whether or not it should allow the resized creative to be drawn fully/partially
+ offscreen".
+ @return @c YES if the provided @c frame is valid for a resized ad, and @c NO otherwise.
+ */
++ (BOOL)isValidResizeFrame:(CGRect)frame
+     inApplicationSafeArea:(CGRect)applicationSafeArea
+            allowOffscreen:(BOOL)allowOffscreen
 {
-    BOOL valid = YES;
-    if (!allowOffscreen && !CGRectContainsRect(MPApplicationFrame(), frame)) {
-        valid = NO;
-    } else if (CGRectGetWidth(frame) < 50.0f || CGRectGetHeight(frame) < 50.0f) {
-        valid = NO;
+    if (CGRectGetWidth(frame) < kCloseRegionSize.width || CGRectGetHeight(frame) < kCloseRegionSize.height) {
+        /*
+         Per MRAID spec https://www.iab.com/wp-content/uploads/2015/08/IAB_MRAID_v2_FINAL.pdf, page 34,
+         "a resized ad must be at least 50x50 pixels, to ensure there is room on the resized creative
+         for the close event region."
+         */
+        return false;
+    } else {
+        if (allowOffscreen) {
+            return YES; // any frame with a valid size is valid, even off screen
+        } else {
+            return CGRectContainsRect(applicationSafeArea, frame);
+        }
     }
-
-    return valid;
 }
 
-- (BOOL)isValidResizeCloseButtonPlacementInFrame:(CGRect)newFrame
-{
-    CGRect closeButtonFrameForResize = MPClosableViewCustomCloseButtonFrame(newFrame.size, self.mraidAdView.closeButtonLocation);
-    //Manually calculating Button's Frame in the window (newFrame's soon-to-be superview) because newFrame is not
-    //part of the view hierarchy yet.
-    CGRect closeButtonFrameInWindow = CGRectOffset(closeButtonFrameForResize, CGRectGetMinX(newFrame), CGRectGetMinY(newFrame));
-
-    return CGRectContainsRect(MPApplicationFrame(), closeButtonFrameInWindow);
+/**
+ Check whether the frame of Close button is valid.
+ @param closeButtonLocation The Close button location.
+ @param adFrame The ad frame that contains the Close button.
+ @param applicationSafeArea The safe area of this application.
+ @return @c YES if the frame of the Close button is valid, and @c NO otherwise.
+ */
++ (BOOL)isValidCloseButtonPlacement:(MPClosableViewCloseButtonLocation)closeButtonLocation
+                          inAdFrame:(CGRect)adFrame
+              inApplicationSafeArea:(CGRect)applicationSafeArea {
+    // Need to convert the corrdinate system of the Close button frame from "in the ad" to "in the window".
+    CGRect closeButtonFrameInAd = MPClosableViewCustomCloseButtonFrame(adFrame.size, closeButtonLocation);
+    CGRect closeButtonFrameInWindow = CGRectOffset(closeButtonFrameInAd, CGRectGetMinX(adFrame), CGRectGetMinY(adFrame));
+    return CGRectContainsRect(applicationSafeArea, closeButtonFrameInWindow);
 }
 
 - (MPClosableViewCloseButtonLocation)adCloseButtonLocationFromString:(NSString *)closeButtonLocationString
@@ -493,7 +533,6 @@ static NSString *const kMRAIDCommandResize = @"resize";
     view.frame = self.expandModalViewController.view.bounds;
     view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.expandModalViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self.expandModalViewController hideStatusBar];
 
     [[self.delegate viewControllerForPresentingModalView] presentViewController:self.expandModalViewController
                                                                        animated:animated
@@ -565,8 +604,6 @@ static NSString *const kMRAIDCommandResize = @"resize";
     // they're in a transitional state.
     [self willBeginAnimatingAdSize];
 
-    // Tell the modal view controller to restore the state of the status bar back to what the application had it set to.
-    [self.expandModalViewController restoreStatusBarVisibility];
     __weak __typeof__(self) weakSelf = self;
     [self.expandModalViewController dismissViewControllerAnimated:YES completion:^{
         __typeof__(self) strongSelf = weakSelf;
@@ -588,6 +625,11 @@ static NSString *const kMRAIDCommandResize = @"resize";
         // Waiting this long to change the state results in some awkward animation. The full screen ad will briefly appear in the banner's
         // frame after the modal dismisses. However, this is a much safer time to change the state and results in less side effects.
         [strongSelf changeStateTo:MRAdViewStateDefault];
+
+        // Notify listeners that the expanded ad was collapsed.
+        if ([strongSelf.delegate respondsToSelector:@selector(adDidCollapse:)]) {
+            [strongSelf.delegate adDidCollapse:strongSelf.mraidAdView];
+        }
     }];
 }
 
@@ -597,15 +639,25 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
     [self willBeginAnimatingAdSize];
 
+    __weak __typeof__(self) weakSelf = self;
     [UIView animateWithDuration:kMRAIDResizeAnimationTimeInterval animations:^{
-        self.mraidAdView.frame = self.mraidDefaultAdFrameInKeyWindow;
+        __typeof__(self) strongSelf = weakSelf;
+
+        strongSelf.mraidAdView.frame = strongSelf.mraidDefaultAdFrameInKeyWindow;
     } completion:^(BOOL finished) {
-        [self.resizeBackgroundView removeFromSuperview];
-        [self.originalSuperview addSubview:self.mraidAdView];
-        self.mraidAdView.frame = self.mraidDefaultAdFrame;
-        [self changeStateTo:MRAdViewStateDefault];
-        [self didEndAnimatingAdSize];
-        [self adDidDismissModalView];
+        __typeof__(self) strongSelf = weakSelf;
+
+        [strongSelf.resizeBackgroundView removeFromSuperview];
+        [strongSelf.originalSuperview addSubview:strongSelf.mraidAdView];
+        strongSelf.mraidAdView.frame = strongSelf.mraidDefaultAdFrame;
+        [strongSelf changeStateTo:MRAdViewStateDefault];
+        [strongSelf didEndAnimatingAdSize];
+        [strongSelf adDidDismissModalView];
+
+        // Notify listeners that the expanded ad was collapsed.
+        if ([strongSelf.delegate respondsToSelector:@selector(adDidCollapse:)]) {
+            [strongSelf.delegate adDidCollapse:strongSelf.mraidAdView];
+        }
     }];
 }
 
@@ -646,7 +698,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 - (void)nativeCommandWillPresentModalView
 {
-    [self adWillPresentModalView];
+    [self adWillPresentModalViewByExpanding:NO];
 }
 
 - (void)nativeCommandDidDismissModalView
@@ -665,8 +717,8 @@ static NSString *const kMRAIDCommandResize = @"resize";
         if (!self.adRequiresPrecaching) {
             // Only tell the delegate that the ad loaded when the view is the default ad view and not a two-part ad view.
             if (bridge == self.mraidBridge) {
-                // We do not intialize the javascript/fire ready event, or start our timer for a banner load yet.  We wait until
-                // the ad is in the view hierarchy. We are notified by the view when it is potentially added to the hierarchy in
+                // We do not start our timer for a banner load yet.  We wait until the ad is in the view hierarchy.
+                // We are notified by the view when it is potentially added to the hierarchy in
                 // -closableView:didMoveToWindow:.
                 [self adDidLoad];
             } else if (bridge == self.mraidBridgeTwoPart) {
@@ -680,7 +732,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
                 // We initialize javascript and fire the ready event for the two part ad view once it loads
                 // since it'll already be in the view hierarchy.
-                [self initializeLoadedAdForBridge:bridge];
+                [self configureMraidEnvironmentToShowAdForBridge:bridge];
             }
         }
     }
@@ -714,7 +766,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
     } else if (command == MPMoPubHostCommandRewardedVideoEnded) {
         [self.delegate rewardedVideoEnded];
     } else {
-        MPLogWarn(@"MRController - unsupported MoPub URL: %@", [url absoluteString]);
+        MPLogInfo(@"MRController - unsupported MoPub URL: %@", [url absoluteString]);
     }
 }
 
@@ -768,8 +820,10 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
     BOOL inExpandedState = self.currentState == MRAdViewStateExpanded;
 
-    // If we aren't expanded or showing an interstitial ad, we don't have to force orientation on our ad.
+    // If we aren't expanded or showing an interstitial ad, save the force orientation in case the
+    // ad is expanded, but do not process further.
     if (!inExpandedState && self.placementType != MRAdViewPlacementTypeInterstitial) {
+        self.forceOrientationMask = forceOrientationMask;
         return;
     }
 
@@ -795,12 +849,6 @@ static NSString *const kMRAIDCommandResize = @"resize";
     if (inSameOrientation) {
         fullScreenAdViewController.supportedOrientationMask = forceOrientationMask;
     } else {
-        // It doesn't seem possible to force orientation in iOS 7+. So we dismiss the current view controller and re-present it with the forced orientation.
-        // If it's an expanded ad, we need to restore the status bar visibility before we dismiss the current VC since we don't show the status bar in expanded state.
-        if (inExpandedState) {
-            [self.expandModalViewController restoreStatusBarVisibility];
-        }
-
         // Block our timer from updating properties while we force orientation on the view controller.
         [self willBeginAnimatingAdSize];
 
@@ -841,7 +889,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
     // self.mraidDefaultAdFrame has already been set from resize, and the mraidAdView's frame is not the correct default.
     if (self.currentState != MRAdViewStateResized) {
         self.mraidDefaultAdFrame = self.mraidAdView.frame;
-        [self adWillPresentModalView];
+        [self adWillPresentModalViewByExpanding:YES];
     } else {
         [self.resizeBackgroundView removeFromSuperview];
     }
@@ -907,17 +955,29 @@ static NSString *const kMRAIDCommandResize = @"resize";
         self.mraidDefaultAdFrameInKeyWindow = [self.mraidAdView.superview convertRect:self.mraidAdView.frame toView:MPKeyWindow().rootViewController.view];
     }
 
-    CGRect newFrame = CGRectMake(CGRectGetMinX(self.mraidDefaultAdFrameInKeyWindow) + offsetX, CGRectGetMinY(self.mraidDefaultAdFrameInKeyWindow) + offsetY, width, height);
-    newFrame = [self adjustedFrameForFrame:newFrame allowOffscreen:allowOffscreen];
+    MPClosableViewCloseButtonLocation closeButtonLocation = [self adCloseButtonLocationFromString:customClosePositionString];
+    CGRect applicationSafeArea = MPApplicationFrame(self.includeSafeAreaInsetsInCalculations);
+    CGRect newFrame = CGRectMake(CGRectGetMinX(applicationSafeArea) + offsetX,
+                                 CGRectGetMinY(applicationSafeArea) + offsetY,
+                                 width,
+                                 height);
+    if (!allowOffscreen) { // if `allowOffscreen` is YES, the frame doesn't need to be adjusted
+        newFrame = [[self class] adjustedFrameForFrame:newFrame toFitIntoApplicationSafeArea:applicationSafeArea];
+    }
 
-    self.mraidAdView.closeButtonType = MPClosableViewCloseButtonTypeTappableWithoutImage;
-    self.mraidAdView.closeButtonLocation = [self adCloseButtonLocationFromString:customClosePositionString];
-
-    if (![self isValidResizeFrame:newFrame allowOffscreen:allowOffscreen]) {
+    if (![[self class] isValidResizeFrame:newFrame
+                    inApplicationSafeArea:applicationSafeArea
+                           allowOffscreen:allowOffscreen]) {
         [self.mraidBridge fireErrorEventForAction:kMRAIDCommandResize withMessage:@"Could not display desired frame in compliance with MRAID 2.0 specifications."];
-    } else if (![self isValidResizeCloseButtonPlacementInFrame:newFrame]) {
-        [self.mraidBridge fireErrorEventForAction:kMRAIDCommandResize withMessage:@"Custom close event region is offscreen."];
+    } else if (![[self class] isValidCloseButtonPlacement:closeButtonLocation
+                                                inAdFrame:newFrame
+                                    inApplicationSafeArea:applicationSafeArea]) {
+        [self.mraidBridge fireErrorEventForAction:kMRAIDCommandResize withMessage:@"Custom close event region locates in invalid area."];
     } else {
+        // Update the close button
+        self.mraidAdView.closeButtonType = MPClosableViewCloseButtonTypeTappableWithoutImage;
+        self.mraidAdView.closeButtonLocation = closeButtonLocation;
+
         // If current state is default, save our current frame as the default frame, set originalSuperview, setup resizeBackgroundView,
         // move mraidAdView to rootViewController's view, and call adWillPresentModalView
         if (self.currentState == MRAdViewStateDefault) {
@@ -925,12 +985,12 @@ static NSString *const kMRAIDCommandResize = @"resize";
             self.originalSuperview = self.mraidAdView.superview;
 
             self.mraidAdView.frame = self.mraidDefaultAdFrameInKeyWindow;
-            self.resizeBackgroundView.frame = MPApplicationFrame();
+            self.resizeBackgroundView.frame = MPApplicationFrame(self.includeSafeAreaInsetsInCalculations);
 
             [MPKeyWindow().rootViewController.view addSubview:self.resizeBackgroundView];
             [MPKeyWindow().rootViewController.view addSubview:self.mraidAdView];
 
-            [self adWillPresentModalView];
+            [self adWillPresentModalViewByExpanding:YES];
         }
 
         [self animateViewFromDefaultStateToResizedState:self.mraidAdView withFrame:newFrame];
@@ -949,7 +1009,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
     // Fire the ready event and initialize properties if the view has a window.
     MRBridge *bridge = [self bridgeForAdView:closableView];
 
-    if (!self.firedReadyEventForDefaultAd && bridge == self.mraidBridge) {
+    if (!self.didConfigureOrientationNotificationObservers && bridge == self.mraidBridge) {
         // The window may be nil if it was removed from a window or added to a view that isn't attached to a window so make sure it actually has a window.
         if (window != nil) {
             // Just in case this code is executed twice, ensures that self is only added as
@@ -968,8 +1028,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
                                                        object:nil];
 
             [self.adPropertyUpdateTimer scheduleNow];
-            [self initializeLoadedAdForBridge:bridge];
-            self.firedReadyEventForDefaultAd = YES;
+            self.didConfigureOrientationNotificationObservers = YES;
         }
     }
 }
@@ -978,7 +1037,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 - (void)displayAgentWillPresentModal
 {
-    [self adWillPresentModalView];
+    [self adWillPresentModalViewByExpanding:NO];
 }
 
 - (void)displayAgentDidDismissModal
@@ -1001,12 +1060,16 @@ static NSString *const kMRAIDCommandResize = @"resize";
     // requires a bit of extra state logic to handle. We also don't want to check if the ad is visible during animation because
     // the view is transitioning to a parent view that may or may not be on screen at any given time.
     if (!self.isAnimatingAdSize) {
-        [self checkViewability];
         [self updateCurrentPosition];
         [self updateDefaultPosition];
         [self updateScreenSize];
         [self updateMaxSize];
         [self updateEventSizeChange];
+
+        // Updating the Viewable state should be last because the creative may have a
+        // viewable event handler that relies upon the current position and sizes to be
+        // properly set.
+        [self checkViewability];
     }
 }
 
@@ -1014,16 +1077,18 @@ static NSString *const kMRAIDCommandResize = @"resize";
 {
     CGRect visibleFrame = CGRectZero;
 
-    if (self.placementType == MRAdViewPlacementTypeInline) {
-        if (self.currentState == MRAdViewStateExpanded) {
-            // We're in a modal so we can just return the expanded view's frame.
-            visibleFrame = self.expansionContentView.frame;
-        } else {
-            UIWindow *keyWindow = MPKeyWindow();
-            visibleFrame = [self.mraidAdView.superview convertRect:self.mraidAdView.frame toView:keyWindow.rootViewController.view];
-        }
-    } else if (self.placementType == MRAdViewPlacementTypeInterstitial) {
-        visibleFrame = self.mraidAdView.frame;
+    // Full screen ads, including inline ads that are in an expanded state.
+    // The active area should be the full application frame residing in the
+    // safe area.
+    BOOL isExpandedInLineAd = (self.placementType == MRAdViewPlacementTypeInline &&
+                               self.currentState == MRAdViewStateExpanded);
+    if (self.placementType == MRAdViewPlacementTypeInterstitial || isExpandedInLineAd) {
+        visibleFrame = MPApplicationFrame(self.includeSafeAreaInsetsInCalculations);
+    }
+    // Inline ads that are not in an expanded state.
+    else if (self.placementType == MRAdViewPlacementTypeInline) {
+        UIWindow *keyWindow = MPKeyWindow();
+        visibleFrame = [self.mraidAdView.superview convertRect:self.mraidAdView.frame toView:keyWindow.rootViewController.view];
     }
 
     return visibleFrame;
@@ -1051,22 +1116,42 @@ static NSString *const kMRAIDCommandResize = @"resize";
 {
     CGRect frame = [self activeAdFrameInScreenSpace];
 
-    // Only fire to the active ad view.
-    MRBridge *activeBridge = [self bridgeForActiveAdView];
-    [activeBridge fireSetCurrentPositionWithPositionRect:frame];
+    @synchronized (self) {
+        // No need to update since nothing has changed.
+        if (CGRectEqualToRect(frame, self.previousCurrentPosition)) {
+            return;
+        }
 
-    MPLogTrace(@"Current Position: %@", NSStringFromCGRect(frame));
+        // Update previous value
+        self.previousCurrentPosition = frame;
+
+        // Only fire to the active ad view.
+        MRBridge *activeBridge = [self bridgeForActiveAdView];
+        [activeBridge fireSetCurrentPositionWithPositionRect:frame];
+
+        MPLogDebug(@"Current Position: %@", NSStringFromCGRect(frame));
+    }
 }
 
 - (void)updateDefaultPosition
 {
     CGRect defaultFrame = [self defaultAdFrameInScreenSpace];
 
-    // Not necessary to fire to both ad views, but it's better that the two-part expand knows the default position than not.
-    [self.mraidBridge fireSetDefaultPositionWithPositionRect:defaultFrame];
-    [self.mraidBridgeTwoPart fireSetDefaultPositionWithPositionRect:defaultFrame];
+    @synchronized (self) {
+        // No need to update since nothing has changed.
+        if (CGRectEqualToRect(defaultFrame, self.previousDefaultPosition)) {
+            return;
+        }
 
-    MPLogTrace(@"Default Position: %@", NSStringFromCGRect(defaultFrame));
+        // Update previous value
+        self.previousDefaultPosition = defaultFrame;
+
+        // Not necessary to fire to both ad views, but it's better that the two-part expand knows the default position than not.
+        [self.mraidBridge fireSetDefaultPositionWithPositionRect:defaultFrame];
+        [self.mraidBridgeTwoPart fireSetDefaultPositionWithPositionRect:defaultFrame];
+
+        MPLogDebug(@"Default Position: %@", NSStringFromCGRect(defaultFrame));
+    }
 }
 
 - (void)updateScreenSize
@@ -1074,23 +1159,51 @@ static NSString *const kMRAIDCommandResize = @"resize";
     // Fire an event for screen size changing. This includes the area of the status bar in its calculation.
     CGSize screenSize = MPScreenBounds().size;
 
-    // Fire to both ad views as it pertains to both views.
-    [self.mraidBridge fireSetScreenSize:screenSize];
-    [self.mraidBridgeTwoPart fireSetScreenSize:screenSize];
+    @synchronized (self) {
+        // No need to update since nothing has changed.
+        if (CGSizeEqualToSize(screenSize, self.previousScreenSize)) {
+            return;
+        }
 
-    MPLogTrace(@"Screen Size: %@", NSStringFromCGSize(screenSize));
+        // Update previous value
+        self.previousScreenSize = screenSize;
+
+        // Fire to both ad views as it pertains to both views.
+        [self.mraidBridge fireSetScreenSize:screenSize];
+        [self.mraidBridgeTwoPart fireSetScreenSize:screenSize];
+
+        MPLogDebug(@"Screen Size: %@", NSStringFromCGSize(screenSize));
+    }
 }
 
 - (void)updateMaxSize
 {
     // Similar to updateScreenSize except this doesn't include the area of the status bar in its calculation.
-    CGSize maxSize = MPApplicationFrame().size;
+    CGSize maxSize = MPApplicationFrame(self.includeSafeAreaInsetsInCalculations).size;
 
-    // Fire to both ad views as it pertains to both views.
-    [self.mraidBridge fireSetMaxSize:maxSize];
-    [self.mraidBridgeTwoPart fireSetMaxSize:maxSize];
+    @synchronized (self) {
+        // No need to update since nothing has changed.
+        if (CGSizeEqualToSize(maxSize, self.previousMaxSize)) {
+            return;
+        }
 
-    MPLogTrace(@"Max Size: %@", NSStringFromCGSize(maxSize));
+        // Update previous value
+        self.previousMaxSize = maxSize;
+
+        // Fire to both ad views as it pertains to both views.
+        [self.mraidBridge fireSetMaxSize:maxSize];
+        [self.mraidBridgeTwoPart fireSetMaxSize:maxSize];
+
+        MPLogDebug(@"Max Size: %@", NSStringFromCGSize(maxSize));
+    }
+}
+
+- (void)updateOrientation
+{
+    self.expandModalViewController.supportedOrientationMask = self.forceOrientationMask;
+    self.interstitialViewController.supportedOrientationMask = self.forceOrientationMask;
+
+    MPLogDebug(@"Orientation: %ud", (unsigned int)self.forceOrientationMask);
 }
 
 #pragma mark - MRAID events
@@ -1165,6 +1278,9 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 - (void)adDidLoad
 {
+    // Configure environment and fire ready event when ad is finished loading.
+    [self configureMraidEnvironmentToShowAdForBridge:self.mraidBridge];
+
     if ([self.delegate respondsToSelector:@selector(adDidLoad:)]) {
         [self.delegate adDidLoad:self.mraidAdView];
     }
@@ -1191,11 +1307,17 @@ static NSString *const kMRAIDCommandResize = @"resize";
     }
 }
 
-- (void)adWillPresentModalView
+- (void)adWillPresentModalViewByExpanding:(BOOL)wasExpended
 {
     self.modalViewCount++;
-    if (self.modalViewCount == 1) {
+    if (self.modalViewCount >= 1 && !wasExpended) {
         [self appShouldSuspend];
+    }
+
+    // Notify listeners that the ad is expanding or resizing to present
+    // a modal view.
+    if (wasExpended && [self.delegate respondsToSelector:@selector(adWillExpand:)]) {
+        [self.delegate adWillExpand:self.mraidAdView];
     }
 }
 
@@ -1209,6 +1331,12 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 - (void)appShouldSuspend
 {
+    // App is already suspended; do nothing.
+    if (self.isAppSuspended) {
+        return;
+    }
+
+    self.isAppSuspended = YES;
     if ([self.delegate respondsToSelector:@selector(appShouldSuspendForAd:)]) {
         [self.delegate appShouldSuspendForAd:self.mraidAdView];
     }
@@ -1216,6 +1344,12 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 - (void)appShouldResume
 {
+    // App is not suspended; do nothing.
+    if (!self.isAppSuspended) {
+        return;
+    }
+
+    self.isAppSuspended = NO;
     if ([self.delegate respondsToSelector:@selector(appShouldResumeFromAd:)]) {
         [self.delegate appShouldResumeFromAd:self.mraidAdView];
     }

@@ -10,4 +10,5 @@
 
 @interface BUDNormalButton : UIButton
 @property (nonatomic,assign) BOOL showRefreshIncon;
+@property (nonatomic,assign) BOOL isValid;
 @end

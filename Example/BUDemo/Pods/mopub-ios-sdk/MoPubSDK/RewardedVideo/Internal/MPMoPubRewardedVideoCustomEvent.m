@@ -1,13 +1,14 @@
 //
 //  MPMoPubRewardedVideoCustomEvent.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPMoPubRewardedVideoCustomEvent.h"
 #import "MPMRAIDInterstitialViewController.h"
+#import "MPError.h"
 #import "MPLogging.h"
 #import "MPRewardedVideoReward.h"
 #import "MPAdConfiguration.h"
@@ -28,8 +29,10 @@
 
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info
 {
-    MPLogInfo(@"Loading MoPub rewarded video");
-    self.interstitial = [[MPMRAIDInterstitialViewController alloc] initWithAdConfiguration:[self.delegate configuration]];
+    MPAdConfiguration * configuration = self.delegate.configuration;
+    MPLogAdEvent([MPLogEvent adLoadAttemptForAdapter:NSStringFromClass(configuration.customEventClass) dspCreativeId:configuration.dspCreativeId dspName:nil], self.adUnitId);
+
+    self.interstitial = [[MPMRAIDInterstitialViewController alloc] initWithAdConfiguration:configuration];
     self.interstitial.delegate = self;
 
     [self.interstitial setCloseButtonStyle:MPInterstitialCloseButtonStyleAlwaysHidden];
@@ -53,39 +56,62 @@
 
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController
 {
-    if ([self hasAdAvailable]) {
-        [self.interstitial presentInterstitialFromViewController:viewController];
-    } else {
-        MPLogInfo(@"Failed to show MoPub rewarded video");
-        NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorNoAdsAvailable userInfo:nil];
-        [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
+    MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], self.adUnitId);
+
+    // Error handling block.
+    __typeof__(self) __weak weakSelf = self;
+    void (^onShowError)(NSError *) = ^(NSError * error) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf != nil) {
+            MPLogAdEvent([MPLogEvent adShowFailedForAdapter:NSStringFromClass(strongSelf.class) error:error], strongSelf.adUnitId);
+
+            [strongSelf.delegate rewardedVideoDidFailToPlayForCustomEvent:strongSelf error:error];
+        }
+    };
+
+    // No ad available to show.
+    if (!self.hasAdAvailable) {
+        NSError * error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorNoAdsAvailable userInfo:nil];
+        onShowError(error);
+        return;
     }
+
+    [self.interstitial presentInterstitialFromViewController:viewController complete:^(NSError * error) {
+        if (error != nil) {
+            onShowError(error);
+        }
+        else {
+            MPLogAdEvent([MPLogEvent adShowSuccessForAdapter:NSStringFromClass(self.class)], self.adUnitId);
+        }
+    }];
 }
 
 #pragma mark - MPMRAIDInterstitialViewControllerDelegate
 
 - (void)interstitialDidLoadAd:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub rewarded video did load");
+    MPLogAdEvent([MPLogEvent adLoadSuccessForAdapter:NSStringFromClass(self.class)], self.adUnitId);
+
     self.adAvailable = YES;
     [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
 }
 
 - (void)interstitialDidAppear:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub rewarded video did appear");
     [self.delegate rewardedVideoDidAppearForCustomEvent:self];
 }
 
 - (void)interstitialWillAppear:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub rewarded video will appear");
     [self.delegate rewardedVideoWillAppearForCustomEvent:self];
 }
 
 - (void)interstitialDidFailToLoadAd:(MPInterstitialViewController *)interstitial
 {
-    MPLogInfo(@"MoPub rewarded video failed to load");
+    NSString * message = [NSString stringWithFormat:@"Failed to load creative:\n%@", self.delegate.configuration.adResponseHTMLString];
+    NSError * error = [NSError errorWithCode:MOPUBErrorAdapterFailedToLoadAd localizedDescription:message];
+    MPLogAdEvent([MPLogEvent adLoadFailedForAdapter:NSStringFromClass(self.class) error:error], self.adUnitId);
+
     self.adAvailable = NO;
     [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:nil];
 }

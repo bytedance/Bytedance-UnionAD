@@ -1,7 +1,7 @@
 //
 //  MOPUBAVPlayer.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -105,9 +105,12 @@ static NSString * const MPAVPlayerItemLoadErrorTemplate = @"Loading player item 
     // in the AVPlayer time observing API that can cause crashes. Also, the AVPlayerItem stall notification
     // does not always report accurately.
     if (_playbackTimer == nil) {
-        _playbackTimer = [[MPCoreInstanceProvider sharedProvider] buildMPTimerWithTimeInterval:kAvPlayerTimerInterval target:self selector:@selector(timerTick) repeats:YES];
         // Add timer to main run loop with common modes to allow the timer to tick while user is scrolling.
-        _playbackTimer.runLoopMode = NSRunLoopCommonModes;
+        _playbackTimer = [MPTimer timerWithTimeInterval:kAvPlayerTimerInterval
+                                                 target:self
+                                               selector:@selector(timerTick)
+                                                repeats:YES
+                                            runLoopMode:NSRunLoopCommonModes];
         [_playbackTimer scheduleNow];
         _lastContinuousPlaybackCMTime = kCMTimeZero;
 

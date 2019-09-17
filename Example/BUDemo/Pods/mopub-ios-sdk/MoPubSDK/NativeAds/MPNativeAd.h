@@ -1,16 +1,17 @@
 //
 //  MPNativeAd.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "MPMoPubAd.h"
+#import "MPNativeAdDelegate.h"
 
 @protocol MPNativeAdAdapter;
-@protocol MPNativeAdDelegate;
 @protocol MPNativeAdRenderer;
 @class MPAdConfiguration;
 
@@ -20,7 +21,7 @@
  * convenience methods for URL navigation and metrics-gathering.
  */
 
-@interface MPNativeAd : NSObject
+@interface MPNativeAd : NSObject <MPMoPubAd>
 
 /** @name Ad Resources */
 

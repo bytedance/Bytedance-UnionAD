@@ -1,7 +1,7 @@
 //
 //  MPViewabilityTracker.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -52,7 +52,7 @@ NSString *const kDisabledViewabilityTrackers = @"disableViewabilityTrackers";
             NSString * adapterClassName = sSupportedAdapters[@(index)];
             if (NSClassFromString(adapterClassName)) {
                 sEnabledViewabilityVendors |= index;
-                MPLogInfo(@"[Viewability] %@ was found.", adapterClassName);
+                MPLogInfo(@"%@ was found.", adapterClassName);
             }
         }
     }
@@ -69,7 +69,7 @@ NSString *const kDisabledViewabilityTrackers = @"disableViewabilityTrackers";
 
         // Invalid ad view
         if (view == nil) {
-            MPLogError(@"nil ad view passed into %s", __PRETTY_FUNCTION__);
+            MPLogInfo(@"nil ad view passed into %s", __PRETTY_FUNCTION__);
             return nil;
         }
 

@@ -1,7 +1,7 @@
 //
 //  MPHTMLInterstitialViewController.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -20,10 +20,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation MPHTMLInterstitialViewController
-
-@synthesize delegate = _delegate;
-@synthesize backingViewAgent = _backingViewAgent;
-@synthesize backingView = _backingView;
 
 - (void)dealloc
 {
@@ -106,9 +102,8 @@
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-        [self.backingViewAgent rotateToOrientation:orientation];
-     } completion:nil];
+        [self.backingViewAgent forceRedraw];
+    } completion:nil];
 
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }

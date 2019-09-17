@@ -1,7 +1,7 @@
 //
 //  MPVideoConfig.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -289,7 +289,7 @@
 
                 [mergedDictionary[key] addObjectsFromArray:dictionary[key]];
             } else {
-                MPLogError(@"TrackingEvents dictionary expected an array object for key '%@' "
+                MPLogInfo(@"TrackingEvents dictionary expected an array object for key '%@' "
                            @"but got an instance of %@ instead.",
                            key, NSStringFromClass([dictionary[key] class]));
             }

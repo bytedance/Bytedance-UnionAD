@@ -50,6 +50,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)nativeExpressAdViewDidClick:(BUNativeExpressAdView *)nativeExpressAdView;
 
 /**
+ * Sent when a player finished
+ * @param error : error of player
+ */
+- (void)nativeExpressAdViewPlayerDidPlayFinish:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error;
+
+/**
  * Sent when a user clicked dislike reasons.
  * @param filterWords : the array of reasons why the user dislikes the ad
  */

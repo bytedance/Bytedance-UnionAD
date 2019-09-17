@@ -1,7 +1,7 @@
 //
 //  MOPUBPlayerViewController.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -53,7 +53,7 @@
 @property (nonatomic) BOOL isReadyToPlay;
 @property (nonatomic) BOOL disposed;
 
-#pragma - Call to action click tracking url
+#pragma mark - Call to action click tracking url
 @property (nonatomic) NSURL *defaultActionURL;
 
 @property (nonatomic, weak) id<MOPUBPlayerViewControllerDelegate> delegate;

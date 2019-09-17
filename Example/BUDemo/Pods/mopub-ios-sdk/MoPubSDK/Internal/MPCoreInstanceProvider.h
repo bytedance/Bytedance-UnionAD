@@ -1,7 +1,7 @@
 //
 //  MPCoreInstanceProvider.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -59,7 +59,5 @@ typedef NS_OPTIONS(NSUInteger, MPATSSetting) {
 - (NSDictionary *)sharedCarrierInfo;
 
 - (MPNetworkStatus)currentRadioAccessTechnology;
-
-- (MPTimer *)buildMPTimerWithTimeInterval:(NSTimeInterval)seconds target:(id)target selector:(SEL)selector repeats:(BOOL)repeats;
 
 @end

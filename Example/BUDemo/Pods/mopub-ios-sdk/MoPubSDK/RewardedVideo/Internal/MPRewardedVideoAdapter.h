@@ -1,7 +1,7 @@
 //
 //  MPRewardedVideoAdapter.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -72,6 +72,7 @@
 - (void)rewardedVideoWillDisappearForAdapter:(MPRewardedVideoAdapter *)adapter;
 - (void)rewardedVideoDidDisappearForAdapter:(MPRewardedVideoAdapter *)adapter;
 - (void)rewardedVideoDidReceiveTapEventForAdapter:(MPRewardedVideoAdapter *)adapter;
+- (void)rewardedVideoDidReceiveImpressionEventForAdapter:(MPRewardedVideoAdapter *)adapter;
 - (void)rewardedVideoWillLeaveApplicationForAdapter:(MPRewardedVideoAdapter *)adapter;
 - (void)rewardedVideoShouldRewardUserForAdapter:(MPRewardedVideoAdapter *)adapter reward:(MPRewardedVideoReward *)reward;
 

@@ -580,7 +580,7 @@ creatives are non-HTTPS.</p>
 <p><img src="http://sf1-ttcdn-tos.pstatp.com/img/union-platform/e7723fa701c3ab9d9d7a787add33fdad.png~0x0_q100.webp" alt="image"></p>
 <h4 id="122-operating-environment-configuration">1.2.2 Operating Environment Configuration</h4>
 <ul>
-<li>Support iOS 8.X and above</li>
+<li>Support iOS 9.X and above</li>
 <li>SDK compiler environment Xcode 10.0</li>
 <li>Support architecture: i386, x86-64, armv7, armv7s, arm64</li>
 </ul>
@@ -594,6 +594,7 @@ order.</p>
 <li>WebKit.framework</li>
 <li>MediaPlayer.framework</li>
 <li>CoreMedia.framework</li>
+<li>CoreLocation.framework</li>
 <li>AVFoundation.framework</li>
 <li>CoreTelephony.framework</li>
 <li>SystemConfiguration.framework</li>
@@ -602,8 +603,9 @@ order.</p>
 <li>libresolv.9.tbd</li>
 <li>libc++.tbd</li>
 <li>libz.tbd Detailed Steps:</li>
+<li>Add the imageio. framework if the above dependency library is still reporting errors.
+<img src="http://sf1-ttcdn-tos.pstatp.com/img/union-platform/9729c0facdcba2a6aec2c23378e9eee7.png~0x0_q100.webp" alt="image"></li>
 </ul>
-<p><img src="http://sf1-ttcdn-tos.pstatp.com/img/union-platform/9729c0facdcba2a6aec2c23378e9eee7.png~0x0_q100.webp" alt="image"></p>
 <h4 id="124-add-language-configuration">1.2.4 Add language configuration</h4>
 <p>Note: if the application does not support multiple languages, you need
 to configure your own default language so that the SDK supports the
@@ -2136,7 +2138,7 @@ for ways to access rewarded video ads.</p>
 <p>Please refer to <a href="https://developers.google.com/admob/ios/test-ads?hl=zh-CN#enable_test_devices">Test
 Ads</a>
 for ad tests.</p>
-<p>In order to avoid stepping on pit value, please note the following:</p>
+<p>Please note the following:</p>
 <ul>
 <li><strong>When configuring CustomEvent, the Class Name and the implemented
 Adapter class name must be the same. Otherwise, the adapter cannot
@@ -2156,8 +2158,8 @@ actions.</li>
 </ul>
 <h4 id="2121-bufullscreenvideoad-interface">2.12.1 BUFullscreenVideoAd Interface</h4>
 <p><strong>It is required to generate a new BUFullscreenVideoAd object each time
-calling the loadAdData method to request the latest rewarded video ad.
-Please do not reuse the local cache rewarded video ad.</strong></p>
+calling the loadAdData method to request the latest full-screen video ad.
+Please do not reuse the local cache full-screen video ad.</strong></p>
 <pre class="hljs"><code><div>@interface BUFullscreenVideoAd : NSObject
 
 @property (nonatomic, weak, nullable) id&lt;BUFullscreenVideoAdDelegate&gt; delegate;
@@ -2343,7 +2345,7 @@ back to the previous page. A: It can't go back because your home
 page ViewController has hidden the NavigationBar.</p>
 </li>
 <li>
-<p>Found a leak in TTRUIWebView class of the BUWebViewController class
+<p>Found a leak in BUUIWebView class of the BUWebViewController class
 in the TikTok SDK. A: It is a system problem. UIWebView has a
 consistent leak. We will consider replacing it with WKWebView.</p>
 </li>

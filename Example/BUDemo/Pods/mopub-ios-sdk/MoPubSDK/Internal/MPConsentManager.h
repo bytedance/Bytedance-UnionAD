@@ -1,7 +1,7 @@
 //
 //  MPConsentManager.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -14,10 +14,28 @@
 @interface MPConsentManager : NSObject
 
 /**
- Ad unit ID sent to Ad Server as a proxy for the MoPub app ID.
+ Ad unit ID sent to Ad Server as a proxy for the MoPub app ID. If a known
+ good adunit ID is already cached, setting this will have no effect.
  @remark This should only be set by SDK initialization and must be non-nil.
  */
 @property (nonatomic, strong, nonnull) NSString * adUnitIdUsedForConsent;
+
+/**
+ Sets @c self.adUnitIdUsedForConsent, and caches to disk if @c isKnownGood is set to @c YES.
+ No-op if a known good adunit is already cached to disk.
+ @remark @c isKnownGood should only be set to @c YES when the adunit ID has been verified with the server
+ */
+- (void)setAdUnitIdUsedForConsent:(NSString * _Nonnull)adUnitIdUsedForConsent isKnownGood:(BOOL)isKnownGood;
+
+/**
+ Clears @c self.adUnitIdUsedForConsent as well as the backing cache.
+ */
+- (void)clearAdUnitIdUsedForConsent;
+
+/**
+ This API can be used if you want to allow supported SDK networks to collect user information on the basis of legitimate interest. The default value is @c NO.
+ */
+@property (nonatomic, assign) BOOL allowLegitimateInterest;
 
 /**
  Flag indicating that personally identifiable information can be collected.

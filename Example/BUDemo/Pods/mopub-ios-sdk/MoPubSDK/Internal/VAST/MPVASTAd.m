@@ -1,7 +1,7 @@
 //
 //  MPVASTAd.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -20,7 +20,7 @@
         // The VAST spec (2.2.2.2) prohibits an <Ad> element from having both an <InLine> and a
         // <Wrapper> element. If both are present, we'll only allow the <InLine> element.
         if (_inlineAd && _wrapper) {
-            MPLogWarn(@"VAST <Ad> element is not allowed to contain both an <InLine> and a "
+            MPLogInfo(@"VAST <Ad> element is not allowed to contain both an <InLine> and a "
                       @"<Wrapper>. The <Wrapper> will be ignored.");
             _wrapper = nil;
         }

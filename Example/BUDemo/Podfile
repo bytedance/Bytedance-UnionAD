@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 workspace 'BUDemo.xcworkspace'
 
@@ -11,7 +11,7 @@ abstract_target 'Demo' do
     pod 'MLeaksFinder'
     pod 'MBProgressHUD'
     pod 'libwebp', '~> 0.5.1'
-    pod 'mopub-ios-sdk/Core','5.4.0'    
+    pod 'mopub-ios-sdk/Core','5.8.0'    
     pod 'Bugly'
     pod 'Fabric'
     pod 'Crashlytics'

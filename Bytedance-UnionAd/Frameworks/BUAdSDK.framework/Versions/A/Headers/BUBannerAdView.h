@@ -29,13 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nonnull) UIButton *dislikeButton;
 
 - (instancetype)initWithIdentifier:(NSString *)slotID
-                rootViewController:(nullable UIViewController *)rootViewController
+                rootViewController:(UIViewController *)rootViewController
                             adSize:(CGSize)adSize
                   withShowPosition:(BUAdSlotPosition)showPosition
              WithIsSupportDeepLink:(BOOL)isSupportDeepLink;
 
 - (instancetype)initWithIdentifier:(NSString *)slotID
-                rootViewController:(nullable UIViewController *)rootViewController
+                rootViewController:(UIViewController *)rootViewController
                             adSize:(CGSize)adSize
                   withShowPosition:(BUAdSlotPosition)showPosition
              WithIsSupportDeepLink:(BOOL)isSupportDeepLink

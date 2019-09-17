@@ -1,7 +1,7 @@
 //
 //  MPAdDestinationDisplayAgent.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -14,6 +14,7 @@
 #import "MPCoreInstanceProvider.h"
 #import "MPAnalyticsTracker.h"
 #import "MOPUBExperimentProvider.h"
+#import "MoPub+Utility.h"
 #import <SafariServices/SafariServices.h>
 
 static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
@@ -28,27 +29,16 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
 @property (nonatomic, assign) BOOL isLoadingDestination;
 @property (nonatomic) MOPUBDisplayAgentType displayAgentType;
 @property (nonatomic, strong) SKStoreProductViewController *storeKitController;
-
-@property (nonatomic, strong) MPAdBrowserController *browserController;
 @property (nonatomic, strong) SFSafariViewController *safariController;
 
 @property (nonatomic, strong) MPTelephoneConfirmationController *telephoneConfirmationController;
 @property (nonatomic, strong) MPActivityViewControllerHelper *activityViewControllerHelper;
-
-- (void)presentStoreKitControllerWithItemIdentifier:(NSString *)identifier fallbackURL:(NSURL *)URL;
-- (void)hideOverlay;
-- (void)hideModalAndNotifyDelegate;
-- (void)dismissAllModalContent;
 
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation MPAdDestinationDisplayAgent
-
-@synthesize delegate = _delegate;
-@synthesize resolver = _resolver;
-@synthesize isLoadingDestination = _isLoadingDestination;
 
 + (MPAdDestinationDisplayAgent *)agentWithDelegate:(id<MPAdDestinationDisplayAgentDelegate>)delegate
 {
@@ -71,14 +61,25 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
     // in the future. Therefore, we change the controller's delegate to a singleton object which
     // implements SKStoreProductViewControllerDelegate and is always around.
     self.storeKitController.delegate = [MPLastResortDelegate sharedDelegate];
-
-    self.browserController.delegate = nil;
-
 }
 
 - (void)dismissAllModalContent
 {
     [self.overlayView hide];
+}
+
++ (BOOL)shouldDisplayContentInApp
+{
+    switch ([MOPUBExperimentProvider displayAgentType]) {
+        case MOPUBDisplayAgentTypeInApp:
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        case MOPUBDisplayAgentTypeSafariViewController:
+#pragma clang diagnostic pop
+            return YES;
+        case MOPUBDisplayAgentTypeNativeSafari:
+            return NO;
+    }
 }
 
 - (void)displayDestinationForURL:(NSURL *)URL
@@ -164,20 +165,21 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
 
 - (void)handleEnhancedDeeplinkRequest:(MPEnhancedDeeplinkRequest *)request
 {
-    BOOL didOpenSuccessfully = [[UIApplication sharedApplication] openURL:request.primaryURL];
-    if (didOpenSuccessfully) {
-        [self hideOverlay];
-        [self.delegate displayAgentWillLeaveApplication];
-        [self completeDestinationLoading];
-        [[MPAnalyticsTracker sharedTracker] sendTrackingRequestForURLs:request.primaryTrackingURLs];
-    } else if (request.fallbackURL) {
-        [self handleEnhancedDeeplinkFallbackForRequest:request];
-    } else {
-        [self openURLInApplication:request.originalURL];
-    }
+    [MoPub openURL:request.primaryURL options:@{} completion:^(BOOL didOpenURLSuccessfully) {
+        if (didOpenURLSuccessfully) {
+            [self hideOverlay];
+            [self.delegate displayAgentWillLeaveApplication];
+            [self completeDestinationLoading];
+            [[MPAnalyticsTracker sharedTracker] sendTrackingRequestForURLs:request.primaryTrackingURLs];
+        } else if (request.fallbackURL) {
+            [self handleEnhancedDeeplinkFallbackForRequest:request];
+        } else {
+            [self openURLInApplication:request.originalURL];
+        }
+    }];
 }
 
-- (void)handleEnhancedDeeplinkFallbackForRequest:(MPEnhancedDeeplinkRequest *)request;
+- (void)handleEnhancedDeeplinkFallbackForRequest:(MPEnhancedDeeplinkRequest *)request
 {
     __weak __typeof__(self) weakSelf = self;
     [self.enhancedDeeplinkFallbackResolver cancel];
@@ -202,22 +204,18 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
 - (void)showWebViewWithHTMLString:(NSString *)HTMLString baseURL:(NSURL *)URL actionType:(MPURLActionType)actionType {
     switch (self.displayAgentType) {
         case MOPUBDisplayAgentTypeInApp:
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         case MOPUBDisplayAgentTypeSafariViewController:
-            if ([MPAdDestinationDisplayAgent shouldUseSafariViewController]) {
-                if (@available(iOS 9.0, *)) {
-                    self.safariController = [[SFSafariViewController alloc] initWithURL:URL];
-                    self.safariController.delegate = self;
-                }
-            } else {
-                if (actionType == MPURLActionTypeOpenInWebView) {
-                    self.browserController = [[MPAdBrowserController alloc] initWithURL:URL
-                                                                         HTMLString:HTMLString
-                                                                           delegate:self];
-                } else {
-                    self.browserController = [[MPAdBrowserController alloc] initWithURL:URL
-                                                                               delegate:self];
-                }
-            }
+#pragma clang diagnostic pop
+            self.safariController = ({
+                SFSafariViewController * controller = [[SFSafariViewController alloc] initWithURL:URL];
+                controller.delegate = self;
+                controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                controller.modalPresentationStyle = UIModalPresentationFullScreen;
+                controller;
+            });
+
             [self showAdBrowserController];
             break;
         case MOPUBDisplayAgentTypeNativeSafari:
@@ -228,19 +226,15 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
 
 - (void)showAdBrowserController {
     [self hideOverlay];
-
-    UIViewController *browserViewController = self.safariController ? self.safariController : self.browserController;
-
-    browserViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [[self.delegate viewControllerForPresentingModalView] presentViewController:browserViewController
+    [[self.delegate viewControllerForPresentingModalView] presentViewController:self.safariController
                                                                        animated:MP_ANIMATED
                                                                      completion:nil];
 }
 
-- (void)showStoreKitProductWithParameter:(NSString *)parameter fallbackURL:(NSURL *)URL
+- (void)showStoreKitProductWithParameters:(NSDictionary *)parameters fallbackURL:(NSURL *)URL
 {
     if ([MPStoreKitProvider deviceHasStoreKit]) {
-        [self presentStoreKitControllerWithItemIdentifier:parameter fallbackURL:URL];
+        [self presentStoreKitControllerWithProductParameters:parameters fallbackURL:URL];
     } else {
         [self openURLInApplication:URL];
     }
@@ -253,11 +247,12 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
     if ([URL mp_hasTelephoneScheme] || [URL mp_hasTelephonePromptScheme]) {
         [self interceptTelephoneURL:URL];
     } else {
-        BOOL didOpenSuccessfully = [[UIApplication sharedApplication] openURL:URL];
-        if (didOpenSuccessfully) {
-            [self.delegate displayAgentWillLeaveApplication];
-        }
-        [self completeDestinationLoading];
+        [MoPub openURL:URL options:@{} completion:^(BOOL didOpenURLSuccessfully) {
+            if (didOpenURLSuccessfully) {
+                [self.delegate displayAgentWillLeaveApplication];
+            }
+            [self completeDestinationLoading];
+        }];
     }
 }
 
@@ -269,7 +264,7 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
         case MPMoPubShareHostCommandTweet:
             return [self.activityViewControllerHelper presentActivityViewControllerWithTweetShareURL:URL];
         default:
-            MPLogWarn(@"MPAdDestinationDisplayAgent - unsupported Share URL: %@", [URL absoluteString]);
+            MPLogInfo(@"MPAdDestinationDisplayAgent - unsupported Share URL: %@", [URL absoluteString]);
             return NO;
     }
 }
@@ -282,7 +277,7 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
         if (strongSelf) {
             if (confirmed) {
                 [strongSelf.delegate displayAgentWillLeaveApplication];
-                [[UIApplication sharedApplication] openURL:targetTelephoneURL];
+                [MoPub openURL:targetTelephoneURL];
             }
             [strongSelf completeDestinationLoading];
         }
@@ -303,13 +298,11 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
     [self.delegate displayAgentDidDismissModal];
 }
 
-- (void)presentStoreKitControllerWithItemIdentifier:(NSString *)identifier fallbackURL:(NSURL *)URL
+- (void)presentStoreKitControllerWithProductParameters:(NSDictionary *)parameters fallbackURL:(NSURL *)URL
 {
     self.storeKitController = [MPStoreKitProvider buildController];
+    self.storeKitController.modalPresentationStyle = UIModalPresentationFullScreen;
     self.storeKitController.delegate = self;
-
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:identifier
-                                                           forKey:SKStoreProductParameterITunesItemIdentifier];
     [self.storeKitController loadProductWithParameters:parameters completionBlock:nil];
 
     [self hideOverlay];
@@ -322,23 +315,6 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
 {
     self.isLoadingDestination = NO;
     [self hideModalAndNotifyDelegate];
-}
-
-#pragma mark - <MPAdBrowserControllerDelegate>
-
-- (void)dismissBrowserController:(MPAdBrowserController *)browserController animated:(BOOL)animated
-{
-    self.isLoadingDestination = NO;
-    [self hideModalAndNotifyDelegate];
-}
-
-- (MPAdConfiguration *)adConfiguration
-{
-    if ([self.delegate respondsToSelector:@selector(adConfiguration)]) {
-        return [self.delegate adConfiguration];
-    }
-
-    return nil;
 }
 
 #pragma mark - <SFSafariViewControllerDelegate>
@@ -362,16 +338,6 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
     [[self.delegate viewControllerForPresentingModalView] dismissViewControllerAnimated:MP_ANIMATED completion:^{
         [self.delegate displayAgentDidDismissModal];
     }];
-}
-
-+ (BOOL)shouldUseSafariViewController
-{
-    MOPUBDisplayAgentType displayAgentType = [MOPUBExperimentProvider displayAgentType];
-    if (@available(iOS 9.0, *)) {
-        return (displayAgentType == MOPUBDisplayAgentTypeSafariViewController);
-    }
-
-    return NO;
 }
 
 - (void)hideOverlay
@@ -404,9 +370,12 @@ static NSString * const kDisplayAgentErrorDomain = @"com.mopub.displayagent";
 {
     switch (self.displayAgentType) {
         case MOPUBDisplayAgentTypeInApp:
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         case MOPUBDisplayAgentTypeSafariViewController: // It doesn't make sense to open store kit in SafariViewController so storeKitController is used here.
-            [self showStoreKitProductWithParameter:actionInfo.iTunesItemIdentifier
-                                       fallbackURL:actionInfo.iTunesStoreFallbackURL];
+#pragma clang diagnostic pop
+            [self showStoreKitProductWithParameters:actionInfo.iTunesStoreParameters
+                                        fallbackURL:actionInfo.iTunesStoreFallbackURL];
             break;
         case MOPUBDisplayAgentTypeNativeSafari:
             [self openURLInApplication:actionInfo.iTunesStoreFallbackURL];

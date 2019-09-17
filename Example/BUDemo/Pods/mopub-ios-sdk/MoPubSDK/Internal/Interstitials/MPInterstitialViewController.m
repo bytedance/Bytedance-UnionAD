@@ -1,16 +1,15 @@
 //
 //  MPInterstitialViewController.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPInterstitialViewController.h"
 
-#import "MPGlobal.h"
+#import "MPError.h"
 #import "MPLogging.h"
-#import "UIButton+MPAdditions.h"
 
 static const CGFloat kCloseButtonPadding = 5.0;
 static const CGFloat kCloseButtonEdgeInset = 5.0;
@@ -18,13 +17,10 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 
 @interface MPInterstitialViewController ()
 
-@property (nonatomic, assign) BOOL applicationHasStatusBar;
-
 - (void)setCloseButtonImageWithImageNamed:(NSString *)imageName;
 - (void)setCloseButtonStyle:(MPInterstitialCloseButtonStyle)style;
 - (void)closeButtonPressed;
 - (void)dismissInterstitialAnimated:(BOOL)animated;
-- (void)setApplicationStatusBarHidden:(BOOL)hidden;
 
 @end
 
@@ -32,18 +28,12 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 
 @implementation MPInterstitialViewController
 
-@synthesize closeButton = _closeButton;
-@synthesize closeButtonStyle = _closeButtonStyle;
-@synthesize orientationType = _orientationType;
-@synthesize applicationHasStatusBar = _applicationHasStatusBar;
-@synthesize delegate = _delegate;
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor blackColor];
+    self.modalPresentationStyle = UIModalPresentationFullScreen;
 }
 
 - (BOOL)prefersHomeIndicatorAutoHidden {
@@ -52,22 +42,23 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 
 #pragma mark - Public
 
-- (void)presentInterstitialFromViewController:(UIViewController *)controller
+- (void)presentInterstitialFromViewController:(UIViewController *)controller complete:(void(^)(NSError *))complete
 {
     if (self.presentingViewController) {
-        MPLogWarn(@"Cannot present an interstitial that is already on-screen.");
+        if (complete != nil) {
+            complete(NSError.fullscreenAdAlreadyOnScreen);
+        }
         return;
     }
 
     [self willPresentInterstitial];
-
-    self.applicationHasStatusBar = !([UIApplication sharedApplication].isStatusBarHidden);
-    [self setApplicationStatusBarHidden:YES];
-
     [self layoutCloseButton];
 
     [controller presentViewController:self animated:MP_ANIMATED completion:^{
         [self didPresentInterstitial];
+        if (complete != nil) {
+            complete(nil);
+        }
     }];
 }
 
@@ -101,7 +92,7 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 - (UIButton *)closeButton
 {
     if (!_closeButton) {
-        _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _closeButton = [MPExtendedHitBoxButton buttonWithType:UIButtonTypeCustom];
         _closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
         UIViewAutoresizingFlexibleBottomMargin;
 
@@ -127,9 +118,9 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
                                         kCloseButtonPadding,
                                         self.closeButton.bounds.size.width,
                                         self.closeButton.bounds.size.height);
-    self.closeButton.mp_TouchAreaInsets = UIEdgeInsetsMake(kCloseButtonEdgeInset, kCloseButtonEdgeInset, kCloseButtonEdgeInset, kCloseButtonEdgeInset);
+    self.closeButton.touchAreaInsets = UIEdgeInsetsMake(kCloseButtonEdgeInset, kCloseButtonEdgeInset, kCloseButtonEdgeInset, kCloseButtonEdgeInset);
     [self setCloseButtonStyle:self.closeButtonStyle];
-    if (@available(iOS 11.0, *)) {
+    if (@available(iOS 11, *)) {
         self.closeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [NSLayoutConstraint activateConstraints:@[
                                                   [self.closeButton.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:kCloseButtonPadding],
@@ -172,8 +163,6 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 
 - (void)dismissInterstitialAnimated:(BOOL)animated
 {
-    [self setApplicationStatusBarHidden:!self.applicationHasStatusBar];
-
     [self willDismissInterstitial];
 
     UIViewController *presentingViewController = self.presentingViewController;
@@ -187,32 +176,12 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
     }
 }
 
-#pragma mark - Hidding status bar (pre-iOS 7)
-
-- (void)setApplicationStatusBarHidden:(BOOL)hidden
-{
-    [[UIApplication sharedApplication] mp_preIOS7setApplicationStatusBarHidden:hidden];
-}
-
-#pragma mark - Hidding status bar (iOS 7 and above)
-
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
 
-#pragma mark - Autorotation (iOS 6.0 and above)
-
-- (BOOL)shouldAutorotate
-{
-    return YES;
-}
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= MP_IOS_9_0
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
-#else
-- (NSUInteger)supportedInterfaceOrientations
-#endif
 {
     NSUInteger applicationSupportedOrientations =
     [[UIApplication sharedApplication] supportedInterfaceOrientationsForWindow:MPKeyWindow()];
@@ -234,7 +203,7 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
     // just return the application's supported orientations.
 
     if (!interstitialSupportedOrientations) {
-        MPLogError(@"Your application does not support this interstitial's desired orientation "
+        MPLogInfo(@"Your application does not support this interstitial's desired orientation "
                    @"(%@).", orientationDescription);
         return applicationSupportedOrientations;
     } else {

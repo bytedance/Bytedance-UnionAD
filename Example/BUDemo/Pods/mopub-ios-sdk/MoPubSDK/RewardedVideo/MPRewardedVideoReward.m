@@ -1,7 +1,7 @@
 //
 //  MPRewardedVideoReward.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -26,6 +26,14 @@ NSInteger const kMPRewardedVideoRewardCurrencyAmountUnspecified = 0;
 - (instancetype)initWithCurrencyAmount:(NSNumber *)amount
 {
     return [self initWithCurrencyType:kMPRewardedVideoRewardCurrencyTypeUnspecified amount:amount];
+}
+
+- (NSString *)description {
+    NSString * message = nil;
+    if (self.amount != nil && self.currencyType != nil) {
+        message = [NSString stringWithFormat:@"%@ %@", self.amount, self.currencyType];
+    }
+    return message;
 }
 
 @end

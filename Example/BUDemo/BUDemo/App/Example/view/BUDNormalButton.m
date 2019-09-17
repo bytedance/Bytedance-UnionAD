@@ -31,4 +31,14 @@
         self.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
     }
 }
+
+- (void)setIsValid:(BOOL)isValid {
+    _isValid = isValid;
+    self.enabled = isValid;
+    if (isValid) {
+        [self setBackgroundColor:mainColor];
+    } else {
+        [self setBackgroundColor:unValidColor];
+    }
+}
 @end

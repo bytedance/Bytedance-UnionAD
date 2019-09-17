@@ -1,7 +1,7 @@
 //
 //  MRProperty.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -26,8 +26,6 @@
 
 @implementation MRHostSDKVersionProperty : MRProperty
 
-@synthesize version = _version;
-
 + (instancetype)defaultProperty
 {
     MRHostSDKVersionProperty *property = [[self alloc] init];
@@ -45,8 +43,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation MRPlacementTypeProperty : MRProperty
-
-@synthesize placementType = _placementType;
 
 + (MRPlacementTypeProperty *)propertyWithType:(MRAdViewPlacementType)type {
     MRPlacementTypeProperty *property = [[self alloc] init];
@@ -70,8 +66,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation MRStateProperty
-
-@synthesize state = _state;
 
 + (MRStateProperty *)propertyWithState:(MRAdViewState)state {
     MRStateProperty *property = [[self alloc] init];
@@ -106,8 +100,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation MRScreenSizeProperty : MRProperty
-
-@synthesize screenSize = _screenSize;
 
 + (MRScreenSizeProperty *)propertyWithSize:(CGSize)size {
     MRScreenSizeProperty *property = [[self alloc] init];
@@ -177,8 +169,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation MRViewableProperty : MRProperty
-
-@synthesize isViewable = _isViewable;
 
 + (MRViewableProperty *)propertyWithViewable:(BOOL)viewable {
     MRViewableProperty *property = [[self alloc] init];

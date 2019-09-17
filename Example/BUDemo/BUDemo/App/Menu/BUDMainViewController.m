@@ -21,9 +21,9 @@
 #import "BUDFullscreenViewController.h"
 #import "BUNativeSettingViewController.h"
 #import "BUDExpressViewController.h"
+#import "BUDToolsSettingViewController.h"
 #import "BUDMacros.h"
 #import <BUAdSDK/BUAdSDK.h>
-
 
 @interface BUDMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -76,7 +76,7 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *slotId =  [defaults objectForKey:@"interstitial_slot_id"];
         viewModel.slotID = slotId;
-//        viewModel.slotID = @"900546957";  //downloading
+        viewModel.slotID = @"900546957";  //downloading
         vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
@@ -119,7 +119,7 @@
     }];
     
     BUDActionModel *item8 = [BUDActionModel plainTitleActionModel:@"Tools" type:BUDCellType_setting action:^{
-        BUDSettingViewController *vc = [BUDSettingViewController new];
+        BUDToolsSettingViewController *vc = [BUDToolsSettingViewController new];
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];

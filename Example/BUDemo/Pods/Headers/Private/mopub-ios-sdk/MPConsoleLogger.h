@@ -1,0 +1,1 @@
+../../../mopub-ios-sdk/MoPubSDK/Logging/Internal/MPConsoleLogger.h

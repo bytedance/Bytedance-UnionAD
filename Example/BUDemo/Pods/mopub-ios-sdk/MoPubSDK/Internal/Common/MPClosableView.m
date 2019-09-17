@@ -1,7 +1,7 @@
 //
 //  MPClosableView.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -11,40 +11,49 @@
 #import "MPUserInteractionGestureRecognizer.h"
 #import "MPWebView.h"
 
-static CGFloat kCloseRegionWidth = 50.0f;
-static CGFloat kCloseRegionHeight = 50.0f;
+/**
+ Per MRAID spec https://www.iab.com/wp-content/uploads/2015/08/IAB_MRAID_v2_FINAL.pdf, page 31, the
+ close event region should be 50x50 expandable and interstitial ads. On page 34, the 50x50 size applies
+ to resized ads as well.
+ */
+const CGSize kCloseRegionSize = {.width = 50, .height = 50};
+
 static NSString *const kExpandableCloseButtonImageName = @"MPCloseButtonX.png";
 
-CGRect MPClosableViewCustomCloseButtonFrame(CGSize size, MPClosableViewCloseButtonLocation closeButtonLocation)
+/**
+ Provided the ad size and close button location, returns the frame of the close button.
+ Note: The provided ad size is assumed to be at least 50x50, otherwise the return value is undefined.
+ @param adSize The size of the ad
+ @param closeButtonLocation The location of the close button
+ */
+CGRect MPClosableViewCustomCloseButtonFrame(CGSize adSize, MPClosableViewCloseButtonLocation closeButtonLocation)
 {
-    CGFloat width = size.width;
-    CGFloat height = size.height;
-    CGRect closeButtonFrame = CGRectMake(0.0f, 0.0f, kCloseRegionWidth, kCloseRegionHeight);
+    CGRect closeButtonFrame = CGRectMake(0.0f, 0.0f, kCloseRegionSize.width, kCloseRegionSize.height);
 
     switch (closeButtonLocation) {
         case MPClosableViewCloseButtonLocationTopRight:
-            closeButtonFrame.origin = CGPointMake(width-kCloseRegionWidth, 0.0f);
+            closeButtonFrame.origin = CGPointMake(adSize.width-kCloseRegionSize.width, 0.0f);
             break;
         case MPClosableViewCloseButtonLocationTopLeft:
             closeButtonFrame.origin = CGPointMake(0.0f, 0.0f);
             break;
         case MPClosableViewCloseButtonLocationTopCenter:
-            closeButtonFrame.origin = CGPointMake((width-kCloseRegionWidth) / 2.0f, 0.0f);
+            closeButtonFrame.origin = CGPointMake((adSize.width-kCloseRegionSize.width) / 2.0f, 0.0f);
             break;
         case MPClosableViewCloseButtonLocationBottomRight:
-            closeButtonFrame.origin = CGPointMake(width-kCloseRegionWidth, height-kCloseRegionHeight);
+            closeButtonFrame.origin = CGPointMake(adSize.width-kCloseRegionSize.width, adSize.height-kCloseRegionSize.height);
             break;
         case MPClosableViewCloseButtonLocationBottomLeft:
-            closeButtonFrame.origin = CGPointMake(0.0f, height-kCloseRegionHeight);
+            closeButtonFrame.origin = CGPointMake(0.0f, adSize.height-kCloseRegionSize.height);
             break;
         case MPClosableViewCloseButtonLocationBottomCenter:
-            closeButtonFrame.origin = CGPointMake((width-kCloseRegionWidth) / 2.0f, height-kCloseRegionHeight);
+            closeButtonFrame.origin = CGPointMake((adSize.width-kCloseRegionSize.width) / 2.0f, adSize.height-kCloseRegionSize.height);
             break;
         case MPClosableViewCloseButtonLocationCenter:
-            closeButtonFrame.origin = CGPointMake((width-kCloseRegionWidth) / 2.0f, (height-kCloseRegionHeight) / 2.0f);
+            closeButtonFrame.origin = CGPointMake((adSize.width-kCloseRegionSize.width) / 2.0f, (adSize.height-kCloseRegionSize.height) / 2.0f);
             break;
-        default:
-            closeButtonFrame.origin = CGPointMake(width-kCloseRegionWidth, 0.0f);
+        default: // top right
+            closeButtonFrame.origin = CGPointMake(adSize.width-kCloseRegionSize.width, 0.0f);
             break;
     }
 
@@ -110,12 +119,13 @@ CGRect MPClosableViewCustomCloseButtonFrame(CGSize size, MPClosableViewCloseButt
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
     if (@available(iOS 11, *)) {
         self.closeButton.translatesAutoresizingMaskIntoConstraints = NO;
 
         NSMutableArray <NSLayoutConstraint *> *constraints = [NSMutableArray arrayWithObjects:
-                                                              [self.closeButton.widthAnchor constraintEqualToConstant:kCloseRegionWidth],
-                                                              [self.closeButton.heightAnchor constraintEqualToConstant:kCloseRegionHeight],
+                                                              [self.closeButton.widthAnchor constraintEqualToConstant:kCloseRegionSize.width],
+                                                              [self.closeButton.heightAnchor constraintEqualToConstant:kCloseRegionSize.height],
                                                               nil];
 
         switch (self.closeButtonLocation) {
@@ -207,7 +217,7 @@ CGRect MPClosableViewCustomCloseButtonFrame(CGSize size, MPClosableViewCloseButt
 
 #pragma mark - <UIGestureRecognizerDelegate>
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     return YES;
 }

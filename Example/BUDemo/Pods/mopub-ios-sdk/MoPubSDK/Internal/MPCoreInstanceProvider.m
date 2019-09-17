@@ -1,7 +1,7 @@
 //
 //  MPCoreInstanceProvider.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -19,9 +19,6 @@
 #import "MPURLResolver.h"
 
 #define MOPUB_CARRIER_INFO_DEFAULTS_KEY @"com.mopub.carrierinfo"
-
-#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 static NSString *const kMoPubAppTransportSecurityDictionaryKey = @"NSAppTransportSecurity";
 static NSString *const kMoPubAppTransportSecurityAllowsArbitraryLoadsKey = @"NSAllowsArbitraryLoads";
@@ -46,10 +43,6 @@ typedef enum
 @end
 
 @implementation MPCoreInstanceProvider
-
-@synthesize singletons = _singletons;
-@synthesize carrierInfo = _carrierInfo;
-@synthesize twitterDeepLinkStatus = _twitterDeepLinkStatus;
 
 static MPCoreInstanceProvider *sharedProvider = nil;
 
@@ -184,14 +177,6 @@ static MPCoreInstanceProvider *sharedProvider = nil;
     }
 
     // Otherwise, figure out ATS settings
-
-    // App Transport Security was introduced in iOS 9; if the system version is less than 9, then arbirtrary loads are fine.
-    if (SYSTEM_VERSION_LESS_THAN(@"9.0")) {
-        gSetting = MPATSSettingAllowsArbitraryLoads;
-        gCheckedAppTransportSettings = YES;
-        return gSetting;
-    }
-
     // Start with the assumption that ATS is enabled
     gSetting = MPATSSettingEnabled;
 
@@ -205,7 +190,7 @@ static MPCoreInstanceProvider *sharedProvider = nil;
 
     // New App Transport Security keys were introduced in iOS 10. Only send settings for these keys if we're running iOS 10 or greater.
     // They may exist in the dictionary if we're running iOS 9, but they won't do anything, so the server shouldn't know about them.
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
+    if (@available(iOS 10, *)) {
         // In iOS 10, NSAllowsArbitraryLoads gets ignored if ANY keys of NSAllowsArbitraryLoadsForMedia,
         // NSAllowsArbitraryLoadsInWebContent, or NSAllowsLocalNetworking are PRESENT (i.e., they can be set to `false`)
         // See: https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW34
@@ -237,11 +222,6 @@ static MPCoreInstanceProvider *sharedProvider = nil;
 - (NSDictionary *)sharedCarrierInfo
 {
     return self.carrierInfo;
-}
-
-- (MPTimer *)buildMPTimerWithTimeInterval:(NSTimeInterval)seconds target:(id)target selector:(SEL)selector repeats:(BOOL)repeats
-{
-    return [MPTimer timerWithTimeInterval:seconds target:target selector:selector repeats:repeats];
 }
 
 static CTTelephonyNetworkInfo * gTelephonyNetworkInfo;

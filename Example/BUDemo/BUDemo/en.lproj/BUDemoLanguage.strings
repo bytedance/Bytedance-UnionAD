@@ -42,3 +42,5 @@
 "detail" = "View details >";
 "downloadLinks" = "Download and redirect";
 "URLLinks" = "Redirect by URL";
+"ShowPlayable" = "ShowPlayable";
+"IsLandScape" = "isLandScape";

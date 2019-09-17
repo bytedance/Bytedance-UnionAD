@@ -24,8 +24,8 @@
     [self.adapter.delegate rewardedVideoDidFailToPlayForCustomEvent:self.adapter error:error];
 }
     
-- (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd {
-    [self.adapter.delegate rewardedVideoWillAppearForCustomEvent:self.adapter];
+- (void)rewardedVideoAdDidVisible:(BURewardedVideoAd *)rewardedVideoAd {
+    [self.adapter.delegate rewardedVideoDidAppearForCustomEvent:self.adapter];
     [self.adapter.delegate trackImpression];
 }
 

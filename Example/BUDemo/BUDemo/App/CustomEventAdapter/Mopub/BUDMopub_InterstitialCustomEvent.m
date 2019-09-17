@@ -7,11 +7,12 @@
 //
 
 #import "BUDMopub_InterstitialCustomEvent.h"
-#import <BUAdSDK/BUInterstitialAd.h>
+#import <BUAdSDK/BUNativeExpressInterstitialAd.h>
 #import <BUAdSDK/BUSize.h>
+#import "BUDMacros.h"
 
-@interface BUDMopub_InterstitialCustomEvent () <BUInterstitialAdDelegate>
-@property (nonatomic, strong) BUInterstitialAd *interstitialAd;
+@interface BUDMopub_InterstitialCustomEvent () <BUNativeExpresInterstitialAdDelegate>
+@property (nonatomic, strong) BUNativeExpressInterstitialAd *interstitialAd;
 @end
 
 @implementation BUDMopub_InterstitialCustomEvent
@@ -29,38 +30,45 @@
 
 #pragma mark - BUInterstitialAdDelegate
 
-- (void)interstitialAdDidLoad:(BUInterstitialAd *)interstitialAd {
+- (void)nativeExpresInterstitialAdDidLoad:(BUNativeExpressInterstitialAd *)interstitialAd {
     [self.delegate interstitialCustomEvent:self didLoadAd:interstitialAd];
 }
 
-- (void)interstitialAd:(BUInterstitialAd *)interstitialAd didFailWithError:(NSError *)error {
+- (void)nativeExpresInterstitialAd:(BUNativeExpressInterstitialAd *)interstitialAd didFailWithError:(NSError *)error {
     [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
 }
 
-- (void)interstitialAdDidClick:(BUInterstitialAd *)interstitialAd {
+- (void)nativeExpresInterstitialAdRenderSuccess:(BUNativeExpressInterstitialAd *)interstitialAd {
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)nativeExpresInterstitialAdRenderFail:(BUNativeExpressInterstitialAd *)interstitialAd error:(NSError *)error {
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)nativeExpresInterstitialAdDidClick:(BUNativeExpressInterstitialAd *)interstitialAd {
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
     [self.delegate trackClick];
 }
 
-- (void)interstitialAdDidClose:(BUInterstitialAd *)interstitialAd {
+- (void)nativeExpresInterstitialAdDidClose:(BUNativeExpressInterstitialAd *)interstitialAd {
     [self.delegate interstitialCustomEventDidDisappear:self];
 }
 
-- (void)interstitialAdWillClose:(BUInterstitialAd *)interstitialAd {
+- (void)nativeExpresInterstitialAdWillClose:(BUNativeExpressInterstitialAd *)interstitialAd {
     [self.delegate interstitialCustomEventWillDisappear:self];
 }
 
-- (void)interstitialAdWillVisible:(BUInterstitialAd *)interstitialAd {
+- (void)nativeExpresInterstitialAdWillVisible:(BUNativeExpressInterstitialAd *)interstitialAd {
     [self.delegate interstitialCustomEventWillAppear:self];
     [self.delegate trackImpression];
     [self.delegate interstitialCustomEventDidAppear:self];
 }
 
-
 #pragma mark - getter
-- (BUInterstitialAd *)interstitialAd {
+- (BUNativeExpressInterstitialAd *)interstitialAd {
     if (!_interstitialAd) {
-        _interstitialAd = [[BUInterstitialAd alloc] initWithSlotID:@"900546957" size:[BUSize sizeBy:BUProposalSize_Interstitial600_600]];
+        _interstitialAd = [[BUNativeExpressInterstitialAd alloc] initWithSlotID:@"900546270" imgSize:[BUSize sizeBy:BUProposalSize_Interstitial600_600] adSize:CGSizeMake(300, 450)];
         _interstitialAd.delegate = self;
     }
     return _interstitialAd;

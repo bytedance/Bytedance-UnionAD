@@ -1,7 +1,7 @@
 //
 //  MPURLRequest.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
             postData = mpUrl.postData;
         }
         else {
-            MPLogFatal(@"POST Data is not serializable into JSON:\n%@", mpUrl.postData);
+            MPLogInfo(@"🚨 POST data failed to serialize into JSON:\n%@", mpUrl.postData);
         }
     }
 
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
                 [self setHTTPBody:jsonData];
             }
             else {
-                MPLogError(@"Could not generate JSON body from %@", postData);
+                MPLogEvent([MPLogEvent error:error message:nil]);
             }
         }
     }
@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)description {
     if (self.HTTPBody != nil) {
         NSString * httpBody = [[NSString alloc] initWithData:self.HTTPBody encoding:NSUTF8StringEncoding];
-        return [NSString stringWithFormat:@"%@\n%@", self.URL, httpBody];
+        return [NSString stringWithFormat:@"%@\n\t%@", self.URL, httpBody];
     }
     else {
         return self.URL.absoluteString;

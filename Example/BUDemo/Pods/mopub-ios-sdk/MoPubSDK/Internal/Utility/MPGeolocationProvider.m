@@ -1,7 +1,7 @@
 //
 //  MPGeolocationProvider.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -180,7 +180,10 @@ const NSTimeInterval kMPLocationUpdateInterval = 10.0 * 60.0;
     [self.locationManager startUpdatingLocation];
 
     [self.locationUpdateDurationTimer invalidate];
-    self.locationUpdateDurationTimer = [[MPCoreInstanceProvider sharedProvider] buildMPTimerWithTimeInterval:kMPLocationUpdateDuration target:self selector:@selector(currentLocationUpdateDidFinish) repeats:NO];
+    self.locationUpdateDurationTimer = [MPTimer timerWithTimeInterval:kMPLocationUpdateDuration
+                                                               target:self
+                                                             selector:@selector(currentLocationUpdateDidFinish)
+                                                              repeats:NO];
     [self.locationUpdateDurationTimer scheduleNow];
 }
 
@@ -197,7 +200,10 @@ const NSTimeInterval kMPLocationUpdateInterval = 10.0 * 60.0;
 {
     MPLogDebug(@"Next user location update due in %.1f seconds.", delay);
     [self.nextLocationUpdateTimer invalidate];
-    self.nextLocationUpdateTimer = [[MPCoreInstanceProvider sharedProvider] buildMPTimerWithTimeInterval:delay target:self selector:@selector(startRecurringLocationUpdates) repeats:NO];
+    self.nextLocationUpdateTimer = [MPTimer timerWithTimeInterval:delay
+                                                           target:self
+                                                         selector:@selector(startRecurringLocationUpdates)
+                                                          repeats:NO];
     [self.nextLocationUpdateTimer scheduleNow];
 }
 

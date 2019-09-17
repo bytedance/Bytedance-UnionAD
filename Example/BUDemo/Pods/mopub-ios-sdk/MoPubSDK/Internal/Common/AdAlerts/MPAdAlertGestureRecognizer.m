@@ -1,7 +1,7 @@
 //
 //  MPAdAlertGestureRecognizer.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -27,13 +27,6 @@ NSInteger const kMPAdAlertGestureMaxAllowedYAxisMovement = 50;
 @end
 
 @implementation MPAdAlertGestureRecognizer
-
-@synthesize currentAlertGestureState = _currentAlertGestureState;
-@synthesize inflectionPoint = _inflectionPoint;
-@synthesize thresholdReached = _thresholdReached;
-@synthesize curNumZigZags = _curNumZigZags;
-@synthesize numZigZagsForRecognition = _numZigZagsForRecognition;
-@synthesize minTrackedDistanceForZigZag = _minTrackedDistanceForZigZag;
 
 - (id)init
 {

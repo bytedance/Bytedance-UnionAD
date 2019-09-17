@@ -1,22 +1,21 @@
 //
 //  MPAdConfiguration.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <Foundation/Foundation.h>
 #import "MPGlobal.h"
+#import "MPImpressionData.h"
 
 @class MPRewardedVideoReward;
 
-enum {
-    MPAdTypeUnknown = -1,
-    MPAdTypeBanner = 0,
-    MPAdTypeInterstitial = 1
+typedef NS_ENUM(NSUInteger, MPAdType) {
+    MPAdTypeInline,
+    MPAdTypeFullscreen
 };
-typedef NSUInteger MPAdType;
 
 typedef NS_ENUM(NSUInteger, MPAfterLoadResult) {
     MPAfterLoadResultMissingAdapter,
@@ -32,6 +31,7 @@ extern NSString * const kCreativeIdMetadataKey;
 extern NSString * const kCustomEventClassNameMetadataKey;
 extern NSString * const kCustomEventClassDataMetadataKey;
 extern NSString * const kNextUrlMetadataKey;
+extern NSString * const kFormatMetadataKey;
 extern NSString * const kBeforeLoadUrlMetadataKey;
 extern NSString * const kAfterLoadUrlMetadataKey;
 extern NSString * const kAfterLoadSuccessUrlMetadataKey;
@@ -53,6 +53,7 @@ extern NSString * const kRewardedVideoCompletionUrlMetadataKey;
 extern NSString * const kRewardedCurrenciesMetadataKey;
 extern NSString * const kRewardedPlayableDurationMetadataKey;
 extern NSString * const kRewardedPlayableRewardOnClickMetadataKey;
+extern NSString * const kImpressionDataMetadataKey;
 
 extern NSString * const kInterstitialAdTypeMetadataKey;
 extern NSString * const kOrientationTypeMetadataKey;
@@ -75,6 +76,7 @@ extern NSString * const kBannerImpressionMinPixelMetadataKey;
 
 @property (nonatomic, assign) MPAdType adType;
 @property (nonatomic, assign) BOOL adUnitWarmingUp;
+@property (nonatomic, readonly) BOOL isMraidAd;
 @property (nonatomic, copy) NSString *networkType;
 // If this flag is YES, it implies that we've reached the end of the waterfall for the request
 // and there is no need to hit ad server again.
@@ -110,13 +112,22 @@ extern NSString * const kBannerImpressionMinPixelMetadataKey;
 @property (nonatomic, assign) NSTimeInterval rewardedPlayableDuration;
 @property (nonatomic, assign) BOOL rewardedPlayableShouldRewardOnClick;
 @property (nonatomic, copy) NSString *advancedBidPayload;
+@property (nonatomic, strong) MPImpressionData *impressionData;
+
+/**
+ Unified ad unit format in its raw string representation.
+ */
+@property (nonatomic, copy) NSString *format;
 
 // viewable impression tracking experiment
 @property (nonatomic) NSTimeInterval impressionMinVisibleTimeInSec;
 @property (nonatomic) CGFloat impressionMinVisiblePixels;
 @property (nonatomic) BOOL visibleImpressionTrackingEnabled;
 
-- (id)initWithMetadata:(NSDictionary *)metadata data:(NSData *)data;
+- (instancetype)initWithMetadata:(NSDictionary *)metadata data:(NSData *)data adType:(MPAdType)adType;
+
+// Default @c init is unavailable
+- (instancetype)init NS_UNAVAILABLE;
 
 - (BOOL)hasPreferredSize;
 - (NSString *)adResponseHTMLString;

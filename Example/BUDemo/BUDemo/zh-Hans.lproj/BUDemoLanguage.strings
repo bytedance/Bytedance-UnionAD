@@ -43,5 +43,6 @@
 "detail" = "查看详情 >";
 "downloadLinks" = "下载跳转";
 "URLLinks" = "URL跳转";
-
+"ShowPlayable" = "测试playable页面";
+"IsLandScape" = "是否横屏:";
 

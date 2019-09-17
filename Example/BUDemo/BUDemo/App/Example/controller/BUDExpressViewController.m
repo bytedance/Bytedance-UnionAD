@@ -13,6 +13,9 @@
 #import "BUDExpressFeedViewController.h"
 #import "BUDExpressBannerViewController.h"
 #import "BUDExpressInterstitialViewController.h"
+#import "BUDExpressFullScreenVideoViewController.h"
+#import "BUDExpressRewardedVideoViewController.h"
+#import "BUDExpressDrawViewController.h"
 
 @interface BUDExpressViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -49,8 +52,30 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *slotId =  [defaults objectForKey:@"native_express_slot_id"];
         viewModel.slotID = slotId;
+//        viewModel.slotID = @"900546510";//支持视频播放
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    BUDActionModel *feedCellItem_video = [BUDActionModel plainTitleActionModel:@"Express Feed video" type:BUDCellType_native action:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        BUDExpressFeedViewController *vc = [BUDExpressFeedViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *slotId =  [defaults objectForKey:@"native_express_slot_id"];
+        viewModel.slotID = slotId;
+                viewModel.slotID = @"900546510";//支持视频播放
+        vc.viewModel = viewModel;
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    BUDActionModel *drawCellItem = [BUDActionModel plainTitleActionModel:@"Express Draw" type:BUDCellType_native action:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        BUDExpressDrawViewController *vc = [BUDExpressDrawViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = @"900546881";
+        vc.viewModel = viewModel;
+        [strongSelf presentViewController:vc animated:YES completion:nil];
     }];
     
     BUDActionModel *bannerCellItem = [BUDActionModel plainTitleActionModel:@"Express Banner" type:BUDCellType_native action:^{
@@ -70,7 +95,44 @@
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
-    self.items = @[feedCellItem,bannerCellItem,interCellItem].mutableCopy;
+    
+    BUDActionModel *fullScreenCellItem = [BUDActionModel plainTitleActionModel:@"Express FullscreenVideo" type:BUDCellType_native action:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        BUDExpressFullScreenVideoViewController *vc = [BUDExpressFullScreenVideoViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = @"900546551";//竖屏
+        vc.viewModel = viewModel;
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    BUDActionModel *fullScreenCellItem_landscape = [BUDActionModel plainTitleActionModel:@"Express FullscreenVideo _ Landscape" type:BUDCellType_native action:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        BUDExpressFullScreenVideoViewController *vc = [BUDExpressFullScreenVideoViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = @"900546831";//横屏
+        vc.viewModel = viewModel;
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    BUDActionModel *rewardCellItem = [BUDActionModel plainTitleActionModel:@"Express RewardedVideo" type:BUDCellType_native action:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        BUDExpressRewardedVideoViewController *vc = [BUDExpressRewardedVideoViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = @"900546566";//竖屏
+        vc.viewModel = viewModel;
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    BUDActionModel *rewardCellItem_landcape = [BUDActionModel plainTitleActionModel:@"Express RewardedVideo _ Landscape" type:BUDCellType_native action:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        BUDExpressRewardedVideoViewController *vc = [BUDExpressRewardedVideoViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = @"900546606";//横屏
+        vc.viewModel = viewModel;
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    self.items = @[feedCellItem,feedCellItem_video,drawCellItem,bannerCellItem,interCellItem,fullScreenCellItem,fullScreenCellItem_landscape,rewardCellItem,rewardCellItem_landcape].mutableCopy;
     
 }
 

@@ -1,7 +1,7 @@
 //
 //  MPNativeAdConstants.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -33,3 +33,7 @@ NSString *const kPrivacyIconTapDestinationURL = @"https://www.mopub.com/optout";
 NSString *const kImpressionTrackerURLsKey = @"imptracker";
 NSString *const kDefaultActionURLKey = @"clk";
 NSString *const kClickTrackerURLKey = @"clktracker";
+
+NSString *const kNativeAdUnitId        = @"adUnitId";
+NSString *const kNativeAdDspCreativeId = @"dspCreativeId";
+NSString *const kNativeAdDspName       = @"dspName";

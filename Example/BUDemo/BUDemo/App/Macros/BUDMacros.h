@@ -10,6 +10,7 @@
 #define BUDMacros_h
 
 #define mainColor BUD_RGB(0xff, 0x63, 0x5c)
+#define unValidColor BUD_RGB(0xd7, 0xd7, 0xd7)
 #define titleBGColor BUD_RGB(73, 15, 15)
 #define BUD_RGB(a,b,c) [UIColor colorWithRed:(a/255.0) green:(b/255.0) blue:(c/255.0) alpha:1]
 /// iphone X、XR、XS、XS Max适配

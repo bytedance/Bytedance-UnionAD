@@ -1,7 +1,7 @@
 //
 //  NSError+MPAdditions.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -12,7 +12,7 @@
 @implementation NSError (MPAdditions)
 
 - (BOOL)isAdRequestTimedOutError {
-    return ([self.domain isEqualToString:kMOPUBErrorDomain] && self.code == MOPUBErrorAdRequestTimedOut);
+    return ([self.domain isEqualToString:kNSErrorDomain] && self.code == MOPUBErrorAdRequestTimedOut);
 }
 
 @end
@@ -24,7 +24,7 @@
     // status code is 200 (not an error). It is up to the caller of this method to
     // determine if the status code is really an error or not.
     NSString * message = [NSHTTPURLResponse localizedStringForStatusCode:statusCode];
-    NSError * error = [NSError errorWithDomain:kMOPUBErrorDomain code:MOPUBErrorHTTPResponseNot200 userInfo:@{ NSLocalizedDescriptionKey: message }];
+    NSError * error = [NSError errorWithDomain:kNSErrorDomain code:MOPUBErrorHTTPResponseNot200 userInfo:@{ NSLocalizedDescriptionKey: message }];
 
     return error;
 }

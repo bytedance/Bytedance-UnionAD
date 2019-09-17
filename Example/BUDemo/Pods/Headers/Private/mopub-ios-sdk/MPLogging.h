@@ -1,1 +1,1 @@
-../../../mopub-ios-sdk/MoPubSDK/Internal/Utility/MPLogging.h
+../../../mopub-ios-sdk/MoPubSDK/Logging/MPLogging.h

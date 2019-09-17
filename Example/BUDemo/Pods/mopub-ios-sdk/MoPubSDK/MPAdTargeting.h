@@ -1,12 +1,12 @@
 //
 //  MPAdTargeting.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @class CLLocation;
 
@@ -14,6 +14,12 @@
  Optional targeting parameters to use when requesting an ad.
  */
 @interface MPAdTargeting : NSObject
+
+/**
+ The maximum creative size that can be safely rendered in the ad container.
+ The size should be in points.
+ */
+@property (nonatomic, assign) CGSize creativeSafeSize;
 
 /**
  A string representing a set of non-personally identifiable keywords that should be passed
@@ -48,5 +54,24 @@
  consent from the user, @c userDataKeywords will not be sent to the server.
  */
 @property (nonatomic, copy) NSString * userDataKeywords;
+
+/**
+ Initializes ad targeting information.
+ @param size The maximum creative size that can be safely rendered in the ad container.
+ The size should be in points.
+ */
+- (instancetype)initWithCreativeSafeSize:(CGSize)size;
+
+/**
+ Initializes ad targeting information.
+ @param size The maximum creative size that can be safely rendered in the ad container.
+ The size should be in points.
+ */
++ (instancetype)targetingWithCreativeSafeSize:(CGSize)size;
+
+#pragma mark - Unavailable Initializers
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end

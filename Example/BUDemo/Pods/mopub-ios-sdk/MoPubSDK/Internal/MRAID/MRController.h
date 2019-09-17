@@ -1,7 +1,7 @@
 //
 //  MRController.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -30,10 +30,12 @@
 @property (nonatomic, weak) id<MRControllerDelegate> delegate;
 
 - (instancetype)initWithAdViewFrame:(CGRect)adViewFrame
+              supportedOrientations:(MPInterstitialOrientationType)orientationType
                     adPlacementType:(MRAdViewPlacementType)placementType
                            delegate:(id<MRControllerDelegate>)delegate;
 
 - (void)loadAdWithConfiguration:(MPAdConfiguration *)configuration;
+- (void)handleMRAIDInterstitialWillPresentWithViewController:(MPMRAIDInterstitialViewController *)viewController;
 - (void)handleMRAIDInterstitialDidPresentWithViewController:(MPMRAIDInterstitialViewController *)viewController;
 - (void)enableRequestHandling;
 - (void)disableRequestHandling;
@@ -79,5 +81,11 @@
 
 // Called after the rewarded video finishes playing
 - (void)rewardedVideoEnded;
+
+// Called just before the ad will expand or resize
+- (void)adWillExpand:(UIView *)adView;
+
+// Called after the ad collapsed from an expanded or resized state
+- (void)adDidCollapse:(UIView *)adView;
 
 @end

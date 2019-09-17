@@ -1,7 +1,7 @@
 //
 //  MPBannerAdManager.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -17,6 +17,7 @@
 @interface MPBannerAdManager : NSObject <MPAdServerCommunicatorDelegate, MPBannerAdapterDelegate>
 
 @property (nonatomic, weak) id<MPBannerAdManagerDelegate> delegate;
+@property (nonatomic, readonly) BOOL isMraidAd;
 
 - (id)initWithDelegate:(id<MPBannerAdManagerDelegate>)delegate;
 

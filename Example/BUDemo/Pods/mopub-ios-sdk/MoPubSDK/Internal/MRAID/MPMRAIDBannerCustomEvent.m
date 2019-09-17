@@ -1,7 +1,7 @@
 //
 //  MPMRAIDBannerCustomEvent.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -10,6 +10,7 @@
 #import "MPLogging.h"
 #import "MPAdConfiguration.h"
 #import "MRController.h"
+#import "MPError.h"
 #import "MPWebView.h"
 #import "MPViewabilityTracker.h"
 
@@ -23,8 +24,9 @@
 
 - (void)requestAdWithSize:(CGSize)size customEventInfo:(NSDictionary *)info
 {
-    MPLogInfo(@"Loading MoPub MRAID banner");
-    MPAdConfiguration *configuration = [self.delegate configuration];
+    MPAdConfiguration *configuration = self.delegate.configuration;
+
+    MPLogAdEvent([MPLogEvent adLoadAttemptForAdapter:NSStringFromClass(configuration.customEventClass) dspCreativeId:configuration.dspCreativeId dspName:nil], self.adUnitId);
 
     CGRect adViewFrame = CGRectZero;
     if ([configuration hasPreferredSize]) {
@@ -33,6 +35,7 @@
     }
 
     self.mraidController = [[MRController alloc] initWithAdViewFrame:adViewFrame
+                                               supportedOrientations:configuration.orientationType
                                                      adPlacementType:MRAdViewPlacementTypeInline
                                                             delegate:self];
     [self.mraidController loadAdWithConfiguration:configuration];
@@ -62,14 +65,17 @@
 
 - (void)adDidLoad:(UIView *)adView
 {
-    MPLogInfo(@"MoPub MRAID banner did load");
+    MPLogAdEvent([MPLogEvent adLoadSuccessForAdapter:NSStringFromClass(self.class)], self.adUnitId);
     [self.delegate bannerCustomEvent:self didLoadAd:adView];
 }
 
 - (void)adDidFailToLoad:(UIView *)adView
 {
-    MPLogInfo(@"MoPub MRAID banner did fail");
-    [self.delegate bannerCustomEvent:self didFailToLoadAdWithError:nil];
+    NSString * message = [NSString stringWithFormat:@"Failed to load creative:\n%@", self.adConfiguration.adResponseHTMLString];
+    NSError * error = [NSError errorWithCode:MOPUBErrorAdapterFailedToLoadAd localizedDescription:message];
+
+    MPLogAdEvent([MPLogEvent adLoadFailedForAdapter:NSStringFromClass(self.class) error:error], self.adUnitId);
+    [self.delegate bannerCustomEvent:self didFailToLoadAdWithError:error];
 }
 
 - (void)closeButtonPressed
@@ -79,13 +85,11 @@
 
 - (void)appShouldSuspendForAd:(UIView *)adView
 {
-    MPLogInfo(@"MoPub MRAID banner will begin action");
     [self.delegate bannerCustomEventWillBeginAction:self];
 }
 
 - (void)appShouldResumeFromAd:(UIView *)adView
 {
-    MPLogInfo(@"MoPub MRAID banner did end action");
     [self.delegate bannerCustomEventDidFinishAction:self];
 }
 
@@ -97,6 +101,20 @@
 - (void)startViewabilityTracker
 {
     [self.mraidController.viewabilityTracker startTracking];
+}
+
+- (void)adWillExpand:(UIView *)adView
+{
+    if ([self.delegate respondsToSelector:@selector(bannerCustomEventWillExpandAd:)]) {
+        [self.delegate bannerCustomEventWillExpandAd:self];
+    }
+}
+
+- (void)adDidCollapse:(UIView *)adView
+{
+    if ([self.delegate respondsToSelector:@selector(bannerCustomEventDidCollapseAd:)]) {
+        [self.delegate bannerCustomEventDidCollapseAd:self];
+    }
 }
 
 @end

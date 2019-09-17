@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CBC46A822FD44F800078F0C /* BUAdSDKAdapterConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC46A722FD44F800078F0C /* BUAdSDKAdapterConfiguration.m */; };
 		5A8B1A022271A25A0048DE10 /* BUDemoLanguage.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A8B1A002271A25A0048DE10 /* BUDemoLanguage.strings */; };
 		5A988611221AAE16006459BD /* NSString+LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A98860F221AAE16006459BD /* NSString+LocalizedString.m */; };
 		5AB9E0642229561F001B15CE /* BUDImagePortraitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9E0632229561F001B15CE /* BUDImagePortraitViewController.m */; };
@@ -30,6 +31,8 @@
 		78E073A721A2CFE2006D71EE /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073A621A2CFE1006D71EE /* libresolv.9.tbd */; };
 		78E073A921A2CFE9006D71EE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073A821A2CFE9006D71EE /* CoreMotion.framework */; };
 		78E073AB21A2CFF1006D71EE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073AA21A2CFF1006D71EE /* AdSupport.framework */; };
+		DE4FA56622E5B755002D673D /* BUDToolsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4FA56522E5B755002D673D /* BUDToolsSettingViewController.m */; };
+		DE4FA56F22E5B8D3002D673D /* BUDPlayableToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4FA56E22E5B8D3002D673D /* BUDPlayableToolViewController.m */; };
 		DE697B00228BF90200C5B5C6 /* BUDExpressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE697AFF228BF90200C5B5C6 /* BUDExpressViewController.m */; };
 		DE697B0F228BFDD200C5B5C6 /* BUDExpressBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE697B0C228BFDD200C5B5C6 /* BUDExpressBannerViewController.m */; };
 		DE697B10228BFDD200C5B5C6 /* BUDExpressFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE697B0E228BFDD200C5B5C6 /* BUDExpressFeedViewController.m */; };
@@ -90,6 +93,9 @@
 		DE84BDBF21A2E9600090D866 /* drawLocal_07.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE84BD8321A2E9600090D866 /* drawLocal_07.mp4 */; };
 		DE84BDC021A2E9600090D866 /* drawLocal_05.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE84BD8421A2E9600090D866 /* drawLocal_05.mp4 */; };
 		DE84BDC121A2E9600090D866 /* drawLocal_04.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE84BD8521A2E9600090D866 /* drawLocal_04.mp4 */; };
+		DE9D5C6522EEEA4D00A577E7 /* BUDExpressRewardedVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9D5C6222EEEA4D00A577E7 /* BUDExpressRewardedVideoViewController.m */; };
+		DE9D5C6622EEEA4D00A577E7 /* BUDExpressFullScreenVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9D5C6322EEEA4D00A577E7 /* BUDExpressFullScreenVideoViewController.m */; };
+		DE9D5C6722EEEA4D00A577E7 /* BUDExpressDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9D5C6422EEEA4D00A577E7 /* BUDExpressDrawViewController.m */; };
 		DEB95B1921CA28D30025570E /* BUDNativeDislikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB95B1721CA28D30025570E /* BUDNativeDislikeViewController.m */; };
 		DECC5C9F21CF4BB100268877 /* BUDdemoDislikeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DECC5C9E21CF4BB100268877 /* BUDdemoDislikeCollectionCell.m */; };
 /* End PBXBuildFile section */
@@ -98,6 +104,8 @@
 		05C4E22FADCD2F7815223297 /* Pods-Demo-BUADDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		12EFB7EDD6E2C6DC1D7875A1 /* Pods-Demo-BUADDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo.release.xcconfig"; sourceTree = "<group>"; };
 		2209523E35A5A34BE85EF785 /* libPods-Demo-BUADDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo-BUADDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CBC46A622FD44F800078F0C /* BUAdSDKAdapterConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUAdSDKAdapterConfiguration.h; sourceTree = "<group>"; };
+		2CBC46A722FD44F800078F0C /* BUAdSDKAdapterConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUAdSDKAdapterConfiguration.m; sourceTree = "<group>"; };
 		5A8B1A012271A25A0048DE10 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BUDemoLanguage.strings; sourceTree = "<group>"; };
 		5A8B1A032271A2650048DE10 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/BUDemoLanguage.strings; sourceTree = "<group>"; };
 		5A8B1A042271A26E0048DE10 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BUDemoLanguage.strings"; sourceTree = "<group>"; };
@@ -141,6 +149,10 @@
 		78E073A621A2CFE1006D71EE /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		78E073A821A2CFE9006D71EE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		78E073AA21A2CFF1006D71EE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		DE4FA56422E5B754002D673D /* BUDToolsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDToolsSettingViewController.h; sourceTree = "<group>"; };
+		DE4FA56522E5B755002D673D /* BUDToolsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDToolsSettingViewController.m; sourceTree = "<group>"; };
+		DE4FA56D22E5B8D3002D673D /* BUDPlayableToolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUDPlayableToolViewController.h; sourceTree = "<group>"; };
+		DE4FA56E22E5B8D3002D673D /* BUDPlayableToolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUDPlayableToolViewController.m; sourceTree = "<group>"; };
 		DE697AFE228BF90200C5B5C6 /* BUDExpressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUDExpressViewController.h; sourceTree = "<group>"; };
 		DE697AFF228BF90200C5B5C6 /* BUDExpressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUDExpressViewController.m; sourceTree = "<group>"; };
 		DE697B0B228BFDD200C5B5C6 /* BUDExpressBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDExpressBannerViewController.h; sourceTree = "<group>"; };
@@ -247,6 +259,12 @@
 		DE84BD8421A2E9600090D866 /* drawLocal_05.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = drawLocal_05.mp4; sourceTree = "<group>"; };
 		DE84BD8521A2E9600090D866 /* drawLocal_04.mp4 */ = {isa = PBXFileReference; lastKnownFileType = text; path = drawLocal_04.mp4; sourceTree = "<group>"; };
 		DE84BD8621A2E9600090D866 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE9D5C5F22EEEA4C00A577E7 /* BUDExpressRewardedVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDExpressRewardedVideoViewController.h; sourceTree = "<group>"; };
+		DE9D5C6022EEEA4C00A577E7 /* BUDExpressDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDExpressDrawViewController.h; sourceTree = "<group>"; };
+		DE9D5C6122EEEA4D00A577E7 /* BUDExpressFullScreenVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDExpressFullScreenVideoViewController.h; sourceTree = "<group>"; };
+		DE9D5C6222EEEA4D00A577E7 /* BUDExpressRewardedVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDExpressRewardedVideoViewController.m; sourceTree = "<group>"; };
+		DE9D5C6322EEEA4D00A577E7 /* BUDExpressFullScreenVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDExpressFullScreenVideoViewController.m; sourceTree = "<group>"; };
+		DE9D5C6422EEEA4D00A577E7 /* BUDExpressDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDExpressDrawViewController.m; sourceTree = "<group>"; };
 		DEB95B1721CA28D30025570E /* BUDNativeDislikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDNativeDislikeViewController.m; sourceTree = "<group>"; };
 		DEB95B1821CA28D30025570E /* BUDNativeDislikeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDNativeDislikeViewController.h; sourceTree = "<group>"; };
 		DECC5C9D21CF4BB100268877 /* BUDdemoDislikeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDdemoDislikeCollectionCell.h; sourceTree = "<group>"; };
@@ -296,6 +314,8 @@
 		785996F821A556A700CB726E /* Mopub */ = {
 			isa = PBXGroup;
 			children = (
+				2CBC46A622FD44F800078F0C /* BUAdSDKAdapterConfiguration.h */,
+				2CBC46A722FD44F800078F0C /* BUAdSDKAdapterConfiguration.m */,
 				7859971B21A560EB00CB726E /* BUDMopub_BannerCustomEvent.h */,
 				7859971721A560EB00CB726E /* BUDMopub_BannerCustomEvent.m */,
 				7859972421A560EB00CB726E /* BUDMopub_BannerViewController.h */,
@@ -450,6 +470,10 @@
 		DE84BD2B21A2E9600090D866 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				DE4FA56422E5B754002D673D /* BUDToolsSettingViewController.h */,
+				DE4FA56522E5B755002D673D /* BUDToolsSettingViewController.m */,
+				DE4FA56D22E5B8D3002D673D /* BUDPlayableToolViewController.h */,
+				DE4FA56E22E5B8D3002D673D /* BUDPlayableToolViewController.m */,
 				5AB9E0622229561F001B15CE /* BUDImagePortraitViewController.h */,
 				5AB9E0632229561F001B15CE /* BUDImagePortraitViewController.m */,
 				DEB95B1821CA28D30025570E /* BUDNativeDislikeViewController.h */,
@@ -462,6 +486,12 @@
 				DE84BD3821A2E9600090D866 /* BUNativeSettingViewController.m */,
 				DE697AFE228BF90200C5B5C6 /* BUDExpressViewController.h */,
 				DE697AFF228BF90200C5B5C6 /* BUDExpressViewController.m */,
+				DE9D5C6022EEEA4C00A577E7 /* BUDExpressDrawViewController.h */,
+				DE9D5C6422EEEA4D00A577E7 /* BUDExpressDrawViewController.m */,
+				DE9D5C6122EEEA4D00A577E7 /* BUDExpressFullScreenVideoViewController.h */,
+				DE9D5C6322EEEA4D00A577E7 /* BUDExpressFullScreenVideoViewController.m */,
+				DE9D5C5F22EEEA4C00A577E7 /* BUDExpressRewardedVideoViewController.h */,
+				DE9D5C6222EEEA4D00A577E7 /* BUDExpressRewardedVideoViewController.m */,
 				DE697B0D228BFDD200C5B5C6 /* BUDExpressFeedViewController.h */,
 				DE697B0E228BFDD200C5B5C6 /* BUDExpressFeedViewController.m */,
 				DE697B0B228BFDD200C5B5C6 /* BUDExpressBannerViewController.h */,
@@ -690,14 +720,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo-resources.sh",
-				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Internal/Common/MPAdBrowserController.xib",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn@2x.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn@3x.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX@2x.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX@3x.png",
-				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCountdownTimer.html",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon@2x.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon@3x.png",
@@ -711,19 +739,18 @@
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPUnmutedBtn@2x.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPUnmutedBtn@3x.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MRAID.bundle",
+				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPAdapters.plist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPAdBrowserController.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseBtn.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseBtn@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseBtn@3x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButtonX.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButtonX@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButtonX@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCountdownTimer.html",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPDAAIcon.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPDAAIcon@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPDAAIcon@3x.png",
@@ -737,6 +764,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPUnmutedBtn@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPUnmutedBtn@3x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MRAID.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPAdapters.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -771,14 +799,17 @@
 				DE84BD9121A2E9600090D866 /* BUDSlotViewModel.m in Sources */,
 				DE84BD9E21A2E9600090D866 /* BUDNativeViewController.m in Sources */,
 				DE84BD9B21A2E9600090D866 /* BUDSettingViewController.m in Sources */,
+				DE4FA56622E5B755002D673D /* BUDToolsSettingViewController.m in Sources */,
 				DE84BD9021A2E9600090D866 /* BUDMainViewModel.m in Sources */,
 				7859972D21A560EB00CB726E /* BUDMopub_RewardVideoCusEventVC.m in Sources */,
 				DE84BDA921A2E9600090D866 /* BUDPlayerController.m in Sources */,
 				DE84BD8E21A2E9600090D866 /* RRFPSBar.m in Sources */,
 				DE84BD9621A2E9600090D866 /* BUDNativeBannerViewController.m in Sources */,
 				DE84BDAF21A2E9600090D866 /* BUDExampleDefine.m in Sources */,
+				DE9D5C6722EEEA4D00A577E7 /* BUDExpressDrawViewController.m in Sources */,
 				DE697B00228BF90200C5B5C6 /* BUDExpressViewController.m in Sources */,
 				7859972A21A560EB00CB726E /* BUDMopub_RewardedVideoCustomEvent.m in Sources */,
+				DE9D5C6622EEEA4D00A577E7 /* BUDExpressFullScreenVideoViewController.m in Sources */,
 				7859972721A560EB00CB726E /* BUDMopub_InterstitialViewController.m in Sources */,
 				DE84BD9521A2E9600090D866 /* BUDRewardedVideoAdViewController.m in Sources */,
 				DE84BDA621A2E9600090D866 /* BUDSettingTableView.m in Sources */,
@@ -810,7 +841,9 @@
 				7859972821A560EB00CB726E /* BUDMopub_InterstitialCustomEvent.m in Sources */,
 				DE84BDB621A2E9600090D866 /* AppDelegate.m in Sources */,
 				5AB9E0642229561F001B15CE /* BUDImagePortraitViewController.m in Sources */,
+				2CBC46A822FD44F800078F0C /* BUAdSDKAdapterConfiguration.m in Sources */,
 				7859972921A560EB00CB726E /* BUDMopub_BannerCustomEvent.m in Sources */,
+				DE9D5C6522EEEA4D00A577E7 /* BUDExpressRewardedVideoViewController.m in Sources */,
 				DE84BDB221A2E9600090D866 /* BUDMainViewController.m in Sources */,
 				DE84BD9721A2E9600090D866 /* BUDNativeInterstitialViewController.m in Sources */,
 				785996CA21A54E7000CB726E /* BUDAdmob_RewardVideoCusEventVC.m in Sources */,
@@ -827,6 +860,7 @@
 				DECC5C9F21CF4BB100268877 /* BUDdemoDislikeCollectionCell.m in Sources */,
 				DE84BD9D21A2E9600090D866 /* BUDFeedViewController.m in Sources */,
 				DE84BDAB21A2E9600090D866 /* BUDFeedNativeTableViewCell.m in Sources */,
+				DE4FA56F22E5B8D3002D673D /* BUDPlayableToolViewController.m in Sources */,
 				DE84BD9A21A2E9600090D866 /* BUDDrawVideoViewController.m in Sources */,
 				DE84BDA521A2E9600090D866 /* BUDNormalButton.m in Sources */,
 				DE84BDA421A2E9600090D866 /* BUDRefreshButton.m in Sources */,
@@ -993,6 +1027,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BUDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = BUDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1019,6 +1054,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BUDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = BUDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

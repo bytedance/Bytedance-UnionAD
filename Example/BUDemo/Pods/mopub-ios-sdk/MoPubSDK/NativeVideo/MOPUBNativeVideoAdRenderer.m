@@ -1,7 +1,7 @@
 //
 //  MOPUBNativeVideoAdRenderer.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -384,8 +384,11 @@ static const CGFloat kAutoPlayTimerInterval = 0.25f;
             [self.adView bringSubviewToFront:self.adView.nativeVideoView];
 
             if (!self.autoPlayTimer) {
-                self.autoPlayTimer = [MPTimer timerWithTimeInterval:kAutoPlayTimerInterval target:self selector:@selector(tick:) repeats:YES];
-                self.autoPlayTimer.runLoopMode = NSRunLoopCommonModes;
+                self.autoPlayTimer = [MPTimer timerWithTimeInterval:kAutoPlayTimerInterval
+                                                             target:self
+                                                           selector:@selector(tick:)
+                                                            repeats:YES
+                                                        runLoopMode:NSRunLoopCommonModes];
                 [self.autoPlayTimer scheduleNow];
             }
 

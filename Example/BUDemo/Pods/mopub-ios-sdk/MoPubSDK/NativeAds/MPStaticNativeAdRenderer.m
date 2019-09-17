@@ -1,7 +1,7 @@
 //
 //  MPStaticNativeAdRenderer.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -47,10 +47,16 @@ const CGFloat MPNativeViewDynamicDimension = -1.0;
 
 + (MPNativeAdRendererConfiguration *)rendererConfigurationWithRendererSettings:(id<MPNativeAdRendererSettings>)rendererSettings
 {
+    return [MPStaticNativeAdRenderer rendererConfigurationWithRendererSettings:rendererSettings additionalSupportedCustomEvents:@[]];
+}
+
++ (MPNativeAdRendererConfiguration *)rendererConfigurationWithRendererSettings:(id<MPNativeAdRendererSettings>)rendererSettings
+                                               additionalSupportedCustomEvents:(NSArray *)additionalSupportedCustomEvents
+{
     MPNativeAdRendererConfiguration *config = [[MPNativeAdRendererConfiguration alloc] init];
     config.rendererClass = [self class];
     config.rendererSettings = rendererSettings;
-    config.supportedCustomEvents = @[@"MPMoPubNativeCustomEvent", @"FacebookNativeCustomEvent", @"MillennialNativeCustomEvent"];
+    config.supportedCustomEvents = [@[@"MPMoPubNativeCustomEvent"] arrayByAddingObjectsFromArray:additionalSupportedCustomEvents];
 
     return config;
 }

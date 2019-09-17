@@ -1,7 +1,7 @@
 //
 //  MPURLActionInfo.h
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, MPURLActionType) {
 
 @property (nonatomic, readonly) MPURLActionType actionType;
 @property (nonatomic, readonly, copy) NSURL *originalURL;
-@property (nonatomic, readonly, copy) NSString *iTunesItemIdentifier;
+@property (nonatomic, readonly, strong) NSDictionary *iTunesStoreParameters;
 @property (nonatomic, readonly, copy) NSURL *iTunesStoreFallbackURL;
 @property (nonatomic, readonly, copy) NSURL *safariDestinationURL;
 @property (nonatomic, readonly, copy) NSString *HTTPResponseString;
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, MPURLActionType) {
 @property (nonatomic, readonly, strong) MPEnhancedDeeplinkRequest *enhancedDeeplinkRequest;
 @property (nonatomic, readonly, copy) NSURL *shareURL;
 
-+ (instancetype)infoWithURL:(NSURL *)URL iTunesItemIdentifier:(NSString *)identifier iTunesStoreFallbackURL:(NSURL *)URL;
++ (instancetype)infoWithURL:(NSURL *)URL iTunesStoreParameters:(NSDictionary *)parameters iTunesStoreFallbackURL:(NSURL *)fallbackURL;
 + (instancetype)infoWithURL:(NSURL *)URL safariDestinationURL:(NSURL *)safariDestinationURL;
 + (instancetype)infoWithURL:(NSURL *)URL HTTPResponseString:(NSString *)responseString webViewBaseURL:(NSURL *)baseURL;
 + (instancetype)infoWithURL:(NSURL *)URL webViewBaseURL:(NSURL *)baseURL;

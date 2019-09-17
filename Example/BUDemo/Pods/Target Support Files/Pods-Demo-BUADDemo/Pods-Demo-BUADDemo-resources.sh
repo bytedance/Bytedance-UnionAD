@@ -97,14 +97,12 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Internal/Common/MPAdBrowserController.xib"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn@2x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn@3x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX@2x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX@3x.png"
-  install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCountdownTimer.html"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon@2x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon@3x.png"
@@ -118,16 +116,15 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPUnmutedBtn@2x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPUnmutedBtn@3x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MRAID.bundle"
+  install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPAdapters.plist"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Internal/Common/MPAdBrowserController.xib"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn@2x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseBtn@3x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX@2x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX@3x.png"
-  install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPCountdownTimer.html"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon@2x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon@3x.png"
@@ -141,6 +138,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPUnmutedBtn@2x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPUnmutedBtn@3x.png"
   install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MRAID.bundle"
+  install_resource "${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPAdapters.plist"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

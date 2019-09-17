@@ -1,7 +1,7 @@
 //
 //  MOPUBPlayerView.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -53,6 +53,8 @@ static CGFloat const kGradientViewHeight = 25.0f;
 
         _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avPlayerTapped)];
         [self addGestureRecognizer:_tapGestureRecognizer];
+
+        self.accessibilityLabel = @"MoPub Native Video";
     }
     return self;
 }
@@ -95,7 +97,7 @@ static CGFloat const kGradientViewHeight = 25.0f;
 - (void)setAvPlayer:(MOPUBAVPlayer *)player
 {
     if (!player) {
-        MPLogError(@"Cannot set avPlayer to nil");
+        MPLogInfo(@"Cannot set avPlayer to nil");
         return;
     }
     if (_avPlayer == player) {
@@ -189,11 +191,11 @@ static CGFloat const kGradientViewHeight = 25.0f;
         CGFloat currentProgress = self.avPlayer.currentPlaybackTime/self.avPlayer.currentItemDuration;
         if (currentProgress < 0) {
             currentProgress = 0;
-            MPLogError(@"Progress shouldn't be < 0");
+            MPLogInfo(@"Progress shouldn't be < 0");
         }
         if (currentProgress > 1) {
             currentProgress = 1;
-            MPLogError(@"Progress shouldn't be > 1");
+            MPLogInfo(@"Progress shouldn't be > 1");
         }
 
         self.progressBar.frame = CGRectMake(0, CGRectGetMaxY(self.avView.frame)- kVideoProgressBarHeight, vcWidth * currentProgress, kVideoProgressBarHeight);
@@ -216,9 +218,11 @@ static CGFloat const kGradientViewHeight = 25.0f;
 - (void)layoutReplayView
 {
     if (self.replayView) {
-        CGSize screenSize = MPScreenBounds().size;
-        if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) && self.displayMode == MOPUBPlayerDisplayModeFullscreen) {
-            self.replayView.frame = CGRectMake(0, 0, screenSize.width, screenSize.height);
+        CGSize appFrameSize = MPApplicationFrame(YES).size;
+        BOOL isLandscapeOrientation = appFrameSize.width > appFrameSize.height;
+
+        if (isLandscapeOrientation && self.displayMode == MOPUBPlayerDisplayModeFullscreen) {
+            self.replayView.frame = CGRectMake(0, 0, appFrameSize.width, appFrameSize.height);
         } else {
             self.replayView.frame = self.avView.frame;
         }

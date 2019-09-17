@@ -33,7 +33,6 @@
         BUFullscreenVideoAd *fullScreenVideo = [[BUFullscreenVideoAd alloc] initWithSlotID:@"900546299"];
         fullScreenVideo.delegate = self;
         _fullScreenVideo = fullScreenVideo;
-        [fullScreenVideo loadAdData];
     }
     return _fullScreenVideo;
 }

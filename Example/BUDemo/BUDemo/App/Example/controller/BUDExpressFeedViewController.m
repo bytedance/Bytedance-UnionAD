@@ -172,7 +172,7 @@
 }
 
 - (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error {
-    
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
@@ -180,15 +180,19 @@
 }
 
 - (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
-
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)nativeExpressAdViewWillShow:(BUNativeExpressAdView *)nativeExpressAdView {
-    
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)nativeExpressAdViewDidClick:(BUNativeExpressAdView *)nativeExpressAdView {
-    
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)nativeExpressAdViewPlayerDidPlayFinish:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords {//【重要】需要在点击叉以后 在这个回调中移除视图，否则，会出现用户点击叉无效的情况
@@ -201,11 +205,11 @@
 }
 
 - (void)nativeExpressAdViewDidClosed:(BUNativeExpressAdView *)nativeExpressAdView {
-    
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)nativeExpressAdViewWillPresentScreen:(BUNativeExpressAdView *)nativeExpressAdView {
-    
+    BUD_Log(@"%s",__func__);
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource

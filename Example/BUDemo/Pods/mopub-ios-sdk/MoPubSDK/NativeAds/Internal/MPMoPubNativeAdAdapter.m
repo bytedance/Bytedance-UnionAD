@@ -1,7 +1,7 @@
 //
 //  MPMoPubNativeAdAdapter.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -28,6 +28,7 @@ static const CGFloat kMoPubRequiredViewVisibilityPercentage = 0.5;
 
 @implementation MPMoPubNativeAdAdapter
 
+// synthesize for `MPNativeAdAdapter` protocol
 @synthesize properties = _properties;
 @synthesize defaultActionURL = _defaultActionURL;
 

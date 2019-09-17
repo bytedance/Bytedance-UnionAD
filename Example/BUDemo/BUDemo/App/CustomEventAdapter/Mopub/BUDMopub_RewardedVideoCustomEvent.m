@@ -17,11 +17,11 @@
 
 @implementation BUDMopub_RewardedVideoCustomEvent
 
--(void)initializeSdkWithParameters:(NSDictionary *)parameters {
+- (void)initializeSdkWithParameters:(NSDictionary *)parameters {
 
 }
     
--(void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info {
+- (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info {
     
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = @"123";
@@ -32,15 +32,15 @@
     [RewardedVideoAd loadAdData];
 }
 
--(BOOL)hasAdAvailable {
+- (BOOL)hasAdAvailable {
     return self.rewardVideoAd.isAdValid;
 }
     
--(void)presentRewardedVideoFromViewController:(UIViewController *)viewController {
+- (void)presentRewardedVideoFromViewController:(UIViewController *)viewController {
     [self.rewardVideoAd showAdFromRootViewController:viewController ritScene:0 ritSceneDescribe:nil];
 }
 
--(BOOL)enableAutomaticImpressionAndClickTracking {
+- (BOOL)enableAutomaticImpressionAndClickTracking {
     return NO;
 }
 

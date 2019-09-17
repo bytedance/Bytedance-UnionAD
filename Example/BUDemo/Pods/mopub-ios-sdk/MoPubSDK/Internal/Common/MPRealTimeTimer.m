@@ -1,7 +1,7 @@
 //
 //  MPRealTimeTimer.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -68,8 +68,8 @@
     self.timer = [MPTimer timerWithTimeInterval:self.currentTimeInterval
                                          target:self
                                        selector:@selector(fire)
-                                        repeats:NO];
-    self.timer.runLoopMode = NSRunLoopCommonModes;
+                                        repeats:NO
+                                    runLoopMode:NSRunLoopCommonModes];
     [self.timer scheduleNow];
     if (!self.fireDate) {
         self.fireDate = [NSDate dateWithTimeIntervalSinceNow:self.currentTimeInterval];

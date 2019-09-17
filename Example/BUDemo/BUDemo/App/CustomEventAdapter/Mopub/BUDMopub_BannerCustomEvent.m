@@ -7,21 +7,23 @@
 //
 
 #import "BUDMopub_BannerCustomEvent.h"
-#import <BUAdSDK/BUBannerAdView.h>
+#import <BUAdSDK/BUNativeExpressBannerView.h>
+#import <BUAdSDK/BUSize.h>
 #import "BUDMacros.h"
 
-@interface BUDMopub_BannerCustomEvent ()<BUBannerAdViewDelegate>
-@property (strong, nonatomic)BUBannerAdView *bannerView;
+@interface BUDMopub_BannerCustomEvent ()<BUNativeExpressBannerViewDelegate>
+@property (strong, nonatomic)BUNativeExpressBannerView *bannerView;
 @end
 
 @implementation BUDMopub_BannerCustomEvent
 - (void)requestAdWithSize:(CGSize)size customEventInfo:(NSDictionary *)info {
     if (self.bannerView == nil) {
-        BUSize *size = [BUSize sizeBy:BUProposalSize_Banner600_150];
-        self.bannerView = [[BUBannerAdView alloc] initWithSlotID:@"900546859" size:size rootViewController:[UIViewController new]];
-        const CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
-
+        CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
         CGFloat bannerHeight = screenWidth * size.height / size.width;
+        BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Banner600_150];
+        
+        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:@"900546269" rootViewController:[UIApplication sharedApplication].delegate.window.rootViewController imgSize:imgSize adSize:CGSizeMake(screenWidth, bannerHeight) IsSupportDeepLink:YES];
+
         self.bannerView.frame = CGRectMake(0, 0, screenWidth, bannerHeight);
         self.bannerView.delegate = self;
     }
@@ -29,24 +31,32 @@
 }
 
 #pragma mark - BUBannerAdViewDelegate
-- (void)bannerAdViewDidLoad:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd {
-    [self.delegate bannerCustomEvent:self didLoadAd:self.bannerView];
+- (void)nativeExpressBannerAdViewDidLoad:(BUNativeExpressBannerView *)bannerAdView {
+    [self.delegate bannerCustomEvent:self didLoadAd:bannerAdView];
 }
 
-- (void)bannerAdViewDidBecomVisible:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd {
+- (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView didLoadFailWithError:(NSError *)error {
+    [self.delegate bannerCustomEvent:self didFailToLoadAdWithError:error];
+}
+
+- (void)nativeExpressBannerAdViewRenderSuccess:(BUNativeExpressBannerView *)bannerAdView {
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)nativeExpressBannerAdViewRenderFail:(BUNativeExpressBannerView *)bannerAdView error:(NSError *)error {
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)nativeExpressBannerAdViewWillBecomVisible:(BUNativeExpressBannerView *)bannerAdView {
     [self.delegate trackImpression];
 }
 
-- (void)bannerAdViewDidClick:(BUBannerAdView *)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)nativeAd {
+- (void)nativeExpressBannerAdViewDidClick:(BUNativeExpressBannerView *)bannerAdView {
     [self.delegate bannerCustomEventDidFinishAction:self];
     [self.delegate trackClick];
 }
 
-- (void)bannerAdView:(BUBannerAdView *)bannerAdView didLoadFailWithError:(NSError *_Nullable)error {
-    [self.delegate bannerCustomEvent:self didFailToLoadAdWithError:error];
-}
-
-- (void)bannerAdView:(BUBannerAdView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *_Nullable)filterwords {
+- (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterwords {
     BUD_Log(@"%s", __func__);
 }
 

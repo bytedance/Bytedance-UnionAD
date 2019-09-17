@@ -145,7 +145,7 @@ Detailed Steps:
 
 #### 1.2.2 Operating Environment Configuration
 
-+ Support iOS 8.X and above
++ Support iOS 9.X and above
 + SDK compiler environment Xcode 10.0
 + Support architecture: i386, x86-64, armv7, armv7s, arm64
 
@@ -161,6 +161,7 @@ order.
 -   WebKit.framework
 -   MediaPlayer.framework
 -   CoreMedia.framework
+- CoreLocation.framework
 -   AVFoundation.framework
 -   CoreTelephony.framework
 -   SystemConfiguration.framework
@@ -169,7 +170,7 @@ order.
 -   libresolv.9.tbd
 -   libc++.tbd
 -   libz.tbd Detailed Steps:
-
+-   Add the imageio. framework if the above dependency library is still reporting errors.
 ![image](http://sf1-ttcdn-tos.pstatp.com/img/union-platform/9729c0facdcba2a6aec2c23378e9eee7.png~0x0_q100.webp)
 
 #### 1.2.4 Add language configuration
@@ -1742,7 +1743,7 @@ Please refer to [Test
 Ads](https://developers.google.com/admob/ios/test-ads?hl=zh-CN#enable_test_devices)
 for ad tests.
 
-In order to avoid stepping on pit value, please note the following:
+Please note the following:
 
 -   **When configuring CustomEvent, the Class Name and the implemented
     Adapter class name must be the same. Otherwise, the adapter cannot
@@ -1763,8 +1764,8 @@ In order to avoid stepping on pit value, please note the following:
 #### 2.12.1 BUFullscreenVideoAd Interface
 
 **It is required to generate a new BUFullscreenVideoAd object each time
-calling the loadAdData method to request the latest rewarded video ad.
-Please do not reuse the local cache rewarded video ad.**
+calling the loadAdData method to request the latest full-screen video ad.
+Please do not reuse the local cache full-screen video ad.**
 
 ``` {.objective-c}
 @interface BUFullscreenVideoAd : NSObject
@@ -1966,7 +1967,7 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
     back to the previous page. A: It can't go back because your home
     page ViewController has hidden the NavigationBar.
 
-2.  Found a leak in TTRUIWebView class of the BUWebViewController class
+2.  Found a leak in BUUIWebView class of the BUWebViewController class
     in the TikTok SDK. A: It is a system problem. UIWebView has a
     consistent leak. We will consider replacing it with WKWebView.
 

@@ -1,7 +1,7 @@
 //
 //  MPMoPubRewardedPlayableCustomEvent.m
 //
-//  Copyright 2018 Twitter, Inc.
+//  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
@@ -9,6 +9,7 @@
 #import "MPMoPubRewardedPlayableCustomEvent.h"
 #import "MPMRAIDInterstitialViewController.h"
 #import "MPAdConfiguration.h"
+#import "MPError.h"
 #import "MPLogging.h"
 #import "MPRewardedVideoError.h"
 #import "MPCountdownTimerView.h"
@@ -73,7 +74,9 @@ const NSTimeInterval kDefaultCountdownTimerIntervalInSeconds = 30;
 @dynamic delegate;
 
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info {
-    MPLogInfo(@"Loading MoPub rewarded playable");
+    MPAdConfiguration * configuration = self.delegate.configuration;
+    MPLogAdEvent([MPLogEvent adLoadAttemptForAdapter:NSStringFromClass(configuration.customEventClass) dspCreativeId:configuration.dspCreativeId dspName:nil], self.adUnitId);
+
     self.interstitial.delegate = self;
 
     [self.interstitial setCloseButtonStyle:MPInterstitialCloseButtonStyleAlwaysHidden];
@@ -93,47 +96,82 @@ const NSTimeInterval kDefaultCountdownTimerIntervalInSeconds = 30;
 }
 
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController {
-    if (self.hasAdAvailable) {
-        // Add the countdown timer to the interstitial and start the timer.
-        self.timerView = [[MPCountdownTimerView alloc] initWithFrame:viewController.view.bounds duration:self.countdownDuration];
-        [self.interstitial.view addSubview:self.timerView];
+    MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], self.adUnitId);
 
-        __weak __typeof__(self) weakSelf = self;
-        [self.timerView startWithTimerCompletion:^(BOOL hasElapsed) {
-            [weakSelf rewardUserWithConfiguration:self.configuration timerHasElapsed:hasElapsed];
-            [weakSelf showCloseButton];
-        }];
+    // Error handling block.
+    __typeof__(self) __weak weakSelf = self;
+    void (^onShowError)(NSError *) = ^(NSError * error) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf != nil) {
+            MPLogAdEvent([MPLogEvent adShowFailedForAdapter:NSStringFromClass(strongSelf.class) error:error], strongSelf.adUnitId);
 
-        [self.interstitial presentInterstitialFromViewController:viewController];
+            [strongSelf.delegate rewardedVideoDidFailToPlayForCustomEvent:strongSelf error:error];
+            [strongSelf showCloseButton];
+        }
+    };
+
+    // No ad available to show.
+    if (!self.hasAdAvailable) {
+        NSError * error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorNoAdsAvailable userInfo:nil];
+        onShowError(error);
+        return;
     }
-    else {
-        MPLogInfo(@"Failed to show MoPub rewarded playable");
-        NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorNoAdsAvailable userInfo:nil];
-        [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
-        [self showCloseButton];
+
+    // Add the countdown timer to the interstitial and start the timer.
+    self.timerView = [[MPCountdownTimerView alloc] initWithDuration:self.countdownDuration timerCompletion:^(BOOL hasElapsed) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf != nil) {
+            [strongSelf rewardUserWithConfiguration:strongSelf.configuration timerHasElapsed:hasElapsed];
+            [strongSelf showCloseButton];
+        }
+    }];
+    [self.interstitial.view addSubview:self.timerView];
+
+    NSArray * constraints;
+    if (@available(iOS 11, *)) { // consider safe area
+        constraints = @[[self.timerView.topAnchor constraintEqualToAnchor:self.interstitial.view.safeAreaLayoutGuide.topAnchor],
+                        [self.timerView.rightAnchor constraintEqualToAnchor:self.interstitial.view.safeAreaLayoutGuide.rightAnchor]];
+    } else {
+        constraints = @[[self.timerView.topAnchor constraintEqualToAnchor:self.interstitial.view.topAnchor],
+                        [self.timerView.rightAnchor constraintEqualToAnchor:self.interstitial.view.rightAnchor]];
     }
+    [NSLayoutConstraint activateConstraints:constraints];
+    self.timerView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self.timerView start];
+
+    [self.interstitial presentInterstitialFromViewController:viewController complete:^(NSError * error) {
+        if (error != nil) {
+            onShowError(error);
+        }
+        else {
+            MPLogAdEvent([MPLogEvent adShowSuccessForAdapter:NSStringFromClass(self.class)], self.adUnitId);
+        }
+    }];
 }
 
 #pragma mark - MPInterstitialViewControllerDelegate
 
 - (void)interstitialDidLoadAd:(MPInterstitialViewController *)interstitial {
-    MPLogInfo(@"MoPub rewarded playable did load");
+    MPLogAdEvent([MPLogEvent adLoadSuccessForAdapter:NSStringFromClass(self.class)], self.adUnitId);
+
     self.adAvailable = YES;
     [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
 }
 
 - (void)interstitialDidAppear:(MPInterstitialViewController *)interstitial {
-    MPLogInfo(@"MoPub rewarded playable did appear");
     [self.delegate rewardedVideoDidAppearForCustomEvent:self];
 }
 
 - (void)interstitialWillAppear:(MPInterstitialViewController *)interstitial {
-    MPLogInfo(@"MoPub rewarded playable will appear");
     [self.delegate rewardedVideoWillAppearForCustomEvent:self];
 }
 
 - (void)interstitialDidFailToLoadAd:(MPInterstitialViewController *)interstitial {
-    MPLogInfo(@"MoPub rewarded playable failed to load");
+    NSString * message = [NSString stringWithFormat:@"Failed to load creative:\n%@", self.delegate.configuration.adResponseHTMLString];
+    NSError * error = [NSError errorWithCode:MOPUBErrorAdapterFailedToLoadAd localizedDescription:message];
+    MPLogAdEvent([MPLogEvent adLoadFailedForAdapter:NSStringFromClass(self.class) error:error], self.adUnitId);
+
     self.adAvailable = NO;
     [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:nil];
 }

@@ -43,7 +43,7 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MLeaksFinder (1.0.0):
     - FBRetainCycleDetector
-  - mopub-ios-sdk/Core (5.4.0)
+  - mopub-ios-sdk/Core (5.8.0)
 
 DEPENDENCIES:
   - AFNetworking/UIKit (~> 3.0)
@@ -56,7 +56,7 @@ DEPENDENCIES:
   - Masonry
   - MBProgressHUD
   - MLeaksFinder
-  - mopub-ios-sdk/Core (= 5.4.0)
+  - mopub-ios-sdk/Core (= 5.8.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -85,8 +85,8 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
-  mopub-ios-sdk: 6e331c6cf6052426a750568578f55dd3de0a67f1
+  mopub-ios-sdk: b63e15803e70b92d0b51c3e1c49bbcd78cd3d1d5
 
-PODFILE CHECKSUM: 225d5d4c6490365065937293e601e3512ce9d81f
+PODFILE CHECKSUM: 90dd6e7c1cd4215cba338026cb2a7223b25c8379
 
 COCOAPODS: 1.6.1

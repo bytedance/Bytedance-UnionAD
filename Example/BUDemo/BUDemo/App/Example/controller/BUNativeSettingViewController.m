@@ -107,6 +107,7 @@
             viewModel.slotID = strongSelf.textView.text;
         }
         vc.viewModel = viewModel;
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
         [strongSelf presentViewController:vc animated:YES completion:nil];
     }];
     

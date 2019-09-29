@@ -75,6 +75,7 @@
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
         viewModel.slotID = @"900546881";
         vc.viewModel = viewModel;
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
         [strongSelf presentViewController:vc animated:YES completion:nil];
     }];
     

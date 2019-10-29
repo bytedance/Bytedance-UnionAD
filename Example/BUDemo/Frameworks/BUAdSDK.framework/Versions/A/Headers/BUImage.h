@@ -20,5 +20,7 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dic;
 
+- (NSDictionary *)dictionaryValue;
+
 @end
 

@@ -50,6 +50,8 @@
 | v2.4.5.0 | 2019-08-20 | 【1】激励视频增加纯playable展示样式 |
 | v2.4.6.0 | 2019-09-04 | 【1】个性化模板广告支持视频样式（信息流、draw信息流、激励视频、全屏视频）【2】iOS13适配 【3】配合苹果商店要求，去掉UIWebView所有代码
 | v2.4.6.6 | 2019-09-25 | 【1】解决Xcode11个性化模板广告的107错误 【2】解决Xcode11模拟器运行问题 |
+| v2.4.5.0 | 2019-10-08 | 【1】激励视频、全屏视频下载类广告支持deeplink【2】个性化模板广告优化 【3】海外版本支持Coppa合规| 
+| v2.5.0.0 | 2019-10-10 | 【1】个性化模板广告加载逻辑优化 |
 
 <!-- TOC -->
 
@@ -69,6 +71,7 @@
         - [2.1 全局设置(BUAdSDKManager)](#21-全局设置buadsdkmanager)
             - [2.1.1 接口说明](#211-接口说明)
             - [2.1.2 使用](#212-使用)
+            - [2.1.3 跳转须知](#213-跳转须知)
         - [2.2 原生广告](#22-原生广告)
             - [2.2.1广告类(BUNativeAd)](#221广告类bunativead)
                 - [2.2.1.1 BUNativeAd接口说明](#2211-bunativead接口说明)
@@ -217,7 +220,7 @@ pod 'Bytedance-UnionAD', '~> 1.9.8.2'
 #### 1.2.2 运行环境配置
 
 + 支持系统 iOS 9.X 及以上;
-+ SDK编译环境 Xcode 10.2;
++ SDK编译环境 Xcode 10.0;
 + 支持架构：i386, x86-64, armv7, armv7s, arm64
 
 #### 1.2.3 添加依赖库
@@ -234,9 +237,11 @@ pod 'Bytedance-UnionAD', '~> 1.9.8.2'
 + SystemConfiguration.framework
 + AdSupport.framework
 + CoreMotion.framework
++ Accelerate.framework
 + libresolv.9.tbd
 + libc++.tbd
 + libz.tbd
++ libsqlite3.tbd
 
 + 如果以上依赖库增加完仍旧报错，请添加ImageIO.framework。
 
@@ -309,6 +314,10 @@ SDK 需要在 AppDelegate 的方法 ```- (BOOL)application:(UIApplication *)appl
 
 更多使用方式可以参见 SDK Demo 工程
 
+#### 2.1.3 跳转须知
+<font color=red>**广告接口中的所有rootViewController均为必传项，用来处理广告跳转。**
+**SDK里所有的跳转均采用present的方式，请确保传入的rootViewController不能为空且没有present其他的控制器，否则会出现presentedViewController已经存在而导致present失败。**</font>
+
 ### 2.2 原生广告
 + **类型说明：** 广告原生广告即一般广告样式，形式分为图文和视频，按场景又可区分为原生banner、原生插屏广告等。
 
@@ -353,7 +362,7 @@ The delegate can be set to any object which conforming to <BUNativeAdDelegate>.
 /**
 required.
 Root view controller for handling ad actions.
-Action method includes 'pushViewController' and 'presentViewController'.
+Action method includes is 'presentViewController'.
 */
 @property (nonatomic, weak, readwrite) UIViewController *rootViewController;
 

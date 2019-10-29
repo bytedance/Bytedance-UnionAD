@@ -31,6 +31,7 @@
 		78E073A721A2CFE2006D71EE /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073A621A2CFE1006D71EE /* libresolv.9.tbd */; };
 		78E073A921A2CFE9006D71EE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073A821A2CFE9006D71EE /* CoreMotion.framework */; };
 		78E073AB21A2CFF1006D71EE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073AA21A2CFF1006D71EE /* AdSupport.framework */; };
+		DE0223AF234F0C89002C9D26 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0223AE234F0C89002C9D26 /* Accelerate.framework */; };
 		DE4FA56622E5B755002D673D /* BUDToolsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4FA56522E5B755002D673D /* BUDToolsSettingViewController.m */; };
 		DE4FA56F22E5B8D3002D673D /* BUDPlayableToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4FA56E22E5B8D3002D673D /* BUDPlayableToolViewController.m */; };
 		DE697B00228BF90200C5B5C6 /* BUDExpressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE697AFF228BF90200C5B5C6 /* BUDExpressViewController.m */; };
@@ -149,6 +150,7 @@
 		78E073A621A2CFE1006D71EE /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		78E073A821A2CFE9006D71EE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		78E073AA21A2CFF1006D71EE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		DE0223AE234F0C89002C9D26 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		DE4FA56422E5B754002D673D /* BUDToolsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDToolsSettingViewController.h; sourceTree = "<group>"; };
 		DE4FA56522E5B755002D673D /* BUDToolsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDToolsSettingViewController.m; sourceTree = "<group>"; };
 		DE4FA56D22E5B8D3002D673D /* BUDPlayableToolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUDPlayableToolViewController.h; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE0223AF234F0C89002C9D26 /* Accelerate.framework in Frameworks */,
 				780D5E3D2223CB8D0051EF1B /* Photos.framework in Frameworks */,
 				78E073AB21A2CFF1006D71EE /* AdSupport.framework in Frameworks */,
 				78E073A921A2CFE9006D71EE /* CoreMotion.framework in Frameworks */,
@@ -359,6 +362,7 @@
 		A9BB8904F5E2E508722AB9C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE0223AE234F0C89002C9D26 /* Accelerate.framework */,
 				780D5E3C2223CB8D0051EF1B /* Photos.framework */,
 				DE700D5E21A3B4100054DBCB /* libPods-Demo-BUADDemo.a */,
 				DE84972521A2E2C7007007FA /* BUAdSDK.bundle */,
@@ -1044,7 +1048,6 @@
 			baseConfigurationReference = 12EFB7EDD6E2C6DC1D7875A1 /* Pods-Demo-BUADDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = XXHND5J98K;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1062,7 +1065,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.ADUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ADUnionInHouseDist;
+				PROVISIONING_PROFILE_SPECIFIER = ADUnionInHouseDevDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

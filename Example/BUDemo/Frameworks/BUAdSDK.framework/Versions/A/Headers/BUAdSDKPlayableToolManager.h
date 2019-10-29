@@ -15,6 +15,8 @@
 
 + (void)setDownloadUrl:(NSString *)url;
 
++ (void)setDeeplinkUrl:(NSString *)url;
+
 + (void)setIsLandScape:(BOOL)isLandScape;
 
 + (void)clearAll;

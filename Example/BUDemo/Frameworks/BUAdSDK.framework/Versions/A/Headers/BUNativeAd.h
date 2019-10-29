@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  required.
  Root view controller for handling ad actions.
- Action method includes 'pushViewController' and 'presentViewController'.
+ Action method includes is 'presentViewController'.
  */
 @property (nonatomic, weak, readwrite) UIViewController *rootViewController;
 

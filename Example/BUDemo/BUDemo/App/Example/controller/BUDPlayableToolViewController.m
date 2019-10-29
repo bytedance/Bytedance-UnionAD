@@ -17,11 +17,13 @@
 @interface BUDPlayableToolViewController ()<BURewardedVideoAdDelegate>
 @property (nonatomic, strong) UITextField *playableUrlTextView;
 @property (nonatomic, strong) UITextField *downloadUrlTextView;
+@property (nonatomic, strong) UITextField *deeplinkUrlTextView;
 @property (nonatomic, strong) UILabel *isLandscapeLabel;
 @property (nonatomic, strong) UISwitch *isLandscapeSwitch;
 @property (nonatomic, strong) BUDNormalButton *showButton;
 @property (nonatomic, assign) BOOL isPlayableUrlValid;
 @property (nonatomic, assign) BOOL isDownloadUrlValid;
+@property (nonatomic, assign) BOOL isDeeplinkUrlValid;
 @property (nonatomic, strong) BURewardedVideoAd *rewardedVideoAd;
 @end
 
@@ -31,6 +33,7 @@
     [super viewDidLoad];
     [self.view addSubview:self.playableUrlTextView];
     [self.view addSubview:self.downloadUrlTextView];
+    [self.view addSubview:self.deeplinkUrlTextView];
     [self.view addSubview:self.isLandscapeLabel];
     [self.view addSubview:self.isLandscapeSwitch];
     [self.view addSubview:self.showButton];
@@ -41,14 +44,16 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:self.playableUrlTextView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:self.downloadUrlTextView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:self.deeplinkUrlTextView];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    self.playableUrlTextView.frame = CGRectMake(20, 80, self.view.width - 40, 40);
+    self.playableUrlTextView.frame = CGRectMake(20, 20 + NavigationBarHeight, self.view.width - 40, 40);
     self.downloadUrlTextView.frame = CGRectMake(self.playableUrlTextView.left, self.playableUrlTextView.bottom+22, self.playableUrlTextView.width, self.playableUrlTextView.height);
-    self.isLandscapeLabel.frame = CGRectMake(self.playableUrlTextView.left, self.downloadUrlTextView.bottom+22, 100, 31);
-    self.isLandscapeSwitch.frame = CGRectMake(self.isLandscapeLabel.right + 50, self.downloadUrlTextView.bottom+22, 51, 31);
+    self.deeplinkUrlTextView.frame = CGRectMake(self.downloadUrlTextView.left, self.downloadUrlTextView.bottom+22, self.downloadUrlTextView.width, self.downloadUrlTextView.height);
+    self.isLandscapeLabel.frame = CGRectMake(self.deeplinkUrlTextView.left, self.deeplinkUrlTextView.bottom+22, 100, 31);
+    self.isLandscapeSwitch.frame = CGRectMake(self.isLandscapeLabel.right + 50, self.deeplinkUrlTextView.bottom+22, 51, 31);
     self.showButton.frame = CGRectMake(self.showButton.left, self.isLandscapeLabel.bottom + 40, self.showButton.width, self.showButton.height);
 }
 
@@ -79,6 +84,20 @@
         _downloadUrlTextView.placeholder = @"required：Please enter download URL.";
     }
     return _downloadUrlTextView;
+}
+
+- (UITextField *)deeplinkUrlTextView {
+    if (!_deeplinkUrlTextView) {
+        _deeplinkUrlTextView = [[UITextField alloc] init];
+        _deeplinkUrlTextView.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
+        _deeplinkUrlTextView.leftViewMode = UITextFieldViewModeAlways;
+        _deeplinkUrlTextView.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _deeplinkUrlTextView.layer.borderWidth = 0.5;
+        _deeplinkUrlTextView.layer.cornerRadius = 5;
+        _deeplinkUrlTextView.layer.borderColor = unValidColor.CGColor;
+        _deeplinkUrlTextView.placeholder = @"optional：Please enter deeplink URL.";
+    }
+    return _deeplinkUrlTextView;
 }
 
 - (UILabel *)isLandscapeLabel {
@@ -112,6 +131,7 @@
     if (_playableUrlTextView.text.length) {
         [BUAdSDKPlayableToolManager setPlayableURL:_playableUrlTextView.text];
         [BUAdSDKPlayableToolManager setDownloadUrl:_downloadUrlTextView.text];
+        [BUAdSDKPlayableToolManager setDeeplinkUrl:_deeplinkUrlTextView.text];
         [BUAdSDKPlayableToolManager setIsLandScape:_isLandscapeSwitch.on];
         [self.rewardedVideoAd loadAdData];
     } else {
@@ -124,13 +144,14 @@
 }
 
 #pragma mark touch
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
 - (void)textChange :(NSNotification*)notice {
     self.isPlayableUrlValid = self.playableUrlTextView.text.length;
     self.isDownloadUrlValid = self.downloadUrlTextView.text.length;
+    self.isDeeplinkUrlValid = self.deeplinkUrlTextView.text.length;
     self.showButton.isValid = self.isPlayableUrlValid && self.isDownloadUrlValid;
 }
 

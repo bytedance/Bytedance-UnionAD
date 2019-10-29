@@ -635,6 +635,11 @@ blockquote {
 <td>2019-09-25</td>
 <td>【1】解决Xcode11个性化模板广告的107错误 【2】解决Xcode11模拟器运行问题</td>
 </tr>
+<tr>
+<td>v2.4.5.0</td>
+<td>2019-10-08</td>
+<td>【1】激励视频、全屏视频下载类广告支持deeplink【2】个性化模板广告优化 【3】海外版本支持Coppa合规</td>
+</tr>
 </tbody>
 </table>
 <!-- TOC -->
@@ -667,6 +672,7 @@ blockquote {
 <ul>
 <li><a href="#211-%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E">2.1.1 接口说明</a></li>
 <li><a href="#212-%E4%BD%BF%E7%94%A8">2.1.2 使用</a></li>
+<li><a href="#213-%E8%B7%B3%E8%BD%AC%E9%A1%BB%E7%9F%A5">2.1.3 跳转须知</a></li>
 </ul>
 </li>
 <li><a href="#22-%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8A">2.2 原生广告</a>
@@ -865,7 +871,7 @@ blockquote {
 <h4 id="122-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">1.2.2 运行环境配置</h4>
 <ul>
 <li>支持系统 iOS 9.X 及以上;</li>
-<li>SDK编译环境 Xcode 10.2;</li>
+<li>SDK编译环境 Xcode 10.0;</li>
 <li>支持架构：i386, x86-64, armv7, armv7s, arm64</li>
 </ul>
 <h4 id="123-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96%E5%BA%93">1.2.3 添加依赖库</h4>
@@ -905,6 +911,9 @@ blockquote {
 <p>CoreMotion.framework</p>
 </li>
 <li>
+<p>Accelerate.framework</p>
+</li>
+<li>
 <p>libresolv.9.tbd</p>
 </li>
 <li>
@@ -912,6 +921,9 @@ blockquote {
 </li>
 <li>
 <p>libz.tbd</p>
+</li>
+<li>
+<p>libsqlite3.tbd</p>
 </li>
 <li>
 <p>如果以上依赖库增加完仍旧报错，请添加ImageIO.framework。</p>
@@ -966,6 +978,9 @@ Configure development mode.
 <pre class="hljs"><code><div>[BUAdSDKManager setAppID:@&quot;xxxxxx&quot;];
 </div></code></pre>
 <p>更多使用方式可以参见 SDK Demo 工程</p>
+<h4 id="213-%E8%B7%B3%E8%BD%AC%E9%A1%BB%E7%9F%A5">2.1.3 跳转须知</h4>
+<p><font color=red><strong>广告接口中的所有rootViewController均为必传项，用来处理广告跳转。</strong>
+<strong>SDK里所有的跳转均采用present的方式，请确保传入的rootViewController不能为空且没有present其他的控制器，否则会出现presentedViewController已经存在而导致present失败。</strong></font></p>
 <h3 id="22-%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8A">2.2 原生广告</h3>
 <ul>
 <li>
@@ -1008,7 +1023,7 @@ The delegate can be set to any object which conforming to &lt;BUNativeAdDelegate
 /**
 required.
 Root view controller for handling ad actions.
-Action method includes 'pushViewController' and 'presentViewController'.
+Action method includes is 'presentViewController'.
 */
 @property (nonatomic, weak, readwrite) UIViewController *rootViewController;
 

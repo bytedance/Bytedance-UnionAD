@@ -114,20 +114,15 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 }
 
 - (void)setupBUAdSDK {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [BUAdSDKManager setAppID:[BUDAdManager appKey]];
+    [BUAdSDKManager setAppID:[BUDAdManager appKey]];
 #if DEBUG
-            // Whether to open log. default is none.
-            [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
+    // Whether to open log. default is none.
+    [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
 #endif
-            [BUAdSDKManager setIsPaidApp:NO];
-            
-            // splash AD demo
-            [self addSplashAD];
-        });
-    });
+    [BUAdSDKManager setIsPaidApp:NO];
+    
+    // splash AD demo
+    [self addSplashAD];
 }
 
 - (void)addSplashAD {
@@ -156,6 +151,10 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
     BUD_Log(@"Total Runtime: %g s error=%@", endTime - self.startTime, error);
 }
 
+- (void)splashAdWillVisible:(BUSplashAdView *)splashAd {
+    CFTimeInterval endTime = CACurrentMediaTime();
+    BUD_Log(@"Total Showtime: %g s", endTime - self.startTime);
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

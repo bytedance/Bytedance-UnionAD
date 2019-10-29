@@ -30,6 +30,11 @@
 /// Set the age of the user.
 + (void)setUserAge:(NSUInteger)userAge;
 
+/* Set the COPPA of the user, COPPA is the short of Children's Online Privacy Protection Rule, the interface only works in the United States.
+ * @params Coppa 0 adult, 1 child
+ */
++ (void)setCoppa:(NSUInteger)Coppa;
+
 /// Set the user's keywords, such as interests and hobbies, etc.
 + (void)setUserKeywords:(NSString *)keywords;
 

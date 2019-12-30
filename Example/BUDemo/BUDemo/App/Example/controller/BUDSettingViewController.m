@@ -12,6 +12,7 @@
 #import <AdSupport/AdSupport.h>
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
+#import <BUAdSDK/BUAdSDKManager.h>
 
 #define LeftMargin 10
 #define RightMargin 10
@@ -28,6 +29,12 @@
 
 @property (nonatomic, strong) UIButton *idfaBtn;
 @property (nonatomic, strong) UITextField *idfaText;
+
+@property (nonatomic, strong) UIButton *noneBtn;
+@property (nonatomic, strong) UIButton *protocolBtn;
+@property (nonatomic, strong) UIButton *wkWebBtn;
+@property (nonatomic, strong) UITextField *statusText;
+
 @end
 
 @implementation BUDSettingViewController
@@ -46,6 +53,11 @@
     [self.view addSubview:self.locationText];
     [self.view addSubview:self.idfaBtn];
     [self.view addSubview:self.idfaText];
+    
+    [self.view addSubview:self.noneBtn];
+    [self.view addSubview:self.protocolBtn];
+    [self.view addSubview:self.wkWebBtn];
+    [self.view addSubview:self.statusText];
 }
 
 #pragma mark - Target
@@ -63,6 +75,21 @@
 
 - (void)setIDFA {
     self.idfaText.text = [NSString stringWithFormat:@"  %@",[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
+}
+
+- (void)setNone {
+    [BUAdSDKManager setOfflineType:BUOfflineTypeNone];
+    _statusText.text = @"None";
+}
+
+- (void)setProtocol {
+    [BUAdSDKManager setOfflineType:BUOfflineTypeProtocol];
+    _statusText.text = @"Protocol";
+}
+
+- (void)setWkWeb {
+    [BUAdSDKManager setOfflineType:BUOfflineTypeWebview];
+    _statusText.text = @"WKWebview";
 }
 
 #pragma mark - Private methed
@@ -131,6 +158,48 @@
         [self designLayer:[_idfaText layer]];
     }
     return _idfaText;
+}
+
+- (UIButton *)noneBtn {
+    if (!_noneBtn) {
+        _noneBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.idfaBtn.frame) + 10, 200, 30)];
+        [_noneBtn setTitle:@"Set None" forState:UIControlStateNormal];
+        [_noneBtn addTarget:self action:@selector(setNone) forControlEvents:UIControlEventTouchUpInside];
+        [self designButton:_noneBtn];
+    }
+    return _noneBtn;
+}
+
+- (UIButton *)protocolBtn {
+    if (!_protocolBtn) {
+        _protocolBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.noneBtn.frame) + 10, 200, 30)];
+        [_protocolBtn setTitle:@"Set NSProtocol" forState:UIControlStateNormal];
+        [_protocolBtn addTarget:self action:@selector(setProtocol) forControlEvents:UIControlEventTouchUpInside];
+        [self designButton:_protocolBtn];
+    }
+    return _protocolBtn;
+}
+
+- (UIButton *)wkWebBtn {
+    if (!_wkWebBtn) {
+        _wkWebBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.protocolBtn.frame) + 10, 200, 30)];
+        [_wkWebBtn setTitle:@"Set WKWebview" forState:UIControlStateNormal];
+        [_wkWebBtn addTarget:self action:@selector(setWkWeb) forControlEvents:UIControlEventTouchUpInside];
+        [self designButton:_wkWebBtn];
+    }
+    return _wkWebBtn;
+}
+
+- (UITextField *)statusText {
+    if (!_statusText) {
+        _statusText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.noneBtn.frame) + 10, CGRectGetMaxY(self.idfaBtn.frame) + 10, self.view.frame.size.width - CGRectGetMaxX(self.noneBtn.frame) - LeftMargin-RightMargin, 110)];
+        _statusText.center = CGPointMake(_statusText.center.x, self.protocolBtn.center.y);
+        _statusText.font = [UIFont systemFontOfSize:15];
+        _statusText.text = @"Hello World";
+        _statusText.textAlignment = NSTextAlignmentCenter;
+        [self designLayer:[_statusText layer]];
+     }
+     return _statusText;
 }
 
 - (void)designButton:(UIButton *)btn {

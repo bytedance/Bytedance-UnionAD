@@ -23,6 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (CGFloat)currentPlayTime;
 
+/**
+ Set video play when you support CustomMode
+ **/
+- (void)play;
+
+/**
+ Set video pause when you support CustomMode
+**/
+- (void)pause;
+
 @end
 
 @protocol BUVideoAdViewDelegate;
@@ -31,8 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BUVideoAdView : UIView<BUPlayerDelegate, BUVideoEngine>
 
 @property (nonatomic, weak, nullable) id<BUVideoAdViewDelegate> delegate;
-
-/// required. Root view controller for handling ad actions.
+/**
+required. Root view controller for handling ad actions.
+ **/
 @property (nonatomic, weak, readwrite) UIViewController *rootViewController;
 
 /**
@@ -44,6 +55,13 @@ NS_ASSUME_NONNULL_BEGIN
  material information.
  */
 @property (nonatomic, strong, readwrite, nullable) BUMaterialMeta *materialMeta;
+
+/**
+ Set your Video autoPlayMode when you support CustomMode
+ if support CustomMode , default autoplay Video
+ **/
+@property (nonatomic, assign) BOOL supportAutoPlay;
+
 
 - (instancetype)initWithMaterial:(BUMaterialMeta *)materialMeta;
 

@@ -83,6 +83,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id<BUNativeExpressFullscreenVideoAdDelegate> delegate;
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+
 /**
  Initializes video ad with slot id.
  @param slotID : the unique identifier of video ad.

@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign, readonly) BOOL isReady;
 
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+
 /*
  required.
  Root view controller for handling ad actions.

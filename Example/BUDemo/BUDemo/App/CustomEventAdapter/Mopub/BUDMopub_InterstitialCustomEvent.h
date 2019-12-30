@@ -6,7 +6,7 @@
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 
-#import "MPInterstitialCustomEvent.h"
+#import <mopub-ios-sdk/MPInterstitialCustomEvent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

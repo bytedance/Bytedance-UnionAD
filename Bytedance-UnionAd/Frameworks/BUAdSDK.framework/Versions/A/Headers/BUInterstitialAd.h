@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id<BUInterstitialAdDelegate> delegate;
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+
 /**
  Initializes interstitial ad.
  @param slotID : The unique identifier of interstitial ad.

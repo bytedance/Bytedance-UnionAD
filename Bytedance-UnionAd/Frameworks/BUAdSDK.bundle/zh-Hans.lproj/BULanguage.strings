@@ -18,6 +18,11 @@
 "Replay" = "点击重播";
 "Continue" = "继续播放";
 "Skip" = "跳过";
+"Feedback" = "反馈";
+"FeedbackStr1" = "感谢您的反馈！";
+"FeedbackStr2" = "我们将为您带来更优质的广告体验";
+"FeedbackStr3" = "您已提交过反馈!";
+"FeedbackStr4" = "请勿反复提交";
 "ViewNow" = "立即查看";
 "Download" = "立即下载";
 "LoadFailure" = "加载失败,点击重试";

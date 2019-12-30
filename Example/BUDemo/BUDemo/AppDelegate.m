@@ -10,7 +10,6 @@
 #import "BUDAdManager.h"
 #import <BUAdSDK/BUAdSDKManager.h>
 #import "BUAdSDK/BUSplashAdView.h"
-#import "BUDConfigHelper.h"
 #import "BUDSettingViewController.h"
 #import "BUDMainViewController.h"
 #import "BUDMainViewModel.h"
@@ -18,6 +17,7 @@
 #import "RRFPSBar.h"
 #import "MoPub.h"
 #import "BUDMacros.h"
+#import "BUDSlotID.h"
 #import <Bugly/Bugly.h>
 #import "BUAdSDKAdapterConfiguration.h"
 
@@ -27,8 +27,6 @@
 #else
 #define BUFPS_OPEN 0
 #endif
-
-static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 
 @interface AppDelegate () <BUSplashAdDelegate>
 @property (nonatomic, assign) CFTimeInterval startTime;
@@ -64,7 +62,6 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 }
 
 - (void)configDemo {
-    [[BUDConfigHelper sharedInstance] readingPreference];
     [self configFPS];
     [self configAPM];
 }
@@ -85,35 +82,38 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 }
 
 - (void)configCustomEvent {
-    
+    /**
+     admob和mopub各个代码位所对应的adapter请去admob和mopub的对应官网申请(demo的对应关系参见BUDSlotID类)。
+     demo只是给出一个接入参考，具体的使用请结合业务场景。
+     The adapter corresponding to each code bit of admob and mopub can be applied to the corresponding official website of admob and mopub (see BUDSlotID class for the corresponding relation of demo).
+     The demo only provides an access reference, please combine the specific use of the business scenario.
+     */
     // admob adaptor config
-    [GADMobileAds configureWithApplicationID:@"ca-app-pub-9206388280072239~5099042698"];
+    // add appKey in info.plist (key:GADApplicationIdentifier)
+    [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
     
-    if (@available(iOS 9, *)) { // @"MoPub ~> 5.8.0 SDK requires iOS 9 and up"
-        // mopub adaptor initialize
-        MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:MopubADUnitID];
-        
-        NSMutableDictionary *networkConfig = [NSMutableDictionary dictionaryWithCapacity:2];
-        NSDictionary *InitConfig = @{@"appKey": [BUDAdManager appKey], @"slotId": @"900546826"};
-        NSDictionary *config = @{@"BUAdSDKAdapterConfiguration":InitConfig};
-        [networkConfig addEntriesFromDictionary:config];
-        Class<MPAdapterConfiguration> BUAdSDKAdapterConfiguration = NSClassFromString(@"BUAdSDKAdapterConfiguration");
-        sdkConfig.additionalNetworks = @[BUAdSDKAdapterConfiguration];
-        sdkConfig.mediatedNetworkConfigurations = networkConfig;
-    #if DEBUG
-        sdkConfig.loggingLevel = MPBLogLevelInfo;
-    #endif
-        sdkConfig.globalMediationSettings = @[];
-
-        [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
-            BUD_Log(@"Mopub initializeSdk");
-        }];
-    } else {
-        // @"MoPub <= 5.4.0 SDK supports iOS 8"
-    }
+    // mopub adaptor config
+    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:mopub_AD_APPID];
+    
+    NSMutableDictionary *networkConfig = [NSMutableDictionary dictionaryWithCapacity:2];
+    NSDictionary *InitConfig = @{@"appKey": [BUDAdManager appKey]};
+    NSDictionary *config = @{@"BUAdSDKAdapterConfiguration":InitConfig};
+    [networkConfig addEntriesFromDictionary:config];
+    Class<MPAdapterConfiguration> BUAdSDKAdapterConfiguration = NSClassFromString(@"BUAdSDKAdapterConfiguration");
+    sdkConfig.additionalNetworks = @[BUAdSDKAdapterConfiguration];
+    sdkConfig.mediatedNetworkConfigurations = networkConfig;
+#if DEBUG
+    sdkConfig.loggingLevel = MPBLogLevelInfo;
+#endif
+    sdkConfig.globalMediationSettings = @[];
+    
+    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
+        BUD_Log(@"Mopub initializeSdk");
+    }];
 }
 
 - (void)setupBUAdSDK {
+    //BUAdSDK requires iOS 9 and up
     [BUAdSDKManager setAppID:[BUDAdManager appKey]];
 #if DEBUG
     // Whether to open log. default is none.
@@ -127,7 +127,7 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 
 - (void)addSplashAD {
     CGRect frame = [UIScreen mainScreen].bounds;
-    BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:@"800546808" frame:frame];
+    BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:normal_splash_ID frame:frame];
     // tolerateTimeout = CGFLOAT_MAX , The conversion time to milliseconds will be equal to 0
     splashView.tolerateTimeout = 10;
     splashView.delegate = self;
@@ -170,7 +170,6 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    [[BUDConfigHelper sharedInstance] readingPreference];
 }
 
 

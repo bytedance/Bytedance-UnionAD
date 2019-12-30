@@ -16,6 +16,7 @@
 #import "BUDRefreshButton.h"
 #import "BUDNormalButton.h"
 #import "NSString+LocalizedString.h"
+#import "BUDConfigModel.h"
 
 @interface BUDNativeViewController () <BUNativeAdDelegate,BUVideoAdViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 

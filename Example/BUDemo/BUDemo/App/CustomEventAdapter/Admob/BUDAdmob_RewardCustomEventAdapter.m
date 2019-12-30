@@ -7,15 +7,14 @@
 //
 
 #import "BUDAdmob_RewardCustomEventAdapter.h"
-#import "BUDAdmob_RewardCustomEventAdapterDelegate.h"
 #import <BUAdSDK/BURewardedVideoModel.h>
 #import <BUAdSDK/BURewardedVideoAd.h>
 #import "BUDMacros.h"
+#import "BUDSlotID.h"
 
-@interface BUDAdmob_RewardCustomEventAdapter ()
+@interface BUDAdmob_RewardCustomEventAdapter ()<BURewardedVideoAdDelegate>
 {
     __weak id<GADMRewardBasedVideoAdNetworkConnector> _rewardBasedVideoAdConnector;
-    BUDAdmob_RewardCustomEventAdapterDelegate *_adapterDelegate;
 }
 @property (nonatomic, strong) BURewardedVideoAd *rewardedVideoAd;
 
@@ -28,8 +27,6 @@
 }
 
 + (Class<GADAdNetworkExtras>)networkExtrasClass {
-    // OPTIONAL: Create your own class implementing GADAdNetworkExtras and return that class type
-    // here for your publishers to use. This class does not use extras.
     return Nil;
 }
 
@@ -41,48 +38,27 @@
     self = [super init];
     if (self) {
         _rewardBasedVideoAdConnector = connector;
-        _adapterDelegate = [[BUDAdmob_RewardCustomEventAdapterDelegate alloc] initWithRewardBasedVideoAdAdapter:self rewardBasedVideoAdconnector:_rewardBasedVideoAdConnector];
     }
     return self;
 }
 
-/// Tells the adapter to set up reward based video ads. When set up fails, the Sample SDK may try to
-/// set up the adapter again.
 - (void)setUp {
+    id<GADMRewardBasedVideoAdNetworkConnector> strongConnector = _rewardBasedVideoAdConnector;
+    [strongConnector adapterDidSetUpRewardBasedVideoAd:self];
+}
+
+- (void)requestRewardBasedVideoAd {
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = @"123";
-    ///配置slotId
-    self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:@"900546748" rewardedVideoModel:model];
-    self.rewardedVideoAd.delegate = _adapterDelegate;
+    self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:normal_reward_ID rewardedVideoModel:model];
+    self.rewardedVideoAd.delegate = self;
     [self.rewardedVideoAd loadAdData];
 }
 
-/// Tells the adapter to request a reward based video ad, if checkAdAvailability is true. Otherwise,
-/// the connector notifies the adapter that the reward based video ad failed to load.
-- (void)requestRewardBasedVideoAd {
-    id<GADMRewardBasedVideoAdNetworkConnector> strongConnector = _rewardBasedVideoAdConnector;
-    if ([_rewardedVideoAd isAdValid]) {
-        [strongConnector adapterDidReceiveRewardBasedVideoAd:self];
-    } else {
-        NSString *description = @"Failed to load ad.";
-        NSDictionary *userInfo =
-        @{NSLocalizedDescriptionKey : description, NSLocalizedFailureReasonErrorKey : description};
-        NSError *error =
-        [NSError errorWithDomain:@"com.google.mediation.toutiao" code:0 userInfo:userInfo];
-        [strongConnector adapter:self didFailToLoadRewardBasedVideoAdwithError:error];
-    }
-}
-
-/// Tells the adapter to present the reward based video ad with the provided view controller, if the
-/// ad is available. Otherwise, logs a message with the reason for failure.
 - (void)presentRewardBasedVideoAdWithRootViewController:(UIViewController *)viewController {
     if ([_rewardedVideoAd isAdValid]) {
-        // The reward based video ad is available, present the ad.
         [_rewardedVideoAd showAdFromRootViewController:viewController ritScene:0 ritSceneDescribe:nil];
     } else {
-        // Because publishers are expected to check that an ad is available before trying to show one,
-        // the above conditional should always hold true. If for any reason the adapter is not ready to
-        // present an ad, however, it should log an error with reason for failure.
         BUD_Log(@"No ads to show.");
     }
 }
@@ -90,4 +66,54 @@
 - (void)stopBeingDelegate {
     _rewardedVideoAd.delegate = nil;
 }
+
+#pragma mark BURewardedVideoAdDelegate
+- (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
+    [_rewardBasedVideoAdConnector adapterDidReceiveRewardBasedVideoAd:self];
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
+    [_rewardBasedVideoAdConnector adapter:self didFailToLoadRewardBasedVideoAdwithError:error];
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd {
+    [_rewardBasedVideoAdConnector adapterDidOpenRewardBasedVideoAd:self];
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
+    [_rewardBasedVideoAdConnector adapterDidCloseRewardBasedVideoAd:self];
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd {
+    [_rewardBasedVideoAdConnector adapterDidGetAdClick:self];
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
+    if (error) {
+    } else {
+        [_rewardBasedVideoAdConnector adapterDidCompletePlayingRewardBasedVideoAd:self];
+    }
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd {
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {
+    if (verify) {
+        [_rewardBasedVideoAdConnector adapter:self didRewardUserWithReward:nil];
+    }
+    BUD_Log(@"%s", __func__);
+}
+
 @end

@@ -53,8 +53,8 @@
     if (self.bannerView == nil) {
         CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
         CGFloat bannerHeigh = screenWidth/600*90;
-        BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Banner600_150];
-        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:self.viewModel.slotID rootViewController:self imgSize:imgSize adSize:CGSizeMake(screenWidth, bannerHeigh) IsSupportDeepLink:YES];
+#warning 升级的用户请注意，初始化方法去掉了imgSize参数
+        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:self.viewModel.slotID rootViewController:self adSize:CGSizeMake(screenWidth, bannerHeigh) IsSupportDeepLink:YES];
         self.bannerView.frame = CGRectMake(0, 10, screenWidth, bannerHeigh);
         self.bannerView.delegate = self;
         [self.view addSubview:self.bannerView];
@@ -66,8 +66,8 @@
     if (self.carouselBannerView == nil) {
         CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
         CGFloat bannerHeigh = screenWidth/600*90;
-        BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Banner600_150];
-        self.carouselBannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:self.viewModel.slotID rootViewController:self imgSize:imgSize adSize:CGSizeMake(screenWidth, bannerHeigh) IsSupportDeepLink:YES interval:30];
+#warning 升级的用户请注意，初始化方法去掉了imgSize参数
+        self.carouselBannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:self.viewModel.slotID rootViewController:self adSize:CGSizeMake(screenWidth, bannerHeigh) IsSupportDeepLink:YES interval:30];
         self.carouselBannerView.frame = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds)*0.5, screenWidth, bannerHeigh);
         self.carouselBannerView.delegate = self;
         [self.view addSubview:self.carouselBannerView];

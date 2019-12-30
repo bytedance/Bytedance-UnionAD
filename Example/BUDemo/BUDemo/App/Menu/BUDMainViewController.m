@@ -23,6 +23,7 @@
 #import "BUDExpressViewController.h"
 #import "BUDToolsSettingViewController.h"
 #import "BUDMacros.h"
+#import "BUDSlotID.h"
 #import <BUAdSDK/BUAdSDK.h>
 
 @interface BUDMainViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -62,10 +63,7 @@
     BUDActionModel *item4 = [BUDActionModel plainTitleActionModel:@"Banner" type:BUDCellType_normal action:^{
         BUDBannerViewController *vc = [BUDBannerViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *slotId =  [defaults objectForKey:@"banner_slot_id"];
-        viewModel.slotID = slotId;
-//        viewModel.slotID = @"900546859";  //downloading
+        viewModel.slotID = normal_banner_ID; 
         vc.viewModel = viewModel;
         [self.navigationController pushViewController:vc animated:YES];
     }];
@@ -73,10 +71,7 @@
     BUDActionModel *item6 = [BUDActionModel plainTitleActionModel:@"Interstitial" type:BUDCellType_normal action:^{
         BUDInterstitialViewController *vc = [BUDInterstitialViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *slotId =  [defaults objectForKey:@"interstitial_slot_id"];
-        viewModel.slotID = slotId;
-        viewModel.slotID = @"900546957";  //downloading
+        viewModel.slotID = normal_interstitial_ID;  
         vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
@@ -85,10 +80,7 @@
     BUDActionModel *item7 = [BUDActionModel plainTitleActionModel:@"Splash" type:BUDCellType_normal action:^{
         BUDSplashViewController *vc = [BUDSplashViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *slotId =  [defaults objectForKey:@"splash_slot_id"];
-        viewModel.slotID = slotId;
-//        viewModel.slotID = @"800546808";  //landing pages
+        viewModel.slotID = normal_splash_ID;
         vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
@@ -97,16 +89,35 @@
     BUDActionModel *fullscreenItem = [BUDActionModel plainTitleActionModel:@"FullScreen" type:BUDCellType_video action:^{
         BUDFullscreenViewController *vc = [BUDFullscreenViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546299";
+        viewModel.slotID = normal_fullscreen_ID;
         vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
+    BUDActionModel *fullscreenItem_landScape = [BUDActionModel plainTitleActionModel:@"FullScreen_landScape" type:BUDCellType_video action:^{
+        BUDFullscreenViewController *vc = [BUDFullscreenViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = normal_fullscreen_landscape_ID;
+        vc.viewModel = viewModel;
+        vc.view.backgroundColor = [UIColor whiteColor];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    
     BUDActionModel *item10 = [BUDActionModel plainTitleActionModel:@"RewardVideo" type:BUDCellType_video action:^{
         BUDRewardedVideoAdViewController *vc = [BUDRewardedVideoAdViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546826";
+        viewModel.slotID = normal_reward_ID;
+        vc.viewModel = viewModel;
+        vc.view.backgroundColor = [UIColor whiteColor];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    BUDActionModel *item11 = [BUDActionModel plainTitleActionModel:@"RewardVideo_landScape" type:BUDCellType_video action:^{
+        BUDRewardedVideoAdViewController *vc = [BUDRewardedVideoAdViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = normal_reward_landscape_ID;
         vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
@@ -124,7 +135,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.items = @[@[settingVC, nativeExpressModel], @[item4, item6, item7], @[fullscreenItem,item10], @[item12], @[item8]];
+    self.items = @[@[settingVC, nativeExpressModel], @[item4, item6, item7], @[fullscreenItem,fullscreenItem_landScape,item10,item11], @[item12], @[item8]];
     
     CGFloat height = 22 * self.items.count;
     for (NSArray *subItem in self.items) {

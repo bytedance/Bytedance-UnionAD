@@ -67,15 +67,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign, readonly) NSInteger interval;
 
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+
 - (instancetype)initWithSlotID:(NSString *)slotID
             rootViewController:(UIViewController *)rootViewController
-                       imgSize:(BUSize * __nullable )expectSize
                         adSize:(CGSize)adsize
              IsSupportDeepLink:(BOOL)isSupportDeepLink;
 
 - (instancetype)initWithSlotID:(NSString *)slotID
             rootViewController:(UIViewController *)rootViewController
-                       imgSize:(BUSize * __nullable )expectSize
                         adSize:(CGSize)adsize
              IsSupportDeepLink:(BOOL)isSupportDeepLink
                       interval:(NSInteger)interval;

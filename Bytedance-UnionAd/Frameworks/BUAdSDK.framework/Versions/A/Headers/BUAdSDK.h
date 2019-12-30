@@ -34,6 +34,7 @@
 #import <BUAdSDK/BUNativeExpressInterstitialAd.h>
 #import <BUAdSDK/BUNativeExpressRewardedVideoAd.h>
 #import <BUAdSDK/BUNativeExpressFullscreenVideoAd.h>
+#import <BUAdSDK/BUNativeExpressSplashView.h>
 
 /// banner ads
 #import <BUAdSDK/BUBannerAdView.h>

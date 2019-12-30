@@ -2,20 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Fabric</key>
-    <dict>
-        <key>APIKey</key>
-        <string>a6060e6ff4a260945c3a4d4d2aaba3740030cc0a</string>
-        <key>Kits</key>
-        <array>
-            <dict>
-                <key>KitInfo</key>
-                <dict/>
-                <key>KitName</key>
-                <string>Crashlytics</string>
-            </dict>
-        </array>
-    </dict>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-9206388280072239~5099042698</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -34,6 +22,20 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>a6060e6ff4a260945c3a4d4d2aaba3740030cc0a</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -43,14 +45,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>照相</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>始终允许</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>需要允许</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>美颜</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

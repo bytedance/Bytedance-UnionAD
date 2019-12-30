@@ -7,27 +7,23 @@
 //
 
 #import "BUDMopub_RewardedVideoCustomEvent.h"
-#import "BUDMopub_RewardVideoCustomEventDelegate.h"
 #import <BUAdSDK/BUAdSDK.h>
+#import <mopub-ios-sdk/MoPub.h>
+#import "BUDMacros.h"
+#import "BUDSlotID.h"
 
-@interface BUDMopub_RewardedVideoCustomEvent ()
+@interface BUDMopub_RewardedVideoCustomEvent ()<BURewardedVideoAdDelegate>
 @property (nonatomic, strong) BURewardedVideoAd *rewardVideoAd;
-@property (nonatomic, strong) BUDMopub_RewardVideoCustomEventDelegate *customEventDelegate;
 @end
 
 @implementation BUDMopub_RewardedVideoCustomEvent
 
-- (void)initializeSdkWithParameters:(NSDictionary *)parameters {
-
-}
-    
-- (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info {
-    
+- (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info adMarkup:(NSString *)adMarkup {
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = @"123";
     
-    BURewardedVideoAd *RewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:@"900546826" rewardedVideoModel:model];
-    RewardedVideoAd.delegate = self.customEventDelegate;
+    BURewardedVideoAd *RewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:normal_reward_ID rewardedVideoModel:model];
+    RewardedVideoAd.delegate = self;
     self.rewardVideoAd = RewardedVideoAd;
     [RewardedVideoAd loadAdData];
 }
@@ -37,18 +33,61 @@
 }
     
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController {
-    [self.rewardVideoAd showAdFromRootViewController:viewController ritScene:0 ritSceneDescribe:nil];
+    [self.rewardVideoAd showAdFromRootViewController:viewController];
 }
 
 - (BOOL)enableAutomaticImpressionAndClickTracking {
     return NO;
 }
 
-- (BUDMopub_RewardVideoCustomEventDelegate *)customEventDelegate {
-    if (!_customEventDelegate) {
-        _customEventDelegate = [[BUDMopub_RewardVideoCustomEventDelegate alloc] init];
-        _customEventDelegate.adapter = self;
-    }
-    return _customEventDelegate;
+#pragma mark BURewardedVideoAdDelegate
+- (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
+    [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+    BUD_Log(@"%s", __func__);
 }
+
+- (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
+    [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdDidVisible:(BURewardedVideoAd *)rewardedVideoAd {
+    [self.delegate rewardedVideoWillAppearForCustomEvent:self];
+    [self.delegate trackImpression];
+    [self.delegate rewardedVideoDidAppearForCustomEvent:self];
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
+    [self.delegate rewardedVideoDidDisappearForCustomEvent:self];
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd {
+    [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
+    [self.delegate trackClick];
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
+    [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {
+    if (verify) {
+        MPRewardedVideoReward *reward = [[MPRewardedVideoReward alloc] initWithCurrencyType:self.rewardVideoAd.rewardedVideoModel.rewardName amount:[NSNumber numberWithInteger:self.rewardVideoAd.rewardedVideoModel.rewardAmount]];
+        [self.delegate rewardedVideoShouldRewardUserForCustomEvent:self reward:reward];
+    }
+    BUD_Log(@"%s", __func__);
+}
+
+- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd {
+    BUD_Log(@"%s", __func__);
+}
+
 @end

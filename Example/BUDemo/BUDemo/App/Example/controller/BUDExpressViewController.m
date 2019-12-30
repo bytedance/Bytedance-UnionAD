@@ -10,17 +10,19 @@
 #import "BUDActionCellView.h"
 #import "BUDSlotViewModel.h"
 #import "BUDMacros.h"
+#import "BUDSlotID.h"
 #import "BUDExpressFeedViewController.h"
 #import "BUDExpressBannerViewController.h"
 #import "BUDExpressInterstitialViewController.h"
 #import "BUDExpressFullScreenVideoViewController.h"
 #import "BUDExpressRewardedVideoViewController.h"
 #import "BUDExpressDrawViewController.h"
+#import "BUDExpressSplashViewController.h"
 
 @interface BUDExpressViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray<BUDActionModel *> *items;
+@property (nonatomic, strong) NSArray<NSMutableArray *> *items;
 
 @end
 
@@ -49,31 +51,25 @@
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressFeedViewController *vc = [BUDExpressFeedViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *slotId =  [defaults objectForKey:@"native_express_slot_id"];
-        viewModel.slotID = slotId;
-//        viewModel.slotID = @"900546510";//支持视频播放
+        viewModel.slotID = express_feed_ID;
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *feedCellItem_video = [BUDActionModel plainTitleActionModel:@"Express Feed video" type:BUDCellType_native action:^{
+    BUDActionModel *feedCellItem_video = [BUDActionModel plainTitleActionModel:@"Express Feed video" type:BUDCellType_video action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressFeedViewController *vc = [BUDExpressFeedViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *slotId =  [defaults objectForKey:@"native_express_slot_id"];
-        viewModel.slotID = slotId;
-                viewModel.slotID = @"900546510";//支持视频播放
+        viewModel.slotID = express_feed_video_ID;
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *drawCellItem = [BUDActionModel plainTitleActionModel:@"Express Draw" type:BUDCellType_native action:^{
+    BUDActionModel *drawCellItem = [BUDActionModel plainTitleActionModel:@"Express Draw" type:BUDCellType_video action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressDrawViewController *vc = [BUDExpressDrawViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546881";
+        viewModel.slotID = express_draw_ID;
         vc.viewModel = viewModel;
         vc.modalPresentationStyle = UIModalPresentationFullScreen;
         [strongSelf presentViewController:vc animated:YES completion:nil];
@@ -83,7 +79,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressBannerViewController *vc = [BUDExpressBannerViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546269";
+        viewModel.slotID = express_banner_ID;
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
@@ -92,48 +88,57 @@
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressInterstitialViewController *vc = [BUDExpressInterstitialViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546270";
+        viewModel.slotID = express_interstitial_ID;
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *fullScreenCellItem = [BUDActionModel plainTitleActionModel:@"Express FullscreenVideo" type:BUDCellType_native action:^{
+    BUDActionModel *splashCell = [BUDActionModel plainTitleActionModel:@"Express Splash" type:BUDCellType_native action:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        BUDExpressSplashViewController *vc = [BUDExpressSplashViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = express_splash_ID;
+        vc.viewModel = viewModel;
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    BUDActionModel *fullScreenCellItem = [BUDActionModel plainTitleActionModel:@"Express FullscreenVideo" type:BUDCellType_video action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressFullScreenVideoViewController *vc = [BUDExpressFullScreenVideoViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546551";//竖屏
+        viewModel.slotID = express_fullscreen_ID;
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *fullScreenCellItem_landscape = [BUDActionModel plainTitleActionModel:@"Express FullscreenVideo _ Landscape" type:BUDCellType_native action:^{
+    BUDActionModel *fullScreenCellItem_landscape = [BUDActionModel plainTitleActionModel:@"Express FullscreenVideo _ Landscape" type:BUDCellType_video action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressFullScreenVideoViewController *vc = [BUDExpressFullScreenVideoViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546831";//横屏
+        viewModel.slotID = express_fullscreen_landscape_ID;
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *rewardCellItem = [BUDActionModel plainTitleActionModel:@"Express RewardedVideo" type:BUDCellType_native action:^{
+    BUDActionModel *rewardCellItem = [BUDActionModel plainTitleActionModel:@"Express RewardedVideo" type:BUDCellType_video action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressRewardedVideoViewController *vc = [BUDExpressRewardedVideoViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546566";//竖屏
+        viewModel.slotID = express_reward_ID;
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *rewardCellItem_landcape = [BUDActionModel plainTitleActionModel:@"Express RewardedVideo _ Landscape" type:BUDCellType_native action:^{
+    BUDActionModel *rewardCellItem_landcape = [BUDActionModel plainTitleActionModel:@"Express RewardedVideo _ Landscape" type:BUDCellType_video action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressRewardedVideoViewController *vc = [BUDExpressRewardedVideoViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546606";//横屏
+        viewModel.slotID = express_reward_landscape_ID;
         vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.items = @[feedCellItem,feedCellItem_video,drawCellItem,bannerCellItem,interCellItem,fullScreenCellItem,fullScreenCellItem_landscape,rewardCellItem,rewardCellItem_landcape].mutableCopy;
+    self.items = @[@[feedCellItem,feedCellItem_video],@[drawCellItem],@[bannerCellItem],@[interCellItem],@[splashCell],@[fullScreenCellItem,fullScreenCellItem_landscape,rewardCellItem,rewardCellItem_landcape]].mutableCopy;
     
 }
 
@@ -166,11 +171,17 @@
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSArray *sectionItems = self.items[section];
+    return sectionItems.count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    BUDActionModel *model = self.items[indexPath.row];
+    NSArray *sectionItems = self.items[indexPath.section];
+    BUDActionModel *model = sectionItems[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BUDActionCellView" forIndexPath:indexPath];
     if ([cell conformsToProtocol:@protocol(BUDActionCellConfig)]) {
         [(id<BUDActionCellConfig>)cell configWithModel:model];
@@ -192,7 +203,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
+    return 0.01;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

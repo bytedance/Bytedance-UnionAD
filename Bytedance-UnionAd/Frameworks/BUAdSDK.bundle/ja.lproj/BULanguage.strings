@@ -18,6 +18,11 @@
 "Replay" = "リプレイ";
 "Continue" = "再生し続ける";
 "Skip" = "skip";
+"Feedback" = "Feedback";
+"FeedbackStr1" = "Thank you for your feedback.";
+"FeedbackStr2" = "We will try to do better.";
+"FeedbackStr3" = "You have submitted feedback.";
+"FeedbackStr4" = "please don’t submit it again!";
 "ViewNow" = "詳細を見る";
 "Download" = "download";
 "LoadFailure" = "ロードに失敗しました。クリックして再度お試しください";

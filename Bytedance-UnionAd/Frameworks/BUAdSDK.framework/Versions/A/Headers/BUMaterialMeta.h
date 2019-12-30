@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, BUFeedADMode) {
 @property (nonatomic, assign) NSInteger videoDuration;
 
 /// media configuration parameters.
-@property (nonatomic, strong) NSDictionary *mediaExt;
+@property (nonatomic, copy) NSDictionary *mediaExt;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict error:(NSError * __autoreleasing *)error;
 

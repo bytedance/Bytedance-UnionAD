@@ -66,14 +66,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+
 /**
  Initializes interstitial ad.
  @param slotID : The unique identifier of interstitial ad.
- @param expectSize : custom size of image, default 600px * 400px.
  @param adsize : custom size of ad view.
  @return BUInterstitialAd
  */
-- (instancetype)initWithSlotID:(NSString *)slotID imgSize:(BUSize * __nullable )expectSize adSize:(CGSize)adsize;
+- (instancetype)initWithSlotID:(NSString *)slotID adSize:(CGSize)adsize;
 
 /**
  Load interstitial ad datas.

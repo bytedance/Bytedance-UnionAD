@@ -17,13 +17,16 @@
 #import "BUDNativeDislikeViewController.h"
 #import "BUDSettingTableView.h"
 #import "BUDMacros.h"
+#import "BUDSlotID.h"
 #import "BUDImagePortraitViewController.h"
+#import "BUDConfigModel.h"
 
 @interface BUNativeSettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) BUDSettingTableView *tableView;
 @property (nonatomic, strong) UITextField *textView;
 @property (nonatomic, strong) NSMutableArray<BUDActionModel *> *items;
+//@property (nonatomic, strong) UISwitch *switchBtn;
 
 @end
 
@@ -41,19 +44,18 @@
     [self buildItemsData];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:NO];
+}
+
 - (void)buildItemsData {
     __weak typeof(self) weakSelf = self;
     BUDActionModel *feedCellItem = [BUDActionModel plainTitleActionModel:@"native Feed" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDFeedViewController *vc = [BUDFeedViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *slotId =  [defaults objectForKey:@"feed_slot_id"];
-        viewModel.slotID = slotId;
-        viewModel.slotID = @"900546910";    //random
-//        viewModel.slotID = @"900546608";  // landing pages
-//        viewModel.slotID = @"900546311";  // downloading
-//        viewModel.slotID = @"900546238";  //landing pages
+        viewModel.slotID = native_feed_ID;
         if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
             viewModel.slotID = strongSelf.textView.text;
         }
@@ -65,8 +67,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         BUDNativeViewController *vc = [BUDNativeViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546910";    // video
-//        viewModel.slotID = @"900546238";    // landing pages
+        viewModel.slotID = native_feed_ID;
         if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
             viewModel.slotID = strongSelf.textView.text;
         }
@@ -78,7 +79,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         BUDNativeBannerViewController *vc = [BUDNativeBannerViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546687";
+        viewModel.slotID = native_banner_ID;
         if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
             viewModel.slotID = strongSelf.textView.text;
         }
@@ -90,7 +91,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         BUDNativeInterstitialViewController *vc = [BUDNativeInterstitialViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546829";
+        viewModel.slotID = native_interstitial_ID;
         if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
             viewModel.slotID = strongSelf.textView.text;
         }
@@ -102,7 +103,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         BUDDrawVideoViewController *vc = [BUDDrawVideoViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546588";
+        viewModel.slotID = native_draw_ID;
         if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
             viewModel.slotID = strongSelf.textView.text;
         }
@@ -115,7 +116,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         BUDNativeDislikeViewController *vc = [BUDNativeDislikeViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546687";
+        viewModel.slotID = native_banner_ID;
         if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
             viewModel.slotID = strongSelf.textView.text;
         }
@@ -127,7 +128,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         BUDImagePortraitViewController *vc = [BUDImagePortraitViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546264";
+        viewModel.slotID = native_imagePortrait_ID;
         if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
             viewModel.slotID = strongSelf.textView.text;
         }
@@ -142,11 +143,13 @@
 - (void)buildUpChildView {
     [self.view addSubview:self.textView];
     [self.view addSubview:self.tableView];
+//    [self.view addSubview:self.switchBtn];
     [self addAccessibilityIdentifier];
 }
 
 - (void)layoutFrame {
     self.textView.frame = CGRectMake(18, NavigationBarHeight, self.view.bounds.size.width, 50);
+//    self.switchBtn.frame = CGRectMake(18, CGRectGetMaxY(self.textView.frame), 0, 0);
     self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.textView.frame), self.view.bounds.size.width, self.view.bounds.size.height - CGRectGetMaxY(self.textView.frame));
 }
 
@@ -205,10 +208,14 @@
     return nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:NO];
-}
+//- (void)swChange:(UISwitch *)sw{
+//    if(sw.on == YES){
+//        NSLog(@"开关被打开");
+//    }else{
+//        NSLog(@"开关被关闭");
+//    }
+//    [BUDConfigModel sharedConfigModel].enableAutoPlay = sw.on;
+//}
 
 #pragma mark - getter
 - (UITableView *)tableView {
@@ -230,6 +237,16 @@
     }
     return _textView;
 }
+
+//- (UISwitch *)switchBtn {
+//    if (!_switchBtn) {
+//        _switchBtn = [[UISwitch alloc] init];
+//        [_switchBtn addTarget:self action:@selector(swChange:) forControlEvents:UIControlEventValueChanged];
+//        _switchBtn.on = YES;
+//        [BUDConfigModel sharedConfigModel].enableAutoPlay = _switchBtn.on;
+//    }
+//    return _switchBtn;
+//}
 
 #pragma mark addAccessibilityIdentifier
 - (void) addAccessibilityIdentifier {

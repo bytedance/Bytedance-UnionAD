@@ -1,1 +1,0 @@
-../../../mopub-ios-sdk/MoPubSDK/Internal/Interstitials/MPInterstitialCustomEventAdapter.h

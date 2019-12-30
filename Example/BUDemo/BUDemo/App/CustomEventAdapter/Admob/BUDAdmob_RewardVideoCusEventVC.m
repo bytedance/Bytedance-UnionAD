@@ -10,9 +10,15 @@
 #import <BUAdSDK/BURewardedVideoAd.h>
 #import <GoogleMobileAds/GADRewardBasedVideoAd.h>
 #import "BUDMacros.h"
+#import "BUDSlotID.h"
 #import "BUDNormalButton.h"
 #import "NSString+LocalizedString.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
+/*
+ The corresponding adapter class is shown in the corresponding table of the BUDSlotID class.
+ 对应的adapter类参见BUDSlotID类的对应表
+ */
 @interface BUDAdmob_RewardVideoCusEventVC ()<GADRewardBasedVideoAdDelegate>
 @property (nonatomic, strong) BUDNormalButton *button;
 @property (nonatomic, strong) GADRewardBasedVideoAd *rewardVideoAd;
@@ -23,16 +29,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setUpRewardVideo];
+    [self.view addSubview:self.button];
+    self.button.isValid = NO;
+    [self loadRewardVideo];
 }
 
-- (void)setUpRewardVideo {
-//    NSString *adUnitId = @"ca-app-pub-3940256099942544/1712485313"; //官测
-    NSString *adUnitId = @"ca-app-pub-9206388280072239/3592550520";
-
+- (void)loadRewardVideo {
     self.rewardVideoAd = [[GADRewardBasedVideoAd alloc] init];
     self.rewardVideoAd.delegate = self;
-    [self.rewardVideoAd loadRequest:[GADRequest request] withAdUnitID:adUnitId];
+    [self.rewardVideoAd loadRequest:[GADRequest request] withAdUnitID:admob_reward_UnitID];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -51,29 +56,24 @@
 }
 
 #pragma mark 事件处理
-
 - (void)buttonTapped:(id)sender {
     [self.rewardVideoAd presentFromRootViewController:self.navigationController];
+    self.button.isValid = NO;
 }
 
-# pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        BUD_Log(@"cancel");
-    } else if (buttonIndex == 1){
-        [self.view addSubview:self.button];
-    }
-    BUD_Log(@"%ld", (long)buttonIndex);
-}
-
+#pragma mark GADRewardBasedVideoAdDelegate
 - (void)rewardBasedVideoAd:(nonnull GADRewardBasedVideoAd *)rewardBasedVideoAd didRewardUserWithReward:(nonnull GADAdReward *)reward {
     BUD_Log(@"%s", __func__);
 }
 
 - (void)rewardBasedVideoAdDidReceiveAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.offset = CGPointMake(0, -100);
+    hud.label.text = @"reawrded data load success";
+    [hud hideAnimated:YES afterDelay:2];
+    self.button.isValid = YES;
     BUD_Log(@"%s", __func__);
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"load success" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"OK", nil];
-    [alertView show];
 }
 
 - (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd
@@ -81,57 +81,13 @@
     BUD_Log(@"%s", __func__);
 }
 
-- (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
+- (void)rewardBasedVideoAdDidOpen:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
     BUD_Log(@"%s", __func__);
-    
 }
 
-- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
+- (void)rewardBasedVideoAdDidClose:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
+    [self loadRewardVideo];
     BUD_Log(@"%s", __func__);
-    
 }
 
-- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-    BUD_Log(@"%s", __func__);
-    
-}
-
-- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
-    BUD_Log(@"%s", __func__);
-    return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-}
-
-- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-    BUD_Log(@"%s", __func__);
-    
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-    BUD_Log(@"%s", __func__);
-    
-}
-
-- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-    BUD_Log(@"%s", __func__);
-    
-}
-
-- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator  API_AVAILABLE(ios(9.0)){
-    BUD_Log(@"%s", __func__);
-    
-}
-
-- (void)setNeedsFocusUpdate {
-    BUD_Log(@"%s", __func__);
-    
-}
-
-- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context  API_AVAILABLE(ios(9.0)){
-    BUD_Log(@"%s", __func__);
-    return YES;
-}
-
-- (void)updateFocusIfNeeded {
-    BUD_Log(@"%s", __func__);
-}
 @end

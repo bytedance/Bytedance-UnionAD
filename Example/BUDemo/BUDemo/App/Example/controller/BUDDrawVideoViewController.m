@@ -35,6 +35,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.pagingEnabled = YES;
+    self.tableView.scrollsToTop = NO;
 #if defined(__IPHONE_11_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0
     if ([self.tableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
         if (@available(iOS 11.0, *)) {

@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+
 - (instancetype)initWithSlotID:(NSString *)slotID rewardedVideoModel:(BURewardedVideoModel *)model;
 - (void)loadAdData;
 

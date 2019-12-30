@@ -8,12 +8,9 @@
 
 #import "BUDCustomEventViewController.h"
 #import "BUDActionCellView.h"
-#import "BUDAdmob_RewardVideoCusEventVC.h"
-#import "BUDMopub_BannerViewController.h"
-#import "BUDMopub_FullScreenVideoCusEventVC.h"
-#import "BUDMopub_InterstitialViewController.h"
-#import "BUDMopub_RewardVideoCusEventVC.h"
 #import "BUDMacros.h"
+#import "BUDAdmobCustomEventViewController.h"
+#import "BUDMopubCustomEventViewController.h"
 
 @interface BUDCustomEventViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -44,43 +41,22 @@
 
 - (void)buildItemsData {
     __weak typeof(self) weakSelf = self;
-    BUDActionModel *Mopub_RewardVideo_Item = [BUDActionModel plainTitleActionModel:@"Mopub RewardVideo" type:BUDCellType_CustomEvent action:^{
+    BUDActionModel *admobItem = [BUDActionModel plainTitleActionModel:@"Admob" type:BUDCellType_CustomEvent action:^{
         __strong typeof(weakSelf) self = weakSelf;
-        BUDMopub_RewardVideoCusEventVC *vc = [BUDMopub_RewardVideoCusEventVC new];
+        BUDAdmobCustomEventViewController *vc = [BUDAdmobCustomEventViewController new];
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *Mopub_Banner_Item = [BUDActionModel plainTitleActionModel:@"Mopub Banner" type:BUDCellType_CustomEvent action:^{
+    BUDActionModel *mopubItem = [BUDActionModel plainTitleActionModel:@"Mopub" type:BUDCellType_CustomEvent action:^{
         __strong typeof(weakSelf) self = weakSelf;
-        BUDMopub_BannerViewController *vc = [BUDMopub_BannerViewController new];
+        BUDMopubCustomEventViewController *vc = [BUDMopubCustomEventViewController new];
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *Mopub_Interstitial_Item = [BUDActionModel plainTitleActionModel:@"Mopub Interstitial" type:BUDCellType_CustomEvent action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        BUDMopub_InterstitialViewController *vc = [BUDMopub_InterstitialViewController new];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    
-    BUDActionModel *Mopub_FullScreenVideo_Item = [BUDActionModel plainTitleActionModel:@"Mopub FullScreenVideo" type:BUDCellType_CustomEvent action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        BUDMopub_FullScreenVideoCusEventVC *vc = [BUDMopub_FullScreenVideoCusEventVC new];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    
-    BUDActionModel *Admob_RewardVideo_Item = [BUDActionModel plainTitleActionModel:@"Admob RewardVideo" type:BUDCellType_CustomEvent action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        BUDAdmob_RewardVideoCusEventVC *vc = [BUDAdmob_RewardVideoCusEventVC new];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    
-    self.items = @[@[Mopub_RewardVideo_Item, Mopub_Banner_Item, Mopub_Interstitial_Item, Mopub_FullScreenVideo_Item],
-                   @[Admob_RewardVideo_Item]];
+    self.items = @[
+                   @[admobItem],@[mopubItem]];
 }
 
 #pragma mark - UITableViewDataSource
@@ -113,19 +89,34 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 22;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.01;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return nil;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:NO];
 }
 
 #pragma mark - Orientations
--(BOOL)shouldAutorotate
-{
+-(BOOL)shouldAutorotate {
     return YES;
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll; 
 }
+
 @end

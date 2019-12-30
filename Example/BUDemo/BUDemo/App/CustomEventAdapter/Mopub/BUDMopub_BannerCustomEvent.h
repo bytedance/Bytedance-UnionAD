@@ -6,7 +6,7 @@
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-#import "MPBannerCustomEvent.h"
+#import <mopub-ios-sdk/MPBannerCustomEvent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

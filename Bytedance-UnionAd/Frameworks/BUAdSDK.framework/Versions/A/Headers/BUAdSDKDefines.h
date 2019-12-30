@@ -10,10 +10,10 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, BUUserGender) {
-    BUUserGenderUnknown,
-    BUUserGenderMan,
-    BUUserGenderWoman,
+typedef NS_ENUM(NSInteger, BUOfflineType) {
+    BUOfflineTypeNone,  // Do not set offline
+    BUOfflineTypeProtocol, // Offline dependence NSURLProtcol
+    BUOfflineTypeWebview, // Offline dependence WKWebview
 };
 
 typedef NS_ENUM(NSInteger, BUAdSDKLogLevel) {

@@ -28,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong, readonly, nonnull) UIButton *dislikeButton;
 
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+
 - (instancetype)initWithIdentifier:(NSString *)slotID
                 rootViewController:(UIViewController *)rootViewController
                             adSize:(CGSize)adSize

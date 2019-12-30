@@ -12,6 +12,7 @@
 #import "BUDFeedStyleHelper.h"
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
+#import "BUDConfigModel.h"
 
 static CGFloat const margin = 15;
 static CGSize const logoSize = {15, 15};

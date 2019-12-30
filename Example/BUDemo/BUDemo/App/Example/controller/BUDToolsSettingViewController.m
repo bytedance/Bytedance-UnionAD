@@ -13,6 +13,7 @@
 #import "BUDPlayableToolViewController.h"
 #import "BUDSlotViewModel.h"
 #import "BUDMacros.h"
+#import "BUDSlotID.h"
 
 @interface BUDToolsSettingViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) BUDSettingTableView *tableView;
@@ -60,7 +61,7 @@
     
     BUDActionModel *playableTools = [BUDActionModel plainTitleActionModel:@"Playable Tool" type:BUDCellType_setting action:^{
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = @"900546826";
+        viewModel.slotID = normal_reward_ID;
         BUDPlayableToolViewController *vc = [BUDPlayableToolViewController new];
         vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];

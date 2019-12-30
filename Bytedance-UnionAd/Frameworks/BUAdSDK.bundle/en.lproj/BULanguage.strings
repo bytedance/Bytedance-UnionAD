@@ -18,13 +18,18 @@
 "Replay" = "Click to replay";
 "Continue" = "Continue to play";
 "Skip" = "Skip";
+"Feedback" = "Feedback";
+"FeedbackStr1" = "Thank you for your feedback.";
+"FeedbackStr2" = "We will try to do better.";
+"FeedbackStr3" = "You have submitted feedback.";
+"FeedbackStr4" = "please don’t submit it again!";
 "ViewNow" = "View now";
 "Download" = "Download";
 "LoadFailure" = "Failed to load, and click to try again";
 "GetRewardAfterWatching" = "Get reward after watching the full video";
 "GiveUpReward" = "Give up reward";
 "ContinueWatching" = "Continue watching";
-"CanbeTurnedOffAfter" = "can be turned off after %ds";
+"CanbeTurnedOffAfter" = "Skip after %ds";
 "Get" = "Get";
 "View" = "View";
 // Icon

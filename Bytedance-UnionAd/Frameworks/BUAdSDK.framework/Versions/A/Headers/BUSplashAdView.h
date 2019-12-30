@@ -46,6 +46,8 @@ The unique identifier of splash ad.
  */
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
 
 /**
  Initializes splash ad with slot id and frame.

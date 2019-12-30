@@ -1,1 +1,0 @@
-../../../mopub-ios-sdk/MoPubSDK/NativeAds/Internal/MPNativeView.h

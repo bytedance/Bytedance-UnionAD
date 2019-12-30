@@ -97,6 +97,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) BURewardedVideoModel *rewardedVideoModel;
 @property (nonatomic, weak, nullable) id<BUNativeExpressRewardedVideoAdDelegate> delegate;
 
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+
 /**
  Whether material is effective.
  Setted to YES when data is not empty and has not been displayed.

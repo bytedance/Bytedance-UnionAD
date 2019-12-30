@@ -30,8 +30,8 @@
     [self.button setTitle:[NSString localizedStringForKey:ShowInterstitial] forState:UIControlStateNormal];
     [self.button addTarget:self action:@selector(buttonTapped:)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.button];
-    
-    self.interstitialAd = [[BUNativeExpressInterstitialAd alloc] initWithSlotID:self.viewModel.slotID imgSize:[BUSize sizeBy:BUProposalSize_Interstitial600_600] adSize:CGSizeMake(300, 450)];
+#warning 升级的用户请注意，初始化方法去掉了imgSize参数
+    self.interstitialAd = [[BUNativeExpressInterstitialAd alloc] initWithSlotID:self.viewModel.slotID adSize:CGSizeMake(300, 450)];
     self.interstitialAd.delegate = self;
     [self.interstitialAd loadAdData];
 }

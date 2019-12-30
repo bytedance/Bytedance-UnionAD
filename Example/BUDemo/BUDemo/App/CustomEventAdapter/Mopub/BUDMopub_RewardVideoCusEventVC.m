@@ -7,17 +7,19 @@
 //
 
 #import "BUDMopub_RewardVideoCusEventVC.h"
-#import <BUAdSDK/BURewardedVideoAd.h>
-#import "MPRewardedVideo.h"
-#import "BUDMopub_RewardedVideoCustomEvent.h"
+#import <mopub-ios-sdk/MPRewardedVideo.h>
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
+#import "BUDSlotID.h"
 #import "NSString+LocalizedString.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
-static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
-
+/*
+ The corresponding adapter class is shown in the corresponding table of the BUDSlotID class.
+ 对应的adapter类参见BUDSlotID类的对应表
+ */
 @interface BUDMopub_RewardVideoCusEventVC ()<MPRewardedVideoDelegate>
-@property (nonatomic, strong) UIButton *button;
+@property (nonatomic, strong) BUDNormalButton *button;
 @end
 
 @implementation BUDMopub_RewardVideoCusEventVC
@@ -25,12 +27,14 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.view addSubview:self.button];
+    self.button.isValid = NO;
     [self setUpRewardVideo];
 }
 
 - (void)setUpRewardVideo {    
-    [MPRewardedVideo setDelegate:self forAdUnitId:MopubADUnitID];
-    [MPRewardedVideo loadRewardedVideoAdWithAdUnitID:MopubADUnitID withMediationSettings:@[@"1",@"a"]];
+    [MPRewardedVideo setDelegate:self forAdUnitId:mopub_reward_UnitID];
+    [MPRewardedVideo loadRewardedVideoAdWithAdUnitID:mopub_reward_UnitID withMediationSettings:@[@"1",@"a"]];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -39,7 +43,7 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 }
 
 #pragma mark 延迟加载
-- (UIButton *)button {
+- (BUDNormalButton *)button {
     if (!_button) {
         CGSize size = [UIScreen mainScreen].bounds.size;
         _button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
@@ -49,50 +53,37 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
     return _button;
 }
 
-# pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        BUD_Log(@"cancel");
-    } else if (buttonIndex == 1){
-        [self.view addSubview:self.button];
-    }
-    BUD_Log(@"%ld", (long)buttonIndex);
-}
-
 #pragma mark 事件处理
 - (void)buttonTapped:(id)sender {
-    BOOL isvalid = [MPRewardedVideo hasAdAvailableForAdUnitID:MopubADUnitID];
+    BOOL isvalid = [MPRewardedVideo hasAdAvailableForAdUnitID:mopub_reward_UnitID];
     if (isvalid) {
-        [MPRewardedVideo presentRewardedVideoAdForAdUnitID:MopubADUnitID fromViewController:self withReward:nil];
+        [MPRewardedVideo presentRewardedVideoAdForAdUnitID:mopub_reward_UnitID fromViewController:self withReward:nil];
     }
+    self.button.isValid = NO;
 }
-
 
 #pragma mark - MPRewardedVideoDelegate
-
 - (void)rewardedVideoAdDidLoadForAdUnitID:(NSString *)adUnitID {
-    if ([adUnitID isEqualToString:MopubADUnitID]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"video load success" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-        [alertView show];
-    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.offset = CGPointMake(0, -100);
+    hud.label.text = @"reawrded data load success";
+    [hud hideAnimated:YES afterDelay:2];
+    self.button.isValid = YES;
     BUD_Log(@"%s", __func__);
 }
-
 
 - (void)rewardedVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID error:(NSError *)error {
     BUD_Log(@"%s", __func__);
 }
 
-
 - (void)rewardedVideoAdDidExpireForAdUnitID:(NSString *)adUnitID {
     BUD_Log(@"%s", __func__);
 }
 
-
 - (void)rewardedVideoAdDidFailToPlayForAdUnitID:(NSString *)adUnitID error:(NSError *)error {
     BUD_Log(@"%s", __func__);
 }
-
 
 - (void)rewardedVideoAdWillAppearForAdUnitID:(NSString *)adUnitID {
     BUD_Log(@"%s", __func__);
@@ -107,6 +98,7 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 }
 
 - (void)rewardedVideoAdDidDisappearForAdUnitID:(NSString *)adUnitID {
+    [self setUpRewardVideo];
     BUD_Log(@"%s", __func__);
 }
 
@@ -121,4 +113,5 @@ static NSString * const MopubADUnitID = @"e1cbce0838a142ec9bc2ee48123fd470";
 - (void)rewardedVideoAdShouldRewardForAdUnitID:(NSString *)adUnitID reward:(MPRewardedVideoReward *)reward {
     BUD_Log(@"%s", __func__);
 }
+
 @end

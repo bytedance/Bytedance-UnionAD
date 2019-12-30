@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Siwant. All rights reserved.
 //
 
-#import "MPRewardedVideoCustomEvent.h"
+#import <mopub-ios-sdk/MPRewardedVideoCustomEvent.h>
 
 @interface BUDMopub_RewardedVideoCustomEvent : MPRewardedVideoCustomEvent
 

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "BUDBaseExampleViewController.h"
 
-
 @interface BUDMopub_RewardVideoCusEventVC : BUDBaseExampleViewController
 
 @end

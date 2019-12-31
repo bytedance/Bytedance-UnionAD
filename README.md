@@ -1,5 +1,7 @@
 # Bytedance-UnionAD
 
+Pod for Bytedance-UnionAD only support x86_64, armv7, armv7s, arm64.
+
 ## How To Get Started
 
 + [Download Bytedance-UnionAD](https://github.com/bytedance/Bytedance-UnionAD/tree/master) and try out the included [example app](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Example)

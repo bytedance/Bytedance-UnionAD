@@ -28,4 +28,8 @@ Pod::Spec.new do |s|
   s.vendored_frameworks =  'Bytedance-UnionAd/Frameworks/BUAdSDK.framework'
   s.resource = 'Bytedance-UnionAd/Frameworks/BUAdSDK.bundle'
   # s.dependency 'AFNetworking', '~> 2.3'
+  valid_archs = ['armv7', 'armv7s', 'x86_64', 'arm64']
+  s.xcconfig = {
+    'VALID_ARCHS' =>  valid_archs.join(' '),
+  }
 end

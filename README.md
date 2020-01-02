@@ -1,6 +1,6 @@
 # Bytedance-UnionAD
 
-Pod for Bytedance-UnionAD only support x86_64, armv7, armv7s, arm64.
+Pod for Bytedance-UnionAD only support **x86_64, armv7, armv7s, arm64**.
 
 ## How To Get Started
 

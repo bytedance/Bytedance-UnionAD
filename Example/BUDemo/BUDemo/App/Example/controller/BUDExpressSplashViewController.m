@@ -2,7 +2,7 @@
 //  BUDExpressSplashViewController.m
 //  BUDemo
 //
-//  Created by cuiyanan on 2019/10/17.
+//  Created by Bytedance on 2019/10/17.
 //  Copyright © 2019 bytedance. All rights reserved.
 //
 
@@ -10,6 +10,7 @@
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
+#import "UIView+Draw.h"
 #import "NSString+LocalizedString.h"
 
 @interface BUDExpressSplashViewController ()<BUNativeExpressSplashViewDelegate>
@@ -17,8 +18,10 @@
 @property (nonatomic, strong) BUDNormalButton *button;
 @property (nonatomic, strong) BUDNormalButton *button1;
 
-@property (nonatomic, strong) UITextField *textFieldWidth;
-@property (nonatomic, strong) UITextField *textFieldHeight;
+@property (strong, nonatomic) UISlider *widthSlider;
+@property (strong, nonatomic) UISlider *heightSlider;
+@property (strong, nonatomic) UILabel *widthLabel;
+@property (strong, nonatomic) UILabel *heightLabel;
 @property (nonatomic, assign) CGRect splashFrame;
 @end
 
@@ -31,8 +34,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self buildView];
     
-    self.textFieldWidth.text = [NSString stringWithFormat:@"  %.0f",self.view.bounds.size.width];
-    self.textFieldHeight.text = [NSString stringWithFormat:@"  %.0f",self.view.bounds.size.height];
     self.splashFrame = self.view.bounds;
 }
 
@@ -48,27 +49,32 @@
 
 - (void)buildView {
     // 宽
-    UILabel *lableWidth = [[UILabel alloc] initWithFrame:CGRectMake(20, NavigationBarHeight + 20, 40, 30)];
-    lableWidth.text = [NSString localizedStringForKey:Width];
+    UILabel *lableWidth = [[UILabel alloc] initWithFrame:CGRectMake(20, NavigationBarHeight + 20, 60, 30)];
     lableWidth.textAlignment = NSTextAlignmentLeft;
     lableWidth.font = [UIFont systemFontOfSize:17];
     [self.view addSubview:lableWidth];
-    self.textFieldWidth = [[UITextField alloc] init];
-    self.textFieldWidth.frame = CGRectMake(CGRectGetMaxX(lableWidth.frame), NavigationBarHeight + 20, 100, 30);
-    [self.textFieldWidth.layer setBorderWidth:1.0];
-    [self.textFieldWidth.layer setBorderColor:[UIColor blackColor].CGColor];
-    [self.view addSubview:self.textFieldWidth];
+    self.widthLabel =lableWidth;
+    self.widthSlider = [[UISlider alloc] initWithFrame:CGRectMake(lableWidth.right+10, lableWidth.top, self.view.width-lableWidth.right-10-lableWidth.left, 31)];
+    self.widthSlider.maximumValue = CGRectGetWidth(self.view.frame);
+    self.widthSlider.tintColor = mainColor;
+    self.widthSlider.value = self.widthSlider.maximumValue;
+    [self.view addSubview:self.widthSlider];
     // 高
-    UILabel *lableHeight = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(lableWidth.frame) + 10, 80, 30)];
-    lableHeight.text = [NSString localizedStringForKey:Height];
+    UILabel *lableHeight = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(lableWidth.frame) + 10, 60, 30)];
     lableHeight.textAlignment = NSTextAlignmentLeft;
     lableHeight.font = [UIFont systemFontOfSize:17];
     [self.view addSubview:lableHeight];
-    self.textFieldHeight = [[UITextField alloc] init];
-    self.textFieldHeight.frame = CGRectMake(CGRectGetMaxX(lableWidth.frame), CGRectGetMinY(lableHeight.frame), 100, 30);
-    [self.textFieldHeight.layer setBorderWidth:1.0];
-    [self.textFieldHeight.layer setBorderColor:[UIColor blackColor].CGColor];
-    [self.view addSubview:self.textFieldHeight];
+    self.heightLabel = lableHeight;
+    self.heightSlider = [[UISlider alloc] initWithFrame:CGRectMake(self.widthSlider.left, lableHeight.top, self.widthSlider.width, 31)];
+    self.heightSlider.maximumValue = CGRectGetHeight(self.view.frame);
+    self.heightSlider.tintColor = mainColor;
+    self.heightSlider.value = self.heightSlider.maximumValue;
+    [self.view addSubview:self.heightSlider];
+    
+    lableWidth.text = [NSString localizedStringWithFormat:@"%@%.0f",[NSString localizedStringForKey:Width],self.widthSlider.value];
+    lableHeight.text = [NSString localizedStringWithFormat:@"%@%.0f",[NSString localizedStringForKey:Height],self.heightSlider.value];
+    [self.widthSlider addTarget:self action:@selector(sliderPositionWChanged) forControlEvents:UIControlEventValueChanged];
+    [self.heightSlider addTarget:self action:@selector(sliderPositionHChanged) forControlEvents:UIControlEventValueChanged];
     
     CGSize size = [UIScreen mainScreen].bounds.size;
     self.button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
@@ -84,10 +90,18 @@
     [self.view addSubview:self.button1];
 }
 
+- (void)sliderPositionWChanged {
+    self.widthLabel.text = [NSString localizedStringWithFormat:@"%@%.0f",[NSString localizedStringForKey:Width],self.widthSlider.value];
+}
+
+- (void)sliderPositionHChanged {
+    self.heightLabel.text = [NSString localizedStringWithFormat:@"%@%.0f",[NSString localizedStringForKey:Height],self.heightSlider.value];
+}
+
 - (void)buildupDefaultSplashView {
-    if (self.textFieldWidth.text.length && self.textFieldHeight.text.length) {
-        CGFloat width = [self.textFieldWidth.text doubleValue];
-        CGFloat height = [self.textFieldHeight.text doubleValue];
+    if (self.widthSlider.value && self.heightSlider.value) {
+        CGFloat width = self.widthSlider.value;
+        CGFloat height = self.heightSlider.value;
         self.splashFrame = CGRectMake(0, 0, width, height);
     }
     
@@ -99,8 +113,13 @@
 }
 
 - (void)buildupHideSkipButtonSplashView {
-    CGRect frame = self.navigationController.view.bounds;
-    self.splashView = [[BUNativeExpressSplashView alloc] initWithSlotID:self.viewModel.slotID adSize:frame.size rootViewController:self];
+    if (self.widthSlider.value && self.heightSlider.value) {
+        CGFloat width = self.widthSlider.value;
+        CGFloat height = self.heightSlider.value;
+        self.splashFrame = CGRectMake(0, 0, width, height);
+    }
+    
+    self.splashView = [[BUNativeExpressSplashView alloc] initWithSlotID:self.viewModel.slotID adSize:self.splashFrame.size rootViewController:self];
     self.splashView.hideSkipButton = YES;
     self.splashView.delegate = self;
     
@@ -108,8 +127,8 @@
     [custormSkipButton setTitle:[NSString localizedStringForKey:Skip] forState:UIControlStateNormal];
     [custormSkipButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     [custormSkipButton addTarget:self action:@selector(skipButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    CGFloat width = CGRectGetWidth(frame);
-    CGFloat height = CGRectGetHeight(frame);
+    CGFloat width = CGRectGetWidth(self.splashFrame);
+    CGFloat height = CGRectGetHeight(self.splashFrame);
     custormSkipButton.frame = CGRectMake(width - 56 - 12, height - 36 - 12, 56, 36);
     [self.splashView addSubview:custormSkipButton];
     
@@ -139,6 +158,7 @@
     [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
     [self.splashView removeFromSuperview];
     NSLog(@"%s",__func__);
+    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
 }
 
 - (void)nativeExpressSplashViewRenderSuccess:(nonnull BUNativeExpressSplashView *)splashAdView {

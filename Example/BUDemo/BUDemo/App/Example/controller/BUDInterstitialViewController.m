@@ -58,7 +58,8 @@
 
 
 - (void)interstitialAd:(BUInterstitialAd *)interstitialAd didFailWithError:(NSError *)error {
-     BUD_Log(@"interstitialAd data load fail");
+    BUD_Log(@"interstitialAd data load fail");
+    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
 }
 
 - (void)interstitialAdDidCloseOtherController:(BUInterstitialAd *)interstitialAd interactionType:(BUInteractionType)interactionType {

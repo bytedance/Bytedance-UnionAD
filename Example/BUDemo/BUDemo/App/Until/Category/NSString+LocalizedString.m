@@ -48,6 +48,15 @@ NSString * const DownloadLinks = @"downloadLinks";
 NSString * const URLLinks = @"URLLinks";
 NSString * const ShowPlayable = @"ShowPlayable";
 NSString * const IsLandScape = @"IsLandScape";
+NSString * const Vertical = @"Vertical";
+NSString * const Horizontal = @"Horizontal";
+NSString * const IsCarousel = @"Carousel";
+NSString * const TapButton = @"TapButton";
+NSString * const AdLoading = @"AdLoading";
+NSString * const AdLoaded = @"AdLoaded";
+NSString * const AdloadedFail = @"AdloadedFail";
+NSString * const LoadedAd = @"LoadedAd";
+NSString * const ShowAd = @"ShowAd";
 
 @implementation NSString (LocalizedString)
 

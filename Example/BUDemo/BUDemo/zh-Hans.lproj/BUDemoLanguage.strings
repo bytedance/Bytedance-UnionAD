@@ -45,4 +45,13 @@
 "URLLinks" = "URL跳转";
 "ShowPlayable" = "测试playable页面";
 "IsLandScape" = "是否横屏:";
+"Carousel" = "轮播:";
+"Vertical" = "竖屏";
+"Horizontal" = "横屏";
+"TapButton" = "点击左边按钮加载广告.";
+"AdLoading" = "加载中......";
+"AdLoaded" = "广告加载完成.";
+"AdloadedFail" = "广告加载失败.";
+"LoadedAd" = "加载广告";
+"ShowAd" = "展示广告";
 

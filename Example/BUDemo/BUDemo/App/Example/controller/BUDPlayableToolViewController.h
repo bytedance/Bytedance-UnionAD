@@ -2,7 +2,7 @@
 //  BUDPlayableToolViewController.h
 //  BUADDemo
 //
-//  Created by cuiyanan on 2019/7/22.
+//  Created by Bytedance on 2019/7/22.
 //  Copyright © 2019 Bytedance. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  BUDExpressSplashViewController.h
 //  BUDemo
 //
-//  Created by cuiyanan on 2019/10/17.
+//  Created by Bytedance on 2019/10/17.
 //  Copyright © 2019 bytedance. All rights reserved.
 //
 

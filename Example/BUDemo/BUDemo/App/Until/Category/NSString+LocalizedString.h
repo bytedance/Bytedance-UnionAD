@@ -48,6 +48,15 @@ extern NSString * const DownloadLinks;
 extern NSString * const URLLinks;
 extern NSString * const ShowPlayable;
 extern NSString * const IsLandScape;
+extern NSString * const IsCarousel;
+extern NSString * const Vertical;
+extern NSString * const Horizontal;
+extern NSString * const TapButton;
+extern NSString * const AdLoading;
+extern NSString * const AdLoaded;
+extern NSString * const AdloadedFail;
+extern NSString * const LoadedAd;
+extern NSString * const ShowAd;
 
 @interface NSString (LocalizedString)
 

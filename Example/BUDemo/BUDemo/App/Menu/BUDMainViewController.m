@@ -50,25 +50,22 @@
     Class plainActionCellClass = [BUDActionCellView class];
     [self.tableView registerClass:plainActionCellClass forCellReuseIdentifier:NSStringFromClass(plainActionCellClass)];
     
-    BUDActionModel *settingVC = [BUDActionModel plainTitleActionModel:@"Native" type:BUDCellType_native action:^{
+    BUDActionModel *settingVC = [BUDActionModel plainTitleActionModel:@"Native Ad" type:BUDCellType_native action:^{
         BUNativeSettingViewController *vc = [[BUNativeSettingViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *nativeExpressModel = [BUDActionModel plainTitleActionModel:@"NativeExpress" type:BUDCellType_native action:^{
+    BUDActionModel *nativeExpressModel = [BUDActionModel plainTitleActionModel:@"Express Ad" type:BUDCellType_native action:^{
         BUDExpressViewController *vc = [[BUDExpressViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *item4 = [BUDActionModel plainTitleActionModel:@"Banner" type:BUDCellType_normal action:^{
+    BUDActionModel *item4 = [BUDActionModel plainTitleActionModel:@"Normal Banner" type:BUDCellType_normal action:^{
         BUDBannerViewController *vc = [BUDBannerViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = normal_banner_ID; 
-        vc.viewModel = viewModel;
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *item6 = [BUDActionModel plainTitleActionModel:@"Interstitial" type:BUDCellType_normal action:^{
+    BUDActionModel *item6 = [BUDActionModel plainTitleActionModel:@"Normal Interstitial" type:BUDCellType_normal action:^{
         BUDInterstitialViewController *vc = [BUDInterstitialViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
         viewModel.slotID = normal_interstitial_ID;  
@@ -77,7 +74,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *item7 = [BUDActionModel plainTitleActionModel:@"Splash" type:BUDCellType_normal action:^{
+    BUDActionModel *item7 = [BUDActionModel plainTitleActionModel:@"Normal Splash" type:BUDCellType_normal action:^{
         BUDSplashViewController *vc = [BUDSplashViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
         viewModel.slotID = normal_splash_ID;
@@ -86,39 +83,14 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *fullscreenItem = [BUDActionModel plainTitleActionModel:@"FullScreen" type:BUDCellType_video action:^{
+    BUDActionModel *fullscreenItem = [BUDActionModel plainTitleActionModel:@"Normal FullScreenVideo" type:BUDCellType_video action:^{
         BUDFullscreenViewController *vc = [BUDFullscreenViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = normal_fullscreen_ID;
-        vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *fullscreenItem_landScape = [BUDActionModel plainTitleActionModel:@"FullScreen_landScape" type:BUDCellType_video action:^{
-        BUDFullscreenViewController *vc = [BUDFullscreenViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = normal_fullscreen_landscape_ID;
-        vc.viewModel = viewModel;
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    
-    
-    BUDActionModel *item10 = [BUDActionModel plainTitleActionModel:@"RewardVideo" type:BUDCellType_video action:^{
+    BUDActionModel *item10 = [BUDActionModel plainTitleActionModel:@"Normal RewardVideo" type:BUDCellType_video action:^{
         BUDRewardedVideoAdViewController *vc = [BUDRewardedVideoAdViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = normal_reward_ID;
-        vc.viewModel = viewModel;
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    
-    BUDActionModel *item11 = [BUDActionModel plainTitleActionModel:@"RewardVideo_landScape" type:BUDCellType_video action:^{
-        BUDRewardedVideoAdViewController *vc = [BUDRewardedVideoAdViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = normal_reward_landscape_ID;
-        vc.viewModel = viewModel;
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
@@ -135,7 +107,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.items = @[@[settingVC, nativeExpressModel], @[item4, item6, item7], @[fullscreenItem,fullscreenItem_landScape,item10,item11], @[item12], @[item8]];
+    self.items = @[@[settingVC, nativeExpressModel], @[item4, item6, item7], @[fullscreenItem,item10], @[item12], @[item8]];
     
     CGFloat height = 22 * self.items.count;
     for (NSArray *subItem in self.items) {

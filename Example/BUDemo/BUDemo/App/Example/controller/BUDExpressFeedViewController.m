@@ -10,19 +10,20 @@
 #import <BUAdSDK/BUNativeExpressAdManager.h>
 #import <BUAdSDK/BUNativeExpressAdView.h>
 #import "BUDMacros.h"
+#import "BUDNormalButton.h"
+#import "UIView+Draw.h"
+#import "NSString+LocalizedString.h"
 
 @interface BUDExpressFeedViewController () <BUNativeExpressAdViewDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray<__kindof BUNativeExpressAdView *> *expressAdViews;
 @property (strong, nonatomic) BUNativeExpressAdManager *nativeExpressAdManager;
-@property (strong, nonatomic) UILabel *adLabel;
-@property (strong, nonatomic) UITextField *placementIdTextField;
 @property (strong, nonatomic) UILabel *widthLabel;
 @property (strong, nonatomic) UISlider *widthSlider;
 @property (strong, nonatomic) UILabel *heightLabel;
 @property (strong, nonatomic) UISlider *heightSlider;
 @property (strong, nonatomic) UISlider *adCountSlider;
 @property (strong, nonatomic) UILabel *adCountLabel;
-@property (strong, nonatomic) UIButton *freshButton;
+@property (strong, nonatomic) BUDNormalButton *freshButton;
 @property (strong, nonatomic) UITableView *tableView;
 @end
 
@@ -42,57 +43,43 @@
     CGFloat y = 20 + NavigationBarHeight;
     const CGFloat spaceY = 10;
     
-    self.adLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, 60, 21)];
-    self.adLabel.textColor = [UIColor blackColor];
-    self.adLabel.font = [UIFont systemFontOfSize:15];
-    _adLabel.text = @"广告位";
-    [self.view addSubview:self.adLabel];
-    
-    self.placementIdTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, y, CGRectGetWidth(self.view.frame) - 110 - 20, 21)];
-    self.placementIdTextField.textColor = [UIColor blackColor];
-    [self.view addSubview:self.placementIdTextField];
-    self.placementIdTextField.text = @"900546662";
-    self.placementIdTextField.font = [UIFont systemFontOfSize:12];
-    self.placementIdTextField.borderStyle = UITextBorderStyleRoundedRect;
-    y += 21 + spaceY;
-    
     self.widthLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, 60, 21)];
-    self.widthLabel.textColor = [UIColor blackColor];
+    self.widthLabel.textColor = titleBGColor;
     self.widthLabel.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:self.widthLabel];
     
-    self.widthSlider = [[UISlider alloc] initWithFrame:CGRectMake(110, y-5, CGRectGetWidth(self.view.frame) - 110 - 20, 31)];
+    self.widthSlider = [[UISlider alloc] initWithFrame:CGRectMake(self.widthLabel.right+10, y-5, self.view.width-self.widthLabel.right-10-x, 31)];
     self.widthSlider.maximumValue = CGRectGetWidth(self.view.frame);
+    self.widthSlider.tintColor = mainColor;
     [self.view addSubview:self.widthSlider];
     y += 21 + spaceY;
 
     self.heightLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, 60, 21)];
     self.heightLabel.font = [UIFont systemFontOfSize:15];
-    self.heightLabel.textColor = [UIColor blackColor];
+    self.heightLabel.textColor = titleBGColor;
     [self.view addSubview:self.heightLabel];
     
-    self.heightSlider = [[UISlider alloc] initWithFrame:CGRectMake(110, y-5, CGRectGetWidth(self.view.frame) - 110 - 20, 31)];
+    self.heightSlider = [[UISlider alloc] initWithFrame:CGRectMake(self.widthSlider.left, y-5, self.widthSlider.width, 31)];
     self.heightSlider.maximumValue = CGRectGetHeight(self.view.frame);
+    self.heightSlider.tintColor = mainColor;
     [self.view addSubview:self.heightSlider];
     y += 21 + spaceY;
 
-    self.adCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, 80, 21)];
+    self.adCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, 60, 21)];
     self.adCountLabel.font = [UIFont systemFontOfSize:15];
-    self.adCountLabel.textColor = [UIColor blackColor];
+    self.adCountLabel.textColor = titleBGColor;
     [self.view addSubview:self.adCountLabel];
     
-    self.adCountSlider = [[UISlider alloc] initWithFrame:CGRectMake(110, y-5, CGRectGetWidth(self.view.frame) - 110 - 20, 31)];
-    self.adCountSlider.maximumValue = 10;
+    self.adCountSlider = [[UISlider alloc] initWithFrame:CGRectMake(self.widthSlider.left, y-5, self.widthSlider.width, 31)];
+    self.adCountSlider.maximumValue = 3;
     self.adCountSlider.minimumValue = 1;
+    self.adCountSlider.tintColor = mainColor;
     [self.view addSubview:self.adCountSlider];
     y += 21 + 2*spaceY;
 
-    self.freshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.freshButton.frame = CGRectMake(0, y, 70, 21);
-    self.freshButton.center = CGPointMake(CGRectGetWidth(self.view.frame)/2, self.freshButton.center.y);
-    [self.freshButton setTitle:@"拉取广告" forState:UIControlStateNormal];
-    self.freshButton.titleLabel.font = [UIFont systemFontOfSize:15];
-    [self.freshButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    self.freshButton = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, y, 0, 0)];
+    self.freshButton.showRefreshIncon = YES;
+    [self.freshButton setTitle:[NSString localizedStringForKey:LoadedAd] forState:UIControlStateNormal];
     [self.freshButton addTarget:self action:@selector(loadData) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.freshButton];
     
@@ -108,8 +95,8 @@
     self.heightSlider.value = 0;
     self.adCountSlider.value = 3;
     
-    self.widthLabel.text = [NSString stringWithFormat:@"宽：%@", @(self.widthSlider.value)];
-    self.heightLabel.text = [NSString stringWithFormat:@"高：%@", @(self.heightSlider.value)];
+    self.widthLabel.text = [NSString localizedStringWithFormat:@"%@%@", [NSString localizedStringForKey:Width], @(self.widthSlider.value)];
+    self.heightLabel.text = [NSString localizedStringWithFormat:@"%@%@", [NSString localizedStringForKey:Height], @(self.heightSlider.value)];
     self.adCountLabel.text = [NSString stringWithFormat:@"count:%@", @(self.adCountSlider.value)];
     
     [self.widthSlider addTarget:self action:@selector(sliderPositionWChanged) forControlEvents:UIControlEventValueChanged];
@@ -136,15 +123,16 @@
     }
     self.nativeExpressAdManager.adSize = CGSizeMake(self.widthSlider.value, self.heightSlider.value);
     self.nativeExpressAdManager.delegate = self;
-    [self.nativeExpressAdManager loadAd:(NSInteger)self.adCountSlider.value];
+    NSInteger count = (NSInteger)self.adCountSlider.value;
+    [self.nativeExpressAdManager loadAd:count];
 }
 
 - (void)sliderPositionWChanged {
-    self.widthLabel.text = [NSString stringWithFormat:@"宽：%.0f",self.widthSlider.value];
+    self.widthLabel.text = [NSString localizedStringWithFormat:@"%@%.0f", [NSString localizedStringForKey:Width], self.widthSlider.value];
 }
 
 - (void)sliderPositionHChanged {
-    self.heightLabel.text = [NSString stringWithFormat:@"高：%.0f",self.heightSlider.value];
+    self.heightLabel.text = [NSString localizedStringWithFormat:@"%@%.0f", [NSString localizedStringForKey:Height], self.heightSlider.value];
 }
 
 - (void)sliderPositionCountChanged {
@@ -173,6 +161,7 @@
 
 - (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error {
     BUD_Log(@"%s",__func__);
+    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
 }
 
 - (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {

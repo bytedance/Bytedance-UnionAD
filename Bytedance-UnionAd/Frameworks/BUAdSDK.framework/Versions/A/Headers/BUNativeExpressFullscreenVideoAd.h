@@ -8,6 +8,13 @@
 #import <UIKit/UIKit.h>
 @class BUNativeExpressFullscreenVideoAd;
 
+//define the type of native express video ad
+typedef NS_ENUM(NSUInteger, BUNativeExpressFullScreenAdType) {
+    BUNativeExpressFullScreenAdTypeEndcard              = 0,        // video + endcard
+    BUNativeExpressFullScreenAdTypeVideoPlayable        = 1,        // video + playable
+    BUNativeExpressFullScreenAdTypePurePlayable         = 2         // pure playable
+};
+
 NS_ASSUME_NONNULL_BEGIN
 @protocol BUNativeExpressFullscreenVideoAdDelegate <NSObject>
 
@@ -74,6 +81,11 @@ NS_ASSUME_NONNULL_BEGIN
  @param error : the reason of error
  */
 - (void)nativeExpressFullscreenVideoAdDidPlayFinish:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error;
+
+/**
+This method is used to get the type of nativeExpressFullScreenVideo ad
+ */
+- (void)nativeExpressFullscreenVideoAdCallback:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd withType:(BUNativeExpressFullScreenAdType) nativeExpressVideoAdType;
 
 @end
 

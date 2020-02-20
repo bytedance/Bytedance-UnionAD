@@ -12,7 +12,8 @@
 #define mainColor BUD_RGB(0xff, 0x63, 0x5c)
 #define unValidColor BUD_RGB(0xd7, 0xd7, 0xd7)
 #define titleBGColor BUD_RGB(73, 15, 15)
-#define BUD_RGB(a,b,c) [UIColor colorWithRed:(a/255.0) green:(b/255.0) blue:(c/255.0) alpha:1]
+#define selectedColor [UIColor colorWithRed:(73/255.0) green:(15/255.0) blue:(15/255.0) alpha:0.8]
+#define BUD_RGB(r,g,b) [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:1]
 /// iphone X、XR、XS、XS Max适配
 #ifndef BUDMINScreenSide
 #define BUDMINScreenSide                    MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)

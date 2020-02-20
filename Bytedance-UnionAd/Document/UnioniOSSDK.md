@@ -55,7 +55,8 @@
 | v2.7.0.0 | 2019-11-25 | 【1】开屏请求逻辑优化 【2】个性化模板广告支持开屏 【3】个性化模板banner和插屏简化接入参数（去掉imgSize） |
 | v2.7.5.0 | 2019-12-06 | 【1】个性化模板开屏点击回调修复 【2】playable新增加载完成、缓存回调 【3】个性化模板banner、插屏、激励、全屏适配adapter
 | v2.7.5.2 | 2019-12-25 |【1】修复偶现的模拟器运行问题 |
-
+| v2.8.0.0 | 2020-01-03 |【1】解决偶现的开机卡顿问题 【2】playable修复拦截导致WKWebview请求body丢失问题 【3】激励视频全屏适配 
+【4】增加完善错误提示码 |
 <!-- TOC -->
 
 - [头条联盟 iOS SDK 接入说明](#头条联盟-ios-sdk-接入说明)
@@ -1604,6 +1605,16 @@ This method is called when splash ad is about to close.
 */
 - (void)splashAdWillClose:(BUSplashAdView *)splashAd;
 
+/**
+This method is called when spalashAd skip button  is clicked.
+*/
+- (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd;
+
+/**
+This method is called when spalashAd countdown equals to zero
+*/
+- (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd;
+
 @end
 
 ```
@@ -1874,6 +1885,11 @@ Return value is not 2000.
 This method is called when the user clicked skip button.
 */
 - (void)rewardedVideoAdDidClickSkip:(BURewardedVideoAd *)rewardedVideoAd;
+
+/**
+this method is used to get type of rewarded video Ad
+*/
+- (void)rewardedVideoAdCallback:(BURewardedVideoAd *)rewardedVideoAd withType:(BURewardedVideoAdType)rewardedVideoAdType;
 @end
 ```
 
@@ -2085,6 +2101,11 @@ Return value is not 2000.
 */
 - (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
+/**
+this methods is to tell delegate the type of native express rewarded video Ad
+*/
+- (void)nativeExpressRewardedVideoAdCallback:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd withType:(BUNativeExpressRewardedVideoAdType)nativeExpressVideoType;
+
 @end
 ```
 
@@ -2203,6 +2224,11 @@ This method is called when video ad play completed or an error occurred.
 This method is called when the user clicked skip button.
 */
 - (void)fullscreenVideoAdDidClickSkip:(BUFullscreenVideoAd *)fullscreenVideoAd;
+
+/**
+this method is used to get the type of fullscreen video ad
+*/
+- (void)fullscreenVideoAdCallback:(BUFullscreenVideoAd *)fullscreenVideoAd withType:(BUFullScreenVideoAdType)fullscreenVideoAdType;
 
 @end
 ```
@@ -2347,6 +2373,11 @@ This method is called when video ad play completed or an error occurred.
 @param error : the reason of error
 */
 - (void)nativeExpressFullscreenVideoAdDidPlayFinish:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error;
+
+/**
+This method is used to get the type of nativeExpressFullScreenVideo ad
+*/
+- (void)nativeExpressFullscreenVideoAdCallback:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd withType:(BUNativeExpressFullScreenAdType) nativeExpressVideoAdType;
 
 @end
 

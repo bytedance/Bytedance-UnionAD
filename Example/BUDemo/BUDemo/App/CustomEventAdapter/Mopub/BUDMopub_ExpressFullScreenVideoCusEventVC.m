@@ -2,7 +2,7 @@
 //  BUDMopub_ExpressFullScreenVideoCusEventVC.m
 //  BUDemo
 //
-//  Created by cuiyanan on 2019/11/29.
+//  Created by Bytedance on 2019/11/29.
 //  Copyright © 2019 bytedance. All rights reserved.
 //
 

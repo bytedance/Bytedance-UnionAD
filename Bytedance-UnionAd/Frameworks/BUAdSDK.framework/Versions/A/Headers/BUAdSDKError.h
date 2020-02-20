@@ -63,6 +63,7 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
     BUUnionLowVersion           = 40024,    // The SDK version is too low to return ads
     BUErrorCodeAdPackageIncomplete  = 40025,// the SDK package is incomplete. It is recommended to verify the integrity of SDK package or contact technical support.
     BUUnionMedialCheckError     = 40026,    // Non-international account request for overseas delivery system
+    BUUnionSlotIDRenderMthodNoMatch = 40029,// The rendering method for slot ID does not match.
     
     BUErrorCodeSysError         = 50001     // ad server error
 };

@@ -51,7 +51,7 @@
 
 - (void)buildItemsData {
     __weak typeof(self) weakSelf = self;
-    BUDActionModel *feedCellItem = [BUDActionModel plainTitleActionModel:@"native Feed" type:BUDCellType_native action:^{
+    BUDActionModel *feedCellItem = [BUDActionModel plainTitleActionModel:@"Native Feed" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDFeedViewController *vc = [BUDFeedViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
@@ -99,7 +99,7 @@
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *drawfeedCellItem = [BUDActionModel plainTitleActionModel:@"native Draw Feed" type:BUDCellType_native action:^{
+    BUDActionModel *drawfeedCellItem = [BUDActionModel plainTitleActionModel:@"Native Draw Feed" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDDrawVideoViewController *vc = [BUDDrawVideoViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
@@ -124,7 +124,7 @@
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *imagePortraitCell = [BUDActionModel plainTitleActionModel:@"native ImagePortrait" type:BUDCellType_native action:^{
+    BUDActionModel *imagePortraitCell = [BUDActionModel plainTitleActionModel:@"Native ImagePortrait" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDImagePortraitViewController *vc = [BUDImagePortraitViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];

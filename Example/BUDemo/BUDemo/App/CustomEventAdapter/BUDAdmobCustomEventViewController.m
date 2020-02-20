@@ -2,7 +2,7 @@
 //  BUDAdmobCustomEventViewController.m
 //  BUDemo
 //
-//  Created by cuiyanan on 2019/11/26.
+//  Created by Bytedance on 2019/11/26.
 //  Copyright © 2019 bytedance. All rights reserved.
 //
 

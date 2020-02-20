@@ -27,9 +27,11 @@
 "Download" = "download";
 "LoadFailure" = "ロードに失敗しました。クリックして再度お試しください";
 "GetRewardAfterWatching" = "動画を最後まで視聴いただけるとリワードを付与されます";
-"GiveUpReward" = "リワード不要";
+"GiveUpReward" = "やらない";
 "ContinueWatching" = "視聴し続ける";
 "CanbeTurnedOffAfter" = "%ds後に閉じられます";
 "Get" = "Get";
 "View" = "View";
+"ContinuePlaying" = "つづける";
+"GetRewardAfterPlaying" = "遊んで報酬をゲット!";
 // Icon

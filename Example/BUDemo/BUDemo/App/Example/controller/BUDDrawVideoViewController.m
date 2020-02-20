@@ -79,23 +79,8 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self autoPlayVisibleVideo];
 }
 
-- (void)autoPlayVisibleVideo {
-    NSArray *cells = self.tableView.visibleCells;
-    BUDDrawBaseTableViewCell *cell =[cells objectAtIndex:0];
-    if ([cell isKindOfClass:[BUDDrawNormalTableViewCell class]]) {
-        NSInteger cellIndex = [(BUDDrawNormalTableViewCell *)cell videoId];
-        NSInteger lastCellIndex = [_lastCell isKindOfClass:[BUDDrawNormalTableViewCell class]]?[(BUDDrawNormalTableViewCell *)_lastCell videoId]:200;
-        if (cellIndex != lastCellIndex) {
-            [(BUDDrawNormalTableViewCell *)cell autoPlay];
-        }
-    }else if ([_lastCell isKindOfClass:[BUDDrawNormalTableViewCell class]]){
-        [(BUDDrawNormalTableViewCell *)_lastCell pause];
-    }
-    _lastCell = cell;
-}
 #pragma mark -- adsManager
 - (void)loadNativeAds {
     BUNativeAdsManager *nad = [BUNativeAdsManager new];
@@ -132,8 +117,8 @@
     hud.offset = CGPointMake(0, -100);
     hud.label.text = @"DrawVideo datas load faiule";
     [hud hideAnimated:YES afterDelay:1];
-    
     BUD_Log(@"DrawVideo datas load faiule");
+    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
 }
 
 #pragma mark --- BUVideoAdViewDelegate
@@ -185,11 +170,6 @@
     return [BUDDrawBaseTableViewCell cellHeight];
 }
 
-#pragma mark scrollviewDelegate
-
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self autoPlayVisibleVideo];
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

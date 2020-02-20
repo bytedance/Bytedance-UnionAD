@@ -9,118 +9,102 @@
 #import "BUDRewardedVideoAdViewController.h"
 #import <BUAdSDK/BURewardedVideoAd.h>
 #import <BUAdSDK/BURewardedVideoModel.h>
-#import <MBProgressHUD/MBProgressHUD.h>
 #import "BUDMacros.h"
-#import "BUDNormalButton.h"
+#import "BUDSlotID.h"
+#import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
 
 @interface BUDRewardedVideoAdViewController () <BURewardedVideoAdDelegate>
-
 @property (nonatomic, strong) BURewardedVideoAd *rewardedVideoAd;
-@property (nonatomic, strong) BUDNormalButton *button;
-
+@property (nonatomic, strong) BUDSelectedView *selectedView;
 @end
 
 @implementation BUDRewardedVideoAdViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-#warning Every time the data is requested, a new one BURewardedVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
-    BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
-    model.userId = @"123";
-    self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:self.viewModel.slotID rewardedVideoModel:model];
-    self.rewardedVideoAd.delegate = self;
-    [self.rewardedVideoAd loadAdData];
-    [self.view addSubview:self.button];
+    
+    BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":normal_reward_ID,@"title":[NSString localizedStringForKey:Vertical]}];
+    BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":normal_reward_landscape_ID,@"title":[NSString localizedStringForKey:Horizontal]}];
+    NSArray *titlesAndIDS = @[@[item1,item2]];
+    
+    __weak typeof(self) weakself = self;
+    self.selectedView = [[BUDSelectedView alloc] initWithAdName:@"RewardVideo" SelectedTitlesAndIDS:titlesAndIDS loadAdAction:^(NSString * _Nullable slotId) {
+        __strong typeof(self) strongself = weakself;
+        [strongself loadRewardVideoAdWithSlotID:slotId];
+    } showAdAction:^{
+        __strong typeof(self) strongself = weakself;
+        [strongself showRewardVideoAd];
+    }];
+    [self.view addSubview:self.selectedView];
+    self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    self.button.center = CGPointMake(self.view.center.x, self.view.center.y*1.5);
 }
 
-#pragma mark Lazy loading
-- (UIButton *)button {
-    if (!_button) {
-        CGSize size = [UIScreen mainScreen].bounds.size;
-        _button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
-        [_button setTitle:[NSString localizedStringForKey:ShowRewardVideo] forState:UIControlStateNormal];
-        [_button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+- (void)loadRewardVideoAdWithSlotID:(NSString *)slotID {
+#warning Every time the data is requested, a new one BURewardedVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
+    BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
+    model.userId = @"123";
+    self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:slotID rewardedVideoModel:model];
+    self.rewardedVideoAd.delegate = self;
+    [self.rewardedVideoAd loadAdData];
+    self.selectedView.promptStatus = BUDPromptStatusLoading;
+}
+
+- (void)showRewardVideoAd {
+    if (self.rewardedVideoAd) {
+        [self.rewardedVideoAd showAdFromRootViewController:self];
     }
-    return _button;
-}
-
-- (void)buttonTapped:(id)sender {
-    // Return YES when material is effective,data is not empty and has not been displayed.
-    //Repeated display is not charged.
-    [self.rewardedVideoAd showAdFromRootViewController:self.navigationController ritScene:BURitSceneType_home_get_bonus ritSceneDescribe:nil];
-//    [self.rewardedVideoAd showAdFromRootViewController:self.navigationController ritScene:BURitSceneType_custom ritSceneDescribe:@"scene_custom"];
+    self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
 
 #pragma mark BURewardedVideoAdDelegate
-
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"rewardedVideoAd data load success");
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"reawrded data load success";
-    [hud hideAnimated:YES afterDelay:0.1];
+    self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
+    BUD_Log(@"%st",__func__);
+    BUD_Log(@"mediaExt-%@",rewardedVideoAd.mediaExt);
 }
 
 - (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"rewardedVideoAd video load success");
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"reawrded video load success";
-    [hud hideAnimated:YES afterDelay:1];
-}
-
-- (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"rewardedVideoAd video will visible");
-}
-
-- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
-     BUD_Log(@"rewardedVideoAd video did close");
-}
-
-- (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"rewardedVideoAd video did click");
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
-    BUD_Log(@"rewardedVideoAd data load fail");
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"rewarded video material load fail";
-    [hud hideAnimated:YES afterDelay:1];
+    self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
+    BUD_Log(@"%s",__func__);
+    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+}
+
+- (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd {
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
+    self.selectedView.promptStatus = BUDPromptStatusDefault;
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd {
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
-    if (error) {
-        BUD_Log(@"rewardedVideoAd play error");
-    } else {
-        BUD_Log(@"rewardedVideoAd play finish");
-    }
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"rewardedVideoAd verify failed");
-    
-    BUD_Log(@"Demo RewardName == %@", rewardedVideoAd.rewardedVideoModel.rewardName);
-    BUD_Log(@"Demo RewardAmount == %ld", (long)rewardedVideoAd.rewardedVideoModel.rewardAmount);
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify{
-    BUD_Log(@"rewardedVideoAd verify succeed");
-    BUD_Log(@"verify result: %@", verify ? @"success" : @"fail");
-    
-    BUD_Log(@"Demo RewardName == %@", rewardedVideoAd.rewardedVideoModel.rewardName);
-    BUD_Log(@"Demo RewardAmount == %ld", (long)rewardedVideoAd.rewardedVideoModel.rewardAmount);
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)rewardedVideoAdClientRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd {
+    BUD_Log(@"%s",__func__);
 }
 
 -(BOOL)shouldAutorotate{

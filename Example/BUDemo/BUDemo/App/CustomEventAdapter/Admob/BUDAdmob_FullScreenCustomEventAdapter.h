@@ -2,7 +2,7 @@
 //  BUDAdmob_FullScreenCustomEventAdapter.h
 //  BUDemo
 //
-//  Created by cuiyanan on 2019/11/27.
+//  Created by Bytedance on 2019/11/27.
 //  Copyright © 2019 bytedance. All rights reserved.
 //
 

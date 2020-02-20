@@ -106,6 +106,16 @@ The unique identifier of splash ad.
  */
 - (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType;
 
+/**
+ This method is called when spalashAd skip button  is clicked.
+ */
+- (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd;
+
+/**
+ This method is called when spalashAd countdown equals to zero
+ */
+- (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd;
+
 @end
 
 NS_ASSUME_NONNULL_END

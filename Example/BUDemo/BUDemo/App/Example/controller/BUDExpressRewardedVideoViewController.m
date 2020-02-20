@@ -2,20 +2,20 @@
 //  BUDExpressRewardedVideoViewController.m
 //  BUDemo
 //
-//  Created by cuiyanan on 2019/7/29.
+//  Created by Bytedance on 2019/7/29.
 //  Copyright © 2019 bytedance. All rights reserved.
 //
 
 #import "BUDExpressRewardedVideoViewController.h"
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDMacros.h"
-#import "BUDNormalButton.h"
+#import "BUDSlotID.h"
+#import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
-#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface BUDExpressRewardedVideoViewController ()<BUNativeExpressRewardedVideoAdDelegate>
 @property (nonatomic, strong) BUNativeExpressRewardedVideoAd *rewardedAd;
-@property (nonatomic, strong) BUDNormalButton *button;
+@property (nonatomic, strong) BUDSelectedView *selectedView;
 @end
 
 @implementation BUDExpressRewardedVideoViewController
@@ -23,77 +23,68 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.button];
     
-    BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
-    model.userId = @"123";
-    self.rewardedAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:self.viewModel.slotID rewardedVideoModel:model];
-    self.rewardedAd.delegate = self;
-    [self.rewardedAd loadAdData];
-    //为保证播放流畅和展示流畅建议可在收到渲染成功和视频下载完成回调后再展示视频。
+    BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_reward_ID,@"title":[NSString localizedStringForKey:Vertical]}];
+    BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_reward_landscape_ID,@"title":[NSString localizedStringForKey:Horizontal]}];
+    NSArray *titlesAndIDS = @[@[item1,item2]];
+    
+    __weak typeof(self) weakself = self;
+    self.selectedView = [[BUDSelectedView alloc] initWithAdName:@"Express RewardVideo" SelectedTitlesAndIDS:titlesAndIDS loadAdAction:^(NSString * _Nullable slotId) {
+        __strong typeof(self) strongself = weakself;
+        [strongself loadRewardVideoAdWithSlotID:slotId];
+    } showAdAction:^{
+        __strong typeof(self) strongself = weakself;
+        [strongself showRewardVideoAd];
+    }];
+    [self.view addSubview:self.selectedView];
+    self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    self.button.center = CGPointMake(self.view.center.x, self.view.center.y*1.5);
 }
 
-#pragma mark Lazy loading
-- (UIButton *)button {
-    if (!_button) {
-        CGSize size = [UIScreen mainScreen].bounds.size;
-        _button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
-        [_button setTitle:[NSString localizedStringForKey:ShowRewardVideo] forState:UIControlStateNormal];
-        [_button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        _button.isValid = NO;
-    }
-    return _button;
+- (void)loadRewardVideoAdWithSlotID:(NSString *)slotID {
+    BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
+    model.userId = @"123";
+    self.rewardedAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:slotID rewardedVideoModel:model];
+    self.rewardedAd.delegate = self;
+    [self.rewardedAd loadAdData];
+    //为保证播放流畅和展示流畅建议可在收到渲染成功和视频下载完成回调后再展示视频。
+    self.selectedView.promptStatus = BUDPromptStatusLoading;
 }
 
-- (void)buttonTapped:(id)sender {
-    if (self.rewardedAd.isAdValid) {
-        [self.rewardedAd showAdFromRootViewController:self.navigationController];
-        self.button.isValid = NO;
+- (void)showRewardVideoAd {
+    if (self.rewardedAd) {
+        [self.rewardedAd showAdFromRootViewController:self];
     }
+    self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
+
 
 #pragma mark - BUNativeExpressRewardedVideoAdDelegate
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"material load success";
-    [hud hideAnimated:YES afterDelay:2];
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
     BUD_Log(@"%s",__func__);
-    self.button.isValid = NO;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"material or template plugin load fail";
-    [hud hideAnimated:YES afterDelay:2];
+    self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
+    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
 }
 
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.offset = CGPointMake(0, -200);
-    hud.label.text = @"video load success";
-    [hud hideAnimated:YES afterDelay:2];
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
-    self.button.isValid = YES;
+    self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
     BUD_Log(@"%s",__func__);
-    self.button.isValid = NO;
+    self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
 }
 
 - (void)nativeExpressRewardedVideoAdWillVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
@@ -110,7 +101,7 @@
 
 - (void)nativeExpressRewardedVideoAdDidClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
-    [self.rewardedAd loadAdData];
+    self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
 
 - (void)nativeExpressRewardedVideoAdDidClick:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {

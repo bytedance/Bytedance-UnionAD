@@ -44,3 +44,12 @@
 "URLLinks" = "URLリンク";
 "ShowPlayable" = "ShowPlayable";
 "IsLandScape" = "isLandScape";
+"Carousel" = "Carousel:";
+"Vertical" = "Vertical";
+"Horizontal" = "Horizontal";
+"TapButton" = "Tap left button to load Ad.";
+"AdLoading" = "Loading......";
+"AdLoaded" = "Ad loaded.";
+"AdloadedFail" = "Ad loaded fail.";
+"LoadedAd" = "load ad";
+"ShowAd" = "show ad";

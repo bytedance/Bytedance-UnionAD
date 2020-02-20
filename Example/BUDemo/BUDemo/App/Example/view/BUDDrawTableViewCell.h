@@ -23,8 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BUDDrawNormalTableViewCell : BUDDrawBaseTableViewCell<BUDDrawCellProtocol>
 @property (nonatomic, assign) NSInteger videoId;
 - (void)refreshUIAtIndex:(NSUInteger)index;
-- (void)autoPlay;
-- (void)pause;
 @end
 
 @interface BUDDrawAdTableViewCell : BUDDrawBaseTableViewCell<BUDDrawCellProtocol>

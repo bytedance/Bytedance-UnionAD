@@ -8,88 +8,83 @@
 
 #import "BUDFullscreenViewController.h"
 #import <BUAdSDK/BUFullscreenVideoAd.h>
-#import <MBProgressHUD/MBProgressHUD.h>
 #import "BUDMacros.h"
-#import "BUDNormalButton.h"
+#import "BUDSlotID.h"
+#import "NSString+LocalizedString.h"
+#import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
 
 @interface BUDFullscreenViewController () <BUFullscreenVideoAdDelegate>
-
 @property (nonatomic, strong) BUFullscreenVideoAd *fullscreenVideoAd;
-@property (nonatomic, strong) BUDNormalButton *button;
-
+@property (nonatomic, strong) BUDSelectedView *selectedView;
 @end
 
 @implementation BUDFullscreenViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-#warning----- Every time the data is requested, a new one BUFullscreenVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
-    self.fullscreenVideoAd = [[BUFullscreenVideoAd alloc] initWithSlotID:self.viewModel.slotID];
-    self.fullscreenVideoAd.delegate = self;
-    [self.fullscreenVideoAd loadAdData];
-    [self.view addSubview:self.button];
+    
+    BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":normal_fullscreen_ID,@"title":[NSString localizedStringForKey:Vertical]}];
+    BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":normal_fullscreen_landscape_ID,@"title":[NSString localizedStringForKey:Horizontal]}];
+    NSArray *titlesAndIDS = @[@[item1,item2]];
+    
+    __weak typeof(self) weakself = self;
+    self.selectedView = [[BUDSelectedView alloc] initWithAdName:@"FullScreenVideo Ad" SelectedTitlesAndIDS:titlesAndIDS loadAdAction:^(NSString * _Nullable slotId) {
+        __strong typeof(self) strongself = weakself;
+        [strongself loadFullscreenVideoAdWithSlotID:slotId];
+    } showAdAction:^{
+        __strong typeof(self) strongself = weakself;
+        [strongself showFullscreenVideoAd];
+    }];
+    [self.view addSubview:self.selectedView];
+    self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    self.button.center = CGPointMake(self.view.center.x, self.view.center.y*1.5);
 }
 
-#pragma mark Lazy loading
-- (UIButton *)button {
-    if (!_button) {
-        CGSize size = [UIScreen mainScreen].bounds.size;
-        _button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
-        [_button setTitle:[NSString localizedStringForKey:ShowFullScreenVideo] forState:UIControlStateNormal];
-        [_button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+- (void)loadFullscreenVideoAdWithSlotID:(NSString *)slotID {
+#warning----- Every time the data is requested, a new one BUFullscreenVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
+    self.fullscreenVideoAd = [[BUFullscreenVideoAd alloc] initWithSlotID:slotID];
+    self.fullscreenVideoAd.delegate = self;
+    [self.fullscreenVideoAd loadAdData];
+    self.selectedView.promptStatus = BUDPromptStatusLoading;
+}
+
+- (void)showFullscreenVideoAd {
+    if (self.fullscreenVideoAd) {
+        [self.fullscreenVideoAd showAdFromRootViewController:self];
     }
-    return _button;
-}
-
-- (void)buttonTapped:(id)sender {
-    /**Return YES when material is effective,data is not empty and has not been displayed.
-    Repeated display is not charged.
-     */
-    [self.fullscreenVideoAd showAdFromRootViewController:self.navigationController ritSceneDescribe:@"custom"];
+    self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
 
 #pragma mark BURewardedVideoAdDelegate
-
 - (void)fullscreenVideoMaterialMetaAdDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"fullscreenVideoAd data load success");
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"fullscreen data load success";
-    [hud hideAnimated:YES afterDelay:1];
-}
-
-- (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {
-    BUD_Log(@"fullscreenVideoAd data load fail");
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"fullscreen data load fail";
-    [hud hideAnimated:YES afterDelay:1];
+    self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"fullscreenVideoAd video load success");
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"fullscreen video load success";
-    [hud hideAnimated:YES afterDelay:1];
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {
+    self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
+    BUD_Log(@"%s",__func__);
+    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
 }
 
 - (void)fullscreenVideoAdDidClickSkip:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"fullscreenVideoAd click skip");
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)fullscreenVideoAdDidClick:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"fullscreenVideoAd did click");
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)fullscreenVideoAdDidClose:(BUFullscreenVideoAd *)fullscreenVideoAd {
+    BUD_Log(@"%s",__func__);
 }
 
 @end

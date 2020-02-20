@@ -46,6 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
  This method is called when nativeExpressSplashAdView's skip button is clicked.
  */
 - (void)nativeExpressSplashViewDidClickSkip:(BUNativeExpressSplashView *)splashAdView;
+/**
+ This method is called when nativeExpressSplashAdView countdown equals to zero
+ */
+- (void)nativeExpressSplashViewCountdownToZero:(BUNativeExpressSplashView *)splashAdView;
 
 /**
  This method is called when nativeExpressSplashAdView closed.

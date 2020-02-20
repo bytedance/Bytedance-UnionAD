@@ -2,7 +2,7 @@
 //  BUDSlotID.h
 //  BUDemo
 //
-//  Created by cuiyanan on 2019/11/27.
+//  Created by Bytedance on 2019/11/27.
 //  Copyright © 2019 bytedance. All rights reserved.
 //
 
@@ -28,7 +28,18 @@
 #define express_feed_video_ID             @"900546510"
 #define express_draw_ID                   @"900546881"
 #define express_banner_ID                 @"900546269"
+#define express_banner_ID_60090           @"900546269"
+#define express_banner_ID_640100          @"900546833"
+#define express_banner_ID_600150          @"900546198"
+#define express_banner_ID_690388          @"900546673"
+#define express_banner_ID_600260          @"900546387"
+#define express_banner_ID_600300          @"900546526"
+#define express_banner_ID_600400          @"900546672"
+#define express_banner_ID_600500          @"900546768"
 #define express_interstitial_ID           @"900546270"
+#define express_interstitial_ID_1_1       @"900546747"
+#define express_interstitial_ID_2_3       @"900546270"
+#define express_interstitial_ID_3_2       @"900546676"
 #define express_splash_ID                 @"800546851"
 #define express_fullscreen_ID             @"900546551"
 #define express_fullscreen_landscape_ID   @"900546831"

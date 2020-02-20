@@ -27,9 +27,11 @@
 "Download" = "Download";
 "LoadFailure" = "Failed to load, and click to try again";
 "GetRewardAfterWatching" = "Get reward after watching the full video";
-"GiveUpReward" = "Give up reward";
+"GiveUpReward" = "Abandon";
 "ContinueWatching" = "Continue watching";
 "CanbeTurnedOffAfter" = "Skip after %ds";
 "Get" = "Get";
 "View" = "View";
+"ContinuePlaying" = "Keep on";
+"GetRewardAfterPlaying" = "Finish playing to get rewards!";
 // Icon

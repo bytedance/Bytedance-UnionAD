@@ -100,7 +100,8 @@
 }
 
 - (void)nativeAdsManager:(BUNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error {
-    BUD_Log(@"DrawVideo datas load fail");
+    BUD_Log(@"feed datas load fail");
+    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
 }
 
 #pragma mark - tableView

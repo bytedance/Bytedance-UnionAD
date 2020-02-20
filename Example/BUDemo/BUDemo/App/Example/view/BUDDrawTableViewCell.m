@@ -7,7 +7,6 @@
 //
 
 #import "BUDDrawTableViewCell.h"
-#import "BUDPlayerController.h"
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 
@@ -104,7 +103,7 @@
 @end
 
 @interface BUDDrawNormalTableViewCell()
-@property (nonatomic, strong)BUDPlayerController *player;
+
 @end
 
 @implementation BUDDrawNormalTableViewCell
@@ -113,51 +112,21 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
 
--(void)autoPlay {
-    self.player = [self reuseInlinePlayer];
-    NSString *resourceName = [NSString stringWithFormat:@"drawLocal_0%u",arc4random()%8];
-    NSString *loacUrl = [[NSBundle mainBundle] pathForResource:resourceName ofType:@"mp4"];
-    _player.contentURL = [NSURL fileURLWithPath:loacUrl];
-    [_player play];
-}
-
-- (void)pause {
-    [_player pause];
-}
-
-- (void)setPlayer:(BUDPlayerController *)player {
-    _player = player;
-    if (_player) {
-        _player.view.frame = CGRectMake(0, 0, GlobleWidth, GlobleHeight);
-        [self.contentView insertSubview:_player.view atIndex:0];
-    }
-}
-
-- (BOOL)willDealloc {
-    return NO;
-}
-
-- (BUDPlayerController *)reuseInlinePlayer {
-    static BUDPlayerController* player = nil;
-    if (!player) {
-        player = [[BUDPlayerController alloc] init];
-    }else{
-        player.contentURL = nil;
-        [player.view removeFromSuperview];
-        [player pause];
-    }
-    return player;
-}
-
--(void)refreshUIAtIndex:(NSUInteger)index{
+-(void)refreshUIAtIndex:(NSUInteger)index {
     self.titleLabel.text = [NSString localizedStringWithFormat:[NSString localizedStringForKey:DrawTitle],(unsigned long)index];
     self.descriptionLabel.text = [NSString localizedStringForKey:DrawDescription];
-    self.backgroundColor = [UIColor blackColor];
+    UIColor *color1 = [UIColor grayColor];
+    UIColor *color2 = titleBGColor;
+    if (index%2) {
+        self.backgroundColor = color1;
+    } else {
+        self.backgroundColor = color2;
+    }
 }
 
 @end

@@ -2,7 +2,7 @@
 //  BUDExpressDrawViewController.m
 //  BUDemo
 //
-//  Created by cuiyanan on 2019/7/29.
+//  Created by Bytedance on 2019/7/29.
 //  Copyright © 2019 bytedance. All rights reserved.
 //
 
@@ -96,22 +96,6 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self autoPlayVisibleVideo];
-}
-
-- (void)autoPlayVisibleVideo {
-    NSArray *cells = self.tableView.visibleCells;
-    BUDDrawBaseTableViewCell *cell =[cells objectAtIndex:0];
-    if ([cell isKindOfClass:[BUDDrawNormalTableViewCell class]]) {
-        NSInteger cellIndex = [(BUDDrawNormalTableViewCell *)cell videoId];
-        NSInteger lastCellIndex = [_lastCell isKindOfClass:[BUDDrawNormalTableViewCell class]]?[(BUDDrawNormalTableViewCell *)_lastCell videoId]:200;
-        if (cellIndex != lastCellIndex) {
-            [(BUDDrawNormalTableViewCell *)cell autoPlay];
-        }
-    } else if ([_lastCell isKindOfClass:[BUDDrawNormalTableViewCell class]]){
-        [(BUDDrawNormalTableViewCell *)_lastCell pause];
-    }
-    _lastCell = cell;
 }
 
 #pragma mark - BUNativeExpressAdViewDelegate
@@ -132,6 +116,7 @@
 
 - (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error {
     BUD_Log(@"%s",__func__);
+    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
 }
 
 - (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
@@ -202,10 +187,5 @@
     return [BUDDrawBaseTableViewCell cellHeight];
 }
 
-#pragma mark scrollviewDelegate
-
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self autoPlayVisibleVideo];
-}
 
 @end

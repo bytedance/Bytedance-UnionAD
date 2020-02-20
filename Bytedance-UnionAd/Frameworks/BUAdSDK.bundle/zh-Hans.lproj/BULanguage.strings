@@ -32,4 +32,6 @@
 "CanbeTurnedOffAfter" = "%ds后可关闭";
 "Get" = "下载";
 "View" = "查看";
+"ContinuePlaying" = "继续试玩";
+"GetRewardAfterPlaying" = "试玩后才可领取奖励";
 // Icon

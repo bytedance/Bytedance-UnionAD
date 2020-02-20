@@ -47,7 +47,7 @@
 
 - (void)buildItemsData {
     __weak typeof(self) weakSelf = self;
-    BUDActionModel *feedCellItem = [BUDActionModel plainTitleActionModel:@"Express Feed" type:BUDCellType_native action:^{
+    BUDActionModel *feedCellItem = [BUDActionModel plainTitleActionModel:@"Express Feed Picture" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressFeedViewController *vc = [BUDExpressFeedViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
@@ -56,7 +56,7 @@
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *feedCellItem_video = [BUDActionModel plainTitleActionModel:@"Express Feed video" type:BUDCellType_video action:^{
+    BUDActionModel *feedCellItem_video = [BUDActionModel plainTitleActionModel:@"Express Feed Video" type:BUDCellType_video action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressFeedViewController *vc = [BUDExpressFeedViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
@@ -78,18 +78,12 @@
     BUDActionModel *bannerCellItem = [BUDActionModel plainTitleActionModel:@"Express Banner" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressBannerViewController *vc = [BUDExpressBannerViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = express_banner_ID;
-        vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
     BUDActionModel *interCellItem = [BUDActionModel plainTitleActionModel:@"Express Interstitial" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressInterstitialViewController *vc = [BUDExpressInterstitialViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = express_interstitial_ID;
-        vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
@@ -105,40 +99,16 @@
     BUDActionModel *fullScreenCellItem = [BUDActionModel plainTitleActionModel:@"Express FullscreenVideo" type:BUDCellType_video action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressFullScreenVideoViewController *vc = [BUDExpressFullScreenVideoViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = express_fullscreen_ID;
-        vc.viewModel = viewModel;
-        [strongSelf.navigationController pushViewController:vc animated:YES];
-    }];
-    
-    BUDActionModel *fullScreenCellItem_landscape = [BUDActionModel plainTitleActionModel:@"Express FullscreenVideo _ Landscape" type:BUDCellType_video action:^{
-        __strong typeof(self) strongSelf = weakSelf;
-        BUDExpressFullScreenVideoViewController *vc = [BUDExpressFullScreenVideoViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = express_fullscreen_landscape_ID;
-        vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
     BUDActionModel *rewardCellItem = [BUDActionModel plainTitleActionModel:@"Express RewardedVideo" type:BUDCellType_video action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressRewardedVideoViewController *vc = [BUDExpressRewardedVideoViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = express_reward_ID;
-        vc.viewModel = viewModel;
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *rewardCellItem_landcape = [BUDActionModel plainTitleActionModel:@"Express RewardedVideo _ Landscape" type:BUDCellType_video action:^{
-        __strong typeof(self) strongSelf = weakSelf;
-        BUDExpressRewardedVideoViewController *vc = [BUDExpressRewardedVideoViewController new];
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = express_reward_landscape_ID;
-        vc.viewModel = viewModel;
-        [strongSelf.navigationController pushViewController:vc animated:YES];
-    }];
-    
-    self.items = @[@[feedCellItem,feedCellItem_video],@[drawCellItem],@[bannerCellItem],@[interCellItem],@[splashCell],@[fullScreenCellItem,fullScreenCellItem_landscape,rewardCellItem,rewardCellItem_landcape]].mutableCopy;
+    self.items = @[@[feedCellItem,feedCellItem_video],@[drawCellItem],@[bannerCellItem,interCellItem,splashCell],@[fullScreenCellItem,rewardCellItem]].mutableCopy;
     
 }
 

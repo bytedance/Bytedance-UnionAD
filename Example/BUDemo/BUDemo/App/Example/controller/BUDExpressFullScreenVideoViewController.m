@@ -80,6 +80,7 @@
 }
 
 - (void)nativeExpressFullscreenVideoAdDidDownLoadVideo:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
+    self.selectedView.promptStatus = BUDPromptStatusAdVideoLoadedSuccess;
     BUD_Log(@"%s",__func__);
 }
 
@@ -110,6 +111,18 @@
 
 - (void)nativeExpressFullscreenVideoAdDidPlayFinish:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error {
     BUD_Log(@"%s",__func__);
+}
+
+- (void)nativeExpressFullscreenVideoAdDidCloseOtherController:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd interactionType:(BUInteractionType)interactionType {
+    NSString *str = nil;
+    if (interactionType == BUInteractionTypePage) {
+        str = @"ladingpage";
+    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
+        str = @"videoDetail";
+    } else {
+        str = @"appstoreInApp";
+    }
+    BUD_Log(@"%s __ %@",__func__,str);
 }
 
 @end

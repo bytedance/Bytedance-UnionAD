@@ -107,7 +107,7 @@
     
     self.splashView = [[BUNativeExpressSplashView alloc] initWithSlotID:self.viewModel.slotID adSize:self.splashFrame.size rootViewController:self];
     self.splashView.delegate = self;
-    
+    self.splashView.tolerateTimeout = 3;
     [self.splashView loadAdData];
     [self.navigationController.view addSubview:self.splashView];
 }
@@ -191,6 +191,18 @@
 
 - (void)nativeExpressSplashViewFinishPlayDidPlayFinish:(BUNativeExpressSplashView *)splashView didFailWithError:(NSError *)error {
     NSLog(@"%s",__func__);
+}
+
+- (void)nativeExpressSplashViewDidCloseOtherController:(BUNativeExpressSplashView *)splashView interactionType:(BUInteractionType)interactionType {
+    NSString *str = nil;
+    if (interactionType == BUInteractionTypePage) {
+        str = @"ladingpage";
+    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
+        str = @"videoDetail";
+    } else {
+        str = @"appstoreInApp";
+    }
+    BUD_Log(@"%s __ %@",__func__,str);
 }
 
 @end

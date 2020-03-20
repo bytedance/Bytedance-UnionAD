@@ -13,6 +13,7 @@
 #import "UIView+Draw.h"
 #import "BUDMacros.h"
 #import <BUAdSDK/BUAdSDK.h>
+#import "AFHTTPSessionManager.h"
 
 @interface BUDPlayableToolViewController ()<BURewardedVideoAdDelegate>
 @property (nonatomic, strong) UITextField *playableUrlTextView;
@@ -127,13 +128,17 @@
     return _showButton;
 }
 
+// 添加拼接是否测试工具的餐宿
 - (void)showPlayable {
     if (_playableUrlTextView.text.length) {
-        [BUAdSDKPlayableToolManager setPlayableURL:_playableUrlTextView.text];
+        NSString *playableUrl = _playableUrlTextView.text;
+        playableUrl = [self bu_urlStringWithOriginUrlString:playableUrl appendString:@"&is_test_tool=1"];
+        [BUAdSDKPlayableToolManager setPlayableURL:playableUrl];
         [BUAdSDKPlayableToolManager setDownloadUrl:_downloadUrlTextView.text];
         [BUAdSDKPlayableToolManager setDeeplinkUrl:_deeplinkUrlTextView.text];
         [BUAdSDKPlayableToolManager setIsLandScape:_isLandscapeSwitch.on];
         [self.rewardedVideoAd loadAdData];
+        
     } else {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
@@ -141,6 +146,7 @@
         hud.label.text = @"Please enter the correct config.";
         [hud hideAnimated:YES afterDelay:1];
     }
+    [self logClick_playable_test_tool];
 }
 
 #pragma mark touch
@@ -155,11 +161,72 @@
     self.showButton.isValid = self.isPlayableUrlValid && self.isDownloadUrlValid;
 }
 
-#pragma mark BURewardedVideoAdDelegate
+#pragma mark - BURewardedVideoAdDelegate
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
     if ([self.rewardedVideoAd isAdValid]) {
         [self.rewardedVideoAd showAdFromRootViewController:self];
     }
 }
 
+- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
+    [self logClose_playable_test_tool];
+}
+
+- (void)logClick_playable_test_tool {
+    [self logWithClickType:@"click_playable_test_tool"];
+}
+
+- (void)logClose_playable_test_tool {
+    [self logWithClickType:@"close_playable_test_tool"];
+}
+
+- (void)logWithClickType:(NSString *)type
+{
+    // 网络请求地址
+    NSString *URLString = @"https://is.snssdk.com/api/ad/union/sdk/stats/";
+    // 网络请求管理者
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    // 请求参数
+    NSDictionary *extra = [NSMutableDictionary dictionary];
+    [extra setValue:_playableUrlTextView.text forKey:@"Playable_url"];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"timestamp"] = @((NSInteger)[[NSDate date] timeIntervalSince1970]);
+    parameters[@"type"] = type;
+    parameters[@"ad_sdk_version"] = [BUAdSDKManager SDKVersion];
+    [parameters setValue:[self dictionaryToJson:extra] forKey:@"extra"];
+    // 发送POST请求
+    [manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+//字典转json格式字符串：
+- (NSString*)dictionaryToJson:(NSDictionary *)dic
+{
+    NSError *parseError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
+
+
+#pragma mark - tool
+- (NSString *)bu_urlStringWithOriginUrlString:(NSString *)originUrlString appendString:(NSString *)paraUrlString {
+    NSString *filteredUrl = originUrlString;
+    if (paraUrlString && paraUrlString.length > 0) {
+        if ([originUrlString rangeOfString:@"?"].location != NSNotFound) {
+            filteredUrl = [originUrlString stringByAppendingString:paraUrlString];
+        } else {
+            filteredUrl = [filteredUrl stringByAppendingFormat:@"?%@", [paraUrlString substringFromIndex:1]];
+        }
+        return filteredUrl;
+    } else {
+        return originUrlString;
+    }
+}
 @end

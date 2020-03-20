@@ -95,6 +95,10 @@
             lableText = [NSString localizedStringForKey:AdloadedFail];
         }
             break;
+        case BUDPromptStatusAdVideoLoadedSuccess: {
+            lableText = @"视频加载完成";
+        }
+            break;
         default:
             break;
     }

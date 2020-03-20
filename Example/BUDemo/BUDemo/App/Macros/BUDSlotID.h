@@ -19,6 +19,7 @@
 #define normal_splash_ID                  @"800546808"
 
 #define native_feed_ID                    @"900546910"
+#define native_feed_image_ID              @"945019352" //This id 
 #define native_draw_ID                    @"900546588"
 #define native_banner_ID                  @"900546687"
 #define native_interstitial_ID            @"900546829"
@@ -57,6 +58,9 @@
 #define mopub_expressFullscreen_UnitID     @"58f7244f244148918088f09838d243d3"
 #define mopub_expressIntersttitial_UnitID  @"438548d72c0c4d2ea9c801a4b193c962"
 #define mopub_expressBanner_UnitID         @"d4bfb78262b349f8bb8302a508d94284"
+#define mopub_nativeAd_UnitID              @"8a864df99f144136b942bc6656692e58"  // This is adUnitId we register in mopub for loading Bytedance Union Ad
+#define mopub_nativeAd_UnitID_test         @"76a3fefaced247959582d2d2df6f4757"  // This is mopub offical test adUnitId for native Ad
+#define mopub_nativeVideoAd_UnitID_test    @"b2b67c2a8c0944eda272ed8e4ddf7ed4"  // This is mopub offical test adUnitId for native video Ad
 
 #if googleUnit //使用google官方默认的unitId(use admob's default unitID)
 #define admob_reward_UnitID               @"ca-app-pub-3940256099942544/1712485313"
@@ -64,12 +68,14 @@
 #define admob_expressFullscreen_UnitID    @"ca-app-pub-3940256099942544/4411468910"
 #define admob_expressBanner_UnitID        @"ca-app-pub-3940256099942544/2934735716"
 #define admob_expressInterstitial_UnitID  @"ca-app-pub-3940256099942544/4411468910"
+#define admob_native_UnitID               @"ca-app-pub-3940256099942544/3986624511"
 #else
 #define admob_reward_UnitID               @"ca-app-pub-9206388280072239/3592550520"
 #define admob_expressReward_UnitID        @"ca-app-pub-9206388280072239/3833766591"
 #define admob_expressFullscreen_UnitID    @"ca-app-pub-9206388280072239/7953469846"
 #define admob_expressBanner_UnitID        @"ca-app-pub-9206388280072239/8476569246"
 #define admob_expressInterstitial_UnitID  @"ca-app-pub-9206388280072239/8309048289"
+#define admob_native_UnitID               @"ca-app-pub-9206388280072239/1140624809"
 #endif
 
 #endif /* BUDSlotID_h */

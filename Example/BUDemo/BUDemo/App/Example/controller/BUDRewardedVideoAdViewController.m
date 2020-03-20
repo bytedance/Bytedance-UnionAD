@@ -61,7 +61,7 @@
     self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
 
-#pragma mark BURewardedVideoAdDelegate
+#pragma mark - BURewardedVideoAdDelegate
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
     self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
     BUD_Log(@"%st",__func__);
@@ -69,6 +69,7 @@
 }
 
 - (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
+    self.selectedView.promptStatus = BUDPromptStatusAdVideoLoadedSuccess;
     BUD_Log(@"%s",__func__);
 }
 

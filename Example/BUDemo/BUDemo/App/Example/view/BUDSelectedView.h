@@ -14,7 +14,8 @@ typedef NS_ENUM(NSInteger, BUDPromptStatus) {
     BUDPromptStatusDefault      = 0,
     BUDPromptStatusLoading      = 1,
     BUDPromptStatusAdLoaded     = 2,
-    BUDPromptStatusAdLoadedFail = 3
+    BUDPromptStatusAdLoadedFail = 3,
+    BUDPromptStatusAdVideoLoadedSuccess = 4
 };
 
 typedef void(^loadAd)(NSString * _Nullable slotId);

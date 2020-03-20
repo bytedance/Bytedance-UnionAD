@@ -66,6 +66,7 @@
 }
 
 - (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
+    self.selectedView.promptStatus = BUDPromptStatusAdVideoLoadedSuccess;
     BUD_Log(@"%s",__func__);
 }
 

@@ -57,6 +57,7 @@
 | v2.7.5.2 | 2019-12-25 |【1】修复偶现的模拟器运行问题 |
 | v2.8.0.0 | 2020-01-03 |【1】解决偶现的开机卡顿问题 【2】playable修复拦截导致WKWebview请求body丢失问题 【3】激励视频全屏适配 
 【4】增加完善错误提示码 |
+| v2.9.0.0 | 2020-02-20 |【1】为了方便通过pod方式接入，SDK拆分为两个包 |
 <!-- TOC -->
 
 - [头条联盟 iOS SDK 接入说明](#头条联盟-ios-sdk-接入说明)
@@ -162,8 +163,8 @@
 
 ### 方法一
 
-获取 framework 文件后直接将 {BUAdSDK.framework, BUAdSDK.bundle}文件拖入工程即可。
-**升级SDK必须同时更新framework和bundle文件，否则可能出现部分页面无法展示的问题**
+获取 framework 文件后直接将 {BUAdSDK.framework, BUFoundation.framework, BUAdSDK.bundle}文件拖入工程即可。
+**升级SDK必须同时更新framework和bundle文件，否则可能出现部分页面无法展示的问题，老版本升级的同学需要引入BUFoundation**
 
 拖入时请按以下方式选择：
 
@@ -210,7 +211,7 @@ pod 'Bytedance-UnionAD', '~> 1.9.8.2'
 
 + 支持系统 iOS 9.X 及以上;
 + SDK编译环境 Xcode 11;
-+ 支持架构：i386, x86-64, armv7, armv7s, arm64
++ 支持架构： x86-64, armv7, armv7s, arm64
 
 ### 添加依赖库
 

@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSArray *dataSource;
 @property (nonatomic, strong) BUNativeExpressAdManager *nativeExpressAdManager;
 @property (nonatomic ,strong)BUDDrawBaseTableViewCell *lastCell;
+@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation BUDExpressDrawViewController
@@ -73,6 +74,12 @@
     [self loadData];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
 - (void)loadData {
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
@@ -121,6 +128,25 @@
 
 - (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
     [self.tableView reloadData];
+    NSLog(@"====== %p videoDuration = %ld",nativeExpressAdView,(long)nativeExpressAdView.videoDuration);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateCurrentPlayedTime) userInfo:nil repeats:YES];
+        [self.timer fire];
+    });
+}
+
+- (void)updateCurrentPlayedTime {
+    for (id nativeExpressAdView in self.dataSource) {
+        if ([nativeExpressAdView isKindOfClass:[BUNativeExpressAdView class]]) {
+            BUNativeExpressAdView *adView = nativeExpressAdView;
+            NSLog(@"====== %p currentPlayedTime = %f",nativeExpressAdView,adView.currentPlayedTime);
+        }
+    }
+}
+
+- (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView stateDidChanged:(BUPlayerPlayState)playerState {
+    NSLog(@"====== %p playerState = %ld",nativeExpressAdView,playerState);
 }
 
 - (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
@@ -149,6 +175,18 @@
 
 - (void)nativeExpressAdViewWillPresentScreen:(BUNativeExpressAdView *)nativeExpressAdView {
     BUD_Log(@"%s",__func__);
+}
+
+- (void)nativeExpressAdViewDidCloseOtherController:(BUNativeExpressAdView *)nativeExpressAdView interactionType:(BUInteractionType)interactionType {
+    NSString *str = nil;
+    if (interactionType == BUInteractionTypePage) {
+        str = @"ladingpage";
+    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
+        str = @"videoDetail";
+    } else {
+        str = @"appstoreInApp";
+    }
+    BUD_Log(@"%s __ %@",__func__,str);
 }
 
 #pragma mark --- tableView dataSource&delegate

@@ -699,12 +699,12 @@ void 0!==arguments[0]&&(br.sequenceConfig=arguments[0]),e=arguments[1]):e=argume
 <tr>
 <td>v2.8.0.0</td>
 <td>2020-01-03</td>
-<td>【1】解决偶现的开机卡顿问题 【2】playable修复拦截导致WKWebview请求body丢失问题 【3】激励视频全屏适配</td>
+<td>【1】解决偶现的开机卡顿问题 【2】playable修复拦截导致WKWebview请求body丢失问题 【3】激励视频全屏适配 【4】增加完善错误提示码</td>
 </tr>
 <tr>
-<td>【4】增加完善错误提示码</td>
-<td></td>
-<td></td>
+<td>v2.9.0.0</td>
+<td>2020-02-20</td>
+<td>【1】为了方便通过pod方式接入，SDK拆分为两个包</td>
 </tr>
 </tbody>
 </table>
@@ -896,8 +896,8 @@ void 0!==arguments[0]&&(br.sequenceConfig=arguments[0]),e=arguments[1]):e=argume
 <!-- /TOC -->
 <h2 id="%E6%AD%A5%E9%AA%A4%E4%B8%80%E5%B7%A5%E7%A8%8B%E8%AE%BE%E7%BD%AE%E5%AF%BC%E5%85%A5framework">步骤一工程设置导入framework</h2>
 <h3 id="%E6%96%B9%E6%B3%95%E4%B8%80">方法一</h3>
-<p>获取 framework 文件后直接将 {BUAdSDK.framework, BUAdSDK.bundle}文件拖入工程即可。
-<strong>升级SDK必须同时更新framework和bundle文件，否则可能出现部分页面无法展示的问题</strong></p>
+<p>获取 framework 文件后直接将 {BUAdSDK.framework, BUFoundation.framework,BUAdSDK.bundle}文件拖入工程即可。
+<strong>升级SDK必须同时更新framework和bundle文件，否则可能出现部分页面无法展示的问题,老版本升级的同学需要引入BUFoundatio</strong></p>
 <p>拖入时请按以下方式选择：</p>
 <p><img src="http://sf1-ttcdn-tos.pstatp.com/img/union-platform/9537cbbf7a663781539ae6b07f2e646b.png~0x0_q100.webp" alt="image"></p>
 <p>拖入完请确保Copy Bundle Resources中有BUAdSDK.bundle，否则可能出现incon图片加载不出来的情况。</p>
@@ -930,7 +930,7 @@ void 0!==arguments[0]&&(br.sequenceConfig=arguments[0]),e=arguments[1]):e=argume
 <ul>
 <li>支持系统 iOS 9.X 及以上;</li>
 <li>SDK编译环境 Xcode 11;</li>
-<li>支持架构：i386, x86-64, armv7, armv7s, arm64</li>
+<li>支持架构：x86-64, armv7, armv7s, arm64</li>
 </ul>
 <h3 id="%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96%E5%BA%93">添加依赖库</h3>
 <p>工程需要在TARGETS -&gt; Build Phases中找到Link Binary With Libraries，点击“+”，依次添加下列依赖库</p>

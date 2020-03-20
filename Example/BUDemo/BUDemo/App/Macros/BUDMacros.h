@@ -33,4 +33,8 @@ do {                                                      \
 NSLog(@"【BUAdDemo】%@", [NSString stringWithFormat:frmt,##__VA_ARGS__]);  \
 } while(0)
 
+#ifndef BUDNativeAdTranslateKey
+#define BUDNativeAdTranslateKey @"bu_nativeAd"
+#endif
+
 #endif /* BUDMacros_h */

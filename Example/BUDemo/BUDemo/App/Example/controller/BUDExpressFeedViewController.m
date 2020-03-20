@@ -25,6 +25,7 @@
 @property (strong, nonatomic) UILabel *adCountLabel;
 @property (strong, nonatomic) BUDNormalButton *freshButton;
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation BUDExpressFeedViewController
@@ -36,6 +37,12 @@
     [self setupViews];
     
     [self loadData];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 - (void)setupViews {
@@ -166,6 +173,22 @@
 
 - (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
     [self.tableView reloadData];
+    NSLog(@"====== %p videoDuration = %ld",nativeExpressAdView,(long)nativeExpressAdView.videoDuration);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateCurrentPlayedTime) userInfo:nil repeats:YES];
+        [self.timer fire];
+    });
+}
+
+- (void)updateCurrentPlayedTime {
+    for (BUNativeExpressAdView *nativeExpressAdView in self.expressAdViews) {
+        NSLog(@"====== %p currentPlayedTime = %f",nativeExpressAdView,nativeExpressAdView.currentPlayedTime);
+    }
+}
+
+- (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView stateDidChanged:(BUPlayerPlayState)playerState {
+    NSLog(@"====== %p playerState = %ld",nativeExpressAdView,playerState);
 }
 
 - (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
@@ -199,6 +222,18 @@
 
 - (void)nativeExpressAdViewWillPresentScreen:(BUNativeExpressAdView *)nativeExpressAdView {
     BUD_Log(@"%s",__func__);
+}
+
+- (void)nativeExpressAdViewDidCloseOtherController:(BUNativeExpressAdView *)nativeExpressAdView interactionType:(BUInteractionType)interactionType {
+    NSString *str = nil;
+    if (interactionType == BUInteractionTypePage) {
+        str = @"ladingpage";
+    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
+        str = @"videoDetail";
+    } else {
+        str = @"appstoreInApp";
+    }
+    BUD_Log(@"%s __ %@",__func__,str);
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource

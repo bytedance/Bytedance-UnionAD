@@ -63,10 +63,10 @@
 #pragma mark - Target
 - (void)authoid {
     self.locationText.text = [NSString localizedStringForKey:StartLocation];
-    if (![self serviceEnable]) {
-        self.locationText.text = [NSString localizedStringForKey:PermissionDenied];
-        return;
-    }
+//    if (![self serviceEnable]) {
+//        self.locationText.text = [NSString localizedStringForKey:PermissionDenied];
+//        return;
+//    }
     CLLocationManager *locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     [locationManager startUpdatingLocation];

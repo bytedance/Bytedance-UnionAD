@@ -17,25 +17,6 @@ Pod for Bytedance-UnionAD only support **x86_64, armv7, armv7s, arm64**.
 $ gem install cocoapods
 ```
 
-## Installation with Git LFS
-[Git LFS](https://git-lfs.github.com/) is a command line extension and specification for managing large files with Git.
-You can install it with the following steps:
-
-step 1:
-Click [Git LFS](https://git-lfs.github.com/)  to download it.
-
-step 2:
-Install LFS with the following command:
-```ruby
-sudo sh install.sh
-```
-
-step 3:
-Check for proper installation：
-```ruby
-git lfs version
-```
-
 ### Podfile
 
 To integrate Bytedance-UnionAD into your Xcode project using CocoaPods, **you must install Git LFS first**,then specify it in your **Podfile**:

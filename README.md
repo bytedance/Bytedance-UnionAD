@@ -22,7 +22,7 @@ $ gem install cocoapods
 To integrate Bytedance-UnionAD into your Xcode project using CocoaPods, **you must install Git LFS first**,then specify it in your **Podfile**:
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 target 'TargetName' do
 pod 'Bytedance-UnionAD'

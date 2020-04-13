@@ -10,6 +10,7 @@
 
 FOUNDATION_EXPORT NSString * const BUSDKVersion;
 
+
 /** String **/
 #define BUEmptyString                                 (@"");
 #define BUSafeString(__string)                        ((__string && [__string isKindOfClass:[NSString class]]) ? __string :@"")

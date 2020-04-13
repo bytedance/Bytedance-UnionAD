@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Bytedance-UnionAD'
-  s.version          = '2.9.0.1'
+  s.version          = '2.9.0.3'
   s.summary          = 'BUAdSDK is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Bytedance provides Union ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD'
   s.source           = { :git => 'https://github.com/bytedance/Bytedance-UnionAD.git', :tag => s.version.to_s }
-  s.platform     = :ios, "8.0"  
+  s.platform     = :ios, "9.0"  
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3'
 

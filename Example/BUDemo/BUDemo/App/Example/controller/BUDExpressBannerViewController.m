@@ -37,8 +37,8 @@
                           express_banner_ID_690388  :  [NSValue valueWithCGSize:CGSizeMake(690, 388)],
                           express_banner_ID_600260  :  [NSValue valueWithCGSize:CGSizeMake(600, 260)],
                           express_banner_ID_600300  :  [NSValue valueWithCGSize:CGSizeMake(600, 300)],
-                          express_banner_ID_600400  :  [NSValue valueWithCGSize:CGSizeMake(600, 400)],
-                          express_banner_ID_600500  :  [NSValue valueWithCGSize:CGSizeMake(600, 500)],
+                          express_banner_ID_600400_both  :  [NSValue valueWithCGSize:CGSizeMake(600, 400)],
+                          express_banner_ID_600500_both  :  [NSValue valueWithCGSize:CGSizeMake(600, 500)],
                           };
 
     
@@ -48,8 +48,8 @@
     BUDSelcetedItem *item4 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_banner_ID_690388,@"title":@"690*388"}];
     BUDSelcetedItem *item5 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_banner_ID_600260,@"title":@"600*260"}];
     BUDSelcetedItem *item6 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_banner_ID_600300,@"title":@"600*300"}];
-    BUDSelcetedItem *item7 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_banner_ID_600400,@"title":@"600*400"}];
-    BUDSelcetedItem *item8 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_banner_ID_600500,@"title":@"600*500"}];
+    BUDSelcetedItem *item7 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_banner_ID_600400_both,@"title":@"600*400-both"}];
+    BUDSelcetedItem *item8 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_banner_ID_600500_both,@"title":@"600*500-both"}];
     NSArray *titlesAndIDS = @[@[item1,item2,item3],@[item4,item5,item6],@[item7,item8]];
 
     __weak typeof(self) weakself = self;

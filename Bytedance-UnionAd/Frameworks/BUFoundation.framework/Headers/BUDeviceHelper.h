@@ -47,6 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 返回硬盘空闲空间
 + (NSNumber *)freeDiskSpace;
 
+/// 设备的总内存 单位MB
++ (NSInteger)totolDeviceMemory;
+
+/// APP已使用的内存 单位MB
++ (NSInteger)usedAPPMemory;
 @end
 
 

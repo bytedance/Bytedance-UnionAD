@@ -26,13 +26,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.sizeDict = @{
-                      express_interstitial_ID_1_1:[NSValue valueWithCGSize:CGSizeMake(300, 300)],
-                      express_interstitial_ID_2_3:[NSValue valueWithCGSize:CGSizeMake(300, 450)],
-                      express_interstitial_ID_3_2:[NSValue valueWithCGSize:CGSizeMake(300, 200)]
+                      express_interstitial_ID_1_1_both:[NSValue valueWithCGSize:CGSizeMake(300, 300)],
+                      express_interstitial_ID_2_3_both:[NSValue valueWithCGSize:CGSizeMake(300, 450)],
+                      express_interstitial_ID_3_2_both:[NSValue valueWithCGSize:CGSizeMake(300, 200)],
                       };
-    BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_interstitial_ID_1_1,@"title":@"1:1"}];
-    BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_interstitial_ID_2_3,@"title":@"2:3"}];
-    BUDSelcetedItem *item3 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_interstitial_ID_3_2,@"title":@"3:2"}];
+    BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_interstitial_ID_1_1_both,@"title":@"1:1-both"}];
+    BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_interstitial_ID_2_3_both,@"title":@"2:3-both"}];
+    BUDSelcetedItem *item3 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_interstitial_ID_3_2_both,@"title":@"3:2-both"}];
     NSArray *titlesAndIDS = @[@[item1,item2,item3]];
     
     __weak typeof(self) weakself = self;

@@ -14,6 +14,7 @@
 "Evaluation" = "Evaluation";
 "Score" = "%@ score";
 "Select" = "Select";
+"Wan" = "";//英文逻辑不一样，为空就好
 "Back" = "Back";
 "Replay" = "Click to replay";
 "Continue" = "Continue to play";

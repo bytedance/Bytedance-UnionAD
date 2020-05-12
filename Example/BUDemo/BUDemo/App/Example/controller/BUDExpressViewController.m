@@ -47,7 +47,7 @@
 
 - (void)buildItemsData {
     __weak typeof(self) weakSelf = self;
-    BUDActionModel *feedCellItem = [BUDActionModel plainTitleActionModel:@"Express Feed Picture" type:BUDCellType_native action:^{
+    BUDActionModel *feedCellItem = [BUDActionModel plainTitleActionModel:@"Express Feed Picture-both" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDExpressFeedViewController *vc = [BUDExpressFeedViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];

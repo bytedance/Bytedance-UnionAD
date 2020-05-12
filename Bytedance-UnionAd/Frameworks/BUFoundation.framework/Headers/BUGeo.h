@@ -11,10 +11,10 @@
 @interface BUGeo : NSObject
 
 // 经度
-@property (nonatomic, strong) NSNumber *latitude;
+@property (atomic, strong) NSNumber *latitude;
 
 // 纬度
-@property (nonatomic, strong) NSNumber *longitude;
+@property (atomic, strong) NSNumber *longitude;
 
 - (NSDictionary *)dictionaryValue;
 

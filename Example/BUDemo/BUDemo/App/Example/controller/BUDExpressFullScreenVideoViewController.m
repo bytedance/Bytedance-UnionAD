@@ -23,8 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_fullscreen_ID,@"title":[NSString localizedStringForKey:Vertical]}];
-    BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_fullscreen_landscape_ID,@"title":[NSString localizedStringForKey:Horizontal]}];
+    NSString *verticalTitle = [NSString localizedStringForKey:Vertical];
+    NSString *horizontalTitle = [NSString localizedStringForKey:Horizontal];
+    BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_full_ID_both,@"title":[NSString stringWithFormat:@"%@-both",verticalTitle]}];
+    BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_full_landscape_ID_both,@"title":[NSString stringWithFormat:@"%@-both",horizontalTitle]}];
     NSArray *titlesAndIDS = @[@[item1,item2]];
     
     __weak typeof(self) weakself = self;

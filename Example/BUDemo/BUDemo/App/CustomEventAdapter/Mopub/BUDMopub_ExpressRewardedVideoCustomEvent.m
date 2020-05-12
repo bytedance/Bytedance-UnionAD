@@ -21,7 +21,7 @@
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = @"123";
     
-    self.rewardVideoAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:express_reward_ID rewardedVideoModel:model];
+    self.rewardVideoAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:express_reward_ID_both rewardedVideoModel:model];
     self.rewardVideoAd.delegate = self;
     [self.rewardVideoAd loadAdData];
 }

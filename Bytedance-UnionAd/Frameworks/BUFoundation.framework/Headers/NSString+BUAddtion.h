@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, BULanguageType) {//"万"转换规则
+    BULanguageType_showWan     = 0,         //直接拼接万,默认
+    BULanguageType_showNum     = 1,         //直接展示数字
+};
+
 @interface NSString (BU_URLCoding)
 - (NSString *)bu_URLEncodedString;
 - (NSString *)bu_URLDecodedString;
@@ -23,8 +28,8 @@
 @end
 
 @interface NSString (BU_NumberToWan)
-/// 数字转换成x万(以1w为界限，小于1w显示原始数字)
-+ (NSString *)bu_numberToWan:(NSInteger)target;
+/// 数字转换成x万(以1w为界限，小于1w显示原始数字) 没有”万“走另一套展示逻辑
++ (NSString *)bu_numberToWan:(NSInteger)target wan:(NSString *)wan;
 @end
 
 @interface NSString (BU_URLStringAppend)

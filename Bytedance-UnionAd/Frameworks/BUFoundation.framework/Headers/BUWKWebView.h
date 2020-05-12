@@ -14,4 +14,6 @@
 /// 白屏检测
 - (void)bu_detectBlankWebViewCompleteBlock:(void(^)(BOOL, NSError *))block;
 
+/// 白屏检测百分比
+- (void)bu_detectBlankPercentCompleteBlock:(void(^)(CGFloat bgColorPercent, NSError *error))block;
 @end

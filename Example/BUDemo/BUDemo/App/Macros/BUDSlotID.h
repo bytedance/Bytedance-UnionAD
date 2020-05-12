@@ -25,7 +25,8 @@
 #define native_interstitial_ID            @"900546829"
 #define native_imagePortrait_ID           @"900546264"
 
-#define express_feed_ID                   @"900546131"
+/// 带_both代表海外国内通用的rit
+#define express_feed_ID                   @"945113159"
 #define express_feed_video_ID             @"900546510"
 #define express_draw_ID                   @"900546881"
 #define express_banner_ID                 @"900546269"
@@ -35,17 +36,17 @@
 #define express_banner_ID_690388          @"900546673"
 #define express_banner_ID_600260          @"900546387"
 #define express_banner_ID_600300          @"900546526"
-#define express_banner_ID_600400          @"900546672"
-#define express_banner_ID_600500          @"900546768"
+#define express_banner_ID_600400_both     @"945113150"
+#define express_banner_ID_600500_both     @"945113147"
 #define express_interstitial_ID           @"900546270"
-#define express_interstitial_ID_1_1       @"900546747"
-#define express_interstitial_ID_2_3       @"900546270"
-#define express_interstitial_ID_3_2       @"900546676"
+#define express_interstitial_ID_1_1_both  @"945113154"
+#define express_interstitial_ID_2_3_both  @"945113156"
+#define express_interstitial_ID_3_2_both  @"945113155"
 #define express_splash_ID                 @"800546851"
-#define express_fullscreen_ID             @"900546551"
-#define express_fullscreen_landscape_ID   @"900546831"
-#define express_reward_ID                 @"900546566"
-#define express_reward_landscape_ID       @"900546606"
+#define express_full_ID_both              @"945113164"
+#define express_full_landscape_ID_both    @"945113165"
+#define express_reward_ID_both            @"945113162"
+#define express_reward_landscape_ID_both  @"945113163"
 
 
 // custom Event

@@ -48,7 +48,7 @@
 - (void)requestRewardBasedVideoAd {
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = @"123";
-    self.rewardedVideoAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:express_reward_ID rewardedVideoModel:model];
+    self.rewardedVideoAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:express_reward_ID_both rewardedVideoModel:model];
     self.rewardedVideoAd.delegate = self;
     [self.rewardedVideoAd loadAdData];
 }

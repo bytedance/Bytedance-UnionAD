@@ -17,7 +17,7 @@
 
 @implementation BUDMopub_ExpressFullscreenVideoCustomEvent
 - (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info adMarkup:(NSString *)adMarkup {
-    self.fullScreenVideo = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:express_fullscreen_ID];
+    self.fullScreenVideo = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:express_full_ID_both];
     self.fullScreenVideo.delegate = self;
     [self.fullScreenVideo loadAdData];
 }

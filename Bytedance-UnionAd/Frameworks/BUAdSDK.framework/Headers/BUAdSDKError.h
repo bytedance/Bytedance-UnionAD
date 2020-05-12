@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
     BUErrorCodeNEParseError       = 105,    // native Express ad, parse fail
     BUErrorCodeNERenderError      = 106,    // native Express ad, render fail
     BUErrorCodeNERenderTimoutError= 107,    // native Express ad, render timeout
+    BUErrorCodeTempLoadError      = 109,    // native Express ad, template load fail
     
     BUErrorCodeSDKStop          = 1000,     // SDK stop forcely
     

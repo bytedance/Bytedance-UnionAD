@@ -27,7 +27,7 @@
 }
 
 - (void)requestInterstitialAdWithParameter:(nullable NSString *)serverParameter label:(nullable NSString *)serverLabel request:(nonnull GADCustomEventRequest *)request {
-    self.fullscreenVideoAd = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:express_fullscreen_ID];
+    self.fullscreenVideoAd = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:express_full_ID_both];
     self.fullscreenVideoAd.delegate = self;
     [self.fullscreenVideoAd loadAdData];
 }

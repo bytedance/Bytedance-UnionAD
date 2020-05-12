@@ -55,10 +55,11 @@
 | v2.7.0.0 | 2019-11-25 | 【1】开屏请求逻辑优化 【2】个性化模板广告支持开屏 【3】个性化模板banner和插屏简化接入参数（去掉imgSize） |
 | v2.7.5.0 | 2019-12-06 | 【1】个性化模板开屏点击回调修复 【2】playable新增加载完成、缓存回调 【3】个性化模板banner、插屏、激励、全屏适配adapter
 | v2.7.5.2 | 2019-12-25 |【1】修复偶现的模拟器运行问题 |
-| v2.8.0.0 | 2020-01-03 |【1】解决偶现的开机卡顿问题 【2】playable修复拦截导致WKWebview请求body丢失问题 【3】激励视频全屏适配 
-【4】增加完善错误提示码 |
+| v2.8.0.0 | 2020-01-03 |【1】解决偶现的开机卡顿问题 【2】playable修复拦截导致WKWebview请求body丢失问题 【3】激励视频全屏适配【4】增加完善错误提示码 |
 | v2.9.0.0 | 2020-02-20 |【1】为了方便通过pod方式接入，SDK拆分为两个包 |
 | v2.9.0.3 | 2020-03-24 |【1】海外GDPR合规传入赋值错误 |
+| v2.9.5.0 | 2020-03-16 |【1】纯playable加载优化 【2】Playable 素材黑屏问题修复【3】个性化模板性能优化|
+
 <!-- TOC -->
 
 - [头条联盟 iOS SDK 接入说明](#头条联盟-ios-sdk-接入说明)
@@ -266,16 +267,23 @@ pod 'Bytedance-UnionAD', '~> 1.9.8.2'
 
 ```Objective-C
 /**
+@property (nonatomic, copy, readonly, class) NSString *SDKVersion;
+
+/**
 Register the App key that’s already been applied before requesting an ad from TikTok Audience Network.
 @param appID : the unique identifier of the App
 */
 + (void)setAppID:(NSString *)appID;
-
 /**
 Configure development mode.
 @param level : default BUAdSDKLogLevelNone
 */
 + (void)setLoglevel:(BUAdSDKLogLevel)level;
+
+/* Set the COPPA of the user, COPPA is the short of Children's Online Privacy Protection Rule, the interface only works in the United States.
+* @params Coppa 0 adult, 1 child
+*/
++ (void)setCoppa:(NSUInteger)Coppa;
 
 /// Set the user's keywords, such as interests and hobbies, etc.
 /// Must obtain the consent of the user before incoming.
@@ -288,9 +296,24 @@ Configure development mode.
 /// Must obtain the consent of the user before incoming
 + (void)setIsPaidApp:(BOOL)isPaidApp;
 
+/// Solve the problem when your WKWebview post message empty,default is BUOfflineTypeWebview
++ (void)setOfflineType:(BUOfflineType)type;
+
+/// Custom set the GDPR of the user,GDPR is the short of General Data Protection Regulation,the interface only works in The European.
+/// @params GDPR 0 close privacy protection, 1 open privacy protection
++ (void)setGDPR:(NSInteger)GDPR;
+
+/// Open GDPR Privacy for the user to choose before setAppID.
++ (void)openGDPRPrivacyFromRootViewController:(UIViewController *)rootViewController confirm:(BUConfirmGDPR)confirm;
+
+/// get appID
 + (NSString *)appID;
+
+/// get isPaidApp
 + (BOOL)isPaidApp;
 
+/// get GDPR
++ (NSInteger)GDPR;
 ```
 
 ### 使用详情
@@ -302,12 +325,16 @@ SDK 需要在 AppDelegate 的方法 ```- (BOOL)application:(UIApplication *)appl
 ``` Objective-C
 [BUAdSDKManager setAppID:@"xxxxxx"];
 ```
-
 更多使用方式可以参见 SDK Demo 工程
 
 ### 跳转须知
 <font color=red>**广告接口中的所有rootViewController均为必传项，用来处理广告跳转。**
 **SDK里所有的跳转均采用present的方式，请确保传入的rootViewController不能为空且没有present其他的控制器，否则会出现presentedViewController已经存在而导致present失败。**</font>
+
+### 隐私协议相关
+可自定义设置coppa值，用来标识本次广告是否需要遵循儿童在线隐私保护条例。
+GDPR可以选择```+ (void)openGDPRPrivacyFromRootViewController:(UIViewController *)rootViewController confirm:(BUConfirmGDPR)confirm;```方法来弹出是否遵循隐私协议的选择框。
+也可自定义设置GDPR，用来标识本次广告是否遵循欧盟通用数据保护条例。
 
 ## （信息流、banner、插屏）自渲染基础模块内容
 

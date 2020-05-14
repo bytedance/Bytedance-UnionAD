@@ -174,7 +174,7 @@ Please create the application ID and ad slot ID on the TikTok Audience Network.
 
 #### Method One:
 
-Drag {BUAdSDK.framework, BUAdSDK.bundle} to project file after obtaining framework files. Please select as below when dragging.
+Drag {BUAdSDK.framework, BUAdSDK.bundle, BUFoundation.framework} to project file after obtaining framework files. Please select as below when dragging.
 
 ![image](http://sf1-ttcdn-tos.pstatp.com/img/union-platform/9537cbbf7a663781539ae6b07f2e646b.png~0x0_q100.webp)
 

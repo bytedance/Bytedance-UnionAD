@@ -71,6 +71,7 @@ typedef NS_ENUM(NSInteger, BUFeedADMode) {
 /// media configuration parameters.
 @property (nonatomic, copy) NSDictionary *mediaExt;
 
+
 - (instancetype)initWithDictionary:(NSDictionary *)dict error:(NSError * __autoreleasing *)error;
 
 @end

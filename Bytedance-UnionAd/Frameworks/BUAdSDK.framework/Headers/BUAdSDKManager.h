@@ -49,6 +49,9 @@ typedef void (^BUConfirmGDPR)(BOOL isAgreed);
 /// @params GDPR 0 close privacy protection, 1 open privacy protection
 + (void)setGDPR:(NSInteger)GDPR;
 
+/// Custom set the AB vid of the user. Array element type is NSNumber
++ (void)setABVidArray:(NSArray<NSNumber *> *)abvids;
+
 /// Open GDPR Privacy for the user to choose before setAppID.
 + (void)openGDPRPrivacyFromRootViewController:(UIViewController *)rootViewController confirm:(BUConfirmGDPR)confirm;
 

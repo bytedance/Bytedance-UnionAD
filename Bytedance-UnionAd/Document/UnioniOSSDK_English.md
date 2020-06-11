@@ -174,7 +174,7 @@ Please create the application ID and ad slot ID on the TikTok Audience Network.
 
 #### Method One:
 
-Drag {BUAdSDK.framework, BUAdSDK.bundle, BUFoundation.framework} to project file after obtaining framework files. Please select as below when dragging.
+Drag {BUAdSDK.framework, BUFoundation.framework, BUAdSDK.bundle} to project file after obtaining framework files. Please select as below when dragging.
 
 ![image](http://sf1-ttcdn-tos.pstatp.com/img/union-platform/9537cbbf7a663781539ae6b07f2e646b.png~0x0_q100.webp)
 
@@ -260,36 +260,56 @@ BUAdSDKManager is the inlet and interface of the entire SDK, you can set some SD
 Currently, the interface provides the following class methods.
 
 ``` {.objective-c}
+@property (nonatomic, copy, readonly, class) NSString *SDKVersion;
+
 /**
  Register the App key that’s already been applied before requesting an ad from TikTok Audience Network.
  @param appID : the unique identifier of the App
  */
 + (void)setAppID:(NSString *)appID;
-
 /**
  Configure development mode.
  @param level : default BUAdSDKLogLevelNone
  */
 + (void)setLoglevel:(BUAdSDKLogLevel)level;
 
-/// Set the gender of the user.
-+ (void)setUserGender:(BUUserGender)userGender;
-
-/// Set the age of the user.
-+ (void)setUserAge:(NSUInteger)userAge;
+/* Set the COPPA of the user, COPPA is the short of Children's Online Privacy Protection Rule, the interface only works in the United States.
+ * @params Coppa 0 adult, 1 child
+ */
++ (void)setCoppa:(NSUInteger)Coppa;
 
 /// Set the user's keywords, such as interests and hobbies, etc.
+/// Must obtain the consent of the user before incoming.
 + (void)setUserKeywords:(NSString *)keywords;
 
 /// set additional user information.
 + (void)setUserExtData:(NSString *)data;
 
-/// Set whether the app is a paid app, the default is a non-paid app
+/// Set whether the app is a paid app, the default is a non-paid app.
+/// Must obtain the consent of the user before incoming
 + (void)setIsPaidApp:(BOOL)isPaidApp;
 
+/// Solve the problem when your WKWebview post message empty,default is BUOfflineTypeWebview
++ (void)setOfflineType:(BUOfflineType)type;
+
+/// Custom set the GDPR of the user,GDPR is the short of General Data Protection Regulation,the interface only works in The European.
+/// @params GDPR 0 close privacy protection, 1 open privacy protection
++ (void)setGDPR:(NSInteger)GDPR;
+
+/// Custom set the AB vid of the user. Array element type is NSNumber
++ (void)setABVidArray:(NSArray<NSNumber *> *)abvids;
+
+/// Open GDPR Privacy for the user to choose before setAppID.
++ (void)openGDPRPrivacyFromRootViewController:(UIViewController *)rootViewController confirm:(BUConfirmGDPR)confirm;
+
+/// get appID
 + (NSString *)appID;
 
+/// get isPaidApp
 + (BOOL)isPaidApp;
+
+/// get GDPR
++ (NSInteger)GDPR;
 ```
 
 #### 2.1.2 Use
@@ -1308,103 +1328,111 @@ Adsize is the size of the banner image to be displayed by the client. It needs t
 #### 2.9.1 BUSplashAdView Interface
 
     @interface BUSplashAdView : UIView
-    /**
-    The unique identifier of splash ad.
-    */
-    @property (nonatomic, copy, readonly, nonnull) NSString *slotID;
-    
-    /**
-    Maximum allowable load timeout, default 2s, unit s.
-    */
-    @property (nonatomic, assign) NSTimeInterval tolerateTimeout;
-
-
-    /**
-    Whether hide skip button, default NO.
-    If you hide the skip button, you need to customize the countdown.
-    */
-    @property (nonatomic, assign) BOOL hideSkipButton;
-    
-    /**
-    The delegate for receiving state change messages.
-    */
-    @property (nonatomic, weak, nullable) id<BUSplashAdDelegate> delegate;
-    
-    /*
-    required.
-    Root view controller for handling ad actions.
-    */
-    @property (nonatomic, weak) UIViewController *rootViewController;
-    
-    /**
-    Whether the splash ad data has been loaded.
-    */
-    @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
-
-
-    /**
-    Initializes splash ad with slot id and frame.
-    @param slotID : the unique identifier of splash ad
-    @param frame : the frame of splashAd view. It is recommended for the mobile phone screen.
-    @return BUSplashAdView
-    */
-    - (instancetype)initWithSlotID:(NSString *)slotID frame:(CGRect)frame;
-    
-    /**
-    Load splash ad datas.
-    Start the countdown(@tolerateTimeout) as soon as you request datas.
-    */
-    - (void)loadAdData;
-    
-    @end
+	/**
+	The unique identifier of splash ad.
+	 */
+	@property (nonatomic, copy, readonly, nonnull) NSString *slotID;
+	
+	/**
+	 Maximum allowable load timeout, default 3s, unit s.
+	 */
+	@property (nonatomic, assign) NSTimeInterval tolerateTimeout;
+	
+	
+	/**
+	 Whether hide skip button, default NO.
+	 If you hide the skip button, you need to customize the countdown.
+	 */
+	@property (nonatomic, assign) BOOL hideSkipButton;
+	
+	/**
+	 The delegate for receiving state change messages.
+	 */
+	@property (nonatomic, weak, nullable) id<BUSplashAdDelegate> delegate;
+	
+	/*
+	 required.
+	 Root view controller for handling ad actions.
+	 */
+	@property (nonatomic, weak) UIViewController *rootViewController;
+	
+	/**
+	 Whether the splash ad data has been loaded.
+	 */
+	@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
+	
+	/// media configuration parameters.
+	@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+	
+	/**
+	 Initializes splash ad with slot id and frame.
+	 @param slotID : the unique identifier of splash ad
+	 @param frame : the frame of splashAd view. It is recommended for the mobile phone screen.
+	 @return BUSplashAdView
+	 */
+	- (instancetype)initWithSlotID:(NSString *)slotID frame:(CGRect)frame;
+	
+	/**
+	 Load splash ad datas.
+	 Start the countdown(@tolerateTimeout) as soon as you request datas.
+	 */
+	- (void)loadAdData;
+	
+	@end
 
 #### 2.9.2 BUSplashAdView callback
 
     @protocol BUSplashAdDelegate <NSObject>
-    
-    @optional
-    /**
-    This method is called when splash ad material loaded successfully.
-    */
-    - (void)splashAdDidLoad:(BUSplashAdView *)splashAd;
-    
-    /**
-    This method is called when splash ad material failed to load.
-    @param error : the reason of error
-    */
-    - (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error;
-    
-    /**
-    This method is called when splash ad slot will be showing.
-    */
-    - (void)splashAdWillVisible:(BUSplashAdView *)splashAd;
-    
-    /**
-    This method is called when splash ad is clicked.
-    */
-    - (void)splashAdDidClick:(BUSplashAdView *)splashAd;
-    
-    /**
-    This method is called when splash ad is closed.
-    */
-    - (void)splashAdDidClose:(BUSplashAdView *)splashAd;
-    
-    /**
-    This method is called when splash ad is about to close.
-    */
-    - (void)splashAdWillClose:(BUSplashAdView *)splashAd;
-    
-    /**
-    This method is called when spalashAd skip button  is clicked.
-    */
-    - (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd;
-    
-    /**
-    This method is called when spalashAd countdown equals to zero
-    */
-    - (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd;
-    
-    @end
+
+	@optional
+	/**
+	 This method is called when splash ad material loaded successfully.
+	 */
+	- (void)splashAdDidLoad:(BUSplashAdView *)splashAd;
+	
+	/**
+	 This method is called when splash ad material failed to load.
+	 @param error : the reason of error
+	 */
+	- (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError * _Nullable)error;
+	
+	/**
+	 This method is called when splash ad slot will be showing.
+	 */
+	- (void)splashAdWillVisible:(BUSplashAdView *)splashAd;
+	
+	/**
+	 This method is called when splash ad is clicked.
+	 */
+	- (void)splashAdDidClick:(BUSplashAdView *)splashAd;
+	
+	/**
+	 This method is called when splash ad is closed.
+	 */
+	- (void)splashAdDidClose:(BUSplashAdView *)splashAd;
+	
+	/**
+	 This method is called when splash ad is about to close.
+	 */
+	- (void)splashAdWillClose:(BUSplashAdView *)splashAd;
+	
+	/**
+	 This method is called when another controller has been closed.
+	 @param interactionType : open appstore in app or open the webpage or view video ad details page.
+	 */
+	- (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType;
+	
+	/**
+	 This method is called when spalashAd skip button  is clicked.
+	 */
+	- (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd;
+	
+	/**
+	 This method is called when spalashAd countdown equals to zero
+	 */
+	- (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd;
+	
+	@end
 
 #### 2.9.3 Instance
 
@@ -1921,6 +1949,12 @@ this method is used to get the type of fullscreen video ad, type 0:video+endcard
 - (void)nativeExpressAdViewDidClick:(BUNativeExpressAdView *)nativeExpressAdView;
 
 /**
+Sent when a playerw playback status changed.
+@param playerState : player state after changed
+*/
+- (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView stateDidChanged:(BUPlayerPlayState)playerState;
+
+/**
 * Sent when a player finished
 * @param error : error of player
 */
@@ -1936,6 +1970,12 @@ this method is used to get the type of fullscreen video ad, type 0:video+endcard
  * Sent after an ad view is clicked, a ad landscape view will present modal content
  */
 - (void)nativeExpressAdViewWillPresentScreen:(BUNativeExpressAdView *)nativeExpressAdView;
+
+/**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)nativeExpressAdViewDidCloseOtherController:(BUNativeExpressAdView *)nativeExpressAdView interactionType:(BUInteractionType)interactionType;
 
 @end
 ```
@@ -2081,6 +2121,12 @@ This method is called when the user clicked dislike button and chose dislike rea
 */
 - (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *_Nullable)filterwords;
 
+/**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)nativeExpressBannerAdViewDidCloseOtherController:(BUNativeExpressBannerView *)bannerAdView interactionType:(BUInteractionType)interactionType;
+
 @end
 ```
 
@@ -2190,6 +2236,12 @@ This method is called when interstitial ad is closed.
 */
 - (void)nativeExpresInterstitialAdDidClose:(BUNativeExpressInterstitialAd *)interstitialAd;
 
+/**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)nativeExpresInterstitialAdDidCloseOtherController:(BUNativeExpressInterstitialAd *)interstitialAd interactionType:(BUInteractionType)interactionType;
+
 @end
 ```
 
@@ -2270,84 +2322,90 @@ If ritSceneType is custom, you need to pass in the values for sceneDescirbe.
 
 @optional
 /**
-This method is called when video ad material loaded successfully.
-*/
+ This method is called when video ad material loaded successfully.
+ */
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
 /**
-This method is called when video ad materia failed to load.
-@param error : the reason of error
-*/
+ This method is called when video ad materia failed to load.
+ @param error : the reason of error
+ */
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error;
+/**
+  this methods is to tell delegate the type of native express rewarded video Ad
+ */
+- (void)nativeExpressRewardedVideoAdCallback:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd withType:(BUNativeExpressRewardedVideoAdType)nativeExpressVideoType;
 
 /**
-This method is called when cached successfully.
-*/
+ This method is called when cached successfully.
+ */
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
 /**
-This method is called when rendering a nativeExpressAdView successed.
-*/
+ This method is called when rendering a nativeExpressAdView successed.
+ */
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
 /**
-This method is called when a nativeExpressAdView failed to render.
-@param error : the reason of error
-*/
+ This method is called when a nativeExpressAdView failed to render.
+ @param error : the reason of error
+ */
 - (void)nativeExpressRewardedVideoAdViewRenderFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error;
 
 /**
-This method is called when video ad slot will be showing.
-*/
+ This method is called when video ad slot will be showing.
+ */
 - (void)nativeExpressRewardedVideoAdWillVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
 /**
-This method is called when video ad slot has been shown.
-*/
+ This method is called when video ad slot has been shown.
+ */
 - (void)nativeExpressRewardedVideoAdDidVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
 /**
-This method is called when video ad is about to close.
-*/
+ This method is called when video ad is about to close.
+ */
 - (void)nativeExpressRewardedVideoAdWillClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
 /**
-This method is called when video ad is closed.
-*/
+ This method is called when video ad is closed.
+ */
 - (void)nativeExpressRewardedVideoAdDidClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
 /**
-This method is called when video ad is clicked.
-*/
+ This method is called when video ad is clicked.
+ */
 - (void)nativeExpressRewardedVideoAdDidClick:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
 /**
-This method is called when the user clicked skip button.
-*/
+ This method is called when the user clicked skip button.
+ */
 - (void)nativeExpressRewardedVideoAdDidClickSkip:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
 /**
-This method is called when video ad play completed or an error occurred.
-@param error : the reason of error
-*/
+ This method is called when video ad play completed or an error occurred.
+ @param error : the reason of error
+ */
 - (void)nativeExpressRewardedVideoAdDidPlayFinish:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error;
 
 /**
-Server verification which is requested asynchronously is succeeded.
-@param verify :return YES when return value is 2000.
-*/
+ Server verification which is requested asynchronously is succeeded. now include two v erify methods:
+      1. C2C need  server verify  2. S2S don't need server verify
+ @param verify :return YES when return value is 2000.
+ */
 - (void)nativeExpressRewardedVideoAdServerRewardDidSucceed:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify;
 
 /**
-Server verification which is requested asynchronously is failed.
-Return value is not 2000.
-*/
+ Server verification which is requested asynchronously is failed.
+ Return value is not 2000.
+ */
 - (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
 /**
-this methods is to tell delegate the type of express rewarded video Ad, type 0:video+endcard  1:video+playable   2:playable
-*/
-- (void)nativeExpressRewardedVideoAdCallback:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd withType:(BUNativeExpressRewardedVideoAdType)nativeExpressVideoType;
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)nativeExpressRewardedVideoAdDidCloseOtherController:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd interactionType:(BUInteractionType)interactionType;
 
 @end
 ```
@@ -2484,6 +2542,12 @@ This method is used to get the type of nativeExpressFullScreenVideo ad, type 0:v
 */
 - (void)nativeExpressFullscreenVideoAdCallback:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd withType:(BUNativeExpressFullScreenAdType) nativeExpressVideoAdType;
 
+/**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)nativeExpressFullscreenVideoAdDidCloseOtherController:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd interactionType:(BUInteractionType)interactionType;
+
 @end
 ```
 
@@ -2602,6 +2666,12 @@ This method is called when when video ad play completed or an error occurred.
 */
 - (void)nativeExpressSplashViewFinishPlayDidPlayFinish:(BUNativeExpressSplashView *)splashView didFailWithError:(NSError *)error;
 
+/**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)nativeExpressSplashViewDidCloseOtherController:(BUNativeExpressSplashView *)splashView interactionType:(BUInteractionType)interactionType;
+- 
 @end
 ```
 
@@ -2674,6 +2744,7 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
     BUErrorCodeNEParseError       = 105,    // native Express ad, parse fail
     BUErrorCodeNERenderError      = 106,    // native Express ad, render fail
     BUErrorCodeNERenderTimoutError= 107,    // native Express ad, render timeout
+    BUErrorCodeTempLoadError      = 109,    // native Express ad, template load fail
 
     BUErrorCodeSDKStop          = 1000,     // SDK stop forcely
 

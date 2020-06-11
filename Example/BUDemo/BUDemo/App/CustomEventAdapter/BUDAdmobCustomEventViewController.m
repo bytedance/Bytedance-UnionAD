@@ -16,6 +16,7 @@
 #import "BUDAdmob_BannerExpressCusEventVC.h"
 #import "BUDAdmob_InterstitialExpressCusEventVC.h"
 #import "BUDAdmob_FeedNativeCusEventVC.h"
+#import "BUDAdmob_FullScreenCusEventVC.h"
 
 @interface BUDAdmobCustomEventViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -47,6 +48,15 @@
         vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
+    
+    BUDActionModel *Admob_FullScreen_Item = [BUDActionModel plainTitleActionModel:@"Normal FullScreenVideo" type:BUDCellType_CustomEvent action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUDAdmob_FullScreenCusEventVC *vc = [BUDAdmob_FullScreenCusEventVC new];
+        vc.view.backgroundColor = [UIColor whiteColor];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+
+
     
     BUDActionModel *Admob_RewardExpress_Item = [BUDActionModel plainTitleActionModel:@"Express RewardVideo" type:BUDCellType_CustomEvent action:^{
         __strong typeof(weakSelf) self = weakSelf;
@@ -83,7 +93,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.items = @[          @[Admob_RewardVideo_Item],@[Admob_RewardExpress_Item,Admob_FullScreenExpresss_Item,Admob_BannerExpress_Item,Admob_InterstitialExpress_Item],@[Admob_FeedNative_Item]
+    self.items = @[          @[Admob_RewardVideo_Item,Admob_FullScreen_Item],@[Admob_RewardExpress_Item,Admob_FullScreenExpresss_Item,Admob_BannerExpress_Item,Admob_InterstitialExpress_Item],@[Admob_FeedNative_Item]
     ];
 }
 

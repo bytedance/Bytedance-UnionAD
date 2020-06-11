@@ -157,6 +157,7 @@
 - (void)nativeExpressSplashView:(nonnull BUNativeExpressSplashView *)splashAdView didFailWithError:(NSError * _Nullable)error {
     [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
     [self.splashView removeFromSuperview];
+    self.splashView = nil;
     NSLog(@"%s",__func__);
     NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
 }
@@ -168,6 +169,7 @@
 - (void)nativeExpressSplashViewRenderFail:(nonnull BUNativeExpressSplashView *)splashAdView error:(NSError * _Nullable)error {
     [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
     [self.splashView removeFromSuperview];
+    self.splashView = nil;
     NSLog(@"%s",__func__);
 }
 
@@ -186,6 +188,7 @@
 - (void)nativeExpressSplashViewDidClose:(nonnull BUNativeExpressSplashView *)splashAdView {
     [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
     [self.splashView removeFromSuperview];
+    self.splashView = nil;
     NSLog(@"%s",__func__);
 }
 

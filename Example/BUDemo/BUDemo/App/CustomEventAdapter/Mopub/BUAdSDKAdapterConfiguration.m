@@ -9,6 +9,7 @@
 #import "BUAdSDKAdapterConfiguration.h"
 #import <BUAdSDK/BUAdSDKManager.h>
 #import "BUDAdManager.h"
+#import "MoPub.h"
 
 @implementation BUAdSDKAdapterConfiguration
 - (NSString *)adapterVersion {
@@ -41,6 +42,11 @@
                 [BUAdSDKManager setAppID:[BUDAdManager appKey]];
                 [BUAdSDKManager setIsPaidApp:NO];
                 [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
+                // This is a example to set GDPR. You can change GDPR at right scence
+                if ([[MoPub sharedInstance] isGDPRApplicable] != MPBoolUnknown) {
+                    BOOL canCollect =  [[MoPub sharedInstance] canCollectPersonalInfo];
+                    [BUAdSDKManager setGDPR:canCollect];
+                }
                 if (complete != nil) {
                     complete(nil);
                 }

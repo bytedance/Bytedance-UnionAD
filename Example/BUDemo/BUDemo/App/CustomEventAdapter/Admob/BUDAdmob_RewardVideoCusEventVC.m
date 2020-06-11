@@ -8,7 +8,7 @@
 
 #import "BUDAdmob_RewardVideoCusEventVC.h"
 #import <BUAdSDK/BURewardedVideoAd.h>
-#import <GoogleMobileAds/GADRewardBasedVideoAd.h>
+#import <GoogleMobileAds/GADRewardedAd.h>
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
 #import "BUDNormalButton.h"
@@ -19,9 +19,9 @@
  The corresponding adapter class is shown in the corresponding table of the BUDSlotID class.
  对应的adapter类参见BUDSlotID类的对应表
  */
-@interface BUDAdmob_RewardVideoCusEventVC ()<GADRewardBasedVideoAdDelegate>
+@interface BUDAdmob_RewardVideoCusEventVC ()<GADRewardedAdDelegate>
 @property (nonatomic, strong) BUDNormalButton *button;
-@property (nonatomic, strong) GADRewardBasedVideoAd *rewardVideoAd;
+@property (nonatomic, strong) GADRewardedAd *rewardVideoAd;
 @end
 
 @implementation BUDAdmob_RewardVideoCusEventVC
@@ -32,12 +32,28 @@
     [self.view addSubview:self.button];
     self.button.isValid = NO;
     [self loadRewardVideo];
+
 }
 
 - (void)loadRewardVideo {
-    self.rewardVideoAd = [[GADRewardBasedVideoAd alloc] init];
-    self.rewardVideoAd.delegate = self;
-    [self.rewardVideoAd loadRequest:[GADRequest request] withAdUnitID:admob_reward_UnitID];
+    self.rewardVideoAd = [[GADRewardedAd alloc] initWithAdUnitID:admob_reward_UnitID];
+    GADRequest *request = [GADRequest request];
+    __weak typeof(self) weakself = self;
+    [self.rewardVideoAd loadRequest:request completionHandler:^(GADRequestError * _Nullable error) {
+        __strong typeof(self) strongself = weakself;
+        if (error) {
+            // Handle ad failed to load case.
+            BUD_Log(@"%s", __func__);
+        } else {
+            // Ad successfully loaded.
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.offset = CGPointMake(0, -100);
+            hud.label.text = @"reawrded data load success";
+            [hud hideAnimated:YES afterDelay:2];
+            strongself.button.isValid = YES;
+        }
+    }];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -57,37 +73,30 @@
 
 #pragma mark 事件处理
 - (void)buttonTapped:(id)sender {
-    [self.rewardVideoAd presentFromRootViewController:self.navigationController];
+    [self.rewardVideoAd presentFromRootViewController:self.navigationController delegate:self];
     self.button.isValid = NO;
 }
 
-#pragma mark GADRewardBasedVideoAdDelegate
-- (void)rewardBasedVideoAd:(nonnull GADRewardBasedVideoAd *)rewardBasedVideoAd didRewardUserWithReward:(nonnull GADAdReward *)reward {
-    BUD_Log(@"%s", __func__);
+#pragma mark GADRewardedAdDelegate
+/// Tells the delegate that the user earned a reward.
+- (void)rewardedAd:(GADRewardedAd *)rewardedAd userDidEarnReward:(GADAdReward *)reward {
+  // TODO: Reward the user.
+  BUD_Log(@"%s", __func__);
 }
 
-- (void)rewardBasedVideoAdDidReceiveAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"reawrded data load success";
-    [hud hideAnimated:YES afterDelay:2];
-    self.button.isValid = YES;
-    BUD_Log(@"%s", __func__);
+/// Tells the delegate that the rewarded ad was presented.
+- (void)rewardedAdDidPresent:(GADRewardedAd *)rewardedAd {
+  BUD_Log(@"%s", __func__);
 }
 
-- (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd
-    didFailToLoadWithError:(NSError *)error {
-    BUD_Log(@"%s", __func__);
+/// Tells the delegate that the rewarded ad failed to present.
+- (void)rewardedAd:(GADRewardedAd *)rewardedAd didFailToPresentWithError:(NSError *)error {
+  BUD_Log(@"%s", __func__);
 }
 
-- (void)rewardBasedVideoAdDidOpen:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
+/// Tells the delegate that the rewarded ad was dismissed.
+- (void)rewardedAdDidDismiss:(GADRewardedAd *)rewardedAd {
     BUD_Log(@"%s", __func__);
-}
-
-- (void)rewardBasedVideoAdDidClose:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
     [self loadRewardVideo];
-    BUD_Log(@"%s", __func__);
 }
-
 @end

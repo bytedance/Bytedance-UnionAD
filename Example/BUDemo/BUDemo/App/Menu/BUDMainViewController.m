@@ -25,6 +25,7 @@
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
 #import <BUAdSDK/BUAdSDK.h>
+#import "BUDWaterfallViewController.h"
 
 @interface BUDMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -95,6 +96,11 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
+    BUDActionModel *item13 = [BUDActionModel plainTitleActionModel:@"Waterfall Ad" type:BUDCellType_video action:^{
+        BUDWaterfallViewController *vc = [BUDWaterfallViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    
     BUDActionModel *item12 = [BUDActionModel plainTitleActionModel:@"CustomEventAdapter" type:BUDCellType_CustomEvent action:^{
         BUDCustomEventViewController *vc = [BUDCustomEventViewController new];
         vc.view.backgroundColor = [UIColor whiteColor];
@@ -107,7 +113,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.items = @[@[settingVC, nativeExpressModel], @[item4, item6, item7], @[fullscreenItem,item10], @[item12], @[item8]];
+    self.items = @[@[settingVC, nativeExpressModel], @[item4, item6, item7], @[fullscreenItem,item10],@[item13], @[item12], @[item8]];
     
     CGFloat height = 22 * self.items.count;
     for (NSArray *subItem in self.items) {

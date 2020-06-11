@@ -70,6 +70,8 @@
 #define admob_expressBanner_UnitID        @"ca-app-pub-3940256099942544/2934735716"
 #define admob_expressInterstitial_UnitID  @"ca-app-pub-3940256099942544/4411468910"
 #define admob_native_UnitID               @"ca-app-pub-3940256099942544/3986624511"
+#define admob_normalFullscreen_UnitID     @"ca-app-pub-3940256099942544/4411468910"
+
 #else
 #define admob_reward_UnitID               @"ca-app-pub-9206388280072239/3592550520"
 #define admob_expressReward_UnitID        @"ca-app-pub-9206388280072239/3833766591"
@@ -77,6 +79,7 @@
 #define admob_expressBanner_UnitID        @"ca-app-pub-9206388280072239/8476569246"
 #define admob_expressInterstitial_UnitID  @"ca-app-pub-9206388280072239/8309048289"
 #define admob_native_UnitID               @"ca-app-pub-9206388280072239/1140624809"
+#define admob_normalFullscreen_UnitID     @"ca-app-pub-9206388280072239/7278598648"
 #endif
 
 #endif /* BUDSlotID_h */
@@ -85,6 +88,7 @@
  admob广告位与adapter对应表：
  广告类型                        adaper类                                        展示的VC
  NormalRewardVideo :           BUDAdmob_RewardCustomEventAdapter             BUDAdmob_RewardVideoCusEventVC
+ NormalFullscreenVideo         BUDAdmob_NormalFullScreenCustomEventAdapter       BUDAdmob_FullScreenCusEventVC
  ExpressRewardVideo:           BUDAdmob_RewardExpressCustomEventAdapter      BUDAdmob_RewardExpressCusEventVC
  ExpressFullscreenVideo:       BUDAdmob_FullScreenCustomEventAdapter         BUDAdmob_FullScreenExpressCusEventVC
  ExpressBanner:                BUDAdmob_BannerCustomEventAdapter             BUDAdmob_BannerExpressCusEventVC

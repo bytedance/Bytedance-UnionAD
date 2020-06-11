@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BUDAdmob_RewardExpressCustomEventAdapter : NSObject<GADMRewardBasedVideoAdNetworkAdapter>
+@interface BUDAdmob_RewardExpressCustomEventAdapter : NSObject<GADMediationAdapter>
 
 @end
 

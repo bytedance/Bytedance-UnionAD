@@ -90,7 +90,10 @@
      */
     // admob adaptor config
     // add appKey in info.plist (key:GADApplicationIdentifier)
-    [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
+    [[GADMobileAds sharedInstance] startWithCompletionHandler:^(GADInitializationStatus * _Nonnull status) {
+        // This is a example to set GDPR. You can change GDPR at right scence
+//        [BUAdSDKManager setGDPR:0];
+    }];
     
     // mopub adaptor config
     MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:mopub_AD_APPID];
@@ -115,6 +118,7 @@
 - (void)setupBUAdSDK {
     //BUAdSDK requires iOS 9 and up
     [BUAdSDKManager setAppID:[BUDAdManager appKey]];
+
 #if DEBUG
     // Whether to open log. default is none.
     [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];

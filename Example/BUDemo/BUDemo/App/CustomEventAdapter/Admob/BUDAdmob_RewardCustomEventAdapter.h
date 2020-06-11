@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
-@interface BUDAdmob_RewardCustomEventAdapter : NSObject<GADMRewardBasedVideoAdNetworkAdapter>
+@interface BUDAdmob_RewardCustomEventAdapter : NSObject<GADMediationAdapter>
 @end

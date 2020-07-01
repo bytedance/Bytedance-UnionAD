@@ -56,6 +56,14 @@
 | v2.7.5.0         | 2019-12-06 | 1. Fixed the click callback for personalized template takeover ads. 2. Added loading completed and cache callbacks for playable ads. 3. Provided an adapter for personalized template banner, interstitial, rewarded, and full-screen ads. |
 | v2.7.5.2         | 2019-12-25 | 1. Fixed occasional simulator operation problems             |
 | v2.9.0.0         | 2020-02-10 | 1. Sdk is divided into 2 frameworks and 1 bundle, no longer need to install Github LFS to import sdk with using Pod  2. Add 2 callbacks for normal Splash Ad. splashAdDidClickSkip & splashAdCountdownToZero 3.Add ad type callback for RewardedVideo, FullScreenVideo, ExpressRewardedVideo, ExpressFullScreenVideo.           |
+| v2.9.0.3 | 2020-03-24 | 1.Incorrect assignment of overseas GDPR compliance |
+| v2.9.5.0 | 2020-03-16 | 1. Playable ads loading optimization 2. Fix the Playable ads black screen issue 3. Express ad performance optimization|
+| v2.9.5.5 | 2020-04-20 | 1. App Store preview page bug fix |
+| v2.9.5.6 | 2020-04-29 | 1. Express ad optimization |
+| v3.0.0.0 | 2020-04-28 | 1. Splash ad optimization 2.Improve the fill ability to splash ad; 3. Support video splash ad 4. Optimized the Playable ad capabilities to improve filling capabilities and play fluency;|
+| v3.0.0.1 | 2020-05-15 | 1. Express ad optimization |
+| v3.0.0.2 | 2020-06-05 | 1. Fix playable ad mute issue 2. Fix some crash issues |
+| v3.0.0.6 | 2020-06-30 | 1. Splash ad bug fix  2. Bundle optimization |
 
 -   [1.SDK Access](#1sdk-access)
     -   [1.1 iOS SDK Framework](#11-ios-sdk-framework)

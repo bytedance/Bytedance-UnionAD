@@ -56,10 +56,8 @@ If the content of the document cannot solve your problem, you can try to give fe
 - Pangle will invite some developers to grayscale the new version of the SDK, please pay attention to the notice in the station. You can send an email to union_tech_support@bytedance.com to apply for the new version of the Pangle SDK. Your participation is highly appreciated!
 
 - SDK information
-  - Version Number: 3.0.0.2
-  - Updated: 2020-06-07
+  - Version Number: 3.0.0.6
+  - Updated: 2020-07-01
   - Change Log:
-    - Optimization splash ad 
-      - Improve the filling ability of  splash ads
-      - Support video splash ad
-    - Optimized playable ads，Improve the filling ability and playback fluency
+    1. Splash ad bug fix 
+    2. Bundle addressing optimization (support dynamic library addressing adaptation unity 2019.3+)

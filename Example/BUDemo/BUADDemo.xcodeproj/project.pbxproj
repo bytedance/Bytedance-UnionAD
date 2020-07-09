@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		124FCD49249206370008FA8D /* BUAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124FCD46249206370008FA8D /* BUAdSDK.framework */; };
-		124FCD4A249206370008FA8D /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 124FCD47249206370008FA8D /* BUAdSDK.bundle */; };
-		124FCD4B249206370008FA8D /* BUFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124FCD48249206370008FA8D /* BUFoundation.framework */; };
+		1200EE5324B6CC6D00E331DD /* BUAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1200EE5024B6CC6D00E331DD /* BUAdSDK.framework */; };
+		1200EE5424B6CC6D00E331DD /* BUFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1200EE5124B6CC6D00E331DD /* BUFoundation.framework */; };
+		1200EE5524B6CC6D00E331DD /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1200EE5224B6CC6D00E331DD /* BUAdSDK.bundle */; };
+		1200EE5824B6CCD400E331DD /* BUDTestToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EE5724B6CCD400E331DD /* BUDTestToolsViewController.m */; };
 		124FCD4E2492066A0008FA8D /* BUDWaterfallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 124FCD4D249206690008FA8D /* BUDWaterfallViewController.m */; };
 		124FCD6B249206A50008FA8D /* BUDAdmob_RewardVideoCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 124FCD4F249206A40008FA8D /* BUDAdmob_RewardVideoCusEventVC.m */; };
 		124FCD6C249206A50008FA8D /* BUDAdmob_RewardExpressCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 124FCD51249206A40008FA8D /* BUDAdmob_RewardExpressCusEventVC.m */; };
@@ -127,9 +128,11 @@
 
 /* Begin PBXFileReference section */
 		05C4E22FADCD2F7815223297 /* Pods-Demo-BUADDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		124FCD46249206370008FA8D /* BUAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BUAdSDK.framework; path = BUDemo/BUAdSDK.framework; sourceTree = "<group>"; };
-		124FCD47249206370008FA8D /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = BUAdSDK.bundle; path = BUDemo/BUAdSDK.bundle; sourceTree = "<group>"; };
-		124FCD48249206370008FA8D /* BUFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BUFoundation.framework; path = BUDemo/BUFoundation.framework; sourceTree = "<group>"; };
+		1200EE5024B6CC6D00E331DD /* BUAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BUAdSDK.framework; path = BUDemo/BUAdSDK.framework; sourceTree = "<group>"; };
+		1200EE5124B6CC6D00E331DD /* BUFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BUFoundation.framework; path = BUDemo/BUFoundation.framework; sourceTree = "<group>"; };
+		1200EE5224B6CC6D00E331DD /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = BUAdSDK.bundle; path = BUDemo/BUAdSDK.bundle; sourceTree = "<group>"; };
+		1200EE5624B6CCD400E331DD /* BUDTestToolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDTestToolsViewController.h; sourceTree = "<group>"; };
+		1200EE5724B6CCD400E331DD /* BUDTestToolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDTestToolsViewController.m; sourceTree = "<group>"; };
 		124FCD4C249206690008FA8D /* BUDWaterfallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDWaterfallViewController.h; sourceTree = "<group>"; };
 		124FCD4D249206690008FA8D /* BUDWaterfallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDWaterfallViewController.m; sourceTree = "<group>"; };
 		124FCD4F249206A40008FA8D /* BUDAdmob_RewardVideoCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_RewardVideoCusEventVC.m; sourceTree = "<group>"; };
@@ -362,9 +365,9 @@
 				DE0223AF234F0C89002C9D26 /* Accelerate.framework in Frameworks */,
 				780D5E3D2223CB8D0051EF1B /* Photos.framework in Frameworks */,
 				78E073AB21A2CFF1006D71EE /* AdSupport.framework in Frameworks */,
-				124FCD49249206370008FA8D /* BUAdSDK.framework in Frameworks */,
+				1200EE5324B6CC6D00E331DD /* BUAdSDK.framework in Frameworks */,
 				78E073A921A2CFE9006D71EE /* CoreMotion.framework in Frameworks */,
-				124FCD4B249206370008FA8D /* BUFoundation.framework in Frameworks */,
+				1200EE5424B6CC6D00E331DD /* BUFoundation.framework in Frameworks */,
 				78E073A721A2CFE2006D71EE /* libresolv.9.tbd in Frameworks */,
 				78E073A521A2CFDB006D71EE /* libc++.tbd in Frameworks */,
 				DE700D5F21A3B4100054DBCB /* libPods-Demo-BUADDemo.a in Frameworks */,
@@ -528,9 +531,9 @@
 		A9BB8904F5E2E508722AB9C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				124FCD47249206370008FA8D /* BUAdSDK.bundle */,
-				124FCD46249206370008FA8D /* BUAdSDK.framework */,
-				124FCD48249206370008FA8D /* BUFoundation.framework */,
+				1200EE5224B6CC6D00E331DD /* BUAdSDK.bundle */,
+				1200EE5024B6CC6D00E331DD /* BUAdSDK.framework */,
+				1200EE5124B6CC6D00E331DD /* BUFoundation.framework */,
 				DE0223AE234F0C89002C9D26 /* Accelerate.framework */,
 				780D5E3C2223CB8D0051EF1B /* Photos.framework */,
 				DE700D5E21A3B4100054DBCB /* libPods-Demo-BUADDemo.a */,
@@ -701,6 +704,8 @@
 				DE84BD3E21A2E9600090D866 /* BUDSettingViewController.m */,
 				785996AA21A5387F00CB726E /* BUDCustomEventViewController.h */,
 				785996AB21A5387F00CB726E /* BUDCustomEventViewController.m */,
+				1200EE5624B6CCD400E331DD /* BUDTestToolsViewController.h */,
+				1200EE5724B6CCD400E331DD /* BUDTestToolsViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -869,7 +874,7 @@
 				DE84BDB321A2E9600090D866 /* LaunchScreen.storyboard in Resources */,
 				DE84BDB821A2E9600090D866 /* Assets.xcassets in Resources */,
 				DE84BDB421A2E9600090D866 /* Main.storyboard in Resources */,
-				124FCD4A249206370008FA8D /* BUAdSDK.bundle in Resources */,
+				1200EE5524B6CC6D00E331DD /* BUAdSDK.bundle in Resources */,
 				5A8B1A022271A25A0048DE10 /* BUDemoLanguage.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -961,6 +966,7 @@
 				DEB95B1921CA28D30025570E /* BUDNativeDislikeViewController.m in Sources */,
 				124FCD6D249206A50008FA8D /* BUDAdmob_FullScreenCustomEventAdapter.m in Sources */,
 				DE84BD9321A2E9600090D866 /* BUDNativeFeedCollectionViewController.m in Sources */,
+				1200EE5824B6CCD400E331DD /* BUDTestToolsViewController.m in Sources */,
 				DE84BD9F21A2E9600090D866 /* BUDFullscreenViewController.m in Sources */,
 				DE4E1937239116F500E052F8 /* BUDMopub_ExpressInterstitialCusEventVC.m in Sources */,
 				DE84BD8B21A2E9600090D866 /* BUDBase64.m in Sources */,

@@ -2,71 +2,8 @@
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v1.0.0           | 2017-6-23 | Created document; supported banner and in-feed ads           |
-| v1.1.0           | 2017-7-21 | Improved API fields and data encryption                      |
-| v1.1.1           | 2017-7-30 | Improved event callback APIs                                 |
-| v1.2.0           | 2017-9-17 | Added takeover and interstitial ads                          |
-| v1.3.2           | 2017-12-28| Fixed the bug where the WebView did not display the Back button when the screen was rotated during an interstitial ad |
-| v1.4.0           | 2017-12-2 | Added banner carousel and video ads                          |
-| v1.5.0           | 2018-01-29 | Added rewarded video ads                                     |
-| v1.5.1           | 2018-02-06 | Solved the symbol conflict problem                           |
-| v1.5.2           | 2018-03-01| Solved the problem where Feed exposures showed 0             |
-| v1.8.0           | 2018-03-28 | Added vertical support for rewarded video ads and fixed the horizontal display |
-| v1.8.1           | 2018-04-11| Fixed the duplicate name problem between UIView categories and media |
-| v1.8.2           | 2018-04-12 | Fixed the NavigationBar display problem on the WebView page  |
-| v1.8.3           | 2018-04-25 | 1. Added demo for AdMob aggregation using the CustomEvent Adatper. 2. Fixed the iPhone X and iPad adaptation problems for rewarded video ads. 3. Added horizontal display support for App Store pages. |
-| v1.8.4           | 2018-05-02| Synced audio playback with device mute status so rewarded video ads would not play audio if the device was in mute mode |
-| v1.9.0           | 2018-05-04 | 1. Improved the request cache logic of the takeover ad SDK. 2. Fixed the screen rotation problem of the native video details page. |
-| v1.9.1           | 2018-05-10 | 1. Solved the takeover redirect problem. 2. Fixed the redirect logic for deepLink redirects. |
-| v1.9.2           | 2018-05-16 | 1. Solved the reward problem of rewarded video ads. 2. Solved the screen rotation problem. 3. Solved the iOS 8 crash problem. 4. Solved the iPhone X adaptation problem of the WebView navigation bar. |
-| v1.9.3           | 2018-06-12| 1. Provided support for third-party URL detection and improved the logic |
-| v1.9.4           | 2018-06-12| 1. Provided pre-loading of rewarded video ad encard pages. 2. Improved native videos. 3. Improved external SDK APIs. |
-| v1.9.4.1         | 2018-08-23 | 1. Added anti-cheating policies                              |
-| v1.9.5           | 2018-08-31 | 1. Added full screen video ad type. 2. Added banner and interstitial templates for native ads, with support for native banner styles and native interstitial styles. 3. Ensured compatibility with iOS 6 and iOS 7, but without support for ad display in these versions. 4. Expanded the versatility of native ads (video and text-image ads), which do not rely on WMTableViewCell and support display in UIView as well as UITableView, UICollectionView, UIScrollView, and other list views. |
-| v1.9.6.0         | 2018-09-13 | 1. Fixed the takeover proxy callback name from "spalsh" to "splash". 2. Adjusted interstitial styles. 3. Added tracking for takeover timeout policies. |
-| v1.9.6.1         | 2018-09-25 | 1. Fixed the screen rotation problem for rewarded video ad pre-loading |
-| v1.9.6.2         | 2018-10-17 | 1. Fixed the problem where the WebView landing page did not support horizontal display |
-| v1.9.7.0         | 2018-11-17 | 1. Added callback times for rewarded video ads and full screen video ads: already displayed and about to close. 2. Added a native video pre-loading feature. 3. Added a rewarded video pre-loading function. 4. Added an App Store pre-loading feature. 5. Added vertical native videos (draw videos). 6. Provided support for pod integration. 7. Fixed the logo size on native banners. 8. Fixed the missing title problems for ad landing pages displayed by the present pop-up method. 9. Added support for external setting of the takeover display size. 10. Brand upgrade, changed the SDK prefix WM to BU (BytedanceUnion). |
-| v1.9.7.1         | 2018-11-29 | 1. Added support for simultaneous requests for rewarded video and full screen ads, with the latter overriding the former. 2. Fixed the reward callback failure for rewarded video ads. 3. Improved the rewarded video ad cache. |
-| v1.9.8.0         | 2018-11-30 | 1. Added external fields, app ratings, review counts, install package sizes, and other information. 2. Provided GIF support for takeover ads. 3. Provided skip time configuration support for full screen video ads. 4. Added demo for CustomEvent for Mopub and Admob. 5. Added a click callback for rewarded video and full screen video landing page type ads. 6. Improved security. |
-| v1.9.8.1         | 2018-11-30 | 1. Supported horizontal display for App Store                |
-| v1.9.8.2         | 2018-12-19 | 1. Supported horizontal display for landing pages            |
-| v1.9.8.5         | 2019-01-11 | 1. Fixed the problem that caused landing pages to occasionally crash on 32-bit devices |
-| v1.9.9.0         | 2019-01-11 | 1. Added a dislike feature. 2. Added load progress bar for opening the landing page. 3. Upgraded API encryption. 4. Provided bar configuration for rewarded video ads. |
-| v1.9.9.1         | 2019-01-12 | 1. Fixed the problem that caused landing pages to occasionally crash on 32-bit devices |
-| v1.9.9.2         | 2019-03-01 | 1. Improved UA. 2. Improved audio playback of rewarded video ads |
-| v1.9.9.5         | 2019-04-09 | 1. Performed a security verification                         |
-| v2.0.0.0         | 2019-03-20 | 1. Added rewarded video ads and full screen video ads for the international version. 2. Provided personalized templates for in-feed ads. 3. Provided close configuration and delayed close features for rewarded video ads. 4. Supported vertical image styles for native ads. |
-| v2.0.1.1         | 2019-04-12 | 1. Provided personalized templates                           |
-| v2.0.1.3         | 2019-04-26 | 1. Adjusted the network cache policy for personalized template ads. |
-| v2.0.1.4         | 2019-05-28 | 1. Fixed ad API request problems                             |
-| v2.0.1.7         | 2019-05-30 | 1. Removed unnecessary dependencies                          |
-| v2.1.0.0         | 2019-05-14 | 1. Added callbacks for redirect landing page and App Store Back button clicks. 2. Improved the rewarded video and full screen video cache logic. 3. Added volume control for rewarded video and full screen video ads. |
-| v2.1.0.2         | 2019-07-09 | 1. Solved the old-version Xcode packaging problem. 2. Supported personalized template ads for banner and interstitial ads. |
-| v2.2.0.0         | 2019-06-19 | 1. Improved the pre-loading logic of rewarded video and full screen video ads. 2. Improved the styles of rewarded video and full screen video ads. |
-| v2.2.0.1         | 2019-07-04 | 1. Solved the old-version Xcode packaging problem. 2. Fixed the click callback problems for rewarded video and full screen video ads. |
-| v2.3.0.0         | 2019-07-18 | 1. Added pre-loading feature for rewarded video and full screen video trial ads. 2. Changed UIWebView to WKWebView. |
-| v2.4.0.0         | 2019-08-05 | 1. Reinforced API security. 2. Added ad logos for rewarded video and full screen video ads. 3. Supported automatic playback for playable ads. |
-| v2.4.5.0         | 2019-08-20 | 1. Added pure playable display styles for rewarded video ads |
-| v2.4.6.0         | 2019-09-04 | 1. Supported video styles (in-feed, draw in-feed, rewarded video, full screen video) for personalized template ads. 2. Adapted to iOS 13. 3. Removed all UIWebView code to comply with Apple App Store requirements. |
-| v2.4.6.6         | 2019-09-25 | 1. Solved 107 errors for Xcode 11 personalized template ads. 2. Solved Xcode 11 simulator operation problem. |
-| v2.4.5.0         | 2019-10-08 | 1. Supported deeplinks for rewarded video and full screen video download-type ads. 2. Improved personalized template ads. 3. Supported Coppa compliance for the international version. |
-| v2.5.0.0         | 2019-10-10 | 1. Improved personalized template ad loading logic.          |
-| v2.7.0.0         | 2019-11-25 | 1. Improved takeover request logic. 2. Supported takeover for personalized template ads. 3. Simplified the integration parameters (removed imgSize) of personalized template banner and interstitial ads. |
-| v2.7.5.0         | 2019-12-06 | 1. Fixed the click callback for personalized template takeover ads. 2. Added loading completed and cache callbacks for playable ads. 3. Provided an adapter for personalized template banner, interstitial, rewarded, and full-screen ads. |
-| v2.7.5.2         | 2019-12-25 | 1. Fixed occasional simulator operation problems             |
-| v2.9.0.0         | 2020-02-10 | 1. Sdk is divided into 2 frameworks and 1 bundle, no longer need to install Github LFS to import sdk with using Pod  2. Add 2 callbacks for normal Splash Ad. splashAdDidClickSkip & splashAdCountdownToZero 3.Add ad type callback for RewardedVideo, FullScreenVideo, ExpressRewardedVideo, ExpressFullScreenVideo.           |
-| v2.9.0.3 | 2020-03-24 | 1.Incorrect assignment of overseas GDPR compliance |
-| v2.9.5.0 | 2020-03-16 | 1. Playable ads loading optimization 2. Fix the Playable ads black screen issue 3. Express ad performance optimization|
-| v2.9.5.5 | 2020-04-20 | 1. App Store preview page bug fix |
-| v2.9.5.6 | 2020-04-29 | 1. Express ad optimization |
-| v3.0.0.0 | 2020-04-28 | 1. Splash ad optimization 2.Improve the fill ability to splash ad; 3. Support video splash ad 4. Optimized the Playable ad capabilities to improve filling capabilities and play fluency;|
-| v3.0.0.1 | 2020-05-15 | 1. Express ad optimization |
-| v3.0.0.2 | 2020-06-05 | 1. Fix playable ad mute issue 2. Fix some crash issues |
-| v3.0.0.6 | 2020-06-30 | 1. Splash ad bug fix  2. Bundle optimization |
-| v3.1.0.0 | 2020-06-07 | 1. Express ad performance optimization; 2. Align the playable ad callback timing with rewarded-video/full-screen video ad. Playable background playback issue fix|
-| v3.1.0.1 | 2020-06-22 | 1. Splash ad bug fix 2. Rewarded video sound issue fix 3. Adjust callback timing for express ad |
 | v3.1.0.2 | 2020-07-07 | 1. Splash ad bug fix 2. Bundle addressing optimization 3. Fixed some bugs |
+[Version history](#Version history)
 
 -   [1.SDK Access](#1sdk-access)
     -   [1.1 iOS SDK Framework](#11-ios-sdk-framework)
@@ -2845,3 +2782,75 @@ Two causes of 40029 errors:
 9. When plugged in, why isn't the display language the one I want?
 
    A: refer to **1.2.4 to add the language configuration** and let the app match the corresponding language
+
+
+
+## Version history
+
+| Document Version | Revision Date | Revision Description                                         |
+| ---------------- | ------------- | ------------------------------------------------------------ |
+| v3.1.0.2 | 2020-07-07 | 1. Splash ad bug fix 2. Bundle addressing optimization 3. Fixed some bugs |
+| v3.1.0.1 | 2020-06-22 | 1. Splash ad bug fix 2. Rewarded video sound issue fix 3. Adjust callback timing for express ad |
+| v3.1.0.0 | 2020-06-07 | 1. Express ad performance optimization; 2. Align the playable ad callback timing with rewarded-video/full-screen video ad. Playable background playback issue fix|
+| v3.0.0.6 | 2020-06-30 | 1. Splash ad bug fix  2. Bundle optimization |
+| v3.0.0.2 | 2020-06-05 | 1. Fix playable ad mute issue 2. Fix some crash issues |
+| v3.0.0.1 | 2020-05-15 | 1. Express ad optimization |
+| v3.0.0.0 | 2020-04-28 | 1. Splash ad optimization 2.Improve the fill ability to splash ad; 3. Support video splash ad 4. Optimized the Playable ad capabilities to improve filling capabilities and play fluency;|
+| v2.9.5.6 | 2020-04-29 | 1. Express ad optimization |
+| v2.9.5.5 | 2020-04-20 | 1. App Store preview page bug fix |
+| v2.9.5.0 | 2020-03-16 | 1. Playable ads loading optimization 2. Fix the Playable ads black screen issue 3. Express ad performance optimization|
+| v2.9.0.3 | 2020-03-24 | 1.Incorrect assignment of overseas GDPR compliance |
+| v2.9.0.0         | 2020-02-10 | 1. Sdk is divided into 2 frameworks and 1 bundle, no longer need to install Github LFS to import sdk with using Pod  2. Add 2 callbacks for normal Splash Ad. splashAdDidClickSkip & splashAdCountdownToZero 3.Add ad type callback for RewardedVideo, FullScreenVideo, ExpressRewardedVideo, ExpressFullScreenVideo.           |
+| v2.7.5.2         | 2019-12-25 | 1. Fixed occasional simulator operation problems             |
+| v2.7.5.0         | 2019-12-06 | 1. Fixed the click callback for personalized template takeover ads. 2. Added loading completed and cache callbacks for playable ads. 3. Provided an adapter for personalized template banner, interstitial, rewarded, and full-screen ads. |
+| v2.7.0.0         | 2019-11-25 | 1. Improved takeover request logic. 2. Supported takeover for personalized template ads. 3. Simplified the integration parameters (removed imgSize) of personalized template banner and interstitial ads. |
+| v2.5.0.0         | 2019-10-10 | 1. Improved personalized template ad loading logic.          |
+| v2.4.5.0         | 2019-10-08 | 1. Supported deeplinks for rewarded video and full screen video download-type ads. 2. Improved personalized template ads. 3. Supported Coppa compliance for the international version. |
+| v2.4.6.6         | 2019-09-25 | 1. Solved 107 errors for Xcode 11 personalized template ads. 2. Solved Xcode 11 simulator operation problem. |
+| v2.4.6.0         | 2019-09-04 | 1. Supported video styles (in-feed, draw in-feed, rewarded video, full screen video) for personalized template ads. 2. Adapted to iOS 13. 3. Removed all UIWebView code to comply with Apple App Store requirements. |
+| v2.4.5.0         | 2019-08-20 | 1. Added pure playable display styles for rewarded video ads |
+| v2.4.0.0         | 2019-08-05 | 1. Reinforced API security. 2. Added ad logos for rewarded video and full screen video ads. 3. Supported automatic playback for playable ads. |
+| v2.3.0.0         | 2019-07-18 | 1. Added pre-loading feature for rewarded video and full screen video trial ads. 2. Changed UIWebView to WKWebView. |
+| v2.2.0.1         | 2019-07-04 | 1. Solved the old-version Xcode packaging problem. 2. Fixed the click callback problems for rewarded video and full screen video ads. |
+| v2.2.0.0         | 2019-06-19 | 1. Improved the pre-loading logic of rewarded video and full screen video ads. 2. Improved the styles of rewarded video and full screen video ads. |
+| v2.1.0.2         | 2019-07-09 | 1. Solved the old-version Xcode packaging problem. 2. Supported personalized template ads for banner and interstitial ads. |
+| v2.1.0.0         | 2019-05-14 | 1. Added callbacks for redirect landing page and App Store Back button clicks. 2. Improved the rewarded video and full screen video cache logic. 3. Added volume control for rewarded video and full screen video ads. |
+| v2.0.1.7         | 2019-05-30 | 1. Removed unnecessary dependencies                          |
+| v2.0.1.4         | 2019-05-28 | 1. Fixed ad API request problems                             |
+| v2.0.1.3         | 2019-04-26 | 1. Adjusted the network cache policy for personalized template ads. |
+| v2.0.1.1         | 2019-04-12 | 1. Provided personalized templates                           |
+| v2.0.0.0         | 2019-03-20 | 1. Added rewarded video ads and full screen video ads for the international version. 2. Provided personalized templates for in-feed ads. 3. Provided close configuration and delayed close features for rewarded video ads. 4. Supported vertical image styles for native ads. |
+| v1.9.9.5         | 2019-04-09 | 1. Performed a security verification                         |
+| v1.9.9.2         | 2019-03-01 | 1. Improved UA. 2. Improved audio playback of rewarded video ads |
+| v1.9.9.1         | 2019-01-12 | 1. Fixed the problem that caused landing pages to occasionally crash on 32-bit devices |
+| v1.9.9.0         | 2019-01-11 | 1. Added a dislike feature. 2. Added load progress bar for opening the landing page. 3. Upgraded API encryption. 4. Provided bar configuration for rewarded video ads. |
+| v1.9.8.5         | 2019-01-11 | 1. Fixed the problem that caused landing pages to occasionally crash on 32-bit devices |
+| v1.9.8.2         | 2018-12-19 | 1. Supported horizontal display for landing pages            |
+| v1.9.8.1         | 2018-11-30 | 1. Supported horizontal display for App Store                |
+| v1.9.8.0         | 2018-11-30 | 1. Added external fields, app ratings, review counts, install package sizes, and other information. 2. Provided GIF support for takeover ads. 3. Provided skip time configuration support for full screen video ads. 4. Added demo for CustomEvent for Mopub and Admob. 5. Added a click callback for rewarded video and full screen video landing page type ads. 6. Improved security. |
+| v1.9.7.1         | 2018-11-29 | 1. Added support for simultaneous requests for rewarded video and full screen ads, with the latter overriding the former. 2. Fixed the reward callback failure for rewarded video ads. 3. Improved the rewarded video ad cache. |
+| v1.9.7.0         | 2018-11-17 | 1. Added callback times for rewarded video ads and full screen video ads: already displayed and about to close. 2. Added a native video pre-loading feature. 3. Added a rewarded video pre-loading function. 4. Added an App Store pre-loading feature. 5. Added vertical native videos (draw videos). 6. Provided support for pod integration. 7. Fixed the logo size on native banners. 8. Fixed the missing title problems for ad landing pages displayed by the present pop-up method. 9. Added support for external setting of the takeover display size. 10. Brand upgrade, changed the SDK prefix WM to BU (BytedanceUnion). |
+| v1.9.6.2         | 2018-10-17 | 1. Fixed the problem where the WebView landing page did not support horizontal display |
+| v1.9.6.1         | 2018-09-25 | 1. Fixed the screen rotation problem for rewarded video ad pre-loading |
+| v1.9.6.0         | 2018-09-13 | 1. Fixed the takeover proxy callback name from "spalsh" to "splash". 2. Adjusted interstitial styles. 3. Added tracking for takeover timeout policies. |
+| v1.9.5           | 2018-08-31 | 1. Added full screen video ad type. 2. Added banner and interstitial templates for native ads, with support for native banner styles and native interstitial styles. 3. Ensured compatibility with iOS 6 and iOS 7, but without support for ad display in these versions. 4. Expanded the versatility of native ads (video and text-image ads), which do not rely on WMTableViewCell and support display in UIView as well as UITableView, UICollectionView, UIScrollView, and other list views. |
+| v1.9.4.1         | 2018-08-23 | 1. Added anti-cheating policies                              |
+| v1.9.4           | 2018-06-12| 1. Provided pre-loading of rewarded video ad encard pages. 2. Improved native videos. 3. Improved external SDK APIs. |
+| v1.9.3           | 2018-06-12| 1. Provided support for third-party URL detection and improved the logic |
+| v1.9.2           | 2018-05-16 | 1. Solved the reward problem of rewarded video ads. 2. Solved the screen rotation problem. 3. Solved the iOS 8 crash problem. 4. Solved the iPhone X adaptation problem of the WebView navigation bar. |
+| v1.9.1           | 2018-05-10 | 1. Solved the takeover redirect problem. 2. Fixed the redirect logic for deepLink redirects. |
+| v1.9.0           | 2018-05-04 | 1. Improved the request cache logic of the takeover ad SDK. 2. Fixed the screen rotation problem of the native video details page. |
+| v1.8.4           | 2018-05-02| Synced audio playback with device mute status so rewarded video ads would not play audio if the device was in mute mode |
+| v1.8.3           | 2018-04-25 | 1. Added demo for AdMob aggregation using the CustomEvent Adatper. 2. Fixed the iPhone X and iPad adaptation problems for rewarded video ads. 3. Added horizontal display support for App Store pages. |
+| v1.8.2           | 2018-04-12 | Fixed the NavigationBar display problem on the WebView page  |
+| v1.8.1           | 2018-04-11| Fixed the duplicate name problem between UIView categories and media |
+| v1.8.0           | 2018-03-28 | Added vertical support for rewarded video ads and fixed the horizontal display |
+| v1.5.2           | 2018-03-01| Solved the problem where Feed exposures showed 0             |
+| v1.5.1           | 2018-02-06 | Solved the symbol conflict problem                           |
+| v1.5.0           | 2018-01-29 | Added rewarded video ads                                     |
+| v1.4.0           | 2017-12-2 | Added banner carousel and video ads                          |
+| v1.3.2           | 2017-12-28| Fixed the bug where the WebView did not display the Back button when the screen was rotated during an interstitial ad |
+| v1.2.0           | 2017-9-17 | Added takeover and interstitial ads                          |
+| v1.1.1           | 2017-7-30 | Improved event callback APIs                                 |
+| v1.1.0           | 2017-7-21 | Improved API fields and data encryption                      |
+| v1.0.0           | 2017-6-23 | Created document; supported banner and in-feed ads           |

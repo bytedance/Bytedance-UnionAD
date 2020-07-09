@@ -10,6 +10,7 @@
 #import "BUAdSlot.h"
 #import "BUMaterialMeta.h"
 #import "BUVideoAdView.h"
+#import "BUMopubAdMarkUpDelegate.h"
 
 @protocol BUNativeAdDelegate;
 
@@ -22,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  Native ads include in-feed ad (multiple ads, image + video), general native ad (single ad, image + video), native banner ad, and native interstitial ad.
  Support interstitial ad, banner ad, splash ad, rewarded video ad, full-screen video ad.
  */
-@interface BUNativeAd : NSObject
+@interface BUNativeAd : NSObject <BUMopubAdMarkUpDelegate>
 
 /**
  Ad slot description.

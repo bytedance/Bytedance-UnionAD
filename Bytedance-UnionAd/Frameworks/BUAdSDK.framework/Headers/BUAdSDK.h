@@ -60,3 +60,7 @@
 
 /// test tools
 #import <BUAdSDK/BUAdSDKTestToolManager.h>
+
+/// pangle view
+#import <BUAdSDK/PangleNativeBannerView.h>
+#import <BUAdSDK/PangleNativeInterstitialView.h>

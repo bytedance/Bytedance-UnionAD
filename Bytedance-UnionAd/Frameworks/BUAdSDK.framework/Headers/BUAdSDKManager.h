@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "BUAdSDKDefines.h"
+#import "BUMopubAdMarkUpDelegate.h"
 
 typedef void (^BUConfirmGDPR)(BOOL isAgreed);
 
@@ -69,3 +70,7 @@ typedef void (^BUConfirmGDPR)(BOOL isAgreed);
 
 @end
 
+
+@interface BUAdSDKManager (MopubAdaptor) <BUMopubAdMarkUpDelegate>
+
+@end

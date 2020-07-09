@@ -13,12 +13,12 @@
 */
 typedef NS_ENUM(NSInteger, BUProposalSize) {
     BUProposalSize_Banner600_90,
-    BUProposalSize_Banner600_100,
+    BUProposalSize_Banner640_100,
     BUProposalSize_Banner600_150,
     BUProposalSize_Banner600_260,
     BUProposalSize_Banner600_286,
     BUProposalSize_Banner600_300,
-    BUProposalSize_Banner600_388,
+    BUProposalSize_Banner690_388,
     BUProposalSize_Banner600_400,
     BUProposalSize_Banner600_500,
     BUProposalSize_Feed228_150,

@@ -13,6 +13,7 @@
 #import "BUNativeExpressAdView.h"
 #import "BUDislikeWords.h"
 #import "BUPlayerPublicDefine.h"
+#import "BUMopubAdMarkUpDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -83,7 +84,7 @@ Sent when a playerw playback status changed.
 @end
 
 
-@interface BUNativeExpressAdManager : NSObject
+@interface BUNativeExpressAdManager : NSObject <BUMopubAdMarkUpDelegate>
 
 @property (nonatomic, strong, nullable) BUAdSlot *adslot;
 

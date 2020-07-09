@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "BUAdSlot.h"
+#import "BUMopubAdMarkUpDelegate.h"
 
 typedef NS_ENUM(NSUInteger, BUFullScreenVideoAdType) {
     BUFullScreenAdTypeEndcard        = 0,    // video + endcard
@@ -83,7 +84,7 @@ this method is used to get the type of fullscreen video ad
 
 @end
 
-@interface BUFullscreenVideoAd : NSObject
+@interface BUFullscreenVideoAd : NSObject <BUMopubAdMarkUpDelegate>
 
 @property (nonatomic, weak, nullable) id<BUFullscreenVideoAdDelegate> delegate;
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;

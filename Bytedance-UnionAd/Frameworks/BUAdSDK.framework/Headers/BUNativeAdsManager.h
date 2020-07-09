@@ -19,7 +19,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 /// Bunativeadsmanager class can request multiple ad data per time.
-@interface BUNativeAdsManager : NSObject
+@interface BUNativeAdsManager : NSObject <BUMopubAdMarkUpDelegate>
 
 @property (nonatomic, strong, nullable) BUAdSlot *adslot;
 @property (nonatomic, strong, nullable) NSArray<BUNativeAd *> *data;

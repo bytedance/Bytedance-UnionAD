@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
     BUErrorCodeNetError         = -2,       // network request failed
     BUErrorCodeParseError       = -1,       // parsing failed
     
+    BUErrorCodeSDKInitConfigUnfinished      = -100,   // sdk init config is unfinished
+
     BUErrorCodePlayableError_ERR_HAS_CACHE  = -702,   // has cache
     BUErrorCodePlayableError_ERR_UNZIP      = -704,   // unzip error
 

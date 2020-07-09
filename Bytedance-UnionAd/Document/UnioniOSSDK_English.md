@@ -2,7 +2,7 @@
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v3.1.0.2 | 2020-07-07 | 1. Splash ad bug fix 2. Bundle addressing optimization 3. Fixed some bugs |
+| v3.1.0.4 | 2020-07-09 | 1. Stability improvement |
 [Version history](#Version history)
 
 -   [1.SDK Access](#1sdk-access)
@@ -2789,6 +2789,7 @@ Two causes of 40029 errors:
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
+| v3.1.0.4 | 2020-07-09 | 1. Stability improvement |
 | v3.1.0.2 | 2020-07-07 | 1. Splash ad bug fix 2. Bundle addressing optimization 3. Fixed some bugs |
 | v3.1.0.1 | 2020-06-22 | 1. Splash ad bug fix 2. Rewarded video sound issue fix 3. Adjust callback timing for express ad |
 | v3.1.0.0 | 2020-06-07 | 1. Express ad performance optimization; 2. Align the playable ad callback timing with rewarded-video/full-screen video ad. Playable background playback issue fix|

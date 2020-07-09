@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BUAdSDKDefines.h"
+#import "BUMopubAdMarkUpDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +21,7 @@ typedef NS_ENUM(NSUInteger, BURewardedVideoAdType) {
 @protocol BURewardedVideoAdDelegate;
 @class BURewardedVideoModel;
 
-@interface BURewardedVideoAd : NSObject
+@interface BURewardedVideoAd : NSObject <BUMopubAdMarkUpDelegate>
 @property (nonatomic, strong) BURewardedVideoModel *rewardedVideoModel;
 @property (nonatomic, weak, nullable) id<BURewardedVideoAdDelegate> delegate;
 

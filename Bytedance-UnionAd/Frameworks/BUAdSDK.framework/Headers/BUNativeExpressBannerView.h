@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BUMaterialMeta.h"
+#import "BUMopubAdMarkUpDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -65,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface BUNativeExpressBannerView : UIView
+@interface BUNativeExpressBannerView : UIView <BUMopubAdMarkUpDelegate>
 
 @property (nonatomic, weak, nullable) id<BUNativeExpressBannerViewDelegate> delegate;
 

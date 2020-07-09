@@ -52,6 +52,9 @@ typedef void (^BUConfirmGDPR)(BOOL isAgreed);
 /// Custom set the AB vid of the user. Array element type is NSNumber
 + (void)setABVidArray:(NSArray<NSNumber *> *)abvids;
 
+/// Custom set the tob ab sdk version of the user.
++ (void)setABSDKVersion:(NSString *)abSDKVersion;
+
 /// Open GDPR Privacy for the user to choose before setAppID.
 + (void)openGDPRPrivacyFromRootViewController:(UIViewController *)rootViewController confirm:(BUConfirmGDPR)confirm;
 

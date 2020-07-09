@@ -120,7 +120,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     y += 5;
     
     CGFloat originInfoX = padding.left;
-    self.nativeAdRelatedView.adLabel.frame = CGRectMake(originInfoX, y + 3, 26, 14);
+    [self.nativeAdRelatedView.adLabel sizeToFit];
+    self.nativeAdRelatedView.adLabel.frame = CGRectMake(originInfoX, y + 3, self.nativeAdRelatedView.adLabel.frame.size.width + 10, 14);
     originInfoX += 24;
     originInfoX += 5;
     
@@ -168,7 +169,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     y += 10;
     
     CGFloat originInfoX = padding.left;
-    self.nativeAdRelatedView.adLabel.frame = CGRectMake(originInfoX, y + 3, 26, 14);
+    [self.nativeAdRelatedView.adLabel sizeToFit];
+    self.nativeAdRelatedView.adLabel.frame = CGRectMake(originInfoX, y + 3, self.nativeAdRelatedView.adLabel.frame.size.width + 10, 14);
     originInfoX += 24;
     originInfoX += 10;
     
@@ -264,7 +266,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 //    }
     // info
     CGFloat originInfoX = padding.left;
-    self.nativeAdRelatedView.adLabel.frame = CGRectMake(originInfoX, y + 3, 26, 14);
+    [self.nativeAdRelatedView.adLabel sizeToFit];
+    self.nativeAdRelatedView.adLabel.frame = CGRectMake(originInfoX, y + 3, self.nativeAdRelatedView.adLabel.frame.size.width + 10, 14);
     originInfoX += 24;
     originInfoX += 15;
     
@@ -312,11 +315,13 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     
     if (!self.nativeAdRelatedView.videoAdView.superview) {
         [self.contentView addSubview:self.nativeAdRelatedView.videoAdView];
+        [self.contentView addSubview:self.nativeAdRelatedView.logoImageView];
     }
     
     if (self.creativeButton && !self.creativeButton.superview) {
         [self.contentView addSubview:self.creativeButton];
     }
+    
     CGFloat width = CGRectGetWidth(self.contentView.bounds);
     CGFloat contentWidth = (width - 2 * margin);
     CGFloat y = padding.top;
@@ -334,7 +339,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     const CGFloat imageHeight = contentWidth * (image.height / image.width);
     
     self.nativeAdRelatedView.videoAdView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
-    
+    self.nativeAdRelatedView.logoImageView.frame = CGRectMake(CGRectGetMaxX(self.nativeAdRelatedView.videoAdView.frame) - logoSize.width, CGRectGetMaxY(self.nativeAdRelatedView.videoAdView.frame) - logoSize.height, logoSize.width, logoSize.height);
     y += imageHeight;
     
     self.bgView.frame = CGRectMake(padding.left, y, contentWidth, self.creativeButton.frame.size.height + 20);
@@ -356,8 +361,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     
     y += 15;
     CGFloat originInfoX = padding.left;
-    self.nativeAdRelatedView.adLabel.frame = CGRectMake(originInfoX, y + 3, 26, 14);
-    
+    [self.nativeAdRelatedView.adLabel sizeToFit];
+    self.nativeAdRelatedView.adLabel.frame = CGRectMake(originInfoX, y + 3, self.nativeAdRelatedView.adLabel.frame.size.width + 10, 14);
     CGFloat dislikeX = width - 24 - padding.right;
     self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 24, 20);
 }

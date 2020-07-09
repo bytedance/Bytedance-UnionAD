@@ -57,3 +57,6 @@
 
 // smartlook
 #import <BUAdSDK/BUAdSmartlookManager.h>
+
+/// test tools
+#import <BUAdSDK/BUAdSDKTestToolManager.h>

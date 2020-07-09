@@ -130,10 +130,12 @@ static CGSize const dislikeSize = {20, 20};
 }
 
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     NSString *info = @"banner material load failed";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"native" message:info delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
-    
     [alert show];
+#pragma clang diagnostic pop
 }
 
 

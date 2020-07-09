@@ -94,8 +94,10 @@
 }
 
 - (void)nativeExpressRewardedVideoAdDidPlayFinish:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
-    [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
     BUD_Log(@"%s",__func__);
+    if (error) {
+        [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
+    }
 }
 
 - (void)nativeExpressRewardedVideoAdServerRewardDidSucceed:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {

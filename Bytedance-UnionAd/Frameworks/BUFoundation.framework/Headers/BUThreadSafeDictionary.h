@@ -7,7 +7,9 @@
 
 @interface BUThreadSafeDictionary: NSMutableDictionary
 - (id)objectForKey:(id <NSCopying>)aKey;
+- (id)valueForKey:(id)aKey;
 - (void)setObject:(id)object forKey:(id <NSCopying>)aKey;
+- (void)setValue:(id)value forKey:(NSString *)key;
 - (void)removeAllObjects;
 - (void)removeObjectForKey:(id <NSCopying>)aKey;
 - (NSDictionary *)dictionary;

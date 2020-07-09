@@ -61,6 +61,7 @@ typedef NS_ENUM(NSInteger, BUAdSlotPosition) {
 /// Native banner ads and native interstitial ads are set to 1, other ad types are 0, the default is 0.
 @property (nonatomic, assign) BOOL isOriginAd;
 
+
 //adload_seq：（针对聚合广告位）传递本次请求是为“自然日内某设备某广告位置第N次展示机会”发出的广告请求，同物理位置在自然日从1开始计数，不同物理位置独立计数；example：某原生广告位置，当天第5次产生展示机会，这次展示机向穿山甲发送了4次广告请求，则这4次广告请求的"adload_seq"的值应为5。第二天重新开始计数。
 @property (nonatomic, assign) NSInteger adloadSeq;
 

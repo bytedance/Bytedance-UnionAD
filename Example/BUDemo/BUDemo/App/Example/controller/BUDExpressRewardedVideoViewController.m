@@ -52,7 +52,7 @@
     self.rewardedAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:slotID rewardedVideoModel:model];
     self.rewardedAd.delegate = self;
     [self.rewardedAd loadAdData];
-    //为保证播放流畅和展示流畅建议可在收到渲染成功和视频下载完成回调后再展示视频。
+    //为保证播放流畅建议可在收到视频下载完成回调后再展示视频。
     self.selectedView.promptStatus = BUDPromptStatusLoading;
 }
 
@@ -67,12 +67,17 @@
 #pragma mark - BUNativeExpressRewardedVideoAdDelegate
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
+    self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
     BUD_Log(@"%s",__func__);
     self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
     NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+}
+
+- (void)nativeExpressRewardedVideoAdCallback:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd withType:(BUNativeExpressRewardedVideoAdType)nativeExpressVideoType{
+    BUD_Log(@"%s",__func__);
 }
 
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
@@ -82,7 +87,6 @@
 
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
-    self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {

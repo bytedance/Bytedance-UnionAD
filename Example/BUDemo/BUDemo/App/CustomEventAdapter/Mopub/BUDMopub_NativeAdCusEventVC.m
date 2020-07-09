@@ -59,6 +59,7 @@
     
     // load native Ad
     [self.adReq startWithCompletionHandler:^(MPNativeAdRequest *request, MPNativeAd *response, NSError *error) {
+        
         if (error) {
             BUD_Log(@"error: %@",error);
         } else {

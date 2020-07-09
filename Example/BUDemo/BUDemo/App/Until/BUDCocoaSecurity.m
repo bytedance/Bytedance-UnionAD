@@ -420,7 +420,7 @@
 // convert NSData to Base64
 - (NSString *)base64:(NSData *)data
 {
-    return [data base64EncodedString];
+    return [data bud_base64EncodedString];
 }
 
 // convert NSData to hex string
@@ -467,7 +467,7 @@
 @implementation BUDCocoaSecurityDecoder
 - (NSData *)base64:(NSString *)string
 {
-    return [NSData dataWithBase64EncodedString:string];
+    return [NSData bud_dataWithBase64EncodedString:string];
 }
 - (NSData *)hex:(NSString *)data
 {

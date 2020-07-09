@@ -96,3 +96,10 @@ typedef enum {
 @interface UIView (BU_NearestController)
 - (UIViewController *)bu_findNearestController;
 @end
+
+@interface UIView (BU_SafeArea)
+- (UIEdgeInsets)bu_safeAreaInsets;
+
++ (UIEdgeInsets)bu_defaultAreaInsets;
+
+@end

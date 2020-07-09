@@ -83,6 +83,14 @@
     BUD_Log(@"%s",__func__);
 }
 
+- (void)rewardedVideoAdDidVisible:(BURewardedVideoAd *)rewardedVideoAd{
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)rewardedVideoAdWillClose:(BURewardedVideoAd *)rewardedVideoAd{
+    BUD_Log(@"%s",__func__);
+}
+
 - (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
     self.selectedView.promptStatus = BUDPromptStatusDefault;
     BUD_Log(@"%s",__func__);
@@ -100,11 +108,20 @@
     BUD_Log(@"%s",__func__);
 }
 
+- (void)rewardedVideoAdDidClickSkip:(BURewardedVideoAd *)rewardedVideoAd{
+    BUD_Log(@"%s",__func__);
+
+}
+
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify{
     BUD_Log(@"%s",__func__);
 }
 
 - (void)rewardedVideoAdClientRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd {
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)rewardedVideoAdCallback:(BURewardedVideoAd *)rewardedVideoAd withType:(BURewardedVideoAdType)rewardedVideoAdType{
     BUD_Log(@"%s",__func__);
 }
 

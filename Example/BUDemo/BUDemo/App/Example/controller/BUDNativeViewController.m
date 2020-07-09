@@ -71,6 +71,8 @@
 }
 
 - (void)buildCollection {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished loading" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
     self.collectionBtn.hidden = YES;
@@ -79,9 +81,12 @@
     [self buildupView];
     [self buildUICollectionView];
     [self loadNativeAd];
+#pragma clang diagnostic pop
 }
 
 - (void)buildNormalView {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished loading" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
     self.collectionBtn.hidden = YES;
@@ -89,6 +94,7 @@
     self.isNormalView = YES;
     [self buildupView];
     [self loadNativeAd];
+#pragma clang diagnostic pop
 }
 
 - (void)buildUICollectionView {
@@ -238,19 +244,23 @@
 
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     NSString *info = @"material load failed";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"native" message:info delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
-    
     [alert show];
+#pragma clang diagnostic pop
 }
 
 - (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *)view
 {
     NSString *str = NSStringFromClass([view class]);
     NSString *info = [NSString stringWithFormat:@"clicked %@", str];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ad" message:info delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
-    
     [alert show];
+#pragma clang diagnostic pop
 }
 
 - (void)nativeAdDidBecomeVisible:(BUNativeAd *)nativeAd
@@ -268,15 +278,21 @@
     } else {
         str = @"appstoreInApp";
     }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
+#pragma clang diagnostic pop
 }
 
 #pragma mark - BUVideoAdViewDelegate
 
 - (void)videoAdViewDidClick:(BUVideoAdView *)videoAdView {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"click" message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
+#pragma clang diagnostic pop
 }
 
 - (void)videoAdViewDidCloseOtherController:(BUVideoAdView *)videoAdView interactionType:(BUInteractionType)interactionType {
@@ -288,13 +304,19 @@
     } else {
         str = @"appstoreInApp";
     }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
+#pragma clang diagnostic pop
 }
 
 - (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finishView is clicked" message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
+#pragma clang diagnostic pop
 }
 
 - (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView {

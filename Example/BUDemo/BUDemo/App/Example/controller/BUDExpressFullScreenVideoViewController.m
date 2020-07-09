@@ -49,7 +49,7 @@
     self.fullscreenAd = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:slotID];
     self.fullscreenAd.delegate = self;
     [self.fullscreenAd loadAdData];
-    //为保证播放流畅和展示流畅建议可在收到渲染成功和视频下载完成回调后再展示视频。
+    //为保证播放流畅建议可在收到视频下载完成回调后再展示视频。
     self.selectedView.promptStatus = BUDPromptStatusLoading;
 }
 
@@ -63,6 +63,7 @@
 #pragma mark - BUFullscreenVideoAdDelegate
 - (void)nativeExpressFullscreenVideoAdDidLoad:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
     BUD_Log(@"%s",__func__);
+    self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
 }
 
 - (void)nativeExpressFullscreenVideoAd:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error {
@@ -72,7 +73,6 @@
 }
 
 - (void)nativeExpressFullscreenVideoAdViewRenderSuccess:(BUNativeExpressFullscreenVideoAd *)rewardedVideoAd {
-    self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
     BUD_Log(@"%s",__func__);
 }
 
@@ -112,6 +112,10 @@
 }
 
 - (void)nativeExpressFullscreenVideoAdDidPlayFinish:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error {
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)nativeExpressFullscreenVideoAdCallback:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd withType:(BUNativeExpressFullScreenAdType) nativeExpressVideoAdType{
     BUD_Log(@"%s",__func__);
 }
 

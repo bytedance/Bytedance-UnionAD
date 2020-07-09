@@ -63,7 +63,7 @@
     const CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
     
     CGFloat bannerHeight = screenWidth * size.height / size.width;
-    self.bannerView.frame = CGRectMake(0, self.view.height-bannerHeight, screenWidth, bannerHeight);
+    self.bannerView.frame = CGRectMake(0, self.view.height-bannerHeight-100, screenWidth, bannerHeight);
     self.bannerView.delegate = self;
     [self.bannerView loadAdData];
     [self.view addSubview:self.bannerView];

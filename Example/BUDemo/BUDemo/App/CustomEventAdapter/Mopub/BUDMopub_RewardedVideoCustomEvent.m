@@ -74,8 +74,10 @@
 }
 
 - (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
-    [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
-    BUD_Log(@"%s", __func__);
+    BUD_Log(@"%s",__func__);
+    if (error) {
+        [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
+    }
 }
 
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {

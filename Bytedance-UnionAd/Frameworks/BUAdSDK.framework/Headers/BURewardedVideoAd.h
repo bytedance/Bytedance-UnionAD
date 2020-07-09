@@ -42,6 +42,7 @@ prime_rit：（针对聚合广告位）广告物理位置对应的固定穿山�
 */
 
 - (instancetype)initWithSlotID:(NSString *)slotID adloadSeq:(NSInteger)adloadSeq primeRit:(NSString * __nullable)primeRit rewardedVideoModel:(nonnull BURewardedVideoModel *)model;
+
 - (void)loadAdData;
 
 /**

@@ -52,6 +52,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// APP已使用的内存 单位MB
 + (NSInteger)usedAPPMemory;
+
+// 是否是低端机型
+// 1. 非iPhone机型不是低端机型
+// 2. iPhone5s及以下是低端机型
++ (BOOL)lowEndMode;
 @end
 
 

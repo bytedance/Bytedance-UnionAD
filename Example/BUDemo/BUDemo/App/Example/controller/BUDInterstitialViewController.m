@@ -16,7 +16,6 @@
 
 @interface BUDInterstitialViewController () <BUInterstitialAdDelegate>
 @property (nonatomic, strong) BUInterstitialAd *interstitialAd;
-@property (nonatomic, strong) BUDNormalButton *button;
 @end
 
 @implementation BUDInterstitialViewController
@@ -26,34 +25,52 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     CGSize size = [UIScreen mainScreen].bounds.size;
-    self.button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
-    self.button.showRefreshIncon = YES;
-    [self.button setTitle:[NSString localizedStringForKey:ShowInterstitial] forState:UIControlStateNormal];
-    [self.button addTarget:self action:@selector(buttonTapped:)forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.button];
     
-    self.interstitialAd = [[BUInterstitialAd alloc] initWithSlotID:self.viewModel.slotID size:[BUSize sizeBy:BUProposalSize_Interstitial600_600]];
-    self.interstitialAd.delegate = self;
-    [self.interstitialAd loadAdData];
+    NSArray *sizeAry = @[@(BUProposalSize_Interstitial600_400), @(BUProposalSize_Interstitial600_600), @(BUProposalSize_Interstitial600_900)];
+    NSArray *stringAry = @[@"600:400", @"600:600", @"600:900"];
+    NSInteger count = sizeAry.count;
+    CGFloat widht = size.width;
+    CGFloat height = size.height;
+    CGFloat itemHeight = 44;
+    CGFloat xOffset = 40;
+    CGFloat itemWidth = widht - xOffset * 2;
+    CGFloat yStep = height / (count + 1);
+    
+    for (NSInteger i = 0; i < count; i++) {
+        CGFloat y = yStep * (i + 1);
+        BUDNormalButton *button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(xOffset, y, itemWidth, itemHeight)];
+        button.showRefreshIncon = YES;
+        NSString *text = [NSString stringWithFormat:@"%@-%@", [NSString localizedStringForKey:ShowInterstitial], stringAry[i]];
+        [button setTitle:text forState:UIControlStateNormal];
+        button.tag = [sizeAry[i] integerValue];
+        [button addTarget:self action:@selector(buttonTapped:)forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+    }
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    self.button.center = CGPointMake(self.view.center.x, self.view.center.y*1.5);
 }
 
 - (void)buttonTapped:(UIButton *)sender {
-    [self.interstitialAd showAdFromRootViewController:self.navigationController];
+    BUProposalSize proposalSize = sender.tag;
+    [self loadAndShowWithBUProposalSize:proposalSize];
+}
+
+- (void)loadAndShowWithBUProposalSize:(BUProposalSize)proposalSize {
+    self.interstitialAd = [[BUInterstitialAd alloc] initWithSlotID:self.viewModel.slotID size:[BUSize sizeBy:proposalSize]];
+    self.interstitialAd.delegate = self;
+    [self.interstitialAd loadAdData];
 }
 
 - (void)interstitialAdDidClose:(BUInterstitialAd *)interstitialAd {
-    [self.interstitialAd loadAdData];
      BUD_Log(@"interstitialAd AdDidClose");
 }
 
 
 - (void)interstitialAdDidLoad:(BUInterstitialAd *)interstitialAd {
     BUD_Log(@"interstitialAd data load sucess");
+    [self.interstitialAd showAdFromRootViewController:self.navigationController];
 }
 
 
@@ -71,8 +88,12 @@
     } else {
         str = @"appstoreInApp";
     }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
+#pragma clang diagnostic pop
 }
 
 - (void)didReceiveMemoryWarning {

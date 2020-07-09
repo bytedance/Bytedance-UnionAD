@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "UIViewController+BUUtilities.h"
 
 @interface BURouter : NSObject
 + (void)pushFromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC;

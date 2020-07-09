@@ -44,7 +44,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.items = [NSMutableArray array];
-    
+    if (@available(iOS 13.0, *)) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
     [self buildupView];
 }
 

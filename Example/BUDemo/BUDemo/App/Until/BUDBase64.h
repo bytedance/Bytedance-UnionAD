@@ -33,22 +33,22 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NSData (BUBase64)
+@interface NSData (BUDBase64)
 
-+ (NSData *)dataWithBase64EncodedString:(NSString *)string;
-- (NSString *)base64EncodedStringWithWrapWidth:(NSUInteger)wrapWidth;
-- (NSString *)base64EncodedString;
++ (NSData *)bud_dataWithBase64EncodedString:(NSString *)string;
+- (NSString *)bud_base64EncodedStringWithWrapWidth:(NSUInteger)wrapWidth;
+- (NSString *)bud_base64EncodedString;
 
 @end
 
 
-@interface NSString (BUBase64)
+@interface NSString (BUDBase64)
 
-+ (NSString *)stringWithBase64EncodedString:(NSString *)string;
-- (NSString *)base64EncodedStringWithWrapWidth:(NSUInteger)wrapWidth;
-- (NSString *)base64EncodedString;
-- (NSString *)base64DecodedString;
-- (NSData *)base64DecodedData;
++ (NSString *)bud_stringWithBase64EncodedString:(NSString *)string;
+- (NSString *)bud_base64EncodedStringWithWrapWidth:(NSUInteger)wrapWidth;
+- (NSString *)bud_base64EncodedString;
+- (NSString *)bud_base64DecodedString;
+- (NSData *)bud_base64DecodedData;
 
 @end
 

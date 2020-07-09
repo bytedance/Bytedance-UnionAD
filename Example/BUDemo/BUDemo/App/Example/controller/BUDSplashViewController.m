@@ -109,7 +109,7 @@
     BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:self.viewModel.slotID frame:self.splashFrame];
     splashView.delegate = self;
     splashView.rootViewController = self;
-    
+    splashView.tolerateTimeout = 3;
     [splashView loadAdData];
     [self.navigationController.view addSubview:splashView];
     self.splashView = splashView;
@@ -179,8 +179,11 @@
     } else {
         str = @"appstoreInApp";
     }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
+#pragma clang diagnostic pop
 }
 
 - (void)didReceiveMemoryWarning {

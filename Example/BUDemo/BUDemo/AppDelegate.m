@@ -20,6 +20,7 @@
 #import "BUDSlotID.h"
 #import <Bugly/Bugly.h>
 #import "BUAdSDKAdapterConfiguration.h"
+#import "BUDTestToolsViewController.h"
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -30,6 +31,7 @@
 
 @interface AppDelegate () <BUSplashAdDelegate>
 @property (nonatomic, assign) CFTimeInterval startTime;
+@property (nonatomic, strong) BUSplashAdView *splashAdView;
 @end
 
 @implementation AppDelegate
@@ -62,8 +64,14 @@
 }
 
 - (void)configDemo {
+    [self configTestData];
     [self configFPS];
     [self configAPM];
+}
+
+- (void)configTestData {
+    // initialize test data
+    [BUDTestToolsViewController initializeTestSetting];
 }
 
 - (void)configFPS {
@@ -131,16 +139,16 @@
 
 - (void)addSplashAD {
     CGRect frame = [UIScreen mainScreen].bounds;
-    BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:normal_splash_ID frame:frame];
+    self.splashAdView = [[BUSplashAdView alloc] initWithSlotID:normal_splash_ID frame:frame];
     // tolerateTimeout = CGFLOAT_MAX , The conversion time to milliseconds will be equal to 0
-    splashView.tolerateTimeout = 10;
-    splashView.delegate = self;
+    self.splashAdView.tolerateTimeout = 10;
+    self.splashAdView.delegate = self;
     
     UIWindow *keyWindow = self.window;
     self.startTime = CACurrentMediaTime();
-    [splashView loadAdData];
-    [keyWindow.rootViewController.view addSubview:splashView];
-    splashView.rootViewController = keyWindow.rootViewController;
+    [self.splashAdView loadAdData];
+    [keyWindow.rootViewController.view addSubview:self.splashAdView];
+    self.splashAdView.rootViewController = keyWindow.rootViewController;
 }
 
 - (void)splashAdDidClose:(BUSplashAdView *)splashAd {

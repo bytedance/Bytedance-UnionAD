@@ -64,6 +64,9 @@
 | v3.0.0.1 | 2020-05-15 | 1. Express ad optimization |
 | v3.0.0.2 | 2020-06-05 | 1. Fix playable ad mute issue 2. Fix some crash issues |
 | v3.0.0.6 | 2020-06-30 | 1. Splash ad bug fix  2. Bundle optimization |
+| v3.1.0.0 | 2020-06-07 | 1. Express ad performance optimization; 2. Align the playable ad callback timing with rewarded-video/full-screen video ad. Playable background playback issue fix|
+| v3.1.0.1 | 2020-06-22 | 1. Splash ad bug fix 2. Rewarded video sound issue fix 3. Adjust callback timing for express ad |
+| v3.1.0.2 | 2020-07-07 | 1. Splash ad bug fix 2. Bundle addressing optimization 3. Fixed some bugs |
 
 -   [1.SDK Access](#1sdk-access)
     -   [1.1 iOS SDK Framework](#11-ios-sdk-framework)
@@ -2351,6 +2354,7 @@ If ritSceneType is custom, you need to pass in the values for sceneDescirbe.
 
 /**
  This method is called when rendering a nativeExpressAdView successed.
+ It will happen when ad is show.
  */
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
@@ -2495,6 +2499,7 @@ This method is called when video ad materia failed to load.
 
 /**
 This method is called when rendering a nativeExpressAdView successed.
+It will happen when ad is show.
 */
 - (void)nativeExpressFullscreenVideoAdViewRenderSuccess:(BUNativeExpressFullscreenVideoAd *)rewardedVideoAd;
 

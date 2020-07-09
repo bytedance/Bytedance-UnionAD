@@ -88,4 +88,27 @@
     BUD_Log(@"%s",__func__);
 }
 
+- (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error{
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)fullscreenVideoAdWillVisible:(BUFullscreenVideoAd *)fullscreenVideoAd{
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)fullscreenVideoAdDidVisible:(BUFullscreenVideoAd *)fullscreenVideoAd{
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)fullscreenVideoAdWillClose:(BUFullscreenVideoAd *)fullscreenVideoAd{
+    BUD_Log(@"%s",__func__);
+}
+
+- (void)fullscreenVideoAdCallback:(BUFullscreenVideoAd *)fullscreenVideoAd withType:(BUFullScreenVideoAdType)fullscreenVideoAdType{
+    BUD_Log(@"%s",__func__);
+}
+
+
+
+
 @end

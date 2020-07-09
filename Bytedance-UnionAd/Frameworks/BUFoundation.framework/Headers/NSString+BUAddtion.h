@@ -30,6 +30,10 @@ typedef NS_ENUM(NSUInteger, BULanguageType) {//"万"转换规则
 @interface NSString (BU_NumberToWan)
 /// 数字转换成x万(以1w为界限，小于1w显示原始数字) 没有”万“走另一套展示逻辑
 + (NSString *)bu_numberToWan:(NSInteger)target wan:(NSString *)wan;
+
+/// 大于1w就用k表示，不大于就直接展示多少个评分
++ (NSString *)bu_numberToThousand:(NSInteger)target;
+
 @end
 
 @interface NSString (BU_URLStringAppend)

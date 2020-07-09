@@ -10,15 +10,15 @@
 | v1.4.0 | 2017-12-2 | 新增banner轮播，视频广告|
 | v1.5.0 | 2018-01-29 | 新增激励视频 |
 | v1.5.1 | 2018-02-06 | 解决符号冲突问题 |
-| v1.5.2 | 2018-03-01 | 解决Feed曝光量为0
+| v1.5.2 | 2018-03-01 | 解决Feed曝光量为0 |
 | v1.8.0 | 2018-03-28 | 激励视频纵向支持与横向展示修复|
 | v1.8.1 | 2018-04-11 | 修复UIView分类可能与媒体重名问题|
 | v1.8.2 | 2018-04-12 | 修复WebView页面NavigationBar显示问题|
 | v1.8.3 | 2018-04-25 | 【1】新增AdMob通过CustomEvent Adapter方式聚合Demo 【2】修复激励视频iPhone X、ipad适配问题【3】App Store页面支持横向展示|
-| v1.8.4 | 2018-05-02 | 声音播放同步设备静音模式，使静音模式下不播放激励视频声音
+| v1.8.4 | 2018-05-02 | 声音播放同步设备静音模式，使静音模式下不播放激励视频声音 |
 | v1.9.0 | 2018-05-04 |【1】优化开屏广告SDK的请求缓存逻辑 【2】修复原生视频详情页转屏问题|
 | v1.9.1 | 2018-05-10 |【1】解决开屏跳转问题【2】修改跳转deepLink情况下跳转逻辑|
-|v1.9.2  | 2018-05-16 |【1】解决激励视频奖励问题【2】解决屏幕旋转问题【3】解决iOS8 crash问题【4】解决webView导航条在iPhone X上适配问题
+| v1.9.2 | 2018-05-16 |【1】解决激励视频奖励问题【2】解决屏幕旋转问题【3】解决iOS8 crash问题【4】解决webView导航条在iPhone X上适配问题 |
 | v1.9.3 | 2018-06-12 |【1】广告支持第三方检测链接和逻辑优化|
 | v1.9.4 | 2018-06-12 |【1】激励视频encard页面预缓存【2】原生视频优化【3】SDK对外接口优化|
 | v1.9.4.1 | 2018-08-23 |【1】增加反作弊策略|
@@ -28,7 +28,7 @@
 | v1.9.6.2 | 2018-10-17 |【1】修复webView落地页横屏不支持问题|
 | v1.9.7.0 | 2018-11-17 |【1】激励视频和全屏视频增加回调时机，已经展示、即将关闭【2】添加原生视频预缓存的功能【3】增加激励视频预缓存功能【4】增加AppStore预缓存功能【5】增加竖版原生视频(draw视频)【6】支持pod方式接入【7】修改原生banner Logo大小【8】修复广告落地页present弹出方式下没有title的问题【9】支持开屏展示大小外部设定【10】品牌升级，SDK的前缀WM替换成BU（BytedanceUnion）|
 | v1.9.7.1 | 2018-11-29 | 【1】激励视频和全屏视频同时请求，后者覆盖前者【2】激励视频奖励回调失败【3】激励视频缓存优化|
-| v1.9.8.0 | 2018-11-30 | 【1】新增对外字段，app评分、评论人数、安装包大小等【2】开屏广告支持gif【3】全屏视频支持跳过时间配置【4】CustomEvent聚合Mopub、Admob，输出demo【5】激励视频、全屏视频落地页类型广告增加点击回调【6】强化安全性
+| v1.9.8.0 | 2018-11-30 | 【1】新增对外字段，app评分、评论人数、安装包大小等【2】开屏广告支持gif【3】全屏视频支持跳过时间配置【4】CustomEvent聚合Mopub、Admob，输出demo【5】激励视频、全屏视频落地页类型广告增加点击回调【6】强化安全性 |
 | v1.9.8.1 | 2018-11-30 | 【1】支持appstore横屏|
 | v1.9.8.2 | 2018-12-19 | 【1】支持落地页横屏|
 | v1.9.8.5 | 2019-01-11 | 【1】修复32bit机型，落地页偶现crash情况|
@@ -42,29 +42,25 @@
 | v2.0.1.4 | 2019-05-28 | 【1】修复广告接口请求问题|
 | v2.0.1.7 | 2019-05-30 | 【1】去掉不需要的依赖库|
 | v2.1.0.0 | 2019-05-14 | 【1】跳转落地页、appstore返回增加回调 【2】激励视频、全屏视频缓存逻辑优化 【3】激励视频、全屏视频增加声音控制|
-| v2.1.0.2 | 2019-07-09 | 【1】解决低版本xcode打包问题 【2】支持banner和插屏广告的个性化模板广告，并优化模板广告场景
+| v2.1.0.2 | 2019-07-09 | 【1】解决低版本xcode打包问题 【2】支持banner和插屏广告的个性化模板广告，并优化模板广告场景 |
 | v2.2.0.0 | 2019-06-19 | 【1】激励视频、全屏视频预缓存逻辑优化  【2】激励视频全屏视频样式优化 |
 | v2.2.0.1 | 2019-07-04 | 【1】解决低版本xcode打包问题 【2】修复激励视频、全屏视频点击回调问题 |
 | v2.3.0.0 | 2019-07-18 | 【1】激励视频、全屏视频试玩广告预加载 【2】UIWebView替换为WKWebView |
 | v2.4.0.0 | 2019-08-05 | 【1】接口增强安全性【2】激励视频、全屏视频增加广告标识【3】可玩广告支持自动播放 |
 | v2.4.5.0 | 2019-08-20 | 【1】激励视频增加纯playable展示样式 |
-| v2.4.6.0 | 2019-09-04 | 【1】个性化模板广告支持视频样式（信息流、draw信息流、激励视频、全屏视频）【2】iOS13适配 【3】配合苹果商店要求，去掉UIWebView所有代码
+| v2.4.6.0 | 2019-09-04 | 【1】个性化模板广告支持视频样式（信息流、draw信息流、激励视频、全屏视频）【2】iOS13适配 【3】配合苹果商店要求，去掉UIWebView所有代码 |
 | v2.4.6.6 | 2019-09-25 | 【1】解决Xcode11个性化模板广告的107错误 【2】解决Xcode11模拟器运行问题 |
-| v2.4.5.0 | 2019-10-08 | 【1】激励视频、全屏视频下载类广告支持deeplink【2】个性化模板广告优化 【3】海外版本支持Coppa合规| 
+| v2.4.5.0 | 2019-10-08 | 【1】激励视频、全屏视频下载类广告支持deeplink【2】个性化模板广告优化 【3】海外版本支持Coppa合规|
 | v2.5.0.0 | 2019-10-10 | 【1】个性化模板广告加载逻辑优化 |
 | v2.7.0.0 | 2019-11-25 | 【1】开屏请求逻辑优化 【2】个性化模板广告支持开屏 【3】个性化模板banner和插屏简化接入参数（去掉imgSize） |
-| v2.7.5.0 | 2019-12-06 | 【1】个性化模板开屏点击回调修复 【2】playable新增加载完成、缓存回调 【3】个性化模板banner、插屏、激励、全屏适配adapter
+| v2.7.5.0 | 2019-12-06 | 【1】个性化模板开屏点击回调修复 【2】playable新增加载完成、缓存回调 【3】个性化模板banner、插屏、激励、全屏适配adapter |
 | v2.7.5.2 | 2019-12-25 |【1】修复偶现的模拟器运行问题 |
 | v2.8.0.0 | 2020-01-03 |【1】解决偶现的开机卡顿问题 【2】playable修复拦截导致WKWebview请求body丢失问题 【3】激励视频全屏适配【4】增加完善错误提示码 |
 | v2.9.0.0 | 2020-02-20 |【1】为了方便通过pod方式接入，SDK拆分为两个包 |
-| v2.9.0.3 | 2020-03-24 |【1】修复GDPR赋值错误问题 |
+| v2.9.0.3 | 2020-03-24 |【1】海外GDPR合规传入赋值错误 |
 | v2.9.5.0 | 2020-03-16 |【1】纯playable加载优化 【2】Playable 素材黑屏问题修复【3】个性化模板性能优化|
-| v2.9.5.5 | 2020-04-20 |【1】App Store预览页bug修复 |
-| v2.9.5.6 | 2020-04-29 |【1】模板广告优化 |
-| v3.0.0.0 | 2020-04-28 |【1】开屏广告优化【2】提高了开屏广告填充能力；【3】支持了视频开屏；【4】playable广告能力优化，提高填充能力及播放流畅度；|
-| v3.0.0.1 | 2020-05-15 |【1】模板广告优化 |
-| v3.0.0.2 | 2020-06-05 |【1】playable 广告静音问题修复【2】部分crash问题修复 |
-| v3.0.0.6 | 2020-06-30 |【1】开屏广告bug修复 【2】Bundle优化 |
+| v3.1.0.1 | 2020-06-24 |【1】实时开屏bugfix; 【2】endcard 展现 依然有视频播放声音bug【3】模板渲染激励/全屏视频广告模板渲染成功时机调整|
+| v3.1.0.2 | 2020-07-07 |【1】开屏广告bug fix【2】bundle寻址优化【3】其他bug fix|
 
 <!-- TOC -->
 
@@ -2113,6 +2109,7 @@ If ritSceneType is custom, you need to pass in the values for sceneDescirbe.
 @optional
 /**
  This method is called when video ad material loaded successfully.
+ And you can call [BUNativeExpressRewardedVideoAd showAdFromRootViewController:].
  */
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
@@ -2133,6 +2130,7 @@ If ritSceneType is custom, you need to pass in the values for sceneDescirbe.
 
 /**
  This method is called when rendering a nativeExpressAdView successed.
+ It will happen when ad is show.
  */
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
@@ -2404,6 +2402,7 @@ Display video ad.
 @optional
 /**
 This method is called when video ad material loaded successfully.
+And you can call [BUNativeExpressFullscreenVideoAd showAdFromRootViewController:].
 */
 - (void)nativeExpressFullscreenVideoAdDidLoad:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd;
 
@@ -2415,6 +2414,7 @@ This method is called when video ad materia failed to load.
 
 /**
 This method is called when rendering a nativeExpressAdView successed.
+It will happen when ad is show.
 */
 - (void)nativeExpressFullscreenVideoAdViewRenderSuccess:(BUNativeExpressFullscreenVideoAd *)rewardedVideoAd;
 

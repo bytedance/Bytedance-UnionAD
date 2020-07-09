@@ -14,6 +14,7 @@
 #import "BUDSlotViewModel.h"
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
+#import "BUDTestToolsViewController.h"
 
 @interface BUDToolsSettingViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) BUDSettingTableView *tableView;
@@ -67,8 +68,13 @@
         vc.view.backgroundColor = [UIColor whiteColor];
         [weaksefl.navigationController pushViewController:vc animated:YES];
     }];
-    
-    self.items = @[normalTools,playableTools].mutableCopy;
+    BUDActionModel *testTools = [BUDActionModel plainTitleActionModel:@"Test Tool" type:BUDCellType_setting action:^{
+        BUDTestToolsViewController *vc = [BUDTestToolsViewController new];
+        vc.view.backgroundColor = [UIColor whiteColor];
+        [weaksefl.navigationController pushViewController:vc animated:YES];
+    }];
+
+    self.items = @[normalTools,playableTools,testTools].mutableCopy;
 }
 
 -(BOOL)shouldAutorotate

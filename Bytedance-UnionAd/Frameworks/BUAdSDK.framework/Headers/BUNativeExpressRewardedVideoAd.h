@@ -26,6 +26,7 @@ typedef NS_ENUM(NSUInteger, BUNativeExpressRewardedVideoAdType) {
 @optional
 /**
  This method is called when video ad material loaded successfully.
+ And you can call [BUNativeExpressRewardedVideoAd showAdFromRootViewController:].
  */
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
@@ -46,6 +47,7 @@ typedef NS_ENUM(NSUInteger, BUNativeExpressRewardedVideoAdType) {
 
 /**
  This method is called when rendering a nativeExpressAdView successed.
+ It will happen when ad is show.
  */
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 

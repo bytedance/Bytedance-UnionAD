@@ -32,6 +32,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (@available(iOS 13.0, *)) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
     [self.view addSubview:self.playableUrlTextView];
     [self.view addSubview:self.downloadUrlTextView];
     [self.view addSubview:self.deeplinkUrlTextView];

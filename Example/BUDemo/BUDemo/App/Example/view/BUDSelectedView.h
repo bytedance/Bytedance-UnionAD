@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BUDSelectedView : UIView
 
 @property (nonatomic, assign) BUDPromptStatus promptStatus;
+@property (nonatomic, copy) NSString *currentID;
+
 - (instancetype)initWithAdName:(NSString*)adName SelectedTitlesAndIDS:(NSArray<NSArray *> *)titlesAndIDS loadAdAction:(nonnull loadAd)loadAd showAdAction:(nonnull dispatch_block_t)showAd;
 @end
 

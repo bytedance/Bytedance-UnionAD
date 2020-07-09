@@ -94,9 +94,9 @@ static CGSize const logoSize = {20, 20};
 }
 
 - (void)tapCloseButton {
-    self.backgroundView.hidden = YES;
-    self.interstitialAdView.image = nil;
-    [self loadNativeAd];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)viewWillLayoutSubviews {

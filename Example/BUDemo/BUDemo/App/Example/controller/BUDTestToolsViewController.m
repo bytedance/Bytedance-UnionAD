@@ -64,7 +64,7 @@ NSString *const HttpPrefixString = @"http://";
     self.view.backgroundColor = [UIColor whiteColor];
     if (@available(iOS 13.0, *)) {
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    } 
+    }
     [self buildupView];
 }
 

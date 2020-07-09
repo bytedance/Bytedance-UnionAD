@@ -2,7 +2,7 @@
 //  BUDMopub_RewardVideoCusEventVC.m
 //  BUAdSDKDemo
 //
-//  Created by bytedance_yuanhuan on 2018/10/22.
+//  Created by bytedance on 2018/10/22.
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 

@@ -8,8 +8,6 @@
 
 #import "BUDMopub_ExpressFullscreenVideoCustomEvent.h"
 #import <BUAdSDK/BUNativeExpressFullscreenVideoAd.h>
-#import "BUDMacros.h"
-#import "BUDSlotID.h"
 
 @interface BUDMopub_ExpressFullscreenVideoCustomEvent ()<BUNativeExpressFullscreenVideoAdDelegate>
 @property (nonatomic, strong) BUNativeExpressFullscreenVideoAd *fullScreenVideo;
@@ -17,7 +15,13 @@
 
 @implementation BUDMopub_ExpressFullscreenVideoCustomEvent
 - (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info adMarkup:(NSString *)adMarkup {
-    self.fullScreenVideo = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:express_full_ID_both];
+    NSString *adPlacementId = [info objectForKey:@"ad_placement_id"];
+    if (adPlacementId == nil) {
+        NSError *error = [NSError errorWithDomain:NSStringFromClass([self class]) code:0 userInfo:@{NSLocalizedDescriptionKey: @"Invalid ad_placement_id. Failing ad request."}];
+        [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
+        return;
+    }
+    self.fullScreenVideo = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:adPlacementId];
     self.fullScreenVideo.delegate = self;
     [self.fullScreenVideo loadAdData];
 }
@@ -32,61 +36,61 @@
 
 #pragma mark BUNativeExpressFullscreenVideoAdDelegate
 - (void)nativeExpressFullscreenVideoAdDidLoad:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAd:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error {
     [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAdViewRenderSuccess:(BUNativeExpressFullscreenVideoAd *)rewardedVideoAd {
     [self.delegate interstitialCustomEvent:self didLoadAd:rewardedVideoAd];
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAdViewRenderFail:(BUNativeExpressFullscreenVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
     [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAdDidDownLoadVideo:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAdWillVisible:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
     [self.delegate interstitialCustomEventWillAppear:self];
     [self.delegate trackImpression];
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAdDidVisible:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
     [self.delegate interstitialCustomEventDidAppear:self];
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAdDidClick:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
     [self.delegate trackClick];
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAdDidClickSkip:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAdWillClose:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
     [self.delegate interstitialCustomEventWillDisappear:self];
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAdDidClose:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
     [self.delegate interstitialCustomEventDidDisappear:self];
-    BUD_Log(@"%s", __func__);
+    
 }
 
 - (void)nativeExpressFullscreenVideoAdDidPlayFinish:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error {
-    BUD_Log(@"%s", __func__);
+    
 }
 
 @end

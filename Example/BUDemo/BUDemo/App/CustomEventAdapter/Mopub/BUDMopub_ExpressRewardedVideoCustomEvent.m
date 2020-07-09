@@ -9,8 +9,6 @@
 #import "BUDMopub_ExpressRewardedVideoCustomEvent.h"
 #import <BUAdSDK/BUAdSDK.h>
 #import <mopub-ios-sdk/MoPub.h>
-#import "BUDMacros.h"
-#import "BUDSlotID.h"
 
 @interface BUDMopub_ExpressRewardedVideoCustomEvent ()<BUNativeExpressRewardedVideoAdDelegate>
 @property (nonatomic, strong) BUNativeExpressRewardedVideoAd *rewardVideoAd;
@@ -18,10 +16,17 @@
 
 @implementation BUDMopub_ExpressRewardedVideoCustomEvent
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info adMarkup:(NSString *)adMarkup {
+    NSString *adPlacementId = [info objectForKey:@"ad_placement_id"];
+    if (adPlacementId == nil) {
+        NSError *error = [NSError errorWithDomain:NSStringFromClass([self class]) code:0 userInfo:@{NSLocalizedDescriptionKey: @"Invalid ad_placement_id. Failing ad request."}];
+        [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
+        return;
+    }
+
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = @"123";
     
-    self.rewardVideoAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:express_reward_ID_both rewardedVideoModel:model];
+    self.rewardVideoAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:adPlacementId rewardedVideoModel:model];
     self.rewardVideoAd.delegate = self;
     [self.rewardVideoAd loadAdData];
 }
@@ -40,61 +45,60 @@
 
 #pragma mark BUNativeExpressRewardedVideoAdDelegate
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
     [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    
     [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
     [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAdWillVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     [self.delegate rewardedVideoWillAppearForCustomEvent:self];
     [self.delegate trackImpression];
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAdDidVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     [self.delegate rewardedVideoDidAppearForCustomEvent:self];
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAdWillClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     [self.delegate rewardedVideoWillDisappearForCustomEvent:self];
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAdDidClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     [self.delegate rewardedVideoDidDisappearForCustomEvent:self];
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAdDidClick:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
     [self.delegate trackClick];
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAdDidClickSkip:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAdDidPlayFinish:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
-    BUD_Log(@"%s",__func__);
     if (error) {
         [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
     }
@@ -105,11 +109,11 @@
         MPRewardedVideoReward *reward = [[MPRewardedVideoReward alloc] initWithCurrencyType:self.rewardVideoAd.rewardedVideoModel.rewardName amount:[NSNumber numberWithInteger:self.rewardVideoAd.rewardedVideoModel.rewardAmount]];
         [self.delegate rewardedVideoShouldRewardUserForCustomEvent:self reward:reward];
     }
-    BUD_Log(@"%s",__func__);
+    
 }
 
 - (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    
 }
 
 

@@ -2,7 +2,7 @@
 //  BUDMopub_NativeAdCusEventVC.m
 //  BUDemo
 //
-//  Created by liudonghui on 2020/1/8.
+//  Created by bytedance on 2020/1/8.
 //  Copyright © 2020 bytedance. All rights reserved.
 //
 
@@ -14,6 +14,7 @@
 #import "NSString+LocalizedString.h"
 #import "BUDSlotID.h"
 #import "view/BUDMopubNativeAdView.h"
+#import "PangleNativeAdView.h"
 
 #import <mopub-ios-sdk/MPNativeAd.h>
 #import <mopub-ios-sdk/MPNativeAdRenderer.h>
@@ -25,7 +26,8 @@
 #import <mopub-ios-sdk/MPNativeAdRequest.h>
 #import <mopub-ios-sdk/MPNativeView.h>
 #import <mopub-ios-sdk/MOPUBNativeVideoAdRendererSettings.h>
-#import <mopub-ios-sdk/MOPUBNativeVideoAdRenderer.h> 
+#import <mopub-ios-sdk/MOPUBNativeVideoAdRenderer.h>
+#import "BUDMopub_NativeAdRender.h"
 
 @interface BUDMopub_NativeAdCusEventVC () <UITableViewDelegate,UITableViewDataSource,MPNativeAdDelegate,MPNativeViewDelegate,BUNativeAdDelegate,BUVideoAdViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -67,7 +69,6 @@
             self.nativeAd.delegate = self;
             if ([self.nativeAd.properties objectForKey:@"bu_nativeAd"] != nil) {
                 BUNativeAd *nativeAd = [self.nativeAd.properties objectForKey:@"bu_nativeAd"];
-                // 8jjlppg
                 nativeAd.delegate = self;
                 nativeAd.rootViewController = self;
             }
@@ -96,6 +97,7 @@
             }
             MPNativeView *view = (MPNativeView *)[self.nativeVideoAd retrieveAdViewWithError:nil];
             CGFloat height = [BUDMopubNativeAdView cellHeightWithModel:self.nativeVideoAd width:CGRectGetWidth(self.tableView.bounds)];
+
             view.frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds),height);
             
             UITableViewCell *cell = [[UITableViewCell alloc] init];
@@ -111,12 +113,13 @@
 
 - (void)setAdReq {
     MPStaticNativeAdRendererSettings *settings = [[MPStaticNativeAdRendererSettings alloc] init];
-    settings.renderingViewClass = [BUDMopubNativeAdView class];
+    settings.renderingViewClass = [PangleNativeAdView class];
     settings.viewSizeHandler = ^(CGFloat maximumWidth) {
         return CGSizeMake(maximumWidth,300);
     };
 
-    MPNativeAdRendererConfiguration *config = [MPStaticNativeAdRenderer rendererConfigurationWithRendererSettings:settings additionalSupportedCustomEvents:@[@"BUDMopub_NativeAdCustomEvent"]];
+    MPNativeAdRendererConfiguration *config = [BUDMopub_NativeAdRender rendererConfigurationWithRendererSettings:settings];
+
     
     // targeting
     MPNativeAdRequestTargeting *targeting = [MPNativeAdRequestTargeting targeting];
@@ -129,13 +132,13 @@
 
 - (void)setVideoAdReq {
     MOPUBNativeVideoAdRendererSettings *nativeVideoAdSettings = [[MOPUBNativeVideoAdRendererSettings alloc] init];
-    nativeVideoAdSettings.renderingViewClass = [BUDMopubNativeAdView class];
+    nativeVideoAdSettings.renderingViewClass = [PangleNativeAdView class];
     nativeVideoAdSettings.viewSizeHandler = ^(CGFloat maximumWidth) {
         return CGSizeMake(100.0f, 312.0f);
     };
 
-    MPNativeAdRendererConfiguration *nativeVideoConfig = [MOPUBNativeVideoAdRenderer rendererConfigurationWithRendererSettings:nativeVideoAdSettings];
-    nativeVideoConfig.supportedCustomEvents = @[@"BUDMopub_NativeAdCustomEvent",@"MOPUBNativeVideoCustomEvent"];
+    MPNativeAdRendererConfiguration *nativeVideoConfig = [BUDMopub_NativeAdRender rendererConfigurationWithRendererSettings:nativeVideoAdSettings];
+
     
     MPNativeAdRequestTargeting *targeting = [MPNativeAdRequestTargeting targeting];
     targeting.desiredAssets =  targeting.desiredAssets = [NSSet setWithObjects:kAdTitleKey, kAdTextKey, kAdCTATextKey, kAdIconImageKey, kAdMainImageKey, kAdStarRatingKey, kVASTVideoKey,nil];

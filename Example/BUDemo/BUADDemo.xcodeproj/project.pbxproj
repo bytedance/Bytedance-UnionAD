@@ -7,10 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1200EE5324B6CC6D00E331DD /* BUAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1200EE5024B6CC6D00E331DD /* BUAdSDK.framework */; };
-		1200EE5424B6CC6D00E331DD /* BUFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1200EE5124B6CC6D00E331DD /* BUFoundation.framework */; };
-		1200EE5524B6CC6D00E331DD /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1200EE5224B6CC6D00E331DD /* BUAdSDK.bundle */; };
 		1200EE5824B6CCD400E331DD /* BUDTestToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EE5724B6CCD400E331DD /* BUDTestToolsViewController.m */; };
+		1200EECC24B77A9A00E331DD /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1200EEC924B77A9A00E331DD /* BUAdSDK.bundle */; };
+		1200EECD24B77A9A00E331DD /* BUFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1200EECA24B77A9A00E331DD /* BUFoundation.framework */; };
+		1200EECE24B77A9A00E331DD /* BUAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1200EECB24B77A9A00E331DD /* BUAdSDK.framework */; };
+		1200EEEA24B77B3800E331DD /* PangleBannerCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EED024B77B3800E331DD /* PangleBannerCustomEvent.m */; };
+		1200EEEB24B77B3800E331DD /* PangleNativeAdRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EED624B77B3800E331DD /* PangleNativeAdRender.m */; };
+		1200EEEC24B77B3800E331DD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1200EED724B77B3800E331DD /* README.md */; };
+		1200EEED24B77B3800E331DD /* PangleNativeCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EED924B77B3800E331DD /* PangleNativeCustomEvent.m */; };
+		1200EEEE24B77B3800E331DD /* PangleInterstitialCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EEDA24B77B3800E331DD /* PangleInterstitialCustomEvent.m */; };
+		1200EEEF24B77B3800E331DD /* PangleNativeAdAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EEDB24B77B3800E331DD /* PangleNativeAdAdapter.m */; };
+		1200EEF024B77B3800E331DD /* PangleAdapterConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EEDC24B77B3800E331DD /* PangleAdapterConfiguration.m */; };
+		1200EEF124B77B3800E331DD /* PangleRewardedVideoCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EEDD24B77B3800E331DD /* PangleRewardedVideoCustomEvent.m */; };
+		1200EEF224B77B3800E331DD /* MPPangleFullScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EEE024B77B3800E331DD /* MPPangleFullScreenVC.m */; };
+		1200EEF324B77B3800E331DD /* MPPangleBannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EEE224B77B3800E331DD /* MPPangleBannerVC.m */; };
+		1200EEF424B77B3800E331DD /* MPPangleNativeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EEE324B77B3800E331DD /* MPPangleNativeVC.m */; };
+		1200EEF524B77B3800E331DD /* MPPangleInterstitialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EEE724B77B3800E331DD /* MPPangleInterstitialVC.m */; };
+		1200EEF624B77B3800E331DD /* MPPangleRewardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EEE924B77B3800E331DD /* MPPangleRewardVC.m */; };
+		1200EEF924B77B7400E331DD /* PangleNativeAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1200EEF724B77B7300E331DD /* PangleNativeAdView.m */; };
 		124FCD4E2492066A0008FA8D /* BUDWaterfallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 124FCD4D249206690008FA8D /* BUDWaterfallViewController.m */; };
 		124FCD6B249206A50008FA8D /* BUDAdmob_RewardVideoCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 124FCD4F249206A40008FA8D /* BUDAdmob_RewardVideoCusEventVC.m */; };
 		124FCD6C249206A50008FA8D /* BUDAdmob_RewardExpressCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 124FCD51249206A40008FA8D /* BUDAdmob_RewardExpressCusEventVC.m */; };
@@ -128,11 +142,38 @@
 
 /* Begin PBXFileReference section */
 		05C4E22FADCD2F7815223297 /* Pods-Demo-BUADDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADDemo/Pods-Demo-BUADDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		1200EE5024B6CC6D00E331DD /* BUAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BUAdSDK.framework; path = BUDemo/BUAdSDK.framework; sourceTree = "<group>"; };
-		1200EE5124B6CC6D00E331DD /* BUFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BUFoundation.framework; path = BUDemo/BUFoundation.framework; sourceTree = "<group>"; };
-		1200EE5224B6CC6D00E331DD /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = BUAdSDK.bundle; path = BUDemo/BUAdSDK.bundle; sourceTree = "<group>"; };
 		1200EE5624B6CCD400E331DD /* BUDTestToolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDTestToolsViewController.h; sourceTree = "<group>"; };
 		1200EE5724B6CCD400E331DD /* BUDTestToolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDTestToolsViewController.m; sourceTree = "<group>"; };
+		1200EEC924B77A9A00E331DD /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BUAdSDK.bundle; sourceTree = "<group>"; };
+		1200EECA24B77A9A00E331DD /* BUFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUFoundation.framework; sourceTree = "<group>"; };
+		1200EECB24B77A9A00E331DD /* BUAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUAdSDK.framework; sourceTree = "<group>"; };
+		1200EED024B77B3800E331DD /* PangleBannerCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PangleBannerCustomEvent.m; sourceTree = "<group>"; };
+		1200EED124B77B3800E331DD /* PangleNativeCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PangleNativeCustomEvent.h; sourceTree = "<group>"; };
+		1200EED224B77B3800E331DD /* PangleRewardedVideoCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PangleRewardedVideoCustomEvent.h; sourceTree = "<group>"; };
+		1200EED324B77B3800E331DD /* PangleAdapterConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PangleAdapterConfiguration.h; sourceTree = "<group>"; };
+		1200EED424B77B3800E331DD /* PangleNativeAdAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PangleNativeAdAdapter.h; sourceTree = "<group>"; };
+		1200EED524B77B3800E331DD /* PangleInterstitialCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PangleInterstitialCustomEvent.h; sourceTree = "<group>"; };
+		1200EED624B77B3800E331DD /* PangleNativeAdRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PangleNativeAdRender.m; sourceTree = "<group>"; };
+		1200EED724B77B3800E331DD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1200EED824B77B3800E331DD /* PangleBannerCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PangleBannerCustomEvent.h; sourceTree = "<group>"; };
+		1200EED924B77B3800E331DD /* PangleNativeCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PangleNativeCustomEvent.m; sourceTree = "<group>"; };
+		1200EEDA24B77B3800E331DD /* PangleInterstitialCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PangleInterstitialCustomEvent.m; sourceTree = "<group>"; };
+		1200EEDB24B77B3800E331DD /* PangleNativeAdAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PangleNativeAdAdapter.m; sourceTree = "<group>"; };
+		1200EEDC24B77B3800E331DD /* PangleAdapterConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PangleAdapterConfiguration.m; sourceTree = "<group>"; };
+		1200EEDD24B77B3800E331DD /* PangleRewardedVideoCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PangleRewardedVideoCustomEvent.m; sourceTree = "<group>"; };
+		1200EEDE24B77B3800E331DD /* PangleNativeAdRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PangleNativeAdRender.h; sourceTree = "<group>"; };
+		1200EEE024B77B3800E331DD /* MPPangleFullScreenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPPangleFullScreenVC.m; sourceTree = "<group>"; };
+		1200EEE124B77B3800E331DD /* MPPangleInterstitialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPPangleInterstitialVC.h; sourceTree = "<group>"; };
+		1200EEE224B77B3800E331DD /* MPPangleBannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPPangleBannerVC.m; sourceTree = "<group>"; };
+		1200EEE324B77B3800E331DD /* MPPangleNativeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPPangleNativeVC.m; sourceTree = "<group>"; };
+		1200EEE424B77B3800E331DD /* MPPangleRewardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPPangleRewardVC.h; sourceTree = "<group>"; };
+		1200EEE524B77B3800E331DD /* MPPangleFullScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPPangleFullScreenVC.h; sourceTree = "<group>"; };
+		1200EEE624B77B3800E331DD /* MPPangleBannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPPangleBannerVC.h; sourceTree = "<group>"; };
+		1200EEE724B77B3800E331DD /* MPPangleInterstitialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPPangleInterstitialVC.m; sourceTree = "<group>"; };
+		1200EEE824B77B3800E331DD /* MPPangleNativeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPPangleNativeVC.h; sourceTree = "<group>"; };
+		1200EEE924B77B3800E331DD /* MPPangleRewardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPPangleRewardVC.m; sourceTree = "<group>"; };
+		1200EEF724B77B7300E331DD /* PangleNativeAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PangleNativeAdView.m; sourceTree = "<group>"; };
+		1200EEF824B77B7300E331DD /* PangleNativeAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PangleNativeAdView.h; sourceTree = "<group>"; };
 		124FCD4C249206690008FA8D /* BUDWaterfallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDWaterfallViewController.h; sourceTree = "<group>"; };
 		124FCD4D249206690008FA8D /* BUDWaterfallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDWaterfallViewController.m; sourceTree = "<group>"; };
 		124FCD4F249206A40008FA8D /* BUDAdmob_RewardVideoCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_RewardVideoCusEventVC.m; sourceTree = "<group>"; };
@@ -362,21 +403,60 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1200EECD24B77A9A00E331DD /* BUFoundation.framework in Frameworks */,
 				DE0223AF234F0C89002C9D26 /* Accelerate.framework in Frameworks */,
 				780D5E3D2223CB8D0051EF1B /* Photos.framework in Frameworks */,
 				78E073AB21A2CFF1006D71EE /* AdSupport.framework in Frameworks */,
-				1200EE5324B6CC6D00E331DD /* BUAdSDK.framework in Frameworks */,
 				78E073A921A2CFE9006D71EE /* CoreMotion.framework in Frameworks */,
-				1200EE5424B6CC6D00E331DD /* BUFoundation.framework in Frameworks */,
 				78E073A721A2CFE2006D71EE /* libresolv.9.tbd in Frameworks */,
 				78E073A521A2CFDB006D71EE /* libc++.tbd in Frameworks */,
 				DE700D5F21A3B4100054DBCB /* libPods-Demo-BUADDemo.a in Frameworks */,
+				1200EECE24B77A9A00E331DD /* BUAdSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1200EECF24B77B3800E331DD /* Pangle */ = {
+			isa = PBXGroup;
+			children = (
+				1200EED024B77B3800E331DD /* PangleBannerCustomEvent.m */,
+				1200EED124B77B3800E331DD /* PangleNativeCustomEvent.h */,
+				1200EED224B77B3800E331DD /* PangleRewardedVideoCustomEvent.h */,
+				1200EED324B77B3800E331DD /* PangleAdapterConfiguration.h */,
+				1200EED424B77B3800E331DD /* PangleNativeAdAdapter.h */,
+				1200EED524B77B3800E331DD /* PangleInterstitialCustomEvent.h */,
+				1200EED624B77B3800E331DD /* PangleNativeAdRender.m */,
+				1200EED724B77B3800E331DD /* README.md */,
+				1200EED824B77B3800E331DD /* PangleBannerCustomEvent.h */,
+				1200EED924B77B3800E331DD /* PangleNativeCustomEvent.m */,
+				1200EEDA24B77B3800E331DD /* PangleInterstitialCustomEvent.m */,
+				1200EEDB24B77B3800E331DD /* PangleNativeAdAdapter.m */,
+				1200EEDC24B77B3800E331DD /* PangleAdapterConfiguration.m */,
+				1200EEDD24B77B3800E331DD /* PangleRewardedVideoCustomEvent.m */,
+				1200EEDE24B77B3800E331DD /* PangleNativeAdRender.h */,
+			);
+			path = Pangle;
+			sourceTree = "<group>";
+		};
+		1200EEDF24B77B3800E331DD /* PangleVC */ = {
+			isa = PBXGroup;
+			children = (
+				1200EEE024B77B3800E331DD /* MPPangleFullScreenVC.m */,
+				1200EEE124B77B3800E331DD /* MPPangleInterstitialVC.h */,
+				1200EEE224B77B3800E331DD /* MPPangleBannerVC.m */,
+				1200EEE324B77B3800E331DD /* MPPangleNativeVC.m */,
+				1200EEE424B77B3800E331DD /* MPPangleRewardVC.h */,
+				1200EEE524B77B3800E331DD /* MPPangleFullScreenVC.h */,
+				1200EEE624B77B3800E331DD /* MPPangleBannerVC.h */,
+				1200EEE724B77B3800E331DD /* MPPangleInterstitialVC.m */,
+				1200EEE824B77B3800E331DD /* MPPangleNativeVC.h */,
+				1200EEE924B77B3800E331DD /* MPPangleRewardVC.m */,
+			);
+			path = PangleVC;
+			sourceTree = "<group>";
+		};
 		2C6C9EF2241FD10E0003B0F2 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +480,8 @@
 		2C6C9F04241FD21D0003B0F2 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				1200EEF824B77B7300E331DD /* PangleNativeAdView.h */,
+				1200EEF724B77B7300E331DD /* PangleNativeAdView.m */,
 				2C6C9F05241FD21D0003B0F2 /* BUDMopubNativeAdView.h */,
 				2C6C9F06241FD21D0003B0F2 /* BUDMopubNativeAdView.m */,
 			);
@@ -531,9 +613,9 @@
 		A9BB8904F5E2E508722AB9C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1200EE5224B6CC6D00E331DD /* BUAdSDK.bundle */,
-				1200EE5024B6CC6D00E331DD /* BUAdSDK.framework */,
-				1200EE5124B6CC6D00E331DD /* BUFoundation.framework */,
+				1200EEC924B77A9A00E331DD /* BUAdSDK.bundle */,
+				1200EECB24B77A9A00E331DD /* BUAdSDK.framework */,
+				1200EECA24B77A9A00E331DD /* BUFoundation.framework */,
 				DE0223AE234F0C89002C9D26 /* Accelerate.framework */,
 				780D5E3C2223CB8D0051EF1B /* Photos.framework */,
 				DE700D5E21A3B4100054DBCB /* libPods-Demo-BUADDemo.a */,
@@ -576,6 +658,8 @@
 		DE84BD1021A2E9600090D866 /* CustomEventAdapter */ = {
 			isa = PBXGroup;
 			children = (
+				1200EECF24B77B3800E331DD /* Pangle */,
+				1200EEDF24B77B3800E331DD /* PangleVC */,
 				785996C321A54E7000CB726E /* Admob */,
 				785996F821A556A700CB726E /* Mopub */,
 				12F3BFCF2434769100B0B447 /* BUDAdmobCustomEventViewController.h */,
@@ -873,8 +957,9 @@
 				DE84BDB921A2E9600090D866 /* feedInfo.cactus in Resources */,
 				DE84BDB321A2E9600090D866 /* LaunchScreen.storyboard in Resources */,
 				DE84BDB821A2E9600090D866 /* Assets.xcassets in Resources */,
+				1200EEEC24B77B3800E331DD /* README.md in Resources */,
 				DE84BDB421A2E9600090D866 /* Main.storyboard in Resources */,
-				1200EE5524B6CC6D00E331DD /* BUAdSDK.bundle in Resources */,
+				1200EECC24B77A9A00E331DD /* BUAdSDK.bundle in Resources */,
 				5A8B1A022271A25A0048DE10 /* BUDemoLanguage.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -941,13 +1026,16 @@
 				DE84BD9521A2E9600090D866 /* BUDRewardedVideoAdViewController.m in Sources */,
 				DE4E1943239116F500E052F8 /* BUDMopub_FullscreenVideoCustomEvent.m in Sources */,
 				DE4E193A239116F500E052F8 /* BUDMopub_InterstitialCusEventVC.m in Sources */,
+				1200EEED24B77B3800E331DD /* PangleNativeCustomEvent.m in Sources */,
 				DE4E1935239116F500E052F8 /* BUDMopub_BannerCusEventVC.m in Sources */,
 				DE4E1938239116F500E052F8 /* BUDMopub_ExpressBannerCustomEvent.m in Sources */,
 				DE84BDA621A2E9600090D866 /* BUDSettingTableView.m in Sources */,
 				78CF1B8D21A3F71A00A426BA /* main.m in Sources */,
 				DE84BD9C21A2E9600090D866 /* BUDInterstitialViewController.m in Sources */,
+				1200EEF524B77B3800E331DD /* MPPangleInterstitialVC.m in Sources */,
 				DE84BDA121A2E9600090D866 /* BUDAdManager.m in Sources */,
 				DE84BDAC21A2E9600090D866 /* BUDActionAreaView.m in Sources */,
+				1200EEF324B77B3800E331DD /* MPPangleBannerVC.m in Sources */,
 				DE4E1940239116F500E052F8 /* BUDMopub_BannerCustomEvent.m in Sources */,
 				DE84BD8D21A2E9600090D866 /* NSString+Json.m in Sources */,
 				DE84BDA021A2E9600090D866 /* BUDSplashViewController.m in Sources */,
@@ -955,13 +1043,16 @@
 				124FCD77249206A50008FA8D /* BUDAdmob_FullScreenCusEventVC.m in Sources */,
 				DE84BDA721A2E9600090D866 /* BUDFeedStyleHelper.m in Sources */,
 				DE697B10228BFDD200C5B5C6 /* BUDExpressFeedViewController.m in Sources */,
+				1200EEF424B77B3800E331DD /* MPPangleNativeVC.m in Sources */,
 				124FCD4E2492066A0008FA8D /* BUDWaterfallViewController.m in Sources */,
 				5AB9E06722295644001B15CE /* BUDCollectionViewCell.m in Sources */,
 				DE84BDAD21A2E9600090D866 /* BUDFeedAdTableViewCell.m in Sources */,
 				DE4E1939239116F500E052F8 /* BUAdSDKAdapterConfiguration.m in Sources */,
 				DE84BDA321A2E9600090D866 /* BUDFeedNormalTableViewCell.m in Sources */,
+				1200EEEA24B77B3800E331DD /* PangleBannerCustomEvent.m in Sources */,
 				DE4E1941239116F500E052F8 /* BUDMopub_ExpressFullscreenVideoCustomEvent.m in Sources */,
 				124FCD6C249206A50008FA8D /* BUDAdmob_RewardExpressCusEventVC.m in Sources */,
+				1200EEEE24B77B3800E331DD /* PangleInterstitialCustomEvent.m in Sources */,
 				124FCD74249206A50008FA8D /* BUDAdmob_RewardCustomEventAdapter.m in Sources */,
 				DEB95B1921CA28D30025570E /* BUDNativeDislikeViewController.m in Sources */,
 				124FCD6D249206A50008FA8D /* BUDAdmob_FullScreenCustomEventAdapter.m in Sources */,
@@ -972,6 +1063,7 @@
 				DE84BD8B21A2E9600090D866 /* BUDBase64.m in Sources */,
 				12F3BFD32434769100B0B447 /* BUDMopubCustomEventViewController.m in Sources */,
 				DE20688D23953BCE00115A43 /* BUDSelectedView.m in Sources */,
+				1200EEF024B77B3800E331DD /* PangleAdapterConfiguration.m in Sources */,
 				2C6C9EFC241FD10E0003B0F2 /* BUDAdmob_nativeAdModel.m in Sources */,
 				DE84BDB121A2E9600090D866 /* BUDActionCellView.m in Sources */,
 				DE84BD8F21A2E9600090D866 /* BUDCocoaSecurity.m in Sources */,
@@ -995,6 +1087,7 @@
 				124FCD73249206A50008FA8D /* BUDAdmob_BannerExpressCusEventVC.m in Sources */,
 				124FCD72249206A50008FA8D /* BUDAdmob_FullScreenExpressCusEventVC.m in Sources */,
 				DE9D5C6522EEEA4D00A577E7 /* BUDExpressRewardedVideoViewController.m in Sources */,
+				1200EEF124B77B3800E331DD /* PangleRewardedVideoCustomEvent.m in Sources */,
 				DED3324B239DF6B900E77551 /* BUDSelcetedItem.m in Sources */,
 				124FCD76249206A50008FA8D /* BU_NativeAdCustomEventAdaptor_Back.m in Sources */,
 				DE84BDB221A2E9600090D866 /* BUDMainViewController.m in Sources */,
@@ -1010,8 +1103,11 @@
 				DE84BDB021A2E9600090D866 /* BUDActionCellDefine.m in Sources */,
 				DE84BDAA21A2E9600090D866 /* BUDNativeBannerTableViewCell.m in Sources */,
 				DECC5C9F21CF4BB100268877 /* BUDdemoDislikeCollectionCell.m in Sources */,
+				1200EEF224B77B3800E331DD /* MPPangleFullScreenVC.m in Sources */,
 				DE4E193F239116F500E052F8 /* BUDMopub_ExpressFullScreenVideoCusEventVC.m in Sources */,
+				1200EEEF24B77B3800E331DD /* PangleNativeAdAdapter.m in Sources */,
 				2C6C9EFB241FD10E0003B0F2 /* BUDAdmobNativeFeedView.m in Sources */,
+				1200EEF924B77B7400E331DD /* PangleNativeAdView.m in Sources */,
 				2C6C9EEA241FD01B0003B0F2 /* BUDMopub_nativeAdAdapter.m in Sources */,
 				124FCD6B249206A50008FA8D /* BUDAdmob_RewardVideoCusEventVC.m in Sources */,
 				2C6C9EE9241FD01B0003B0F2 /* BUDMopub_NativeAdCustomEvent.m in Sources */,
@@ -1023,7 +1119,9 @@
 				DE84BD9A21A2E9600090D866 /* BUDDrawVideoViewController.m in Sources */,
 				DE84BDA521A2E9600090D866 /* BUDNormalButton.m in Sources */,
 				DE84BDA421A2E9600090D866 /* BUDRefreshButton.m in Sources */,
+				1200EEEB24B77B3800E331DD /* PangleNativeAdRender.m in Sources */,
 				DE4E193E239116F500E052F8 /* BUDMopub_ExpressRewardedVideoCustomEvent.m in Sources */,
+				1200EEF624B77B3800E331DD /* MPPangleRewardVC.m in Sources */,
 				124FCD78249206A50008FA8D /* BUDAdmob_InterstitialCustomEventAdapter.m in Sources */,
 				DE697B17228C22D500C5B5C6 /* BUDExpressInterstitialViewController.m in Sources */,
 			);

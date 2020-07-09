@@ -107,7 +107,22 @@
     MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:mopub_AD_APPID];
     
     NSMutableDictionary *networkConfig = [NSMutableDictionary dictionaryWithCapacity:2];
-    NSDictionary *InitConfig = @{@"appKey": [BUDAdManager appKey]};
+    NSMutableDictionary *InitConfig = [[NSMutableDictionary alloc] init];
+    //=== required =============================================================================
+    [InitConfig setValue:[BUDAdManager appKey] forKey:@"appKey"];
+
+    //=== optional =============================================================================
+    /* Set the COPPA of the user, COPPA is the short of Children's Online Privacy Protection Rule, the interface only works in the United States.
+    * @params Coppa 0 adult, 1 child
+    */
+    [InitConfig setValue:@(0) forKey:@"Coppa"];
+    /// Set whether the app is a paid app, the default is a non-paid app.
+    /// Must obtain the consent of the user before incoming
+    [InitConfig setValue:@(NO) forKey:@"isPaidApp"];
+    /// Custom set the GDPR of the user,GDPR is the short of General Data Protection Regulation,the interface only works in The European.
+    /// @params GDPR 0 close privacy protection, 1 open privacy protection
+    [InitConfig setValue:@(0) forKey:@"GDPR"];
+    
     NSDictionary *config = @{@"BUAdSDKAdapterConfiguration":InitConfig};
     [networkConfig addEntriesFromDictionary:config];
     Class<MPAdapterConfiguration> BUAdSDKAdapterConfiguration = NSClassFromString(@"BUAdSDKAdapterConfiguration");
@@ -124,6 +139,13 @@
 }
 
 - (void)setupBUAdSDK {
+    //optional
+    //GDPR 0 close privacy protection, 1 open privacy protection
+    [BUAdSDKManager setGDPR:0];
+    //optional
+    //Coppa 0 adult, 1 child
+    [BUAdSDKManager setCoppa:0];
+    
     //BUAdSDK requires iOS 9 and up
     [BUAdSDKManager setAppID:[BUDAdManager appKey]];
 

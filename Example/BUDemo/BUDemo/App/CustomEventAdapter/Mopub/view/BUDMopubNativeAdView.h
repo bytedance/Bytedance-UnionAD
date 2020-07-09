@@ -2,7 +2,7 @@
 //  BUDMopubNativeAdView.h
 //  BUDemo
 //
-//  Created by liudonghui on 2020/1/8.
+//  Created by bytedance on 2020/1/8.
 //  Copyright © 2020 bytedance. All rights reserved.
 //
 
@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) UIView *separatorLine;
 @property (nonatomic, strong) BUNativeAdRelatedView *nativeAdRelatedView;
 @property (nonatomic, strong) BUNativeAd *nativeAd;
+@property (nonatomic, strong) UIView *mediaView;
 
 + (CGFloat)cellHeightWithModel:(MPNativeAd *_Nonnull)model width:(CGFloat)width;
 - (void)layoutCustomAssetsWithProperties:(NSDictionary *)customProperties imageLoader:(MPNativeAdRenderingImageLoader *)imageLoader;

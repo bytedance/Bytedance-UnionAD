@@ -2,14 +2,15 @@
 //  BUDMopubNativeAdView.m
 //  BUDemo
 //
-//  Created by liudonghui on 2020/1/8.
+//  Created by bytedance on 2020/1/8.
 //  Copyright © 2020 bytedance. All rights reserved.
 //
 
 #import "BUDMopubNativeAdView.h"
-#import "BUDMacros.h"
 #import <mopub-ios-sdk/MPNativeAdRenderingImageLoader.h>
 #import <mopub-ios-sdk/MPNativeAdConstants.h>
+
+#define BUDMopubNativeAdView_RGB(r,g,b) [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:1]
 
 static CGFloat const margin = 15;
 static UIEdgeInsets const padding = {10, 15, 10, 15};
@@ -44,7 +45,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     // init
     CGFloat width = CGRectGetWidth([UIScreen mainScreen].bounds) - padding.left - padding.right;
     self.separatorLine = [[UIView alloc] initWithFrame:CGRectMake(margin, 0, width, 0.5)];
-    self.separatorLine.backgroundColor = BUD_RGB(0xd9, 0xd9, 0xd9);
+    self.separatorLine.backgroundColor = BUDMopubNativeAdView_RGB(0xd9, 0xd9, 0xd9);
         
     // set frame
     CGFloat y = padding.top , x = padding.left;
@@ -56,10 +57,12 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     CGFloat imageHeight =  imageWidth / (imageScale + 1e-4);
     CGFloat imageX = (width - imageWidth) / 2  + padding.left;
     if (self.videoView) {
-        self.videoView.frame = CGRectMake(imageX, y, imageWidth, imageHeight);
+        self.mediaView.frame = CGRectMake(imageX, y, imageWidth, imageHeight);
+        self.videoView.frame = CGRectMake(0, 0, imageWidth, imageHeight);
         y = y + imageHeight + margin;
     } else {
-        self.mainImageView.frame = CGRectMake(imageX, y, imageWidth , imageHeight);
+        self.mediaView.frame = CGRectMake(imageX, y, imageWidth, imageHeight);
+        self.mainImageView.frame = CGRectMake(0, 0, imageWidth , imageHeight);
         self.mainImageView.image = [self resizeImage:self.mainImageView.image withTragetSize:CGSizeMake(imageWidth, imageHeight)];
         y = y + imageHeight + margin;
     }
@@ -83,13 +86,14 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     
     // add view
     [self addSubview:self.separatorLine];
-    [self addSubview:self.mainImageView];
+    [self addSubview:self.mediaView];
+    [self.mediaView addSubview:self.mainImageView];
     [self addSubview:self.titleLabel];
     [self addSubview:self.mainTextLabel];
     [self addSubview:self.callToActionLabel];
     [self addSubview:self.privacyInformationIconImageView];
     [self addSubview:self.iconImageView];
-    [self addSubview:self.videoView];
+    [self.mediaView addSubview:self.videoView];
 }
 
 /// This is layout view for Bytedance Union Ad. You can layout by self.nativeAd
@@ -97,7 +101,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     // init
     CGFloat width = CGRectGetWidth([UIScreen mainScreen].bounds) - padding.left - padding.right;
     self.separatorLine = [[UIView alloc] initWithFrame:CGRectMake(margin, 0, width, 0.5)];
-    self.separatorLine.backgroundColor = BUD_RGB(0xd9, 0xd9, 0xd9);
+    self.separatorLine.backgroundColor = BUDMopubNativeAdView_RGB(0xd9, 0xd9, 0xd9);
     
     self.nativeAdRelatedView = [[BUNativeAdRelatedView alloc] init];
     
@@ -110,16 +114,18 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     CGFloat imageScale = self.mainImageView.image.size.width / (self.mainImageView.image.size.height + 1e-4);
     CGFloat imageHeight =  imageWidth / (imageScale + 1e-4);
     CGFloat imageX = (width - imageWidth) / 2  + padding.left;
-    
     if (self.nativeAd.data.imageMode == BUFeedVideoAdModeImage) {
         //CGFloat videoWidth = self.nativeAd.data.
         id <BUVideoAdViewDelegate> temp = self.nativeAd.delegate;
         self.nativeAdRelatedView.videoAdView.delegate = temp;
         self.nativeAdRelatedView.videoAdView.rootViewController = self.nativeAd.rootViewController;
-        self.nativeAdRelatedView.videoAdView.frame = CGRectMake(imageX, y, imageWidth, imageHeight);
+        self.mediaView.frame = CGRectMake(imageX, y, imageWidth, imageHeight);
+        self.nativeAdRelatedView.videoAdView.frame = CGRectMake(0, 0, imageWidth, imageHeight);
         y = y + imageHeight + margin;
     } else if (self.nativeAd.data.imageMode != BUFeedVideoAdModeImage) {
-        self.mainImageView.frame = CGRectMake(imageX, y, imageWidth , imageHeight);
+        self.mainImageView.frame = CGRectMake(0, 0, imageWidth , imageHeight);
+        self.mediaView.frame = CGRectMake(imageX, y, imageWidth , imageHeight);
+
         self.mainImageView.image = [self resizeImage:self.mainImageView.image withTragetSize:CGSizeMake(imageWidth, imageHeight)];
         y = y + imageHeight + margin;
     }
@@ -147,12 +153,13 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.frame = CGRectMake(0, 0, width + padding.left + padding.right, y + 12 + padding.bottom);
     // add view
     [self addSubview:self.separatorLine];
-    [self addSubview:self.mainImageView];
+    [self addSubview:self.mediaView];
+    [self.mediaView addSubview:self.mainImageView];
     [self addSubview:self.titleLabel];
     [self addSubview:self.mainTextLabel];
     [self addSubview:self.callToActionLabel];
     [self addSubview:self.nativeAdRelatedView.dislikeButton];
-    [self addSubview:self.nativeAdRelatedView.videoAdView];
+    [self.mediaView addSubview:self.nativeAdRelatedView.videoAdView];
     [self addSubview:self.nativeAdRelatedView.logoImageView];
     [self addSubview:self.nativeAdRelatedView.logoADImageView];
     // register click
@@ -182,7 +189,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     [imageLoader loadImageForURL:[NSURL URLWithString:[customProperties objectForKey:kAdIconImageKey]] intoImageView:self.iconImageView];
     self.mainImageView.image = [BUDMopubNativeAdView urlToImage:[NSURL URLWithString:[customProperties objectForKey:kAdMainImageKey]]];
     self.iconImageView.image = [BUDMopubNativeAdView urlToImage:[NSURL URLWithString:[customProperties objectForKey:kAdIconImageKey]]];
-    
+    self.mediaView = [customProperties objectForKey:kAdMainMediaViewKey];
     // take different layout for different ad!!!
     if ([customProperties objectForKey:@"bu_nativeAd"] == nil) {
         // set property by customProperties

@@ -30,7 +30,6 @@
 @property (nonatomic, copy) dispatch_block_t showAdBlock;
 
 @property (nonatomic, copy) NSArray<NSArray *> *titlesArr;
-@property (nonatomic, copy) NSString *currentID;
 @end
 
 @implementation BUDSelectedView

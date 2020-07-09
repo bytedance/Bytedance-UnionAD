@@ -8,8 +8,6 @@
 
 #import "BUDMopub_FullscreenVideoCustomEvent.h"
 #import <BUAdSDK/BUFullscreenVideoAd.h>
-#import "BUDMacros.h"
-#import "BUDSlotID.h"
 
 @interface BUDMopub_FullscreenVideoCustomEvent ()<BUFullscreenVideoAdDelegate>
 @property (strong, nonatomic) BUFullscreenVideoAd *fullScreenVideo;
@@ -17,7 +15,13 @@
 
 @implementation BUDMopub_FullscreenVideoCustomEvent
 - (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info adMarkup:(NSString *)adMarkup {
-    self.fullScreenVideo = [[BUFullscreenVideoAd alloc] initWithSlotID:normal_fullscreen_ID];
+    NSString *adPlacementId = [info objectForKey:@"ad_placement_id"];
+    if (adPlacementId == nil) {
+        NSError *error = [NSError errorWithDomain:NSStringFromClass([self class]) code:0 userInfo:@{NSLocalizedDescriptionKey: @"Invalid ad_placement_id. Failing ad request."}];
+        [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
+        return;
+    }
+    self.fullScreenVideo = [[BUFullscreenVideoAd alloc] initWithSlotID:adPlacementId];
     self.fullScreenVideo.delegate = self;
     [self.fullScreenVideo loadAdData];
 }
@@ -33,41 +37,41 @@
 #pragma mark - BUFullscreenVideoAdDelegate
 - (void)fullscreenVideoMaterialMetaAdDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
     [self.delegate interstitialCustomEvent:self didLoadAd:fullscreenVideoAd];
-    BUD_Log(@"%s", __func__);
+    ;
 }
 
 - (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s", __func__);
+    ;
 }
 
 - (void)fullscreenVideoAdWillVisible:(BUFullscreenVideoAd *)fullscreenVideoAd {
     [self.delegate interstitialCustomEventWillAppear:self];
     [self.delegate trackImpression];
-    BUD_Log(@"%s", __func__);
+    ;
 }
 
 - (void)fullscreenVideoAdDidClose:(BUFullscreenVideoAd *)fullscreenVideoAd {
     [self.delegate interstitialCustomEventDidDisappear:self];
-    BUD_Log(@"%s", __func__);
+    ;
 }
 
 - (void)fullscreenVideoAdDidClick:(BUFullscreenVideoAd *)fullscreenVideoAd {
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
     [self.delegate trackClick];
-    BUD_Log(@"%s", __func__);
+    ;
 }
 
 - (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {
     [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
-    BUD_Log(@"%s", __func__);
+    ;
 }
 
 - (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {
-    BUD_Log(@"%s", __func__);
+    ;
 }
 
 - (void)fullscreenVideoAdDidClickSkip:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s", __func__);
+    ;
 }
 
 @synthesize description;

@@ -62,6 +62,10 @@
 #define mopub_nativeAd_UnitID              @"8a864df99f144136b942bc6656692e58"  // This is adUnitId we register in mopub for loading Bytedance Union Ad
 #define mopub_nativeAd_UnitID_test         @"76a3fefaced247959582d2d2df6f4757"  // This is mopub offical test adUnitId for native Ad
 #define mopub_nativeVideoAd_UnitID_test    @"b2b67c2a8c0944eda272ed8e4ddf7ed4"  // This is mopub offical test adUnitId for native video Ad
+#define mopub_official_intersttitial_UnitID  @"20c57bb4c1974a60bfbbb4ad724a33b4"
+#define mopub_official_native_UnitID         @"36b1cc9fc81e4ee696a301159be2bcd3"
+#define mopub_official_banner_UnitID         @"edc1f2d5f0554c7389bfdb272c798adb"
+#define mopub_official_reward_UnitID         @"07fbb1924348482b8b3fc02ec115faf5"
 
 #if googleUnit //使用google官方默认的unitId(use admob's default unitID)
 #define admob_reward_UnitID               @"ca-app-pub-3940256099942544/1712485313"

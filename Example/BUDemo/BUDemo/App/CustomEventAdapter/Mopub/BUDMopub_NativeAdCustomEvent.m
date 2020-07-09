@@ -7,8 +7,6 @@
 //
 
 #import "BUDMopub_NativeAdCustomEvent.h"
-#import "BUDMacros.h"
-#import "BUDSlotID.h"
 #import "BUDMopub_nativeAdAdapter.h"
 
 #import <BUAdSDK/BUNativeAd.h>
@@ -24,7 +22,6 @@
 - (BUNativeAd *)nativeAd {
     if (_nativeAd == nil) {
         BUAdSlot *slot = [[BUAdSlot alloc] init];
-        slot.ID = native_feed_ID;
         slot.AdType = BUAdSlotAdTypeFeed;
         slot.position = BUAdSlotPositionTop;
         slot.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
@@ -37,6 +34,10 @@
 }
 
 - (void)requestAdWithCustomEventInfo:(NSDictionary *)info adMarkup:(NSString *)adMarkup {
+    NSString *slotId = [info objectForKey:@"slotid"];
+    if ([slotId isKindOfClass:[NSString class]] && slotId.length) {
+        self.nativeAd.adslot.ID = slotId;
+    }
     [self.nativeAd loadAdData];
 }
 
@@ -47,12 +48,10 @@
 #pragma mark - BUNativeAdDelegate
 
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *)error {
-    BUD_Log(@"%s",__func__);
     [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:error];
 }
 
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
-    BUD_Log(@"%s",__func__);
     BUDMopub_nativeAdAdapter *adapter = [[BUDMopub_nativeAdAdapter alloc] initWithBUNativeAd:nativeAd];
     MPNativeAd *mp_nativeAd = [[MPNativeAd alloc] initWithAdAdapter:adapter];
     [self.delegate nativeCustomEvent:self didLoadAd:mp_nativeAd];

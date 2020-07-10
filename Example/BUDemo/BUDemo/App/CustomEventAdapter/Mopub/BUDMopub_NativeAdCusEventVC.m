@@ -14,7 +14,6 @@
 #import "NSString+LocalizedString.h"
 #import "BUDSlotID.h"
 #import "view/BUDMopubNativeAdView.h"
-#import "PangleNativeAdView.h"
 
 #import <mopub-ios-sdk/MPNativeAd.h>
 #import <mopub-ios-sdk/MPNativeAdRenderer.h>
@@ -113,7 +112,7 @@
 
 - (void)setAdReq {
     MPStaticNativeAdRendererSettings *settings = [[MPStaticNativeAdRendererSettings alloc] init];
-    settings.renderingViewClass = [PangleNativeAdView class];
+    settings.renderingViewClass = [BUDMopubNativeAdView class];
     settings.viewSizeHandler = ^(CGFloat maximumWidth) {
         return CGSizeMake(maximumWidth,300);
     };
@@ -132,7 +131,7 @@
 
 - (void)setVideoAdReq {
     MOPUBNativeVideoAdRendererSettings *nativeVideoAdSettings = [[MOPUBNativeVideoAdRendererSettings alloc] init];
-    nativeVideoAdSettings.renderingViewClass = [PangleNativeAdView class];
+    nativeVideoAdSettings.renderingViewClass = [BUDMopubNativeAdView class];
     nativeVideoAdSettings.viewSizeHandler = ^(CGFloat maximumWidth) {
         return CGSizeMake(100.0f, 312.0f);
     };

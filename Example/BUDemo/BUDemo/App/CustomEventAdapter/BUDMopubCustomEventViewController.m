@@ -20,12 +20,6 @@
 #import "BUDMopub_ExpressRewardVideoCusEventVC.h"
 #import "BUDMopub_NativeAdCusEventVC.h"
 
-#import "MPPangleBannerVC.h"
-#import "MPPangleInterstitialVC.h"
-#import "MPPangleNativeVC.h"
-#import "MPPangleRewardVC.h"
-#import "MPPangleFullScreenVC.h"
-
 @interface BUDMopubCustomEventViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray<NSMutableArray *> *items;
@@ -112,39 +106,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *pangle_banner_Item = [BUDActionModel plainTitleActionModel:@"pangle_banner_Item" type:BUDCellType_CustomEvent action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        MPPangleBannerVC *vc = [MPPangleBannerVC new];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    BUDActionModel *pangle_interstitial_Item = [BUDActionModel plainTitleActionModel:@"pangle_interstitial_Item" type:BUDCellType_CustomEvent action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        MPPangleInterstitialVC *vc = [MPPangleInterstitialVC new];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    BUDActionModel *pangle_native_Item = [BUDActionModel plainTitleActionModel:@"pangle_native_Item" type:BUDCellType_CustomEvent action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        MPPangleNativeVC *vc = [MPPangleNativeVC new];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    BUDActionModel *pangle_reward_Item = [BUDActionModel plainTitleActionModel:@"pangle_reward_Item" type:BUDCellType_CustomEvent action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        MPPangleRewardVC *vc = [MPPangleRewardVC new];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    BUDActionModel *pangle_fullScreen_Item = [BUDActionModel plainTitleActionModel:@"pangle_fullscreen_Item" type:BUDCellType_CustomEvent action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        MPPangleFullScreenVC *vc = [MPPangleFullScreenVC new];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-
-
-    self.items = @[@[RewardVideo_Item, FullScreenVideo_Item,Banner_Item, Interstitial_Item],@[Express_RewardVideo_Item, Express_FullScreenVideo_Item,Express_Banner_Item, Express_Interstitial_Item],@[native_feed_Item],@[pangle_banner_Item,pangle_interstitial_Item,pangle_fullScreen_Item,pangle_native_Item,pangle_reward_Item]].mutableCopy;
+    self.items = @[@[RewardVideo_Item, FullScreenVideo_Item,Banner_Item, Interstitial_Item],@[Express_RewardVideo_Item, Express_FullScreenVideo_Item,Express_Banner_Item, Express_Interstitial_Item],@[native_feed_Item]].mutableCopy;
 }
 
 - (void)buildUpChildView {

@@ -59,7 +59,7 @@ If the content of the document cannot solve your problem, you can try to give fe
   - Version Number: 3.1.0.4
   - Updated: 2020-07-09
   - Change Log:
-    1.Splash ad bug fix
-    2.Bundle addressing optimization
-    3.Template rendering reward video/full-screen video, the timing of rendering success is adjusted
-    4.Stability improvement
+    1. Splash ad bug fix
+    2. Bundle addressing optimization
+    3. Template rendering reward video/full-screen video, the timing of rendering success is adjusted
+    4. Stability improvement

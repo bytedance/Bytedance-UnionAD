@@ -160,7 +160,7 @@ pod 'Bytedance-UnionAD', '~> 1.9.8.2'
 
 + 支持系统 iOS 9.X 及以上;
 + SDK编译环境 Xcode 11;
-+ 支持架构： x86-64, armv7, armv7s, arm64
++ 支持架构： x86-64, armv7, arm64
 
 ### 添加依赖库
 
@@ -245,14 +245,13 @@ pod 'Bytedance-UnionAD', '~> 1.9.8.2'
 /// Solve the problem when your WKWebview post message empty,default is BUOfflineTypeWebview
 + (void)setOfflineType:(BUOfflineType)type;
 
-/// Custom set the GDPR of the user,GDPR is the short of General Data Protection Regulation,the interface only works in The European.
-/// @params GDPR 0 close privacy protection, 1 open privacy protection
+///Fields to indicate SDK whether the user grants consent for personalized ads, the value of GDPR : 0 User has granted the consent for personalized ads, SDK will return personalized ads; 1: User doesn't grant consent for personalized ads, SDK will only return non-personalized ads.
 + (void)setGDPR:(NSInteger)GDPR;
 
 /// Custom set the AB vid of the user. Array element type is NSNumber
 + (void)setABVidArray:(NSArray<NSNumber *> *)abvids;
 
-/// Open GDPR Privacy for the user to choose before setAppID.
+/// Notice that Developers must open GDPR Privacy for the user before setAppID.
 + (void)openGDPRPrivacyFromRootViewController:(UIViewController *)rootViewController confirm:(BUConfirmGDPR)confirm;
 
 /// get appID
@@ -2012,7 +2011,7 @@ if __name__ == "__main__":
 ###  模板渲染（个性化模板广告）
 +  **类型说明：** 个性化模板激励视频是一种具备动态渲染能力的一种原生广告。即通过开发者在媒体平台编辑渲染模板，SDK支持实时更新广告布局，SDK进行渲染并为开发者提供渲染视图。
 +  **使用说明：** 个性化模板激励视频可通过BUNativeExpressRewardedVideoAd请求广告，调用showAdFromRootViewController:展示广告，值得注意的是一定要设置rootViewController，即展示广告和跳转落地页需要的viewController。通过设置BUNativeExpressRewardedVideoAdDelegate代理，获取广告、展示、点击、关闭等回调。
-+ 为保证播放流畅和展示流畅建议在收到渲染成功和视频下载完成回调后再展示视频。
++ 为保证播放流畅和展示流畅建议在视频下载完成回调后再展示视频。
 
 #### BUNativeExpressRewardedVideoAd
 ```
@@ -2300,7 +2299,7 @@ this method is used to get the type of fullscreen video ad
 
 ### 模板渲染（个性化模板广告）
 +  **使用说明：** 个性化模板激励视频可通过BUNativeExpressFullscreenVideoAd请求广告，调用showAdFromRootViewController:展示广告，值得注意的是一定要设置rootViewController，即展示广告和跳转落地页需要的viewController。通过设置BUNativeExpressFullscreenVideoAdDelegate代理，获取广告、展示、点击、关闭等回调。
-+ 为保证播放流畅和展示流畅建议在收到渲染成功和视频下载完成回调后再展示视频。
++ 为保证播放流畅和展示流畅建议在视频下载完成回调后再展示视频。
 +  接入影响： 个性化模板为了优化展示速度,会使用本地模板,请求时会拦截相关数据.如果接入方正在使用H5的页面发送请求,会造成请求body清空,其他逻辑不变.如果使用body传参请更换其他方式.例如:jsBridge方式。
 
 #### BUNativeExpressFullscreenVideoAd
@@ -2509,11 +2508,11 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
 40029 两种情况：
 1. SDK版本低：您使用的sdk版本不得低于2.5.0.0，麻烦升级到平台最新版本sdk。
 2. 接口使用错误：创建的代码位类型是模板渲染/非模板渲染，但是请求方法是非模板渲染/模板渲染的方法。解决办法：使用模板渲染的方法去请求模板渲染类型或者使用非模板渲染的方法去请求非模板类型的广告，如果代码位在平台上是模板渲染，可以参考文档中个性化模板XX广告的部分，demo中参考带有express部分的代码。如果代码位不是模板渲染，则不要调用含有express字样的接口。
-更多错误码参见：[错误码](https://ad.oceanengine.com/union/media/faq?id=139)
+更多错误码参见：[错误码](https://ad.oceanengine.com/union/media/doc?id=5de4cc6d78c8690012a90aa5)
 
 
 ## 常见问题
-更多常见问题请查阅：[常见问题](https://ad.oceanengine.com/union/media/faq?id=138)
+更多常见问题请查阅：[常见问题](https://ad.oceanengine.com/union/media/doc?id=5dd0fe618507820012088272)
 1. 媒体平台配置了只出小图和组图，为什么会返回大图？（类似返回素材类型和媒体平台不符问题）
 
     答：先check下接入版本，1.2.0及之前版本的SDK对素材类型解析有问题，如果版本问题建议升级；

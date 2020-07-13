@@ -168,7 +168,7 @@ Detailed Steps:
 
 + Support iOS 9.X and above
 + SDK compiler environment Xcode 10.0
-+ Support architecture: i386, x86-64, armv7, armv7s, arm64
++ Support architecture: i386, x86-64, armv7, arm64
 
 
 #### 1.2.3 Add Dependency Libraries
@@ -240,14 +240,13 @@ Currently, the interface provides the following class methods.
 /// Solve the problem when your WKWebview post message empty,default is BUOfflineTypeWebview
 + (void)setOfflineType:(BUOfflineType)type;
 
-/// Custom set the GDPR of the user,GDPR is the short of General Data Protection Regulation,the interface only works in The European.
-/// @params GDPR 0 close privacy protection, 1 open privacy protection
+//Fields to indicate SDK whether the user grants consent for personalized ads, the value of GDPR : 0 User has granted the consent for personalized ads, SDK will return personalized ads; 1: User doesn't grant consent for personalized ads, SDK will only return non-personalized ads.
 + (void)setGDPR:(NSInteger)GDPR;
 
 /// Custom set the AB vid of the user. Array element type is NSNumber
 + (void)setABVidArray:(NSArray<NSNumber *> *)abvids;
 
-/// Open GDPR Privacy for the user to choose before setAppID.
+/// Notice that Developers must open GDPR Privacy for the user before setAppID.
 + (void)openGDPRPrivacyFromRootViewController:(UIViewController *)rootViewController confirm:(BUConfirmGDPR)confirm;
 
 /// get appID
@@ -1276,23 +1275,24 @@ Adsize is the size of the banner image to be displayed by the client. It needs t
 #### 2.9.1 BUSplashAdView Interface
 
     @interface BUSplashAdView : UIView
-	/**
-	The unique identifier of splash ad.
-	 */
-	@property (nonatomic, copy, readonly, nonnull) NSString *slotID;
-	
-	/**
-	 Maximum allowable load timeout, default 3s, unit s.
-	 */
-	@property (nonatomic, assign) NSTimeInterval tolerateTimeout;
-	
-	
-	/**
-	 Whether hide skip button, default NO.
-	 If you hide the skip button, you need to customize the countdown.
-	 */
-	@property (nonatomic, assign) BOOL hideSkipButton;
-	
+    /**
+    The unique identifier of splash ad.
+     */
+    @property (nonatomic, copy, readonly, nonnull) NSString *slotID;
+    
+    /**
+     Maximum allowable load timeout, default 3s, unit s.
+     */
+    @property (nonatomic, assign) NSTimeInterval tolerateTimeout;
+
+
+​	
+​	/**
+​	 Whether hide skip button, default NO.
+​	 If you hide the skip button, you need to customize the countdown.
+​	 */
+​	@property (nonatomic, assign) BOOL hideSkipButton;
+​	
 	/**
 	 The delegate for receiving state change messages.
 	 */
@@ -1331,56 +1331,56 @@ Adsize is the size of the banner image to be displayed by the client. It needs t
 #### 2.9.2 BUSplashAdView callback
 
     @protocol BUSplashAdDelegate <NSObject>
-
-	@optional
-	/**
-	 This method is called when splash ad material loaded successfully.
-	 */
-	- (void)splashAdDidLoad:(BUSplashAdView *)splashAd;
-	
-	/**
-	 This method is called when splash ad material failed to load.
-	 @param error : the reason of error
-	 */
-	- (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError * _Nullable)error;
-	
-	/**
-	 This method is called when splash ad slot will be showing.
-	 */
-	- (void)splashAdWillVisible:(BUSplashAdView *)splashAd;
-	
-	/**
-	 This method is called when splash ad is clicked.
-	 */
-	- (void)splashAdDidClick:(BUSplashAdView *)splashAd;
-	
-	/**
-	 This method is called when splash ad is closed.
-	 */
-	- (void)splashAdDidClose:(BUSplashAdView *)splashAd;
-	
-	/**
-	 This method is called when splash ad is about to close.
-	 */
-	- (void)splashAdWillClose:(BUSplashAdView *)splashAd;
-	
-	/**
-	 This method is called when another controller has been closed.
-	 @param interactionType : open appstore in app or open the webpage or view video ad details page.
-	 */
-	- (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType;
-	
-	/**
-	 This method is called when spalashAd skip button  is clicked.
-	 */
-	- (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd;
-	
-	/**
-	 This method is called when spalashAd countdown equals to zero
-	 */
-	- (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd;
-	
-	@end
+    
+    @optional
+    /**
+     This method is called when splash ad material loaded successfully.
+     */
+    - (void)splashAdDidLoad:(BUSplashAdView *)splashAd;
+    
+    /**
+     This method is called when splash ad material failed to load.
+     @param error : the reason of error
+     */
+    - (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError * _Nullable)error;
+    
+    /**
+     This method is called when splash ad slot will be showing.
+     */
+    - (void)splashAdWillVisible:(BUSplashAdView *)splashAd;
+    
+    /**
+     This method is called when splash ad is clicked.
+     */
+    - (void)splashAdDidClick:(BUSplashAdView *)splashAd;
+    
+    /**
+     This method is called when splash ad is closed.
+     */
+    - (void)splashAdDidClose:(BUSplashAdView *)splashAd;
+    
+    /**
+     This method is called when splash ad is about to close.
+     */
+    - (void)splashAdWillClose:(BUSplashAdView *)splashAd;
+    
+    /**
+     This method is called when another controller has been closed.
+     @param interactionType : open appstore in app or open the webpage or view video ad details page.
+     */
+    - (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType;
+    
+    /**
+     This method is called when spalashAd skip button  is clicked.
+     */
+    - (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd;
+    
+    /**
+     This method is called when spalashAd countdown equals to zero
+     */
+    - (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd;
+    
+    @end
 
 #### 2.9.3 Instance
 
@@ -2225,7 +2225,7 @@ This method is called when interstitial ad is closed.
 
 **•** ***\*Instructions:\**** Personalized template rewarded video ads can use BUNativeExpressRewardedVideoAd to request ads and call showAdFromRootViewController: to display ads. Note that you must set rootViewController, which is the viewController required by the redirect landing page. By setting the BUNativeExpressRewardedVideoAdDelegate proxy, you can get the ad, impression, click, and close callbacks.
 
-• To ensure smooth ad playback and display, we recommend displaying the ad only after receiving the render successful and video download complete callbacks.
+• To ensure the smooth playback and display of advertisements, we recommend that the advertisements be displayed after the video download is complete.
 
 • Effect of integration: Local templates are used to improve the display speed of personalized template ads and related data is blocked during requests. If the accessor is sending requests from a H5 webpage, the request body will be cleared. The other logic remains unchanged. If you use body to pass parameters, you need to switch to another method, such as jsBridge.
 
@@ -2375,7 +2375,7 @@ self.rewardedAd.delegate = self;
 
 **•** ***\*Instructions:\**** Personalized template rewarded video ads can use BUNativeExpressFullscreenVideoAd to request ads and call showAdFromRootViewController: to display ads. Note that you must set rootViewController, which is the viewController required by the landing page. By setting the BUNativeExpressFullscreenVideoAdDelegate proxy, you can get the ad, impression, click, and close callbacks.
 
-• To ensure smooth ad playback and display, we recommend displaying the ad only after receiving the render successful and video download complete callbacks.
+• To ensure the smooth playback and display of advertisements, we recommend that the advertisements be displayed after the video download is complete.
 
 • Effect of integration: Local templates are used to improve the display speed of personalized template ads and related data is blocked during requests. If the accessor is sending requests from a H5 webpage, the request body will be cleared. The other logic remains unchanged. If you use body to pass parameters, you need to switch to another method, such as jsBridge.
 
@@ -2742,7 +2742,7 @@ Two causes of 40029 errors:
 
 1. The SDK version is outdated: Your SDK version cannot be earlier than 2.5.0.0. To avoid this issue, please upgrade to the latest SDK version on the platform.
 
-2. API use error: The created ad placement type is template render, but the requested method is non-template render, or vice versa. Solution: Use the template render method to request template render type ads and the non-template render method to request non-template render type ads. If the ad placement is template render on the platform, see the sections on personalized template ads in this document and the code for APIs that include the word "express". If the ad placement is not template render type, you do not have to call any APIs that include the word "express". For more error codes, see: [Error Codes](https://partner.oceanengine.com/doc?id=5de4cc6d78c8690012a90aa5).
+2. API use error: The created ad placement type is template render, but the requested method is non-template render, or vice versa. Solution: Use the template render method to request template render type ads and the non-template render method to request non-template render type ads. If the ad placement is template render on the platform, see the sections on personalized template ads in this document and the code for APIs that include the word "express". If the ad placement is not template render type, you do not have to call any APIs that include the word "express". For more error codes, see: [Error Codes](https://ad.oceanengine.com/union/media/doc?id=5de4cc6d78c8690012a90aa5).
 
 ### FAQ
 

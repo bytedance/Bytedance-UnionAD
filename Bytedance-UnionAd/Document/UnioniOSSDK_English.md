@@ -2,7 +2,7 @@
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v3.1.0.4 | 2020-07-09 | 1. Stability improvement |
+| v3.1.0.5 | 2020-07-14 | 1. Fixed some bugs |
 [Version history](#Version history)
 
 -   [1.SDK Access](#1sdk-access)
@@ -1293,11 +1293,11 @@ Adsize is the size of the banner image to be displayed by the client. It needs t
 ​	 */
 ​	@property (nonatomic, assign) BOOL hideSkipButton;
 ​	
-	/**
-	 The delegate for receiving state change messages.
-	 */
-	@property (nonatomic, weak, nullable) id<BUSplashAdDelegate> delegate;
-	
+​	/**
+​	 The delegate for receiving state change messages.
+​	 */
+​	@property (nonatomic, weak, nullable) id<BUSplashAdDelegate> delegate;
+​	
 	/*
 	 required.
 	 Root view controller for handling ad actions.
@@ -2789,6 +2789,7 @@ Two causes of 40029 errors:
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
+| v3.1.0.5 | 2020-07-14 | 1. Fixed some bugs |
 | v3.1.0.4 | 2020-07-09 | 1. Stability improvement |
 | v3.1.0.2 | 2020-07-07 | 1. Splash ad bug fix 2. Bundle addressing optimization 3. Fixed some bugs |
 | v3.1.0.1 | 2020-06-22 | 1. Splash ad bug fix 2. Rewarded video sound issue fix 3. Adjust callback timing for express ad |

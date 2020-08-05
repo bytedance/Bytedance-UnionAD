@@ -1,6 +1,6 @@
 # Bytedance-UnionAD-Beta
 
-Pod for Bytedance-UnionAD only support **x86_64, armv7, armv7s, arm64**.
+Pod for Bytedance-UnionAD only support **x86_64, armv7, arm64**.
 
 ## How To Get Started
 
@@ -25,7 +25,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 target 'TargetName' do
-pod 'Bytedance-UnionAD'
+pod 'Bytedance-UnionAD-Beta'
 end
 ```
 Then, run the following command:

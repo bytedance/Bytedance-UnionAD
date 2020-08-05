@@ -1,4 +1,4 @@
-# Bytedance-UnionAD
+# Bytedance-UnionAD-Beta
 
 Pod for Bytedance-UnionAD only support **x86_64, armv7, armv7s, arm64**.
 
@@ -52,11 +52,12 @@ https://partner.oceanengine.com/doc?id=5dd0fe618507820012088272
 https://partner.oceanengine.com/doc?id=5de4cc6d78c8690012a90aa5
 If the content of the document cannot solve your problem, you can try to give feedback through the official channel. Feedback channel: "Pangle Platform-Help-Feedback"
 
-## Reward test
-- Pangle will invite some developers to grayscale the new version of the SDK, please pay attention to the notice in the station. You can send an email to union_tech_support@bytedance.com to apply for the new version of the Pangle SDK. Your participation is highly appreciated!
-
 - SDK information
-  - Version Number: 3.1.0.5
-  - Updated: 2020-07-15
+  - Version Number: 3.2.0.0
+  - Updated: 2020-08-05
   - Change Log:
-    1. Fixed some bugs
+    1. Optimize landing page advertising experience;
+    2. Template advertisement optimization;
+    3. Playable advertising optimization;
+    4. Upgrade some services to ipv6;
+    5. Add **libbz2.tbd** dependency library；

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Bytedance-UnionAD-Beta'
-  s.version          = '3.2.0.0-Beta'
+  s.version          = '3.2.0.0'
   s.summary          = 'BUAdSDK is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Bytedance provides Union ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -21,8 +21,5 @@ Pod::Spec.new do |s|
   s.vendored_frameworks =  ['Bytedance-UnionAd/Frameworks/BUAdSDK.framework','Bytedance-UnionAd/Frameworks/BUFoundation.framework']
   s.resource = 'Bytedance-UnionAd/Frameworks/BUAdSDK.bundle'
   # s.dependency 'AFNetworking', '~> 2.3'
-  valid_archs = ['armv7', 'armv7s', 'x86_64', 'arm64']
-  s.xcconfig = {
-    'VALID_ARCHS' =>  valid_archs.join(' '),
-  }
+  
 end

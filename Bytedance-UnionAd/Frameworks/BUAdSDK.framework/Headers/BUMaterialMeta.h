@@ -27,7 +27,9 @@ typedef NS_ENUM(NSInteger, BUFeedADMode) {
     BUFeedADModeGroupImage = 4,
     BUFeedVideoAdModeImage = 5, // video ad || rewarded video ad horizontal screen
     BUFeedVideoAdModePortrait = 15, // rewarded video ad vertical screen
-    BUFeedADModeImagePortrait = 16
+    BUFeedADModeImagePortrait = 16,
+    BUFeedADModeSquareImage   = 33, //SquareImage Currently it exists only in the oversea now. V3200 add
+    BUFeedADModeSquareVideo   = 50, //SquareVideo Currently it exists only in the oversea now. V3200 add
 };
 
 @interface BUMaterialMeta : NSObject <NSCoding>

@@ -42,6 +42,7 @@ typedef NS_ENUM(NSUInteger, BUNativeExpressRewardedVideoAdType) {
 
 /**
  This method is called when cached successfully.
+ For a better user experience, it is recommended to display video ads at this time.
  */
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
@@ -104,7 +105,14 @@ typedef NS_ENUM(NSUInteger, BUNativeExpressRewardedVideoAdType) {
  Server verification which is requested asynchronously is failed.
  Return value is not 2000.
  */
-- (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
+- (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd  __attribute__((deprecated("Use nativeExpressRewardedVideoAdServerRewardDidFail: error: instead.")));
+
+/**
+  Server verification which is requested asynchronously is failed.
+  @param rewardedVideoAd express rewardVideo Ad
+  @param error request error info
+ */
+- (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error;
 
 /**
  This method is called when another controller has been closed.

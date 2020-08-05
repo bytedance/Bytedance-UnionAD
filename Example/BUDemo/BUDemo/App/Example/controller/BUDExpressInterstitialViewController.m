@@ -50,12 +50,16 @@
     [super viewWillLayoutSubviews];
 }
 
+/***important:
+广告加载成功的时候，会立即渲染WKWebView。
+如果想预加载的话，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
+*/
 - (void)loadInterstitialWithSlotID:(NSString *)slotID {
     NSValue *sizeValue = [self.sizeDict objectForKey:slotID];
     CGSize size = [sizeValue CGSizeValue];
     CGFloat width = CGRectGetWidth([UIScreen mainScreen].bounds)-40;
     CGFloat height = width/size.width*size.height;
-#warning 升级的用户请注意，初始化方法去掉了imgSize参数
+// important: 升级的用户请注意，初始化方法去掉了imgSize参数
     self.interstitialAd = [[BUNativeExpressInterstitialAd alloc] initWithSlotID:slotID adSize:CGSizeMake(width, height)];
     self.interstitialAd.delegate = self;
     [self.interstitialAd loadAdData];
@@ -71,39 +75,39 @@
 
 #pragma ---BUNativeExpresInterstitialAdDelegate
 - (void)nativeExpresInterstitialAdDidLoad:(BUNativeExpressInterstitialAd *)interstitialAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpresInterstitialAd:(BUNativeExpressInterstitialAd *)interstitialAd didFailWithError:(NSError *)error {
     self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)nativeExpresInterstitialAdRenderSuccess:(BUNativeExpressInterstitialAd *)interstitialAd {
     self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpresInterstitialAdRenderFail:(BUNativeExpressInterstitialAd *)interstitialAd error:(NSError *)error {
     self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
-    BUD_Log(@"%s",__func__);
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)nativeExpresInterstitialAdWillVisible:(BUNativeExpressInterstitialAd *)interstitialAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpresInterstitialAdDidClick:(BUNativeExpressInterstitialAd *)interstitialAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpresInterstitialAdWillClose:(BUNativeExpressInterstitialAd *)interstitialAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpresInterstitialAdDidClose:(BUNativeExpressInterstitialAd *)interstitialAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
+    self.interstitialAd = nil;
 }
 
 - (void)nativeExpresInterstitialAdDidCloseOtherController:(BUNativeExpressInterstitialAd *)interstitialAd interactionType:(BUInteractionType)interactionType {
@@ -115,7 +119,9 @@
     } else {
         str = @"appstoreInApp";
     }
-    BUD_Log(@"%s __ %@",__func__,str);
+    [self pbud_logWithSEL:_cmd msg:str];
 }
-
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUNativeExpressInterstitialAd In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
+}
 @end

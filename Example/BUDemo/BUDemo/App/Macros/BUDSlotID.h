@@ -27,7 +27,8 @@
 
 /// 带_both代表海外国内通用的rit
 #define express_feed_ID                   @"945113159"
-#define express_feed_video_ID             @"900546510"
+//#define express_feed_video_ID             @"900546510"
+#define express_feed_video_ID             @"945294189"
 #define express_draw_ID                   @"900546881"
 #define express_banner_ID                 @"900546269"
 #define express_banner_ID_60090           @"900546269"

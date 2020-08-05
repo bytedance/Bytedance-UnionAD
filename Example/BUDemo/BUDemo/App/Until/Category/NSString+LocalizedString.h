@@ -57,6 +57,8 @@ extern NSString * const AdLoaded;
 extern NSString * const AdloadedFail;
 extern NSString * const LoadedAd;
 extern NSString * const ShowAd;
+extern NSString * const ScanQRCode;
+extern NSString * const IsEtOpen;
 
 @interface NSString (LocalizedString)
 

@@ -21,6 +21,7 @@
 #import <Bugly/Bugly.h>
 #import "BUAdSDKAdapterConfiguration.h"
 #import "BUDTestToolsViewController.h"
+#import "BUDAnimationTool.h"
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -146,26 +147,29 @@
     //Coppa 0 adult, 1 child
     [BUAdSDKManager setCoppa:0];
     
-    //BUAdSDK requires iOS 9 and up
-    [BUAdSDKManager setAppID:[BUDAdManager appKey]];
-
 #if DEBUG
     // Whether to open log. default is none.
     [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
 #endif
+    //BUAdSDK requires iOS 9 and up
+    [BUAdSDKManager setAppID:[BUDAdManager appKey]];
+
     [BUAdSDKManager setIsPaidApp:NO];
-    
     // splash AD demo
     [self addSplashAD];
 }
 
+#pragma mark - SplashAdView
 - (void)addSplashAD {
     CGRect frame = [UIScreen mainScreen].bounds;
     self.splashAdView = [[BUSplashAdView alloc] initWithSlotID:normal_splash_ID frame:frame];
     // tolerateTimeout = CGFLOAT_MAX , The conversion time to milliseconds will be equal to 0
     self.splashAdView.tolerateTimeout = 10;
     self.splashAdView.delegate = self;
-    
+    //optional
+    self.splashAdView.needSplashZoomOutAd = YES;
+
+
     UIWindow *keyWindow = self.window;
     self.startTime = CACurrentMediaTime();
     [self.splashAdView loadAdData];
@@ -173,23 +177,77 @@
     self.splashAdView.rootViewController = keyWindow.rootViewController;
 }
 
+
+- (void)splashAdDidLoad:(BUSplashAdView *)splashAd {
+    if (splashAd.zoomOutView) {
+        UIViewController *parentVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+        [parentVC.view addSubview:splashAd.zoomOutView];
+        [parentVC.view bringSubviewToFront:splashAd];
+        //Add this view to your container
+        [parentVC.view insertSubview:splashAd.zoomOutView belowSubview:splashAd];
+        splashAd.zoomOutView.rootViewController = parentVC;
+    }
+}
+
 - (void)splashAdDidClose:(BUSplashAdView *)splashAd {
+    if (splashAd.zoomOutView) {
+        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView];
+    } else{
+        [splashAd removeFromSuperview];
+    }
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashAdDidClick:(BUSplashAdView *)splashAd {
+    if (splashAd.zoomOutView) {
+        [splashAd.zoomOutView removeFromSuperview];
+    }
     [splashAd removeFromSuperview];
-    CFTimeInterval endTime = CACurrentMediaTime();
-    BUD_Log(@"Total Runtime: %g s", endTime - self.startTime);
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd {
+    if (splashAd.zoomOutView) {
+        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView];
+    } else{
+        [splashAd removeFromSuperview];
+    }
+    [self pbu_logWithSEL:_cmd msg:@""];
 }
 
 - (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error {
     [splashAd removeFromSuperview];
-    CFTimeInterval endTime = CACurrentMediaTime();
-    BUD_Log(@"Total Runtime: %g s error=%@", endTime - self.startTime, error);
+    [self pbu_logWithSEL:_cmd msg:@""];
 }
 
 - (void)splashAdWillVisible:(BUSplashAdView *)splashAd {
-    CFTimeInterval endTime = CACurrentMediaTime();
-    BUD_Log(@"Total Showtime: %g s", endTime - self.startTime);
+    [self pbu_logWithSEL:_cmd msg:@""];
 }
 
+
+
+
+
+- (void)splashAdWillClose:(BUSplashAdView *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+
+
+- (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)pbu_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    CFTimeInterval endTime = CACurrentMediaTime();
+    BUD_Log(@"SplashAdView In AppDelegate (%@) total run time: %gs, extraMsg:%@", NSStringFromSelector(sel), endTime - self.startTime, msg);
+}
+
+#pragma mark - UIApplicationDelegate
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

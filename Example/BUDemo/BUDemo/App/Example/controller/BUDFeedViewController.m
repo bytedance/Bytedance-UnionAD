@@ -53,6 +53,10 @@
     [self.tableView registerClass:[BUDFeedNormalBigImgTableViewCell class] forCellReuseIdentifier:@"BUDFeedNormalBigImgTableViewCell"];
     [self.tableView registerClass:[BUDFeedNormalthreeImgsableViewCell class] forCellReuseIdentifier:@"BUDFeedNormalthreeImgsableViewCell"];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+    //方图
+    [self.tableView registerClass:[BUDFeedAdSquareImgTableViewCell class] forCellReuseIdentifier:@"BUDFeedAdSquareImgTableViewCell"];
+    //方视频
+    [self.tableView registerClass:[BUDFeedSquareVideoAdTableViewCell class] forCellReuseIdentifier:@"BUDFeedSquareVideoAdTableViewCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self loadNativeAds];
@@ -89,20 +93,6 @@
     [nad loadAdDataWithCount:3];
 }
 
-- (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
-    BUD_Log(@"feed datas load success");
-    for (BUNativeAd *model in nativeAdDataArray) {
-        NSUInteger index = rand() % (self.dataSource.count-3)+2;
-        [self.dataSource insertObject:model atIndex:index];
-    }
-    
-    [self.tableView reloadData];
-}
-
-- (void)nativeAdsManager:(BUNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error {
-    BUD_Log(@"feed datas load fail");
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
-}
 
 #pragma mark - tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -125,9 +115,14 @@
             cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdLargeTableViewCell" forIndexPath:indexPath];
         } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdGroupTableViewCell" forIndexPath:indexPath];
-        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage) {
+        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedVideoAdTableViewCell" forIndexPath:indexPath];
             // Set the delegate to listen for status of video
+            isVideoCell = YES;
+        } else if (nativeAd.data.imageMode == BUFeedADModeSquareImage) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdSquareImgTableViewCell" forIndexPath:indexPath];
+        } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedSquareVideoAdTableViewCell" forIndexPath:indexPath];
             isVideoCell = YES;
         }
         
@@ -135,9 +130,15 @@
         if (cell) {
             [cell refreshUIWithModel:nativeAd];
             if (isVideoCell) {
-                BUDFeedVideoAdTableViewCell *videoCell = (BUDFeedVideoAdTableViewCell *)cell;
-                videoCell.nativeAdRelatedView.videoAdView.delegate = self;
-                [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
+                if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait) {
+                    BUDFeedVideoAdTableViewCell *videoCell = (BUDFeedVideoAdTableViewCell *)cell;
+                    videoCell.nativeAdRelatedView.videoAdView.delegate = self;
+                    [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
+                } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
+                    BUDFeedSquareVideoAdTableViewCell *videoCell = (BUDFeedSquareVideoAdTableViewCell *)cell;
+                    videoCell.nativeAdRelatedView.videoAdView.delegate = self;
+                    [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
+                }
             } else {
                 if (type == BUInteractionTypeDownload) {
                     [cell.customBtn setTitle:[NSString localizedStringForKey:ClickDownload] forState:UIControlStateNormal];
@@ -209,8 +210,12 @@
             return [BUDFeedAdLargeTableViewCell cellHeightWithModel:nativeAd width:width];
         } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
             return [BUDFeedAdGroupTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage) {
+        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode == BUFeedVideoAdModePortrait) {
             return [BUDFeedVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
+        } else if (nativeAd.data.imageMode == BUFeedADModeSquareImage) {
+            return [BUDFeedAdSquareImgTableViewCell cellHeightWithModel:nativeAd width:width];
+        } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
+            return [BUDFeedSquareVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
         }
     }else if ([model isKindOfClass:[BUDFeedNormalModel class]]){
         return [(BUDFeedNormalModel *)model cellHeight];
@@ -231,8 +236,12 @@
             return [BUDFeedAdLargeTableViewCell cellHeightWithModel:nativeAd width:width];
         } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
             return [BUDFeedAdGroupTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage) {
+        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode == BUFeedVideoAdModePortrait) {
             return [BUDFeedVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
+        } else if (nativeAd.data.imageMode == BUFeedADModeSquareImage) {
+            return [BUDFeedAdSquareImgTableViewCell cellHeightWithModel:nativeAd width:width];
+        } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
+            return [BUDFeedSquareVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
         }
     }else if ([model isKindOfClass:[BUDFeedNormalModel class]]){
         return [(BUDFeedNormalModel *)model cellHeight];
@@ -240,25 +249,82 @@
     return 80;
 }
 
-#pragma mark 
+#pragma mark - BUNativeAdsManagerDelegate
+
+- (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
+    for (BUNativeAd *model in nativeAdDataArray) {
+        NSUInteger index = rand() % (self.dataSource.count-3)+2;
+        [self.dataSource insertObject:model atIndex:index];
+    }
+    
+    [self.tableView reloadData];
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdsManagerDelegate" msg:[NSString stringWithFormat:@"native-count:%ld", (long)nativeAdDataArray.count]];
+}
+
+- (void)nativeAdsManager:(BUNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdsManagerDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
+}
+#pragma mark - BUNativeAdDelegate
+- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
+}
+
+- (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
+}
+
+- (void)nativeAdDidBecomeVisible:(BUNativeAd *)nativeAd {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
+}
+
+- (void)nativeAdDidCloseOtherController:(BUNativeAd *)nativeAd interactionType:(BUInteractionType)interactionType {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:[NSString stringWithFormat:@"interactionType:%ld", (long)interactionType]];
+}
+
+- (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *_Nullable)view {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:[NSString stringWithFormat:@"view:%@", view]];
+}
+
 - (void)nativeAd:(BUNativeAd *)nativeAd dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords {
-    BUD_Log(@"click dislike");
     NSMutableArray *dataSources = [self.dataSource mutableCopy];
     [dataSources removeObject:nativeAd];
     self.dataSource = [dataSources copy];
     [self.tableView reloadData];
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
 }
 
+
+#pragma mark - BUVideoAdViewDelegate
+
 - (void)videoAdView:(BUVideoAdView *)videoAdView stateDidChanged:(BUPlayerPlayState)playerState {
-    BUD_Log(@"videoAdView state change to %ld", (long)playerState);
+    
+    [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"playerState:%ld", (long)playerState]];
 }
 
 - (void)videoAdView:(BUVideoAdView *)videoAdView didLoadFailWithError:(NSError *)error {
-    BUD_Log(@"videoAdView didLoadFailWithError");
+    [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView {
-    BUD_Log(@"videoAdView didPlayFinish");
+    [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:@""];
 }
 
+- (void)videoAdViewDidClick:(BUVideoAdView *)videoAdView {
+    [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:@""];
+}
+
+- (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView {
+    [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:@""];
+}
+
+
+- (void)videoAdViewDidCloseOtherController:(BUVideoAdView *)videoAdView interactionType:(BUInteractionType)interactionType {
+    [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"interactionType:%ld", (long)interactionType]];
+}
+
+
+#pragma mark - Log
+- (void)pbud_logWithSEL:(SEL)sel prefix:(NSString *)prefix msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate Native Feed %@ In VC (%@) extraMsg:%@", prefix, NSStringFromSelector(sel), msg);
+}
 @end

@@ -145,16 +145,18 @@ completionHandler: (nonnull GADMediationRewardedLoadCompletionHandler)completion
 
 - (void)nativeExpressRewardedVideoAdServerRewardDidSucceed:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {
     if (verify) {
+        NSNumber *rewardAmountNumber = [NSNumber numberWithInteger:rewardedVideoAd.rewardedVideoModel.rewardAmount];
+        NSDecimalNumber *rewardAmountDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:[rewardAmountNumber decimalValue]];
         GADAdReward *aReward = [[GADAdReward alloc] initWithRewardType:@""
-                                   rewardAmount:[NSDecimalNumber numberWithInteger:rewardedVideoAd.rewardedVideoModel.rewardAmount]];
+                                   rewardAmount:rewardAmountDecimalNumber];
         [self.delegate didRewardUserWithReward:aReward];
 
     }
     BUD_Log(@"%s", __func__);
 }
 
-- (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+- (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError * _Nullable)error {
+    BUD_Log(@"%s error =  %@",__func__,error);
 }
 
 @end

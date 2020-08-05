@@ -45,7 +45,7 @@
 }
 
 - (void)loadFullscreenVideoAdWithSlotID:(NSString *)slotID {
-#warning----- Every time the data is requested, a new one BUFullscreenVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
+// important:----- Every time the data is requested, a new one BUFullscreenVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
     self.fullscreenVideoAd = [[BUFullscreenVideoAd alloc] initWithSlotID:slotID];
     self.fullscreenVideoAd.delegate = self;
     [self.fullscreenVideoAd loadAdData];
@@ -62,50 +62,54 @@
 #pragma mark BURewardedVideoAdDelegate
 - (void)fullscreenVideoMaterialMetaAdDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
     self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
     self.selectedView.promptStatus = BUDPromptStatusAdVideoLoadedSuccess;
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {
     self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
-    BUD_Log(@"%s",__func__);
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)fullscreenVideoAdDidClickSkip:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)fullscreenVideoAdDidClick:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)fullscreenVideoAdDidClose:(BUFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error{
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)fullscreenVideoAdWillVisible:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)fullscreenVideoAdDidVisible:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)fullscreenVideoAdWillClose:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)fullscreenVideoAdCallback:(BUFullscreenVideoAd *)fullscreenVideoAd withType:(BUFullScreenVideoAdType)fullscreenVideoAdType{
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
+
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUFullscreenVideoAd In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
+}
+
 
 @end

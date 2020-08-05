@@ -76,6 +76,10 @@
     [self.view addSubview:self.isCarouselSwitch];
 }
 
+/***important:
+ 广告加载成功的时候，会立即渲染WKWebView。
+ 如果想预加载的话，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
+ */
 - (void)loadBannerWithSlotID:(NSString *)slotID {
     [self.bannerView removeFromSuperview];
     
@@ -83,7 +87,7 @@
     CGSize size = [sizeValue CGSizeValue];
     CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
     CGFloat bannerHeigh = screenWidth/size.width*size.height;
-#warning 升级的用户请注意，初始化方法去掉了imgSize参数
+// important: 升级的用户请注意，初始化方法去掉了imgSize参数
     if (self.isCarouselSwitch.on) {
         self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:slotID rootViewController:self adSize:CGSizeMake(screenWidth, bannerHeigh) IsSupportDeepLink:YES interval:30];
     } else {
@@ -102,35 +106,33 @@
 
 #pragma BUNativeExpressBannerViewDelegate
 - (void)nativeExpressBannerAdViewDidLoad:(BUNativeExpressBannerView *)bannerAdView {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView didLoadFailWithError:(NSError *)error {
     self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
-    BUD_Log(@"%s",__func__);
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)nativeExpressBannerAdViewRenderSuccess:(BUNativeExpressBannerView *)bannerAdView {
     self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressBannerAdViewRenderFail:(BUNativeExpressBannerView *)bannerAdView error:(NSError *)error {
     self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)nativeExpressBannerAdViewWillBecomVisible:(BUNativeExpressBannerView *)bannerAdView {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressBannerAdViewDidClick:(BUNativeExpressBannerView *)bannerAdView {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterwords {
-    BUD_Log(@"%s",__func__);
     [UIView animateWithDuration:0.25 animations:^{
         bannerAdView.alpha = 0;
     } completion:^(BOOL finished) {
@@ -138,6 +140,7 @@
         self.bannerView = nil;
     }];
     self.selectedView.promptStatus = BUDPromptStatusDefault;
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressBannerAdViewDidCloseOtherController:(BUNativeExpressBannerView *)bannerAdView interactionType:(BUInteractionType)interactionType {
@@ -149,7 +152,9 @@
     } else {
         str = @"appstoreInApp";
     }
-    BUD_Log(@"%s __ %@",__func__,str);
+    [self pbud_logWithSEL:_cmd msg:str];
 }
-
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUNativeExpressBannerView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
+}
 @end

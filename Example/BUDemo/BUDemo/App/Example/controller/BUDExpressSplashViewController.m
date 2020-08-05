@@ -108,6 +108,10 @@
     self.splashView = [[BUNativeExpressSplashView alloc] initWithSlotID:self.viewModel.slotID adSize:self.splashFrame.size rootViewController:self];
     self.splashView.delegate = self;
     self.splashView.tolerateTimeout = 3;
+    /***
+    广告加载成功的时候，会立即渲染WKWebView。
+    如果想预加载的话，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
+    */
     [self.splashView loadAdData];
     [self.navigationController.view addSubview:self.splashView];
 }
@@ -132,7 +136,10 @@
     custormSkipButton.frame = CGRectMake(width - 56 - 12, height - 36 - 12, 56, 36);
     [self.splashView addSubview:custormSkipButton];
     
-    
+    /*** important:
+    广告加载成功的时候，会立即渲染WKWebView。
+    如果想预加载的话，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
+    */
     [self.splashView loadAdData];
     [self.navigationController.view addSubview:self.splashView];
 }
@@ -149,51 +156,56 @@
     [self buildupHideSkipButtonSplashView];
 }
 
-#pragma mark BUNativeExpressSplashViewDelegate
+#pragma mark - BUNativeExpressSplashViewDelegate
 - (void)nativeExpressSplashViewDidLoad:(nonnull BUNativeExpressSplashView *)splashAdView {
-    NSLog(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressSplashView:(nonnull BUNativeExpressSplashView *)splashAdView didFailWithError:(NSError * _Nullable)error {
     [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
     [self.splashView removeFromSuperview];
     self.splashView = nil;
-    NSLog(@"%s",__func__);
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    NSString *msg = [NSString stringWithFormat:@"error:%@", error];
+    [self pbud_logWithSEL:_cmd msg:msg];
 }
 
 - (void)nativeExpressSplashViewRenderSuccess:(nonnull BUNativeExpressSplashView *)splashAdView {
-    NSLog(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressSplashViewRenderFail:(nonnull BUNativeExpressSplashView *)splashAdView error:(NSError * _Nullable)error {
     [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
     [self.splashView removeFromSuperview];
     self.splashView = nil;
-    NSLog(@"%s",__func__);
+    NSString *msg = [NSString stringWithFormat:@"error:%@", error];
+    [self pbud_logWithSEL:_cmd msg:msg];
 }
 
 - (void)nativeExpressSplashViewWillVisible:(nonnull BUNativeExpressSplashView *)splashAdView {
-    NSLog(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressSplashViewDidClick:(nonnull BUNativeExpressSplashView *)splashAdView {
-    NSLog(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressSplashViewDidClickSkip:(nonnull BUNativeExpressSplashView *)splashAdView {
-    NSLog(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressSplashViewDidClose:(nonnull BUNativeExpressSplashView *)splashAdView {
     [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
     [self.splashView removeFromSuperview];
     self.splashView = nil;
-    NSLog(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+- (void)nativeExpressSplashViewCountdownToZero:(BUNativeExpressSplashView *)splashAdView {
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressSplashViewFinishPlayDidPlayFinish:(BUNativeExpressSplashView *)splashView didFailWithError:(NSError *)error {
-    NSLog(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressSplashViewDidCloseOtherController:(BUNativeExpressSplashView *)splashView interactionType:(BUInteractionType)interactionType {
@@ -205,7 +217,11 @@
     } else {
         str = @"appstoreInApp";
     }
-    BUD_Log(@"%s __ %@",__func__,str);
+    [self pbud_logWithSEL:_cmd msg:str];
+}
+
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUNativeExpressSplashView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
 }
 
 @end

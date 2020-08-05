@@ -116,7 +116,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     CGFloat imageX = (width - imageWidth) / 2  + padding.left;
     if (self.nativeAd.data.imageMode == BUFeedVideoAdModeImage) {
         //CGFloat videoWidth = self.nativeAd.data.
-        id <BUVideoAdViewDelegate> temp = self.nativeAd.delegate;
+        id<BUVideoAdViewDelegate> temp = (id<BUVideoAdViewDelegate>)self.nativeAd.delegate;
         self.nativeAdRelatedView.videoAdView.delegate = temp;
         self.nativeAdRelatedView.videoAdView.rootViewController = self.nativeAd.rootViewController;
         self.mediaView.frame = CGRectMake(imageX, y, imageWidth, imageHeight);

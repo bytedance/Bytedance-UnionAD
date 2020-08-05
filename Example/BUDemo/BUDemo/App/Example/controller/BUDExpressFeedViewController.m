@@ -37,6 +37,7 @@
     [self setupViews];
     
     [self loadData];
+    [self addAccessibilityIdentifier];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -159,52 +160,53 @@
         [views enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             BUNativeExpressAdView *expressView = (BUNativeExpressAdView *)obj;
             expressView.rootViewController = self;
+            // important: 此处会进行WKWebview的渲染，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
             [expressView render];
         }];
     }
     [self.tableView reloadData];
-    NSLog(@"【BytedanceUnion】个性化模板拉取广告成功回调");
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error {
-    BUD_Log(@"%s",__func__);
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
     [self.tableView reloadData];
-    NSLog(@"====== %p videoDuration = %ld",nativeExpressAdView,(long)nativeExpressAdView.videoDuration);
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateCurrentPlayedTime) userInfo:nil repeats:YES];
         [self.timer fire];
     });
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"nativeExpressAdView.videoDuration:%ld", (long)nativeExpressAdView.videoDuration]];
 }
 
 - (void)updateCurrentPlayedTime {
     for (BUNativeExpressAdView *nativeExpressAdView in self.expressAdViews) {
-        NSLog(@"====== %p currentPlayedTime = %f",nativeExpressAdView,nativeExpressAdView.currentPlayedTime);
+        [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"nativeExpressAdView.currentPlayedTime:%.4f", nativeExpressAdView.currentPlayedTime]];
     }
 }
 
 - (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView stateDidChanged:(BUPlayerPlayState)playerState {
-    NSLog(@"====== %p playerState = %ld",nativeExpressAdView,playerState);
+//    NSLog(@"====== %p playerState = %ld",nativeExpressAdView,(long)playerState);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"playerState:%ld", (long)playerState]];
 }
 
 - (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)nativeExpressAdViewWillShow:(BUNativeExpressAdView *)nativeExpressAdView {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressAdViewDidClick:(BUNativeExpressAdView *)nativeExpressAdView {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressAdViewPlayerDidPlayFinish:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords {//【重要】需要在点击叉以后 在这个回调中移除视图，否则，会出现用户点击叉无效的情况
@@ -213,15 +215,15 @@
     NSUInteger index = [self.expressAdViews indexOfObject:nativeExpressAdView];
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressAdViewDidClosed:(BUNativeExpressAdView *)nativeExpressAdView {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressAdViewWillPresentScreen:(BUNativeExpressAdView *)nativeExpressAdView {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressAdViewDidCloseOtherController:(BUNativeExpressAdView *)nativeExpressAdView interactionType:(BUInteractionType)interactionType {
@@ -233,7 +235,12 @@
     } else {
         str = @"appstoreInApp";
     }
-    BUD_Log(@"%s __ %@",__func__,str);
+    [self pbud_logWithSEL:_cmd msg:str];
+}
+
+
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUNativeExpressFeedAdView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
@@ -275,6 +282,12 @@
         cell.backgroundColor = [UIColor whiteColor];
     }
     return cell;
+}
+
+- (void) addAccessibilityIdentifier {
+    self.widthSlider.accessibilityIdentifier = @"expressFeed_width";
+    self.heightSlider.accessibilityIdentifier = @"expressFeed_height";
+    self.adCountSlider.accessibilityIdentifier = @"expressFeed_count";
 }
 
 @end

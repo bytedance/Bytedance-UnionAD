@@ -64,19 +64,17 @@
 }
 
 - (void)interstitialAdDidClose:(BUInterstitialAd *)interstitialAd {
-     BUD_Log(@"interstitialAd AdDidClose");
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
-
 - (void)interstitialAdDidLoad:(BUInterstitialAd *)interstitialAd {
-    BUD_Log(@"interstitialAd data load sucess");
+    [self pbud_logWithSEL:_cmd msg:@""];
     [self.interstitialAd showAdFromRootViewController:self.navigationController];
 }
 
 
 - (void)interstitialAd:(BUInterstitialAd *)interstitialAd didFailWithError:(NSError *)error {
-    BUD_Log(@"interstitialAd data load fail");
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)interstitialAdDidCloseOtherController:(BUInterstitialAd *)interstitialAd interactionType:(BUInteractionType)interactionType {
@@ -88,14 +86,12 @@
     } else {
         str = @"appstoreInApp";
     }
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored"-Wdeprecated-declarations"
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
-    [alert show];
-#pragma clang diagnostic pop
+    [self pbud_logWithSEL:_cmd msg:str];
 }
 
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUInterstitialAd In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

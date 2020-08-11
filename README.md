@@ -56,7 +56,8 @@ If the content of the document cannot solve your problem, you can try to give fe
 - Pangle will invite some developers to grayscale the new version of the SDK, please pay attention to the notice in the station. You can send an email to union_tech_support@bytedance.com to apply for the new version of the Pangle SDK. Your participation is highly appreciated!
 
 - SDK information
-  - Version Number: 3.1.0.5
-  - Updated: 2020-07-15
+  - Version Number: 3.2.0.0
+  - Updated: 2020-08-11
   - Change Log:
-    1. Fixed some bugs
+    1. 1.Playable white screen issue fixed
+    2.Fixed some bugs

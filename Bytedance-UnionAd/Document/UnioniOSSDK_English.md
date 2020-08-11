@@ -2,7 +2,7 @@
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v3.1.0.5 | 2020-07-14 | 1. Fixed some bugs |
+| v3.1.0.9 | 2020-08-06 | 1. Bug fix 2.Fix playable white screen |
 [Version history](#Version history)
 
 -   [1.SDK Access](#1sdk-access)
@@ -1298,17 +1298,17 @@ Adsize is the size of the banner image to be displayed by the client. It needs t
 ​	 */
 ​	@property (nonatomic, weak, nullable) id<BUSplashAdDelegate> delegate;
 ​	
-	/*
-	 required.
-	 Root view controller for handling ad actions.
-	 */
-	@property (nonatomic, weak) UIViewController *rootViewController;
-	
-	/**
-	 Whether the splash ad data has been loaded.
-	 */
-	@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
-	
+​	/*
+​	 required.
+​	 Root view controller for handling ad actions.
+​	 */
+​	@property (nonatomic, weak) UIViewController *rootViewController;
+​	
+​	/**
+​	 Whether the splash ad data has been loaded.
+​	 */
+​	@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
+​	
 	/// media configuration parameters.
 	@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
 	
@@ -2789,6 +2789,8 @@ Two causes of 40029 errors:
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
+| v3.1.0.9 | 2020-08-06 | 1. Bug fix 2.Fix playable white screen |
+| v3.1.0.8 | 2020-07-31 | 1. Bug fix |
 | v3.1.0.5 | 2020-07-14 | 1. Fixed some bugs |
 | v3.1.0.4 | 2020-07-09 | 1. Stability improvement |
 | v3.1.0.2 | 2020-07-07 | 1. Splash ad bug fix 2. Bundle addressing optimization 3. Fixed some bugs |

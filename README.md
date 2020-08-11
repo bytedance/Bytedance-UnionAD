@@ -59,5 +59,5 @@ If the content of the document cannot solve your problem, you can try to give fe
   - Version Number: 3.2.0.0
   - Updated: 2020-08-11
   - Change Log:
-    1. 1.Playable white screen issue fixed
+    1.Playable white screen issue fixed
     2.Fixed some bugs

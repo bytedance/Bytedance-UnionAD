@@ -30,6 +30,9 @@
 		2BB89B7024E249D8009E0DF5 /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2BB89B6D24E249D8009E0DF5 /* BUAdSDK.bundle */; };
 		2BB89B7124E249D8009E0DF5 /* BUAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BB89B6E24E249D8009E0DF5 /* BUAdSDK.framework */; };
 		2BB89B7224E249D8009E0DF5 /* BUFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BB89B6F24E249D8009E0DF5 /* BUFoundation.framework */; };
+		2BF228AD24EFF6B200468F80 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF228AC24EFF6B200468F80 /* libbz2.tbd */; };
+		2BF228AF24EFF6C000468F80 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF228AE24EFF6C000468F80 /* libxml2.tbd */; };
+		2BF228B324EFF77100468F80 /* BUDAnimationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF228B124EFF77100468F80 /* BUDAnimationTool.m */; };
 		2C6C9EE9241FD01B0003B0F2 /* BUDMopub_NativeAdCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C9EE4241FD01B0003B0F2 /* BUDMopub_NativeAdCustomEvent.m */; };
 		2C6C9EEA241FD01B0003B0F2 /* BUDMopub_nativeAdAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C9EE5241FD01B0003B0F2 /* BUDMopub_nativeAdAdapter.m */; };
 		2C6C9EEB241FD01B0003B0F2 /* BUDMopub_NativeAdCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C9EE6241FD01B0003B0F2 /* BUDMopub_NativeAdCusEventVC.m */; };
@@ -173,6 +176,10 @@
 		2BB89B6D24E249D8009E0DF5 /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = BUAdSDK.bundle; path = "../../Bytedance-UnionAd/Frameworks/BUAdSDK.bundle"; sourceTree = "<group>"; };
 		2BB89B6E24E249D8009E0DF5 /* BUAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BUAdSDK.framework; path = "../../Bytedance-UnionAd/Frameworks/BUAdSDK.framework"; sourceTree = "<group>"; };
 		2BB89B6F24E249D8009E0DF5 /* BUFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BUFoundation.framework; path = "../../Bytedance-UnionAd/Frameworks/BUFoundation.framework"; sourceTree = "<group>"; };
+		2BF228AC24EFF6B200468F80 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		2BF228AE24EFF6C000468F80 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		2BF228B124EFF77100468F80 /* BUDAnimationTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAnimationTool.m; sourceTree = "<group>"; };
+		2BF228B224EFF77100468F80 /* BUDAnimationTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAnimationTool.h; sourceTree = "<group>"; };
 		2C6C9EE3241FD01B0003B0F2 /* BUDMopub_NativeAdCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDMopub_NativeAdCusEventVC.h; sourceTree = "<group>"; };
 		2C6C9EE4241FD01B0003B0F2 /* BUDMopub_NativeAdCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDMopub_NativeAdCustomEvent.m; sourceTree = "<group>"; };
 		2C6C9EE5241FD01B0003B0F2 /* BUDMopub_nativeAdAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDMopub_nativeAdAdapter.m; sourceTree = "<group>"; };
@@ -362,6 +369,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BF228AF24EFF6C000468F80 /* libxml2.tbd in Frameworks */,
+				2BF228AD24EFF6B200468F80 /* libbz2.tbd in Frameworks */,
 				DE0223AF234F0C89002C9D26 /* Accelerate.framework in Frameworks */,
 				780D5E3D2223CB8D0051EF1B /* Photos.framework in Frameworks */,
 				78E073AB21A2CFF1006D71EE /* AdSupport.framework in Frameworks */,
@@ -377,6 +386,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2BF228B024EFF77100468F80 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				2BF228B124EFF77100468F80 /* BUDAnimationTool.m */,
+				2BF228B224EFF77100468F80 /* BUDAnimationTool.h */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
 		2C6C9EF2241FD10E0003B0F2 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,6 +549,8 @@
 		A9BB8904F5E2E508722AB9C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2BF228AE24EFF6C000468F80 /* libxml2.tbd */,
+				2BF228AC24EFF6B200468F80 /* libbz2.tbd */,
 				2BB89B6D24E249D8009E0DF5 /* BUAdSDK.bundle */,
 				2BB89B6E24E249D8009E0DF5 /* BUAdSDK.framework */,
 				2BB89B6F24E249D8009E0DF5 /* BUFoundation.framework */,
@@ -589,6 +609,7 @@
 		DE84BD1721A2E9600090D866 /* Until */ = {
 			isa = PBXGroup;
 			children = (
+				2BF228B024EFF77100468F80 /* Animation */,
 				DE84BD2221A2E9600090D866 /* BUDBase64.h */,
 				DE84BD1821A2E9600090D866 /* BUDBase64.m */,
 				DE84BD1E21A2E9600090D866 /* BUDCocoaSecurity.h */,
@@ -957,6 +978,7 @@
 				DE697B10228BFDD200C5B5C6 /* BUDExpressFeedViewController.m in Sources */,
 				124FCD4E2492066A0008FA8D /* BUDWaterfallViewController.m in Sources */,
 				5AB9E06722295644001B15CE /* BUDCollectionViewCell.m in Sources */,
+				2BF228B324EFF77100468F80 /* BUDAnimationTool.m in Sources */,
 				DE84BDAD21A2E9600090D866 /* BUDFeedAdTableViewCell.m in Sources */,
 				DE4E1939239116F500E052F8 /* BUAdSDKAdapterConfiguration.m in Sources */,
 				DE84BDA321A2E9600090D866 /* BUDFeedNormalTableViewCell.m in Sources */,

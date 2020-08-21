@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Bytedance-UnionAD'
-  s.version          = '3.1.0.9'
+  s.version          = '3.2.0.1'
   s.summary          = 'BUAdSDK is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Bytedance provides Union ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/bytedance/Bytedance-UnionAD.git', :tag => s.version.to_s }
   s.platform     = :ios, "9.0"  
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate'
-  s.libraries = 'c++', 'resolv', 'z', 'sqlite3'
+  s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2'
 
   #s.public_header_files = 'Bytedance-UnionAd/Classes/*.h'
   #s.source_files = 'Bytedance-UnionAd/Classes/*'
@@ -29,7 +29,4 @@ Pod::Spec.new do |s|
   s.resource = 'Bytedance-UnionAd/Frameworks/BUAdSDK.bundle'
   # s.dependency 'AFNetworking', '~> 2.3'
   valid_archs = ['armv7', 'armv7s', 'x86_64', 'arm64']
-  s.xcconfig = {
-    'VALID_ARCHS' =>  valid_archs.join(' '),
-  }
 end

@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BUMaterialMeta.h"
+#import "BUSplashZoomOutView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,6 +31,9 @@ The unique identifier of splash ad.
  */
 @property (nonatomic, assign) BOOL hideSkipButton;
 
+///optional: Whether need splashZoomOutAd, default NO.
+@property (nonatomic, assign) BOOL needSplashZoomOutAd;
+
 /**
  The delegate for receiving state change messages.
  */
@@ -48,6 +52,9 @@ The unique identifier of splash ad.
 
 /// media configuration parameters.
 @property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+
+/// When it is a zoom out advertisement, it has value.
+@property (nonatomic, strong, readonly) BUSplashZoomOutView *zoomOutView;
 
 /**
  Initializes splash ad with slot id and frame.

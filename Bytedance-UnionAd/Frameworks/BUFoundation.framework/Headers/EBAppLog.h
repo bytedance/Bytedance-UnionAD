@@ -21,10 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @abstract The unique device ID that get from register server. */
 @property (class, nonatomic, copy, readonly, nullable) NSString *deviceID;
 
-/*! @abstract The unique install ID that get from register server. */
+/*! @abstract The unique install ID that get from register server.
+ @discussion Embed版本值为nil
+ */
 @property (class, nonatomic, copy, readonly, nullable) NSString *installID;
 
-/*! @abstract The unique ssID that get from register server. */
+/*! @abstract The unique ssID that get from register server.
+ @discussion Embed版本值为nil
+ */
 @property (class, nonatomic, copy, readonly, nullable) NSString *ssID;
 
 /*! @abstract 初始化注册

@@ -12,7 +12,7 @@
 
 @class BU_SDWebImageOptionsResult;
 
-typedef BU_SDWebImageOptionsResult * _Nullable(^SDWebImageOptionsProcessorBlock)(NSURL * _Nullable url, SDWebImageOptions options, SDWebImageContext * _Nullable context);
+typedef BU_SDWebImageOptionsResult * _Nullable(^BU_SDWebImageOptionsProcessorBlock)(NSURL * _Nullable url, BU_SDWebImageOptions options, SDWebImageContext * _Nullable context);
 
 /**
  The options result contains both options and context.
@@ -20,9 +20,9 @@ typedef BU_SDWebImageOptionsResult * _Nullable(^SDWebImageOptionsProcessorBlock)
 @interface BU_SDWebImageOptionsResult : NSObject
 
 /**
- WebCache options.
+ BU_WebCache options.
  */
-@property (nonatomic, assign, readonly) SDWebImageOptions options;
+@property (nonatomic, assign, readonly) BU_SDWebImageOptions options;
 
 /**
  Context options.
@@ -36,27 +36,27 @@ typedef BU_SDWebImageOptionsResult * _Nullable(^SDWebImageOptionsProcessorBlock)
  @param context context
  @return The options result contains both options and context.
  */
-- (nonnull instancetype)initWithOptions:(SDWebImageOptions)options context:(nullable SDWebImageContext *)context;
+- (nonnull instancetype)initWithOptions:(BU_SDWebImageOptions)options context:(nullable SDWebImageContext *)context;
 
 @end
 
 /**
  This is the protocol for options processor.
- Options processor can be used, to control the final result for individual image request's `SDWebImageOptions` and `SDWebImageContext`
+ Options processor can be used, to control the final result for individual image request's `BU_SDWebImageOptions` and `SDWebImageContext`
  Implements the protocol to have a global control for each indivadual image request's option.
  */
-@protocol SDWebImageOptionsProcessor <NSObject>
+@protocol BU_SDWebImageOptionsProcessor <NSObject>
 
 /**
  Return the processed options result for specify image URL, with its options and context
 
  @param url The URL to the image
  @param options A mask to specify options to use for this request
- @param context A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
+ @param context A context contains different options to perform specify changes or processes, see `BU_SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
  @return The processed result, contains both options and context
  */
 - (nullable BU_SDWebImageOptionsResult *)processedResultForURL:(nullable NSURL *)url
-                                                    options:(SDWebImageOptions)options
+                                                    options:(BU_SDWebImageOptions)options
                                                     context:(nullable SDWebImageContext *)context;
 
 @end
@@ -64,9 +64,9 @@ typedef BU_SDWebImageOptionsResult * _Nullable(^SDWebImageOptionsProcessorBlock)
 /**
  A options processor class with block.
  */
-@interface BU_SDWebImageOptionsProcessor : NSObject<SDWebImageOptionsProcessor>
+@interface BU_SDWebImageOptionsProcessor : NSObject<BU_SDWebImageOptionsProcessor>
 
-- (nonnull instancetype)initWithBlock:(nonnull SDWebImageOptionsProcessorBlock)block;
-+ (nonnull instancetype)optionsProcessorWithBlock:(nonnull SDWebImageOptionsProcessorBlock)block;
+- (nonnull instancetype)initWithBlock:(nonnull BU_SDWebImageOptionsProcessorBlock)block;
++ (nonnull instancetype)optionsProcessorWithBlock:(nonnull BU_SDWebImageOptionsProcessorBlock)block;
 
 @end

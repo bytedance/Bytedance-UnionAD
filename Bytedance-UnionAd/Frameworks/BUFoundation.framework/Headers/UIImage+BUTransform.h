@@ -8,21 +8,21 @@
 
 #import "BU_SDWebImageCompat.h"
 
-typedef NS_ENUM(NSUInteger, SDImageScaleMode) {
-    SDImageScaleModeFill = 0,
-    SDImageScaleModeAspectFit = 1,
-    SDImageScaleModeAspectFill = 2
+typedef NS_ENUM(NSUInteger, BU_SDImageScaleMode) {
+    BU_SDImageScaleModeFill = 0,
+    BU_SDImageScaleModeAspectFit = 1,
+    BU_SDImageScaleModeAspectFill = 2
 };
 
 #if SD_UIKIT || SD_WATCH
-typedef UIRectCorner SDRectCorner;
+typedef UIRectCorner BU_SDRectCorner;
 #else
-typedef NS_OPTIONS(NSUInteger, SDRectCorner) {
-    SDRectCornerTopLeft     = 1 << 0,
-    SDRectCornerTopRight    = 1 << 1,
-    SDRectCornerBottomLeft  = 1 << 2,
-    SDRectCornerBottomRight = 1 << 3,
-    SDRectCornerAllCorners  = ~0UL
+typedef NS_OPTIONS(NSUInteger, BU_SDRectCorner) {
+    BU_SDRectCornerTopLeft     = 1 << 0,
+    BU_SDRectCornerTopRight    = 1 << 1,
+    BU_SDRectCornerBottomLeft  = 1 << 2,
+    BU_SDRectCornerBottomRight = 1 << 3,
+    BU_SDRectCornerAllCorners  = ~0UL
 };
 #endif
 
@@ -30,7 +30,7 @@ typedef NS_OPTIONS(NSUInteger, SDRectCorner) {
  Provide some commen method for `UIImage`.
  Image process is based on Core Graphics and vImage.
  */
-@interface UIImage (Transform)
+@interface UIImage (BU_Transform)
 
 #pragma mark - Image Geometry
 
@@ -42,7 +42,7 @@ typedef NS_OPTIONS(NSUInteger, SDRectCorner) {
  @param scaleMode   The scale mode for image content.
  @return The new image with the given size.
  */
-- (nullable UIImage *)sdBu_resizedImageWithSize:(CGSize)size scaleMode:(SDImageScaleMode)scaleMode;
+- (nullable UIImage *)sdBu_resizedImageWithSize:(CGSize)size scaleMode:(BU_SDImageScaleMode)scaleMode;
 
 /**
  Returns a new image which is cropped from this image.
@@ -68,7 +68,7 @@ typedef NS_OPTIONS(NSUInteger, SDRectCorner) {
  @return The new image with the round corner.
  */
 - (nullable UIImage *)sdBu_roundedCornerImageWithRadius:(CGFloat)cornerRadius
-                                              corners:(SDRectCorner)corners
+                                              corners:(BU_SDRectCorner)corners
                                           borderWidth:(CGFloat)borderWidth
                                           borderColor:(nullable UIColor *)borderColor;
 

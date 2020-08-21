@@ -123,7 +123,14 @@ prime_rit：（针对聚合广告位）广告物理位置对应的固定穿山�
  Server verification which is requested asynchronously is failed.
  Return value is not 2000.
  */
-- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd;
+- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd __attribute__((deprecated("Use rewardedVideoAdServerRewardDidFail: error: instead.")));
+
+/**
+  Server verification which is requested asynchronously is failed.
+  @param rewardedVideoAd rewarded Video ad
+  @param error request error info
+ */
+- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd error:(NSError *)error;
 
 /**
  This method is called when the user clicked skip button.

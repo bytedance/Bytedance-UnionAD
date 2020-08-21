@@ -36,8 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)render;
 
-@property (nonatomic, copy) void(^renderFinishBlock)(void);
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -134,14 +134,17 @@
     BUD_Log(@"%s", __func__);
 }
 
-- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s", __func__);
+- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd error:(nonnull NSError *)error {
+    BUD_Log(@"%s error = %@",__func__,error);
 }
 
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {
+    NSNumber *rewardAmountNumber = [NSNumber numberWithInteger:rewardedVideoAd.rewardedVideoModel.rewardAmount];
+    NSDecimalNumber *rewardAmountDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:[rewardAmountNumber decimalValue]];
+
     GADAdReward *aReward =
     [[GADAdReward alloc] initWithRewardType:@""
-                               rewardAmount:[NSDecimalNumber numberWithInteger:rewardedVideoAd.rewardedVideoModel.rewardAmount]];
+                               rewardAmount:rewardAmountDecimalNumber];
     [self.delegate didRewardUserWithReward:aReward];
     BUD_Log(@"%s", __func__);
 }

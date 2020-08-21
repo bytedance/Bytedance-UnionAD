@@ -14,7 +14,7 @@
  *
  * @code
 
-#import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+BU_WebCache.h>
 
 ...
 
@@ -33,7 +33,7 @@
     [cell.imageView sdBu_setImageWithURL:[NSURL URLWithString:@"http://example.com/image.jpg"]
                       placeholderImage:[UIImage imageNamed:@"placeholder"]];
  
-    cell.textLabel.text = @"My Text";
+    cell.textLabel.text = @"My BU_Text";
     return cell;
 }
 
@@ -73,11 +73,11 @@
  *
  * @param url         The url for the image.
  * @param placeholder The image to be set initially, until the image request finishes.
- * @param options     The options to use when downloading the image. @see SDWebImageOptions for the possible values.
+ * @param options     The options to use when downloading the image. @see BU_SDWebImageOptions for the possible values.
  */
 - (void)sdBu_setImageWithURL:(nullable NSURL *)url
           placeholderImage:(nullable UIImage *)placeholder
-                   options:(SDWebImageOptions)options NS_REFINED_FOR_SWIFT;
+                   options:(BU_SDWebImageOptions)options NS_REFINED_FOR_SWIFT;
 
 /**
  * Set the imageView `image` with an `url`, placeholder, custom options and context.
@@ -86,12 +86,12 @@
  *
  * @param url         The url for the image.
  * @param placeholder The image to be set initially, until the image request finishes.
- * @param options     The options to use when downloading the image. @see SDWebImageOptions for the possible values.
- * @param context     A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
+ * @param options     The options to use when downloading the image. @see BU_SDWebImageOptions for the possible values.
+ * @param context     A context contains different options to perform specify changes or processes, see `BU_SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
  */
 - (void)sdBu_setImageWithURL:(nullable NSURL *)url
           placeholderImage:(nullable UIImage *)placeholder
-                   options:(SDWebImageOptions)options
+                   options:(BU_SDWebImageOptions)options
                    context:(nullable SDWebImageContext *)context;
 
 /**
@@ -107,7 +107,7 @@
  *                       The fourth parameter is the original image url.
  */
 - (void)sdBu_setImageWithURL:(nullable NSURL *)url
-                 completed:(nullable SDExternalCompletionBlock)completedBlock;
+                 completed:(nullable BU_SDExternalCompletionBlock)completedBlock;
 
 /**
  * Set the imageView `image` with an `url`, placeholder.
@@ -124,7 +124,7 @@
  */
 - (void)sdBu_setImageWithURL:(nullable NSURL *)url
           placeholderImage:(nullable UIImage *)placeholder
-                 completed:(nullable SDExternalCompletionBlock)completedBlock NS_REFINED_FOR_SWIFT;
+                 completed:(nullable BU_SDExternalCompletionBlock)completedBlock NS_REFINED_FOR_SWIFT;
 
 /**
  * Set the imageView `image` with an `url`, placeholder and custom options.
@@ -133,7 +133,7 @@
  *
  * @param url            The url for the image.
  * @param placeholder    The image to be set initially, until the image request finishes.
- * @param options        The options to use when downloading the image. @see SDWebImageOptions for the possible values.
+ * @param options        The options to use when downloading the image. @see BU_SDWebImageOptions for the possible values.
  * @param completedBlock A block called when operation has been completed. This block has no return value
  *                       and takes the requested UIImage as first parameter. In case of error the image parameter
  *                       is nil and the second parameter may contain an NSError. The third parameter is a Boolean
@@ -142,8 +142,8 @@
  */
 - (void)sdBu_setImageWithURL:(nullable NSURL *)url
           placeholderImage:(nullable UIImage *)placeholder
-                   options:(SDWebImageOptions)options
-                 completed:(nullable SDExternalCompletionBlock)completedBlock;
+                   options:(BU_SDWebImageOptions)options
+                 completed:(nullable BU_SDExternalCompletionBlock)completedBlock;
 
 /**
  * Set the imageView `image` with an `url`, placeholder and custom options.
@@ -152,7 +152,7 @@
  *
  * @param url            The url for the image.
  * @param placeholder    The image to be set initially, until the image request finishes.
- * @param options        The options to use when downloading the image. @see SDWebImageOptions for the possible values.
+ * @param options        The options to use when downloading the image. @see BU_SDWebImageOptions for the possible values.
  * @param progressBlock  A block called while image is downloading
  *                       @note the progress block is executed on a background queue
  * @param completedBlock A block called when operation has been completed. This block has no return value
@@ -163,9 +163,9 @@
  */
 - (void)sdBu_setImageWithURL:(nullable NSURL *)url
           placeholderImage:(nullable UIImage *)placeholder
-                   options:(SDWebImageOptions)options
+                   options:(BU_SDWebImageOptions)options
                   progress:(nullable SDImageLoaderProgressBlock)progressBlock
-                 completed:(nullable SDExternalCompletionBlock)completedBlock;
+                 completed:(nullable BU_SDExternalCompletionBlock)completedBlock;
 
 /**
  * Set the imageView `image` with an `url`, placeholder, custom options and context.
@@ -174,8 +174,8 @@
  *
  * @param url            The url for the image.
  * @param placeholder    The image to be set initially, until the image request finishes.
- * @param options        The options to use when downloading the image. @see SDWebImageOptions for the possible values.
- * @param context        A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
+ * @param options        The options to use when downloading the image. @see BU_SDWebImageOptions for the possible values.
+ * @param context        A context contains different options to perform specify changes or processes, see `BU_SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
  * @param progressBlock  A block called while image is downloading
  *                       @note the progress block is executed on a background queue
  * @param completedBlock A block called when operation has been completed. This block has no return value
@@ -186,9 +186,9 @@
  */
 - (void)sdBu_setImageWithURL:(nullable NSURL *)url
           placeholderImage:(nullable UIImage *)placeholder
-                   options:(SDWebImageOptions)options
+                   options:(BU_SDWebImageOptions)options
                    context:(nullable SDWebImageContext *)context
                   progress:(nullable SDImageLoaderProgressBlock)progressBlock
-                 completed:(nullable SDExternalCompletionBlock)completedBlock;
+                 completed:(nullable BU_SDExternalCompletionBlock)completedBlock;
 
 @end

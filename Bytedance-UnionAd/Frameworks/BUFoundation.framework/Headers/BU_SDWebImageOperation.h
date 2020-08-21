@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 /// A protocol represents cancelable operation.
-@protocol SDWebImageOperation <NSObject>
+@protocol BU_SDWebImageOperation <NSObject>
 
 - (void)cancel;
 
 @end
 
-/// NSOperation conform to `SDWebImageOperation`.
-@interface NSOperation (SDWebImageOperation) <SDWebImageOperation>
+/// NSOperation conform to `BU_SDWebImageOperation`.
+@interface NSOperation (BU_SDWebImageOperation) <BU_SDWebImageOperation>
 
 @end

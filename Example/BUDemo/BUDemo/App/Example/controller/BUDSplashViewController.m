@@ -12,8 +12,9 @@
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 #import "UIView+Draw.h"
+#import "BUDAnimationTool.h"
 
-@interface BUDSplashViewController () <BUSplashAdDelegate>
+@interface BUDSplashViewController () <BUSplashAdDelegate,BUSplashZoomOutViewDelegate>
 
 @property (nonatomic, strong) BUSplashAdView *splashView;
 @property (nonatomic, strong) BUDNormalButton *button;
@@ -110,6 +111,8 @@
     splashView.delegate = self;
     splashView.rootViewController = self;
     splashView.tolerateTimeout = 3;
+    //optional
+    splashView.needSplashZoomOutAd = YES;
     [splashView loadAdData];
     [self.navigationController.view addSubview:splashView];
     self.splashView = splashView;
@@ -126,7 +129,9 @@
     splashView.hideSkipButton = YES;
     splashView.delegate = self;
     splashView.rootViewController = self;
-
+    //optional
+    splashView.needSplashZoomOutAd = YES;
+    
     UIButton *custormSkipButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [custormSkipButton setTitle:[NSString localizedStringForKey:Skip] forState:UIControlStateNormal];
     [custormSkipButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
@@ -143,7 +148,7 @@
 }
 
 - (void)skipButtonTapped:(UIButton *)sender {
-    [self.splashView removeFromSuperview];
+    [self handleSplashDimiss:self.splashView];
 }
 
 - (void)buttonTapped:(UIButton *)sender {
@@ -154,20 +159,45 @@
     [self buildupHideSkipButtonSplashView];
 }
 
+- (void)handleSplashDimiss:(BUSplashAdView *)splashAd {
+    if (splashAd.zoomOutView) {
+        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView];
+    } else{
+        [splashAd removeFromSuperview];
+    }
+}
+
+#pragma mark - BUSplashAdDelegate
 - (void)splashAdDidLoad:(BUSplashAdView *)splashAd {
-    BUD_Log(@"splashAdDidLoad");
-    BUD_Log(@"mediaExt-%@",splashAd.mediaExt);
+    [self pbud_logWithSEL:_cmd msg:@""];
+    if (splashAd.zoomOutView) {
+        // Add this view to your container
+        [self.view addSubview:splashAd.zoomOutView];
+        splashAd.zoomOutView.rootViewController = self;
+    }
+}
+
+- (void)splashAdDidClick:(BUSplashAdView *)splashAd {
+    if (splashAd.zoomOutView) {
+        [splashAd.zoomOutView removeFromSuperview];
+    }
+    [splashAd removeFromSuperview];
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)splashAdDidClose:(BUSplashAdView *)splashAd {
-    BUD_Log(@"splashAdView AdDidClose");
-    [splashAd removeFromSuperview];
+    [self pbud_logWithSEL:_cmd msg:@""];
+    [self handleSplashDimiss:splashAd];
+}
+
+- (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd {
+    [self handleSplashDimiss:splashAd];
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error {
-    BUD_Log(@"splashAdView load data fail");
-    [splashAd removeFromSuperview];
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    [self handleSplashDimiss:splashAd];
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType {
@@ -179,13 +209,29 @@
     } else {
         str = @"appstoreInApp";
     }
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored"-Wdeprecated-declarations"
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
-    [alert show];
-#pragma clang diagnostic pop
+    [self pbud_logWithSEL:_cmd msg:str];
 }
 
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUSplashAdView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
+}
+
+#pragma mark - BUSplashZoomOutViewDelegate
+- (void)splashZoomOutViewAdDidClick:(BUSplashZoomOutView *)splashAd {
+    [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashZoomOutViewAdDidClose:(BUSplashZoomOutView *)splashAd {
+    [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashZoomOutViewAdDidCloseOtherController:(BUSplashZoomOutView *)splashAd interactionType:(BUInteractionType)interactionType {
+    [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
+}
+
+- (void)pbud_splashzoomout_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUSplashZoomOutView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

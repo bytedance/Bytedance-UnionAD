@@ -24,7 +24,7 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
  
  @note The transform process is called from a global queue in order to not to block the main queue.
  */
-@protocol SDImageTransformer <NSObject>
+@protocol BU_SDImageTransformer <NSObject>
 
 @required
 /**
@@ -51,15 +51,15 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
  Pipeline transformer. Which you can bind multiple transformers together to let the image to be transformed one by one in order and generate the final image.
  @note Because transformers are lightweight, if you want to append or arrange transfomers, create another pipeline transformer instead. This class is considered as immutable.
  */
-@interface BU_SDImagePipelineTransformer : NSObject <SDImageTransformer>
+@interface BU_SDImagePipelineTransformer : NSObject <BU_SDImageTransformer>
 
 /**
  All transformers in pipeline
  */
-@property (nonatomic, copy, readonly, nonnull) NSArray<id<SDImageTransformer>> *transformers;
+@property (nonatomic, copy, readonly, nonnull) NSArray<id<BU_SDImageTransformer>> *transformers;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
-+ (nonnull instancetype)transformerWithTransformers:(nonnull NSArray<id<SDImageTransformer>> *)transformers;
++ (nonnull instancetype)transformerWithTransformers:(nonnull NSArray<id<BU_SDImageTransformer>> *)transformers;
 
 @end
 
@@ -70,7 +70,7 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
 /**
  Image round corner transformer
  */
-@interface BU_SDImageRoundCornerTransformer: NSObject <SDImageTransformer>
+@interface BU_SDImageRoundCornerTransformer: NSObject <BU_SDImageTransformer>
 
 /**
  The radius of each corner oval. Values larger than half the
@@ -84,7 +84,7 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
  rounded. You can use this parameter to round only a subset
  of the corners of the rectangle.
  */
-@property (nonatomic, assign, readonly) SDRectCorner corners;
+@property (nonatomic, assign, readonly) BU_SDRectCorner corners;
 
 /**
  The inset border line width. Values larger than half the rectangle's
@@ -99,14 +99,14 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
 @property (nonatomic, strong, readonly, nullable) UIColor *borderColor;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
-+ (nonnull instancetype)transformerWithRadius:(CGFloat)cornerRadius corners:(SDRectCorner)corners borderWidth:(CGFloat)borderWidth borderColor:(nullable UIColor *)borderColor;
++ (nonnull instancetype)transformerWithRadius:(CGFloat)cornerRadius corners:(BU_SDRectCorner)corners borderWidth:(CGFloat)borderWidth borderColor:(nullable UIColor *)borderColor;
 
 @end
 
 /**
  Image resizing transformer
  */
-@interface BU_SDImageResizingTransformer : NSObject <SDImageTransformer>
+@interface BU_SDImageResizingTransformer : NSObject <BU_SDImageTransformer>
 
 /**
  The new size to be resized, values should be positive.
@@ -116,17 +116,17 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
 /**
  The scale mode for image content.
  */
-@property (nonatomic, assign, readonly) SDImageScaleMode scaleMode;
+@property (nonatomic, assign, readonly) BU_SDImageScaleMode scaleMode;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
-+ (nonnull instancetype)transformerWithSize:(CGSize)size scaleMode:(SDImageScaleMode)scaleMode;
++ (nonnull instancetype)transformerWithSize:(CGSize)size scaleMode:(BU_SDImageScaleMode)scaleMode;
 
 @end
 
 /**
  Image cropping transformer
  */
-@interface BU_SDImageCroppingTransformer : NSObject <SDImageTransformer>
+@interface BU_SDImageCroppingTransformer : NSObject <BU_SDImageTransformer>
 
 /**
  Image's inner rect.
@@ -141,7 +141,7 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
 /**
  Image flipping transformer
  */
-@interface BU_SDImageFlippingTransformer : NSObject <SDImageTransformer>
+@interface BU_SDImageFlippingTransformer : NSObject <BU_SDImageTransformer>
 
 /**
  YES to flip the image horizontally. ⇋
@@ -161,7 +161,7 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
 /**
  Image rotation transformer
  */
-@interface BU_SDImageRotationTransformer : NSObject <SDImageTransformer>
+@interface BU_SDImageRotationTransformer : NSObject <BU_SDImageTransformer>
 
 /**
  Rotated radians in counterclockwise.⟲
@@ -184,7 +184,7 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
 /**
  Image tint color transformer
  */
-@interface BU_SDImageTintTransformer : NSObject <SDImageTransformer>
+@interface BU_SDImageTintTransformer : NSObject <BU_SDImageTransformer>
 
 /**
  The tint color.
@@ -201,7 +201,7 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
 /**
  Image blur effect transformer
  */
-@interface BU_SDImageBlurTransformer : NSObject <SDImageTransformer>
+@interface BU_SDImageBlurTransformer : NSObject <BU_SDImageTransformer>
 
 /**
  The radius of the blur in points, 0 means no blur effect.
@@ -217,7 +217,7 @@ FOUNDATION_EXPORT NSString * _Nullable BU_SDTransformedKeyForKey(NSString * _Nul
 /**
  Core Image filter transformer
  */
-@interface BU_SDImageFilterTransformer: NSObject <SDImageTransformer>
+@interface BU_SDImageFilterTransformer: NSObject <BU_SDImageTransformer>
 
 /**
  The CIFilter to be applied to the image.

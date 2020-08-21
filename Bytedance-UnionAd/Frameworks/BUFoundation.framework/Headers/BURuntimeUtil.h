@@ -28,5 +28,6 @@
 + (void)exchangeInstanceSEL:(SEL)originSEL
           targetInstanceSEL:(SEL)targetSEL
                      aClass:(Class)aClass;
-
+//判断当前类是否重写了方法
++ (BOOL)hasImpletionClass:(Class)targetClass sel:(SEL)sel;
 @end

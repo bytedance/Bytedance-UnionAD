@@ -53,6 +53,7 @@
     self.selectedView.promptStatus = BUDPromptStatusLoading;
 }
 
+// important:show的时候会进行WKWebview的渲染，建议一次最多展示三个广告，如果超过3个会很大概率导致WKWebview渲染失败。当然一般情况下全屏视频一次只会show一个
 - (void)showFullscreenVideoAd {
     if (self.fullscreenAd) {
         [self.fullscreenAd showAdFromRootViewController:self];
@@ -60,63 +61,62 @@
     self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
 
-#pragma mark - BUFullscreenVideoAdDelegate
+#pragma mark - BUNativeExpressFullscreenVideoAdDelegate
 - (void)nativeExpressFullscreenVideoAdDidLoad:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s",__func__);
     self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressFullscreenVideoAd:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error {
     self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
-    BUD_Log(@"%s",__func__);
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"%@", error]];
 }
 
 - (void)nativeExpressFullscreenVideoAdViewRenderSuccess:(BUNativeExpressFullscreenVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressFullscreenVideoAdViewRenderFail:(BUNativeExpressFullscreenVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
     self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"%@", error]];
 }
 
 - (void)nativeExpressFullscreenVideoAdDidDownLoadVideo:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
     self.selectedView.promptStatus = BUDPromptStatusAdVideoLoadedSuccess;
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressFullscreenVideoAdWillVisible:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressFullscreenVideoAdDidVisible:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressFullscreenVideoAdDidClick:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressFullscreenVideoAdDidClickSkip:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressFullscreenVideoAdWillClose:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressFullscreenVideoAdDidClose:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
     self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
 
 - (void)nativeExpressFullscreenVideoAdDidPlayFinish:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressFullscreenVideoAdCallback:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd withType:(BUNativeExpressFullScreenAdType) nativeExpressVideoAdType{
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressFullscreenVideoAdDidCloseOtherController:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd interactionType:(BUInteractionType)interactionType {
@@ -128,7 +128,12 @@
     } else {
         str = @"appstoreInApp";
     }
-    BUD_Log(@"%s __ %@",__func__,str);
+    [self pbud_logWithSEL:_cmd msg:str];
+}
+
+#pragma mark - Log
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUNativeExpressFullscreenVideoAd In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
 }
 
 @end

@@ -2,7 +2,7 @@
 
 | 文档版本| 修订日期| 修订说明|
 | --- | --- | --- |
-| v3.1.0.9 | 2020-08-06 |【1】bug fix 【2】修复playable 播放白屏|
+| v3.2.0.1 | 2020-08-21 |【1】 修复playable播放白屏【2】 Bug Fix【3】 添加 libxml2.tbd 依赖库|
 
 [历史版本](#历史版本)
 
@@ -112,7 +112,7 @@
 ### 方法一
 
 获取 framework 文件后直接将 {BUAdSDK.framework, BUFoundation.framework, BUAdSDK.bundle}文件拖入工程即可。
-**升级SDK必须同时更新framework和bundle文件，否则可能出现部分页面无法展示的问题，老版本升级的同学需要引入BUFoundation**
+**升级SDK必须同时更新framework和bundle文件，否则可能出现部分页面无法展示的问题，老版本升级的同学需要重新引入BUFoundation**
 
 拖入时请按以下方式选择：
 
@@ -155,6 +155,19 @@ pod 'Bytedance-UnionAD', '~> 1.9.8.2'
 
 ![image](http://sf1-ttcdn-tos.pstatp.com/img/union-platform/e7723fa701c3ab9d9d7a787add33fdad.png~0x0_q100.webp)
 
+
+
+### 关于 iOS 14 AppTrackingTransparency
+
+在 iOS 14 设备上，穿山甲建议您在应用启动时调用 apple 提供的 AppTrackingTransparency 方案，获取用户的 IDFA 授权，以便穿山甲提供更精准的广告投放和收入优化
+
+```objective-c
+<key>NSUserTrackingUsageDescription</key>
+<string>需要获取您设备的广告标识符，以为您提供更好的广告体验</string>
+```
+
+权限请求窗口调用方法：`requestTrackingAuthorization(completionHandler:)`
+
 ### 运行环境配置
 
 + 支持系统 iOS 9.X 及以上;
@@ -181,7 +194,8 @@ pod 'Bytedance-UnionAD', '~> 1.9.8.2'
 + libc++.tbd
 + libz.tbd
 + libsqlite3.tbd
-
++ **libbz2.tbd**
++ **libxml2.tbd**
 + 如果以上依赖库增加完仍旧报错，请添加ImageIO.framework。
 
 
@@ -1409,7 +1423,7 @@ Initializes interstitial ad.
 @param adsize : custom size of ad view.
 @return BUInterstitialAd
 */
-- (instancetype)initWithSlotID:(NSString *)slotID imgSize:(BUSize * __nullable )expectSize adSize:(CGSize)adsize;
+- (instancetype)initWithSlotID:(NSString *)slotID adSize:(CGSize)adsize;
 
 /**
 Load interstitial ad datas.
@@ -1495,7 +1509,7 @@ self.button.showRefreshIncon = YES;
 [self.button addTarget:self action:@selector(buttonTapped:)forControlEvents:UIControlEventTouchUpInside];
 [self.view addSubview:self.button];
 
-self.interstitialAd = [[BUNativeExpressInterstitialAd alloc] initWithSlotID:self.viewModel.slotID imgSize:[BUSize sizeBy:BUProposalSize_Interstitial600_600] adSize:CGSizeMake(300, 450)];
+self.interstitialAd = [[BUNativeExpressInterstitialAd alloc] initWithSlotID:self.viewModel.slotID adSize:CGSizeMake(300, 450)];
 self.interstitialAd.delegate = self;
 [self.interstitialAd loadAdData];
 }
@@ -2068,6 +2082,7 @@ If ritSceneType is custom, you need to pass in the values for sceneDescirbe.
 
 /**
  This method is called when cached successfully.
+ For a better user experience, it is recommended to display video ads at this time.
  */
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
@@ -2369,6 +2384,7 @@ This method is called when a nativeExpressAdView failed to render.
 
 /**
 This method is called when video cached successfully.
+For a better user experience, it is recommended to display video ads at this time.
 */
 - (void)nativeExpressFullscreenVideoAdDidDownLoadVideo:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd;
 
@@ -2552,8 +2568,8 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
 ## 历史版本
 | 文档版本| 修订日期| 修订说明|
 | --- | --- | --- |
-| v3.1.0.9 | 2020-08-06 | 【1】bug fix 【2】修复playable 播放白屏 |
-| v3.1.0.8 | 2020-07-31 | 【1】bug fix |
+| v3.2.0.1 | 2020-08-21 |【1】 修复playable播放白屏【2】 Bug Fix【3】 添加 libxml2.tbd 依赖库|
+| V3.2.0.0 | 2020-07-29 |【1】优化落地页广告体验【2】模板广告优化【3】playable广告优化【4】部分服务切换到ipv6【5】添加 libbz2.tbd 依赖库 |
 | v3.1.0.5 | 2020-07-14 |【1】部分bug修改|
 | v3.1.0.4 | 2020-07-09 |【1】稳定性提升|
 | v3.1.0.2 | 2020-07-07 |【1】开屏广告bug fix【2】bundle寻址优化【3】其他bug fix|

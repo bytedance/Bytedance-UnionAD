@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Ad slot material.
  */
-@property (nonatomic, strong, readonly, nullable) BUMaterialMeta *data;
+@property (atomic, strong, readonly, nullable) BUMaterialMeta *data;
 
 /**
  The delegate for receiving state change messages.

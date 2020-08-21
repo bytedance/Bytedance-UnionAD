@@ -12,34 +12,34 @@
 #import "BU_SDWebImageDefine.h"
 
 /// Image Cache Type
-typedef NS_ENUM(NSInteger, SDImageCacheType) {
+typedef NS_ENUM(NSInteger, BU_SDImageCacheType) {
     /**
      * For query and contains op in response, means the image isn't available in the image cache
      * For op in request, this type is not available and take no effect.
      */
-    SDImageCacheTypeNone,
+    BU_SDImageCacheTypeNone,
     /**
      * For query and contains op in response, means the image was obtained from the disk cache.
      * For op in request, means process only disk cache.
      */
-    SDImageCacheTypeDisk,
+    BU_SDImageCacheTypeDisk,
     /**
      * For query and contains op in response, means the image was obtained from the memory cache.
      * For op in request, means process only memory cache.
      */
-    SDImageCacheTypeMemory,
+    BU_SDImageCacheTypeMemory,
     /**
      * For query and contains op in response, this type is not available and take no effect.
      * For op in request, means process both memory cache and disk cache.
      */
-    SDImageCacheTypeAll
+    BU_SDImageCacheTypeAll
 };
 
 typedef void(^SDImageCacheCheckCompletionBlock)(BOOL isInCache);
 typedef void(^SDImageCacheCalculateSizeBlock)(NSUInteger fileCount, NSUInteger totalSize);
 typedef NSString * _Nullable (^SDImageCacheAdditionalCachePathBlock)(NSString * _Nonnull key);
-typedef void(^SDImageCacheQueryCompletionBlock)(UIImage * _Nullable image, NSData * _Nullable data, SDImageCacheType cacheType);
-typedef void(^SDImageCacheContainsCompletionBlock)(SDImageCacheType containsCacheType);
+typedef void(^BU_SDImageCacheQueryCompletionBlock)(UIImage * _Nullable image, NSData * _Nullable data, BU_SDImageCacheType cacheType);
+typedef void(^BU_SDImageCacheContainsCompletionBlock)(BU_SDImageCacheType containsCacheType);
 
 /**
  This is the built-in decoding process for image query from cache.
@@ -51,14 +51,14 @@ typedef void(^SDImageCacheContainsCompletionBlock)(SDImageCacheType containsCach
  @param context The context arg from the input
  @return The decoded image for current image data query from cache
  */
-FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageCacheDecodeImageData(NSData * _Nonnull imageData, NSString * _Nonnull cacheKey, SDWebImageOptions options, SDWebImageContext * _Nullable context);
+FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageCacheDecodeImageData(NSData * _Nonnull imageData, NSString * _Nonnull cacheKey, BU_SDWebImageOptions options, SDWebImageContext * _Nullable context);
 
 /**
  This is the image cache protocol to provide custom image cache for `SDWebImageManager`.
  Though the best practice to custom image cache, is to write your own class which conform `SDMemoryCache` or `SDDiskCache` protocol for `SDImageCache` class (See more on `SDImageCacheConfig.memoryCacheClass & SDImageCacheConfig.diskCacheClass`).
  However, if your own cache implementation contains more advanced feature beyond `SDImageCache` itself, you can consider to provide this instead. For example, you can even use a cache manager like `SDImageCachesManager` to register multiple caches.
  */
-@protocol SDImageCache <NSObject>
+@protocol BU_SDImageCache <NSObject>
 
 @required
 /**
@@ -67,14 +67,14 @@ FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageCacheDecodeImageData(NSData * _N
 
  @param key The image cache key
  @param options A mask to specify options to use for this query
- @param context A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
+ @param context A context contains different options to perform specify changes or processes, see `BU_SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
  @param completionBlock The completion block. Will not get called if the operation is cancelled
  @return The operation for this query
  */
-- (nullable id<SDWebImageOperation>)queryImageForKey:(nullable NSString *)key
-                                             options:(SDWebImageOptions)options
+- (nullable id<BU_SDWebImageOperation>)queryImageForKey:(nullable NSString *)key
+                                             options:(BU_SDWebImageOptions)options
                                              context:(nullable SDWebImageContext *)context
-                                          completion:(nullable SDImageCacheQueryCompletionBlock)completionBlock;
+                                          completion:(nullable BU_SDImageCacheQueryCompletionBlock)completionBlock;
 
 /**
  Store the image into image cache for the given key. If cache type is memory only, completion is called synchronously, else aynchronously.
@@ -88,7 +88,7 @@ FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageCacheDecodeImageData(NSData * _N
 - (void)storeImage:(nullable UIImage *)image
          imageData:(nullable NSData *)imageData
             forKey:(nullable NSString *)key
-         cacheType:(SDImageCacheType)cacheType
+         cacheType:(BU_SDImageCacheType)cacheType
         completion:(nullable SDWebImageNoParamsBlock)completionBlock;
 
 /**
@@ -99,7 +99,7 @@ FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageCacheDecodeImageData(NSData * _N
  @param completionBlock A block executed after the operation is finished
  */
 - (void)removeImageForKey:(nullable NSString *)key
-                cacheType:(SDImageCacheType)cacheType
+                cacheType:(BU_SDImageCacheType)cacheType
                completion:(nullable SDWebImageNoParamsBlock)completionBlock;
 
 /**
@@ -110,8 +110,8 @@ FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageCacheDecodeImageData(NSData * _N
  @param completionBlock A block executed after the operation is finished.
  */
 - (void)containsImageForKey:(nullable NSString *)key
-                  cacheType:(SDImageCacheType)cacheType
-                 completion:(nullable SDImageCacheContainsCompletionBlock)completionBlock;
+                  cacheType:(BU_SDImageCacheType)cacheType
+                 completion:(nullable BU_SDImageCacheContainsCompletionBlock)completionBlock;
 
 /**
  Clear all the cached images for image cache. If cache type is memory only, completion is called synchronously, else aynchronously.
@@ -119,7 +119,7 @@ FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageCacheDecodeImageData(NSData * _N
  @param cacheType The image clear op cache type
  @param completionBlock A block executed after the operation is finished
  */
-- (void)clearWithCacheType:(SDImageCacheType)cacheType
+- (void)clearWithCacheType:(BU_SDImageCacheType)cacheType
                 completion:(nullable SDWebImageNoParamsBlock)completionBlock;
 
 @end

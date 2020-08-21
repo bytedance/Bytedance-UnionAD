@@ -45,7 +45,7 @@
 }
 
 - (void)loadRewardVideoAdWithSlotID:(NSString *)slotID {
-#warning Every time the data is requested, a new one BURewardedVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
+// important: Every time the data is requested, a new one BURewardedVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = @"123";
     self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:slotID rewardedVideoModel:model];
@@ -104,8 +104,8 @@
     BUD_Log(@"%s",__func__);
 }
 
-- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd error:(nonnull NSError *)error {
+    BUD_Log(@"%s error = %@",__func__,error);
 }
 
 - (void)rewardedVideoAdDidClickSkip:(BURewardedVideoAd *)rewardedVideoAd{
@@ -114,10 +114,6 @@
 }
 
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify{
-    BUD_Log(@"%s",__func__);
-}
-
-- (void)rewardedVideoAdClientRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
 }
 

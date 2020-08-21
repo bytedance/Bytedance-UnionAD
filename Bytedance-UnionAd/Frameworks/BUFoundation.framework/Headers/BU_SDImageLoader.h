@@ -20,7 +20,7 @@ typedef void(^SDImageLoaderCompletedBlock)(UIImage * _Nullable image, NSData * _
  This can be a hint for image loader to load the image from network and refresh the image from remote location if needed. If the image from remote location does not change, you should call the completion with `SDWebImageErrorCacheNotModified` error. (UIImage)
  @note If you don't implement `SDWebImageRefreshCached` support, you do not need to care abot this context option.
  */
-FOUNDATION_EXPORT SDWebImageContextOption _Nonnull const BU_SDWebImageContextLoaderCachedImage;
+FOUNDATION_EXPORT BU_SDWebImageContextOption _Nonnull const BU_SDWebImageContextLoaderCachedImage;
 
 #pragma mark - Helper method
 
@@ -34,7 +34,7 @@ FOUNDATION_EXPORT SDWebImageContextOption _Nonnull const BU_SDWebImageContextLoa
  @param context The context arg from the input
  @return The decoded image for current image data load from the network
  */
-FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageLoaderDecodeImageData(NSData * _Nonnull imageData, NSURL * _Nonnull imageURL, SDWebImageOptions options, SDWebImageContext * _Nullable context);
+FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageLoaderDecodeImageData(NSData * _Nonnull imageData, NSURL * _Nonnull imageURL, BU_SDWebImageOptions options, SDWebImageContext * _Nullable context);
 
 /**
  This is the built-in decoding process for image progressive download from network. It's used when `SDWebImageProgressiveLoad` option is set. (It's not required when your loader does not support progressive image loading)
@@ -48,7 +48,7 @@ FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageLoaderDecodeImageData(NSData * _
  @param context The context arg from the input
  @return The decoded progressive image for current image data load from the network
  */
-FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageLoaderDecodeProgressiveImageData(NSData * _Nonnull imageData, NSURL * _Nonnull imageURL, BOOL finished,  id<SDWebImageOperation> _Nonnull operation, SDWebImageOptions options, SDWebImageContext * _Nullable context);
+FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageLoaderDecodeProgressiveImageData(NSData * _Nonnull imageData, NSURL * _Nonnull imageURL, BOOL finished,  id<BU_SDWebImageOperation> _Nonnull operation, BU_SDWebImageOptions options, SDWebImageContext * _Nullable context);
 
 #pragma mark - SDImageLoader
 
@@ -58,7 +58,7 @@ FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageLoaderDecodeProgressiveImageData
  If you directlly get the image instance using some third-party SDKs, such as image directlly from Photos framework. You can process the image data and image instance by yourself without that built-in decoding process. And finally callback the completion block.
  @note It's your responsibility to load the image in the desired global queue(to avoid block main queue). We do not dispatch these method call in a global queue but just from the call queue (For `SDWebImageManager`, it typically call from the main queue).
 */
-@protocol SDImageLoader <NSObject>
+@protocol BU_SDImageLoader <NSObject>
 
 /**
  Whether current image loader supports to load the provide image URL.
@@ -74,14 +74,14 @@ FOUNDATION_EXPORT UIImage * _Nullable BU_SDImageLoaderDecodeProgressiveImageData
 
  @param url The URL represent the image. Note this may not be a HTTP URL
  @param options A mask to specify options to use for this request
- @param context A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
+ @param context A context contains different options to perform specify changes or processes, see `BU_SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
  @param progressBlock A block called while image is downloading
  *                    @note the progress block is executed on a background queue
  @param completedBlock A block called when operation has been completed.
  @return An operation which allow the user to cancel the current request.
  */
-- (nullable id<SDWebImageOperation>)requestImageWithURL:(nullable NSURL *)url
-                                                options:(SDWebImageOptions)options
+- (nullable id<BU_SDWebImageOperation>)requestImageWithURL:(nullable NSURL *)url
+                                                options:(BU_SDWebImageOptions)options
                                                 context:(nullable SDWebImageContext *)context
                                                progress:(nullable SDImageLoaderProgressBlock)progressBlock
                                               completed:(nullable SDImageLoaderCompletedBlock)completedBlock;

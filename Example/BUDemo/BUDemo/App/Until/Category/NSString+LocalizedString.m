@@ -57,6 +57,8 @@ NSString * const AdLoaded = @"AdLoaded";
 NSString * const AdloadedFail = @"AdloadedFail";
 NSString * const LoadedAd = @"LoadedAd";
 NSString * const ShowAd = @"ShowAd";
+NSString * const ScanQRCode = @"ScanQRCode";
+NSString * const IsEtOpen = @"IsEtOpen";
 
 @implementation NSString (LocalizedString)
 

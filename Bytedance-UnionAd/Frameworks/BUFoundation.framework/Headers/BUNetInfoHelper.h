@@ -42,9 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// host
 + (nullable NSString*)addressOfHost:(nullable NSString *)host;
 
-/// 获取MAC地址
-+ (nullable NSString*)MACAddress;
-
 @end
 
 NS_ASSUME_NONNULL_END

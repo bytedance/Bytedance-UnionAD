@@ -8,6 +8,7 @@
 
 #import "BUDMopub_RewardedVideoCustomEvent.h"
 #import <BUAdSDK/BUAdSDK.h>
+#import "BUDMacros.h"
 #import <mopub-ios-sdk/MoPub.h>
 
 @interface BUDMopub_RewardedVideoCustomEvent ()<BURewardedVideoAdDelegate>
@@ -92,8 +93,8 @@
     
 }
 
-- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd {
-    
+- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd error:(nonnull NSError *)error {
+    BUD_Log(@"%s error = %@",__func__,error);
 }
 
 @end

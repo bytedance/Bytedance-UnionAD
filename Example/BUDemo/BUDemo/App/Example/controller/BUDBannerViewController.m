@@ -76,24 +76,23 @@
 
 #pragma mark -  BUBannerAdViewDelegate implementation
 - (void)bannerAdViewDidLoad:(BUBannerAdView * _Nonnull)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)admodel {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)bannerAdViewDidBecomVisible:(BUBannerAdView *_Nonnull)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)admodel {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)bannerAdViewDidClick:(BUBannerAdView *_Nonnull)bannerAdView WithAdmodel:(BUNativeAd *_Nullable)admodel {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)bannerAdView:(BUBannerAdView *_Nonnull)bannerAdView didLoadFailWithError:(NSError *_Nullable)error {
     BUD_Log(@"%s",__func__);
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)bannerAdView:(BUBannerAdView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterwords {
-    BUD_Log(@"%s",__func__);
     [UIView animateWithDuration:0.25 animations:^{
         bannerAdView.alpha = 0;
     } completion:^(BOOL finished) {
@@ -102,10 +101,13 @@
             self.bannerView = nil;
         }
     }];
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)bannerAdViewDidCloseOtherController:(BUBannerAdView *)bannerAdView interactionType:(BUInteractionType)interactionType {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"interactionType:%ld", (long)interactionType]];
 }
-
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUBannerAdView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
+}
 @end

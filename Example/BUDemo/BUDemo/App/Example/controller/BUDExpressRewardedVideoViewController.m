@@ -56,6 +56,7 @@
     self.selectedView.promptStatus = BUDPromptStatusLoading;
 }
 
+// important: show的时候会进行WKWebview的渲染，建议一次最多展示三个广告，如果超过3个会很大概率导致WKWebview渲染失败。当然一般情况下激励视频一次只会show一个
 - (void)showRewardVideoAd {
     if (self.rewardedAd) {
         [self.rewardedAd showAdFromRootViewController:self];
@@ -66,69 +67,68 @@
 
 #pragma mark - BUNativeExpressRewardedVideoAdDelegate
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
     self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
-    BUD_Log(@"%s",__func__);
     self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"%@", error]];
 }
 
 - (void)nativeExpressRewardedVideoAdCallback:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd withType:(BUNativeExpressRewardedVideoAdType)nativeExpressVideoType{
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     self.selectedView.promptStatus = BUDPromptStatusAdVideoLoadedSuccess;
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
-    BUD_Log(@"%s",__func__);
     self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"%@", error]];
 }
 
 - (void)nativeExpressRewardedVideoAdWillVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressRewardedVideoAdDidVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressRewardedVideoAdWillClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressRewardedVideoAdDidClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
     self.selectedView.promptStatus = BUDPromptStatusDefault;
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressRewardedVideoAdDidClick:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressRewardedVideoAdDidClickSkip:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressRewardedVideoAdDidPlayFinish:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"%@", error]];
 }
 
 - (void)nativeExpressRewardedVideoAdServerRewardDidSucceed:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {
-    BUD_Log(@"%s",__func__);
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
-- (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+- (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError * _Nullable)error {
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"%@", error]];
 }
 
 - (void)nativeExpressRewardedVideoAdDidCloseOtherController:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd interactionType:(BUInteractionType)interactionType {
@@ -140,7 +140,10 @@
     } else {
         str = @"appstoreInApp";
     }
-    BUD_Log(@"%s __ %@",__func__,str);
+    [self pbud_logWithSEL:_cmd msg:str];
 }
-
+#pragma mark - Log
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUNativeExpressRewardedVideoAd In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
+}
 @end

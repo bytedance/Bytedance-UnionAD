@@ -15,14 +15,14 @@
 #import "BU_SDWebImageCacheSerializer.h"
 #import "BU_SDWebImageOptionsProcessor.h"
 
-typedef void(^SDExternalCompletionBlock)(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL);
+typedef void(^BU_SDExternalCompletionBlock)(UIImage * _Nullable image, NSError * _Nullable error, BU_SDImageCacheType cacheType, NSURL * _Nullable imageURL);
 
-typedef void(^SDInternalCompletionBlock)(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL);
+typedef void(^BU_SDInternalCompletionBlock)(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BU_SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL);
 
 /**
  A combined operation representing the cache and loader operation. You can use it to cancel the load process.
  */
-@interface BU_SDWebImageCombinedOperation : NSObject <SDWebImageOperation>
+@interface BU_SDWebImageCombinedOperation : NSObject <BU_SDWebImageOperation>
 
 /**
  Cancel the current operation, including cache and loader process
@@ -32,12 +32,12 @@ typedef void(^SDInternalCompletionBlock)(UIImage * _Nullable image, NSData * _Nu
 /**
  The cache operation from the image cache query
  */
-@property (strong, nonatomic, nullable, readonly) id<SDWebImageOperation> cacheOperation;
+@property (strong, nonatomic, nullable, readonly) id<BU_SDWebImageOperation> cacheOperation;
 
 /**
  The loader operation from the image loader (such as download operation)
  */
-@property (strong, nonatomic, nullable, readonly) id<SDWebImageOperation> loaderOperation;
+@property (strong, nonatomic, nullable, readonly) id<BU_SDWebImageOperation> loaderOperation;
 
 @end
 
@@ -47,7 +47,7 @@ typedef void(^SDInternalCompletionBlock)(UIImage * _Nullable image, NSData * _Nu
 /**
  The manager delegate protocol.
  */
-@protocol SDWebImageManagerDelegate <NSObject>
+@protocol BU_SDWebImageManagerDelegate <NSObject>
 
 @optional
 
@@ -74,7 +74,7 @@ typedef void(^SDInternalCompletionBlock)(UIImage * _Nullable image, NSData * _Nu
 @end
 
 /**
- * The SDWebImageManager is the class behind the UIImageView+WebCache category and likes.
+ * The SDWebImageManager is the class behind the UIImageView+BU_WebCache category and likes.
  * It ties the asynchronous downloader (SDWebImageDownloader) with the image cache store (SDImageCache).
  * You can use this class directly to benefit from web image downloading with caching in another context than
  * a UIView.
@@ -87,7 +87,7 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
 [manager loadImageWithURL:imageURL
                   options:0
                  progress:nil
-                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                completed:^(UIImage *image, NSError *error, BU_SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                     if (image) {
                         // do something with image
                     }
@@ -100,24 +100,24 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
 /**
  * The delegate for manager. Defatuls to nil.
  */
-@property (weak, nonatomic, nullable) id <SDWebImageManagerDelegate> delegate;
+@property (weak, nonatomic, nullable) id <BU_SDWebImageManagerDelegate> delegate;
 
 /**
  * The image cache used by manager to query image cache.
  */
-@property (strong, nonatomic, readonly, nonnull) id<SDImageCache> imageCache;
+@property (strong, nonatomic, readonly, nonnull) id<BU_SDImageCache> imageCache;
 
 /**
  * The image loader used by manager to load image.
  */
-@property (strong, nonatomic, readonly, nonnull) id<SDImageLoader> imageLoader;
+@property (strong, nonatomic, readonly, nonnull) id<BU_SDImageLoader> imageLoader;
 
 /**
- The image transformer for manager. It's used for image transform after the image load finished and store the transformed image to cache, see `SDImageTransformer`.
+ The image transformer for manager. It's used for image transform after the image load finished and store the transformed image to cache, see `BU_SDImageTransformer`.
  Defaults to nil, which means no transform is applied.
  @note This will affect all the load requests for this manager if you provide. However, you can pass `BU_SDWebImageContextImageTransformer` in context arg to explicitly use that transformer instead.
  */
-@property (strong, nonatomic, nullable) id<SDImageTransformer> transformer;
+@property (strong, nonatomic, nullable) id<BU_SDImageTransformer> transformer;
 
 /**
  * The cache filter is used to convert an URL into a cache key each time SDWebImageManager need cache key to use image cache.
@@ -141,9 +141,9 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  * @note This method is called from a global queue in order to not to block the main thread.
  * @code
  SDWebImageManager.sharedManager.cacheSerializer = [BU_SDWebImageCacheSerializer cacheSerializerWithBlock:^NSData * _Nullable(UIImage * _Nonnull image, NSData * _Nullable data, NSURL * _Nullable imageURL) {
-    SDImageFormat format = [NSData sdBu_imageFormatForImageData:data];
+    BU_SDImageFormat format = [NSData sdBu_imageFormatForImageData:data];
     switch (format) {
-        case SDImageFormatWebP:
+        case BU_SDImageFormatWebP:
             return image.images ? data : nil;
         default:
             return data;
@@ -160,7 +160,7 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  For example, you can control the global options, based on the URL or original context option like the below code.
  
  @code
- SDWebImageManager.sharedManager.optionsProcessor = [SDWebImageOptionsProcessor optionsProcessorWithBlock:^SDWebImageOptionsResult * _Nullable(NSURL * _Nullable url, SDWebImageOptions options, SDWebImageContext * _Nullable context) {
+ SDWebImageManager.sharedManager.optionsProcessor = [BU_SDWebImageOptionsProcessor optionsProcessorWithBlock:^BU_SDWebImageOptionsResult * _Nullable(NSURL * _Nullable url, BU_SDWebImageOptions options, SDWebImageContext * _Nullable context) {
      // Only do animation on `SDAnimatedImageView`
      if (!context[BU_SDWebImageContextAnimatedImageClass]) {
         options |= SDWebImageDecodeFirstFrameOnly;
@@ -174,11 +174,11 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
      mutableContext[BU_SDWebImageContextImageScaleFactor] = @(UIScreen.mainScreen.scale);
      context = [mutableContext copy];
  
-     return [[SDWebImageOptionsResult alloc] initWithOptions:options context:context];
+     return [[BU_SDWebImageOptionsResult alloc] initWithOptions:options context:context];
  }];
  @endcode
  */
-@property (nonatomic, strong, nullable) id<SDWebImageOptionsProcessor> optionsProcessor;
+@property (nonatomic, strong, nullable) id<BU_SDWebImageOptionsProcessor> optionsProcessor;
 
 /**
  * Check one or more operations running
@@ -189,13 +189,13 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  The default image cache when the manager which is created with no arguments. Such as shared manager or init.
  Defaults to nil. Means using `SDImageCache.sharedImageCache`
  */
-@property (nonatomic, class, nullable) id<SDImageCache> defaultImageCache;
+@property (nonatomic, class, nullable) id<BU_SDImageCache> defaultImageCache;
 
 /**
  The default image loader for manager which is created with no arguments. Such as shared manager or init.
  Defaults to nil. Means using `SDWebImageDownloader.sharedDownloader`
  */
-@property (nonatomic, class, nullable) id<SDImageLoader> defaultImageLoader;
+@property (nonatomic, class, nullable) id<BU_SDImageLoader> defaultImageLoader;
 
 /**
  * Returns global shared manager instance.
@@ -206,7 +206,7 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  * Allows to specify instance of cache and image loader used with image manager.
  * @return new instance of `SDWebImageManager` with specified cache and loader.
  */
-- (nonnull instancetype)initWithCache:(nonnull id<SDImageCache>)cache loader:(nonnull id<SDImageLoader>)loader NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithCache:(nonnull id<BU_SDImageCache>)cache loader:(nonnull id<BU_SDImageLoader>)loader NS_DESIGNATED_INITIALIZER;
 
 /**
  * Downloads the image at the given URL if not present in cache or return the cached version otherwise.
@@ -222,7 +222,7 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  *   This block has no return value and takes the requested UIImage as first parameter and the NSData representation as second parameter.
  *   In case of error the image parameter is nil and the third parameter may contain an NSError.
  *
- *   The forth parameter is an `SDImageCacheType` enum indicating if the image was retrieved from the local cache
+ *   The forth parameter is an `BU_SDImageCacheType` enum indicating if the image was retrieved from the local cache
  *   or from the memory cache or from the network.
  *
  *   The fith parameter is set to NO when the SDWebImageProgressiveLoad option is used and the image is
@@ -234,16 +234,16 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  * @return Returns an instance of BU_SDWebImageCombinedOperation, which you can cancel the loading process.
  */
 - (nullable BU_SDWebImageCombinedOperation *)loadImageWithURL:(nullable NSURL *)url
-                                                   options:(SDWebImageOptions)options
+                                                   options:(BU_SDWebImageOptions)options
                                                   progress:(nullable SDImageLoaderProgressBlock)progressBlock
-                                                 completed:(nonnull SDInternalCompletionBlock)completedBlock;
+                                                 completed:(nonnull BU_SDInternalCompletionBlock)completedBlock;
 
 /**
  * Downloads the image at the given URL if not present in cache or return the cached version otherwise.
  *
  * @param url            The URL to the image
  * @param options        A mask to specify options to use for this request
- * @param context        A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
+ * @param context        A context contains different options to perform specify changes or processes, see `BU_SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
  * @param progressBlock  A block called while image is downloading
  *                       @note the progress block is executed on a background queue
  * @param completedBlock A block called when operation has been completed.
@@ -251,10 +251,10 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  * @return Returns an instance of BU_SDWebImageCombinedOperation, which you can cancel the loading process.
  */
 - (nullable BU_SDWebImageCombinedOperation *)loadImageWithURL:(nullable NSURL *)url
-                                                   options:(SDWebImageOptions)options
+                                                   options:(BU_SDWebImageOptions)options
                                                    context:(nullable SDWebImageContext *)context
                                                   progress:(nullable SDImageLoaderProgressBlock)progressBlock
-                                                 completed:(nonnull SDInternalCompletionBlock)completedBlock;
+                                                 completed:(nonnull BU_SDInternalCompletionBlock)completedBlock;
 
 /**
  * Cancel all current operations

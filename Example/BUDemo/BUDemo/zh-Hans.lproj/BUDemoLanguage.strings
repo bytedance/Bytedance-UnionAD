@@ -54,4 +54,6 @@
 "AdloadedFail" = "广告加载失败.";
 "LoadedAd" = "加载广告";
 "ShowAd" = "展示广告";
+"IsEtOpen" = "ET开关";
+"ScanQRCode" = "扫描二维码设置地址";
 

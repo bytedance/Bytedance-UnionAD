@@ -42,6 +42,19 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BUDFeedAdLargeTableViewCell : BUDFeedAdBaseTableViewCell
 @end
 
+//方图
+@interface BUDFeedAdSquareImgTableViewCell : BUDFeedAdBaseTableViewCell
+@end
+
+//方视频
+@interface BUDFeedSquareVideoAdTableViewCell : BUDFeedAdBaseTableViewCell
+/**
+ Creative button which is usede by video ad, need to actively add to the view, and register the view for user click.
+ */
+@property (nonatomic, strong, nullable) UIButton *creativeButton;
+@property (nonatomic, strong) UIView *bgView;
+@end
+
 @interface BUDFeedVideoAdTableViewCell : BUDFeedAdBaseTableViewCell
 /**
  Creative button which is usede by video ad, need to actively add to the view, and register the view for user click.

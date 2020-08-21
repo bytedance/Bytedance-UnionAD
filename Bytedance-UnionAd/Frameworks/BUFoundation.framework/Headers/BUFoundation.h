@@ -69,12 +69,12 @@
 //  SD
 #import <BUFoundation/BU_SDWebImageManager.h>
 #import <BUFoundation/UIImageView+BUWebCache.h>
-
+#import <BUFoundation/BU_SDImageCache.h>
 
 // ByteFinder
 #import <BUFoundation/EBAppLog.h>
 #import <BUFoundation/EBAppLogConfig.h>
-#import <BUFoundation/HMDBUToBCrashTrackerRestrict.h>
-#import <BUFoundation/HMDBUToBAddressRange.h>
-#import <BUFoundation/HMDBUToBCrashTracker.h>
+//#import <BUFoundation/HMDBUToBCrashTrackerRestrict.h>
+//#import <BUFoundation/HMDBUToBAddressRange.h>
+//#import <BUFoundation/HMDBUToBCrashTracker.h>
 /************************************ ThirdParty***********************************/

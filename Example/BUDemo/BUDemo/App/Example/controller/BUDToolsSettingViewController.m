@@ -73,8 +73,10 @@
         vc.view.backgroundColor = [UIColor whiteColor];
         [weaksefl.navigationController pushViewController:vc animated:YES];
     }];
-
-    self.items = @[normalTools,playableTools,testTools].mutableCopy;
+    
+    self.items = @[normalTools,
+                   playableTools,
+                   testTools].mutableCopy;
 }
 
 -(BOOL)shouldAutorotate
@@ -108,6 +110,8 @@
     if ([cell conformsToProtocol:@protocol(BUDCommandProtocol)]) {
         [cell execute];
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

@@ -2,7 +2,7 @@
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v3.1.0.9 | 2020-08-06 | 1. Bug fix 2.Fix playable white screen |
+| v3.2.0.1 | 2020-08-21 | 1. Playable white screen issue fixed 2. Bug fix 3.Add libxml2.tbd dependency library|
 [Version history](#Version history)
 
 -   [1.SDK Access](#1sdk-access)
@@ -164,6 +164,20 @@ Detailed Steps:
 
 ![image](http://sf1-ttcdn-tos.pstatp.com/img/union-platform/e7723fa701c3ab9d9d7a787add33fdad.png~0x0_q100.webp)
 
+
+
+**About iOS 14 AppTrackingTransparency**
+
+-   On iOS 14 devices, Pangle recommends that you use the AppTrackingTransparency framework provided by Apple when the app starts to obtain the user’s IDFA authorization, so that Pangle can provide more accurate advertising and revenue optimization
+
+```objective-c
+<key>NSUserTrackingUsageDescription</key>
+<string>To provide you better advertising experience ,Please give permission to obtain the advertising identifier of your device  </string>
+```
+
+Call ` requestTrackingAuthorization(completionHandler:) ` to present the app-tracking authorization request to the end user.
+
+
 #### 1.2.2 Operating Environment Configuration
 
 + Support iOS 9.X and above
@@ -174,6 +188,7 @@ Detailed Steps:
 #### 1.2.3 Add Dependency Libraries
 
 Project needs to find Link Binary With Libraries in TARGETS - > Build Phases, click "+", and then add the following dependent libraries in order.
+To upgrade the SDK, the framework and bundle files must be updated at the same time, otherwise there may be a problem and some pages cannot be displayed. The upgrade of the old version requires reintroduction of BUFoundation.
 
 -   StoreKit.framework
 -   MobileCoreServices.framework
@@ -188,6 +203,8 @@ Project needs to find Link Binary With Libraries in TARGETS - > Build Phases, cl
 -   CoreMotion.framework
 -   libresolv.9.tbd
 -   libc++.tbd
+-   **libbz2.tbd**
+-   **libxml2.tbd**
 -   libz.tbd Detailed Steps:
 -   Add the imageio. framework if the above dependency library is still reporting errors.
 ![image](http://sf1-ttcdn-tos.pstatp.com/img/union-platform/9729c0facdcba2a6aec2c23378e9eee7.png~0x0_q100.webp)
@@ -1309,17 +1326,17 @@ Adsize is the size of the banner image to be displayed by the client. It needs t
 ​	 */
 ​	@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 ​	
-	/// media configuration parameters.
-	@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
-	
-	/**
-	 Initializes splash ad with slot id and frame.
-	 @param slotID : the unique identifier of splash ad
-	 @param frame : the frame of splashAd view. It is recommended for the mobile phone screen.
-	 @return BUSplashAdView
-	 */
-	- (instancetype)initWithSlotID:(NSString *)slotID frame:(CGRect)frame;
-	
+​	/// media configuration parameters.
+​	@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
+​	
+​	/**
+​	 Initializes splash ad with slot id and frame.
+​	 @param slotID : the unique identifier of splash ad
+​	 @param frame : the frame of splashAd view. It is recommended for the mobile phone screen.
+​	 @return BUSplashAdView
+​	 */
+​	- (instancetype)initWithSlotID:(NSString *)slotID frame:(CGRect)frame;
+​	
 	/**
 	 Load splash ad datas.
 	 Start the countdown(@tolerateTimeout) as soon as you request datas.
@@ -2286,6 +2303,7 @@ If ritSceneType is custom, you need to pass in the values for sceneDescirbe.
 
 /**
  This method is called when cached successfully.
+ For a better user experience, it is recommended to display video ads at this time.
  */
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
@@ -2448,6 +2466,7 @@ This method is called when a nativeExpressAdView failed to render.
 
 /**
 This method is called when video cached successfully.
+For a better user experience, it is recommended to display video ads at this time.
 */
 - (void)nativeExpressFullscreenVideoAdDidDownLoadVideo:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd;
 
@@ -2789,8 +2808,8 @@ Two causes of 40029 errors:
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v3.1.0.9 | 2020-08-06 | 1. Bug fix 2.Fix playable white screen |
-| v3.1.0.8 | 2020-07-31 | 1. Bug fix |
+| v3.2.0.1 | 2020-08-21 | 1. Playable white screen issue fixed 2. Bug fix 3.Add libxml2.tbd dependency library|
+| v3.2.0.0 | 2020-07-29 | 1. Optimize landing page advertising experience; 2. Template advertisement optimization; 3. Playable advertising optimization; 4. Upgrade some services to ipv6; 5. Add libbz2.tbd dependency library |
 | v3.1.0.5 | 2020-07-14 | 1. Fixed some bugs |
 | v3.1.0.4 | 2020-07-09 | 1. Stability improvement |
 | v3.1.0.2 | 2020-07-07 | 1. Splash ad bug fix 2. Bundle addressing optimization 3. Fixed some bugs |

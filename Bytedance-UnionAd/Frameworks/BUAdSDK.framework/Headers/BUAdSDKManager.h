@@ -56,6 +56,9 @@ typedef void (^BUConfirmGDPR)(BOOL isAgreed);
 /// Custom set the tob ab sdk version of the user.
 + (void)setABSDKVersion:(NSString *)abSDKVersion;
 
+/// Custom set disable sdadnetwork. if won't need skadnetwork to record conversion set disable to YES, default is enable
++ (void)setDisableSKAdNetwork:(BOOL)disable;
+
 /// Open GDPR Privacy for the user to choose before setAppID.
 + (void)openGDPRPrivacyFromRootViewController:(UIViewController *)rootViewController confirm:(BUConfirmGDPR)confirm;
 

@@ -2,7 +2,7 @@
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v3.2.0.1 | 2020-08-21 | 1. Playable white screen issue fixed 2. Bug fix 3.Add libxml2.tbd dependency library|
+| v3.2.5.1 | 2020-08-31 | 1. Fixed some bugs |
 [Version history](#Version history)
 
 -   [1.SDK Access](#1sdk-access)
@@ -110,6 +110,70 @@
         -   [SDK Error Code](#sdk-error-code)
         -   [FAQ](#faq)
 
+
+## Pangle Publishers checklist for iOS 14
+1. Update apps to run on XCode 12.0 and higher version to ensure compatibility with iOS 14.
+2. Update to Pangle iOS SDK 3.2.5.0 and higher version for iOS 14 and SKAdNetwork Support
+3. Add Pangle SKAdNetwork ID to your app's Info.plist to enable conversion tracking
+
+```
+<key>SKAdNetworkItems</key>
+  <array>
+    <dict>
+      <key>SKAdNetworkIdentifier</key>
+      <string>238da6jt44.skadnetwork</string>
+    </dict>
+    <dict>
+      <key>SKAdNetworkIdentifier</key>
+      <string>22mmun2rn5.skadnetwork</string>
+    </dict>
+  </array>
+```
+
+4.Support for Apple’s ATT framework: Starting in iOS 14, IDFA will be unavailable until an app calls the App Tracking Transparency framework to present the app-tracking authorization request to the end user. If an app does not present this request, the IDFA will automatically be zeroed out which may lead to a significant loss in ad revenue.
+  - To display the App Tracking Transparency authorization request for accessing the IDFA, update your Info.plist to add the NSUserTrackingUsageDescription key with a custom message describing your usage. 
+  - Below is an example description text:
+
+```
+<key>NSUserTrackingUsageDescription</key>
+<string>This identifier will be used to deliver personalized ads to you.</string>
+```
+
+  - To display the authorization request prompt, call `requestTrackingAuthorization(completionHandler:)` . We recommend waiting for the end user's authorization before loading ads. This is so that if the user grants the app permission, the Pangle SDK can use the IDFA to optimize ad delivery.
+
+```
+Example for Swift
+
+import AppTrackingTransparency
+import AdSupport
+...
+func requestIDFA() {
+  ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+    // Tracking authorization completed. Start loading ads here.
+    // loadAd()
+  })
+}
+```
+
+```
+Example for Objective-C
+
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+#import <AdSupport/AdSupport.h>
+...
+- (void)requestIDFA {
+  [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+    // Tracking authorization completed. Start loading ads here.
+    // [self loadAd];
+  }];
+}
+```
+
+Key Terms
+- App Tracking Transparency (ATT) is used to request user authorization to access app-related data for tracking the user or the device. Visit https://developer.apple.com/documentation/apptrackingtransparency for more information.
+- SKAdNetwork (SKAN) is Apple's attribution solution that helps advertisers measure the success of ad campaigns while maintaining user privacy. Using Apple's SKAN, ad networks can attribute app installs even when IDFA is unavailable. Visit https://developer.apple.com/documentation/storekit/skadnetwork for more information.
+
+
 ## 1.SDK Access
 
 ### 1.1 iOS SDK Framework
@@ -163,19 +227,6 @@ Detailed Steps:
 Detailed Steps:
 
 ![image](http://sf1-ttcdn-tos.pstatp.com/img/union-platform/e7723fa701c3ab9d9d7a787add33fdad.png~0x0_q100.webp)
-
-
-
-**About iOS 14 AppTrackingTransparency**
-
--   On iOS 14 devices, Pangle recommends that you use the AppTrackingTransparency framework provided by Apple when the app starts to obtain the user’s IDFA authorization, so that Pangle can provide more accurate advertising and revenue optimization
-
-```objective-c
-<key>NSUserTrackingUsageDescription</key>
-<string>To provide you better advertising experience ,Please give permission to obtain the advertising identifier of your device  </string>
-```
-
-Call ` requestTrackingAuthorization(completionHandler:) ` to present the app-tracking authorization request to the end user.
 
 
 #### 1.2.2 Operating Environment Configuration
@@ -277,10 +328,11 @@ Currently, the interface provides the following class methods.
 ```
 
 #### 2.1.2 Use
+Before loading ads, have your app initialize the Pangle Ads SDK. This needs to be done only once, ideally at app launch ( in AppDelegate method)
 
-SDK needs to be initialized in AppDelegate method
+Warning: Ads may be preloaded by the Pangle Ads SDK or mediation partner SDKs after initial. If you need to obtain consent from users in the European Economic Area (EEA) or users under age, please ensure you do so before initializing the Pangle Ads SDK.
 
-`- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
+Here's an example of how to call the startWithCompletionHandler: method in your AppDelegate:
 
 The following settings are mandatory settings for appID setup:
 
@@ -1337,12 +1389,12 @@ Adsize is the size of the banner image to be displayed by the client. It needs t
 ​	 */
 ​	- (instancetype)initWithSlotID:(NSString *)slotID frame:(CGRect)frame;
 ​	
-	/**
-	 Load splash ad datas.
-	 Start the countdown(@tolerateTimeout) as soon as you request datas.
-	 */
-	- (void)loadAdData;
-	
+​	/**
+​	 Load splash ad datas.
+​	 Start the countdown(@tolerateTimeout) as soon as you request datas.
+​	 */
+​	- (void)loadAdData;
+​	
 	@end
 
 #### 2.9.2 BUSplashAdView callback
@@ -2808,6 +2860,8 @@ Two causes of 40029 errors:
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
+| v3.2.5.1 | 2020-08-31 | 1. Fixed some bugs |
+| v3.2.5.0 | 2020-08-25 | 1. Support for iOS 14 and SKAdNetwork |
 | v3.2.0.1 | 2020-08-21 | 1. Playable white screen issue fixed 2. Bug fix 3.Add libxml2.tbd dependency library|
 | v3.2.0.0 | 2020-07-29 | 1. Optimize landing page advertising experience; 2. Template advertisement optimization; 3. Playable advertising optimization; 4. Upgrade some services to ipv6; 5. Add libbz2.tbd dependency library |
 | v3.1.0.5 | 2020-07-14 | 1. Fixed some bugs |

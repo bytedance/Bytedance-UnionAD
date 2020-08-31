@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "EBAppLogConfig.h"
+#import "EBAppLogDelegateProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
  EBAppLog日志上报功能的类
  */
 @interface EBAppLog : NSObject
+
+/*! @abstract settings delegate */
+@property (class, nonatomic, copy) id<EBAppLogDelegateProtocol> delegate;
 
 /*! @abstract The SDK version. */
 @property (class, nonatomic, copy, readonly) NSString *sdkVersion;

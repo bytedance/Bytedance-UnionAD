@@ -22,6 +22,7 @@
 #import "BUAdSDKAdapterConfiguration.h"
 #import "BUDTestToolsViewController.h"
 #import "BUDAnimationTool.h"
+#import <BUFoundation/BUFoundation.h>
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -150,6 +151,7 @@
 #if DEBUG
     // Whether to open log. default is none.
     [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
+//    [BUAdSDKManager setDisableSKAdNetwork:YES];
 #endif
     //BUAdSDK requires iOS 9 and up
     [BUAdSDKManager setAppID:[BUDAdManager appKey]];
@@ -159,7 +161,7 @@
     [self addSplashAD];
 }
 
-#pragma mark - SplashAdView
+#pragma mark - Splash
 - (void)addSplashAD {
     CGRect frame = [UIScreen mainScreen].bounds;
     self.splashAdView = [[BUSplashAdView alloc] initWithSlotID:normal_splash_ID frame:frame];

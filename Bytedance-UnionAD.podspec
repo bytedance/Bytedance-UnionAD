@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Bytedance-UnionAD'
-  s.version          = '3.2.0.1'
+  s.version          = '3.2.5.1'
   s.summary          = 'BUAdSDK is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Bytedance provides Union ADs which include native、banner、feed、splash、RewardVideo etc.

@@ -1,0 +1,55 @@
+/* 
+  BUDemoLanguage.strings
+  BUDemo
+
+  Created by 李盛 on 2019/1/10.
+  Copyright © 2019 bytedance. All rights reserved.
+*/
+
+"test ads" = "テスト広告";
+"adsTitle" = "広告タイトル";
+"width" = "幅:";
+"height" = "高さ:";
+"StartLocation" = "位置情報取得";
+"PermissionDenied" = "権限無し";
+"coordinate" = "  経度:%f,緯度:%f";
+"LocationFailure" = "位置情報の取得に失敗";
+"unknown" = "未知の表示タイプ";
+"drawTitle" = "【%lu】ページ目、[Draw] アナログ動画タイトル";
+"drawDescription" = "全画面でより快適に動画を楽しもう";
+"testDescription" = "テストディスクリプション";
+"Download" = "今すぐダウンロード";
+"loadCollectionView" = "CollectionView形式をロード";
+"loadView" = "通常ページビューをロード";
+"customBtn" = "カスタマイズボタン";
+"nativeInterstitial" = "カスタムインタースティシャル広告を表示";
+"showBanner" = "バナーを表示";
+"showInterstitial" = "インタースティシャル広告を表示";
+"showScrollBanner" = "スライドバナーを表示";
+"splash" = "起動画面";
+"customCloseBtn" = "カスタム起動画面スキップボタン";
+"Skip" = "スキップ";
+"showFullScreenVideo" = "全画面動画を表示";
+"showRewardVideo" = "動画リワードを表示";
+"LocationOn" = "位置情報サービスをオンにする";
+"getIDFA" = "IDFAの取得";
+"clickDownload" = "クリックしてダウンロード";
+"call" = "電話をかける";
+"externalLink" = "外部リンク";
+"internalLink" = "内部リンク";
+"noClick" = "クリック無し";
+"customClick" = "カスタマイズクリック";
+"detail" = "詳細はこちら >";
+"downloadLinks" = "ダウンロードリンク";
+"URLLinks" = "URLリンク";
+"ShowPlayable" = "ShowPlayable";
+"IsLandScape" = "isLandScape";
+"Carousel" = "Carousel:";
+"Vertical" = "Vertical";
+"Horizontal" = "Horizontal";
+"TapButton" = "Tap left button to load Ad.";
+"AdLoading" = "Loading......";
+"AdLoaded" = "Ad loaded.";
+"AdloadedFail" = "Ad loaded fail.";
+"LoadedAd" = "load ad";
+"ShowAd" = "show ad";

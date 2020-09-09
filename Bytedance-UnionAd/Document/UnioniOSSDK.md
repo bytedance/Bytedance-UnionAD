@@ -2,7 +2,7 @@
 
 | 文档版本| 修订日期| 修订说明|
 | --- | --- | --- |
-| v3.2.5.1 | 2020-08-31 |【1】 部分bug修改|
+| v3.2.5.2 | 2020-09-09 |【1】 部分bug修改|
 
 [历史版本](#历史版本)
 
@@ -2115,7 +2115,6 @@ If ritSceneType is custom, you need to pass in the values for sceneDescirbe.
 @optional
 /**
  This method is called when video ad material loaded successfully.
- And you can call [BUNativeExpressRewardedVideoAd showAdFromRootViewController:].
  */
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
@@ -2132,6 +2131,7 @@ If ritSceneType is custom, you need to pass in the values for sceneDescirbe.
 /**
  This method is called when cached successfully.
  For a better user experience, it is recommended to display video ads at this time.
+ And you can call [BUNativeExpressRewardedVideoAd showAdFromRootViewController:].
  */
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
@@ -2409,7 +2409,6 @@ Display video ad.
 @optional
 /**
 This method is called when video ad material loaded successfully.
-And you can call [BUNativeExpressFullscreenVideoAd showAdFromRootViewController:].
 */
 - (void)nativeExpressFullscreenVideoAdDidLoad:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd;
 
@@ -2434,6 +2433,7 @@ This method is called when a nativeExpressAdView failed to render.
 /**
 This method is called when video cached successfully.
 For a better user experience, it is recommended to display video ads at this time.
+And you can call [BUNativeExpressFullscreenVideoAd showAdFromRootViewController:].
 */
 - (void)nativeExpressFullscreenVideoAdDidDownLoadVideo:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd;
 
@@ -2617,6 +2617,7 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
 ## 历史版本
 | 文档版本| 修订日期| 修订说明|
 | --- | --- | --- |
+| v3.2.5.2 | 2020-09-09 | 【1】 部分bug修改 |
 | v3.2.5.1 | 2020-08-31 |【1】 部分bug修改|
 | v3.2.5.0 | 2020-08-25 |【1】 提供了 iOS 14 与 SKAdNetwork 支持|
 | v3.2.0.1 | 2020-08-21 |【1】 修复playable播放白屏【2】 Bug Fix【3】 添加 libxml2.tbd 依赖库|

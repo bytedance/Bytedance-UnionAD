@@ -1,0 +1,15 @@
+//
+//  PrefixHeader.pch
+//  BUDemo
+//
+//  Created by 李盛 on 2019/1/14.
+//  Copyright © 2019 bytedance. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+//#import "NSString+LocalizedString.h"
+
+
+#endif /* PrefixHeader_pch */

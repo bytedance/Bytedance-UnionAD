@@ -2,7 +2,7 @@
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v3.2.5.1 | 2020-08-31 | 1. Fixed some bugs |
+| v3.2.5.2 | 2020-09-09 | 1. Fixed some bugs |
 [Version history](#Version history)
 
 -   [1.SDK Access](#1sdk-access)
@@ -1395,7 +1395,7 @@ Adsize is the size of the banner image to be displayed by the client. It needs t
 ​	 */
 ​	- (void)loadAdData;
 ​	
-	@end
+​	@end
 
 #### 2.9.2 BUSplashAdView callback
 
@@ -2356,6 +2356,7 @@ If ritSceneType is custom, you need to pass in the values for sceneDescirbe.
 /**
  This method is called when cached successfully.
  For a better user experience, it is recommended to display video ads at this time.
+ And you can call [BUNativeExpressRewardedVideoAd showAdFromRootViewController:]. 
  */
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd;
 
@@ -2519,6 +2520,7 @@ This method is called when a nativeExpressAdView failed to render.
 /**
 This method is called when video cached successfully.
 For a better user experience, it is recommended to display video ads at this time.
+And you can call [BUNativeExpressFullscreenVideoAd showAdFromRootViewController:]. 
 */
 - (void)nativeExpressFullscreenVideoAdDidDownLoadVideo:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd;
 
@@ -2860,6 +2862,7 @@ Two causes of 40029 errors:
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
+| v3.2.5.2 | 2020-09-09 | 1. Fixed some bugs |
 | v3.2.5.1 | 2020-08-31 | 1. Fixed some bugs |
 | v3.2.5.0 | 2020-08-25 | 1. Support for iOS 14 and SKAdNetwork |
 | v3.2.0.1 | 2020-08-21 | 1. Playable white screen issue fixed 2. Bug fix 3.Add libxml2.tbd dependency library|

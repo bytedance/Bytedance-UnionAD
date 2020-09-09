@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 /**
  This method is called when video ad material loaded successfully.
- And you can call [BUNativeExpressFullscreenVideoAd showAdFromRootViewController:].
  */
 - (void)nativeExpressFullscreenVideoAdDidLoad:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd;
 
@@ -48,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  This method is called when video cached successfully.
  For a better user experience, it is recommended to display video ads at this time.
+ And you can call [BUNativeExpressFullscreenVideoAd showAdFromRootViewController:]. 
  */
 - (void)nativeExpressFullscreenVideoAdDidDownLoadVideo:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd;
 

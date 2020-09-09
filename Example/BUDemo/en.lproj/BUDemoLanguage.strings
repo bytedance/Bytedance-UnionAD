@@ -1,0 +1,55 @@
+/* 
+  BUDemoLanguage.strings
+  BUDemo
+
+  Created by 李盛 on 2019/1/10.
+  Copyright © 2019 bytedance. All rights reserved.
+*/
+
+"test ads" = "Test ads";
+"adsTitle" = "Ads title";
+"width" = "Width:";
+"height" = "Height:";
+"StartLocation" = "Start to locate";
+"PermissionDenied" = "Permission denied";
+"coordinate" = " Longitude:%f, latitude:%f";
+"LocationFailure" = "Location failed";
+"unknown" = "Unknown display type";
+"drawTitle" = "Page【%lu】, [Draw] stimulate video title";
+"drawDescription" = "Immersive video, you deserve it";
+"testDescription" = "Test copy description";
+"Download" = "Download now";
+"loadCollectionView" = "Load the Collection style";
+"loadView" = "Load the normal page style";
+"customBtn" = "Custom button";
+"nativeInterstitial" = "Show the native interstitial";
+"showBanner" = "Show the Banner";
+"showInterstitial" = "Show the interstitial";
+"showScrollBanner" = "Show the Scroll Banner";
+"splash" = "Splash";
+"customCloseBtn" = "Splash by the custom close button";
+"Skip" = "Skip";
+"showFullScreenVideo" = "Show the full screen video";
+"showRewardVideo" = "Show the reward video";
+"LocationOn" = "Enable location";
+"getIDFA" = "Get IDFA";
+"clickDownload" = "Click to download";
+"call" = "Dial";
+"externalLink" = "External link";
+"internalLink" = "Internal link";
+"noClick" = "No click";
+"customClick" = "Custom click";
+"detail" = "View details >";
+"downloadLinks" = "Download and redirect";
+"URLLinks" = "Redirect by URL";
+"ShowPlayable" = "ShowPlayable";
+"IsLandScape" = "isLandScape";
+"Carousel" = "Carousel:";
+"Vertical" = "Vertical";
+"Horizontal" = "Horizontal";
+"TapButton" = "Tap left button to load Ad.";
+"AdLoading" = "Loading......";
+"AdLoaded" = "Ad loaded.";
+"AdloadedFail" = "Ad loaded fail.";
+"LoadedAd" = "load ad";
+"ShowAd" = "show ad";

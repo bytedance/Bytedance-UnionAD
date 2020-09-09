@@ -1,0 +1,59 @@
+/* 
+  BUDemoLanguage.strings
+  BUDemo
+
+  Created by 李盛 on 2019/1/10.
+  Copyright © 2019 bytedance. All rights reserved.
+*/
+
+
+"test ads" = "测试广告";
+"adsTitle" = "广告标题";
+"width" = "宽:";
+"height" = "高:";
+"StartLocation" = "  开始定位";
+"PermissionDenied" = "  没有权限";
+"coordinate" = "  经度:%f,纬度:%f";
+"LocationFailure" = "定位失败";
+"unknown" = "未知的展示类型";
+"drawTitle" = "第 【%lu】 页，[Draw]模拟视频标题";
+"drawDescription" = "沉浸式视频，超强体验，你值得拥有。";
+"testDescription" = "测试文案描述";
+"Download" = "立即下载";
+"loadCollectionView" = "加载Collection样式";
+"loadView" = "加载普通页面样式";
+"customBtn" = "自定义按钮";
+"nativeInterstitial" = "展示原生插屏";
+"showBanner" = "展示Banner";
+"showInterstitial" = "展示插屏";
+"showScrollBanner" = "展示轮播Banner";
+"splash" = "开屏";
+"customCloseBtn" = "自定义关闭按钮开屏";
+"Skip" = "跳过";
+"showFullScreenVideo" = "展示全屏视频";
+"showRewardVideo" = "展示激励视频";
+"LocationOn" = "开启定位";
+"getIDFA" = "获取IDFA";
+"clickDownload" = "点击下载";
+"call" = "拨打电话";
+"externalLink" = "外部拉起";
+"internalLink" = "内部拉起";
+"noClick" = "无点击";
+"customClick" = "自定义点击";
+"detail" = "查看详情 >";
+"downloadLinks" = "下载跳转";
+"URLLinks" = "URL跳转";
+"ShowPlayable" = "测试playable页面";
+"IsLandScape" = "是否横屏:";
+"Carousel" = "轮播:";
+"Vertical" = "竖屏";
+"Horizontal" = "横屏";
+"TapButton" = "点击左边按钮加载广告.";
+"AdLoading" = "加载中......";
+"AdLoaded" = "广告加载完成.";
+"AdloadedFail" = "广告加载失败.";
+"LoadedAd" = "加载广告";
+"ShowAd" = "展示广告";
+"IsEtOpen" = "ET开关";
+"ScanQRCode" = "扫描二维码设置地址";
+

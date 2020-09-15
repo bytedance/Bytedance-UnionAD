@@ -233,7 +233,7 @@ Detailed Steps:
 
 + Support iOS 9.X and above
 + SDK compiler environment Xcode 10.0
-+ Support architecture: i386, x86-64, armv7, arm64,i386
++ Support architecture: x86-64, armv7, arm64,i386
 
 
 #### 1.2.3 Add Dependency Libraries

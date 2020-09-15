@@ -70,6 +70,12 @@ typedef NS_ENUM(NSInteger, BUFeedADMode) {
 /// video duration
 @property (nonatomic, assign) NSInteger videoDuration;
 
+/// video resolution width
+@property (nonatomic, assign, readonly) NSInteger videoResolutionWidth;
+
+/// video resolution height
+@property (nonatomic, assign, readonly) NSInteger videoResolutionHeight;
+
 /// media configuration parameters.
 @property (nonatomic, copy) NSDictionary *mediaExt;
 

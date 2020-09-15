@@ -2,7 +2,7 @@
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v3.2.5.2 | 2020-09-09 | 1. Fixed some bugs |
+| v3.2.6.2 | 2020-09-15 | 1. Fixed some bugs |
 [Version history](#Version history)
 
 -   [1.SDK Access](#1sdk-access)
@@ -233,7 +233,7 @@ Detailed Steps:
 
 + Support iOS 9.X and above
 + SDK compiler environment Xcode 10.0
-+ Support architecture: i386, x86-64, armv7, arm64
++ Support architecture: i386, x86-64, armv7, arm64,i386
 
 
 #### 1.2.3 Add Dependency Libraries
@@ -2862,6 +2862,8 @@ Two causes of 40029 errors:
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
+| v3.2.6.2 | 2020-09-15 | 1. Fixed some bugs |
+| v3.2.5.3 | 2020-09-11 | 1. Fixed some bugs |
 | v3.2.5.2 | 2020-09-09 | 1. Fixed some bugs |
 | v3.2.5.1 | 2020-08-31 | 1. Fixed some bugs |
 | v3.2.5.0 | 2020-08-25 | 1. Support for iOS 14 and SKAdNetwork |

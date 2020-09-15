@@ -492,8 +492,9 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     y += 5;
     
     // 广告展位图
-    BUImage *image = model.data.imageAry.firstObject;
-    const CGFloat imageHeight = contentWidth * (image.height / image.width);
+    // 对齐安卓，使用视频分辨率确定视频宽高比例
+    CGFloat resloution = (model.data.videoResolutionHeight * 1.0) / (model.data.videoResolutionWidth * 1.0);
+    const CGFloat imageHeight = contentWidth * resloution;
     
     self.nativeAdRelatedView.videoAdView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
     self.nativeAdRelatedView.logoImageView.frame = CGRectMake(CGRectGetMaxX(self.nativeAdRelatedView.videoAdView.frame) - logoSize.width, CGRectGetMaxY(self.nativeAdRelatedView.videoAdView.frame) - logoSize.height, logoSize.width, logoSize.height);
@@ -529,9 +530,9 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     NSAttributedString *attributedText = [BUDFeedStyleHelper titleAttributeText:model.data.AdTitle];
     
     CGSize titleSize = [attributedText boundingRectWithSize:CGSizeMake(contentWidth, 0) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:0].size;
-    
-    BUImage *image = model.data.imageAry.firstObject;
-    const CGFloat imageHeight = contentWidth * (image.height / image.width);
+    // 对齐安卓，使用视频分辨率确定视频宽高比例
+    CGFloat resloution = (model.data.videoResolutionHeight * 1.0) / (model.data.videoResolutionWidth * 1.0);
+    const CGFloat imageHeight = contentWidth * resloution;
     return padding.top + titleSize.height + 10+ imageHeight + 15 + 20 + padding.bottom + 28;
 }
 

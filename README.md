@@ -44,7 +44,7 @@ Siwant
 Bytedance-UnionAD is available under the MIT license. See the LICENSE file for more info.
 
 ## FAQ & feedback channel
-Chinese Developers could refer to the documentation on the Pangle whenever encountered any problems during the integration process:
+Chinese developers could refer to the documentation on the Pangle whenever encountered any problems during the integration process:
 - FAQ document:  https://www.pangle.cn/help/doc/5dd0fe618507820012088272
 - Error code reference document:https://www.pangle.cn/help/doc/5de4cc6d78c8690012a90aa5
 

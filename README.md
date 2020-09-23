@@ -1,6 +1,6 @@
 # Bytedance-UnionAD
 
-Pod for Bytedance-UnionAD only support **x86_64, armv7, armv7s, arm64**.
+Pod for Bytedance-UnionAD only support **x86_64, armv7, arm64, i386**.
 
 ## How To Get Started
 
@@ -34,8 +34,6 @@ $ pod install
 ```
 
 Pod access is only supported after **version 1982**
-
-If you want to get Bytedance-UnionAD before version 1982 ，Please go to [union](http://ad.toutiao.com/union/media) for more information.
 
 ## Author
 

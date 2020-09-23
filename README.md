@@ -44,10 +44,13 @@ Siwant
 Bytedance-UnionAD is available under the MIT license. See the LICENSE file for more info.
 
 ## FAQ & feedback channel
-- Developers could refer to the common problem documentation on the Pangle whenever encountered any problems during the integration process:
-https://partner.oceanengine.com/doc?id=5dd0fe618507820012088272
-- Error code reference document:
-https://partner.oceanengine.com/doc?id=5de4cc6d78c8690012a90aa5
+Chinese Developers could refer to the documentation on the Pangle whenever encountered any problems during the integration process:
+- FAQ document:  https://www.pangle.cn/help/doc/5dd0fe618507820012088272
+- Error code reference document:https://www.pangle.cn/help/doc/5de4cc6d78c8690012a90aa5
+
+
+Global developers can refer to the help center: https://www.pangleglobal.com/help
+
 If the content of the document cannot solve your problem, you can try to give feedback through the official channel. Feedback channel: "Pangle Platform-Help-Feedback"
 
 ## Reward test

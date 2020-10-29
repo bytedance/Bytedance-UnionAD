@@ -57,7 +57,18 @@ If the content of the document cannot solve your problem, you can try to give fe
 - Pangle will invite some developers to grayscale the new version of the SDK, please pay attention to the notice in the station. You can send an email to union_tech_support@bytedance.com to apply for the new version of the Pangle SDK. Your participation is highly appreciated!
 
 - SDK information
-  - Version Number: 3.2.6.2
-  - Updated: 2020-09-16
+  - Version Number: 3.3.0.4
+  - Updated: 2020-10-29
   - Change Log:
-    1.Fixed some bugs
+    1.电商广告模板专项优化，适配双十一预算，提升电商预算转化能力;
+    2.模板渲染插屏、Banner支持视频预算;
+    3.模板Banner展示优化;
+    4.SDWebImage缓存路径问题修复;
+    5.开屏广告DidCloseOtherController回调异常修复;
+    6.模板渲染激励视频isadValid回调方法废弃;
+
+    1.Addition of in-banner video function;
+    2.Improved performance and stability;
+    3.Template Banner display optimization;
+    4.Splash ads advertisement DidCloseOtherController callback exception fix;
+    5.Template rendering  rewarded video isadValid callback method is abandoned;

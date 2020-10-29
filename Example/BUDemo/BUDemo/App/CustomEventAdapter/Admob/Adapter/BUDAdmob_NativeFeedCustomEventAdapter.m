@@ -39,7 +39,6 @@ NSString *const FEED_PANGLE_PLACEMENT_ID = @"placementID";
         slot.AdType = BUAdSlotAdTypeFeed;
         slot.position = BUAdSlotPositionTop;
         slot.imgSize = [BUSize sizeBy:BUProposalSize_Banner600_400];
-        slot.isSupportDeepLink = YES;
         self.adManager = [[BUNativeAdsManager alloc] initWithSlot:slot];
         self.adManager.delegate = self;
     }

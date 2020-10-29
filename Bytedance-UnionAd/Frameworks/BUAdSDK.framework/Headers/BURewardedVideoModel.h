@@ -10,7 +10,7 @@
 @interface BURewardedVideoModel : NSObject
 
 /**
-   required.
+   optional.
    Third-party game user_id identity.
    Mainly used in the reward issuance, it is the callback pass-through parameter from server-to-server.
    It is the unique identifier of each user.
@@ -19,13 +19,13 @@
  */
 @property (nonatomic, copy) NSString *userId;
 
-//optional. reward name.
-@property (nonatomic, copy) NSString *rewardName;
-
-//optional. number of rewards.
-@property (nonatomic, assign) NSInteger rewardAmount;
-
 //optional. serialized string.
 @property (nonatomic, copy) NSString *extra;
+
+//reward name. It will assigned value when the ads back.
+@property (nonatomic, copy) NSString *rewardName;
+
+//number of rewards. It will assigned value when the ads back.
+@property (nonatomic, assign) NSInteger rewardAmount;
 
 @end

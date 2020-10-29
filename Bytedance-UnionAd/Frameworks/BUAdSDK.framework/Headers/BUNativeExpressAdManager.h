@@ -104,7 +104,12 @@ Sent when a playerw playback status changed.
 /**
  The number of ads requested,The maximum is 3
  */
-- (void)loadAd:(NSInteger)count;
+- (void)loadAdDataWithCount:(NSInteger)count;
 @end
+
+@interface BUNativeExpressAdManager (Deprecated)
+- (void)loadAd:(NSInteger)count __attribute__((deprecated("Use loadAdDataWithCount: instead.")));
+@end
+
 
 NS_ASSUME_NONNULL_END

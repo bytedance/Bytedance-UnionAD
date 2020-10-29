@@ -11,5 +11,5 @@
 #import "UIViewController+BUUtilities.h"
 
 @interface BURouter : NSObject
-+ (void)pushFromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC;
++ (void)presentFromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC;
 @end

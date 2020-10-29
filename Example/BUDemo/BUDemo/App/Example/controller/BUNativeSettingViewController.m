@@ -20,6 +20,7 @@
 #import "BUDSlotID.h"
 #import "BUDImagePortraitViewController.h"
 #import "BUDConfigModel.h"
+#import "BUDCustomVideoPlayerViewController.h"
 
 @interface BUNativeSettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -136,7 +137,19 @@
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.items = @[feedCellItem,drawfeedCellItem,nativeBanner,nativeInterstitial,nativeCustomItem,dislikeCell,imagePortraitCell].mutableCopy;
+    BUDActionModel *customPlayerCell = [BUDActionModel plainTitleActionModel:@"Native Custom Player(Allow List)" type:BUDCellType_native action:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        BUDCustomVideoPlayerViewController *vc = [BUDCustomVideoPlayerViewController new];
+        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
+        viewModel.slotID = native_feed_custom_player_ID;
+        if (strongSelf.textView.text && strongSelf.textView.text.length > 0) {
+            viewModel.slotID = strongSelf.textView.text;
+        }
+        vc.viewModel = viewModel;
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    self.items = @[feedCellItem,drawfeedCellItem,nativeBanner,nativeInterstitial,nativeCustomItem,dislikeCell,imagePortraitCell,customPlayerCell].mutableCopy;
 
 }
 

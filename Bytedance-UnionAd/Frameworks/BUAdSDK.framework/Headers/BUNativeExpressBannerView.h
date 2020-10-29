@@ -80,13 +80,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithSlotID:(NSString *)slotID
             rootViewController:(UIViewController *)rootViewController
-                        adSize:(CGSize)adsize
-             IsSupportDeepLink:(BOOL)isSupportDeepLink;
+                        adSize:(CGSize)adsize;
 
 - (instancetype)initWithSlotID:(NSString *)slotID
             rootViewController:(UIViewController *)rootViewController
                         adSize:(CGSize)adsize
-             IsSupportDeepLink:(BOOL)isSupportDeepLink
                       interval:(NSInteger)interval;
 
 /**
@@ -99,20 +97,42 @@ prime_rit：（针对聚合广告位）广告物理位置对应的固定穿山�
                      adloadSeq:(NSInteger)adloadSeq
                       primeRit:(NSString *)primeRit
             rootViewController:(UIViewController *)rootViewController
-                        adSize:(CGSize)adsize
-             IsSupportDeepLink:(BOOL)isSupportDeepLink;
-
+                        adSize:(CGSize)adsize;
 
 - (instancetype)initWithSlotID:(NSString *)slotID
                      adloadSeq:(NSInteger)adloadSeq
                       primeRit:(NSString *)primeRit
             rootViewController:(UIViewController *)rootViewController
                         adSize:(CGSize)adsize
-             IsSupportDeepLink:(BOOL)isSupportDeepLink
                       interval:(NSInteger)interval;
 
 - (void)loadAdData;
 
+@end
+
+@interface BUNativeExpressBannerView (Deprecated)
+- (instancetype)initWithSlotID:(NSString *)slotID
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize
+             IsSupportDeepLink:(BOOL)isSupportDeepLink DEPRECATED_MSG_ATTRIBUTE("Use initWithSlotID:rootViewController:adSize: instead.");
+- (instancetype)initWithSlotID:(NSString *)slotID
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize
+             IsSupportDeepLink:(BOOL)isSupportDeepLink
+                      interval:(NSInteger)interval DEPRECATED_MSG_ATTRIBUTE("Use initWithSlotID:rootViewController:adSize:interval: instead.");
+- (instancetype)initWithSlotID:(NSString *)slotID
+                     adloadSeq:(NSInteger)adloadSeq
+                      primeRit:(NSString *)primeRit
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize
+             IsSupportDeepLink:(BOOL)isSupportDeepLink DEPRECATED_MSG_ATTRIBUTE("Use initWithSlotID:adloadSeq:primeRit:rootViewController:adSize: instead.");
+- (instancetype)initWithSlotID:(NSString *)slotID
+                     adloadSeq:(NSInteger)adloadSeq
+                      primeRit:(NSString *)primeRit
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize
+             IsSupportDeepLink:(BOOL)isSupportDeepLink
+                      interval:(NSInteger)interval DEPRECATED_MSG_ATTRIBUTE("Use initWithSlotID:adloadSeq:primeRit:rootViewController:adSize:interval: instead.");
 @end
 
 NS_ASSUME_NONNULL_END

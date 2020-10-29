@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIView (BU_Additions)
 
 - (UIImage *)bu_captureView;
@@ -36,8 +38,8 @@ typedef enum {
 @property (nonatomic) float bu_y;
 @property (nonatomic) float bu_width;
 @property (nonatomic) float bu_height;
-@property (nonatomic, getter = bu_y,setter = setBu_y:) float top;
-@property (nonatomic, getter = bu_x,setter = setBu_x:) float left;
+@property (nonatomic, getter = bu_y,setter = setBu_y:) float bu_top;    // 增加bu前缀，防止与外部开发者的分类属性名冲突：https://jira.bytedance.com/browse/UNION-4447 fixed in 3300 by chaors
+@property (nonatomic, getter = bu_x,setter = setBu_x:) float bu_left;
 @property (nonatomic) float bu_bottom;
 @property (nonatomic) float bu_right;
 @property (nonatomic) CGSize bu_size;
@@ -50,17 +52,6 @@ typedef enum {
 @end
 
 
-@interface UIView(BU_ScreenShot)
-
-+ (UIImage *)bu_screenShot;
-+ (UIImage *)bu_screenShotWithoutStatusBar;
-
-- (UIImage *)bu_screenShot;
-
-@end
-
-
-
 @interface UIView (BU_TKCategory)
 
 // DRAW GRADIENT
@@ -71,8 +62,8 @@ typedef enum {
 
 // DRAW LINE
 + (void)bu_drawLineInRect:(CGRect)rect red:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
-+ (void)bu_drawLineInRect:(CGRect)rect colors:(CGFloat[])colors;
-+ (void)bu_drawLineInRect:(CGRect)rect colors:(CGFloat[])colors width:(CGFloat)lineWidth cap:(CGLineCap)cap;
++ (void)bu_drawLineInRect:(CGRect)rect colors:(CGFloat[_Nullable])colors;
++ (void)bu_drawLineInRect:(CGRect)rect colors:(CGFloat[_Nullable])colors width:(CGFloat)lineWidth cap:(CGLineCap)cap;
 
 @end
 
@@ -81,6 +72,10 @@ typedef enum {
 
 - (UILongPressGestureRecognizer *)bu_addLogPressGestureWithTarget:(id)target selecter:(SEL)aSelector;
 
+@property (nonatomic, strong, nullable) UITapGestureRecognizer *bu_tgr;
+// 会移除旧的手势
+- (void)bu_addGestureRecognizerWithTarget:(id)target action:(SEL)action;
+- (void)bu_removeGestureRecognizer;
 @end
 
 @interface UIView (BU_FindFirstResponder)
@@ -95,6 +90,10 @@ typedef enum {
 
 @interface UIView (BU_NearestController)
 - (UIViewController *)bu_findNearestController;
+
+
+
+
 @end
 
 @interface UIView (BU_SafeArea)
@@ -103,3 +102,4 @@ typedef enum {
 + (UIEdgeInsets)bu_defaultAreaInsets;
 
 @end
+NS_ASSUME_NONNULL_END

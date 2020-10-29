@@ -52,6 +52,11 @@ required. Root view controller for handling ad actions.
 @property (nonatomic, assign) BOOL drawVideoClickEnable;
 
 /**
+AdType information.
+*/
+@property (nonatomic, assign) NSInteger AdType;
+
+/**
  material information.
  */
 @property (nonatomic, strong, readwrite, nullable) BUMaterialMeta *materialMeta;

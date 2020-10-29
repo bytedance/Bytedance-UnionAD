@@ -13,6 +13,7 @@
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
+#import "AppDelegate.h"
 
 @interface BUDExpressBannerViewController ()<BUNativeExpressBannerViewDelegate>
 @property(nonatomic, strong) BUDSelectedView *selectedView;
@@ -30,15 +31,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.sizeDcit = @{
-                          express_banner_ID         :  [NSValue valueWithCGSize:CGSizeMake(600, 90)],
-                          express_banner_ID_60090   :  [NSValue valueWithCGSize:CGSizeMake(600, 90)],
-                          express_banner_ID_640100  :  [NSValue valueWithCGSize:CGSizeMake(640, 100)],
-                          express_banner_ID_600150  :  [NSValue valueWithCGSize:CGSizeMake(600, 150)],
-                          express_banner_ID_690388  :  [NSValue valueWithCGSize:CGSizeMake(690, 388)],
-                          express_banner_ID_600260  :  [NSValue valueWithCGSize:CGSizeMake(600, 260)],
-                          express_banner_ID_600300  :  [NSValue valueWithCGSize:CGSizeMake(600, 300)],
-                          express_banner_ID_600400_both  :  [NSValue valueWithCGSize:CGSizeMake(600, 400)],
-                          express_banner_ID_600500_both  :  [NSValue valueWithCGSize:CGSizeMake(600, 500)],
+                          express_banner_ID         :  [NSValue valueWithCGSize:CGSizeMake(300, 45)],
+                          express_banner_ID_60090   :  [NSValue valueWithCGSize:CGSizeMake(300, 45)],
+                          express_banner_ID_640100  :  [NSValue valueWithCGSize:CGSizeMake(320, 50)],
+                          express_banner_ID_600150  :  [NSValue valueWithCGSize:CGSizeMake(300, 75)],
+                          express_banner_ID_690388  :  [NSValue valueWithCGSize:CGSizeMake(345, 194)],
+                          express_banner_ID_600260  :  [NSValue valueWithCGSize:CGSizeMake(300, 130)],
+                          express_banner_ID_600300  :  [NSValue valueWithCGSize:CGSizeMake(300, 150)],
+                          express_banner_ID_600400_both  :  [NSValue valueWithCGSize:CGSizeMake(300, 200)],
+                          express_banner_ID_600500_both  :  [NSValue valueWithCGSize:CGSizeMake(300, 250)],
                           };
 
     
@@ -83,17 +84,32 @@
 - (void)loadBannerWithSlotID:(NSString *)slotID {
     [self.bannerView removeFromSuperview];
     
+    UIWindow *window = nil;
+    if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(window)]) {
+        window = [[UIApplication sharedApplication].delegate window];
+    }
+    if (![window isKindOfClass:[UIView class]]) {
+        window = [UIApplication sharedApplication].keyWindow;
+    }
+    if (!window) {
+        window = [[UIApplication sharedApplication].windows objectAtIndex:0];
+    }
+    CGFloat bottom = 0.0;
+    if (@available(iOS 11.0, *)) {
+        bottom = window.safeAreaInsets.bottom;
+    } else {
+        // Fallback on earlier versions
+    }
+    
     NSValue *sizeValue = [self.sizeDcit objectForKey:slotID];
     CGSize size = [sizeValue CGSizeValue];
-    CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
-    CGFloat bannerHeigh = screenWidth/size.width*size.height;
 // important: 升级的用户请注意，初始化方法去掉了imgSize参数
     if (self.isCarouselSwitch.on) {
-        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:slotID rootViewController:self adSize:CGSizeMake(screenWidth, bannerHeigh) IsSupportDeepLink:YES interval:30];
+        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:slotID rootViewController:self adSize:size interval:30];
     } else {
-        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:slotID rootViewController:self adSize:CGSizeMake(screenWidth, bannerHeigh) IsSupportDeepLink:YES];
+        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:slotID rootViewController:self adSize:size];
     }
-    self.bannerView.frame = CGRectMake(0, self.view.height-bannerHeigh, screenWidth, bannerHeigh);
+    self.bannerView.frame = CGRectMake((self.view.width-size.width)/2.0, self.view.height-size.height-bottom, size.width, size.height);
     self.bannerView.delegate = self;
     [self.bannerView loadAdData];
     self.selectedView.promptStatus = BUDPromptStatusLoading;
@@ -144,7 +160,7 @@
 }
 
 - (void)nativeExpressBannerAdViewDidCloseOtherController:(BUNativeExpressBannerView *)bannerAdView interactionType:(BUInteractionType)interactionType {
-    NSString *str = nil;
+    NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
     } else if (interactionType == BUInteractionTypeVideoAdDetail) {
@@ -157,4 +173,5 @@
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
     BUD_Log(@"SDKDemoDelegate BUNativeExpressBannerView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
 }
+
 @end

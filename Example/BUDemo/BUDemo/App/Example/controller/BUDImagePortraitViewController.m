@@ -92,7 +92,6 @@
     size.width = 100;
     size.height = 300;
     slot1.imgSize = size;
-    slot1.isSupportDeepLink = YES;
     nad.adslot = slot1;
     nad.delegate = self;
     self.adManager = nad;
@@ -102,11 +101,12 @@
 
 - (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
     BUD_Log(@"feed datas load success");
-    for (BUNativeAd *model in nativeAdDataArray) {
-        NSUInteger index = rand() % (self.dataSource.count-3)+2;
-        [self.dataSource insertObject:model atIndex:index];
+    if (self.dataSource.count > 3) {
+        for (BUNativeAd *model in nativeAdDataArray) {
+            NSUInteger index = rand() % (self.dataSource.count - 3) + 2;
+            [self.dataSource insertObject:model atIndex:index];
+        }
     }
-    
     [self.collectionView reloadData];
 }
 

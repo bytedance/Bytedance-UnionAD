@@ -78,7 +78,10 @@
             UITableViewCell *cell = [[UITableViewCell alloc] init];
             [cell.contentView addSubview:view];
             cell.contentView.frame = view.frame;
-            NSInteger index = random() % (self.dataSource.count);
+            NSInteger index = 0;
+            if (self.dataSource.count > 0) {
+                index = random() % (self.dataSource.count);
+            }
             [self.dataSource insertObject:cell atIndex:index];
         }
     }];
@@ -102,7 +105,10 @@
             UITableViewCell *cell = [[UITableViewCell alloc] init];
             [cell.contentView addSubview:view];
             cell.contentView.frame = view.frame;
-            NSInteger index = random() % (self.dataSource.count);
+            NSInteger index = 0;
+            if (self.dataSource.count > 0) {
+                index = random() % (self.dataSource.count);
+            }
             [self.dataSource insertObject:cell atIndex:index];
         }
     }];
@@ -174,10 +180,13 @@
         BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:dict];
         [self.dataSource addObject:model];
     }
-    for (int i = 0; i < datas.count; i++) {
-        NSUInteger index = rand() % (datas.count-3)+2;
-        BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:[datas objectAtIndex:index]];
-        [self.dataSource addObject:model];
+    NSInteger datasCount = datas.count;
+    if (datasCount > 3) {
+        for (int i = 0; i < datasCount; i++) {
+            NSUInteger index = rand() % (datasCount - 3) + 2;
+            BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:[datas objectAtIndex:index]];
+            [self.dataSource addObject:model];
+        }
     }
     [self.tableView reloadData];
 }

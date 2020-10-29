@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
   *   adSlotType refer from BUAdSlotAdType in "BUAdSlot.h"
   *   showType: @"1" express AD   @"2" native AD
   */
-+ (NSDictionary *)AdTypeWithRit:(NSString *)rit error:(NSError **)error;
++ (nullable NSDictionary *)AdTypeWithRit:(NSString *)rit error:(NSError **)error;
 
 /** Mopub bidding Adaptor get AD type from adm
   *  @return  @{@"adSlotType": @(1), @"renderType": @(1)}

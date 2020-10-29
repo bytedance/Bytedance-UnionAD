@@ -24,6 +24,7 @@
 #define native_banner_ID                  @"900546687"
 #define native_interstitial_ID            @"900546829"
 #define native_imagePortrait_ID           @"900546264"
+#define native_feed_custom_player_ID      @"900546910"
 
 /// 带_both代表海外国内通用的rit
 #define express_feed_ID                   @"945113159"
@@ -38,7 +39,7 @@
 #define express_banner_ID_600260          @"900546387"
 #define express_banner_ID_600300          @"900546526"
 #define express_banner_ID_600400_both     @"945113150"
-#define express_banner_ID_600500_both     @"945113147"
+#define express_banner_ID_600500_both     @"945467828"
 #define express_interstitial_ID           @"900546270"
 #define express_interstitial_ID_1_1_both  @"945113154"
 #define express_interstitial_ID_2_3_both  @"945113156"
@@ -53,7 +54,7 @@
 // custom Event
 #define mopub_AD_APPID                     @"e1cbce0838a142ec9bc2ee48123fd470"
 #define mopub_reward_UnitID                @"e1cbce0838a142ec9bc2ee48123fd470"
-#define mopub_fullscreen_UnitID            @"d3ecccb5151f4c5aaa93d125004c5d5f"
+#define mopub_fullscreen_UnitID            @"7e214581af8a4883a0bcf1e626c76c70"
 #define mopub_intersttitial_UnitID         @"958434f2c3cc4f54b8cd73684b44baf8"
 #define mopub_banner_UnitID                @"ca9c91eb59694afa9caef204ac622136"
 #define mopub_expressReward_UnitID         @"e0e003e94cfd4442a01265262a2dd5bf"

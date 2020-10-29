@@ -46,7 +46,7 @@
 
 #pragma mark BUNativeExpressRewardedVideoAdDelegate
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    
+    [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
@@ -60,7 +60,6 @@
 
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     
-    [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {

@@ -88,9 +88,7 @@
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeDrawVideo; //required
     slot1.isOriginAd = YES; //required
-    slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_DrawFullScreen];
-    slot1.isSupportDeepLink = YES;
     nad.adslot = slot1;
     nad.delegate = self;
     self.adManager = nad;

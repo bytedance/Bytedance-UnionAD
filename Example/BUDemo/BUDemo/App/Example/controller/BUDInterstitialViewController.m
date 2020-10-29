@@ -78,7 +78,7 @@
 }
 
 - (void)interstitialAdDidCloseOtherController:(BUInterstitialAd *)interstitialAd interactionType:(BUInteractionType)interactionType {
-    NSString *str = @"";
+    NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
     } else if (interactionType == BUInteractionTypeVideoAdDetail) {

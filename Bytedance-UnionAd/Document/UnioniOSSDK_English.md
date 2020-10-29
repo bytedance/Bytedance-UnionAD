@@ -2,7 +2,7 @@
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v3.2.6.2 | 2020-09-15 | 1. Fixed some bugs |
+| v3.3.0.4 | 2020-10-28 | 1.Template Banner display optimization |
 [Version history](#Version history)
 
 -   [1.SDK Access](#1sdk-access)
@@ -233,7 +233,7 @@ Detailed Steps:
 
 + Support iOS 9.X and above
 + SDK compiler environment Xcode 10.0
-+ Support architecture: x86-64, armv7, arm64,i386
++ Support architecture: i386, x86-64, armv7, arm64,i386
 
 
 #### 1.2.3 Add Dependency Libraries
@@ -433,9 +433,7 @@ You can load ad through the loadNativeAd method.
         imgSize1.height = 1920;
         slot1.ID = @"900480107";
         slot1.AdType = BUAdSlotAdTypeFeed;
-        slot1.position = BUAdSlotPositionTop;
         slot1.imgSize = imgSize1;
-        slot1.isSupportDeepLink = YES;
         nad.adslot = slot1;
     
         nad.rootViewController = self;
@@ -540,9 +538,6 @@ BUAdSlot Ad object is the ad description when loading the ad, it is required to 
     /// required. Ad type.
     @property (nonatomic, assign) BUAdSlotAdType AdType;
     
-    /// required. Ad display location.
-    @property (nonatomic, assign) BUAdSlotPosition position;
-    
     /// Accept a set of image sizes, please pass in the BUSize object.
     @property (nonatomic, strong) NSMutableArray<BUSize *> *imgSizeArray;
     
@@ -557,9 +552,6 @@ BUAdSlot Ad object is the ad description when loading the ad, it is required to 
     
     /// Maximum length of description.
     @property (nonatomic, assign) NSInteger descLengthLimit;
-    
-    /// Whether to support deeplink.
-    @property (nonatomic, assign) BOOL isSupportDeepLink;
     
     /// Native banner ads and native interstitial ads are set to 1, other ad types are 0, the default is 0.
     @property (nonatomic, assign) BOOL isOriginAd;
@@ -580,9 +572,7 @@ Take BUNativeAd as an example, initialize a BUAdSlot object and pass it to BUNat
         imgSize1.height = 1920;
         slot1.ID = @"900480107";
         slot1.AdType = BUAdSlotAdTypeFeed;
-        slot1.position = BUAdSlotPositionTop;
         slot1.imgSize = imgSize1;
-        slot1.isSupportDeepLink = YES;
         nad.adslot = slot1;
     
         nad.delegate = self;
@@ -872,9 +862,7 @@ Just like using BUNativeAd, after initializing BUNativeAdsManager object, you ca
         BUAdSlot *slot1 = [[BUAdSlot alloc] init];
         slot1.ID = self.viewModel.slotID;
         slot1.AdType = BUAdSlotAdTypeFeed;
-        slot1.position = BUAdSlotPositionTop;
         slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
-        slot1.isSupportDeepLink = YES;
         nad.adslot = slot1;
         nad.delegate = self;
         self.adManager = nad;
@@ -1016,9 +1004,7 @@ Just like using BUNativeAd, after initializing BUNativeAdsManager object, you ca
         slot1.ID = self.viewModel.slotID;
         slot1.AdType = BUAdSlotAdTypeDrawVideo; //must
         slot1.isOriginAd = YES; //must
-        slot1.position = BUAdSlotPositionTop;
         slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
-        slot1.isSupportDeepLink = YES;
         nad.adslot = slot1;
         nad.delegate = self;
         self.adManager = nad;
@@ -1106,9 +1092,7 @@ Draw in-feed video ad can set icon style, size, and whether to allow pausing a v
             BUAdSlot *slot1 = [[BUAdSlot alloc] init];
             slot1.ID = self.viewModel.slotID;
             slot1.AdType = BUAdSlotAdTypeBanner;
-            slot1.position = BUAdSlotPositionTop;
             slot1.imgSize = imgSize1;
-            slot1.isSupportDeepLink = YES;
             slot1.isOriginAd = YES;
 
             BUNativeAd *nad = [BUNativeAd new];
@@ -1140,9 +1124,7 @@ Draw in-feed video ad can set icon style, size, and whether to allow pausing a v
         BUAdSlot *slot1 = [[BUAdSlot alloc] init];
         slot1.ID = self.viewModel.slotID;
         slot1.AdType = BUAdSlotAdTypeInterstitial;
-        slot1.position = BUAdSlotPositionTop;
         slot1.imgSize = imgSize1;
-        slot1.isSupportDeepLink = YES;
         slot1.isOriginAd = YES;
 
         BUNativeAd *nad = [BUNativeAd new];
@@ -1671,7 +1653,7 @@ self.rewardedVideoAd.delegate = self;
 @interface BURewardedVideoModel : NSObject
 
 /**
-required.
+optional.
 Third-party game user_id identity.
 Mainly used in the reward issuance, it is the callback pass-through parameter from server-to-server.
 It is the unique identifier of each user.
@@ -1680,13 +1662,13 @@ Only the string can be passed in this case, not nil.
 */
 @property (nonatomic, copy) NSString *userId;
 
-//optional. reward name.
+//reward name. It will assigned value when the ads back.
 @property (nonatomic, copy) NSString *rewardName;
 
-//optional. number of rewards.
+//number of rewards. It will assigned value when the ads back.
 @property (nonatomic, assign) NSInteger rewardAmount;
 
-//optional. serialized string.
+//number of rewards. It will assigned value when the ads back.
 @property (nonatomic, copy) NSString *extra;
 
 @end
@@ -2008,7 +1990,6 @@ Sent when a playerw playback status changed.
     BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Feed228_150];
     slot1.imgSize = imgSize;
     slot1.position = BUAdSlotPositionFeed;
-    slot1.isSupportDeepLink = YES;
     
     self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:CGSizeMake(self.widthSlider.value, self.heightSlider.value)];
     self.nativeExpressAdManager.delegate = self;
@@ -2068,29 +2049,52 @@ Sent when a playerw playback status changed.
 #### <a name='2151'>2.15.1 BUNativeExpressBannerView API description </a>
 
 ```objective-c
-@interface BUNativeExpressBannerView : UIView
+@interface BUNativeExpressBannerView : UIView <BUMopubAdMarkUpDelegate>
 
 @property (nonatomic, weak, nullable) id<BUNativeExpressBannerViewDelegate> delegate;
 
 /**
-The carousel interval, in seconds, is set in the range of 30~120s, and is passed during initialization. If it does not meet the requirements, it will not be in carousel ad.
-*/
+ The carousel interval, in seconds, is set in the range of 30~120s, and is passed during initialization. If it does not meet the requirements, it will not be in carousel ad.
+ */
 @property (nonatomic, assign, readonly) NSInteger interval;
 
-- (instancetype)initWithSlotID:(NSString *)slotID
-rootViewController:(UIViewController *)rootViewController
-adSize:(CGSize)adsize
-IsSupportDeepLink:(BOOL)isSupportDeepLink;
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
 
 - (instancetype)initWithSlotID:(NSString *)slotID
-rootViewController:(UIViewController *)rootViewController
-adSize:(CGSize)adsize
-IsSupportDeepLink:(BOOL)isSupportDeepLink
-interval:(NSInteger)interval;
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize;
+
+- (instancetype)initWithSlotID:(NSString *)slotID
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize
+                      interval:(NSInteger)interval;
+
+- (instancetype)initWithSlotID:(NSString *)slotID
+                     adloadSeq:(NSInteger)adloadSeq
+                      primeRit:(NSString *)primeRit
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize;
+
+- (instancetype)initWithSlotID:(NSString *)slotID
+                     adloadSeq:(NSInteger)adloadSeq
+                      primeRit:(NSString *)primeRit
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize
+                      interval:(NSInteger)interval;
 
 - (void)loadAdData;
 
 @end
+```
+
+
+#### <a name='2153'>2.15.3 BUNativeExpressBannerView example description</a>
+```
+self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:express_banner_ID rootViewController:rootViewController adSize:CGSizeMake(adSize.size.width, adSize.size.height)];
+    self.bannerView.frame = CGRectMake(0, 0, adSize.size.width, adSize.size.height);
+    self.bannerView.delegate = self;
+    [self.bannerView loadAdData];
 ```
 
 #### <a name='2152'>2.15.2 BUNativeExpressBannerViewDelegate callback description</a>
@@ -2145,23 +2149,6 @@ This method is called when the user clicked dislike button and chose dislike rea
 - (void)nativeExpressBannerAdViewDidCloseOtherController:(BUNativeExpressBannerView *)bannerAdView interactionType:(BUInteractionType)interactionType;
 
 @end
-```
-
-#### <a name='2153'>2.15.3 BUNativeExpressBannerView example description</a>
-
-```objective-c
--  (void)refreshBanner {
-    if (self.bannerView == nil) {
-        CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
-        CGFloat bannerHeigh = screenWidth/600*90;
-        BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Banner600_150];
-        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:self.viewModel.slotID rootViewController:self adSize:CGSizeMake(screenWidth, bannerHeigh) IsSupportDeepLink:YES];
-        self.bannerView.frame = CGRectMake(0, 10, screenWidth, bannerHeigh);
-        self.bannerView.delegate = self;
-        [self.view addSubview:self.bannerView];
-    }
-    [self.bannerView loadAdData];
-}
 ```
 
 ### <a name='216'>2.16 Express Interstitial Ads</a>
@@ -2304,13 +2291,6 @@ This method is called when interstitial ad is closed.
 @interface BUNativeExpressRewardedVideoAd : NSObject
 @property (nonatomic, strong) BURewardedVideoModel *rewardedVideoModel;
 @property (nonatomic, weak, nullable) id<BUNativeExpressRewardedVideoAdDelegate> delegate;
-
-/**
-Whether material is effective.
-Setted to YES when data is not empty and has not been displayed.
-Repeated display is not billed.
-*/
-@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
 - (instancetype)initWithSlotID:(NSString *)slotID rewardedVideoModel:(BURewardedVideoModel *)model;
 - (void)loadAdData;
@@ -2862,6 +2842,11 @@ Two causes of 40029 errors:
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
+| v3.3.0.4 | 2020-10-28 | 1.Template Banner display optimization |
+| v3.3.0.3 | 2020-10-23 | 1.Template Banner display optimization |
+| v3.3.0.2 | 2020-10-16 | 1. Fixed some bugs |
+| v3.3.0.1 | 2020-10-14 | 1.Template rendering  rewarded video isadValid callback method is abandoned 2. Splash ads advertisement DidCloseOtherController callback exception fix  3.Fixed some bugs |
+| v3.3.0.0 | 2020-09-24 | 1. banner ads support for video 2. Simplification of some mandatory parameters 3. Improved performance and stability 4. rewarded video, full-screen video performance optimization |
 | v3.2.6.2 | 2020-09-15 | 1. Fixed some bugs |
 | v3.2.5.3 | 2020-09-11 | 1. Fixed some bugs |
 | v3.2.5.2 | 2020-09-09 | 1. Fixed some bugs |

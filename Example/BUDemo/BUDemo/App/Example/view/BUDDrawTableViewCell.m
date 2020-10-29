@@ -57,7 +57,7 @@
     _headImg = [[UIImageView alloc] initWithFrame:CGRectMake(GlobleWidth-inconWidth-13, GlobleHeight*0.3, inconWidth, inconWidth)];
     _headImg.image = [UIImage imageNamed:@"head"];
     _headImg.clipsToBounds = YES;
-    _headImg.layer.cornerRadius = inconWidth/2;
+    _headImg.layer.cornerRadius = inconWidth / 2.0f;
     _headImg.layer.borderColor = bu_textColor.CGColor;
     _headImg.layer.borderWidth = 1;
     [self.contentView addSubview:_headImg];

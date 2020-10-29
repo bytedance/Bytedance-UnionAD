@@ -210,10 +210,22 @@
 //字典转json格式字符串：
 - (NSString*)dictionaryToJson:(NSDictionary *)dic
 {
+    if ([NSJSONSerialization isValidJSONObject:dic]) {
+        return nil;
+    }
+    
     NSError *parseError = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    NSData *jsonData = nil;
+    @try {
+        jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
 
-    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *dataStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return dataStr ?: @"";
 }
 
 

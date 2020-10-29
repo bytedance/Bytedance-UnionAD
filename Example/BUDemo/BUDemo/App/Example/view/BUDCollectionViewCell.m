@@ -75,7 +75,7 @@
     self.relatedView.logoImageView.frame = CGRectZero;
     [_customview addSubview:self.relatedView.logoImageView];
     // add dislike view
-    self.relatedView.dislikeButton.frame = CGRectMake(CGRectGetMaxX(_infoLabel.frame) - 20, CGRectGetMaxY(_infoLabel.frame)+5, 24, 20);
+    self.relatedView.dislikeButton.frame = CGRectMake(CGRectGetMaxX(_infoLabel.frame) - 20 +4, CGRectGetMaxY(_infoLabel.frame)+5, 20, 20);
     [_customview addSubview:self.relatedView.dislikeButton];
     // add ad lable
     self.relatedView.adLabel.frame = CGRectZero;

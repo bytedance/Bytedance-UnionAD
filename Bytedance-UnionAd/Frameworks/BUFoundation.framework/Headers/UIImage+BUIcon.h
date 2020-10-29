@@ -33,6 +33,8 @@ extern NSString *const kBU_logoAd;
 extern NSString *const kBU_logoAd_oversea;
 extern NSString *const kBU_GDPRBack;
 extern NSString *const kBU_playableLoading;
+extern NSString *const kBU_splashZoomOutClose;
+extern NSString *const kBU_playableLoading_oversea;
 
 @interface UIImage (BU_Icon)
 // 异步获取image 不阻塞主线程

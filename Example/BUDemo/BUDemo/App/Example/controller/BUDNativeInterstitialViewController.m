@@ -128,9 +128,7 @@ static CGSize const logoSize = {20, 20};
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeInterstitial;
-    slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = imgSize1;
-    slot1.isSupportDeepLink = YES;
     slot1.isOriginAd = YES;
     
     BUNativeAd *nad = [[BUNativeAd alloc] initWithSlot:slot1];

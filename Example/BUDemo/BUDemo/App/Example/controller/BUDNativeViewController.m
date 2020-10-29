@@ -162,7 +162,7 @@
     self.relatedView.logoImageView.frame = CGRectZero;
     [_customview addSubview:self.relatedView.logoImageView];
     // add dislike view
-    self.relatedView.dislikeButton.frame = CGRectMake(CGRectGetMaxX(_infoLabel.frame) - 20, CGRectGetMaxY(_infoLabel.frame)+5, 24, 20);
+    self.relatedView.dislikeButton.frame = CGRectMake(CGRectGetMaxX(_infoLabel.frame) - 20 + 4, CGRectGetMaxY(_infoLabel.frame)+5, 20, 20);
     [_customview addSubview:self.relatedView.dislikeButton];
     // add ad lable
     self.relatedView.adLabel.frame = CGRectZero;
@@ -191,7 +191,6 @@
     slot1.AdType = BUAdSlotAdTypeFeed;
     slot1.position = BUAdSlotPositionFeed;
     slot1.imgSize = imgSize1;
-    slot1.isSupportDeepLink = YES;
     nad.adslot = slot1;
     
     nad.rootViewController = self;
@@ -224,7 +223,7 @@
         self.relatedView.videoAdView.hidden = NO;
         self.relatedView.videoAdView.frame = rect;
         [self.relatedView refreshData:nativeAd];
-        NSLog(@"====视频的时长为：%ld  %@",nativeAd.data.videoDuration,nativeAd.adslot.ID);
+        NSLog(@"====视频的时长为：%ld  %@", (long)nativeAd.data.videoDuration, nativeAd.adslot.ID);
     } else {
         self.imageView.hidden = NO;
         self.relatedView.videoAdView.hidden = YES;
@@ -270,7 +269,7 @@
 
 
 -(void)nativeAdDidCloseOtherController:(BUNativeAd *)nativeAd interactionType:(BUInteractionType)interactionType {
-    NSString *str = @"";
+    NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
     } else if (interactionType == BUInteractionTypeVideoAdDetail) {
@@ -296,7 +295,7 @@
 }
 
 - (void)videoAdViewDidCloseOtherController:(BUVideoAdView *)videoAdView interactionType:(BUInteractionType)interactionType {
-    NSString *str = @"";
+    NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
     } else if (interactionType == BUInteractionTypeVideoAdDetail) {

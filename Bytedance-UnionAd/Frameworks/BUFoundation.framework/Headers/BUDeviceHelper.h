@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BUDeviceHelper (ProcessesAdditions)
 
 /// 获取当前设备的进程，仅适用于（iOS9以下）
-+ (NSArray *)runningProcesses;
++ (nullable NSArray *)runningProcesses;
 
 @end
 

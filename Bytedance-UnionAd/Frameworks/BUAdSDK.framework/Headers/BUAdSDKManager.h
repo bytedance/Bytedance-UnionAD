@@ -71,6 +71,9 @@ typedef void (^BUConfirmGDPR)(BOOL isAgreed);
 /// get GDPR
 + (NSInteger)GDPR;
 
+/// get coppa
++ (NSUInteger)coppa;
+
 @end
 
 

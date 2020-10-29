@@ -184,8 +184,6 @@
     CCHmac(kCCHmacAlgMD5, cKey, strlen(cKey), [hashData bytes], [hashData length], digest);
     BUDCocoaSecurityResult *result = [[BUDCocoaSecurityResult alloc] initWithBytes:digest length:CC_MD5_DIGEST_LENGTH];
     free(digest);
-    cKey = nil;
-    
     return result;
 }
 
@@ -286,8 +284,6 @@
     CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), [hashData bytes], [hashData length], digest);
     BUDCocoaSecurityResult *result = [[BUDCocoaSecurityResult alloc] initWithBytes:digest length:CC_SHA1_DIGEST_LENGTH];
     free(digest);
-    cKey = nil;
-    
     return result;
 }
 #pragma mark HMAC-SHA224
@@ -304,8 +300,6 @@
     CCHmac(kCCHmacAlgSHA224, cKey, strlen(cKey), [hashData bytes], [hashData length], digest);
     BUDCocoaSecurityResult *result = [[BUDCocoaSecurityResult alloc] initWithBytes:digest length:CC_SHA224_DIGEST_LENGTH];
     free(digest);
-    cKey = nil;
-    
     return result;
 }
 #pragma mark HMAC-SHA256
@@ -322,8 +316,6 @@
     CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), [hashData bytes], [hashData length], digest);
     BUDCocoaSecurityResult *result = [[BUDCocoaSecurityResult alloc] initWithBytes:digest length:CC_SHA256_DIGEST_LENGTH];
     free(digest);
-    cKey = nil;
-    
     return result;
 }
 #pragma mark HMAC-SHA384
@@ -340,8 +332,6 @@
     CCHmac(kCCHmacAlgSHA384, cKey, strlen(cKey), [hashData bytes], [hashData length], digest);
     BUDCocoaSecurityResult *result = [[BUDCocoaSecurityResult alloc] initWithBytes:digest length:CC_SHA384_DIGEST_LENGTH];
     free(digest);
-    cKey = nil;
-    
     return result;
 }
 #pragma mark HMAC-SHA512
@@ -358,8 +348,6 @@
     CCHmac(kCCHmacAlgSHA512, cKey, strlen(cKey), [hashData bytes], [hashData length], digest);
     BUDCocoaSecurityResult *result = [[BUDCocoaSecurityResult alloc] initWithBytes:digest length:CC_SHA512_DIGEST_LENGTH];
     free(digest);
-    cKey = nil;
-    
     return result;
 }
 
@@ -455,7 +443,6 @@
     
     // convert result(char[]) to NSString
     NSString *result = [NSString stringWithCString:resultData encoding:NSASCIIStringEncoding];
-    sourceData = nil;
     free(resultData);
     
     return result;

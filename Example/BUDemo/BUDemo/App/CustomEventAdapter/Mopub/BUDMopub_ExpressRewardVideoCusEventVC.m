@@ -67,7 +67,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.offset = CGPointMake(0, -100);
-    hud.label.text = @"reawrded data load success";
+    hud.label.text = @"rewardVideo data load success";
     [hud hideAnimated:YES afterDelay:2];
     self.button.isValid = YES;
     BUD_Log(@"%s", __func__);

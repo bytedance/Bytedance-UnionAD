@@ -13,6 +13,7 @@
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 #import <BUAdSDK/BUAdSDKManager.h>
+#import <BUAdSDK/BUAdSDKTestToolManager.h>
 
 #define LeftMargin 10
 #define RightMargin 10
@@ -35,6 +36,8 @@
 @property (nonatomic, strong) UIButton *wkWebBtn;
 @property (nonatomic, strong) UITextField *statusText;
 
+@property (nonatomic, strong) UIButton *tsBtn;
+@property (nonatomic, strong) UITextField *tsText;
 @end
 
 @implementation BUDSettingViewController
@@ -60,6 +63,9 @@
     [self.view addSubview:self.protocolBtn];
     [self.view addSubview:self.wkWebBtn];
     [self.view addSubview:self.statusText];
+    
+    [self.view addSubview:self.tsBtn];
+    [self.view addSubview:self.tsText];
 }
 
 #pragma mark - Target
@@ -92,6 +98,10 @@
 - (void)setWkWeb {
     [BUAdSDKManager setOfflineType:BUOfflineTypeWebview];
     _statusText.text = @"WKWebview";
+}
+
+- (void)outputTimeStamp {
+    self.tsText.text = [BUAdSDKTestToolManager sharedInstance].testTimeStamp;
 }
 
 #pragma mark - Private methed
@@ -202,6 +212,25 @@
         [self designLayer:[_statusText layer]];
      }
      return _statusText;
+}
+
+- (UIButton *)tsBtn {
+    if (!_tsBtn) {
+        _tsBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.wkWebBtn.frame) + 10, 100, 30)];
+        [_tsBtn setTitle:@"Get TS" forState:UIControlStateNormal];
+        [_tsBtn addTarget:self action:@selector(outputTimeStamp) forControlEvents:UIControlEventTouchUpInside];
+        [self designButton:_tsBtn];
+    }
+    return _tsBtn;
+}
+
+- (UITextField *)tsText {
+    if (!_tsText) {
+        _tsText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.locationBtn.frame) + 10, CGRectGetMaxY(self.wkWebBtn.frame) + 10, self.view.frame.size.width - CGRectGetMaxX(self.locationBtn.frame) - LeftMargin-RightMargin, 30)];
+        _tsText.font = [UIFont systemFontOfSize:10];
+        [self designLayer:[_tsText layer]];
+     }
+     return _tsText;
 }
 
 - (void)designButton:(UIButton *)btn {

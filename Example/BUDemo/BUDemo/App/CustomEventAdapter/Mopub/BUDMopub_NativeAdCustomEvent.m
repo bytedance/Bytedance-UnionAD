@@ -23,9 +23,7 @@
     if (_nativeAd == nil) {
         BUAdSlot *slot = [[BUAdSlot alloc] init];
         slot.AdType = BUAdSlotAdTypeFeed;
-        slot.position = BUAdSlotPositionTop;
         slot.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
-        slot.isSupportDeepLink = YES;
         
         _nativeAd = [[BUNativeAd alloc] initWithSlot:slot];
         _nativeAd.delegate = self;
@@ -34,9 +32,9 @@
 }
 
 - (void)requestAdWithCustomEventInfo:(NSDictionary *)info adMarkup:(NSString *)adMarkup {
-    NSString *slotId = [info objectForKey:@"slotid"];
-    if ([slotId isKindOfClass:[NSString class]] && slotId.length) {
-        self.nativeAd.adslot.ID = slotId;
+    NSString *adPlacementId = [info objectForKey:@"ad_placement_id"];
+    if ([adPlacementId isKindOfClass:[NSString class]] && adPlacementId.length) {
+        self.nativeAd.adslot.ID = adPlacementId;
     }
     [self.nativeAd loadAdData];
 }

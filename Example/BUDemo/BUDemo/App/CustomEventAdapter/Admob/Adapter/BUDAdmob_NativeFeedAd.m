@@ -33,7 +33,6 @@ static NSString *const BUDNativeAdTranslateKey = @"bu_nativeAd";
                 data.imageMode == BUFeedVideoAdModePortrait ||
                 data.imageMode == BUFeedADModeSquareVideo
                 ){
-                NSLog(@"imagemode is %ld",data.imageMode );
                 self.relatedView = [[BUNativeAdRelatedView alloc] init];
                 self.relatedView.videoAdView.hidden = NO;
                 [self.relatedView refreshData:nativeAd];

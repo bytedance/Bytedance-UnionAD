@@ -12,7 +12,7 @@
 #import "BUDMacros.h"
 #import "UIView+Draw.h"
 
-static CGSize const logoSize = {58, 18.5};
+static CGSize const logoSize = {58, 22.5};
 
 @implementation BUDBannerModel
 
@@ -95,7 +95,7 @@ static CGSize const logoSize = {58, 18.5};
         gradientLayer.frame = CGRectMake(0, model.imgeViewHeight -60, contentWidth, 60);
         [adImageView.layer addSublayer:gradientLayer];
         
-        NSString * titleString = [NSString stringWithFormat:@"Total Page:%lu, Current page:%d",materialMeta.imageAry.count,i+1];
+        NSString * titleString = [NSString stringWithFormat:@"Total Page:%ld, Current page:%ld", (long)materialMeta.imageAry.count, (long)(i + 1)];
 
         UILabel *titleLable = [UILabel new];
         titleLable.frame = CGRectMake(10, model.imgeViewHeight-10-20, contentWidth-100, 20);

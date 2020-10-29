@@ -28,6 +28,11 @@
 @property (strong, nonatomic) NSTimer *timer;
 @end
 
+// 方便将来测试用
+#define BUD_FeedDistributionNumber      2
+#define BUD_FeedDefaultCellHeight       44
+
+
 @implementation BUDExpressFeedViewController
 
 - (void)viewDidLoad {
@@ -123,7 +128,6 @@
     BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Feed228_150];
     slot1.imgSize = imgSize;
     slot1.position = BUAdSlotPositionFeed;
-    slot1.isSupportDeepLink = YES;
     
     // self.nativeExpressAdManager可以重用
     if (!self.nativeExpressAdManager) {
@@ -132,7 +136,7 @@
     self.nativeExpressAdManager.adSize = CGSizeMake(self.widthSlider.value, self.heightSlider.value);
     self.nativeExpressAdManager.delegate = self;
     NSInteger count = (NSInteger)self.adCountSlider.value;
-    [self.nativeExpressAdManager loadAd:count];
+    [self.nativeExpressAdManager loadAdDataWithCount:count];
 }
 
 - (void)sliderPositionWChanged {
@@ -156,12 +160,15 @@
 - (void)nativeExpressAdSuccessToLoad:(BUNativeExpressAdManager *)nativeExpressAd views:(NSArray<__kindof BUNativeExpressAdView *> *)views {
     [self.expressAdViews removeAllObjects];//【重要】不能保存太多view，需要在合适的时机手动释放不用的，否则内存会过大
     if (views.count) {
+
         [self.expressAdViews addObjectsFromArray:views];
+//        [self.expressAdViews addObject:views.firstObject];
         [views enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             BUNativeExpressAdView *expressView = (BUNativeExpressAdView *)obj;
             expressView.rootViewController = self;
             // important: 此处会进行WKWebview的渲染，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
             [expressView render];
+//            *stop = YES;
         }];
     }
     [self.tableView reloadData];
@@ -189,7 +196,6 @@
 }
 
 - (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView stateDidChanged:(BUPlayerPlayState)playerState {
-//    NSLog(@"====== %p playerState = %ld",nativeExpressAdView,(long)playerState);
     [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"playerState:%ld", (long)playerState]];
 }
 
@@ -227,7 +233,7 @@
 }
 
 - (void)nativeExpressAdViewDidCloseOtherController:(BUNativeExpressAdView *)nativeExpressAdView interactionType:(BUInteractionType)interactionType {
-    NSString *str = nil;
+    NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
     } else if (interactionType == BUInteractionTypeVideoAdDetail) {
@@ -247,24 +253,24 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row % 2 == 0) {
-        UIView *view = [self.expressAdViews objectAtIndex:indexPath.row / 2];
+    if (indexPath.row % BUD_FeedDistributionNumber == 0) {
+        UIView *view = [self.expressAdViews objectAtIndex:indexPath.row / BUD_FeedDistributionNumber];
         return view.bounds.size.height;
     }
     else {
-        return 44;
+        return BUD_FeedDefaultCellHeight;
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.expressAdViews.count * 2;
+    return self.expressAdViews.count * BUD_FeedDistributionNumber;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = nil;
-    if (indexPath.row % 2 == 0) {
+    if (indexPath.row % BUD_FeedDistributionNumber == 0) {
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"BUDNativeExpressCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -274,8 +280,9 @@
             [subView removeFromSuperview];
         }
         
-        UIView *view = [self.expressAdViews objectAtIndex:indexPath.row / 2];
+        UIView *view = [self.expressAdViews objectAtIndex:indexPath.row / BUD_FeedDistributionNumber];
         view.tag = 1000;
+        [self addAccessibilityIdentifier:view];
         [cell.contentView addSubview:view];
     } else {
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"BUDSplitNativeExpressCell" forIndexPath:indexPath];
@@ -284,10 +291,25 @@
     return cell;
 }
 
-- (void) addAccessibilityIdentifier {
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIView *view = [cell.contentView viewWithTag:1000];
+    if (view) {
+        [self removeAccessibilityIdentifier:view];
+    }
+}
+
+#pragma mark - AccessibilityIdentifier
+- (void)addAccessibilityIdentifier {
     self.widthSlider.accessibilityIdentifier = @"expressFeed_width";
     self.heightSlider.accessibilityIdentifier = @"expressFeed_height";
     self.adCountSlider.accessibilityIdentifier = @"expressFeed_count";
 }
 
+- (void)addAccessibilityIdentifier:(UIView *)adView {
+    adView.accessibilityIdentifier = @"express_feed_view";
+}
+
+- (void)removeAccessibilityIdentifier:(UIView *)adView {
+    adView.accessibilityIdentifier = nil;
+}
 @end

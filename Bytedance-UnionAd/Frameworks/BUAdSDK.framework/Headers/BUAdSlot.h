@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, BUAdSlotPosition) {
 /// required. Ad type.
 @property (nonatomic, assign) BUAdSlotAdType AdType;
 
-/// required. Ad display location.
+/// optional. Ad display location. defaults is BUAdSlotPositionTop
 @property (nonatomic, assign) BUAdSlotPosition position;
 
 /// Accept a set of image sizes, please pass in the BUSize object.
@@ -55,8 +55,8 @@ typedef NS_ENUM(NSInteger, BUAdSlotPosition) {
 /// Maximum length of description.
 @property (nonatomic, assign) NSInteger descLengthLimit;
 
-/// Whether to support deeplink.
-@property (nonatomic, assign) BOOL isSupportDeepLink;
+/// optional. Whether to support deeplink.defaults is true
+@property (nonatomic, assign) BOOL isSupportDeepLink DEPRECATED_MSG_ATTRIBUTE("This property is deprecated,Settings are no longer required after version 3300");
 
 /// Native banner ads and native interstitial ads are set to 1, other ad types are 0, the default is 0.
 @property (nonatomic, assign) BOOL isOriginAd;

@@ -2,7 +2,7 @@
 
 | 文档版本| 修订日期| 修订说明|
 | --- | --- | --- |
-| v3.2.6.2 | 2020-09-15 |【1】 部分bug修改|
+| v3.3.0.4 | 2020-10-28 |【1】模板Banner展示优化【2】SDWebImage缓存路径问题修复|
 
 [历史版本](#历史版本)
 
@@ -189,7 +189,7 @@ SDK1982版本以后支持pod方式接入，只需配置pod环境，在podfile文
 ```
 pod 'Bytedance-UnionAD', '~> 1.9.8.2'
 ```
-注意：更多关于pod方式的接入请参考 [gitthub地址](https://github.com/bytedance/Bytedance-UnionAD)
+注意：更多关于pod方式的接入请参考 [github地址](https://github.com/bytedance/Bytedance-UnionAD)
 
 ## 步骤二Xcode编译选项设置
 
@@ -441,9 +441,7 @@ Actively request nativeAd datas.
     imgSize1.height = 1920;
     slot1.ID = @"900480107";
     slot1.AdType = BUAdSlotAdTypeFeed;
-    slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = imgSize1;
-    slot1.isSupportDeepLink = YES;
     nad.adslot = slot1;
     
     nad.rootViewController = self;
@@ -555,9 +553,6 @@ BUAdSlot 对象为加载广告时需要设置的广告位描述信息，在BUNat
 /// required. Ad type.
 @property (nonatomic, assign) BUAdSlotAdType AdType;
 
-/// required. Ad display location.
-@property (nonatomic, assign) BUAdSlotPosition position;
-
 /// Accept a set of image sizes, please pass in the BUSize object.
 @property (nonatomic, strong) NSMutableArray<BUSize *> *imgSizeArray;
 
@@ -572,9 +567,6 @@ BUAdSlot 对象为加载广告时需要设置的广告位描述信息，在BUNat
 
 /// Maximum length of description.
 @property (nonatomic, assign) NSInteger descLengthLimit;
-
-/// Whether to support deeplink.
-@property (nonatomic, assign) BOOL isSupportDeepLink;
 
 /// Native banner ads and native interstitial ads are set to 1, other ad types are 0, the default is 0.
 @property (nonatomic, assign) BOOL isOriginAd;
@@ -596,9 +588,7 @@ BUAdSlot 对象为加载广告时需要设置的广告位描述信息，在BUNat
     imgSize1.height = 1920;
     slot1.ID = @"900480107";
     slot1.AdType = BUAdSlotAdTypeFeed;
-    slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = imgSize1;
-    slot1.isSupportDeepLink = YES;
     nad.adslot = slot1;
 
     nad.delegate = self;
@@ -908,9 +898,7 @@ The maximum is 10.
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeFeed;
-    slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
-    slot1.isSupportDeepLink = YES;
     nad.adslot = slot1;
     nad.delegate = self;
     self.adManager = nad;
@@ -1126,7 +1114,6 @@ slot1.AdType = BUAdSlotAdTypeFeed;
 BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Feed228_150];
 slot1.imgSize = imgSize;
 slot1.position = BUAdSlotPositionFeed;
-slot1.isSupportDeepLink = YES;
 
 self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:CGSizeMake(self.widthSlider.value, self.heightSlider.value)];
 self.nativeExpressAdManager.delegate = self;
@@ -1208,9 +1195,7 @@ The maximum is 10.
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeDrawVideo; //must
     slot1.isOriginAd = YES; //must
-    slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
-    slot1.isSupportDeepLink = YES;
     nad.adslot = slot1;
     nad.delegate = self;
     self.adManager = nad;
@@ -1303,9 +1288,7 @@ if (!self.nativeAdRelatedView.videoAdView.superview) {
         BUAdSlot *slot1 = [[BUAdSlot alloc] init];
         slot1.ID = self.viewModel.slotID;
         slot1.AdType = BUAdSlotAdTypeBanner;
-        slot1.position = BUAdSlotPositionTop;
         slot1.imgSize = imgSize1;
-        slot1.isSupportDeepLink = YES;
         slot1.isOriginAd = YES;
         
         BUNativeAd *nad = [BUNativeAd new];
@@ -1329,31 +1312,57 @@ if (!self.nativeAdRelatedView.videoAdView.superview) {
 
 #### BUNativeExpressBannerView接口说明
 ```
-@interface BUNativeExpressBannerView : UIView
+@interface BUNativeExpressBannerView : UIView <BUMopubAdMarkUpDelegate>
 
 @property (nonatomic, weak, nullable) id<BUNativeExpressBannerViewDelegate> delegate;
 
 /**
-The carousel interval, in seconds, is set in the range of 30~120s, and is passed during initialization. If it does not meet the requirements, it will not be in carousel ad.
-*/
+ The carousel interval, in seconds, is set in the range of 30~120s, and is passed during initialization. If it does not meet the requirements, it will not be in carousel ad.
+ */
 @property (nonatomic, assign, readonly) NSInteger interval;
 
-- (instancetype)initWithSlotID:(NSString *)slotID
-rootViewController:(UIViewController *)rootViewController
-imgSize:(BUSize * __nullable )expectSize
-adSize:(CGSize)adsize
-IsSupportDeepLink:(BOOL)isSupportDeepLink;
+/// media configuration parameters.
+@property (nonatomic, copy, readonly) NSDictionary *mediaExt;
 
 - (instancetype)initWithSlotID:(NSString *)slotID
-rootViewController:(UIViewController *)rootViewController
-imgSize:(BUSize * __nullable )expectSize
-adSize:(CGSize)adsize
-IsSupportDeepLink:(BOOL)isSupportDeepLink
-interval:(NSInteger)interval;
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize;
+
+- (instancetype)initWithSlotID:(NSString *)slotID
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize
+                      interval:(NSInteger)interval;
+
+/**
+adload_seq：（针对聚合广告位）传递本次请求是为“自然日内某设备某广告位置第N次展示机会”发出的广告请求，同物理位置在自然日从1开始计数，不同物理位置独立计数；example：某原生广告位置，当天第5次产生展示机会，这次展示机向穿山甲发送了4次广告请求，则这4次广告请求的"adload_seq"的值应为5。第二天重新开始计数。
+
+prime_rit：（针对聚合广告位）广告物理位置对应的固定穿山甲广告位id，可以使用第一层的广告位id也可以为某一层的广告位id，但要求同一物理位置在该字段固定上报同一广告位id，不频繁更换；example：某原生广告位，当天共发出了1000个请求，这1000个请求中使用了5个不同target的穿山甲rit，用某X rit来作为该位置的标记rit，则这1000次请求的prime_rit都需要上报X rit的rit id。
+*/
+
+- (instancetype)initWithSlotID:(NSString *)slotID
+                     adloadSeq:(NSInteger)adloadSeq
+                      primeRit:(NSString *)primeRit
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize;
+
+- (instancetype)initWithSlotID:(NSString *)slotID
+                     adloadSeq:(NSInteger)adloadSeq
+                      primeRit:(NSString *)primeRit
+            rootViewController:(UIViewController *)rootViewController
+                        adSize:(CGSize)adsize
+                      interval:(NSInteger)interval;
 
 - (void)loadAdData;
 
 @end
+```
+
+#### BUNativeExpressBannerView实例说明
+```
+self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:express_banner_ID rootViewController:rootViewController adSize:CGSizeMake(adSize.size.width, adSize.size.height)];
+    self.bannerView.frame = CGRectMake(0, 0, adSize.size.width, adSize.size.height);
+    self.bannerView.delegate = self;
+    [self.bannerView loadAdData];
 ```
 
 #### BUNativeExpressBannerViewDelegate回调说明
@@ -1409,22 +1418,6 @@ This method is called when the user clicked dislike button and chose dislike rea
 @end
 ```
 
-#### BUNativeExpressBannerView实例说明
-```
--  (void)refreshBanner {
-if (self.bannerView == nil) {
-CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
-CGFloat bannerHeigh = screenWidth/600*90;
-BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Banner600_150];
-self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:self.viewModel.slotID rootViewController:self imgSize:imgSize adSize:CGSizeMake(screenWidth, bannerHeigh) IsSupportDeepLink:YES];
-self.bannerView.frame = CGRectMake(0, 10, screenWidth, bannerHeigh);
-self.bannerView.delegate = self;
-[self.view addSubview:self.bannerView];
-}
-[self.bannerView loadAdData];
-}
-```
-
 ### 插屏广告
 #### 自渲染
 +  **使用说明** SDK可提供数据绑定、点击事件的上报、响应回调，开发者进行自渲染，接入方式同原生广告相同。不同点在于，slot的AdType类型需要设置为 BUAdSlotAdTypeInterstitial，示例如下。具体可参考Demo中BUDNativeInterstitialViewController部分示例代码。其中BUNativeAd和BUAdSlot可参见原生基础模块。
@@ -1438,9 +1431,7 @@ self.bannerView.delegate = self;
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeInterstitial;
-    slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = imgSize1;
-    slot1.isSupportDeepLink = YES;
     slot1.isOriginAd = YES;
     
     BUNativeAd *nad = [BUNativeAd new];
@@ -1887,13 +1878,6 @@ NSLog(@"%s",__func__);
 @property (nonatomic, strong) BURewardedVideoModel *rewardedVideoModel;
 @property (nonatomic, weak, nullable) id<BURewardedVideoAdDelegate> delegate;
 
-/**
-Whether material is effective.
-Setted to YES when data is not empty and has not been displayed.
-Repeated display is not billed.
-*/
-@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
-
 - (instancetype)initWithSlotID:(NSString *)slotID rewardedVideoModel:(BURewardedVideoModel *)model;
 - (void)loadAdData;
 - (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;
@@ -1996,7 +1980,7 @@ self.rewardedVideoAd.delegate = self;
 @interface BURewardedVideoModel : NSObject
 
 /**
-required.
+optional.
 Third-party game user_id identity.
 Mainly used in the reward issuance, it is the callback pass-through parameter from server-to-server.
 It is the unique identifier of each user.
@@ -2005,10 +1989,10 @@ Only the string can be passed in this case, not nil.
 */
 @property (nonatomic, copy) NSString *userId;
 
-//optional. reward name.
+//reward name. It will assigned value when the ads back.
 @property (nonatomic, copy) NSString *rewardName;
 
-//optional. number of rewards.
+//number of rewards. It will assigned value when the ads back.
 @property (nonatomic, assign) NSInteger rewardAmount;
 
 //optional. serialized string.
@@ -2617,12 +2601,17 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
 ## 历史版本
 | 文档版本| 修订日期| 修订说明|
 | --- | --- | --- |
-| v3.2.6.2 | 2020-09-15 | 【1】 部分bug修改 |
-| v3.2.5.3 | 2020-09-11 | 【1】 部分bug修改 |
-| v3.2.5.2 | 2020-09-09 | 【1】 部分bug修改 |
-| v3.2.5.1 | 2020-08-31 |【1】 部分bug修改|
-| v3.2.5.0 | 2020-08-25 |【1】 提供了 iOS 14 与 SKAdNetwork 支持|
-| v3.2.0.1 | 2020-08-21 |【1】 修复playable播放白屏【2】 Bug Fix【3】 添加 libxml2.tbd 依赖库|
+| v3.3.0.4 | 2020-10-28 | 【1】模板Banner展示优化【2】SDWebImage缓存路径问题修复 |
+| v3.3.0.3 | 2020-10-23 | 【1】模板Banner展示优化【2】SDWebImage缓存路径问题修复 |
+| v3.3.0.2 | 2020-10-16 | 【1】修复模版banner 展示异常 |
+| v3.3.0.1 | 2020-10-14 | 【1】模板渲染激励视频isadValid回调方法废弃 【2】开屏广告DidCloseOtherController回调异常修复 【3】bugfix |
+| v3.3.0.0 | 2020-09-24 |【1】Banner 支持视频【2】简化了一些必传参数【3】性能与稳定性提升【4】激励视频、全屏视频动态布局性能优化|
+| v3.2.6.2 | 2020-09-15 |【1】部分bug修改 |
+| v3.2.5.3 | 2020-09-11 |【1】部分bug修改 |
+| v3.2.5.2 | 2020-09-09 |【1】部分bug修改 |
+| v3.2.5.1 | 2020-08-31 |【1】部分bug修改|
+| v3.2.5.0 | 2020-08-25 |【1】提供了 iOS 14 与 SKAdNetwork 支持|
+| v3.2.0.1 | 2020-08-21 |【1】修复playable播放白屏【2】 Bug Fix【3】 添加 libxml2.tbd 依赖库|
 | V3.2.0.0 | 2020-07-29 |【1】优化落地页广告体验【2】模板广告优化【3】playable广告优化【4】部分服务切换到ipv6【5】添加 libbz2.tbd 依赖库 |
 | v3.1.0.5 | 2020-07-14 |【1】部分bug修改|
 | v3.1.0.4 | 2020-07-09 |【1】稳定性提升|

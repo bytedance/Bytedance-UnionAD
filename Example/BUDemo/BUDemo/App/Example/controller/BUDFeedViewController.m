@@ -70,10 +70,13 @@
         BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:dict];
         [self.dataSource addObject:model];
     }
-    for (int i = 0; i < datas.count; i++) {
-        NSUInteger index = rand() % (datas.count-3)+2;
-        BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:[datas objectAtIndex:index]];
-        [self.dataSource addObject:model];
+    NSInteger datasCount = datas.count;
+    if (datasCount > 3) {
+        for (int i = 0; i < datasCount; i++) {
+            NSUInteger index = rand() % (datasCount - 3) + 2;
+            BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:[datas objectAtIndex:index]];
+            [self.dataSource addObject:model];
+        }
     }
     [self.tableView reloadData];
 }
@@ -83,9 +86,7 @@
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeFeed;
-    slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
-    slot1.isSupportDeepLink = YES;
     nad.adslot = slot1;
     nad.delegate = self;
     self.adManager = nad;
@@ -252,11 +253,12 @@
 #pragma mark - BUNativeAdsManagerDelegate
 
 - (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
-    for (BUNativeAd *model in nativeAdDataArray) {
-        NSUInteger index = rand() % (self.dataSource.count-3)+2;
-        [self.dataSource insertObject:model atIndex:index];
+    if (self.dataSource.count > 3) {
+        for (BUNativeAd *model in nativeAdDataArray) {
+            NSUInteger index = rand() % (self.dataSource.count - 3) + 2;
+            [self.dataSource insertObject:model atIndex:index];
+        }
     }
-    
     [self.tableView reloadData];
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdsManagerDelegate" msg:[NSString stringWithFormat:@"native-count:%ld", (long)nativeAdDataArray.count]];
 }

@@ -25,7 +25,7 @@
         [self.delegate bannerCustomEvent:self didFailToLoadAdWithError:error];
         return;
     }
-    self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:adPlacementId rootViewController:self.delegate.viewControllerForPresentingModalView adSize:size IsSupportDeepLink:YES];
+    self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:adPlacementId rootViewController:self.delegate.viewControllerForPresentingModalView adSize:size];
     self.bannerView.frame = CGRectMake(0, 0, size.width, size.height);
     self.bannerView.delegate = self;
     [self.bannerView loadAdData];

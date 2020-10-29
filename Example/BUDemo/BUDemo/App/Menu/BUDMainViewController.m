@@ -44,6 +44,7 @@
     self.title = @"BytedanceUnion Demo";
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

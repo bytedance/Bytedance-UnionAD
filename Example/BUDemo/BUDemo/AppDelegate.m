@@ -22,6 +22,7 @@
 #import "BUAdSDKAdapterConfiguration.h"
 #import "BUDTestToolsViewController.h"
 #import "BUDAnimationTool.h"
+#import <BUDBuglyConfig/BUDBuglyConfig.h>
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -30,7 +31,7 @@
 #define BUFPS_OPEN 0
 #endif
 
-@interface AppDelegate () <BUSplashAdDelegate>
+@interface AppDelegate () <BUSplashAdDelegate, BUSplashZoomOutViewDelegate>
 @property (nonatomic, assign) CFTimeInterval startTime;
 @property (nonatomic, strong) BUSplashAdView *splashAdView;
 @end
@@ -54,6 +55,7 @@
     
     // initialize AD SDK
     [self setupBUAdSDK];
+
     
     return YES;
 }
@@ -85,9 +87,7 @@
 
 - (void)configAPM {
     // bugly
-    BuglyConfig *buglyconfig = [[BuglyConfig alloc] init];
-    buglyconfig.debugMode = YES;
-    [Bugly startWithAppId:@"b39a3d744a" config:buglyconfig];
+    [BUDBuglyConfig startWithBugly:[Bugly class] andConfig:[[BuglyConfig alloc] init]];
 }
 
 - (void)configCustomEvent {
@@ -127,7 +127,9 @@
     NSDictionary *config = @{@"BUAdSDKAdapterConfiguration":InitConfig};
     [networkConfig addEntriesFromDictionary:config];
     Class<MPAdapterConfiguration> BUAdSDKAdapterConfiguration = NSClassFromString(@"BUAdSDKAdapterConfiguration");
-    sdkConfig.additionalNetworks = @[BUAdSDKAdapterConfiguration];
+    if (BUAdSDKAdapterConfiguration != nil) {
+        sdkConfig.additionalNetworks = @[BUAdSDKAdapterConfiguration];
+    }
     sdkConfig.mediatedNetworkConfigurations = networkConfig;
 #if DEBUG
     sdkConfig.loggingLevel = MPBLogLevelInfo;
@@ -178,6 +180,13 @@
     self.splashAdView.rootViewController = keyWindow.rootViewController;
 }
 
+- (void)removeSplashAdView {
+    if (self.splashAdView) {
+        [self.splashAdView removeFromSuperview];
+        self.splashAdView = nil;
+    }
+}
+
 
 - (void)splashAdDidLoad:(BUSplashAdView *)splashAd {
     if (splashAd.zoomOutView) {
@@ -187,6 +196,7 @@
         //Add this view to your container
         [parentVC.view insertSubview:splashAd.zoomOutView belowSubview:splashAd];
         splashAd.zoomOutView.rootViewController = parentVC;
+        splashAd.zoomOutView.delegate = self;
     }
 }
 
@@ -194,6 +204,8 @@
     if (splashAd.zoomOutView) {
         [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView];
     } else{
+        // Be careful not to say 'self.splashadview = nil' here.
+        // Subsequent agent callbacks will not be triggered after the 'splashAdView' is released early.
         [splashAd removeFromSuperview];
     }
     [self pbu_logWithSEL:_cmd msg:@""];
@@ -203,6 +215,8 @@
     if (splashAd.zoomOutView) {
         [splashAd.zoomOutView removeFromSuperview];
     }
+    // Be careful not to say 'self.splashadview = nil' here.
+    // Subsequent agent callbacks will not be triggered after the 'splashAdView' is released early.
     [splashAd removeFromSuperview];
     [self pbu_logWithSEL:_cmd msg:@""];
 }
@@ -211,13 +225,15 @@
     if (splashAd.zoomOutView) {
         [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView];
     } else{
-        [splashAd removeFromSuperview];
+        // Click Skip, there is no subsequent operation, completely remove 'splashAdView', avoid memory leak
+        [self removeSplashAdView];
     }
     [self pbu_logWithSEL:_cmd msg:@""];
 }
 
 - (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error {
-    [splashAd removeFromSuperview];
+    // Display fails, completely remove 'splashAdView', avoid memory leak
+    [self removeSplashAdView];
     [self pbu_logWithSEL:_cmd msg:@""];
 }
 
@@ -234,14 +250,45 @@
 }
 
 - (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType {
+    // No further action after closing the other Controllers, completely remove the 'splashAdView' and avoid memory leaks
+    [self removeSplashAdView];
+    
     [self pbu_logWithSEL:_cmd msg:@""];
 }
 
 
 
 - (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd {
+    // When the countdown is over, it is equivalent to clicking Skip to completely remove 'splashAdView' and avoid memory leak
+    if (!splashAd.zoomOutView) {    
+        [self removeSplashAdView];
+    }
     [self pbu_logWithSEL:_cmd msg:@""];
 }
+
+#pragma mark - BUSplashZoomOutViewDelegate
+- (void)splashZoomOutViewAdDidClick:(BUSplashZoomOutView *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashZoomOutViewAdDidClose:(BUSplashZoomOutView *)splashAd {
+    // Click close, completely remove 'splashAdView', avoid memory leak
+    [self removeSplashAdView];
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashZoomOutViewAdDidAutoDimiss:(BUSplashZoomOutView *)splashAd {
+    // Back down at the end of the countdown to completely remove the 'splashAdView' to avoid memory leaks
+    [self removeSplashAdView];
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashZoomOutViewAdDidCloseOtherController:(BUSplashZoomOutView *)splashAd interactionType:(BUInteractionType)interactionType {
+    // No further action after closing the other Controllers, completely remove the 'splashAdView' and avoid memory leaks
+    [self removeSplashAdView];
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
 
 - (void)pbu_logWithSEL:(SEL)sel msg:(NSString *)msg {
     CFTimeInterval endTime = CACurrentMediaTime();

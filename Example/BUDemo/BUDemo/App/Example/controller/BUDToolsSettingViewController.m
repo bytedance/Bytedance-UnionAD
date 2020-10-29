@@ -15,6 +15,7 @@
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
 #import "BUDTestToolsViewController.h"
+#import "BUDCoppaViewController.h"
 
 @interface BUDToolsSettingViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) BUDSettingTableView *tableView;
@@ -73,10 +74,17 @@
         vc.view.backgroundColor = [UIColor whiteColor];
         [weaksefl.navigationController pushViewController:vc animated:YES];
     }];
+    BUDActionModel *coppaTools = [BUDActionModel plainTitleActionModel:@"Coppa && GDPR Tool" type:BUDCellType_setting action:^{
+        BUDCoppaViewController *vc = [[BUDCoppaViewController alloc] initWithNibName:@"BUDCoppaViewController" bundle:[NSBundle mainBundle]];
+        vc.view.backgroundColor = [UIColor whiteColor];
+        [weaksefl.navigationController pushViewController:vc animated:YES];
+    }];
     
     self.items = @[normalTools,
                    playableTools,
-                   testTools].mutableCopy;
+                   testTools,
+                   coppaTools
+                    ].mutableCopy;
 }
 
 -(BOOL)shouldAutorotate

@@ -156,6 +156,12 @@
     [self buildupHideSkipButtonSplashView];
 }
 
+- (void)removeSplashAdView {
+    if (self.splashView) {
+        [self.splashView removeFromSuperview];
+        self.splashView = nil;
+    }
+}
 #pragma mark - BUNativeExpressSplashViewDelegate
 - (void)nativeExpressSplashViewDidLoad:(nonnull BUNativeExpressSplashView *)splashAdView {
     [self pbud_logWithSEL:_cmd msg:@""];
@@ -163,8 +169,8 @@
 
 - (void)nativeExpressSplashView:(nonnull BUNativeExpressSplashView *)splashAdView didFailWithError:(NSError * _Nullable)error {
     [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
-    [self.splashView removeFromSuperview];
-    self.splashView = nil;
+    // Display failed, remove splashView completely, avoid memory leak
+    [self removeSplashAdView];
     NSString *msg = [NSString stringWithFormat:@"error:%@", error];
     [self pbud_logWithSEL:_cmd msg:msg];
 }
@@ -175,8 +181,8 @@
 
 - (void)nativeExpressSplashViewRenderFail:(nonnull BUNativeExpressSplashView *)splashAdView error:(NSError * _Nullable)error {
     [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
-    [self.splashView removeFromSuperview];
-    self.splashView = nil;
+    // Render failed, remove splashView completely, avoid memory leak
+    [self removeSplashAdView];
     NSString *msg = [NSString stringWithFormat:@"error:%@", error];
     [self pbud_logWithSEL:_cmd msg:msg];
 }
@@ -190,17 +196,25 @@
 }
 
 - (void)nativeExpressSplashViewDidClickSkip:(nonnull BUNativeExpressSplashView *)splashAdView {
+    [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
+    // When it jumps, there will be no subsequent operation, so splashView needs to be released to avoid memory leak
+    [self removeSplashAdView];
+    
     [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressSplashViewDidClose:(nonnull BUNativeExpressSplashView *)splashAdView {
     [self.splashView removeSplashView];//记得在remove广告视图前调用remove方法，否则可能出现倒计时有问题或者视频播放有问题
-    [self.splashView removeFromSuperview];
-    self.splashView = nil;
+    // Be careful not to say 'self.splashadview = nil' here
+    // When it is closed, it will show the App Store and so on. 'splashView' does not need to be released for the time being
+    // If 'splashView' is released early here, the proxy callback for subsequent operations will not be triggered
+    [splashAdView removeFromSuperview];
     [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)nativeExpressSplashViewCountdownToZero:(BUNativeExpressSplashView *)splashAdView {
+    // When the countdown ends, it is equivalent to clicking Skip to completely remove 'splashView' and avoid memory leak
+    [self removeSplashAdView];
     [self pbud_logWithSEL:_cmd msg:@""];
 }
 
@@ -209,7 +223,7 @@
 }
 
 - (void)nativeExpressSplashViewDidCloseOtherController:(BUNativeExpressSplashView *)splashView interactionType:(BUInteractionType)interactionType {
-    NSString *str = nil;
+    NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
     } else if (interactionType == BUInteractionTypeVideoAdDetail) {
@@ -217,6 +231,10 @@
     } else {
         str = @"appstoreInApp";
     }
+    
+    // After closing the Controller, there will be no further action, so 'splashView' needs to be released to avoid memory leaks
+    [self removeSplashAdView];
+    
     [self pbud_logWithSEL:_cmd msg:str];
 }
 

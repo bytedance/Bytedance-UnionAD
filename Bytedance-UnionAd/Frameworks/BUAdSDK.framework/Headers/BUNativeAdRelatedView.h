@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "BUVideoAdView.h"
 #import "BUNativeAd.h"
+#import "BUVideoAdReportor.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,14 +34,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nullable) UIImageView *logoADImageView;
 
 /**
- Video ad view. Need to actively add to the view.
+ Video ad view. Need to actively add to the view. Can not coexist with videoAdReportor.
  */
 @property (nonatomic, strong, readonly, nullable) BUVideoAdView *videoAdView;
+
+/**
+Video ad Reportor. Can not coexist with videoAdView.
+*/
+@property (nonatomic, strong, readonly, nullable) id<BUVideoAdReportor> videoAdReportor;
 
 /**
  Refresh the data every time you get new datas in order to show ad perfectly.
  */
 - (void)refreshData:(BUNativeAd *)nativeAd;
+
+//@property (nonatomic, copy) BOOL(^expectUseCustomVideoPlayer)(BOOL isSupported, NSString *videoUrl);
 
 @end
 

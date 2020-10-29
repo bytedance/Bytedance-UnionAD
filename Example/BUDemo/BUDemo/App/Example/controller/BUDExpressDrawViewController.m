@@ -86,16 +86,14 @@
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeDrawVideo; //required
     slot1.isOriginAd = YES; //required
-    slot1.position = BUAdSlotPositionTop;
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_DrawFullScreen];
-    slot1.isSupportDeepLink = YES;
     
     if (!self.nativeExpressAdManager) {
         self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:self.view.bounds.size];
     }
     self.nativeExpressAdManager.adSize = self.view.bounds.size;
     self.nativeExpressAdManager.delegate = self;
-    [self.nativeExpressAdManager loadAd:3];
+    [self.nativeExpressAdManager loadAdDataWithCount:3];
 }
 
 - (void)closeVC{
@@ -180,7 +178,7 @@
 }
 
 - (void)nativeExpressAdViewDidCloseOtherController:(BUNativeExpressAdView *)nativeExpressAdView interactionType:(BUInteractionType)interactionType {
-    NSString *str = nil;
+    NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
     } else if (interactionType == BUInteractionTypeVideoAdDetail) {
@@ -207,7 +205,7 @@
         UITableViewCell *cell = nil;
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"BUDNativeExpressCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        [self addAccessibilityIdentifier:model];
         // 重用BUNativeExpressAdView，先把之前的广告试图取下来，再添加上当前视图
         UIView *subView = (UIView *)[cell.contentView viewWithTag:1000];
         if ([subView superview]) {
@@ -227,9 +225,24 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSUInteger index = indexPath.row;
+    id model = self.dataSource[index];
+    if ([model isKindOfClass:[BUNativeExpressAdView class]]) {
+        [self removeAccessibilityIdentifier:(BUNativeExpressAdView *)model];
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [BUDDrawBaseTableViewCell cellHeight];
 }
 
+#pragma mark - AccessibilityIdentifier
+- (void)addAccessibilityIdentifier:(BUNativeExpressAdView *)adView {
+    adView.accessibilityIdentifier = @"express_draw_view";
+}
 
+- (void)removeAccessibilityIdentifier:(BUNativeExpressAdView *)adView {
+    adView.accessibilityIdentifier = nil;
+}
 @end

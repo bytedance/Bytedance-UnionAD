@@ -140,7 +140,6 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
     BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Feed228_150];
     slot1.imgSize = imgSize;
     slot1.position = BUAdSlotPositionFeed;
-    slot1.isSupportDeepLink = YES;
     slot1.adloadSeq = [[self.adInfo objectForKey:BU_adloadSeqKey] integerValue];
     slot1.primeRit =  self.slotIds.firstObject;
     
@@ -148,7 +147,7 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
     self.nativeExpressAdManager.adSize = CGSizeMake(self.widthSlider.value, self.heightSlider.value);
     self.nativeExpressAdManager.delegate = self;
     NSInteger count = (NSInteger)self.adCountSlider.value;
-    [self.nativeExpressAdManager loadAd:count];
+    [self.nativeExpressAdManager loadAdDataWithCount:count];
 }
 
 - (void)updateAdLoadTimes{
@@ -263,7 +262,7 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
 }
 
 - (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView stateDidChanged:(BUPlayerPlayState)playerState {
-    NSLog(@"====== %p playerState = %ld",nativeExpressAdView,playerState);
+    NSLog(@"====== %p playerState = %ld", nativeExpressAdView, (long)playerState);
 }
 
 - (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
@@ -300,7 +299,7 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
 }
 
 - (void)nativeExpressAdViewDidCloseOtherController:(BUNativeExpressAdView *)nativeExpressAdView interactionType:(BUInteractionType)interactionType {
-    NSString *str = nil;
+    NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
     } else if (interactionType == BUInteractionTypeVideoAdDetail) {
@@ -315,6 +314,9 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.expressAdViews.count == 0) {
+        return 44;
+    }
     if (indexPath.row % 2 == 0) {
         UIView *view = [self.expressAdViews objectAtIndex:indexPath.row / 2];
         return view.bounds.size.height;

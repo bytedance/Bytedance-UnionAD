@@ -167,6 +167,12 @@
     }
 }
 
+- (void)removeSplashAdView {
+    if (self.splashView) {
+        [self.splashView removeFromSuperview];
+        self.splashView = nil;
+    }
+}
 #pragma mark - BUSplashAdDelegate
 - (void)splashAdDidLoad:(BUSplashAdView *)splashAd {
     [self pbud_logWithSEL:_cmd msg:@""];
@@ -174,6 +180,7 @@
         // Add this view to your container
         [self.view addSubview:splashAd.zoomOutView];
         splashAd.zoomOutView.rootViewController = self;
+        splashAd.zoomOutView.delegate = self;
     }
 }
 
@@ -192,16 +199,23 @@
 
 - (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd {
     [self handleSplashDimiss:splashAd];
+    // 'zoomOutView' is nil, there will be no subsequent operation to completely remove splashAdView and avoid memory leak
+    // 'zoomOutView' is not nil，do nothing
+    if (!splashAd.zoomOutView) {
+        [self removeSplashAdView];
+    }
     [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error {
     [self handleSplashDimiss:splashAd];
+    // Display failed, no subsequent operation, completely remove 'splashAdView', avoid memory leak
+    [self removeSplashAdView];
     [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
 - (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType {
-    NSString *str = @"";
+    NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
     } else if (interactionType == BUInteractionTypeVideoAdDetail) {
@@ -209,7 +223,20 @@
     } else {
         str = @"appstoreInApp";
     }
+    
+    // After closing the other controllers, there will be no further action, so 'splashView' needs to be released to avoid memory leaks
+    [self removeSplashAdView];
     [self pbud_logWithSEL:_cmd msg:str];
+}
+
+- (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd {
+    [self handleSplashDimiss:splashAd];
+    // 'zoomOutView' is nil, there will be no subsequent operation to completely remove splashAdView and avoid memory leak
+    // 'zoomOutView' is not nil，do nothing
+    if (!splashAd.zoomOutView) {
+        [self removeSplashAdView];
+    }
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
@@ -222,10 +249,20 @@
 }
 
 - (void)splashZoomOutViewAdDidClose:(BUSplashZoomOutView *)splashAd {
+    // Click close, completely remove 'splashAdView', avoid memory leak
+    [self removeSplashAdView];
+    [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashZoomOutViewAdDidAutoDimiss:(BUSplashZoomOutView *)splashAd {
+    // Back down at the end of the countdown to completely remove the 'splashAdView' to avoid memory leaks
+    [self removeSplashAdView];
     [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
 }
 
 - (void)splashZoomOutViewAdDidCloseOtherController:(BUSplashZoomOutView *)splashAd interactionType:(BUInteractionType)interactionType {
+    // No further action after closing the other Controllers, completely remove the 'splashAdView' and avoid memory leaks
+    [self removeSplashAdView];
     [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
 }
 

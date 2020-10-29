@@ -55,6 +55,7 @@
 #import <BUFoundation/UIColor+BUTheme.h>
 #import <BUFoundation/UIImage+BUIcon.h>
 #import <BUFoundation/NSObject+BUSafeKVO.h>
+#import <BUFoundation/NSJSONSerialization+BUSafeSerializaiton.h>
 
 
 /************************************ ThirdParty***********************************/
@@ -70,6 +71,8 @@
 #import <BUFoundation/BU_SDWebImageManager.h>
 #import <BUFoundation/UIImageView+BUWebCache.h>
 #import <BUFoundation/BU_SDImageCache.h>
+
+#import <BUFoundation/BUZipArchive.h>
 
 // ByteFinder
 #import <BUFoundation/EBAppLog.h>

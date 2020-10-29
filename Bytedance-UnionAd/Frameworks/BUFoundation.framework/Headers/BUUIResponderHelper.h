@@ -29,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 // 获取指定UIResponder的链下游第一个UINavigationController对象
 + (nullable UINavigationController*)nextNavigationControllerFor:(UIResponder* _Nullable)responder;
 
+/** 查找当前显示的ViewController*/
++ (UIViewController *)topViewController;
+
++ (UIViewController *)recursiveFindCurrentShowViewControllerFromViewController:(UIViewController *)fromVC;
 @end
 
 NS_ASSUME_NONNULL_END

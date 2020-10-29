@@ -36,7 +36,7 @@
 
 #pragma mark BUNativeExpressFullscreenVideoAdDelegate
 - (void)nativeExpressFullscreenVideoAdDidLoad:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
-    
+    [self.delegate interstitialCustomEvent:self didLoadAd:fullscreenVideoAd];
 }
 
 - (void)nativeExpressFullscreenVideoAd:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error {
@@ -45,9 +45,8 @@
 }
 
 - (void)nativeExpressFullscreenVideoAdViewRenderSuccess:(BUNativeExpressFullscreenVideoAd *)rewardedVideoAd {
-    [self.delegate interstitialCustomEvent:self didLoadAd:rewardedVideoAd];
-    
 }
+
 
 - (void)nativeExpressFullscreenVideoAdViewRenderFail:(BUNativeExpressFullscreenVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
     [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];

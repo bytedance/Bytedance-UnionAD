@@ -81,7 +81,8 @@ static CGSize const dislikeSize = {20, 20};
     }else{
         self.collectionDataSource = self.dislikeModel.filterWords;
     }
-    CGFloat height = 60 * ceilf((self.collectionDataSource.count + 1) /2);
+    // ceif: 向上取整
+    CGFloat height = 60 * ceilf((self.collectionDataSource.count + 1) / 2.0f);
     self.collectionView.frame = CGRectMake(margin, self.closeButton.bottom + 20, self.view.size.width-2*margin, height);
     self.cornerView.frame = CGRectMake(self.collectionView.right-20, self.collectionView.top-10, 10, 10);
     [self.collectionView reloadData];
@@ -96,9 +97,7 @@ static CGSize const dislikeSize = {20, 20};
         BUAdSlot *slot1 = [[BUAdSlot alloc] init];
         slot1.ID = self.viewModel.slotID;
         slot1.AdType = BUAdSlotAdTypeBanner;
-        slot1.position = BUAdSlotPositionTop;
         slot1.imgSize = imgSize1;
-        slot1.isSupportDeepLink = YES;
         slot1.isOriginAd = YES;
         
         BUNativeAd *nad = [[BUNativeAd alloc] initWithSlot:slot1];

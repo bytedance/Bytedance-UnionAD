@@ -1,1 +1,0 @@
-../../../mopub-ios-sdk/MoPubSDK/MPBannerCustomEvent.h

@@ -125,8 +125,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     originInfoX += 24;
     originInfoX += 5;
     
-    CGFloat dislikeX = width - 24 - padding.right;
-    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 24, 20);
+    CGFloat dislikeX = width - 20 - padding.right;
+    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
     
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10;
     self.adDescriptionLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
@@ -174,8 +174,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     originInfoX += 24;
     originInfoX += 10;
     
-    CGFloat dislikeX = width - 24 - padding.right;
-    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 24, 20);
+    CGFloat dislikeX = width - 20 - padding.right;
+    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
     
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10 - 100;
     self.adDescriptionLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
@@ -230,8 +230,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     originInfoX += 24;
     originInfoX += 10;
     
-    CGFloat dislikeX = width - 24 - padding.right;
-    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 24, 20);
+    CGFloat dislikeX = width - 20 - padding.right;
+    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
     
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10 - 100;
     self.adDescriptionLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
@@ -325,8 +325,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     originInfoX += 24;
     originInfoX += 15;
     
-    CGFloat dislikeX = width - 24 - padding.right;
-    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 24, 20);
+    CGFloat dislikeX = width - 20 - padding.right;
+    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
     
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10;
     self.adDescriptionLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
@@ -414,8 +414,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     CGFloat originInfoX = padding.left;
     self.nativeAdRelatedView.adLabel.frame = CGRectMake(originInfoX, y + 3, 26, 14);
     
-    CGFloat dislikeX = width - 24 - padding.right;
-    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 24, 20);
+    CGFloat dislikeX = width - 20 - padding.right;
+    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
 }
 
 + (CGFloat)cellHeightWithModel:(BUNativeAd *_Nonnull)model width:(CGFloat)width {
@@ -521,8 +521,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     CGFloat originInfoX = padding.left;
     [self.nativeAdRelatedView.adLabel sizeToFit];
     self.nativeAdRelatedView.adLabel.frame = CGRectMake(originInfoX, y + 3, self.nativeAdRelatedView.adLabel.frame.size.width + 10, 14);
-    CGFloat dislikeX = width - 24 - padding.right;
-    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 24, 20);
+    CGFloat dislikeX = width - 20 - padding.right;
+    self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
 }
 
 + (CGFloat)cellHeightWithModel:(BUNativeAd *_Nonnull)model width:(CGFloat)width {

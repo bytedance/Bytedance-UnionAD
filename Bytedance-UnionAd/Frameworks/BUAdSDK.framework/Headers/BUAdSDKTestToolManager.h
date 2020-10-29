@@ -25,6 +25,8 @@
 
 + (void)clearInputContent;
 
+- (NSString *)testTimeStamp;
+
 @end
 
 

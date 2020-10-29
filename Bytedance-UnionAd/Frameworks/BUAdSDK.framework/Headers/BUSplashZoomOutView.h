@@ -43,6 +43,11 @@ The delegate for receiving state change messages.
 - (void)splashZoomOutViewAdDidClose:(BUSplashZoomOutView *)splashAd;
 
 /**
+This method is called when spalashAd automatically dimiss afte countdown equals to zero
+*/
+- (void)splashZoomOutViewAdDidAutoDimiss:(BUSplashZoomOutView *)splashAd;
+
+/**
  This method is called when another controller has been closed.
  @param interactionType : open appstore in app or open the webpage or view video ad details page.
  */

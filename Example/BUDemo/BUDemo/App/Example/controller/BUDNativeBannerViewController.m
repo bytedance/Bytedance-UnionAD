@@ -61,10 +61,12 @@
     NSArray *datas = [s objectFromJSONString];
     
     self.dataSource = [NSMutableArray new];
-    for (int i = 0; i < datas.count; i++) {
-        NSUInteger index = rand() % (datas.count-2)+1;
-        BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:[datas objectAtIndex:index]];
-        [self.dataSource addObject:model];
+    if (datas.count > 2) {
+        for (int i = 0; i < datas.count; i++) {
+            NSUInteger index = rand() % (datas.count - 2) + 1;
+            BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:[datas objectAtIndex:index]];
+            [self.dataSource addObject:model];
+        }
     }
     [self.tableView reloadData];
     
@@ -82,9 +84,7 @@
         BUAdSlot *slot1 = [[BUAdSlot alloc] init];
         slot1.ID = self.viewModel.slotID;
         slot1.AdType = BUAdSlotAdTypeBanner;
-        slot1.position = BUAdSlotPositionTop;
         slot1.imgSize = imgSize1;
-        slot1.isSupportDeepLink = YES;
         slot1.isOriginAd = YES;
         
         BUNativeAd *nad = [[BUNativeAd alloc] initWithSlot:slot1];
@@ -184,7 +184,6 @@
     }else{
         return [(BUDFeedNormalModel *)model cellHeight];
     }
-    return 0;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section { 

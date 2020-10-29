@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BUBundleHelper : NSObject
 
 // 获取资源文件
-+ (NSBundle *)resourceBundle;
++ (nullable NSBundle *)resourceBundle;
 
 @end
 

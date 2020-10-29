@@ -18,13 +18,13 @@
     BUSize *adSize = [[BUSize alloc] init];
     adSize.width = size.width;
     adSize.height = size.height;
-    NSString *slotId = [info objectForKey:@"slotid"];
-    if (slotId == nil) {
+    NSString *adPlacementId = [info objectForKey:@"ad_placement_id"];
+    if (adPlacementId == nil) {
         NSError *error = [NSError errorWithDomain:NSStringFromClass([self class]) code:0 userInfo:@{NSLocalizedDescriptionKey: @"Invalid slotid. Failing ad request."}];
         [self.delegate bannerCustomEvent:self didFailToLoadAdWithError:error];
         return;
     }
-    self.bannerView = [[BUBannerAdView alloc] initWithSlotID:slotId size:adSize rootViewController:self.delegate.viewControllerForPresentingModalView];
+    self.bannerView = [[BUBannerAdView alloc] initWithSlotID:adPlacementId size:adSize rootViewController:self.delegate.viewControllerForPresentingModalView];
     self.bannerView.frame = CGRectMake(0, 0, size.width, size.height);
     self.bannerView.delegate = self;
     [self.bannerView loadAdData];

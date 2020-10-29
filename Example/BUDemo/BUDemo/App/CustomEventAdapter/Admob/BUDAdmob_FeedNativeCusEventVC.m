@@ -102,6 +102,7 @@
         UILabel *headlineView = (UILabel *)_adView.headlineView;
         headlineView.text = nativeAd.headline;
     }
+
     GADMediaContent *mediaContent = nativeAd.mediaContent;
     _adView.mediaView.mediaContent = mediaContent;
     if (mediaContent.hasVideoContent) {

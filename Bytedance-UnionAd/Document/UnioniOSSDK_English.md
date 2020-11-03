@@ -2,7 +2,7 @@
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| v3.3.0.4 | 2020-10-28 | 1.Template Banner display optimization |
+| v3.3.0.5 | 2020-11-03 | 1.Rewarded video, full-screen video caching logic optimization |
 [Version history](#Version history)
 
 -   [1.SDK Access](#1sdk-access)
@@ -2842,6 +2842,7 @@ Two causes of 40029 errors:
 
 | Document Version | Revision Date | Revision Description                                         |
 | ---------------- | ------------- | ------------------------------------------------------------ |
+| v3.3.0.5 | 2020-11-03 | 1. Rewarded video, full-screen video caching logic optimization |
 | v3.3.0.4 | 2020-10-28 | 1.Template Banner display optimization |
 | v3.3.0.3 | 2020-10-23 | 1.Template Banner display optimization |
 | v3.3.0.2 | 2020-10-16 | 1. Fixed some bugs |

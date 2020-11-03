@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BUMaterialMeta.h"
-#import "BUMopubAdMarkUpDelegate.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class BUSize;
@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface BUNativeExpressInterstitialAd : NSObject <BUMopubAdMarkUpDelegate>
+@interface BUNativeExpressInterstitialAd : NSObject
 
 @property (nonatomic, weak, nullable) id<BUNativeExpresInterstitialAdDelegate> delegate;
 

@@ -96,7 +96,8 @@ FOUNDATION_EXPORT NSString * const BUSDKVersion;
 #define BUMAXScreenSide                   MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)
 #endif
 
-#define BUiPhoneX ((BUMAXScreenSide == 812.0) || (BUMAXScreenSide == 896))
+#define BUIsNotchScreen bu_is_notch_screen()
+#define BUiPhoneX BUIsNotchScreen
 #define kBUDefaultNavigationBarHeight  (BUiPhoneX?88:64)      // 导航条高度
 #define kBUSafeTopMargin (BUiPhoneX?24:0)
 #define kBUDefaultStautsBarHeight  (BUiPhoneX?44:20)      // 状态栏高度
@@ -130,6 +131,7 @@ FOUNDATION_EXPORT void bu_safe_dispatch_async_main_queue(void (^block)(void));
 
 FOUNDATION_EXPORT id BU_JSONObjectByRemovingKeysWithNullValues(id JSONObject);
 
+FOUNDATION_EXPORT BOOL bu_is_notch_screen(void);
 
 /** LOG **/
 #define BU_Log_Foundation(frmt, ...)   BU_Log_Base(BUFoundationLog, frmt, ##__VA_ARGS__)

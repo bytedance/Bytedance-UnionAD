@@ -40,6 +40,7 @@
 #define express_banner_ID_600300          @"900546526"
 #define express_banner_ID_600400_both     @"945113150"
 #define express_banner_ID_600500_both     @"945467828"
+//#define express_banner_ID_600500_both     @"945509778"
 #define express_interstitial_ID           @"900546270"
 #define express_interstitial_ID_1_1_both  @"945113154"
 #define express_interstitial_ID_2_3_both  @"945113156"

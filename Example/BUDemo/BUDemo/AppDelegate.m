@@ -22,7 +22,6 @@
 #import "BUAdSDKAdapterConfiguration.h"
 #import "BUDTestToolsViewController.h"
 #import "BUDAnimationTool.h"
-#import <BUDBuglyConfig/BUDBuglyConfig.h>
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -69,7 +68,6 @@
 - (void)configDemo {
     [self configTestData];
     [self configFPS];
-    [self configAPM];
 }
 
 - (void)configTestData {
@@ -83,11 +81,6 @@
         [RRFPSBar sharedInstance].showsAverage = YES;
         [[RRFPSBar sharedInstance] setHidden:NO];
     }
-}
-
-- (void)configAPM {
-    // bugly
-    [BUDBuglyConfig startWithBugly:[Bugly class] andConfig:[[BuglyConfig alloc] init]];
 }
 
 - (void)configCustomEvent {

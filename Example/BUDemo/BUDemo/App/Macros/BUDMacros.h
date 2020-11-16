@@ -9,6 +9,8 @@
 #ifndef BUDMacros_h
 #define BUDMacros_h
 
+#import <BUFoundation/BUFoundation.h>
+
 #define mainColor BUD_RGB(0xff, 0x63, 0x5c)
 #define unValidColor BUD_RGB(0xd7, 0xd7, 0xd7)
 #define titleBGColor BUD_RGB(73, 15, 15)
@@ -23,7 +25,7 @@
 #define BUDMAXScreenSide                   MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)
 #endif
 
-#define BUDiPhoneX ((BUDMAXScreenSide == 812.0) || (BUDMAXScreenSide == 896))
+#define BUDiPhoneX BUIsNotchScreen
 #define NavigationBarHeight (BUDiPhoneX? 88: 64)      // 导航条高度
 #define TopMargin        (BUDiPhoneX? 24: 0)
 #define BottomMargin     (BUDiPhoneX? 40: 0)      // 状态栏高度

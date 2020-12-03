@@ -144,7 +144,6 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
     slot1.primeRit =  self.slotIds.firstObject;
     
     self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:CGSizeMake(self.widthSlider.value, self.heightSlider.value)];
-    self.nativeExpressAdManager.adSize = CGSizeMake(self.widthSlider.value, self.heightSlider.value);
     self.nativeExpressAdManager.delegate = self;
     NSInteger count = (NSInteger)self.adCountSlider.value;
     [self.nativeExpressAdManager loadAdDataWithCount:count];

@@ -61,4 +61,12 @@
 - (CGFloat)height { return self.frame.size.height; }
 - (CGSize)size { return self.frame.size; }
 
+
+- (void)bud_removeAllSubViews {
+    NSArray *ary = [self.subviews copy];
+    for (UIView *view in ary) {
+        [view removeFromSuperview];
+    }
+}
+
 @end

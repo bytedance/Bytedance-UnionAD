@@ -22,14 +22,16 @@ static CGSize const logoSize = {20, 20};
 
 @interface BUDNativeInterstitialViewController () <BUNativeAdDelegate>
 @property (nonatomic, strong) BUNativeAd *nativeAd;
-@property (nonatomic, strong) BUNativeAdRelatedView *relatedView;
+
 @property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UIView *whiteBackgroundView;
+@property (nonatomic, strong) UIImageView *interstitialAdView;
+
+@property (nonatomic, strong) BUNativeAdRelatedView *relatedView;
 @property (nonatomic, strong) UIImageView *logoImgeView;
 @property (nonatomic, strong) UIButton *dislikeButton;
 @property (nonatomic, strong) UILabel *titleLable;
 @property (nonatomic, strong) UILabel *describeLable;
-@property (nonatomic, strong) UIImageView *interstitialAdView;
 @property (nonatomic, strong) UIButton *dowloadButton;
 @property (nonatomic, strong) BUDNormalButton *refreshbutton;
 @end
@@ -38,18 +40,19 @@ static CGSize const logoSize = {20, 20};
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.haveRenderSwitchView = YES;
     [self buildupView];
     [self loadNativeAd];
 }
 
 - (void)buildupView {
     self.view.backgroundColor = [UIColor whiteColor];
-    
     CGSize size = [UIScreen mainScreen].bounds.size;
-    self.refreshbutton = [[BUDNormalButton alloc]initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
+    self.refreshbutton = [[BUDNormalButton alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height*0.75, 0, 0)];
     self.refreshbutton.showRefreshIncon = YES;
     [self.refreshbutton setTitle:[NSString localizedStringForKey:NativeInterstitial] forState:UIControlStateNormal];
-    [self.refreshbutton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.refreshbutton addTarget:self action:@selector(refreshbuttonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.refreshbutton];
     
     self.backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, size.width, size.height)];
@@ -80,6 +83,7 @@ static CGSize const logoSize = {20, 20};
     
     self.interstitialAdView = [[UIImageView alloc] init];
     _interstitialAdView.contentMode =  UIViewContentModeScaleAspectFill;
+    _interstitialAdView.userInteractionEnabled = YES;
     _interstitialAdView.clipsToBounds = YES;
     [self.whiteBackgroundView addSubview:_interstitialAdView];
     
@@ -89,20 +93,11 @@ static CGSize const logoSize = {20, 20};
     
     self.dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.dislikeButton setImage:[UIImage imageNamed:@"nativeDislike.png"] forState:UIControlStateNormal];
-    [self.dislikeButton addTarget:self action:@selector(tapCloseButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.dislikeButton addTarget:self action:@selector(dislikeButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [self.backgroundView addSubview:_dislikeButton];
 }
 
-- (void)tapCloseButton {
-    self.backgroundView.hidden = YES;
-    self.interstitialAdView.image = nil;
-    [self loadNativeAd];
-}
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    self.refreshbutton.center = CGPointMake(self.view.center.x, self.view.center.y*1.5);
-}
 
 - (void)layoutViewsWithimageViewHeight:(CGFloat)imageViewHeight {
     CGFloat whiteViewHeight = titleHeight + imageViewHeight + 10 + titleHeight + 10 + 30;
@@ -129,7 +124,9 @@ static CGSize const logoSize = {20, 20};
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeInterstitial;
     slot1.imgSize = imgSize1;
+    slot1.supportRenderControl = self.renderSwitchView.on;
     slot1.isOriginAd = YES;
+    slot1.adSize = CGSizeMake(300, 300);
     
     BUNativeAd *nad = [[BUNativeAd alloc] initWithSlot:slot1];
     nad.rootViewController = self;
@@ -138,9 +135,32 @@ static CGSize const logoSize = {20, 20};
     [nad loadAdData];
 }
 
+#pragma mark - BUNativeAdDelegate
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
-    if (!nativeAd.data) { return; }
-    if (nativeAd.data.imageAry.count) {
+    [self bud_delegateLogWithSEL:_cmd msg:@""];
+}
+- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd view:(UIView *)view {
+
+    [self bud_delegateLogWithSEL:_cmd msg:@""];
+    if (nativeAd.data == nil || nativeAd.data.imageAry.count == 0) {
+        return;
+    }
+
+    [self.interstitialAdView bud_removeAllSubViews];
+    self.whiteBackgroundView.hidden = NO;
+    self.backgroundView.hidden = NO;
+    self.interstitialAdView.hidden = NO;
+    
+    if (view) {
+        [self.interstitialAdView addSubview:view];
+        CGFloat width = view.frame.size.width;
+        CGFloat height = view.frame.size.height;
+        CGFloat x = ([UIScreen mainScreen].bounds.size.width - width) / 2.0f;
+        CGFloat y = ([UIScreen mainScreen].bounds.size.height - height) / 2.0f;
+        self.interstitialAdView.frame = CGRectMake(0, 0, width, height);
+        self.whiteBackgroundView.frame = CGRectMake(x, y, width, height);
+    } else {
+        [self.interstitialAdView bud_removeAllSubViews];
         self.titleLable.text = nativeAd.data.AdTitle;
         
         BUImage *adImage = nativeAd.data.imageAry.firstObject;
@@ -164,24 +184,41 @@ static CGSize const logoSize = {20, 20};
         
         [self addAccessibilityIdentifier];
     }
+    
 }
 
 - (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error {
-    NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
+    [self bud_delegateLogWithSEL:_cmd error:error];
 }
 
-- (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *)view
-{
-    BUD_Log(@"nativeAdDidClick");
+- (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *)view {
+    [self bud_delegateLogWithSEL:_cmd msg:@""];
 }
 
-- (void)nativeAdDidBecomeVisible:(BUNativeAd *)nativeAd
-{
-    BUD_Log(@"nativeAdDidBecomeVisible");
+- (void)nativeAdDidCloseOtherController:(BUNativeAd *)nativeAd interactionType:(BUInteractionType)interactionType {
+    [self bud_delegateLogWithSEL:_cmd msg:@""];
 }
 
--(void)buttonTapped:(UIButton *)sender {
-    self.backgroundView.hidden = NO;
+- (void)nativeAd:(BUNativeAd *_Nullable)nativeAd dislikeWithReason:(NSArray<BUDislikeWords *> *_Nullable)filterWords {
+    [self bud_delegateLogWithSEL:_cmd msg:@""];
+    [self pbud_closeInterstitial];
+}
+
+- (void)nativeAdDidBecomeVisible:(BUNativeAd *)nativeAd {
+    [self bud_delegateLogWithSEL:_cmd msg:@""];
+}
+
+#pragma mark - Action
+-(void)refreshbuttonTouchUpInside:(UIButton *)sender {
+    [self loadNativeAd];
+}
+- (void)dislikeButtonTouchUpInside:(id)sender {
+    [self pbud_closeInterstitial];
+}
+#pragma mark - Private
+- (void)pbud_closeInterstitial {
+    self.backgroundView.hidden = YES;
+    self.interstitialAdView.image = nil;
 }
 
 #pragma mark addAccessibilityIdentifier

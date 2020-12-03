@@ -13,6 +13,7 @@
 #import "BUDNormalButton.h"
 #import "UIView+Draw.h"
 #import "NSString+LocalizedString.h"
+#import "BUDSlotID.h"
 
 @interface BUDExpressFeedViewController () <BUNativeExpressAdViewDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray<__kindof BUNativeExpressAdView *> *expressAdViews;
@@ -26,6 +27,7 @@
 @property (strong, nonatomic) BUDNormalButton *freshButton;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) BUDSwitchView *slotSwitchView;
 @end
 
 // 方便将来测试用
@@ -37,6 +39,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.haveRenderSwitchView = YES;
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.expressAdViews = [NSMutableArray new];
     [self setupViews];
@@ -44,7 +48,9 @@
     [self loadData];
     [self addAccessibilityIdentifier];
 }
-
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.timer invalidate];
@@ -88,6 +94,14 @@
     self.adCountSlider.minimumValue = 1;
     self.adCountSlider.tintColor = mainColor;
     [self.view addSubview:self.adCountSlider];
+    
+    y += 22 + spaceY;
+    self.slotSwitchView = [[BUDSwitchView alloc] initWithTitle:@"是否是模板slot" on:YES height:44];
+    CGRect frame = self.slotSwitchView.frame;
+    frame.origin.y = y;
+    self.slotSwitchView.frame = frame;
+    [self.view addSubview:self.slotSwitchView];
+    
     y += 21 + 2*spaceY;
 
     self.freshButton = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, y, 0, 0)];
@@ -123,8 +137,10 @@
         self.expressAdViews = [NSMutableArray arrayWithCapacity:20];
     }
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
-    slot1.ID = self.viewModel.slotID;
+    NSString *slotId = self.slotSwitchView.on ? self.viewModel.slotID : native_feed_ID;
+    slot1.ID = slotId;
     slot1.AdType = BUAdSlotAdTypeFeed;
+    slot1.supportRenderControl = YES;
     BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Feed228_150];
     slot1.imgSize = imgSize;
     slot1.position = BUAdSlotPositionFeed;
@@ -133,7 +149,6 @@
     if (!self.nativeExpressAdManager) {
         self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:CGSizeMake(self.widthSlider.value, self.heightSlider.value)];
     }
-    self.nativeExpressAdManager.adSize = CGSizeMake(self.widthSlider.value, self.heightSlider.value);
     self.nativeExpressAdManager.delegate = self;
     NSInteger count = (NSInteger)self.adCountSlider.value;
     [self.nativeExpressAdManager loadAdDataWithCount:count];

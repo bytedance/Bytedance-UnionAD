@@ -24,12 +24,20 @@ typedef enum {
     UIViewBorderOptionAll
 } UIViewBorderOption;
 
+
+typedef struct {
+  CGFloat topLeft;
+  CGFloat topRight;
+  CGFloat bottomLeft;
+  CGFloat bottomRight;
+} BUFCornerRadii;
+
 @interface UIView (BU_Border)
 
 - (void)bu_setBorder:(UIViewBorderOption)option width:(CGFloat)width color:(UIColor *)color;
 - (void)bu_setDashBorder:(UIViewBorderOption)option width:(CGFloat)width color:(UIColor *)color;
 - (void)bu_roundCornerWithDashBorder:(CGFloat)radius width:(CGFloat)widht color:(UIColor *)color;
-
+- (void)bu_updateClippingForLayer:(CALayer *)layer cornerRadii:(BUFCornerRadii)cornerRadii maxRadius:(CGFloat)maxRadius;
 @end
 
 

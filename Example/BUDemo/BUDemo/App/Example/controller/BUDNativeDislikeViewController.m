@@ -110,6 +110,10 @@ static CGSize const dislikeSize = {20, 20};
 
 #pragma mark -- BUNativeAdDelegate
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
+    [self bud_delegateLogWithSEL:_cmd msg:@""];
+}
+
+- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd view:(UIView *)view {
     if (!nativeAd.data) { return; }
     if (!(nativeAd == self.nativeAd)) { return; }
     

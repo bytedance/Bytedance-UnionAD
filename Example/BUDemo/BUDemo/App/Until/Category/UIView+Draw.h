@@ -19,4 +19,7 @@
 - (CGFloat)width;
 - (CGFloat)height;
 - (CGSize)size;
+
+- (void)bud_removeAllSubViews;
+
 @end

@@ -202,42 +202,47 @@
 }
 
 #pragma mark - BUNativeAdDelegate
-
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
+    [self bud_delegateLogWithSEL:_cmd msg:@""];
+}
+- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd view:(UIView *)view {
+    
     self.ad_load = nil;
     self.ad = nativeAd;
     
-    self.infoLabel.text = nativeAd.data.AdDescription;
-    self.titleLabel.text = nativeAd.data.AdTitle;
-    BUMaterialMeta *adMeta = nativeAd.data;
-    CGFloat contentWidth = CGRectGetWidth(_customview.frame) - 20;
-    BUImage *image = adMeta.imageAry.firstObject;
-    const CGFloat imageHeight = contentWidth * (image.height / image.width);
-    CGRect rect = CGRectMake(10, CGRectGetMaxY(_actionButton.frame) + 5, contentWidth, imageHeight);
-    self.relatedView.logoImageView.frame = CGRectMake(CGRectGetMaxX(rect) - 15 , CGRectGetMaxY(rect) - 15, 15, 15);
-    self.relatedView.adLabel.frame = CGRectMake(CGRectGetMinX(rect), CGRectGetMaxY(rect) - 14, 26, 14);
-    
-    // imageMode decides whether to show video or not
-    if (adMeta.imageMode == BUFeedVideoAdModeImage) {
-        self.imageView.hidden = YES;
-        self.relatedView.videoAdView.hidden = NO;
-        self.relatedView.videoAdView.frame = rect;
-        [self.relatedView refreshData:nativeAd];
-        NSLog(@"====视频的时长为：%ld  %@", (long)nativeAd.data.videoDuration, nativeAd.adslot.ID);
+    if (view != nil) {
+        [self.customview addSubview:view];
     } else {
-        self.imageView.hidden = NO;
-        self.relatedView.videoAdView.hidden = YES;
-        if (adMeta.imageAry.count > 0) {
-            if (image.imageURL.length > 0) {
-                self.imageView.frame = rect;
-                [self.imageView setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
+        self.infoLabel.text = nativeAd.data.AdDescription;
+        self.titleLabel.text = nativeAd.data.AdTitle;
+        BUMaterialMeta *adMeta = nativeAd.data;
+        CGFloat contentWidth = CGRectGetWidth(_customview.frame) - 20;
+        BUImage *image = adMeta.imageAry.firstObject;
+        const CGFloat imageHeight = contentWidth * (image.height / image.width);
+        CGRect rect = CGRectMake(10, CGRectGetMaxY(_actionButton.frame) + 5, contentWidth, imageHeight);
+        self.relatedView.logoImageView.frame = CGRectMake(CGRectGetMaxX(rect) - 15 , CGRectGetMaxY(rect) - 15, 15, 15);
+        self.relatedView.adLabel.frame = CGRectMake(CGRectGetMinX(rect), CGRectGetMaxY(rect) - 14, 26, 14);
+        
+        // imageMode decides whether to show video or not
+        if (adMeta.imageMode == BUFeedVideoAdModeImage) {
+            self.imageView.hidden = YES;
+            self.relatedView.videoAdView.hidden = NO;
+            self.relatedView.videoAdView.frame = rect;
+            [self.relatedView refreshData:nativeAd];
+            NSLog(@"====视频的时长为：%ld  %@", (long)nativeAd.data.videoDuration, nativeAd.adslot.ID);
+        } else {
+            self.imageView.hidden = NO;
+            self.relatedView.videoAdView.hidden = YES;
+            if (adMeta.imageAry.count > 0) {
+                if (image.imageURL.length > 0) {
+                    self.imageView.frame = rect;
+                    [self.imageView setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
+                }
             }
         }
+        // Register UIView with the native ad; the whole UIView will be clickable.
+        [nativeAd registerContainer:self.customview withClickableViews:@[self.infoLabel, self.actionButton]];
     }
- 
-    
-    // Register UIView with the native ad; the whole UIView will be clickable.
-    [nativeAd registerContainer:self.customview withClickableViews:@[self.infoLabel, self.actionButton]];
 }
 
 

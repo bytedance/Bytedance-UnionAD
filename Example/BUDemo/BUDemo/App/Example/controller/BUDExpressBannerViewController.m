@@ -18,16 +18,18 @@
 @interface BUDExpressBannerViewController ()<BUNativeExpressBannerViewDelegate>
 @property(nonatomic, strong) BUDSelectedView *selectedView;
 @property(nonatomic, strong) BUNativeExpressBannerView *bannerView;
-@property (nonatomic, strong) UISwitch *isCarouselSwitch;
 
 @property(nonatomic, copy) NSString *currentID;
 @property(nonatomic, copy) NSDictionary *sizeDcit;
+@property (strong, nonatomic) BUDSwitchView *slotSwitchView;
+@property (strong, nonatomic) BUDSwitchView *rotationSwitchView;
 @end
 
 @implementation BUDExpressBannerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.haveRenderSwitchView = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.sizeDcit = @{
@@ -64,17 +66,20 @@
     [self.view addSubview:self.selectedView];
     self.selectedView.promptStatus = BUDPromptStatusDefault;
     
-    //是否使用轮播banner的开关
-    UILabel *carouselLabel = [[UILabel alloc] initWithFrame:CGRectMake(22, self.selectedView.bottom+20, 100, 30)];
-    carouselLabel.text = [NSString localizedStringForKey:IsCarousel];
-    carouselLabel.textColor = [UIColor blackColor];
-    carouselLabel.font = [UIFont systemFontOfSize:18];
-    [self.view addSubview:carouselLabel];
     
-    self.isCarouselSwitch = [[UISwitch alloc] init];
-    self.isCarouselSwitch.onTintColor = mainColor;
-    self.isCarouselSwitch.frame = CGRectMake(120, self.selectedView.bottom+20, 51, 31);
-    [self.view addSubview:self.isCarouselSwitch];
+    self.rotationSwitchView = [[BUDSwitchView alloc] initWithTitle:@"轮播" on:NO height:44];
+    CGRect frame = self.rotationSwitchView.frame;
+    frame.origin.y = self.selectedView.bottom+20;
+    frame.origin.x = 0;
+    self.rotationSwitchView.frame = frame;
+    [self.view addSubview:self.rotationSwitchView];
+    
+    self.slotSwitchView = [[BUDSwitchView alloc] initWithTitle:@"是否是模板slot" on:YES height:44];
+    CGRect frame2 = self.slotSwitchView.frame;
+    frame2.origin.y = self.selectedView.bottom+20;
+    frame2.origin.x = 120 + 51 + 10;
+    self.slotSwitchView.frame = frame2;
+    [self.view addSubview:self.slotSwitchView];
 }
 
 /***important:
@@ -103,13 +108,16 @@
     
     NSValue *sizeValue = [self.sizeDcit objectForKey:slotID];
     CGSize size = [sizeValue CGSizeValue];
-// important: 升级的用户请注意，初始化方法去掉了imgSize参数
-    if (self.isCarouselSwitch.on) {
-        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:slotID rootViewController:self adSize:size interval:30];
+    //    native_banner_ID
+    NSString *realSlotId = self.slotSwitchView.on ? slotID : native_banner_ID;
+    // important: 升级的用户请注意，初始化方法去掉了imgSize参数
+    if (self.rotationSwitchView.on) {
+        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:realSlotId rootViewController:self adSize:size interval:30];
     } else {
-        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:slotID rootViewController:self adSize:size];
+        self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:realSlotId rootViewController:self adSize:size];
     }
     self.bannerView.frame = CGRectMake((self.view.width-size.width)/2.0, self.view.height-size.height-bottom, size.width, size.height);
+
     self.bannerView.delegate = self;
     [self.bannerView loadAdData];
     self.selectedView.promptStatus = BUDPromptStatusLoading;

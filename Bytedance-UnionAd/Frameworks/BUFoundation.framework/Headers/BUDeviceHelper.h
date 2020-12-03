@@ -38,6 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 返回设备平台信息
 + (NSString *)platform;
 
+/// 返回设备Model
++ (NSString *)model;
+
 /// 返回设备type：iphone／ipad／ipod／apple tv等
 + (NSString *)platformTypeString;
 

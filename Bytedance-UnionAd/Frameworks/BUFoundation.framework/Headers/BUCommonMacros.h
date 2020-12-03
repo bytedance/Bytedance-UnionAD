@@ -145,3 +145,8 @@ if(flg) NSLog(@"【BytedanceUnion V%@】-【%@】%@", BUSDKVersion, BULogTypeStr
 
 FOUNDATION_EXPORT NSString * const BUFoundationLog;
 FOUNDATION_EXPORT BOOL BU_LOG_ENABLED;
+
+// 对枚举值进行日志字符串转换， 例如对于一个枚举值   1表示激励视频广告的意思， 将返回：   激励视频广告(value:1)
+FOUNDATION_EXPORT NSString *NSStringLogFromBUAdEnumItem(NSInteger enumItem, NSDictionary *dic, NSString *defaultValue);
+// 对枚举值进行字符串转换   例如对于一个枚举值   1表示rewarded_ad的字符串， 将返回：  rewarded_ad
+FOUNDATION_EXPORT NSString *NSStringFromBUAdEnumItem(NSInteger enumItem, NSDictionary *dic, NSString *defaultValue);

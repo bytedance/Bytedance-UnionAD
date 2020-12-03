@@ -12,6 +12,7 @@
 #import "BUVideoAdView.h"
 #import "BUMopubAdMarkUpDelegate.h"
 
+
 @protocol BUNativeAdDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -87,9 +88,15 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /**
- This method is called when native ad material loaded successfully.
+ This method is called when native ad material loaded successfully. This method will be deprecated. Use nativeAdDidLoad:view: instead
  */
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd;
+
+
+/**
+ This method is called when native ad material loaded successfully.
+ */
+- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd view:(UIView *_Nullable)view;
 
 /**
  This method is called when native ad materia failed to load.

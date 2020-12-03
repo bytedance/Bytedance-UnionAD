@@ -7,19 +7,22 @@
 //
 
 #import "BUDFeedViewController.h"
-#import <BUAdSDK/BUNativeAdsManager.h>
+#import <BUAdSDK/BUAdSDK.h>
 #import "BUDFeedAdTableViewCell.h"
 #import "NSString+Json.h"
 #import "BUDFeedNormalModel.h"
 #import "BUDFeedNormalTableViewCell.h"
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
+#import "BUDSwitchView.h"
+#import <MJRefresh/MJRefresh.h>
 
-@interface BUDFeedViewController () <UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate>
+@interface BUDFeedViewController () <UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate,BUNativeExpressAdViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) BUNativeAdsManager *adManager;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+
 @end
 
 @implementation BUDFeedViewController
@@ -37,8 +40,16 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.haveRenderSwitchView = YES;
+    
     self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.view addSubview:self.tableView];
+    
+    __weak typeof(self) weakSelf = self;
+    MJRefreshHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf loadNativeAds];
+    }];
+    self.tableView.mj_header = refreshHeader;
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -59,42 +70,56 @@
     [self.tableView registerClass:[BUDFeedSquareVideoAdTableViewCell class] forCellReuseIdentifier:@"BUDFeedSquareVideoAdTableViewCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self loadNativeAds];
     
-    NSString *feedPath = [[NSBundle mainBundle] pathForResource:@"feedInfo" ofType:@"cactus"];
-    NSString *s = [NSString stringWithContentsOfFile:feedPath encoding:NSUTF8StringEncoding error:nil];
-    NSArray *datas = [s objectFromJSONString];
-    
-    self.dataSource = [NSMutableArray new];
-    for (NSDictionary *dict in datas) {
-        BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:dict];
-        [self.dataSource addObject:model];
-    }
-    NSInteger datasCount = datas.count;
-    if (datasCount > 3) {
-        for (int i = 0; i < datasCount; i++) {
-            NSUInteger index = rand() % (datasCount - 3) + 2;
-            BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:[datas objectAtIndex:index]];
-            [self.dataSource addObject:model];
-        }
-    }
+   
     [self.tableView reloadData];
 }
 
+// 重置测试数据，非广告数据
+- (void)pbud_resetDemoData {
+    NSString *feedPath = [[NSBundle mainBundle] pathForResource:@"feedInfo" ofType:@"cactus"];
+    NSString *s = [NSString stringWithContentsOfFile:feedPath encoding:NSUTF8StringEncoding error:nil];
+    NSArray *datas = [s objectFromJSONString];
+
+    self.dataSource = [NSMutableArray new];
+    for (NSDictionary *dict in datas) {
+       BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:dict];
+       [self.dataSource addObject:model];
+    }
+    NSInteger datasCount = datas.count;
+    if (datasCount > 3) {
+       for (int i = 0; i < datasCount; i++) {
+           NSUInteger index = rand() % (datasCount - 3) + 2;
+           BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:[datas objectAtIndex:index]];
+           [self.dataSource addObject:model];
+       }
+    }
+}
+
 - (void)loadNativeAds {
+    [self pbud_resetDemoData];
     BUNativeAdsManager *nad = [BUNativeAdsManager new];
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeFeed;
+    slot1.supportRenderControl = self.renderSwitchView.on;
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
     nad.adslot = slot1;
+    nad.adSize = CGSizeMake(self.tableView.frame.size.width, 0);
     nad.delegate = self;
+    nad.nativeExpressAdViewDelegate = self;
     self.adManager = nad;
     
     [nad loadAdDataWithCount:3];
 }
-
-
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
 #pragma mark - tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
@@ -171,6 +196,21 @@
         [cell refreshUIWithModel:model];
         return cell;
         
+    } else if ([model isKindOfClass:[UIView class]]) {
+        
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        // 重用BUNativeExpressAdView，先把之前的广告试图取下来，再添加上当前视图
+        UIView *subView = (UIView *)[cell.contentView viewWithTag:1000];
+        if ([subView superview]) {
+            [subView removeFromSuperview];
+        }
+        
+        UIView *view = (UIView *)model;
+        view.tag = 1000;
+        [cell.contentView addSubview:view];
+        return cell;
     }
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     cell.textLabel.text = [NSString localizedStringForKey:Unknown];
@@ -220,6 +260,9 @@
         }
     }else if ([model isKindOfClass:[BUDFeedNormalModel class]]){
         return [(BUDFeedNormalModel *)model cellHeight];
+    } else if ([model isKindOfClass:[UIView class]]) {
+        UIView *view = (UIView *)model;
+        return view.bounds.size.height;
     }
     return 80;
 }
@@ -246,28 +289,122 @@
         }
     }else if ([model isKindOfClass:[BUDFeedNormalModel class]]){
         return [(BUDFeedNormalModel *)model cellHeight];
-    }
+    } else if ([model isKindOfClass:[UIView class]]) {
+           UIView *view = (UIView *)model;
+           return view.bounds.size.height;
+       }
     return 80;
+}
+
+
+- (void)pbud_insertIntoDataSourceWithArray:(NSArray *)array {
+    if (self.dataSource.count > 3) {
+        for (id item in array) {
+            NSUInteger index = rand() % (self.dataSource.count - 3) + 2;
+            [self.dataSource insertObject:item atIndex:index];
+        }
+    }
 }
 
 #pragma mark - BUNativeAdsManagerDelegate
 
 - (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
-    if (self.dataSource.count > 3) {
-        for (BUNativeAd *model in nativeAdDataArray) {
-            NSUInteger index = rand() % (self.dataSource.count - 3) + 2;
-            [self.dataSource insertObject:model atIndex:index];
-        }
-    }
+    [self pbud_insertIntoDataSourceWithArray:nativeAdDataArray];
+    [self.tableView.mj_header endRefreshing];
     [self.tableView reloadData];
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdsManagerDelegate" msg:[NSString stringWithFormat:@"native-count:%ld", (long)nativeAdDataArray.count]];
 }
 
+
+
 - (void)nativeAdsManager:(BUNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error {
+    [self.tableView.mj_header endRefreshing];
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdsManagerDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
 }
+#pragma mark - BUNativeExpressAdViewDelegate
+- (void)nativeExpressAdSuccessToLoad:(BUNativeExpressAdManager *)nativeExpressAd views:(NSArray<__kindof BUNativeExpressAdView *> *)views {
+    [self.tableView.mj_header endRefreshing];
+    [self pbud_insertIntoDataSourceWithArray:views];
+    if (views.count) {
+        [views enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            BUNativeExpressAdView *expressView = (BUNativeExpressAdView *)obj;
+            expressView.rootViewController = self;
+            // important: 此处会进行WKWebview的渲染，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
+            [expressView render];
+        }];
+    }
+    [self.tableView reloadData];
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:@""];
+}
+
+- (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
+}
+
+- (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
+    [self.tableView reloadData];
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:[NSString stringWithFormat:@"nativeExpressAdView.videoDuration:%ld", (long)nativeExpressAdView.videoDuration]];
+}
+
+
+- (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView stateDidChanged:(BUPlayerPlayState)playerState {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:[NSString stringWithFormat:@"playerState:%ld", (long)playerState]];
+}
+
+- (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
+}
+
+- (void)nativeExpressAdViewWillShow:(BUNativeExpressAdView *)nativeExpressAdView {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:@""];
+}
+
+- (void)nativeExpressAdViewDidClick:(BUNativeExpressAdView *)nativeExpressAdView {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:@""];
+}
+
+- (void)nativeExpressAdViewPlayerDidPlayFinish:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:@""];
+}
+
+- (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords {//【重要】需要在点击叉以后 在这个回调中移除视图，否则，会出现用户点击叉无效的情况
+    [self.dataSource removeObject:nativeExpressAdView];
+
+    NSUInteger index = [self.dataSource indexOfObject:nativeExpressAdView];
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:@""];
+}
+
+- (void)nativeExpressAdViewDidClosed:(BUNativeExpressAdView *)nativeExpressAdView {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:@""];
+}
+
+- (void)nativeExpressAdViewWillPresentScreen:(BUNativeExpressAdView *)nativeExpressAdView {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:@""];
+}
+
+- (void)nativeExpressAdViewDidCloseOtherController:(BUNativeExpressAdView *)nativeExpressAdView interactionType:(BUInteractionType)interactionType {
+    NSString *str;
+    if (interactionType == BUInteractionTypePage) {
+        str = @"ladingpage";
+    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
+        str = @"videoDetail";
+    } else {
+        str = @"appstoreInApp";
+    }
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:str];
+}
+
+
+
+
+
 #pragma mark - BUNativeAdDelegate
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
+}
+- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd view:view {
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
 }
 

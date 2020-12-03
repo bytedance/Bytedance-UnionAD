@@ -28,6 +28,7 @@
 #import <BUAdSDK/BUNativeAdsManager.h>
 
 /// native express ads
+#import <BUAdSDK/BUNativeExpressAdViewDelegate.h>
 #import <BUAdSDK/BUNativeExpressAdManager.h>
 #import <BUAdSDK/BUNativeExpressAdView.h>
 #import <BUAdSDK/BUNativeExpressBannerView.h>

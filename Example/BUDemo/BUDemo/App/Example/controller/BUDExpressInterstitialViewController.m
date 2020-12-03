@@ -18,12 +18,15 @@
 @property (nonatomic, strong) BUNativeExpressInterstitialAd *interstitialAd;
 @property (nonatomic, strong) BUDSelectedView *selectedView;
 @property (nonatomic, copy) NSDictionary *sizeDict;
+@property (strong, nonatomic) BUDSwitchView *slotSwitchView;
 @end
 
 @implementation BUDExpressInterstitialViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    self.haveRenderSwitchView = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     self.sizeDict = @{
                       express_interstitial_ID_1_1_both:[NSValue valueWithCGSize:CGSizeMake(300, 300)],
@@ -44,6 +47,12 @@
         [strongself showInterstitial];
     }];
     [self.view addSubview:self.selectedView];
+    
+    self.slotSwitchView = [[BUDSwitchView alloc] initWithTitle:@"是否是模板slot" on:YES height:44];
+    CGRect frame = self.slotSwitchView.frame;
+    frame.origin.y = CGRectGetMaxY(self.selectedView.frame);
+    self.slotSwitchView.frame = frame;
+    [self.view addSubview:self.slotSwitchView];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -59,8 +68,9 @@
     CGSize size = [sizeValue CGSizeValue];
     CGFloat width = CGRectGetWidth([UIScreen mainScreen].bounds)-40;
     CGFloat height = width/size.width*size.height;
+    NSString *realSlotId = self.slotSwitchView.on ? slotID : native_interstitial_ID;
 // important: 升级的用户请注意，初始化方法去掉了imgSize参数
-    self.interstitialAd = [[BUNativeExpressInterstitialAd alloc] initWithSlotID:slotID adSize:CGSizeMake(width, height)];
+    self.interstitialAd = [[BUNativeExpressInterstitialAd alloc] initWithSlotID:realSlotId adSize:CGSizeMake(width, height)];
     self.interstitialAd.delegate = self;
     [self.interstitialAd loadAdData];
     self.selectedView.promptStatus = BUDPromptStatusLoading;

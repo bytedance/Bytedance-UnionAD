@@ -62,6 +62,9 @@ typedef void (^BUConfirmGDPR)(BOOL isAgreed);
 /// Open GDPR Privacy for the user to choose before setAppID.
 + (void)openGDPRPrivacyFromRootViewController:(UIViewController *)rootViewController confirm:(BUConfirmGDPR)confirm;
 
+/// Custom set idfa value
++ (void)setCustomIDFA:(NSString *)idfa;
+
 /// get appID
 + (NSString *)appID;
 

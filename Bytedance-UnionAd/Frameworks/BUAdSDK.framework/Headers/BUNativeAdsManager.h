@@ -14,6 +14,7 @@
 #import "BUAdSlot.h"
 #import "BUMaterialMeta.h"
 #import "BUNativeAd.h"
+#import "BUNativeExpressAdViewDelegate.h"
 
 @protocol BUNativeAdsManagerDelegate;
 
@@ -26,7 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The delegate for receiving state change messages such as requests succeeding/failing.
 /// The delegate can be set to any object which conforming to <BUNativeAdsManagerDelegate>.
 @property (nonatomic, weak, nullable) id<BUNativeAdsManagerDelegate> delegate;
-
+/// The delegate for receiving messages when is render template
+@property (nonatomic, weak, nullable) id<BUNativeExpressAdViewDelegate> nativeExpressAdViewDelegate;
+/// Valid only in native Feed
+@property (nonatomic, assign, readwrite) CGSize adSize;
 - (instancetype)initWithSlot:(BUAdSlot * _Nullable) slot;
 
 /**

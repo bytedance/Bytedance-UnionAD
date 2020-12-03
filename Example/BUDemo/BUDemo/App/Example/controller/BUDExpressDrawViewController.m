@@ -91,7 +91,6 @@
     if (!self.nativeExpressAdManager) {
         self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:self.view.bounds.size];
     }
-    self.nativeExpressAdManager.adSize = self.view.bounds.size;
     self.nativeExpressAdManager.delegate = self;
     [self.nativeExpressAdManager loadAdDataWithCount:3];
 }

@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface BUNativeExpressAdView : UIView
 /**
  * Whether render is ready
@@ -35,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
  required
  */
 - (void)render;
+
 
 @end
 

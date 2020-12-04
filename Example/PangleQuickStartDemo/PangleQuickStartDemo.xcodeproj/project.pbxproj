@@ -1,0 +1,798 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0D64BC38A960C740535943F3 /* Pods_PangleQuickStartDemo_PangleQuickStartDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4E7972483CA588473FCEDF /* Pods_PangleQuickStartDemo_PangleQuickStartDemoUITests.framework */; };
+		2CD26205252DA4AD00115243 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26204252DA4AD00115243 /* AppDelegate.swift */; };
+		2CD26207252DA4AD00115243 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26206252DA4AD00115243 /* SceneDelegate.swift */; };
+		2CD26209252DA4AD00115243 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26208252DA4AD00115243 /* ViewController.swift */; };
+		2CD2620C252DA4AD00115243 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CD2620A252DA4AD00115243 /* Main.storyboard */; };
+		2CD2620E252DA4B000115243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CD2620D252DA4B000115243 /* Assets.xcassets */; };
+		2CD26211252DA4B000115243 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CD2620F252DA4B000115243 /* LaunchScreen.storyboard */; };
+		2CD2621C252DA4B000115243 /* PangleQuickStartDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2621B252DA4B000115243 /* PangleQuickStartDemoTests.swift */; };
+		2CD26227252DA4B000115243 /* PangleQuickStartDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26226252DA4B000115243 /* PangleQuickStartDemoUITests.swift */; };
+		2CD26238252DA5C300115243 /* NativeAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26237252DA5C300115243 /* NativeAdsViewController.swift */; };
+		2CD26249252DA64300115243 /* NativeAdCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26245252DA64300115243 /* NativeAdCellTableViewCell.swift */; };
+		2CD2624A252DA64300115243 /* TemplateNativeAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CD26246252DA64300115243 /* TemplateNativeAdCell.xib */; };
+		2CD2624B252DA64300115243 /* NativeAdCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CD26247252DA64300115243 /* NativeAdCellTableViewCell.xib */; };
+		2CD2624C252DA64300115243 /* TemplateNativeAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26248252DA64300115243 /* TemplateNativeAdCell.swift */; };
+		2CD26276252DADD300115243 /* TemplateNativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26275252DADD300115243 /* TemplateNativeViewController.swift */; };
+		2CD2627E252DC99500115243 /* RewardedVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2627D252DC99500115243 /* RewardedVideoViewController.swift */; };
+		2CD26286252EB48200115243 /* FullScreenVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26285252EB48200115243 /* FullScreenVideoViewController.swift */; };
+		2CD26291253EC3F400115243 /* TemplateBannerAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26290253EC3F400115243 /* TemplateBannerAdsViewController.swift */; };
+		60EE89FC5BAF61FA900DD956 /* Pods_PangleQuickStartDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67BA390502C07E5912D8FADB /* Pods_PangleQuickStartDemoTests.framework */; };
+		7CC9C3CEC7E798C14BCFCD3F /* Pods_PangleQuickStartDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F704DC9C20649C4C4F6AF7 /* Pods_PangleQuickStartDemo.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2CD26218252DA4B000115243 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CD261F9252DA4AD00115243 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2CD26200252DA4AD00115243;
+			remoteInfo = PangleQuickStartDemo;
+		};
+		2CD26223252DA4B000115243 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CD261F9252DA4AD00115243 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2CD26200252DA4AD00115243;
+			remoteInfo = PangleQuickStartDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2CD26201252DA4AD00115243 /* PangleQuickStartDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PangleQuickStartDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD26204252DA4AD00115243 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2CD26206252DA4AD00115243 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2CD26208252DA4AD00115243 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2CD2620B252DA4AD00115243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2CD2620D252DA4B000115243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2CD26210252DA4B000115243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2CD26212252DA4B000115243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CD26217252DA4B000115243 /* PangleQuickStartDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PangleQuickStartDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD2621B252DA4B000115243 /* PangleQuickStartDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PangleQuickStartDemoTests.swift; sourceTree = "<group>"; };
+		2CD2621D252DA4B000115243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CD26222252DA4B000115243 /* PangleQuickStartDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PangleQuickStartDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD26226252DA4B000115243 /* PangleQuickStartDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PangleQuickStartDemoUITests.swift; sourceTree = "<group>"; };
+		2CD26228252DA4B000115243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CD26237252DA5C300115243 /* NativeAdsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeAdsViewController.swift; sourceTree = "<group>"; };
+		2CD26245252DA64300115243 /* NativeAdCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeAdCellTableViewCell.swift; sourceTree = "<group>"; };
+		2CD26246252DA64300115243 /* TemplateNativeAdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemplateNativeAdCell.xib; sourceTree = "<group>"; };
+		2CD26247252DA64300115243 /* NativeAdCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdCellTableViewCell.xib; sourceTree = "<group>"; };
+		2CD26248252DA64300115243 /* TemplateNativeAdCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateNativeAdCell.swift; sourceTree = "<group>"; };
+		2CD26260252DAB5E00115243 /* AdmobAdapterDemo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AdmobAdapterDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		2CD26275252DADD300115243 /* TemplateNativeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateNativeViewController.swift; sourceTree = "<group>"; };
+		2CD2627D252DC99500115243 /* RewardedVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedVideoViewController.swift; sourceTree = "<group>"; };
+		2CD26285252EB48200115243 /* FullScreenVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoViewController.swift; sourceTree = "<group>"; };
+		2CD26290253EC3F400115243 /* TemplateBannerAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateBannerAdsViewController.swift; sourceTree = "<group>"; };
+		328F6255AA555E130CAE8BD7 /* Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests.debug.xcconfig"; path = "Target Support Files/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3B82C3C914D60821E1B0F742 /* Pods-PangleQuickStartDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PangleQuickStartDemo.debug.xcconfig"; path = "Target Support Files/Pods-PangleQuickStartDemo/Pods-PangleQuickStartDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		55F704DC9C20649C4C4F6AF7 /* Pods_PangleQuickStartDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PangleQuickStartDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		634A96278F5D241A630FF990 /* Pods-PangleQuickStartDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PangleQuickStartDemoTests.release.xcconfig"; path = "Target Support Files/Pods-PangleQuickStartDemoTests/Pods-PangleQuickStartDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		67BA390502C07E5912D8FADB /* Pods_PangleQuickStartDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PangleQuickStartDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F32624E5C0C86A7205DE9FA /* Pods-PangleQuickStartDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PangleQuickStartDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-PangleQuickStartDemoTests/Pods-PangleQuickStartDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7B4E7972483CA588473FCEDF /* Pods_PangleQuickStartDemo_PangleQuickStartDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PangleQuickStartDemo_PangleQuickStartDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE83EBEDC18DF4EF708D2FD3 /* Pods-PangleQuickStartDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PangleQuickStartDemo.release.xcconfig"; path = "Target Support Files/Pods-PangleQuickStartDemo/Pods-PangleQuickStartDemo.release.xcconfig"; sourceTree = "<group>"; };
+		FE542773B09E86DA630EF113 /* Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests.release.xcconfig"; path = "Target Support Files/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2CD261FE252DA4AD00115243 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CC9C3CEC7E798C14BCFCD3F /* Pods_PangleQuickStartDemo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD26214252DA4B000115243 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60EE89FC5BAF61FA900DD956 /* Pods_PangleQuickStartDemoTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD2621F252DA4B000115243 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D64BC38A960C740535943F3 /* Pods_PangleQuickStartDemo_PangleQuickStartDemoUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		09BCBD1768BE551F1772E25F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55F704DC9C20649C4C4F6AF7 /* Pods_PangleQuickStartDemo.framework */,
+				7B4E7972483CA588473FCEDF /* Pods_PangleQuickStartDemo_PangleQuickStartDemoUITests.framework */,
+				67BA390502C07E5912D8FADB /* Pods_PangleQuickStartDemoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2CD261F8252DA4AD00115243 = {
+			isa = PBXGroup;
+			children = (
+				2CD26203252DA4AD00115243 /* PangleQuickStartDemo */,
+				2CD2621A252DA4B000115243 /* PangleQuickStartDemoTests */,
+				2CD26225252DA4B000115243 /* PangleQuickStartDemoUITests */,
+				2CD26202252DA4AD00115243 /* Products */,
+				621864ACE16E68264F201618 /* Pods */,
+				09BCBD1768BE551F1772E25F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2CD26202252DA4AD00115243 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2CD26201252DA4AD00115243 /* PangleQuickStartDemo.app */,
+				2CD26217252DA4B000115243 /* PangleQuickStartDemoTests.xctest */,
+				2CD26222252DA4B000115243 /* PangleQuickStartDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CD26203252DA4AD00115243 /* PangleQuickStartDemo */ = {
+			isa = PBXGroup;
+			children = (
+				2CD26244252DA61800115243 /* CustomTableViewCell */,
+				2CD26204252DA4AD00115243 /* AppDelegate.swift */,
+				2CD26206252DA4AD00115243 /* SceneDelegate.swift */,
+				2CD26208252DA4AD00115243 /* ViewController.swift */,
+				2CD26237252DA5C300115243 /* NativeAdsViewController.swift */,
+				2CD26275252DADD300115243 /* TemplateNativeViewController.swift */,
+				2CD2627D252DC99500115243 /* RewardedVideoViewController.swift */,
+				2CD26285252EB48200115243 /* FullScreenVideoViewController.swift */,
+				2CD26290253EC3F400115243 /* TemplateBannerAdsViewController.swift */,
+				2CD2620A252DA4AD00115243 /* Main.storyboard */,
+				2CD2620D252DA4B000115243 /* Assets.xcassets */,
+				2CD2620F252DA4B000115243 /* LaunchScreen.storyboard */,
+				2CD26212252DA4B000115243 /* Info.plist */,
+				2CD26260252DAB5E00115243 /* AdmobAdapterDemo-Bridging-Header.h */,
+			);
+			path = PangleQuickStartDemo;
+			sourceTree = "<group>";
+		};
+		2CD2621A252DA4B000115243 /* PangleQuickStartDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				2CD2621B252DA4B000115243 /* PangleQuickStartDemoTests.swift */,
+				2CD2621D252DA4B000115243 /* Info.plist */,
+			);
+			path = PangleQuickStartDemoTests;
+			sourceTree = "<group>";
+		};
+		2CD26225252DA4B000115243 /* PangleQuickStartDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2CD26226252DA4B000115243 /* PangleQuickStartDemoUITests.swift */,
+				2CD26228252DA4B000115243 /* Info.plist */,
+			);
+			path = PangleQuickStartDemoUITests;
+			sourceTree = "<group>";
+		};
+		2CD26244252DA61800115243 /* CustomTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2CD26245252DA64300115243 /* NativeAdCellTableViewCell.swift */,
+				2CD26247252DA64300115243 /* NativeAdCellTableViewCell.xib */,
+				2CD26248252DA64300115243 /* TemplateNativeAdCell.swift */,
+				2CD26246252DA64300115243 /* TemplateNativeAdCell.xib */,
+			);
+			path = CustomTableViewCell;
+			sourceTree = "<group>";
+		};
+		621864ACE16E68264F201618 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B82C3C914D60821E1B0F742 /* Pods-PangleQuickStartDemo.debug.xcconfig */,
+				EE83EBEDC18DF4EF708D2FD3 /* Pods-PangleQuickStartDemo.release.xcconfig */,
+				328F6255AA555E130CAE8BD7 /* Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests.debug.xcconfig */,
+				FE542773B09E86DA630EF113 /* Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests.release.xcconfig */,
+				6F32624E5C0C86A7205DE9FA /* Pods-PangleQuickStartDemoTests.debug.xcconfig */,
+				634A96278F5D241A630FF990 /* Pods-PangleQuickStartDemoTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2CD26200252DA4AD00115243 /* PangleQuickStartDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD2622B252DA4B000115243 /* Build configuration list for PBXNativeTarget "PangleQuickStartDemo" */;
+			buildPhases = (
+				EBB3D69ACBAE82A4310E0F21 /* [CP] Check Pods Manifest.lock */,
+				2CD261FD252DA4AD00115243 /* Sources */,
+				2CD261FE252DA4AD00115243 /* Frameworks */,
+				2CD261FF252DA4AD00115243 /* Resources */,
+				D7419CE54BD0D952466CBDE2 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PangleQuickStartDemo;
+			productName = PangleQuickStartDemo;
+			productReference = 2CD26201252DA4AD00115243 /* PangleQuickStartDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2CD26216252DA4B000115243 /* PangleQuickStartDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD2622E252DA4B000115243 /* Build configuration list for PBXNativeTarget "PangleQuickStartDemoTests" */;
+			buildPhases = (
+				6E23B19F532B0145080B13DD /* [CP] Check Pods Manifest.lock */,
+				2CD26213252DA4B000115243 /* Sources */,
+				2CD26214252DA4B000115243 /* Frameworks */,
+				2CD26215252DA4B000115243 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2CD26219252DA4B000115243 /* PBXTargetDependency */,
+			);
+			name = PangleQuickStartDemoTests;
+			productName = PangleQuickStartDemoTests;
+			productReference = 2CD26217252DA4B000115243 /* PangleQuickStartDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2CD26221252DA4B000115243 /* PangleQuickStartDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD26231252DA4B000115243 /* Build configuration list for PBXNativeTarget "PangleQuickStartDemoUITests" */;
+			buildPhases = (
+				AA578CDA8C91B2035F6CE1CC /* [CP] Check Pods Manifest.lock */,
+				2CD2621E252DA4B000115243 /* Sources */,
+				2CD2621F252DA4B000115243 /* Frameworks */,
+				2CD26220252DA4B000115243 /* Resources */,
+				9F6E14A122B4890D0FC409FC /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2CD26224252DA4B000115243 /* PBXTargetDependency */,
+			);
+			name = PangleQuickStartDemoUITests;
+			productName = PangleQuickStartDemoUITests;
+			productReference = 2CD26222252DA4B000115243 /* PangleQuickStartDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2CD261F9252DA4AD00115243 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					2CD26200252DA4AD00115243 = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+					2CD26216252DA4B000115243 = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 2CD26200252DA4AD00115243;
+					};
+					2CD26221252DA4B000115243 = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 2CD26200252DA4AD00115243;
+					};
+				};
+			};
+			buildConfigurationList = 2CD261FC252DA4AD00115243 /* Build configuration list for PBXProject "PangleQuickStartDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2CD261F8252DA4AD00115243;
+			productRefGroup = 2CD26202252DA4AD00115243 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2CD26200252DA4AD00115243 /* PangleQuickStartDemo */,
+				2CD26216252DA4B000115243 /* PangleQuickStartDemoTests */,
+				2CD26221252DA4B000115243 /* PangleQuickStartDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2CD261FF252DA4AD00115243 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD26211252DA4B000115243 /* LaunchScreen.storyboard in Resources */,
+				2CD2620E252DA4B000115243 /* Assets.xcassets in Resources */,
+				2CD2624B252DA64300115243 /* NativeAdCellTableViewCell.xib in Resources */,
+				2CD2620C252DA4AD00115243 /* Main.storyboard in Resources */,
+				2CD2624A252DA64300115243 /* TemplateNativeAdCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD26215252DA4B000115243 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD26220252DA4B000115243 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6E23B19F532B0145080B13DD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PangleQuickStartDemoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F6E14A122B4890D0FC409FC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA578CDA8C91B2035F6CE1CC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7419CE54BD0D952466CBDE2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo/Pods-PangleQuickStartDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo/Pods-PangleQuickStartDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo/Pods-PangleQuickStartDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBB3D69ACBAE82A4310E0F21 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PangleQuickStartDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2CD261FD252DA4AD00115243 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD2627E252DC99500115243 /* RewardedVideoViewController.swift in Sources */,
+				2CD26286252EB48200115243 /* FullScreenVideoViewController.swift in Sources */,
+				2CD26209252DA4AD00115243 /* ViewController.swift in Sources */,
+				2CD2624C252DA64300115243 /* TemplateNativeAdCell.swift in Sources */,
+				2CD26205252DA4AD00115243 /* AppDelegate.swift in Sources */,
+				2CD26291253EC3F400115243 /* TemplateBannerAdsViewController.swift in Sources */,
+				2CD26207252DA4AD00115243 /* SceneDelegate.swift in Sources */,
+				2CD26249252DA64300115243 /* NativeAdCellTableViewCell.swift in Sources */,
+				2CD26238252DA5C300115243 /* NativeAdsViewController.swift in Sources */,
+				2CD26276252DADD300115243 /* TemplateNativeViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD26213252DA4B000115243 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD2621C252DA4B000115243 /* PangleQuickStartDemoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD2621E252DA4B000115243 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD26227252DA4B000115243 /* PangleQuickStartDemoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2CD26219252DA4B000115243 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2CD26200252DA4AD00115243 /* PangleQuickStartDemo */;
+			targetProxy = 2CD26218252DA4B000115243 /* PBXContainerItemProxy */;
+		};
+		2CD26224252DA4B000115243 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2CD26200252DA4AD00115243 /* PangleQuickStartDemo */;
+			targetProxy = 2CD26223252DA4B000115243 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2CD2620A252DA4AD00115243 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CD2620B252DA4AD00115243 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2CD2620F252DA4B000115243 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CD26210252DA4B000115243 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2CD26229252DA4B000115243 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2CD2622A252DA4B000115243 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2CD2622C252DA4B000115243 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B82C3C914D60821E1B0F742 /* Pods-PangleQuickStartDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6RCYD83376;
+				INFOPLIST_FILE = PangleQuickStartDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangleglobal.PangleQuickStartDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PangleQuickStartDemo/AdmobAdapterDemo-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2CD2622D252DA4B000115243 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE83EBEDC18DF4EF708D2FD3 /* Pods-PangleQuickStartDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6RCYD83376;
+				INFOPLIST_FILE = PangleQuickStartDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangleglobal.PangleQuickStartDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PangleQuickStartDemo/AdmobAdapterDemo-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2CD2622F252DA4B000115243 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F32624E5C0C86A7205DE9FA /* Pods-PangleQuickStartDemoTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PangleQuickStartDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangleglobal.PangleQuickStartDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PangleQuickStartDemo.app/PangleQuickStartDemo";
+			};
+			name = Debug;
+		};
+		2CD26230252DA4B000115243 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 634A96278F5D241A630FF990 /* Pods-PangleQuickStartDemoTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PangleQuickStartDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangleglobal.PangleQuickStartDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PangleQuickStartDemo.app/PangleQuickStartDemo";
+			};
+			name = Release;
+		};
+		2CD26232252DA4B000115243 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 328F6255AA555E130CAE8BD7 /* Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PangleQuickStartDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangleglobal.PangleQuickStartDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PangleQuickStartDemo;
+			};
+			name = Debug;
+		};
+		2CD26233252DA4B000115243 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE542773B09E86DA630EF113 /* Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PangleQuickStartDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangleglobal.PangleQuickStartDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PangleQuickStartDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2CD261FC252DA4AD00115243 /* Build configuration list for PBXProject "PangleQuickStartDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD26229252DA4B000115243 /* Debug */,
+				2CD2622A252DA4B000115243 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD2622B252DA4B000115243 /* Build configuration list for PBXNativeTarget "PangleQuickStartDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD2622C252DA4B000115243 /* Debug */,
+				2CD2622D252DA4B000115243 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD2622E252DA4B000115243 /* Build configuration list for PBXNativeTarget "PangleQuickStartDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD2622F252DA4B000115243 /* Debug */,
+				2CD26230252DA4B000115243 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD26231252DA4B000115243 /* Build configuration list for PBXNativeTarget "PangleQuickStartDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD26232252DA4B000115243 /* Debug */,
+				2CD26233252DA4B000115243 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2CD261F9252DA4AD00115243 /* Project object */;
+}

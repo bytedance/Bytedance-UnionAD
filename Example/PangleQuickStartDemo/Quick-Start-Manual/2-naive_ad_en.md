@@ -162,7 +162,7 @@ class NativeAdCellTableViewCell: UITableViewCell {
 <a name="start/native_ad_template"></a>
 ## Template Native Ads
 
-<a name="start/native_ad_template"></a>
+<a name="start/native_ad_template_load"></a>
 ## Loading Ads
 
 On Pangle platform, create an **Template** ad in the app, you will get a **placement ID** for ad's loading.

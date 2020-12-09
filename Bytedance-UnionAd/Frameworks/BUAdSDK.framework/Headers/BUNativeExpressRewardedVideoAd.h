@@ -134,7 +134,8 @@ typedef NS_ENUM(NSUInteger, BUNativeExpressRewardedVideoAdType) {
  Setted to YES when data is not empty and has not been displayed.
  Repeated display is not billed.
  */
-@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
+
+@property (nonatomic, getter=isAdValid, readonly) BOOL adValid __attribute__((deprecated("Use nativeExpressRewardedVideoAdDidLoad: instead.")));
 
 - (instancetype)initWithSlotID:(NSString *)slotID rewardedVideoModel:(BURewardedVideoModel *)model;
 

@@ -104,7 +104,8 @@ This method is used to get the type of nativeExpressFullScreenVideo ad
 @interface BUNativeExpressFullscreenVideoAd : NSObject
 
 @property (nonatomic, weak, nullable) id<BUNativeExpressFullscreenVideoAdDelegate> delegate;
-@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
+
+@property (nonatomic, getter=isAdValid, readonly) BOOL adValid __attribute__((deprecated("Use nativeExpressFullscreenVideoAdDidLoad: instead.")));
 
 /// media configuration parameters.
 @property (nonatomic, copy, readonly) NSDictionary *mediaExt;

@@ -30,7 +30,8 @@ typedef NS_ENUM(NSUInteger, BURewardedVideoAdType) {
  Setted to YES when data is not empty and has not been displayed.
  Repeated display is not billed.
  */
-@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
+
+@property (nonatomic, getter=isAdValid, readonly) BOOL adValid __attribute__((deprecated("Use rewardedVideoAdDidLoad: instead.")));
 
 /// media configuration parameters.
 @property (nonatomic, copy, readonly) NSDictionary *mediaExt;

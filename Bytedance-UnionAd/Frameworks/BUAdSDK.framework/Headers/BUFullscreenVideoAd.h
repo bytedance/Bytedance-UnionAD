@@ -87,7 +87,8 @@ this method is used to get the type of fullscreen video ad
 @interface BUFullscreenVideoAd : NSObject <BUMopubAdMarkUpDelegate>
 
 @property (nonatomic, weak, nullable) id<BUFullscreenVideoAdDelegate> delegate;
-@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
+
+@property (nonatomic, getter=isAdValid, readonly) BOOL adValid __attribute__((deprecated("Use fullscreenVideoMaterialMetaAdDidLoad: instead.")));
 
 /// media configuration parameters.
 @property (nonatomic, copy, readonly) NSDictionary *mediaExt;

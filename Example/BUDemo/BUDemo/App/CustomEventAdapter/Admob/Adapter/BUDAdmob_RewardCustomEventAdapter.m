@@ -85,6 +85,8 @@ NSString *const REWARD_PANGLE_PLACEMENT_ID = @"placementID";
 
 #pragma mark - GADMediationRewardedAd
 - (void)presentFromViewController:(nonnull UIViewController *)viewController{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     if ([_rewardedVideoAd isAdValid]) {
         [_rewardedVideoAd showAdFromRootViewController:viewController ritScene:0 ritSceneDescribe:nil];
     } else {
@@ -95,6 +97,7 @@ NSString *const REWARD_PANGLE_PLACEMENT_ID = @"placementID";
                         userInfo:@{NSLocalizedDescriptionKey : @"Unable to display ad."}];
         [self.delegate didFailToPresentWithError:error];
     }
+#pragma clang diagnostic pop
 }
 
 #pragma mark BURewardedVideoAdDelegate

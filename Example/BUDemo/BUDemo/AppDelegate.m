@@ -15,11 +15,14 @@
 #import "BUDMainViewModel.h"
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import "RRFPSBar.h"
+#import "MoPub.h"
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
 #import <Bugly/Bugly.h>
+#import "BUAdSDKAdapterConfiguration.h"
 #import "BUDTestToolsViewController.h"
 #import "BUDAnimationTool.h"
+#import <BUDBuglyConfig/BUDBuglyConfig.h>
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -84,6 +87,7 @@
 
 - (void)configAPM {
     // bugly
+    [BUDBuglyConfig startWithBugly:[Bugly class] andConfig:[[BuglyConfig alloc] init]];
 }
 
 - (void)configCustomEvent {
@@ -100,6 +104,41 @@
 //        [BUAdSDKManager setGDPR:0];
     }];
     
+    // mopub adaptor config
+    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:mopub_AD_APPID];
+    
+    NSMutableDictionary *networkConfig = [NSMutableDictionary dictionaryWithCapacity:2];
+    NSMutableDictionary *InitConfig = [[NSMutableDictionary alloc] init];
+    //=== required =============================================================================
+    [InitConfig setValue:[BUDAdManager appKey] forKey:@"appKey"];
+
+    //=== optional =============================================================================
+    /* Set the COPPA of the user, COPPA is the short of Children's Online Privacy Protection Rule, the interface only works in the United States.
+    * @params Coppa 0 adult, 1 child
+    */
+    [InitConfig setValue:@(0) forKey:@"Coppa"];
+    /// Set whether the app is a paid app, the default is a non-paid app.
+    /// Must obtain the consent of the user before incoming
+    [InitConfig setValue:@(NO) forKey:@"isPaidApp"];
+    /// Custom set the GDPR of the user,GDPR is the short of General Data Protection Regulation,the interface only works in The European.
+    /// @params GDPR 0 close privacy protection, 1 open privacy protection
+    [InitConfig setValue:@(0) forKey:@"GDPR"];
+    
+    NSDictionary *config = @{@"BUAdSDKAdapterConfiguration":InitConfig};
+    [networkConfig addEntriesFromDictionary:config];
+    Class<MPAdapterConfiguration> BUAdSDKAdapterConfiguration = NSClassFromString(@"BUAdSDKAdapterConfiguration");
+    if (BUAdSDKAdapterConfiguration != nil) {
+        sdkConfig.additionalNetworks = @[BUAdSDKAdapterConfiguration];
+    }
+    sdkConfig.mediatedNetworkConfigurations = networkConfig;
+#if DEBUG
+    sdkConfig.loggingLevel = MPBLogLevelInfo;
+#endif
+    sdkConfig.globalMediationSettings = @[];
+    
+    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
+        BUD_Log(@"Mopub initializeSdk");
+    }];
 }
 
 - (void)setupBUAdSDK {

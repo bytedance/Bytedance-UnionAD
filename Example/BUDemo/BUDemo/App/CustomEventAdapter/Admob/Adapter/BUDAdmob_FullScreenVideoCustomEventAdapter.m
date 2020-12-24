@@ -17,11 +17,14 @@
 NSString *const INTERSTITIAL_PANGLE_PLACEMENT_ID = @"placementID";
 
 - (void)presentFromRootViewController:(nonnull UIViewController *)rootViewController {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
     if (self.fullScreenVideo.isAdValid) {
         [self.fullScreenVideo showAdFromRootViewController:rootViewController];
     } else {
         NSLog(@"no ads to show");
     }
+#pragma clang diagnostic pop
 }
 
 - (void)requestInterstitialAdWithParameter:(nullable NSString *)serverParameter label:(nullable NSString *)serverLabel request:(nonnull GADCustomEventRequest *)request {

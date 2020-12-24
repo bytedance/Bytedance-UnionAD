@@ -10,6 +10,7 @@
 #import "BUDActionCellView.h"
 #import "BUDMacros.h"
 #import "BUDAdmobCustomEventViewController.h"
+#import "BUDMopubCustomEventViewController.h"
 
 @interface BUDCustomEventViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -47,8 +48,15 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
+    BUDActionModel *mopubItem = [BUDActionModel plainTitleActionModel:@"Mopub" type:BUDCellType_CustomEvent action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUDMopubCustomEventViewController *vc = [BUDMopubCustomEventViewController new];
+        vc.view.backgroundColor = [UIColor whiteColor];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    
     self.items = @[
-                   @[admobItem]];
+                   @[admobItem],@[mopubItem]];
 }
 
 #pragma mark - UITableViewDataSource

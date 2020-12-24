@@ -26,6 +26,7 @@ Pod::Spec.new do |s|
   #s.public_header_files = 'Bytedance-UnionAd/Classes/*.h'
   #s.source_files = 'Bytedance-UnionAd/Classes/*'
   s.vendored_frameworks =  ['Bytedance-UnionAd/Frameworks/BUAdSDK.framework','Bytedance-UnionAd/Frameworks/BUFoundation.framework']
+  s.preserve_paths = ['Bytedance-UnionAd/Frameworks/BUAdSDK.framework','Bytedance-UnionAd/Frameworks/BUFoundation.framework']
   s.resource = 'Bytedance-UnionAd/Frameworks/BUAdSDK.bundle'
   # s.dependency 'AFNetworking', '~> 2.3'
   valid_archs = ['armv7', 'armv7s', 'x86_64', 'arm64']

@@ -26,6 +26,12 @@ Pod::Spec.new do |s|
   valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
   s.preserve_paths = 'PangleSDK/*.framework'
 
+  s.preserve_paths = ['PangleSDK/**']
+  s.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+
   s.default_subspec = 'BUAdSDK'
   
   s.subspec 'International' do |ss|
@@ -33,16 +39,16 @@ Pod::Spec.new do |s|
     ss.preserve_paths = 'PangleSDK/BUVAAuxiliary.framework'
   end
   
-  s.subspec 'Domestic' do |ss|
-      ss.vendored_frameworks = ['PangleSDK/BUCNAuxiliary.framework']
-      ss.preserve_paths = 'PangleSDK/BUCNAuxiliary.framework'
-  end
+  # s.subspec 'Domestic' do |ss|
+  #     ss.vendored_frameworks = ['PangleSDK/BUCNAuxiliary.framework']
+  #     ss.preserve_paths = 'PangleSDK/BUCNAuxiliary.framework'
+  # end
   
   s.subspec 'BUAdSDK' do |ss|
     ss.vendored_frameworks = ['PangleSDK/BUAdSDK.framework']
     ss.preserve_paths = 'PangleSDK/BUAdSDK.framework'
-    ss.dependency 'BUPlugins/BUFoundation'
-    ss.dependency 'BUPlugins/International'
+    ss.dependency 'Ads-Global-Beta/BUFoundation'
+    ss.dependency 'Ads-Global-Beta/International'
     ss.resource = 'PangleSDK/BUAdSDK.bundle'
   end
   

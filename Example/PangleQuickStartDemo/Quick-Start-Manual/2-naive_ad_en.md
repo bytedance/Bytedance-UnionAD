@@ -4,7 +4,7 @@
 * [Origin Native Ads](#start/native_ad_origin)
   * [Loading Ads](#start/native_ad_origin_load)
   * [Determining load events](#start/native_ad_origin_loadevent)
-  * [Displaying Ads](#start/native_ad_origin_display)
+  * [Displaying Ads and Registering Ads](#start/native_ad_origin_display)
 * [Template Native Ads](#start/native_ad_template)
   * [Loading Ads](#start/native_ad_template_load)
   * [Determining load events](#start/native_ad_template_loadevent)
@@ -83,13 +83,16 @@ extension YourNativeAdsViewController: BUNativeAdsManagerDelegate {
 ```
 
 <a name="start/native_ad_origin_display"></a>
-### Displaying Ads
+### Displaying Ads and Registering Ads
 
 `nativeAd`'s parameter `data` has parts like ad's title, description, images for displaying.
 
 if the parameter`imageMode` in the `data` is **BUFeedVideoAdModeImage** or **BUFeedADModeSquareVideo**, please init a `BUNativeAdRelatedView` and call `- (void)refreshData:(BUNativeAd *)nativeAd;` to get videoAdView parts for the ad.
 
 Please add `BUNativeAdRelatedView`'s `logoADImageView` on ad's view, this view will show the privacy information when been clicked.
+
+**Must** register clickable view in the ad via `BUNativeAd`'s` (void)registerContainer:(__kindof UIView *)containerView
+       withClickableViews:(NSArray<__kindof UIView *> *_Nullable)clickableViews;`. You can set clickable area of the ad(etc. button/image/video) and this method will response to user clicks to redirected to the landing page, and **also watching the ad to trigger the impression event**.
 
 
 ```swift

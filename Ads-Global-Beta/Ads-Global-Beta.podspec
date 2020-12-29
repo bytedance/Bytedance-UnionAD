@@ -9,9 +9,9 @@
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global-Beta'
   s.version          = '3.4.1.0'
-  s.summary          = 'BUAdSDK is a SDK from Bytedance providing union AD service.'
+  s.summary          = 'Ads-Global-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
-  Bytedance provides Union ADs which include native、banner、feed、splash、RewardVideo etc.
+  Ads-Global-Beta provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
                        DESC
 
   s.license          = { :type => 'MIT', :file => 'LICENSE' }

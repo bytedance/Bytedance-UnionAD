@@ -58,16 +58,14 @@ class FullScreenVideoViewController: UIViewController {
 <a name="start/fullscreen_loadevent"></a>
 ### Determining load events and displaying
 
-`BUFullscreenVideoAdDelegate` indicates the result of ad's load. If ad is loaded and `isAdValid`, call `- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;` to display the ad.
+`BUFullscreenVideoAdDelegate` indicates the result of ad's load. Please call `- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;` to display the ad.
 
 ```swift
 // MARK: BUFullscreenVideoAdDelegate
 extension FullScreenVideoViewController: BUFullscreenVideoAdDelegate{
 
     func fullscreenVideoMaterialMetaAdDidLoad(_ fullscreenVideoAd: BUFullscreenVideoAd) {
-        if (fullscreenVideoAd.isAdValid) {
-            fullscreenVideoAd.show(fromRootViewController: self)
-        }
+        fullscreenVideoAd.show(fromRootViewController: self)
     }
 
     func fullscreenVideoAd(_ fullscreenVideoAd: BUFullscreenVideoAd, didFailWithError error: Error?) {

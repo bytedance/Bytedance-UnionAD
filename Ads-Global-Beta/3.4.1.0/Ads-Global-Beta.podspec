@@ -15,18 +15,18 @@ Pod::Spec.new do |s|
                        DESC
 
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'bytedance-tech' => 'wangyanlin.tech@bytedance.com' }
+  s.author           = { 'bytedance-tech' => 'zywork@bytedance.com' }
 
   s.homepage         = 'https://bytedance.feishu.cn/drive/home/'
   s.source           = { :http => 'https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/3.4.1.0/PangleSDK.zip' }
   s.platform     = :ios, "9.0"  
-  s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore'
-  s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2'
+  s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security'
+  s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv'
   
   valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
+
   s.preserve_paths = 'PangleSDK/*.framework'
 
-  s.preserve_paths = ['PangleSDK/**']
   s.pod_target_xcconfig = {
     'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
   }
@@ -35,6 +35,7 @@ Pod::Spec.new do |s|
   s.default_subspec = 'BUAdSDK'
   
   s.subspec 'International' do |ss|
+    ss.preserve_paths = 'PangleSDK/BUVAAuxiliary.framework'
   	ss.vendored_frameworks = ['PangleSDK/BUVAAuxiliary.framework']
     ss.preserve_paths = 'PangleSDK/BUVAAuxiliary.framework'
   end
@@ -45,6 +46,7 @@ Pod::Spec.new do |s|
   # end
   
   s.subspec 'BUAdSDK' do |ss|
+    ss.preserve_paths = 'PangleSDK/BUAdSDK.framework'
     ss.vendored_frameworks = ['PangleSDK/BUAdSDK.framework']
     ss.preserve_paths = 'PangleSDK/BUAdSDK.framework'
     ss.dependency 'Ads-Global-Beta/BUFoundation'
@@ -53,6 +55,7 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'BUFoundation' do |ss|
+    ss.preserve_paths = 'PangleSDK/BUFoundation.framework'
     ss.vendored_frameworks = ['PangleSDK/BUFoundation.framework']
     ss.preserve_paths = 'PangleSDK/BUFoundation.framework'
   end

@@ -15,23 +15,28 @@ Pod::Spec.new do |s|
                        DESC
 
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'bytedance-tech' => 'wangyanlin.tech@bytedance.com' }
+  s.author           = { 'bytedance-tech' => 'zywork@bytedance.com' }
 
   s.homepage         = 'https://bytedance.feishu.cn/drive/home/'
   s.source           = { :http => 'https://sf3-fe-tos.pglstatp-toutiao.com/obj/pangle-sdk-static/3.4.1.0/PangleSDK.zip' }
   s.platform     = :ios, "9.0"  
-  s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore'
-  s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2'
+  s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security'
+  s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv'
   
   valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
+
   s.preserve_paths = 'PangleSDK/*.framework'
+  s.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
   s.default_subspec = 'BUAdSDK'
   
-  s.subspec 'International' do |ss|
-  	ss.vendored_frameworks = ['PangleSDK/BUVAAuxiliary.framework']
-    ss.preserve_paths = 'PangleSDK/BUVAAuxiliary.framework'
-  end
+  # s.subspec 'International' do |ss|
+  # 	ss.vendored_frameworks = ['PangleSDK/BUVAAuxiliary.framework']
+  #   ss.preserve_paths = 'PangleSDK/BUVAAuxiliary.framework'
+  # end
   
   s.subspec 'Domestic' do |ss|
       ss.vendored_frameworks = ['PangleSDK/BUCNAuxiliary.framework']
@@ -41,8 +46,8 @@ Pod::Spec.new do |s|
   s.subspec 'BUAdSDK' do |ss|
     ss.vendored_frameworks = ['PangleSDK/BUAdSDK.framework']
     ss.preserve_paths = 'PangleSDK/BUAdSDK.framework'
-    ss.dependency 'BUPlugins/BUFoundation'
-    ss.dependency 'BUPlugins/Domestic'
+    ss.dependency 'Ads-CN-Beta/BUFoundation'
+    ss.dependency 'Ads-CN-Beta/Domestic'
     ss.resource = 'PangleSDK/BUAdSDK.bundle'
   end
   

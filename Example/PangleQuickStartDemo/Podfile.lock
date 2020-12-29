@@ -1,5 +1,5 @@
 PODS:
-  - Bytedance-UnionAD (3.3.0.4)
+  - Bytedance-UnionAD (3.3.6.2)
 
 DEPENDENCIES:
   - Bytedance-UnionAD
@@ -9,7 +9,7 @@ SPEC REPOS:
     - Bytedance-UnionAD
 
 SPEC CHECKSUMS:
-  Bytedance-UnionAD: 1c658dd37741b799c6fb6f8a242a14b409711e15
+  Bytedance-UnionAD: e9f83939e2a5d857e104f6a91035bbf504b603e5
 
 PODFILE CHECKSUM: 8605198075ccbf781763238b4f9da0af756077cb
 

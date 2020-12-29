@@ -32,9 +32,7 @@ class FullScreenVideoViewController: UIViewController {
 extension FullScreenVideoViewController: BUFullscreenVideoAdDelegate{
     
     func fullscreenVideoMaterialMetaAdDidLoad(_ fullscreenVideoAd: BUFullscreenVideoAd) {
-        if (fullscreenVideoAd.isAdValid) {
-            fullscreenVideoAd.show(fromRootViewController: self)
-        }
+        fullscreenVideoAd.show(fromRootViewController: self)
     }
     
     func fullscreenVideoAd(_ fullscreenVideoAd: BUFullscreenVideoAd, didFailWithError error: Error?) {

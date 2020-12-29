@@ -38,11 +38,7 @@ class RewardedVideoViewController: UIViewController {
 extension RewardedVideoViewController: BURewardedVideoAdDelegate {
     func rewardedVideoAdDidLoad(_ rewardedVideoAd: BURewardedVideoAd) {
         print("\(#function)")
-        if (rewardedVideoAd.isAdValid) {
-            rewardedVideoAd.show(fromRootViewController: self)
-        } else {
-            print("\(#function) rewardedVideoAd is unvalid ")
-        }
+        rewardedVideoAd.show(fromRootViewController: self)
     }
     
     func rewardedVideoAdVideoDidLoad(_ rewardedVideoAd: BURewardedVideoAd) {

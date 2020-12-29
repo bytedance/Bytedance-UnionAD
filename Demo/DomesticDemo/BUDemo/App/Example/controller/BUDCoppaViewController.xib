@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BUDCoppaViewController">
+            <connections>
+                <outlet property="coppaLabel" destination="pSI-0v-ib5" id="hfB-Dt-sgF"/>
+                <outlet property="coppaSwitch" destination="2iA-Kb-WMx" id="fjM-lC-iVN"/>
+                <outlet property="gdprLabel" destination="xdi-GO-NBs" id="FOm-c5-67m"/>
+                <outlet property="gdprSwitch" destination="ErA-53-jP7" id="UG5-Ap-T4W"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2iA-Kb-WMx">
+                    <rect key="frame" x="85" y="162" width="51" height="31"/>
+                    <color key="onTintColor" systemColor="systemOrangeColor"/>
+                    <color key="thumbTintColor" systemColor="systemTealColor"/>
+                    <connections>
+                        <action selector="coppaValueChange:" destination="-1" eventType="valueChanged" id="wNV-sv-DYe"/>
+                    </connections>
+                </switch>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coppa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjc-Ac-4pD">
+                    <rect key="frame" x="20" y="167" width="51" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSI-0v-ib5">
+                    <rect key="frame" x="383" y="167" width="11" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ErA-53-jP7">
+                    <rect key="frame" x="85" y="219" width="51" height="31"/>
+                    <color key="onTintColor" systemColor="systemOrangeColor"/>
+                    <color key="thumbTintColor" systemColor="systemTealColor"/>
+                    <connections>
+                        <action selector="gdprValueChange:" destination="-1" eventType="valueChanged" id="GJT-yG-N6W"/>
+                    </connections>
+                </switch>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GDPR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZk-YG-e17">
+                    <rect key="frame" x="20" y="224" width="46" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdi-GO-NBs">
+                    <rect key="frame" x="383" y="224" width="11" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZo-AV-F1o">
+                    <rect key="frame" x="20" y="275" width="374" height="43"/>
+                    <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="43" id="huh-jk-PO8"/>
+                    </constraints>
+                    <state key="normal" title="刷新当前值">
+                        <color key="titleColor" systemColor="tableCellGroupedBackgroundColor"/>
+                    </state>
+                    <connections>
+                        <action selector="refresh:" destination="-1" eventType="touchUpInside" id="Jks-TC-xvE"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="2iA-Kb-WMx" firstAttribute="leading" secondItem="Gjc-Ac-4pD" secondAttribute="trailing" constant="14" id="7IA-7R-XAU"/>
+                <constraint firstItem="kZk-YG-e17" firstAttribute="top" secondItem="Gjc-Ac-4pD" secondAttribute="bottom" constant="36" id="GcX-Ul-AMY"/>
+                <constraint firstItem="KZo-AV-F1o" firstAttribute="top" secondItem="ErA-53-jP7" secondAttribute="bottom" constant="25" id="Lmh-Q8-0Yu"/>
+                <constraint firstItem="Gjc-Ac-4pD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="167" id="QNq-Ov-u5Q"/>
+                <constraint firstItem="kZk-YG-e17" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="W00-qg-WNh"/>
+                <constraint firstItem="Gjc-Ac-4pD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Xeu-4P-igK"/>
+                <constraint firstItem="ErA-53-jP7" firstAttribute="centerY" secondItem="kZk-YG-e17" secondAttribute="centerY" id="Xjo-gA-nd7"/>
+                <constraint firstItem="pSI-0v-ib5" firstAttribute="centerY" secondItem="Gjc-Ac-4pD" secondAttribute="centerY" id="bT7-bJ-TZ7"/>
+                <constraint firstItem="2iA-Kb-WMx" firstAttribute="centerY" secondItem="Gjc-Ac-4pD" secondAttribute="centerY" id="gjU-1A-EWx"/>
+                <constraint firstItem="ErA-53-jP7" firstAttribute="leading" secondItem="kZk-YG-e17" secondAttribute="trailing" constant="19" id="jqA-Pn-amy"/>
+                <constraint firstItem="xdi-GO-NBs" firstAttribute="centerY" secondItem="kZk-YG-e17" secondAttribute="centerY" id="nfV-OJ-6Oc"/>
+                <constraint firstAttribute="trailing" secondItem="KZo-AV-F1o" secondAttribute="trailing" constant="20" id="sTH-9w-U4p"/>
+                <constraint firstAttribute="trailing" secondItem="pSI-0v-ib5" secondAttribute="trailing" constant="20" id="tBJ-fn-fek"/>
+                <constraint firstItem="KZo-AV-F1o" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="uCB-j3-rIc"/>
+                <constraint firstAttribute="trailing" secondItem="xdi-GO-NBs" secondAttribute="trailing" constant="20" id="ypp-5R-9V8"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="101.78571428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tableCellGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

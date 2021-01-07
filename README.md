@@ -27,7 +27,16 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 target 'TargetName' do
-pod 'Bytedance-UnionAD'
+
+#Used >3400. Pangle-Ads-The-Chinese-Mainland-Traffic
+#pod 'Ads-CN'
+
+#Used >3400. Pangle-Ads-Outside-The-Chinese-Mainland-Traffic
+#pod 'Ads-Global'
+
+#Used <3400
+#pod 'Bytedance-UnionAD'
+
 end
 ```
 Then, run the following command:

@@ -1,0 +1,16 @@
+PODS:
+  - Bytedance-UnionAD (3.3.6.2)
+
+DEPENDENCIES:
+  - Bytedance-UnionAD
+
+SPEC REPOS:
+  trunk:
+    - Bytedance-UnionAD
+
+SPEC CHECKSUMS:
+  Bytedance-UnionAD: e9f83939e2a5d857e104f6a91035bbf504b603e5
+
+PODFILE CHECKSUM: 8605198075ccbf781763238b4f9da0af756077cb
+
+COCOAPODS: 1.9.3

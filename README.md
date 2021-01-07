@@ -4,12 +4,9 @@ Pod for Bytedance-UnionAD only support **x86_64, armv7, arm64, i386**.
 
 ## How To Get Started
 
-+ [Download Bytedance-UnionAD](https://github.com/bytedance/Bytedance-UnionAD/tree/master) and try out the included [example app](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Example)
-
++ [Download Bytedance-UnionAD](https://github.com/bytedance/Bytedance-UnionAD/tree/master) and try out the included [example app](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Demo)
 + Check out the [documentation](https://www.pangle.cn/help/doc/5fc4f25f7b550100157c01d0) for a comprehensive look at all of the APIs available in Bytedance-UnionAD
-
 + If you have other questions, please read [FAQ](https://www.pangle.cn/help/doc/5dd0fe618507820012088272) first
-
 + We provide a [**Quick Start**](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Example/PangleQuickStartDemo) to help you to easily integrate and use the SDK.
 
 ## Installation with CocoaPods
@@ -21,20 +18,20 @@ $ gem install cocoapods
 
 ### Podfile
 
-To integrate Bytedance-UnionAD into your Xcode project using CocoaPods, **you must install Git LFS first**,then specify it in your **Podfile**:
+To integrate Bytedance-UnionAD into your Xcode project using CocoaPods,then specify it in your **Podfile**:
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 target 'TargetName' do
 
-#Used >3400. Pangle-Ads-The-Chinese-Mainland-Traffic
+#Used >3.4.0.0. Pangle-Ads-The-Chinese-Mainland-Traffic
 #pod 'Ads-CN'
 
-#Used >3400. Pangle-Ads-Outside-The-Chinese-Mainland-Traffic
+#Used >3.4.0.0. Pangle-Ads-Outside-The-Chinese-Mainland-Traffic
 #pod 'Ads-Global'
 
-#Used <3400
+#Used <3.4.0.0
 #pod 'Bytedance-UnionAD'
 
 end

@@ -33,10 +33,10 @@ Pod::Spec.new do |s|
     ss.preserve_paths = 'PangleSDK/BUVAAuxiliary.framework'
   end
   
-  # s.subspec 'Domestic' do |ss|
-  #     ss.vendored_frameworks = ['PangleSDK/BUCNAuxiliary.framework']
-  #     ss.preserve_paths = 'PangleSDK/BUCNAuxiliary.framework'
-  # end
+  s.subspec 'Domestic' do |ss|
+    ss.vendored_frameworks = ['PangleSDK/BUCNAuxiliary.framework']
+    ss.preserve_paths = 'PangleSDK/BUCNAuxiliary.framework'
+  end
   
   s.subspec 'BUAdSDK' do |ss|
     ss.vendored_frameworks = ['PangleSDK/BUAdSDK.framework']

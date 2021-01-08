@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global-Beta'
-  s.version          = '3.4.1.0'
+  s.version          = '3.4.1.1'
   s.summary          = 'Ads-Global-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Global-Beta provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.author           = { 'bytedance-tech' => 'zywork@bytedance.com' }
 
   s.homepage         = 'https://bytedance.feishu.cn/drive/home/'
-  s.source           = { :http => 'https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/3.4.1.0/PangleSDK.zip' }
+  s.source           = { :http => 'https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/3.4.1.1/PangleSDK.zip' }
   s.platform     = :ios, "9.0"  
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv'
@@ -40,10 +40,10 @@ Pod::Spec.new do |s|
     ss.preserve_paths = 'PangleSDK/BUVAAuxiliary.framework'
   end
   
-  # s.subspec 'Domestic' do |ss|
-  #     ss.vendored_frameworks = ['PangleSDK/BUCNAuxiliary.framework']
-  #     ss.preserve_paths = 'PangleSDK/BUCNAuxiliary.framework'
-  # end
+  s.subspec 'Domestic' do |ss|
+      ss.vendored_frameworks = ['PangleSDK/BUCNAuxiliary.framework']
+      ss.preserve_paths = 'PangleSDK/BUCNAuxiliary.framework'
+  end
   
   s.subspec 'BUAdSDK' do |ss|
     ss.preserve_paths = 'PangleSDK/BUAdSDK.framework'

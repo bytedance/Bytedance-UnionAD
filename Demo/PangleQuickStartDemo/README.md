@@ -17,5 +17,6 @@ We also provide a [Demo app](PangleQuickStartDemo).
 3. [リワード動画広告](Quick-Start-Manual/ja/3-reward_video_ja.md)
 4. [フルスクリーン動画広告](Quick-Start-Manual/ja/4-fullscreen_video_ja.md)
 5. [テンプレートバナー広告](Quick-Start-Manual/ja/5-template_banner_ad_ja.md)
+6. [メディエーションについて](Quick-Start-Manual/ja/6-mediation_ja.md)
 
 [Demo app](PangleQuickStartDemo)もご参考いただけます。.

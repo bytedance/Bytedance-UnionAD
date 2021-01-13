@@ -7,7 +7,7 @@ Pod for Bytedance-UnionAD only support **x86_64, armv7, arm64, i386**.
 + [Download Bytedance-UnionAD](https://github.com/bytedance/Bytedance-UnionAD/tree/master) and try out the included [example app](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Demo)
 + Check out the [documentation](https://www.pangle.cn/help/doc/5fc4f25f7b550100157c01d0) for a comprehensive look at all of the APIs available in Bytedance-UnionAD
 + If you have other questions, please read [FAQ](https://www.pangle.cn/help/doc/5dd0fe618507820012088272) first
-+ We provide a [**Quick Start**](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Example/PangleQuickStartDemo) to help you to easily integrate and use the SDK.
++ We provide a [**Quick Start**](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Demo/PangleQuickStartDemo) to help you to easily integrate and use the SDK.
 
 ## Installation with CocoaPods
 

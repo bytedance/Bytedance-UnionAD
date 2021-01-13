@@ -16,7 +16,7 @@ Please follow [iOS 14 actions](https://www.pangleglobal.com/help/doc/5f4dc4271de
 <a name="start/env"></a>
 ## Prerequisites
 
-* Use Pangle iOS SDK 3.2.5.1 or higher
+* Use Pangle iOS SDK 3.3.6.2 or higher
 * Use Xcode 12.0 or higher
 * Target iOS 9.0 or higher
 * Create a Pangle account [here](https://www.pangleglobal.com/)(If you do not have one), and add your app and placements.

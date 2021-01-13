@@ -1,50 +1,60 @@
-# 5. Template Banner Ads
+# 5. テンプレートバナー広告
 
 
-* [Template Banner Ads](#start/template_banner_ad)
-  * [Support SDK Verion](#start/template_banner_support_version)
-  * [Loading Ads](#start/template_banner_ad_load)
-  * [Determining load events and Displaying](#start/template_banner_ad_loadevent)
+* [テンプレートバナー広告](#start/template_banner_ad)
+  * [必要なSDKバージョン](#start/template_banner_support_version)
+  * [テンプレートバナー広告のロード](#start/template_banner_ad_load)
+  * [ロードイベントの受信と広告の表示](#start/template_banner_ad_loadevent)
 
-This chapter will explain the procedure for displaying the template banner ad in the application.
+この章では、テンプレートバナー広告を表示する手順について説明します。
 
-Please [integrate Pangle SDK](1-integrate_en.md) before load ads.
+広告を利用するには、SDKを有効にする必要があります。詳細は[インストールと初期化](1-integrate_ja.md) をご確認ください。
 
 
 
 <a name="start/template_banner_ad"></a>
-## Template Banner Ads
+## テンプレートバナー広告
 
 <a name="start/template_banner_support_version"></a>
-### Support SDK Verion
-Please Use the following sdk for template banner
+### 必要なSDKバージョン
+以下のSDKバージョンでテンプレートバナー広告をサポートできます
  - Pangle iOS 3.3.0.2 or later
 
 <a name="start/template_banner_ad_load"></a>
-### Loading Ads
+### テンプレートバナー広告のロード
 
-On Pangle platform, create an **Template Banner** ad in the app, you will get a **placement ID** for ad's loading.
+Pangle管理画面上にて, 対象アプリに属する**Template Banner** 広告を新規してください。
+[Native type]に **Template** を選んでください。
 
-**Please select 600*500 at Ad placement size, for now we only opened this size's traffic.**
+新規したらその広告枠の **placement ID** が生成されます。
 
-<img src="pics/template_banner_add.png" alt="drawing" width="200"/>
+<img src="../pics/template_banner_add.png" alt="drawing" width="200"/>
 
-<img src="pics/template_banner_set.png" alt="drawing" width="200"/>
+**300*250をご利用の場合、[600 * 500] を選んでください.**
+
+<img src="../pics/template_banner_set.png" alt="drawing" width="200"/>
+
+**320*50をご利用の場合、[640 * 100] を選んでください.**
+
+<img src="../pics/template320_add.png" alt="drawing" width="200"/>
 
 
-In your application, create a `BUNativeExpressBannerView` for setting size and load ads.
-**For now pangle only support size 300*250. Please set this size.**
+アプリ内に`BUNativeExpressBannerView`を新規してサイズを設定すれば広告をロードすることが可能です。
+
+**サイズは300 * 250 または 300 * 250を設定してください。**
 
 ```swift
 class TemplateBannerAdsViewController: UIViewController {
 
     var nativeExpressBannerView: BUNativeExpressBannerView!
+
+    // set width to 320 and height to 50 for 320*50
     let bannerSize = CGSize.init(width: 300, height: 250)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        requestTemplateBannerAd(placementID: "945557230")
+        requestTemplateBannerAd(placementID: "your placement id")
     }
 
     func requestTemplateBannerAd(placementID:String) {
@@ -59,12 +69,13 @@ class TemplateBannerAdsViewController: UIViewController {
 ```
 
 <a name="start/template_banner_ad_loadevent"></a>
-### Determining load events and Displaying
+### ロードイベントの受信と広告の表示
 
-`BUNativeExpressBannerViewDelegate` indicates the result of ad's load. If ad is rendered,
-a `BUNativeExpressBannerView` will be returned as a ad's view for displaying. Please add it to the place you want the ad to show.
+`BUNativeExpressBannerViewDelegate` はテンプレートバナー広告のロードイベントが発生すると呼び出されます。
+広告が`rendered`成功したら、広告ビューの`BUNativeExpressBannerView` インスタンスを受け取れます。表示したい場所にセットすれば表示することは可能です。
 
-If user clicked close button and choose the reason, `func nativeExpressBannerAdView(_ bannerAdView: BUNativeExpressBannerView, dislikeWithReason filterwords: [BUDislikeWords]?)` will be called.
+ユーザーが閉じるボタンを押下したらフィードバックダイアログが表示されます。フィードバック内容を選んだら`func nativeExpressBannerAdView(_ bannerAdView: BUNativeExpressBannerView, dislikeWithReason filterwords: [BUDislikeWords]?)`が呼ばれます。
+
 
 
 ```swift

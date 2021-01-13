@@ -23,9 +23,9 @@ Please set the ad's `Orientation` to fit for the app.
 `rewards name` and `rewards quantity` can be random if not needed.
 
 
-<img src="pics/reward_video_add.png" alt="drawing" width="300"/>  <br>
+<img src="../pics/reward_video_add.png" alt="drawing" width="300"/>  <br>
 
-<img src="pics/reward_video_set.png" alt="drawing" width="300"/>
+<img src="../pics/reward_video_set.png" alt="drawing" width="300"/>
 
 
 In your application, create a `BURewardedVideoModel` for setting userId and use `BURewardedVideoAd` to load ads.
@@ -56,14 +56,18 @@ class YourRewardedVideoAdsViewController: UIViewController {
 <a name="start/reward_ad_loadevent"></a>
 ### Determining load events and displaying
 
-`BURewardedVideoAdDelegate` indicates the result of ad's load. Please call `- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;` to display the ad.
+`BURewardedVideoAdDelegate` indicates the result of ad's load. If ad is loaded and `isAdValid`, call `- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;` to display the ad.
 
 ```swift
 // MARK: BURewardedVideoAdDelegate
 extension RewardedVideoViewController: BURewardedVideoAdDelegate {
     func rewardedVideoAdDidLoad(_ rewardedVideoAd: BURewardedVideoAd) {
         print("\(#function)")
-        rewardedVideoAd.show(fromRootViewController: self)
+        if (rewardedVideoAd.isAdValid) {
+            rewardedVideoAd.show(fromRootViewController: self)
+        } else {
+            print("\(#function) rewardedVideoAd is unvalid ")
+        }
     }
 
     func rewardedVideoAdVideoDidLoad(_ rewardedVideoAd: BURewardedVideoAd) {

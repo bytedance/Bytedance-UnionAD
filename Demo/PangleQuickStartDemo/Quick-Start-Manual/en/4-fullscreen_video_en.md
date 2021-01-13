@@ -22,9 +22,9 @@ On Pangle platform, create an **Interstitial Video Ads** ad in the app, you will
 Please set the ad's `Orientation` to fit for the app.
 
 
-<img src="pics/fullscreen_add.png" alt="drawing" width="300"/>  <br>
+<img src="../pics/fullscreen_add.png" alt="drawing" width="300"/>  <br>
 
-<img src="pics/fullscreen_set.png" alt="drawing" width="300"/>
+<img src="../pics/fullscreen_set.png" alt="drawing" width="300"/>
 
 
 In your application, create a `BUFullscreenVideoAd` to load ads.
@@ -58,14 +58,16 @@ class FullScreenVideoViewController: UIViewController {
 <a name="start/fullscreen_loadevent"></a>
 ### Determining load events and displaying
 
-`BUFullscreenVideoAdDelegate` indicates the result of ad's load. Please call `- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;` to display the ad.
+`BUFullscreenVideoAdDelegate` indicates the result of ad's load. If ad is loaded and `isAdValid`, call `- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;` to display the ad.
 
 ```swift
 // MARK: BUFullscreenVideoAdDelegate
 extension FullScreenVideoViewController: BUFullscreenVideoAdDelegate{
 
     func fullscreenVideoMaterialMetaAdDidLoad(_ fullscreenVideoAd: BUFullscreenVideoAd) {
-        fullscreenVideoAd.show(fromRootViewController: self)
+        if (fullscreenVideoAd.isAdValid) {
+            fullscreenVideoAd.show(fromRootViewController: self)
+        }
     }
 
     func fullscreenVideoAd(_ fullscreenVideoAd: BUFullscreenVideoAd, didFailWithError error: Error?) {

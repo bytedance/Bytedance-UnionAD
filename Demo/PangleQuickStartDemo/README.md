@@ -20,4 +20,4 @@ We also provide a [Demo app](PangleQuickStartDemo).
 5. [テンプレートバナー広告](Quick-Start-Manual/ja/5-template_banner_ad_ja.md)
 6. [メディエーションについて](Quick-Start-Manual/ja/6-mediation_ja.md)
 
-[Demo app](PangleQuickStartDemo)もご参考いただけます。.
+[Demo app](PangleQuickStartDemo)もご参考いただけます。

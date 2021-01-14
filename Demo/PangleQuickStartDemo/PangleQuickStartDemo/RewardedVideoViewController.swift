@@ -38,11 +38,11 @@ class RewardedVideoViewController: UIViewController {
 extension RewardedVideoViewController: BURewardedVideoAdDelegate {
     func rewardedVideoAdDidLoad(_ rewardedVideoAd: BURewardedVideoAd) {
         print("\(#function)")
-        rewardedVideoAd.show(fromRootViewController: self)
     }
     
     func rewardedVideoAdVideoDidLoad(_ rewardedVideoAd: BURewardedVideoAd) {
         print("\(#function)")
+        rewardedVideoAd.show(fromRootViewController: self)
     }
     
     func rewardedVideoAd(_ rewardedVideoAd: BURewardedVideoAd, didFailWithError error: Error?) {

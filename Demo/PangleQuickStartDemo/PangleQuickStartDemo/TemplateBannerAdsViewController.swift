@@ -10,6 +10,8 @@ import UIKit
 class TemplateBannerAdsViewController: UIViewController {
     
     var nativeExpressBannerView: BUNativeExpressBannerView!
+    
+    // set width to 320 and height to 50 for 320*50
     let bannerSize = CGSize.init(width: 300, height: 250)
     
     @IBAction func back(_ sender: UIButton) {

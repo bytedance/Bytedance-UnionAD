@@ -30,11 +30,10 @@ class FullScreenVideoViewController: UIViewController {
 }
 
 extension FullScreenVideoViewController: BUFullscreenVideoAdDelegate{
-    
-    func fullscreenVideoMaterialMetaAdDidLoad(_ fullscreenVideoAd: BUFullscreenVideoAd) {
+    func fullscreenVideoAdVideoDataDidLoad(_ fullscreenVideoAd: BUFullscreenVideoAd) {
         fullscreenVideoAd.show(fromRootViewController: self)
     }
-    
+        
     func fullscreenVideoAd(_ fullscreenVideoAd: BUFullscreenVideoAd, didFailWithError error: Error?) {
         print("\(#function) failed with \(String(describing: error?.localizedDescription))")
     }

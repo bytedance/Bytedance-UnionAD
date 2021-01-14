@@ -63,8 +63,6 @@ class NativeAdsViewController: UIViewController {
         slot.adType = BUAdSlotAdType.feed
         slot.position = BUAdSlotPosition.feed
         let size = BUSize.init()
-        //size.width = 1280
-        //size.height = 720
         slot.imgSize = size
         adManager = BUNativeAdsManager.init(slot: slot)
         adManager.delegate = self

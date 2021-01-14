@@ -5,6 +5,7 @@
 3. [Rewarded Video Ads](Quick-Start-Manual/en/3-reward_video_en.md)
 4. [Full Screen Video Ads](Quick-Start-Manual/en/4-fullscreen_video_en.md)
 5. [Template Banner Ads](Quick-Start-Manual/en/5-template_banner_ad_en.md)
+6. [About Mediation](Quick-Start-Manual/en/6-mediation_en.md)
 
 We also provide a [Demo app](PangleQuickStartDemo).
 

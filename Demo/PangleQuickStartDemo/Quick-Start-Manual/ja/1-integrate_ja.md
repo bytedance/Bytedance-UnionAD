@@ -27,9 +27,23 @@
 ### CocoaPodsを利用してインストール
 Podfileに以下のように記入し `pod install` することで SDK がご利用いただけます。
 
+v3.4.0.0 から, 中国本土内のトラフィック用と中国本土外のトラフィック用のSDKを分離しました， **v3.4.0.0 and higher** の場合は以下の記述を利用してください。
+
+
 ```
+#for v3.4.0.0 and higher, Outside-The-Chinese-Mainland-Traffic
+pod 'Ads-Global'
+```
+
+
+それより古いバージョンをご利用の場合、以下の記述を利用してください。
+
+```
+#for v3.3.x.x and lower, Outside-The-Chinese-Mainland-Traffic
 pod 'Bytedance-UnionAD'
 ```
+
+
 ### frameworksの追加
 
 1. プロジェクトファイルを選択

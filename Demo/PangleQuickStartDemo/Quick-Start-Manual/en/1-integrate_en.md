@@ -27,9 +27,20 @@ Please follow [iOS 14 actions](https://www.pangleglobal.com/help/doc/5f4dc4271de
 ### Using CocoaPods
 Add the information as follows in Podfile, and using `pod install`.
 
+Since v3.4.0.0, we separated the SDK for traffic in the Chinese Mainland and one is for traffic outside the Chinese Mainland, for SDK **v3.4.0.0 and higher** please use below.
+
 ```
+#for v3.4.0.0 and higher, Outside-The-Chinese-Mainland-Traffic
+pod 'Ads-Global'
+```
+
+And for version lower, please use the information below.
+
+```
+#for v3.3.x.x and lower, Outside-The-Chinese-Mainland-Traffic
 pod 'Bytedance-UnionAD'
 ```
+
 ### Add frameworks
 
 1. Select the project file

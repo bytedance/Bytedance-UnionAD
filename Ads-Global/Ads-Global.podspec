@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global'
-  s.version          = '3.4.1.1'
+  s.version          = '3.4.2.3'
   s.summary          = 'Ads-Global is a SDK from Bytedance providing AD service.'
   s.description      = <<-DESC
   Ads-Global provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Siwant' => 'yuanhuan@bytedance.com' }
 
   s.homepage         = 'https://bytedance.feishu.cn/drive/home/'
-  s.source           = { :http => 'https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/3.4.1.1/PangleSDK.zip' }
+  s.source           = { :http => 'https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/3.4.2.3/PangleSDK.zip' }
   s.platform     = :ios, "9.0"  
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv'

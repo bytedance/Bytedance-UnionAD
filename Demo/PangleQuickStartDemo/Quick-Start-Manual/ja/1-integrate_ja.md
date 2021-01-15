@@ -117,7 +117,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-:warning: **欧州経済領域（EEA）のユーザーまたは未成年のユーザーから同意を得る必要がある場合, かならず `setCoppa:(NSUInteger)Coppa` または `setGDPR:(NSInteger)GDPR`を設定してください. Pangleはユーザーが選択できるAPIも提供しています。 setAppIDの前にこれを使用して、ユーザーが選択できるようにすることができます。**
+:warning: **欧州経済領域（EEA）のユーザーまたは未成年のユーザーから同意を得る必要がある場合, かならず `setCoppa:(NSUInteger)Coppa` または `setGDPR:(NSInteger)GDPR`を設定してください。 Pangleはユーザーが選択できるAPIも提供しています。 setAppIDの前にこれを使用して、ユーザーが選択できるようにすることができます。**
 
 
 ```swift

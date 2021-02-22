@@ -41,7 +41,7 @@ Pangle管理画面上にて, 対象アプリに属する**Template Banner** 広�
 
 アプリ内に`BUNativeExpressBannerView`を新規してサイズを設定すれば広告をロードすることが可能です。
 
-**サイズは300 * 250 または 300 * 250を設定してください。**
+**サイズは300 * 250 または 320 * 50を設定してください。**
 
 ```swift
 class TemplateBannerAdsViewController: UIViewController {

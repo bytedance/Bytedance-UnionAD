@@ -41,7 +41,7 @@ You will get a **placement ID** for ad's loading.
 
 
 In your application, create a `BUNativeExpressBannerView` for setting size and load ads.
-**Please set this size to 300 * 250 or 300 * 250**
+**Please set this size to 300 * 250 or 320 * 50**
 
 ```swift
 class TemplateBannerAdsViewController: UIViewController {

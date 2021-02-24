@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   Ads-CN provides ADs which include native、banner、feed、splash、RewardVideo etc.
                        DESC
 
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'MIT', :file => 'PangleSDK/LICENSE' }
   s.author           = { 'Siwant' => 'yuanhuan@bytedance.com' }
 
   s.homepage         = 'https://bytedance.feishu.cn/drive/home/'
@@ -26,11 +26,6 @@ Pod::Spec.new do |s|
   valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
 
   s.preserve_paths = 'PangleSDK/*.framework'
-
-  s.pod_target_xcconfig = {
-    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
-  }
-  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
   s.default_subspec = 'BUAdSDK'
   

@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   
   valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
 
-  s.preserve_paths = 'PangleSDK/*.framework'
+  s.resource = 'PangleSDK/LICENSE'
 
   s.default_subspec = 'BUAdSDK'
   

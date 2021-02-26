@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'PangleSDK/LICENSE' }
   s.author           = { 'bytedance-tech' => 'zywork@bytedance.com' }
 
-  s.homepage         = 'https://bytedance.feishu.cn/drive/home/'
+  s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD.git'
   s.source           = { :http => 'https://sf3-fe-tos.pglstatp-toutiao.com/obj/pangle-sdk-static/3.4.2.8/PangleSDK.zip' }
   s.platform     = :ios, "9.0"  
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security'

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN-Beta'
-  s.version          = '3.5.0.1'
+  s.version          = '3.5.0.3'
   s.summary          = 'Ads-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.author           = { 'bytedance-tech' => 'zywork@bytedance.com' }
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD.git'
-  s.source           = { :http => 'https://sf3-fe-tos.pglstatp-toutiao.com/obj/pangle-sdk-static/3.5.0.1/PangleSDK.zip' }
+  s.source           = { :http => 'https://sf3-fe-tos.pglstatp-toutiao.com/obj/pangle-sdk-static/3.5.0.3/PangleSDK.zip' }
   s.platform     = :ios, "9.0"  
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'

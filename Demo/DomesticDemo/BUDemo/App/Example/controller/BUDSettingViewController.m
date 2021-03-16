@@ -91,8 +91,8 @@
 }
 
 - (void)setProtocol {
-    [BUAdSDKManager setOfflineType:BUOfflineTypeProtocol];
-    _statusText.text = @"Protocol";
+//    [BUAdSDKManager setOfflineType:BUOfflineTypeProtocol];
+//    _statusText.text = @"Protocol";
 }
 
 - (void)setWkWeb {

@@ -9,10 +9,18 @@ import UIKit
 
 class TemplateBannerAdsViewController: UIViewController {
     
-    var nativeExpressBannerView: BUNativeExpressBannerView!
+    var rectangleExpressBannerView: BUNativeExpressBannerView!
+    var smallExpressBannerView: BUNativeExpressBannerView!
+    let rectangleBannerSize = CGSize.init(width: 300, height: 250)
+    let smallBannerSize = CGSize.init(width: 320, height: 50)
     
-    // set width to 320 and height to 50 for 320*50
-    let bannerSize = CGSize.init(width: 300, height: 250)
+    @IBAction func loadRectangleBanner(_ sender: UIButton) {
+        requestRectangleBannerAd(placementID: "945557230")
+    }
+    
+    @IBAction func loadSmallBanner(_ sender: UIButton) {
+        requestSmallBannerAd(placementID: "945668896")
+    }
     
     @IBAction func back(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -20,15 +28,20 @@ class TemplateBannerAdsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        requestTemplateBannerAd(placementID: "945557230")
     }
     
-    func requestTemplateBannerAd(placementID:String) {
-        nativeExpressBannerView = BUNativeExpressBannerView.init(slotID: placementID, rootViewController: self, adSize: bannerSize)
-        nativeExpressBannerView.frame = CGRect.init(x: 0, y: 0, width: bannerSize.width, height: bannerSize.height)
-        nativeExpressBannerView.delegate = self
-        nativeExpressBannerView.loadAdData()
+    func requestRectangleBannerAd(placementID:String) {
+        rectangleExpressBannerView = BUNativeExpressBannerView.init(slotID: placementID, rootViewController: self, adSize: rectangleBannerSize)
+        rectangleExpressBannerView.frame = CGRect.init(x: 0, y: 0, width: rectangleBannerSize.width, height: rectangleBannerSize.height)
+        rectangleExpressBannerView.delegate = self
+        rectangleExpressBannerView.loadAdData()
+    }
+    
+    func requestSmallBannerAd(placementID:String) {
+        smallExpressBannerView = BUNativeExpressBannerView.init(slotID: placementID, rootViewController: self, adSize: smallBannerSize)
+        smallExpressBannerView.frame = CGRect.init(x: 0, y: 0, width: smallBannerSize.width, height: smallBannerSize.height)
+        smallExpressBannerView.delegate = self
+        smallExpressBannerView.loadAdData()
     }
 
 }
@@ -58,13 +71,13 @@ extension TemplateBannerAdsViewController: BUNativeExpressBannerViewDelegate{
     
     func nativeExpressBannerAdView(_ bannerAdView: BUNativeExpressBannerView, dislikeWithReason filterwords: [BUDislikeWords]?) {
         //After dislike reason been clicked, please remove the ad for view
-        self.nativeExpressBannerView.removeFromSuperview()
+        self.rectangleExpressBannerView.removeFromSuperview()
     }
     
     func addBannerViewToView(_ bannerView: UIView) {
-        let x = (view.frame.width - bannerSize.width)/2
-        let y = view.frame.height - bannerSize.height
-        bannerView.frame = CGRect.init(x: x, y: y, width: bannerSize.width, height: bannerSize.height)
+        let x = (view.frame.width - bannerView.frame.width)/2
+        let y = view.frame.height - view.safeAreaInsets.bottom - bannerView.frame.height
+        bannerView.frame = CGRect.init(x: x, y: y, width: bannerView.frame.width, height: bannerView.frame.height)
         view.addSubview(bannerView)
     }
 }

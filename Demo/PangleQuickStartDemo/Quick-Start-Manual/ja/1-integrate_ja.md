@@ -12,6 +12,23 @@
 ## iOS 14の対応
 [iOS 14 actions](https://www.pangleglobal.com/help/doc/5f4dc4271de305000ece82aa)に従って、`SKAdNetwork`と`App Tracking Transparency`の対応をしてください。
 
+- PangleのSKAdNetwork IDをアプリのinfo.plistに必ず追加してください。
+```xml
+<key>SKAdNetworkItems</key>
+   <array>
+       <dict>
+           <key>SKAdNetworkIdentifier</key>
+           <string>22mmun2rn5.skadnetwork</string>
+       </dict>
+       <dict>
+           <key>SKAdNetworkIdentifier</key>
+           <string>238da6jt44.skadnetwork</string>
+       </dict>
+   </array>
+```
+
+- App Tracking Transparency認証リクエストを表示するには、`AppTrackingTransparency.framework`も Link Binary with Libraries に追加する必要があります。
+
 
 <a name="start/env"></a>
 ## 前提条件
@@ -56,6 +73,7 @@ pod 'Bytedance-UnionAD'
 
 5. 以下のframeworkを追加
 
+    -   AdSupport.framework
     -   StoreKit.framework
     -   MobileCoreServices.framework
     -   WebKit.framework
@@ -65,7 +83,6 @@ pod 'Bytedance-UnionAD'
     -   AVFoundation.framework
     -   CoreTelephony.framework
     -   SystemConfiguration.framework
-    -   AdSupport.framework
     -   CoreMotion.framework
     -   libresolv.9.tbd
     -   libc++.tbd

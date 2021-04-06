@@ -12,6 +12,23 @@ This chapter will explain the procedure for integrating and Initializing the Pan
 ## About iOS 14
 Please follow [iOS 14 actions](https://www.pangleglobal.com/help/doc/5f4dc4271de305000ece82aa) to enable SKAdNetwork and include App Tracking Transparency.
 
+- Please make sure to add Pangle's SKAdNetwork IDs to your app's info.plist.
+```xml
+<key>SKAdNetworkItems</key>
+   <array>
+       <dict>
+           <key>SKAdNetworkIdentifier</key>
+           <string>22mmun2rn5.skadnetwork</string>
+       </dict>
+       <dict>
+           <key>SKAdNetworkIdentifier</key>
+           <string>238da6jt44.skadnetwork</string>
+       </dict>
+   </array>
+```
+
+- For displaying the App Tracking Transparency authorization request, `AppTrackingTransparency.framework` is also needed to be added to the Link Binary with Libraries.
+
 
 <a name="start/env"></a>
 ## Prerequisites
@@ -53,6 +70,7 @@ pod 'Bytedance-UnionAD'
 
 5. Add following frameworks
 
+    -   AdSupport.framework
     -   StoreKit.framework
     -   MobileCoreServices.framework
     -   WebKit.framework
@@ -62,7 +80,6 @@ pod 'Bytedance-UnionAD'
     -   AVFoundation.framework
     -   CoreTelephony.framework
     -   SystemConfiguration.framework
-    -   AdSupport.framework
     -   CoreMotion.framework
     -   libresolv.9.tbd
     -   libc++.tbd

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D64BC38A960C740535943F3 /* Pods_PangleQuickStartDemo_PangleQuickStartDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4E7972483CA588473FCEDF /* Pods_PangleQuickStartDemo_PangleQuickStartDemoUITests.framework */; };
+		2C8EE93D2604A2310052B3AB /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C8EE93C2604A2310052B3AB /* AppTrackingTransparency.framework */; };
 		2CD26205252DA4AD00115243 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26204252DA4AD00115243 /* AppDelegate.swift */; };
 		2CD26207252DA4AD00115243 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26206252DA4AD00115243 /* SceneDelegate.swift */; };
 		2CD26209252DA4AD00115243 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD26208252DA4AD00115243 /* ViewController.swift */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C8EE93A2604A22A0052B3AB /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		2C8EE93C2604A2310052B3AB /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		2CD26201252DA4AD00115243 /* PangleQuickStartDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PangleQuickStartDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD26204252DA4AD00115243 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CD26206252DA4AD00115243 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C8EE93D2604A2310052B3AB /* AppTrackingTransparency.framework in Frameworks */,
 				7CC9C3CEC7E798C14BCFCD3F /* Pods_PangleQuickStartDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,6 +117,8 @@
 		09BCBD1768BE551F1772E25F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C8EE93C2604A2310052B3AB /* AppTrackingTransparency.framework */,
+				2C8EE93A2604A22A0052B3AB /* AdSupport.framework */,
 				55F704DC9C20649C4C4F6AF7 /* Pods_PangleQuickStartDemo.framework */,
 				7B4E7972483CA588473FCEDF /* Pods_PangleQuickStartDemo_PangleQuickStartDemoUITests.framework */,
 				67BA390502C07E5912D8FADB /* Pods_PangleQuickStartDemoTests.framework */,
@@ -639,7 +645,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pangleglobal.PangleQuickStartDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangleglobal.PangleQuickStartDemo.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PangleQuickStartDemo/AdmobAdapterDemo-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -661,7 +667,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pangleglobal.PangleQuickStartDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangleglobal.PangleQuickStartDemo.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PangleQuickStartDemo/AdmobAdapterDemo-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

@@ -4,7 +4,12 @@
 target 'PangleQuickStartDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'Bytedance-UnionAD'
+
+  # This is for SDK v3.4.x.x and later
+  pod 'Ads-Global'
+
+  # This is for SDK v3.3.6.2 and before
+  # pod 'Bytedance-UnionAD'
 
   # Pods for PangleQuickStartDemo
 

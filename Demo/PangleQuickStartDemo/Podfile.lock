@@ -1,16 +1,22 @@
 PODS:
-  - Bytedance-UnionAD (3.3.6.2)
+  - Ads-Global (3.4.4.3):
+    - Ads-Global/BUAdSDK (= 3.4.4.3)
+  - Ads-Global/BUAdSDK (3.4.4.3):
+    - Ads-Global/BUFoundation
+    - Ads-Global/International
+  - Ads-Global/BUFoundation (3.4.4.3)
+  - Ads-Global/International (3.4.4.3)
 
 DEPENDENCIES:
-  - Bytedance-UnionAD
+  - Ads-Global
 
 SPEC REPOS:
   trunk:
-    - Bytedance-UnionAD
+    - Ads-Global
 
 SPEC CHECKSUMS:
-  Bytedance-UnionAD: e9f83939e2a5d857e104f6a91035bbf504b603e5
+  Ads-Global: 68a120508b26bf1a23411cfbf95c8ecf80ba6bf2
 
-PODFILE CHECKSUM: 8605198075ccbf781763238b4f9da0af756077cb
+PODFILE CHECKSUM: faab7e005e265dfea550171faf08811c058cc0fb
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1

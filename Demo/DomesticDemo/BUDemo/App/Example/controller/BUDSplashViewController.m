@@ -122,8 +122,7 @@
     BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:self.viewModel.slotID frame:self.splashFrame];
     splashView.delegate = self;
     splashView.rootViewController = self;
-    //optional
-    splashView.needSplashZoomOutAd = YES;
+    
     // Willie
     //    splashView.tolerateTimeout = 3;
     if (_textFiled.text.length) {
@@ -146,8 +145,6 @@
     splashView.hideSkipButton = YES;
     splashView.delegate = self;
     splashView.rootViewController = self;
-    //optional
-    splashView.needSplashZoomOutAd = YES;
     
     UIButton *custormSkipButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [custormSkipButton setTitle:[NSString localizedStringForKey:Skip] forState:UIControlStateNormal];

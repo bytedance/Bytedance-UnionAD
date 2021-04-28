@@ -8,8 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BUDAdManager.h"
-#import <BUAdSDK/BUAdSDKManager.h>
-#import "BUAdSDK/BUSplashAdView.h"
+#import <BUAdSDK/BUAdSDK.h>
 #import "BUDSettingViewController.h"
 #import "BUDMainViewController.h"
 #import "BUDMainViewModel.h"
@@ -97,29 +96,32 @@
 }
 
 - (void)setupBUAdSDK {
+    BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
     ///optional
     ///CN china, NO_CN is not china
     ///you must set Territory first,  if you need to set them
-//    [BUAdSDKManager setTerritory:BUAdSDKTerritory_CN];
+    configuration.territory = BUAdSDKTerritory_CN;
     //optional
     //GDPR 0 close privacy protection, 1 open privacy protection
-    [BUAdSDKManager setGDPR:0];
+    configuration.GDPR = @(0);
     //optional
     //Coppa 0 adult, 1 child
-    [BUAdSDKManager setCoppa:0];
+    configuration.coppa = @(0);
     // you can set idfa by yourself, it is optional and maybe will never be used.
-    [BUAdSDKManager setCustomIDFA:@"12345678-1234-1234-1234-123456789012"];
+    configuration.customIdfa = @"12345678-1234-1234-1234-123456789012";
 #if DEBUG
     // Whether to open log. default is none.
-    [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
-//    [BUAdSDKManager setDisableSKAdNetwork:YES];
+    configuration.logLevel = BUAdSDKLogLevelDebug;
 #endif
     //BUAdSDK requires iOS 9 and up
-    [BUAdSDKManager setAppID:[BUDAdManager appKey]];
-
-    [BUAdSDKManager setIsPaidApp:NO];
-    // splash AD demo
-    [self addSplashAD];
+    configuration.appID = [BUDAdManager appKey];
+    
+    [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // splash AD demo
+            [self addSplashAD];
+        });
+    }];
 }
 
 #pragma mark - Splash
@@ -129,8 +131,6 @@
     // tolerateTimeout = CGFLOAT_MAX , The conversion time to milliseconds will be equal to 0
     self.splashAdView.tolerateTimeout = 3;
     self.splashAdView.delegate = self;
-    //optional
-    self.splashAdView.needSplashZoomOutAd = YES;
 
 
     UIWindow *keyWindow = self.window;

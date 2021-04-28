@@ -67,26 +67,28 @@
 }
 
 - (void)setupBUAdSDK {
+    BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
     ///optional
     ///CN china, NO_CN is not china
     ///you‘d better set Territory first,  if you need to set them
 //    [BUAdSDKManager setTerritory:BUAdSDKTerritory_CN];
     //optional
     //GDPR 0 close privacy protection, 1 open privacy protection
-    [BUAdSDKManager setGDPR:0];
+    configuration.GDPR = @(0);
     //optional
     //Coppa 0 adult, 1 child
-    [BUAdSDKManager setCoppa:0];
-    
-    [BUAdSDKManager setIsPaidApp:NO];
+    configuration.coppa = @(0);
     
 #if DEBUG
     // Whether to open log. default is none.
-    [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
-//    [BUAdSDKManager setDisableSKAdNetwork:YES];
+    configuration.logLevel = BUAdSDKLogLevelDebug;
 #endif
     //BUAdSDK requires iOS 9 and up
-    [BUAdSDKManager setAppID:@"5000546"];
+    configuration.appID = @"5000546";
+    
+    [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
+        
+    }];
 }
 
 #pragma mark - UIApplicationDelegate

@@ -7,10 +7,8 @@
 //
 
 #import "BUDAdmob_RewardCustomEventAdapter.h"
-#import <BUAdSDK/BURewardedVideoModel.h>
-#import <BUAdSDK/BURewardedVideoAd.h>
 #import <BUAdSDK/BUAdSDK.h>
-
+#import "BUDAdmob_PangleTool.h"
 
 @interface BUDAdmob_RewardCustomEventAdapter ()<BURewardedVideoAdDelegate,GADMediationRewardedAd>
 {
@@ -67,12 +65,13 @@ NSString *const REWARD_PANGLE_PLACEMENT_ID = @"placementID";
 (nonnull GADMediationRewardedLoadCompletionHandler)completionHandler {
     // Look for the "parameter" key to fetch the parameter you defined in the AdMob UI.
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
-    //User ID, a required parameter for rewarded video ads
-    model.userId = @"your app user id";
     NSDictionary<NSString *, id> *credentials = adConfiguration.credentials.settings;
     NSString *placementID = [self processParams:(credentials[@"parameter"])];
     NSLog(@"placementID=%@",placementID);
     if (placementID != nil){
+        /// tag
+        [BUDAdmob_PangleTool setPangleExtData];
+        
         self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:placementID rewardedVideoModel:model];
         self.rewardedVideoAd.delegate = self;
         [self.rewardedVideoAd loadAdData];
@@ -170,7 +169,7 @@ NSString *const REWARD_PANGLE_PLACEMENT_ID = @"placementID";
 
 
 - (NSString *)processParams:(NSString *)param {
-    if (!param) {
+    if (!(param && [param isKindOfClass:[NSString class]] && param.length > 0)) {
         return nil;
     }
     NSError *jsonReadingError;
@@ -182,13 +181,13 @@ NSString *const REWARD_PANGLE_PLACEMENT_ID = @"placementID";
                                                          options:NSJSONReadingAllowFragments
                                                            error:&jsonReadingError];
     
-    if (jsonReadingError) {
-        NSLog(@"jsonReadingError. data=[%@], error=[%@]", json, jsonReadingError);
+    if (jsonReadingError && [jsonReadingError isKindOfClass:[NSError class]]) {
+        NSLog(@"jsonReadingError. error=[%@]", jsonReadingError);
         return nil;
     }
     
-    if (![NSJSONSerialization isValidJSONObject:json]) {
-        NSLog(@"This is NOT JSON data.[%@]", json);
+    if (!(json && [json isKindOfClass:[NSDictionary class]] && [NSJSONSerialization isValidJSONObject:json])) {
+        NSLog(@"Params Error");
         return nil;
     }
     NSString *placementID = json[REWARD_PANGLE_PLACEMENT_ID];

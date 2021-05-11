@@ -25,6 +25,8 @@ static NSString *const BUDNativeAdTranslateKey = @"bu_nativeAd";
     self = [super init];
     if (self) {
         self.nativeAd = nativeAd;
+        self.relatedView = [[BUNativeAdRelatedView alloc] init];
+        [self.relatedView refreshData:nativeAd];
         if (nativeAd && nativeAd.data) {
             BUMaterialMeta *data = nativeAd.data;
             // video view
@@ -33,9 +35,7 @@ static NSString *const BUDNativeAdTranslateKey = @"bu_nativeAd";
                 data.imageMode == BUFeedVideoAdModePortrait ||
                 data.imageMode == BUFeedADModeSquareVideo
                 ){
-                self.relatedView = [[BUNativeAdRelatedView alloc] init];
                 self.relatedView.videoAdView.hidden = NO;
-                [self.relatedView refreshData:nativeAd];
             }
             // main image of the ad
             if (data.imageAry && data.imageAry.count && data.imageAry[0].imageURL != nil){
@@ -76,16 +76,7 @@ static NSString *const BUDNativeAdTranslateKey = @"bu_nativeAd";
 }
 
 - (nullable UIView *)mediaView {
-    if (self.relatedView) {
-        UIImageView *logoView = self.relatedView.logoADImageView;
-        logoView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.relatedView.videoAdView addSubview:logoView];
-        [self.relatedView.videoAdView bringSubviewToFront:logoView];
-        [self.relatedView.videoAdView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[logoView(40)]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logoView)]];
-        [self.relatedView.videoAdView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[logoView(15)]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logoView)]];
-        return self.relatedView.videoAdView;
-    }
-    return nil;
+    return self.relatedView.videoAdView;
 }
 
 - (NSString *)headline {
@@ -161,7 +152,7 @@ static NSString *const BUDNativeAdTranslateKey = @"bu_nativeAd";
 
 
 - (nullable UIView *)adChoicesView {
-    return nil;
+    return self.relatedView.logoADImageView;
 }
 
 

@@ -9,6 +9,7 @@
 #import "BUDAdmob_BannerCustomEventAdapter.h"
 #import <BUAdSDK/BUAdSDK.h>
 #import <GoogleMobileAds/GADCustomEventBanner.h>
+#import "BUDAdmob_PangleTool.h"
 
 @interface BUDAdmob_BannerCustomEventAdapter ()<GADCustomEventBanner, BUNativeExpressBannerViewDelegate>
 @property (strong, nonatomic) BUNativeExpressBannerView *nativeExpressBannerView;
@@ -35,6 +36,9 @@ NSString *const BANNER_PANGLE_PLACEMENT_ID = @"placementID";
     NSLog(@"placementID=%@",placementID);
     NSLog(@"request ad size width = %f",adSize.size.width);
     NSLog(@"request ad size height = %f",adSize.size.height);
+    
+    /// tag
+    [BUDAdmob_PangleTool setPangleExtData];
     
     ///If this method is not available in your SDK version, use the annotated method below
     self.nativeExpressBannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:placementID rootViewController:self.delegate.viewControllerForPresentingModalView adSize:CGSizeMake(adSize.size.width, adSize.size.height)];
@@ -68,7 +72,7 @@ NSString *const BANNER_PANGLE_PLACEMENT_ID = @"placementID";
 
 - (void)nativeExpressBannerAdViewWillBecomVisible:(BUNativeExpressBannerView *)bannerAdView {
     NSLog(@"nativeExpressBannerAdViewWillBecomVisible");
-    [self.delegate customEventBannerWillPresentModal:self];
+//    [self.delegate customEventBannerWillPresentModal:self];
 }
 
 - (void)nativeExpressBannerAdViewDidClick:(BUNativeExpressBannerView *)bannerAdView {
@@ -83,7 +87,7 @@ NSString *const BANNER_PANGLE_PLACEMENT_ID = @"placementID";
 
 #pragma mark - private method
 - (NSString *)processParams:(NSString *)param size:(CGSize)size {
-    if (!param) {
+    if (!(param && [param isKindOfClass:[NSString class]] && param.length > 0)) {
         return nil;
     }
     NSError *jsonReadingError;
@@ -95,13 +99,13 @@ NSString *const BANNER_PANGLE_PLACEMENT_ID = @"placementID";
                                                          options:NSJSONReadingAllowFragments
                                                            error:&jsonReadingError];
     
-    if (jsonReadingError) {
-        NSLog(@"jsonReadingError. data=[%@], error=[%@]", json, jsonReadingError);
+    if (jsonReadingError && [jsonReadingError isKindOfClass:[NSError class]]) {
+        NSLog(@"jsonReadingError. error=[%@]", jsonReadingError);
         return nil;
     }
     
-    if (![NSJSONSerialization isValidJSONObject:json]) {
-        NSLog(@"This is NOT JSON data.[%@]", json);
+    if (!(json && [json isKindOfClass:[NSDictionary class]] && [NSJSONSerialization isValidJSONObject:json])) {
+        NSLog(@"Params Error");
         return nil;
     }
     NSString *placementID = json[BANNER_PANGLE_PLACEMENT_ID];

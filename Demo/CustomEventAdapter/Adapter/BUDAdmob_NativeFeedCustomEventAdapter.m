@@ -11,7 +11,7 @@
 #import <GoogleMobileAds/GADCustomEventNativeAd.h>
 #import <GoogleMobileAds/GADMultipleAdsAdLoaderOptions.h>
 #import "BUDAdmob_NativeFeedAd.h"
-
+#import "BUDAdmob_PangleTool.h"
 
 @interface BUDAdmob_NativeFeedCustomEventAdapter ()<GADCustomEventNativeAd,BUNativeAdsManagerDelegate,BUNativeAdDelegate>
 
@@ -33,6 +33,9 @@ NSString *const FEED_PANGLE_PLACEMENT_ID = @"placementID";
 /// request ad with placementID  adn count
 - (void)getNativeAd:(NSString *)placementID count:(NSInteger)count {
     if (self.adManager == nil) {
+        /// tag
+        [BUDAdmob_PangleTool setPangleExtData];
+        
         BUAdSlot *slot = [[BUAdSlot alloc] init];
         //slot.ID = @"945292641" for video
         slot.ID = placementID;
@@ -99,7 +102,7 @@ NSString *const FEED_PANGLE_PLACEMENT_ID = @"placementID";
 
 
 - (NSString *)processParams:(NSString *)param {
-    if (!param) {
+    if (!(param && [param isKindOfClass:[NSString class]] && param.length > 0)) {
         return nil;
     }
     NSError *jsonReadingError;
@@ -110,13 +113,13 @@ NSString *const FEED_PANGLE_PLACEMENT_ID = @"placementID";
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingAllowFragments
                                                            error:&jsonReadingError];
-    if (jsonReadingError) {
-        NSLog(@"jsonReadingError. data=[%@], error=[%@]", json, jsonReadingError);
+    if (jsonReadingError && [jsonReadingError isKindOfClass:[NSError class]]) {
+        NSLog(@"jsonReadingError. error=[%@]", jsonReadingError);
         return nil;
     }
     
-    if (![NSJSONSerialization isValidJSONObject:json]) {
-        NSLog(@"This is NOT JSON data.[%@]", json);
+    if (!(json && [json isKindOfClass:[NSDictionary class]] && [NSJSONSerialization isValidJSONObject:json])) {
+        NSLog(@"Params Error");
         return nil;
     }
     NSString *placementID = json[FEED_PANGLE_PLACEMENT_ID];

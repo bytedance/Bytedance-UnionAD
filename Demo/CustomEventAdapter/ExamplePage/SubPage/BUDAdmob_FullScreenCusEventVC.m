@@ -7,14 +7,14 @@
 //
 
 #import "BUDAdmob_FullScreenCusEventVC.h"
-#import <GoogleMobileAds/GADInterstitial.h>
+#import <GoogleMobileAds/GADInterstitialAd.h>
 
 /*
  The corresponding adapter class is shown in the corresponding table of the BUDSlotID class.
  对应的adapter类参见BUDSlotID类的对应表
  */
-@interface BUDAdmob_FullScreenCusEventVC ()<GADInterstitialDelegate>
-@property(nonatomic, strong) GADInterstitial *fullscreenVideoAd;
+@interface BUDAdmob_FullScreenCusEventVC ()<GADFullScreenContentDelegate>
+@property(nonatomic, strong) GADInterstitialAd *fullscreenVideoAd;
 @property (nonatomic, strong) UILabel *statusLabel;
 @end
 
@@ -61,38 +61,46 @@
 }
 
 - (void)loadAd:(UIButton *)sender {
-    self.fullscreenVideoAd = [[GADInterstitial alloc]
-                         initWithAdUnitID:@"ca-app-pub-2547387438729744/4725602169"];
-    self.fullscreenVideoAd.delegate = self;
     GADRequest *request = [GADRequest request];
-    [self.fullscreenVideoAd loadRequest:request];
+    [GADInterstitialAd loadWithAdUnitID:@"ca-app-pub-2547387438729744/4725602169"
+                              request:request
+                    completionHandler:^(GADInterstitialAd *ad, NSError *error) {
+        if (error) {
+            self.statusLabel.text = @"Ad Failed";
+          return;
+        }
+        self.fullscreenVideoAd = ad;
+        self.fullscreenVideoAd.fullScreenContentDelegate = self;
+        self.statusLabel.text = @"Ad loaded";
+    }];
 }
 
 - (void)showAd:(UIButton *)sender {
-    if (self.fullscreenVideoAd.isReady) {
+    if (self.fullscreenVideoAd) {
         [self.fullscreenVideoAd presentFromRootViewController:self];
     }
 }
 
 #pragma mark GADInterstitialDelegate
-- (void)interstitialDidReceiveAd:(nonnull GADInterstitial *)ad {
+/// Tells the delegate that an impression has been recorded for the ad.
+- (void)adDidRecordImpression:(nonnull id<GADFullScreenPresentingAd>)ad {
     _statusLabel.text = @"Ad loaded";
 }
 
-- (void)interstitial:(nonnull GADInterstitial *)ad didFailToReceiveAdWithError:(nonnull GADRequestError *)error {
+/// Tells the delegate that the ad failed to present full screen content.
+- (void)ad:(nonnull id<GADFullScreenPresentingAd>)ad
+didFailToPresentFullScreenContentWithError:(nonnull NSError *)error {
     
 }
 
-- (void)interstitialWillPresentScreen:(nonnull GADInterstitial *)ad {
+/// Tells the delegate that the ad presented full screen content.
+- (void)adDidPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
     
 }
 
-- (void)interstitialWillDismissScreen:(GADInterstitial *)ad {
-    
-}
-
-- (void)interstitialDidDismissScreen:(nonnull GADInterstitial *)ad {
-    
+/// Tells the delegate that the ad dismissed full screen content.
+- (void)adDidDismissFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
+    _statusLabel.text = @"Tap left button to load Ad";
 }
 
 @end

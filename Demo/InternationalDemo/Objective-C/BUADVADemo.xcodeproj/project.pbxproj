@@ -44,6 +44,7 @@
 		78E073A721A2CFE2006D71EE /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073A621A2CFE1006D71EE /* libresolv.9.tbd */; };
 		78E073A921A2CFE9006D71EE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073A821A2CFE9006D71EE /* CoreMotion.framework */; };
 		78E073AB21A2CFF1006D71EE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073AA21A2CFF1006D71EE /* AdSupport.framework */; };
+		9BED7398264A93CB00C48B17 /* BUDAdmob_PangleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BED7396264A93CB00C48B17 /* BUDAdmob_PangleTool.m */; };
 		DE0223AF234F0C89002C9D26 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0223AE234F0C89002C9D26 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +115,8 @@
 		78E073A621A2CFE1006D71EE /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		78E073A821A2CFE9006D71EE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		78E073AA21A2CFF1006D71EE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		9BED7396264A93CB00C48B17 /* BUDAdmob_PangleTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_PangleTool.m; sourceTree = "<group>"; };
+		9BED7397264A93CB00C48B17 /* BUDAdmob_PangleTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_PangleTool.h; sourceTree = "<group>"; };
 		C69C285A694613E5BF80895F /* libPods-Demo-BUADVADemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo-BUADVADemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0223AE234F0C89002C9D26 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -268,16 +271,18 @@
 		2B6DD278255D439F00FF8CA5 /* Adapter */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD279255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */,
-				2B6DD27A255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */,
-				2B6DD27B255D439F00FF8CA5 /* BUDAdmob_NativeFeedAd.h */,
-				2B6DD27C255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.h */,
-				2B6DD27D255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */,
+				9BED7397264A93CB00C48B17 /* BUDAdmob_PangleTool.h */,
+				9BED7396264A93CB00C48B17 /* BUDAdmob_PangleTool.m */,
 				2B6DD27E255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.h */,
+				2B6DD27A255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */,
+				2B6DD279255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */,
 				2B6DD27F255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */,
-				2B6DD280255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */,
+				2B6DD27B255D439F00FF8CA5 /* BUDAdmob_NativeFeedAd.h */,
 				2B6DD281255D439F00FF8CA5 /* BUDAdmob_NativeFeedAd.m */,
+				2B6DD27D255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */,
 				2B6DD282255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */,
+				2B6DD27C255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.h */,
+				2B6DD280255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -294,15 +299,15 @@
 		2B6DD284255D439F00FF8CA5 /* SubPage */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD285255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.h */,
 				2B6DD286255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.h */,
-				2B6DD287255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m */,
-				2B6DD288255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m */,
-				2B6DD289255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m */,
-				2B6DD28A255D439F00FF8CA5 /* UnifiedNativeAdView.xib */,
-				2B6DD28B255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.h */,
 				2B6DD28C255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.m */,
 				2B6DD28D255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.h */,
+				2B6DD288255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m */,
+				2B6DD28B255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.h */,
+				2B6DD287255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m */,
+				2B6DD285255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.h */,
+				2B6DD289255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m */,
+				2B6DD28A255D439F00FF8CA5 /* UnifiedNativeAdView.xib */,
 			);
 			path = SubPage;
 			sourceTree = "<group>";
@@ -310,8 +315,8 @@
 		2B6DD28E255D439F00FF8CA5 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD28F255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.m */,
 				2B6DD290255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.h */,
+				2B6DD28F255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.m */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -326,8 +331,8 @@
 		78E0729C21A2BF41006D71EE = {
 			isa = PBXGroup;
 			children = (
-				2B3F58EE251DCF35000198D4 /* BUADVADemo */,
 				2B6DD277255D439F00FF8CA5 /* CustomEventAdapter */,
+				2B3F58EE251DCF35000198D4 /* BUADVADemo */,
 				78E072A621A2BF41006D71EE /* Products */,
 				6C25FC835F24553C67AD4CC9 /* Pods */,
 				A9BB8904F5E2E508722AB9C2 /* Frameworks */,
@@ -489,6 +494,7 @@
 				2B6DD29A255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.m in Sources */,
 				2B6DD293255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m in Sources */,
 				2B6DD297255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m in Sources */,
+				9BED7398264A93CB00C48B17 /* BUDAdmob_PangleTool.m in Sources */,
 				2B3F5A23251DCF35000198D4 /* BUDCustomEventViewController.m in Sources */,
 				2B6DD294255D439F00FF8CA5 /* BUDAdmob_NativeFeedAd.m in Sources */,
 				2BAD9B61255BD97100B89E45 /* BUDNativeExampleView.m in Sources */,

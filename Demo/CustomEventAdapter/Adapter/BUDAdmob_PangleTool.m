@@ -9,7 +9,7 @@
 #import "BUDAdmob_PangleTool.h"
 #import <BUAdSDK/BUAdSDK.h>
 
-NSString * const pangleExtDataString = @"[{\"name\":\"mediation\",\"value\":\"admob\"},{\"name\":\"adapter_version\",\"value\":\"1.2.0\"}]";
+NSString * const pangleExtDataString = @"[{\"name\":\"mediation\",\"value\":\"admob\"},{\"name\":\"adapter_version\",\"value\":\"1.3.0\"}]";
 
 @implementation BUDAdmob_PangleTool
 + (void)setPangleExtData {

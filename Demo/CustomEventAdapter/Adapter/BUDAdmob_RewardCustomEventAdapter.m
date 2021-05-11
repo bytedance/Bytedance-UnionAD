@@ -28,8 +28,8 @@ NSString *const REWARD_PANGLE_PLACEMENT_ID = @"placementID";
 
 #pragma mark - GADMediationAdapter
 /// Returns the adapter version.
-+ (GADVersionNumber)version{
-    NSString *versionString = @"1.0.0";
++ (GADVersionNumber)adapterVersion{
+    NSString *versionString = @"1.3.0";
     NSArray *versionComponents = [versionString componentsSeparatedByString:@"."];
     GADVersionNumber version = {0};
     if (versionComponents.count == 3) {

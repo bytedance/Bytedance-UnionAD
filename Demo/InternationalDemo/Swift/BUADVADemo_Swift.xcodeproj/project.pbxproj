@@ -44,6 +44,7 @@
 		2BED972E257DDC4F00EF5C1F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED972D257DDC4F00EF5C1F /* libiconv.tbd */; };
 		2BED9731257DDC5200EF5C1F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9730257DDC5200EF5C1F /* Security.framework */; };
 		75F3854921D2A9CF63A5C007 /* libPods-Demo-BUADVADemo_Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA995E4CA1F0A21A38A6448 /* libPods-Demo-BUADVADemo_Swift.a */; };
+		9BED73A1264A959000C48B17 /* BUDAdmob_PangleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BED73A0264A959000C48B17 /* BUDAdmob_PangleTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,8 @@
 		2BED972D257DDC4F00EF5C1F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		2BED9730257DDC5200EF5C1F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8BA995E4CA1F0A21A38A6448 /* libPods-Demo-BUADVADemo_Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo-BUADVADemo_Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BED739F264A959000C48B17 /* BUDAdmob_PangleTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_PangleTool.h; sourceTree = "<group>"; };
+		9BED73A0264A959000C48B17 /* BUDAdmob_PangleTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_PangleTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,16 +149,18 @@
 		2B6DD250255D439000FF8CA5 /* Adapter */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD251255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */,
-				2B6DD252255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */,
-				2B6DD253255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.h */,
-				2B6DD254255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.h */,
-				2B6DD255255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */,
 				2B6DD256255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.h */,
+				2B6DD252255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */,
+				2B6DD251255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */,
 				2B6DD257255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */,
-				2B6DD258255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */,
+				2B6DD253255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.h */,
 				2B6DD259255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.m */,
+				2B6DD255255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */,
 				2B6DD25A255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */,
+				9BED739F264A959000C48B17 /* BUDAdmob_PangleTool.h */,
+				9BED73A0264A959000C48B17 /* BUDAdmob_PangleTool.m */,
+				2B6DD254255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.h */,
+				2B6DD258255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				2B6DD272255D439000FF8CA5 /* BUDAdmob_BannerCusEventVC.m in Sources */,
 				2B6DD26B255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m in Sources */,
 				2B6DD26F255D439000FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m in Sources */,
+				9BED73A1264A959000C48B17 /* BUDAdmob_PangleTool.m in Sources */,
 				2B8DC78F2555438200B820D4 /* SceneDelegate.swift in Sources */,
 				2B6DD26C255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.m in Sources */,
 				2B8DC7A62555489D00B820D4 /* ViewController.swift in Sources */,

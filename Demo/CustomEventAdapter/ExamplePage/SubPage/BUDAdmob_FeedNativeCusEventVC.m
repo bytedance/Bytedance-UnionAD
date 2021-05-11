@@ -9,14 +9,14 @@
 #import "BUDAdmob_FeedNativeCusEventVC.h"
 #import <GoogleMobileAds/GADAdLoader.h>
 #import <GoogleMobileAds/GADAdLoaderDelegate.h>
-#import <GoogleMobileAds/GADUnifiedNativeAdDelegate.h>
-#import <GoogleMobileAds/GADUnifiedNativeAd.h>
+#import <GoogleMobileAds/GADNativeAdDelegate.h>
+#import <GoogleMobileAds/GADNativeAd.h>
 
-@interface BUDAdmob_FeedNativeCusEventVC () <GADAdLoaderDelegate,GADUnifiedNativeAdDelegate,GADVideoControllerDelegate,GADUnifiedNativeAdLoaderDelegate>
+@interface BUDAdmob_FeedNativeCusEventVC () <GADAdLoaderDelegate,GADNativeAdDelegate,GADVideoControllerDelegate,GADNativeAdLoaderDelegate>
 
 @property (nonatomic, strong, getter=getAdLoader) GADAdLoader *adLoader;
-@property (nonatomic, strong) GADUnifiedNativeAdView *adView;
-@property (nonatomic, strong) GADUnifiedNativeAd *nativeAd;
+@property (nonatomic, strong) GADNativeAdView *adView;
+@property (nonatomic, strong) GADNativeAd *nativeAd;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UILabel *statusLabel;
 @end
@@ -152,69 +152,31 @@
             [[GADMultipleAdsAdLoaderOptions alloc] init];
         GADNativeMuteThisAdLoaderOptions *muteOptions = [GADNativeMuteThisAdLoaderOptions new];
         multipleAdsOptions.numberOfAds = 1;
-        _adLoader = [[GADAdLoader alloc] initWithAdUnitID:@"ca-app-pub-2547387438729744/8145972422" rootViewController:self adTypes:@[kGADAdLoaderAdTypeUnifiedNative] options:@[multipleAdsOptions,muteOptions]];
+        _adLoader = [[GADAdLoader alloc] initWithAdUnitID:@"ca-app-pub-2547387438729744/8145972422" rootViewController:self adTypes:@[kGADAdLoaderAdTypeNative] options:@[multipleAdsOptions,muteOptions]];
         _adLoader.delegate = self;
     }
     return _adLoader;
 }
 
-#pragma mark - GADAdLoaderDelegate
-- (void)adLoaderDidFinishLoading:(GADAdLoader *)adLoader {
-    
-}
+#pragma mark - GADNativeAdLoaderDelegate
 
-- (void)adLoader:(GADAdLoader *)adLoader didFailToReceiveAdWithError:(GADRequestError *)error {
-    _statusLabel.text = @"Ad loaded fail";
-}
-
-#pragma mark - GADUnifiedNativeAdDelegate
-- (void)nativeAdDidRecordImpression:(nonnull GADUnifiedNativeAd *)nativeAd {
-    
-}
-
-- (void)nativeAdDidRecordClick:(nonnull GADUnifiedNativeAd *)nativeAd {
-    
-}
-
-- (void)nativeAdWillPresentScreen:(nonnull GADUnifiedNativeAd *)nativeAd {
-    
-}
-
-- (void)nativeAdIsMuted:(GADUnifiedNativeAd *)nativeAd {
-    
-}
-
-#pragma mark - GADUnifiedNativeAdLoaderDelegate
-- (void)adLoader:(nonnull GADAdLoader *)adLoader didReceiveUnifiedNativeAd:(nonnull GADUnifiedNativeAd *)nativeAd {
+/// Called when a native ad is received.
+- (void)adLoader:(nonnull GADAdLoader *)adLoader didReceiveNativeAd:(nonnull GADNativeAd *)nativeAd {
     _nativeAd = nativeAd;
     _statusLabel.text = @"Ad loaded";
-    
     [self showAd];
 }
 
-/// Tells the delegate that the video controller has began or resumed playing a video.
-- (void)videoControllerDidPlayVideo:(nonnull GADVideoController *)videoController {
+/// Called when adLoader fails to load an ad.
+- (void)adLoader:(nonnull GADAdLoader *)adLoader
+didFailToReceiveAdWithError:(nonnull NSError *)error {
+    _statusLabel.text = @"Ad loaded fail";
+}
+
+/// Called after adLoader has finished loading.
+- (void)adLoaderDidFinishLoading:(nonnull GADAdLoader *)adLoader {
     
 }
 
-/// Tells the delegate that the video controller has paused video.
-- (void)videoControllerDidPauseVideo:(nonnull GADVideoController *)videoController {
-    
-}
-
-/// Tells the delegate that the video controller's video playback has ended.
-- (void)videoControllerDidEndVideoPlayback:(nonnull GADVideoController *)videoController {
-    
-}
-
-/// Tells the delegate that the video controller has muted video.
-- (void)videoControllerDidMuteVideo:(nonnull GADVideoController *)videoController {
-    
-}
-
-/// Tells the delegate that the video controller has unmuted video.
-- (void)videoControllerDidUnmuteVideo:(nonnull GADVideoController *)videoController {
-    
-}
 
 @end

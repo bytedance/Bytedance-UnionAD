@@ -13,7 +13,7 @@
  The corresponding adapter class is shown in the corresponding table of the BUDSlotID class.
  对应的adapter类参见BUDSlotID类的对应表
  */
-@interface BUDAdmob_RewardVideoCusEventVC ()<GADRewardedAdDelegate>
+@interface BUDAdmob_RewardVideoCusEventVC ()<GADFullScreenContentDelegate>
 @property (nonatomic, strong) GADRewardedAd *rewardVideoAd;
 @property (nonatomic, strong) UILabel *statusLabel;
 @end
@@ -62,45 +62,51 @@
 }
 
 - (void)loadAd:(UIButton *)sender {
-    self.rewardVideoAd = [[GADRewardedAd alloc] initWithAdUnitID:@"ca-app-pub-2547387438729744/1033769165"];
-    GADRequest *request = [GADRequest request];
     __weak typeof(self) weakself = self;
-    [self.rewardVideoAd loadRequest:request completionHandler:^(GADRequestError * _Nullable error) {
+    GADRequest *request = [GADRequest request];
+    [GADRewardedAd loadWithAdUnitID:@"ca-app-pub-2547387438729744/1033769165"
+                          request:request
+                completionHandler:^(GADRewardedAd *ad, NSError *error) {
         __strong typeof(self) strongself = weakself;
         if (error) {
             strongself.statusLabel.text = @"Ad loaded fail";
-        } else {
-            strongself.statusLabel.text = @"Ad loaded";
+            return;
         }
+        strongself.statusLabel.text = @"Ad loaded";
+        self.rewardVideoAd = ad;
+        self.rewardVideoAd.fullScreenContentDelegate = self;
     }];
 }
 
 - (void)showAd:(UIButton *)sender {
-    if (self.rewardVideoAd.isReady) {
-        [self.rewardVideoAd presentFromRootViewController:self.navigationController delegate:self];
+    if (self.rewardVideoAd) {
+        [self.rewardVideoAd presentFromRootViewController:self.navigationController userDidEarnRewardHandler:^{
+            
+        }];
     }
 }
 
-
-#pragma mark GADRewardedAdDelegate
-/// Tells the delegate that the user earned a reward.
-- (void)rewardedAd:(GADRewardedAd *)rewardedAd userDidEarnReward:(GADAdReward *)reward {
-  // TODO: Reward the user.
-  
-}
-
-/// Tells the delegate that the rewarded ad was presented.
-- (void)rewardedAdDidPresent:(GADRewardedAd *)rewardedAd {
-  
-}
-
-/// Tells the delegate that the rewarded ad failed to present.
-- (void)rewardedAd:(GADRewardedAd *)rewardedAd didFailToPresentWithError:(NSError *)error {
-  
-}
-
-/// Tells the delegate that the rewarded ad was dismissed.
-- (void)rewardedAdDidDismiss:(GADRewardedAd *)rewardedAd {
+#pragma mark GADFullScreenContentDelegate
+/// Tells the delegate that an impression has been recorded for the ad.
+- (void)adDidRecordImpression:(nonnull id<GADFullScreenPresentingAd>)ad {
     
 }
+
+/// Tells the delegate that the ad failed to present full screen content.
+- (void)ad:(nonnull id<GADFullScreenPresentingAd>)ad
+didFailToPresentFullScreenContentWithError:(nonnull NSError *)error {
+    
+}
+
+/// Tells the delegate that the ad presented full screen content.
+- (void)adDidPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
+    
+}
+
+/// Tells the delegate that the ad dismissed full screen content.
+- (void)adDidDismissFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
+    _statusLabel.text = @"Tap left button to load Ad";
+}
+
+
 @end

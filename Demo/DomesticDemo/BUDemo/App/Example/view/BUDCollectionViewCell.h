@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <BUAdSDK/BUNativeAdRelatedView.h>
+#import <BUAdSDK/BUAdSDK.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

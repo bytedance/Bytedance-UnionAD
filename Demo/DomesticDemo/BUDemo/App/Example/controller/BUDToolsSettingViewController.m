@@ -16,7 +16,10 @@
 #import "BUDSlotID.h"
 #import "BUDTestToolsViewController.h"
 #import "BUDCoppaViewController.h"
-
+#import "BUDCustomDislikeToolsController.h"
+#if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
+#import <BUAdTestMeasurement/BUAdTestMeasurement.h>
+#endif
 @interface BUDToolsSettingViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) BUDSettingTableView *tableView;
 @property (nonatomic, strong) NSMutableArray<BUDActionModel *> *items;
@@ -54,11 +57,10 @@
 }
 
 - (void)buildItemsData {
-    __weak typeof(self) weaksefl = self;
+    __weak typeof(self) weakself = self;
     BUDActionModel *normalTools = [BUDActionModel plainTitleActionModel:@"Normal Tools" type:BUDCellType_setting action:^{
         BUDSettingViewController *vc = [BUDSettingViewController new];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [weaksefl.navigationController pushViewController:vc animated:YES];
+        [weakself.navigationController pushViewController:vc animated:YES];
     }];
     
     BUDActionModel *playableTools = [BUDActionModel plainTitleActionModel:@"Playable Tool" type:BUDCellType_setting action:^{
@@ -66,25 +68,44 @@
         viewModel.slotID = normal_reward_ID;
         BUDPlayableToolViewController *vc = [BUDPlayableToolViewController new];
         vc.viewModel = viewModel;
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [weaksefl.navigationController pushViewController:vc animated:YES];
+        [weakself.navigationController pushViewController:vc animated:YES];
     }];
     BUDActionModel *testTools = [BUDActionModel plainTitleActionModel:@"Test Tool" type:BUDCellType_setting action:^{
         BUDTestToolsViewController *vc = [BUDTestToolsViewController new];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [weaksefl.navigationController pushViewController:vc animated:YES];
+        [weakself.navigationController pushViewController:vc animated:YES];
     }];
-    BUDActionModel *coppaTools = [BUDActionModel plainTitleActionModel:@"Coppa && GDPR Tool" type:BUDCellType_setting action:^{
+    BUDActionModel *coppaTools = [BUDActionModel plainTitleActionModel:@"Coppa & GDPR & CCPA Tool" type:BUDCellType_setting action:^{
         BUDCoppaViewController *vc = [[BUDCoppaViewController alloc] initWithNibName:@"BUDCoppaViewController" bundle:[NSBundle mainBundle]];
-        vc.view.backgroundColor = [UIColor whiteColor];
-        [weaksefl.navigationController pushViewController:vc animated:YES];
+        [weakself.navigationController pushViewController:vc animated:YES];
     }];
     
+    BUDActionModel *customDislike = [BUDActionModel plainTitleActionModel:@"Custom Dislike" type:BUDCellType_setting action:^{
+        BUDCustomDislikeToolsController *customDislikeVC = [[BUDCustomDislikeToolsController alloc] init];
+        [weakself.navigationController pushViewController:customDislikeVC animated:YES];
+    }];
+    
+#if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
+    BUDActionModel *testMeasurement = [BUDActionModel plainTitleActionModel:@"Test Measurement" type:BUDCellType_setting action:^{
+        __strong typeof(weakself) strongSelf = weakself;
+        [BUAdTestMeasurementManager showTestMeasurementWithController:strongSelf];
+    }];
     self.items = @[normalTools,
                    playableTools,
                    testTools,
-                   coppaTools
+                   coppaTools,
+                   customDislike,
+                   testMeasurement
                     ].mutableCopy;
+#else
+    self.items = @[normalTools,
+                   playableTools,
+                   testTools,
+                   coppaTools,
+                   customDislike
+                    ].mutableCopy;
+#endif
+    
+    
 }
 
 -(BOOL)shouldAutorotate

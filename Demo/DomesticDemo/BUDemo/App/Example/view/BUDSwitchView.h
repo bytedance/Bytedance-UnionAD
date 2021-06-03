@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BUDSwitchView : UIView
 @property (nonatomic, readonly, getter=isOn) BOOL on;
+@property (nonatomic, strong) UISwitch *switchView;
 
 - (id)initWithTitle:(NSString *)title on:(BOOL)on height:(CGFloat)height;
 @end

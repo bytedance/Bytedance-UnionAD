@@ -7,12 +7,12 @@
 //
 
 #import "BUDRewardedVideoAdViewController.h"
-#import <BUAdSDK/BURewardedVideoAd.h>
-#import <BUAdSDK/BURewardedVideoModel.h>
+#import <BUAdSDK/BUAdSDK.h>
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
 #import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
+#import "UIColor+DarkMode.h"
 
 @interface BUDRewardedVideoAdViewController () <BURewardedVideoAdDelegate>
 @property (nonatomic, strong) BURewardedVideoAd *rewardedVideoAd;
@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
 
     BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":normal_reward_ID,@"title":[NSString localizedStringForKey:Vertical]}];
     BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":normal_reward_landscape_ID,@"title":[NSString localizedStringForKey:Horizontal]}];
@@ -50,6 +50,7 @@
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
 //    model.userId = @"123";
     self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:slotID rewardedVideoModel:model];
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.rewardedVideoAd.delegate = self;
     
     [self.rewardedVideoAd loadAdData];

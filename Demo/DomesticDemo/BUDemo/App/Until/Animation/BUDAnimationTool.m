@@ -9,10 +9,11 @@
 #import "BUDAnimationTool.h"
 
 @interface BUDAnimationTool()<CAAnimationDelegate>
-@property (nonatomic, weak) BUSplashAdView *splashView;
+@property (nonatomic, weak) UIView *splashView;
 @property (nonatomic, weak) BUSplashZoomOutView *zoomOutView;
 @property (nonatomic, assign) CGRect resultFrame;
 @property (nonatomic, assign) BOOL isAnimationStart;
+@property (nonatomic, copy) BUDAnimationCompletion splashCompletion;
 @end
 
 @implementation BUDAnimationTool
@@ -26,12 +27,13 @@
     return toolManager;
 }
 
-- (void)transitionFromView:(BUSplashAdView *)fromView toView:(BUSplashZoomOutView *)toView {
+- (void)transitionFromView:(UIView *)fromView toView:(BUSplashZoomOutView *)toView splashCompletion:(BUDAnimationCompletion)splashCompletion {
     if (self.isAnimationStart) {
         return;
     }else{
         self.isAnimationStart = YES;
     }
+    self.splashCompletion = splashCompletion;
     self.splashView = fromView;
     self.zoomOutView = toView;
     CGSize size = self.zoomOutView.showSize;
@@ -62,11 +64,16 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     self.isAnimationStart = NO;
-    [self.splashView removeFromSuperview];
+    if (self.splashCompletion) {
+        self.splashCompletion();
+    }
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
     self.zoomOutView.frame = self.resultFrame;
     [UIView commitAnimations];
+    self.splashView = nil;
+    self.zoomOutView = nil;
+
 }
 
 @end

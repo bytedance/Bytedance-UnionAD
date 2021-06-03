@@ -6,7 +6,7 @@
 //  Copyright © 2020 bytedance. All rights reserved.
 //
 
-#import <BUAdSDK/BUNativeAdRelatedView.h>
+#import <BUAdSDK/BUAdSDK.h>
 #import "BUDCustomPlayerAdView.h"
 #import "BUDVideoView.h"
 #import "BUDMacros.h"

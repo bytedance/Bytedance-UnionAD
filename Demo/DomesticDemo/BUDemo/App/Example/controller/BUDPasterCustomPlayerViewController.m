@@ -10,6 +10,8 @@
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDVideoView.h"
 #import "BUDPasterContentView.h"
+#import "UIColor+DarkMode.h"
+
 @interface BUDPasterCustomPlayerViewController ()
 
 @end
@@ -18,9 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
-
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
 }
 
 #pragma mark - override

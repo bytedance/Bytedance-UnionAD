@@ -29,9 +29,12 @@
         self.titleLable.textColor = mainColor;
         self.titleLable.font = [UIFont boldSystemFontOfSize:17];
     } else {
-        self.titleLable.textColor = [UIColor blackColor];
         self.titleLable.font = [UIFont systemFontOfSize:16];
-
+        if (@available(iOS 13.0, *)) {
+            _titleLable.textColor = UIColor.labelColor;
+        } else {
+            _titleLable.textColor = UIColor.blackColor;
+        }
     }
 }
 
@@ -46,8 +49,11 @@
         _titleLable.textAlignment = NSTextAlignmentCenter;
         _titleLable.clipsToBounds = YES;
         _titleLable.layer.cornerRadius = 5;
-        _titleLable.backgroundColor = BUD_RGB(0xf2, 0xf2, 0xf2);
-        _titleLable.textColor = [UIColor blackColor];
+        if (@available(iOS 13.0, *)) {
+            _titleLable.backgroundColor = UIColor.systemGray6Color;
+        } else {
+            _titleLable.backgroundColor = BUD_RGB(0xf2, 0xf2, 0xf2);
+        }
         _titleLable.font = [UIFont systemFontOfSize:16];
     }
     return _titleLable;

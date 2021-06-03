@@ -28,6 +28,7 @@
 "showScrollBanner" = "スライドバナーを表示";
 "splash" = "起動画面";
 "customCloseBtn" = "カスタム起動画面スキップボタン";
+"SplashContainer" = "起動画面（switch controller）";
 "Skip" = "スキップ";
 "showFullScreenVideo" = "全画面動画を表示";
 "showRewardVideo" = "動画リワードを表示";

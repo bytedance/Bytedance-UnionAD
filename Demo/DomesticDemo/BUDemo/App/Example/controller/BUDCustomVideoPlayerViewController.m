@@ -10,6 +10,7 @@
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDVideoView.h"
 #import "BUDCustomPlayerAdView.h"
+#import "UIColor+DarkMode.h"
 
 @interface BUDCustomVideoPlayerViewController () <BUNativeAdsManagerDelegate>
 
@@ -29,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     [self setupViews];
     [self changeVideoAd];
 }
@@ -115,6 +116,10 @@
     NSString *slotId = self.currentAd.adslot.ID;
     BUDVideoView *view = self.adView.videoView;
     switch (status) {
+        case BUDVideoViewStatusReady: {
+            [reportor startPlayVideo];
+        }
+            break;
         case BUDVideoViewStatusPlaying: {
             NSTimeInterval duration = view.durationOfCurrentItem;
             [reportor didStartPlayVideoWithVideoDuration:duration];
@@ -143,6 +148,11 @@
             [reportor didBreakVideoWithCurrentDuration:duration];
             [self showToastWithMessage:[NSString stringWithFormat:@"REPORT BREAK:%@ %.0lfs", slotId, duration]];
         }
+            break;
+        case BUDVideoViewStatusError: {
+            [reportor didPlayFailedWithError:view.error];
+        }
+            break;
         default:
             break;
     }

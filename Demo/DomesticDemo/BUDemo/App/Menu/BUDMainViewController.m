@@ -22,7 +22,8 @@
 #import "BUDSplashAdListViewController.h"
 #import "BUDFullScreenVideoAdListViewController.h"
 #import "BUDRewardedAdListViewController.h"
-
+#import "BUDStreamAdListViewController.h"
+#import "BUDAdManager.h"
 @interface BUDMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray<NSMutableArray *> *items;
@@ -36,6 +37,11 @@
     if (self.viewModel.custormNavigation) {
         self.navigationController.navigationBarHidden = YES;
     }
+    
+    [self.navigationController.navigationBar setBarTintColor:titleBGColor];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
     self.title = @"BytedanceUnion Demo";
     
@@ -78,6 +84,11 @@
         [self showViewController:[[BUDFullScreenVideoAdListViewController alloc] init] sender:nil];
     }];
     
+    BUDActionModel *streamAdVc = [BUDActionModel plainTitleActionModel:@"Stream Ad" type:BUDCellType_native action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        [self showViewController:[[BUDStreamAdListViewController alloc] init] sender:nil];
+    }];
+    
     BUDActionModel *waterfallItem = [BUDActionModel plainTitleActionModel:@"Waterfall Ad" type:BUDCellType_video action:^{
         BUDWaterfallViewController *vc = [BUDWaterfallViewController new];
         [self.navigationController pushViewController:vc animated:YES];
@@ -85,18 +96,16 @@
     
     BUDActionModel *adapterItem = [BUDActionModel plainTitleActionModel:@"CustomEventAdapter" type:BUDCellType_CustomEvent action:^{
         BUDCustomEventViewController *vc = [BUDCustomEventViewController new];
-        vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
     BUDActionModel *toolsItem = [BUDActionModel plainTitleActionModel:@"Tools" type:BUDCellType_setting action:^{
         BUDToolsSettingViewController *vc = [BUDToolsSettingViewController new];
-        vc.view.backgroundColor = [UIColor whiteColor];
         [self.navigationController pushViewController:vc animated:YES];
     }];
 
     self.items = @[
-            @[feedAdVc, drawAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc],
+            @[feedAdVc, drawAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
             @[waterfallItem],
             @[adapterItem],
             @[toolsItem]
@@ -119,22 +128,17 @@
     self.tableView.frame = self.view.bounds;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setBarTintColor:nil];
-    [self.navigationController.navigationBar setTintColor:nil];
-    [self.navigationController.navigationBar setTitleTextAttributes:nil];
-    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:NO];
-    
-    [self.navigationController.navigationBar setBarTintColor:titleBGColor];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    // 清除自定义dislike标识
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:NO forKey:@"kCustomDislikeIsOn"];
+    [userDefaults synchronize];
 }
 
 -(BOOL)shouldAutorotate

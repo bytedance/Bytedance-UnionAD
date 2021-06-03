@@ -7,8 +7,7 @@
 //
 
 #import "BUDNativeBannerViewController.h"
-#import <BUAdSDK/BUNativeAd.h>
-#import <BUAdSDK/BUNativeAdRelatedView.h>
+#import <BUAdSDK/BUAdSDK.h>
 #import "BUDMacros.h"
 #import "BUDRefreshButton.h"
 #import "UIView+Draw.h"
@@ -18,8 +17,10 @@
 #import "NSString+Json.h"
 #import "BUDNativeBannerTableViewCell.h"
 #import <MJRefresh/MJRefresh.h>
-
-@interface BUDNativeBannerViewController () <BUNativeAdDelegate,UITableViewDelegate,UITableViewDataSource>
+#ifdef DEBUG
+#import <MBProgressHUD/MBProgressHUD.h>
+#endif
+@interface BUDNativeBannerViewController () <BUNativeAdDelegate,UITableViewDelegate,UITableViewDataSource, BUDNativeBannerDelegate>
 @property (nonatomic, strong) BUDBannerModel *bannerModel;
 @property (nonatomic, strong) BUNativeAd *nativeAd_load;
 @property (nonatomic, strong) UITableView *tableView;
@@ -107,6 +108,7 @@
         
         BUNativeAd *nad = [[BUNativeAd alloc] initWithSlot:slot1];
         nad.rootViewController = self;
+        // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
         nad.delegate = self;
         self.nativeAd_load = nad;
     }
@@ -161,6 +163,17 @@
 
 - (void)nativeAd:(BUNativeAd *)nativeAd dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords {
     [self bud_delegateLogWithSEL:_cmd msg:@""];
+}
+
+- (void)nativeAd:(BUNativeAd *)nativeAd adContainerViewDidRemoved:(UIView *)adContainerView {
+#ifdef DEBUG
+    [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view.window];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = @"温馨提示";
+    hud.detailsLabel.text = @"强制关闭广告，开发者请做好布局处理";
+    [hud hideAnimated:YES afterDelay:1.5];
+#endif
     NSMutableArray *dataSources = [self.dataSource mutableCopy];
     id model = dataSources.firstObject;
     if ([model isKindOfClass:[BUDBannerModel class]] && [[(BUDBannerModel *)model nativeAd] isEqual:nativeAd]) {
@@ -171,8 +184,8 @@
     
     self.dataSource = [dataSources copy];
     [self.tableView reloadData];
+    [self bud_delegateLogWithSEL:_cmd msg:@""];
 }
-
 #pragma mark - Events
 - (void)buttonTapped:(UIButton *)sender {
     [self loadNativeAd];
@@ -188,6 +201,7 @@
             cell = [[BUDNativeBannerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BUDNativeBannerTableViewCell"];
         }
         [cell refreshUIWithModel:model];
+        cell.delegate = self;
         return cell;
     } else if ([model isKindOfClass:[UIView class]]) {
         
@@ -247,4 +261,18 @@
     return self.dataSource.count;
 }
 
+#pragma mark - BUDBannerDelegate
+- (void)bannerCustomDislike:(BUDNativeBannerTableViewCell *)cell withNativeAd:(BUNativeAd *)nativeAd didSlected:(BUDislikeWords *)dislikeWord {
+    [self bud_delegateLogWithSEL:_cmd msg:@""];
+    NSMutableArray *dataSources = [self.dataSource mutableCopy];
+    id model = dataSources.firstObject;
+    if ([model isKindOfClass:[BUDBannerModel class]] && [[(BUDBannerModel *)model nativeAd] isEqual:nativeAd]) {
+        [dataSources removeObject:model];
+    } else if ([model isKindOfClass:[UIView class]]) {
+        [dataSources removeObject:model];
+    }
+    
+    self.dataSource = [dataSources copy];
+    [self.tableView reloadData];
+}
 @end

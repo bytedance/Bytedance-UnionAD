@@ -16,8 +16,10 @@
 #import "NSString+LocalizedString.h"
 #import "BUDSwitchView.h"
 #import <MJRefresh/MJRefresh.h>
-
-@interface BUDFeedViewController () <UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate,BUNativeExpressAdViewDelegate>
+#ifdef DEBUG
+#import <MBProgressHUD/MBProgressHUD.h>
+#endif
+@interface BUDFeedViewController () <UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate,BUNativeExpressAdViewDelegate, BUDFeedCustomDislikeDelgate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) BUNativeAdsManager *adManager;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -108,6 +110,7 @@
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
     nad.adslot = slot1;
     nad.adSize = CGSizeMake(self.tableView.frame.size.width, 0);
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     nad.delegate = self;
     nad.nativeExpressAdViewDelegate = self;
     self.adManager = nad;
@@ -123,7 +126,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -142,6 +144,9 @@
     // For ad cells just as the ad cell provider, for normal cells do whatever you would do.
     BOOL isVideoCell = NO;
     NSUInteger index = indexPath.row;
+    if (index >= self.dataSource.count) {
+        return [UITableViewCell new];
+    }
     id model = self.dataSource[index];
     if ([model isKindOfClass:[BUNativeAd class]]) {
         BUNativeAd *nativeAd = (BUNativeAd *)model;
@@ -193,8 +198,10 @@
                     [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
                 } else {
                     [cell.customBtn setTitle:[NSString localizedStringForKey:NoClick] forState:UIControlStateNormal];
+                    [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
                 }
             }
+            cell.delegate = self;
             return cell;
         }
     }else if ([model isKindOfClass:[BUDFeedNormalModel class]]){
@@ -327,6 +334,16 @@
     }
 }
 
+#pragma mark - BUDFeedCustomDislikeDelgate
+- (void)feedCustomDislike:(BUDFeedAdBaseTableViewCell *)cell withNativeAd:(BUNativeAd *)nativeAd didSlected:(BUDislikeWords *)dislikeWord {
+    // 自定义dislike
+    NSMutableArray *dataSources = [self.dataSource mutableCopy];
+    [dataSources removeObject:nativeAd];
+    self.dataSource = [dataSources copy];
+    [self.tableView reloadData];
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
+}
+
 #pragma mark - BUNativeAdsManagerDelegate
 
 - (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
@@ -389,11 +406,11 @@
 }
 
 - (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords {//【重要】需要在点击叉以后 在这个回调中移除视图，否则，会出现用户点击叉无效的情况
-    [self.dataSource removeObject:nativeExpressAdView];
-
-    NSUInteger index = [self.dataSource indexOfObject:nativeExpressAdView];
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    [self.dataSource removeObject:nativeExpressAdView];
+//
+//    NSUInteger index = [self.dataSource indexOfObject:nativeExpressAdView];
+//    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
+//    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:@""];
 }
 
@@ -446,13 +463,24 @@
 }
 
 - (void)nativeAd:(BUNativeAd *)nativeAd dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords {
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
+}
+
+
+- (void)nativeAd:(BUNativeAd *)nativeAd adContainerViewDidRemoved:(UIView *)adContainerView {
+#ifdef DEBUG
+    [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view.window];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = @"温馨提示";
+    hud.detailsLabel.text = @"强制关闭广告，开发者请做好布局处理";
+    [hud hideAnimated:YES afterDelay:1.5];
+#endif
     NSMutableArray *dataSources = [self.dataSource mutableCopy];
     [dataSources removeObject:nativeAd];
     self.dataSource = [dataSources copy];
     [self.tableView reloadData];
-    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
 }
-
 
 #pragma mark - BUVideoAdViewDelegate
 

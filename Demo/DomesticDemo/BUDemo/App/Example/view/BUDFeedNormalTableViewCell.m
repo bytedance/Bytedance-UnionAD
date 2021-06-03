@@ -10,6 +10,7 @@
 #import "BUDFeedStyleHelper.h"
 #import "BUDMacros.h"
 
+
 #define GlobleHeight (self.contentView.frame.size.height)
 #define GlobleWidth (self.contentView.frame.size.width)
 #define imgBgColor BUD_RGB(0xf0, 0xf0, 0xf0)

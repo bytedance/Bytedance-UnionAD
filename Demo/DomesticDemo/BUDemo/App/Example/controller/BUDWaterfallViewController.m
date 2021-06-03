@@ -7,12 +7,12 @@
 //
 
 #import "BUDWaterfallViewController.h"
-#import <BUAdSDK/BUNativeExpressAdManager.h>
-#import <BUAdSDK/BUNativeExpressAdView.h>
+#import <BUAdSDK/BUAdSDK.h>
 #import "BUDMacros.h"
 #import "BUDNormalButton.h"
 #import "UIView+Draw.h"
 #import "NSString+LocalizedString.h"
+#import "UIColor+DarkMode.h"
 
 NSString *const BU_AdCachePath = @"adCachePath.data";
 NSString *const BU_adloadSeqKey = @"bu_adloadSeqKey";
@@ -41,7 +41,7 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     self.slotIds = @[@"945135101",@"945135136",@"945113159"];
     self.expressAdViews = [NSMutableArray new];
     [self setupViews];
@@ -66,7 +66,6 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
     const CGFloat spaceY = 10;
     
     self.widthLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, 60, 21)];
-    self.widthLabel.textColor = titleBGColor;
     self.widthLabel.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:self.widthLabel];
     
@@ -78,7 +77,6 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
 
     self.heightLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, 60, 21)];
     self.heightLabel.font = [UIFont systemFontOfSize:15];
-    self.heightLabel.textColor = titleBGColor;
     [self.view addSubview:self.heightLabel];
     
     self.heightSlider = [[UISlider alloc] initWithFrame:CGRectMake(self.widthSlider.left, y-5, self.widthSlider.width, 31)];
@@ -89,7 +87,6 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
 
     self.adCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, 60, 21)];
     self.adCountLabel.font = [UIFont systemFontOfSize:15];
-    self.adCountLabel.textColor = titleBGColor;
     [self.view addSubview:self.adCountLabel];
     
     self.adCountSlider = [[UISlider alloc] initWithFrame:CGRectMake(self.widthSlider.left, y-5, self.widthSlider.width, 31)];
@@ -348,7 +345,6 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
         [cell.contentView addSubview:view];
     } else {
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"BUDSplitNativeExpressCell" forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor whiteColor];
     }
     return cell;
 }

@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BUDBaseExampleViewController.h"
+#import <BUAdSDK/BUAdSDK.h>
 
 @interface BUDSplashViewController : BUDBaseExampleViewController
+
+- (void)setUpSplashZoomOutAd:(BUSplashAdView *)splashAdView;
 
 @end

@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <BUAdSDK/BUNativeAd.h>
+#import <BUAdSDK/BUAdSDK.h>
 
 NS_ASSUME_NONNULL_BEGIN
-static CGFloat const bottomHeight = 30;
+@class BUDNativeBannerTableViewCell;
+@protocol BUDNativeBannerDelegate <NSObject>
+
+- (void)bannerCustomDislike:(BUDNativeBannerTableViewCell *)cell withNativeAd:(BUNativeAd *)nativeAd didSlected:(BUDislikeWords *)dislikeWord;
+
+@end
 
 @interface BUDBannerModel : NSObject
 @property (nonatomic,strong) BUNativeAd *nativeAd;
@@ -20,6 +25,7 @@ static CGFloat const bottomHeight = 30;
 
 @interface BUDNativeBannerTableViewCell : UITableViewCell
 @property (nonatomic, strong) BUDBannerModel *bannerModel;
+@property (nonatomic, weak) id<BUDNativeBannerDelegate> delegate;
 - (void)refreshUIWithModel:(BUDBannerModel *_Nonnull)model;
 @end
 NS_ASSUME_NONNULL_END

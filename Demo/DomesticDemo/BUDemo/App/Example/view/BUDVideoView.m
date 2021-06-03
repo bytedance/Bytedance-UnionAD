@@ -27,19 +27,23 @@
 
 - (void)loadURL:(NSURL *)URL {
     if (!URL || ![URL isKindOfClass:[NSURL class]]) return;
+    if (_item) {
+        [_item removeObserver:self forKeyPath:@"status"];
+    }
     AVAsset *avasset = [AVAsset assetWithURL:URL];
     _item = [AVPlayerItem playerItemWithAsset:avasset automaticallyLoadedAssetKeys:@[@"duration"]];
     if (!_item) return;
     if (_player) {
         if (self.isPlaying) [_player pause];
         if (_observer) [_player removeTimeObserver:_observer];
+        [_player removeObserver:self forKeyPath:@"rate"];
         [_player replaceCurrentItemWithPlayerItem:_item];
     } else {
         _player = [AVPlayer playerWithPlayerItem:_item];
         _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
         [self.layer addSublayer:_playerLayer];
     }
-    self.status = BUDVideoViewStatusReady;
+    
     CMTime time = CMTimeMake(1, 1);
     __weak __typeof(self) ws = self;
     _observer = [_player addPeriodicTimeObserverForInterval:time queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
@@ -53,13 +57,33 @@
             }
         }
     }];
+    
+    [_item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    [_player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:NULL];
+    self.status = BUDVideoViewStatusDefaut;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (object == self.item && [keyPath isEqualToString:@"status"]) {
+        if (self.item.status == AVPlayerItemStatusReadyToPlay) {
+        } else if (self.item.status == AVPlayerItemStatusFailed) {
+            self.status = BUDVideoViewStatusError;
+            _error = self.item.error;
+        }
+    } else if(object == self.player && [keyPath isEqualToString:@"rate"]) {
+        float rate = [change[NSKeyValueChangeNewKey] floatValue];
+        if (rate == 1.0 && self.status == BUDVideoViewStatusReady) {
+            self.status = BUDVideoViewStatusPlaying;
+        }
+    }
 }
 
 - (void)play {
     if (!_player || !_player.currentItem) return;
+    self.status = BUDVideoViewStatusReady;
+    
     [_player seekToTime:kCMTimeZero];
     [_player play];
-    self.status = BUDVideoViewStatusPlaying;
 }
 
 - (void)pause {

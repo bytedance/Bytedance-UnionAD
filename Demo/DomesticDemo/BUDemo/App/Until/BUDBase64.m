@@ -46,6 +46,11 @@
 
 + (NSData *)bud_dataWithBase64EncodedString:(NSString *)string
 {
+    // fix NSException -[NSNull length]: unrecognized selector sent to instance 0x1f8d3c
+    if (![string isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    
     if (![string length]) return nil;
     
     NSData *decoded = [[self alloc] initWithBase64EncodedString:string options:NSDataBase64DecodingIgnoreUnknownCharacters];

@@ -12,6 +12,7 @@
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
+#import "UIColor+DarkMode.h"
 
 @interface BUDExpressFullScreenVideoViewController ()<BUNativeExpressFullscreenVideoAdDelegate>
 @property (nonatomic, strong) BUDSelectedView *selectedView;
@@ -22,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     NSString *verticalTitle = [NSString localizedStringForKey:Vertical];
     NSString *horizontalTitle = [NSString localizedStringForKey:Horizontal];
     BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_full_ID_both,@"title":[NSString stringWithFormat:@"%@-both",verticalTitle]}];
@@ -47,6 +48,7 @@
 
 - (void)loadFullscreenVideoAdWithSlotID:(NSString *)slotID {
     self.fullscreenAd = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:slotID];
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.fullscreenAd.delegate = self;
     [self.fullscreenAd loadAdData];
     
@@ -136,5 +138,4 @@
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
     BUD_Log(@"SDKDemoDelegate BUNativeExpressFullscreenVideoAd In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
 }
-
 @end

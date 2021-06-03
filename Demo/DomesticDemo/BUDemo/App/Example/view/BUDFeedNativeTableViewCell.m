@@ -7,7 +7,8 @@
 //
 
 #import "BUDFeedNativeTableViewCell.h"
-#import "UIImageView+AFNetworking.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+//#import "UIImageView+WebCache.h"
 #import "NSString+LocalizedString.h"
 
 @implementation BUDFeedNativeTableViewCell

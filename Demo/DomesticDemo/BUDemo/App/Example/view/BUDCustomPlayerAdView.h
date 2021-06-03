@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <BUAdSDK/BUVideoAdReportor.h>
+#import <BUAdSDK/BUAdSDK.h>
 
 @class BUDVideoView;
 

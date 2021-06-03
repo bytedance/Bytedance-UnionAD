@@ -7,12 +7,13 @@
 //
 
 #import "BUDFullscreenViewController.h"
-#import <BUAdSDK/BUFullscreenVideoAd.h>
+#import <BUAdSDK/BUAdSDK.h>
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
 #import "NSString+LocalizedString.h"
 #import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
+#import "UIColor+DarkMode.h"
 
 @interface BUDFullscreenViewController () <BUFullscreenVideoAdDelegate>
 @property (nonatomic, strong) BUFullscreenVideoAd *fullscreenVideoAd;
@@ -23,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
 
     BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":normal_fullscreen_ID,@"title":[NSString localizedStringForKey:Vertical]}];
     BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":normal_fullscreen_landscape_ID,@"title":[NSString localizedStringForKey:Horizontal]}];
@@ -48,6 +49,7 @@
 - (void)loadFullscreenVideoAdWithSlotID:(NSString *)slotID {
 // important:----- Every time the data is requested, a new one BUFullscreenVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
     self.fullscreenVideoAd = [[BUFullscreenVideoAd alloc] initWithSlotID:slotID];
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.fullscreenVideoAd.delegate = self;
     [self.fullscreenVideoAd loadAdData];
     

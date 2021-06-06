@@ -91,6 +91,7 @@
     if (!self.nativeExpressAdManager) {
         self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:self.view.bounds.size];
     }
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.nativeExpressAdManager.delegate = self;
     [self.nativeExpressAdManager loadAdDataWithCount:3];
 }
@@ -138,8 +139,8 @@
 - (void)updateCurrentPlayedTime {
     for (id nativeExpressAdView in self.dataSource) {
         if ([nativeExpressAdView isKindOfClass:[BUNativeExpressAdView class]]) {
-            BUNativeExpressAdView *adView = nativeExpressAdView;
-            NSLog(@"====== %p currentPlayedTime = %f",nativeExpressAdView,adView.currentPlayedTime);
+//            BUNativeExpressAdView *adView = nativeExpressAdView;
+//            NSLog(@"====== %p currentPlayedTime = %f",nativeExpressAdView,adView.currentPlayedTime);
         }
     }
 }

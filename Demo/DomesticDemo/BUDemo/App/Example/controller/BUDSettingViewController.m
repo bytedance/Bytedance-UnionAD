@@ -12,8 +12,8 @@
 #import <AdSupport/AdSupport.h>
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
-#import <BUAdSDK/BUAdSDKManager.h>
-#import <BUAdSDK/BUAdSDKTestToolManager.h>
+#import <BUAdSDK/BUAdSDK.h>
+#import "UIColor+DarkMode.h"
 
 #define LeftMargin 10
 #define RightMargin 10
@@ -32,7 +32,6 @@
 @property (nonatomic, strong) UITextField *idfaText;
 
 @property (nonatomic, strong) UIButton *noneBtn;
-@property (nonatomic, strong) UIButton *protocolBtn;
 @property (nonatomic, strong) UIButton *wkWebBtn;
 @property (nonatomic, strong) UITextField *statusText;
 
@@ -44,12 +43,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.items = [NSMutableArray array];
-    if (@available(iOS 13.0, *)) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
     [self buildupView];
 }
 
@@ -60,7 +56,6 @@
     [self.view addSubview:self.idfaText];
     
     [self.view addSubview:self.noneBtn];
-    [self.view addSubview:self.protocolBtn];
     [self.view addSubview:self.wkWebBtn];
     [self.view addSubview:self.statusText];
     
@@ -88,11 +83,6 @@
 - (void)setNone {
     [BUAdSDKManager setOfflineType:BUOfflineTypeNone];
     _statusText.text = @"None";
-}
-
-- (void)setProtocol {
-//    [BUAdSDKManager setOfflineType:BUOfflineTypeProtocol];
-//    _statusText.text = @"Protocol";
 }
 
 - (void)setWkWeb {
@@ -182,19 +172,9 @@
     return _noneBtn;
 }
 
-- (UIButton *)protocolBtn {
-    if (!_protocolBtn) {
-        _protocolBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.noneBtn.frame) + 10, 200, 30)];
-        [_protocolBtn setTitle:@"Set NSProtocol" forState:UIControlStateNormal];
-        [_protocolBtn addTarget:self action:@selector(setProtocol) forControlEvents:UIControlEventTouchUpInside];
-        [self designButton:_protocolBtn];
-    }
-    return _protocolBtn;
-}
-
 - (UIButton *)wkWebBtn {
     if (!_wkWebBtn) {
-        _wkWebBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.protocolBtn.frame) + 10, 200, 30)];
+        _wkWebBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.noneBtn.frame) + 10, 200, 30)];
         [_wkWebBtn setTitle:@"Set WKWebview" forState:UIControlStateNormal];
         [_wkWebBtn addTarget:self action:@selector(setWkWeb) forControlEvents:UIControlEventTouchUpInside];
         [self designButton:_wkWebBtn];
@@ -204,8 +184,7 @@
 
 - (UITextField *)statusText {
     if (!_statusText) {
-        _statusText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.noneBtn.frame) + 10, CGRectGetMaxY(self.idfaBtn.frame) + 10, self.view.frame.size.width - CGRectGetMaxX(self.noneBtn.frame) - LeftMargin-RightMargin, 110)];
-        _statusText.center = CGPointMake(_statusText.center.x, self.protocolBtn.center.y);
+        _statusText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.noneBtn.frame) + 10, self.noneBtn.frame.origin.y, self.view.frame.size.width - CGRectGetMaxX(self.noneBtn.frame) - LeftMargin-RightMargin, 70)];
         _statusText.font = [UIFont systemFontOfSize:15];
         _statusText.text = @"Hello World";
         _statusText.textAlignment = NSTextAlignmentCenter;
@@ -216,7 +195,7 @@
 
 - (UIButton *)tsBtn {
     if (!_tsBtn) {
-        _tsBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.wkWebBtn.frame) + 10, 100, 30)];
+        _tsBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.statusText.frame) + 10, 100, 30)];
         [_tsBtn setTitle:@"Get TS" forState:UIControlStateNormal];
         [_tsBtn addTarget:self action:@selector(outputTimeStamp) forControlEvents:UIControlEventTouchUpInside];
         [self designButton:_tsBtn];
@@ -226,7 +205,7 @@
 
 - (UITextField *)tsText {
     if (!_tsText) {
-        _tsText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.locationBtn.frame) + 10, CGRectGetMaxY(self.wkWebBtn.frame) + 10, self.view.frame.size.width - CGRectGetMaxX(self.locationBtn.frame) - LeftMargin-RightMargin, 30)];
+        _tsText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.locationBtn.frame) + 10, CGRectGetMaxY(self.statusText.frame) + 10, self.view.frame.size.width - CGRectGetMaxX(self.locationBtn.frame) - LeftMargin-RightMargin, 30)];
         _tsText.font = [UIFont systemFontOfSize:10];
         [self designLayer:[_tsText layer]];
      }
@@ -255,7 +234,7 @@
     
     // Apply a 1 pixel, black border around Buy Button
     [btnLayer setBorderWidth:1.0f];
-    [btnLayer setBorderColor:[[UIColor blackColor] CGColor]];
+    [btnLayer setBorderColor:[[UIColor grayColor] CGColor]];
 }
 
 @end

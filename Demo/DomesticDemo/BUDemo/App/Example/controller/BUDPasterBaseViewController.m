@@ -11,6 +11,8 @@
 #import "BUDVideoView.h"
 #import "BUDPasterContentView.h"
 #import "BUDSlotID.h"
+#import "UIColor+DarkMode.h"
+
 @interface BUDPasterBaseViewController () <BUNativeAdsManagerDelegate, BUNativeAdDelegate, BUVideoAdViewDelegate>
 
 @property (nonatomic, strong) NSTimer *changeTimer;
@@ -22,16 +24,13 @@
 @property (nonatomic, assign) BOOL shouldResume;
 /// 剩余时长，在播放器遮挡时倒计时剩余时间，用于下次继续倒计时
 @property (nonatomic, assign) NSTimeInterval remainingTime;
-/// 定时器初始化时刻，在定时器暂停时计算剩余时间
-@property (nonatomic, strong) NSDate *timerScheduleDate;
 @end
 
 @implementation BUDPasterBaseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     
     [self changeVideoAd];
     
@@ -49,6 +48,20 @@
     
     self.currentAds = [NSMutableArray array];
     self.adViews = [NSMutableArray array];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+}
+
+- (void)enterForeground {
+    self.shouldResume = YES;
+    [self timerResume];
+    [self playAction:nil];
+}
+
+- (void)enterBackground {
+    [self timerPause];
+    [self pauseAction:nil];
 }
 
 /// load ads from Pangle
@@ -150,10 +163,8 @@
     }
 
     NSTimeInterval interval = [self.currentPasterContentView pasterViewTimerInterval];
-    self.remainingTime = interval;
     BUTimerWeakProxy *timerProxy = [BUTimerWeakProxy proxyWithTarget:self];
     self.changeTimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:interval] interval:interval target:timerProxy selector:@selector(pasterTimerAction) userInfo:nil repeats:NO];
-    self.timerScheduleDate = [NSDate date];
     [[NSRunLoop currentRunLoop] addTimer:self.changeTimer forMode:NSRunLoopCommonModes];
 }
 
@@ -167,7 +178,6 @@
 - (void)timerResume {
     BUTimerWeakProxy *timerProxy = [BUTimerWeakProxy proxyWithTarget:self];
     self.changeTimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:self.remainingTime] interval:self.remainingTime target:timerProxy selector:@selector(pasterTimerAction) userInfo:nil repeats:NO];
-    self.timerScheduleDate = [NSDate date];
     [[NSRunLoop currentRunLoop] addTimer:self.changeTimer forMode:NSRunLoopCommonModes];
 }
 
@@ -197,6 +207,19 @@
 /// change other video ad.
 - (void)changeVideoAd {
     [self loadAdData];
+}
+
+- (NSTimeInterval)remainingTime {
+    NSTimeInterval remain = [self.currentPasterContentView pasterViewTimerInterval] - [self currentVideoTime];
+    return ceil(remain);
+}
+
+- (NSTimeInterval)currentVideoTime {
+    if ([self playerStyle] == BUDPasterPlayerStylePangle) {
+        return  [self currentPasterContentView].pangleVideoView.currentPlayTime;
+    } else {
+        return [[self currentCustomVideoView] watchedDurationOfCurrentItem];
+    }
 }
 
 #pragma mark - BUVideoAdViewDelegate
@@ -300,7 +323,6 @@
         return;
     }
     [self timerPause];
-    self.remainingTime = self.remainingTime - fabs([self.timerScheduleDate timeIntervalSinceDate:[NSDate date]]);
     [self pauseAction:nil];
 }
 
@@ -316,6 +338,9 @@
 #pragma mark - Actions
 // 当前SDK播放器
 - (BUVideoAdView *)currentPangleVideoView {
+    if ([self playerStyle] == BUDPasterPlayerStyleCustom) {
+        return nil;
+    }
     BUVideoAdView *videoV = self.adViews[self.currentAdIndex].pangleVideoView;
     if (videoV.hidden) {
         return nil;
@@ -325,6 +350,10 @@
 }
 // 当前自定义播放器
 - (BUDVideoView *)currentCustomVideoView {
+    if ([self playerStyle] == BUDPasterPlayerStylePangle) {
+        return nil;
+    }
+    
     BUDVideoView *videoV = self.adViews[self.currentAdIndex].customVideoView;
     if (videoV.hidden) {
         return nil;

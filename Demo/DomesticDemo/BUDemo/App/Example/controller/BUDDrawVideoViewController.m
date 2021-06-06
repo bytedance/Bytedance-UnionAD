@@ -7,10 +7,11 @@
 //
 
 #import "BUDDrawVideoViewController.h"
-#import <BUAdSDK/BUNativeAdsManager.h>
+#import <BUAdSDK/BUAdSDK.h>
 #import "BUDDrawTableViewCell.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "BUDMacros.h"
+#import "UIColor+DarkMode.h"
 
 @interface BUDDrawVideoViewController ()<UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -29,8 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     
     self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -90,6 +90,7 @@
     slot1.isOriginAd = YES; //required
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_DrawFullScreen];
     nad.adslot = slot1;
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     nad.delegate = self;
     self.adManager = nad;
     

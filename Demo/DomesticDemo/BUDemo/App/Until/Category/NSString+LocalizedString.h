@@ -31,6 +31,7 @@ extern NSString * const ShowBanner;
 extern NSString * const ShowInterstitial;
 extern NSString * const ShowScrollBanner;
 extern NSString * const Splash;
+extern NSString * const SplashContainer;
 extern NSString * const CustomCloseBtn;
 extern NSString * const Skip;
 extern NSString * const ShowFullScreenVideo;

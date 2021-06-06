@@ -7,12 +7,12 @@
 //
 
 #import "BUDExpressInterstitialViewController.h"
-#import <BUAdSDK/BUNativeExpressInterstitialAd.h>
+#import <BUAdSDK/BUAdSDK.h>
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
-#import <BUAdSDK/BUSize.h>
 #import "NSString+LocalizedString.h"
 #import "BUDSelectedView.h"
+#import "UIColor+DarkMode.h"
 
 @interface BUDExpressInterstitialViewController ()<BUNativeExpresInterstitialAdDelegate>
 @property (nonatomic, strong) BUNativeExpressInterstitialAd *interstitialAd;
@@ -25,9 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    self.haveRenderSwitchView = YES;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     self.sizeDict = @{
                       express_interstitial_ID_1_1_both:[NSValue valueWithCGSize:CGSizeMake(300, 300)],
                       express_interstitial_ID_2_3_both:[NSValue valueWithCGSize:CGSizeMake(300, 450)],
@@ -71,6 +69,7 @@
     NSString *realSlotId = self.slotSwitchView.on ? slotID : native_interstitial_ID;
 // important: 升级的用户请注意，初始化方法去掉了imgSize参数
     self.interstitialAd = [[BUNativeExpressInterstitialAd alloc] initWithSlotID:realSlotId adSize:CGSizeMake(width, height)];
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.interstitialAd.delegate = self;
     [self.interstitialAd loadAdData];
     

@@ -9,6 +9,7 @@
 #import "BUDTestToolsViewController.h"
 #import "BUDMacros.h"
 #import <BUAdSDK/BUAdSDK.h>
+#import "UIColor+DarkMode.h"
 
 #define LeftMargin 10
 #define RightMargin 10
@@ -61,10 +62,7 @@ NSString *const HttpPrefixString = @"http://";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    if (@available(iOS 13.0, *)) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     [self buildupView];
 }
 
@@ -89,6 +87,7 @@ NSString *const HttpPrefixString = @"http://";
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:local];
     [dict setValue:nil forKey:TestToolIPKey];
     [dict setValue:nil forKey:TestToolPortKey];
+    
     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:TestToolDictCachePath];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -273,7 +272,7 @@ NSString *const HttpPrefixString = @"http://";
     
     // Apply a 1 pixel, black border around Buy Button
     [btnLayer setBorderWidth:1.0f];
-    [btnLayer setBorderColor:[[UIColor blackColor] CGColor]];
+    [btnLayer setBorderColor:[[UIColor grayColor] CGColor]];
 }
 
 @end

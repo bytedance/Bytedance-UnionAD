@@ -31,6 +31,7 @@ NSString * const ShowBanner = @"showBanner";
 NSString * const ShowInterstitial = @"showInterstitial";
 NSString * const ShowScrollBanner = @"showScrollBanner";
 NSString * const Splash = @"splash";
+NSString * const SplashContainer = @"SplashContainer";
 NSString * const CustomCloseBtn = @"customCloseBtn";
 NSString * const Skip = @"Skip";
 NSString * const ShowFullScreenVideo = @"showFullScreenVideo";

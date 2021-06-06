@@ -12,12 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 // status of player
 typedef NS_ENUM (NSUInteger, BUDVideoViewStatus) {
+    BUDVideoViewStatusDefaut,
     BUDVideoViewStatusReady,
     BUDVideoViewStatusPlaying,
     BUDVideoViewStatusStopped,
     BUDVideoViewStatusPaused,
     BUDVideoViewStatusResumed,
     BUDVideoViewStatusAbort,
+    BUDVideoViewStatusError,
 };
 
 /// JUST demo video view, used for show how to use custom feed video.
@@ -28,6 +30,9 @@ typedef NS_ENUM (NSUInteger, BUDVideoViewStatus) {
 
 /// Status of video player, observable
 @property (nonatomic, assign, readonly) BUDVideoViewStatus status;
+
+/// error of video player
+@property (nonatomic, strong, readonly) NSError *error;
 
 /// load url from local or remote
 /// @param URL url of video file

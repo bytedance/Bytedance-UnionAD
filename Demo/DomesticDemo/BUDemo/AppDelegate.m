@@ -90,7 +90,7 @@
     // add appKey in info.plist (key:GADApplicationIdentifier)
     [[GADMobileAds sharedInstance] startWithCompletionHandler:^(GADInitializationStatus * _Nonnull status) {
         // This is a example to set GDPR. You can change GDPR at right scence
-//        [BUAdSDKManager setGDPR:0];
+        // [BUAdSDKManager setGDPR:0];
     }];
 }
 
@@ -171,8 +171,9 @@
 
 - (void)splashAdDidClose:(BUSplashAdView *)splashAd {
     if (splashAd.zoomOutView) {
+        __weak typeof(splashAd) weakSplashAdView = splashAd;
         [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
-            [splashAd removeFromSuperview];
+            [weakSplashAdView removeFromSuperview];
         }];
     } else{
         // Be careful not to say 'self.splashadview = nil' here.
@@ -194,8 +195,9 @@
 
 - (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd {
     if (splashAd.zoomOutView) {
+        __weak typeof(self) weaSelf = self;
         [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
-            [self removeSplashAdView];
+            [weaSelf removeSplashAdView];
         }];
     } else{
         // Click Skip, there is no subsequent operation, completely remove 'splashAdView', avoid memory leak

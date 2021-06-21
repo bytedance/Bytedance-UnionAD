@@ -51,6 +51,8 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAdvertisingAttributionReportEndpoint</key>
+	<string>https://analytics-test.tiktok.com/</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

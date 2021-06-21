@@ -3,3 +3,4 @@ xcuserdata
 #cocoa-pods
 Podfile.lock
 Pods
+xcshareddata

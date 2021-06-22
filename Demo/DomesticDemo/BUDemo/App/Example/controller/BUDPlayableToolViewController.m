@@ -14,6 +14,7 @@
 #import "BUDMacros.h"
 #import <BUAdSDK/BUAdSDK.h>
 #import "AFHTTPSessionManager.h"
+#import "UIColor+DarkMode.h"
 
 @interface BUDPlayableToolViewController ()<BURewardedVideoAdDelegate>
 @property (nonatomic, strong) UITextField *playableUrlTextView;
@@ -32,9 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (@available(iOS 13.0, *)) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     [self.view addSubview:self.playableUrlTextView];
     [self.view addSubview:self.downloadUrlTextView];
     [self.view addSubview:self.deeplinkUrlTextView];
@@ -42,7 +41,6 @@
     [self.view addSubview:self.isLandscapeSwitch];
     [self.view addSubview:self.showButton];
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
-    model.userId = @"playable";
     self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:self.viewModel.slotID rewardedVideoModel:model];
     self.rewardedVideoAd.delegate = self;
     

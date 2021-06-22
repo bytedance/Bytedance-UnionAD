@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <BUAdSDK/BUNativeAd.h>
+#import <BUAdSDK/BUAdSDK.h>
 
 @interface BUDFeedNativeTableViewCell : UITableViewCell
 @property (nonatomic, strong) UIView *customview;

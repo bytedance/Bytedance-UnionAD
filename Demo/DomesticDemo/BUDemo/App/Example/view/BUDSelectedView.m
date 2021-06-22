@@ -11,6 +11,7 @@
 #import "BUDNormalButton.h"
 #import "BUDSelectedCollectionViewCell.h"
 #import "NSString+LocalizedString.h"
+#import "UIColor+DarkMode.h"
 
 #define mainWidth CGRectGetWidth([UIScreen mainScreen].bounds)
 #define margin 20
@@ -50,7 +51,7 @@
 }
 
 - (void)buildupView {
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = UIColor.bud_systemBackgroundColor;
     
     [self addSubview:self.adTypetLable];
     [self addSubview:self.promptLable];
@@ -120,7 +121,6 @@
         _promptLable = [[UILabel alloc] init];
         _promptLable.textAlignment = NSTextAlignmentCenter;
         _promptLable.font = [UIFont systemFontOfSize:18];
-        _promptLable.textColor = selectedColor;
     }
     return _promptLable;
 }

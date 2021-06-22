@@ -9,10 +9,17 @@
 
 #import "BUDActionAreaView.h"
 #import <Foundation/Foundation.h>
-#import <BUAdSDK/BUNativeAd.h>
-#import <BUAdSDK/BUNativeAdRelatedView.h>
+#import <BUAdSDK/BUAdSDK.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class BUDFeedAdBaseTableViewCell;
+@protocol BUDFeedCustomDislikeDelgate <NSObject>
+
+- (void)feedCustomDislike:(BUDFeedAdBaseTableViewCell *)cell withNativeAd:(BUNativeAd *)nativeAd didSlected:(BUDislikeWords *)dislikeWord;
+
+@end
+
 @protocol BUDFeedCellProtocol <NSObject>
 
 @property (nonatomic, strong) UIButton *customBtn;
@@ -21,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)refreshUIWithModel:(BUNativeAd *_Nonnull)model;
 + (CGFloat)cellHeightWithModel:(BUNativeAd *_Nonnull)model width:(CGFloat)width;
+
+@property (nonatomic, weak) id<BUDFeedCustomDislikeDelgate> delegate;
 @end
 
 
@@ -32,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) BUNativeAd *nativeAd;
 @property (nonatomic, strong) UIButton *customBtn;
 @property (nonatomic, strong) BUNativeAdRelatedView *nativeAdRelatedView;
+@property (nonatomic, strong) UIButton *customDislikeBtn;
+
+@property (nonatomic, weak) id<BUDFeedCustomDislikeDelgate> delegate;
 
 - (void)buildupView;
 @end

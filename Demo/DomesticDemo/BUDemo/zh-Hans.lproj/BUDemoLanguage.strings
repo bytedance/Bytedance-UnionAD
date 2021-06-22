@@ -29,6 +29,7 @@
 "showScrollBanner" = "展示轮播Banner";
 "splash" = "开屏";
 "customCloseBtn" = "自定义关闭按钮开屏";
+"SplashContainer" = "开屏 (切换控制器)";
 "Skip" = "跳过";
 "showFullScreenVideo" = "展示全屏视频";
 "showRewardVideo" = "展示激励视频";

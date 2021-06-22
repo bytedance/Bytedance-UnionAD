@@ -7,16 +7,22 @@
 //
 
 #import "BUDFeedAdTableViewCell.h"
-
-#import "UIImageView+AFNetworking.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+//#import "UIImageView+WebCache.h"
 #import "BUDFeedStyleHelper.h"
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 #import "BUDConfigModel.h"
+#import "BUDCustomDislikeViewController.h"
+
 
 static CGFloat const margin = 15;
 static CGSize const logoSize = {15, 15};
 static UIEdgeInsets const padding = {10, 15, 10, 15};
+
+@interface BUDFeedAdBaseTableViewCell () <BUDCustomDislikeDelegate>
+
+@end
 
 @implementation BUDFeedAdBaseTableViewCell
 
@@ -68,6 +74,13 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     [self.iv1 addSubview:self.nativeAdRelatedView.logoImageView];
     [self.contentView addSubview:self.nativeAdRelatedView.dislikeButton];
     [self.contentView addSubview:self.nativeAdRelatedView.adLabel];
+    
+    // Add custom dislikebutton
+    [self.contentView addSubview:self.customDislikeBtn];
+    BOOL canCustomDislike = [self validCustomDislike];
+    self.nativeAdRelatedView.dislikeButton.hidden = canCustomDislike;
+    self.customDislikeBtn.hidden = !canCustomDislike;
+    
     [self.nativeAdRelatedView refreshData:model];
 
 }
@@ -82,6 +95,39 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     return _customBtn;
 }
 
+- (UIButton *)customDislikeBtn {
+    
+    BOOL isCustomDislike = [self validCustomDislike];
+    if (!isCustomDislike) {
+        [_customDislikeBtn removeFromSuperview];
+        _customDislikeBtn = nil;
+        return _customDislikeBtn;
+    }
+    
+    if (_customDislikeBtn == nil) {
+        _customDislikeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_customDislikeBtn setImage:[UIImage imageNamed:@"feedClose"] forState:UIControlStateNormal];
+        [_customDislikeBtn setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+        [_customDislikeBtn addTarget:self
+                              action:@selector(customDislikeAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _customDislikeBtn;
+}
+
+- (void)customDislikeAction:(UIButton *)sender {
+    // 进入自定义dislike
+    BUDCustomDislikeViewController *dislikeVC = [[BUDCustomDislikeViewController alloc] initWithNativeAd:self.nativeAd];
+    dislikeVC.delegate = self;
+    [self.nativeAd.rootViewController presentViewController:dislikeVC animated:YES completion:nil];
+}
+
+#pragma mark - BUDCustomDislikeDelegate
+- (void)customDislike:(BUDCustomDislikeViewController *)controller withNativeAd:(BUNativeAd *)nativeAd didSelected:(BUDislikeWords *)dislikeWorkd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(feedCustomDislike:withNativeAd:didSlected:)]) {
+        [self.delegate feedCustomDislike:self withNativeAd:self.nativeAd didSlected:dislikeWorkd];
+    }
+}
+
 #pragma mark addAccessibilityIdentifier
 - (void)addAccessibilityIdentifier {
     self.adTitleLabel.accessibilityIdentifier = @"feed_title";
@@ -91,6 +137,16 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.iv1.accessibilityIdentifier = @"feed_view";
 }
 
+- (BOOL)validCustomDislike {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL isCustomDislike = [userDefaults boolForKey:@"kCustomDislikeIsOn"];
+    return self.nativeAd.data.filterWords.count > 0 && isCustomDislike;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.customDislikeBtn.frame = self.nativeAdRelatedView.dislikeButton.frame;
+}
 @end
 
 @implementation BUDFeedAdLeftTableViewCell
@@ -107,7 +163,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     const CGFloat imageHeight = imageWidth * (image.height / image.width);
     CGFloat imageX = width - margin - imageWidth;
     self.iv1.frame = CGRectMake(imageX, y, imageWidth, imageHeight);
-    [self.iv1 setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
+    [self.iv1 sd_setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
     self.nativeAdRelatedView.logoImageView.frame = CGRectMake(imageWidth - logoSize.width, imageHeight - logoSize.height, logoSize.width, logoSize.height);
     
     CGFloat maxTitleWidth =  contentWidth - imageWidth - margin;
@@ -162,7 +218,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     BUImage *image = model.data.imageAry.firstObject;
     const CGFloat imageHeight = contentWidth * (image.height / image.width);
     self.iv1.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
-    [self.iv1 setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
+    [self.iv1 sd_setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
     self.nativeAdRelatedView.logoImageView.frame = CGRectMake(contentWidth - logoSize.width, imageHeight - logoSize.height, logoSize.width, logoSize.height);
     
     y += imageHeight;
@@ -219,7 +275,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     BUImage *image = model.data.imageAry.firstObject;
     const CGFloat imageHeight = contentWidth;
     self.iv1.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
-    [self.iv1 setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
+    [self.iv1 sd_setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
     self.nativeAdRelatedView.logoImageView.frame = CGRectMake(contentWidth - logoSize.width, imageHeight - logoSize.height, logoSize.width, logoSize.height);
     
     y += imageHeight;
@@ -299,13 +355,13 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     
     CGFloat originX = padding.left;
     self.iv1.frame = CGRectMake(originX, y, imageWidth, imageHeight);
-    [self.iv1 setImageWithURL:[NSURL URLWithString: model.data.imageAry[0].imageURL] placeholderImage:nil];
+    [self.iv1 sd_setImageWithURL:[NSURL URLWithString: model.data.imageAry[0].imageURL] placeholderImage:nil];
     originX += (imageWidth + 5);
     self.iv2.frame = CGRectMake(originX, y, imageWidth, imageHeight);
-    [self.iv2 setImageWithURL:[NSURL URLWithString: model.data.imageAry[1].imageURL] placeholderImage:nil];
+    [self.iv2 sd_setImageWithURL:[NSURL URLWithString: model.data.imageAry[1].imageURL] placeholderImage:nil];
     originX += (imageWidth + 5);
     self.iv3.frame = CGRectMake(originX, y, imageWidth, imageHeight);
-    [self.iv3 setImageWithURL:[NSURL URLWithString: model.data.imageAry[2].imageURL] placeholderImage:nil];
+    [self.iv3 sd_setImageWithURL:[NSURL URLWithString: model.data.imageAry[2].imageURL] placeholderImage:nil];
     self.nativeAdRelatedView.logoImageView.frame = CGRectMake(imageWidth - logoSize.width, imageHeight - logoSize.height, logoSize.width, logoSize.height);
     
     y += imageHeight;

@@ -11,7 +11,6 @@
 @interface BUDSwitchView ()
 
 @property (nonatomic, strong) UILabel *label;
-@property (nonatomic, strong) UISwitch *switchView;
 
 @end
 

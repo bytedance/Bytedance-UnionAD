@@ -9,12 +9,14 @@
 #import "BUDExpressBannerViewController.h"
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
-#import <BUAdSDK/BUNativeExpressBannerView.h>
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
 #import "AppDelegate.h"
-
+#import "UIColor+DarkMode.h"
+#ifdef DEBUG
+#import <MBProgressHUD/MBProgressHUD.h>
+#endif
 @interface BUDExpressBannerViewController ()<BUNativeExpressBannerViewDelegate>
 @property(nonatomic, strong) BUDSelectedView *selectedView;
 @property(nonatomic, strong) BUNativeExpressBannerView *bannerView;
@@ -29,11 +31,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.haveRenderSwitchView = YES;
-    self.view.backgroundColor = [UIColor whiteColor];
+
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     
     self.sizeDcit = @{
-                          express_banner_ID         :  [NSValue valueWithCGSize:CGSizeMake(300, 45)],
                           express_banner_ID_60090   :  [NSValue valueWithCGSize:CGSizeMake(300, 45)],
                           express_banner_ID_640100  :  [NSValue valueWithCGSize:CGSizeMake(320, 50)],
                           express_banner_ID_600150  :  [NSValue valueWithCGSize:CGSizeMake(300, 75)],
@@ -80,6 +81,8 @@
     frame2.origin.x = 120 + 51 + 10;
     self.slotSwitchView.frame = frame2;
     [self.view addSubview:self.slotSwitchView];
+    
+    
 }
 
 /***important:
@@ -113,11 +116,13 @@
     // important: 升级的用户请注意，初始化方法去掉了imgSize参数
     if (self.rotationSwitchView.on) {
         self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:realSlotId rootViewController:self adSize:size interval:30];
+        self.bannerView.layer.masksToBounds = YES;
     } else {
         self.bannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:realSlotId rootViewController:self adSize:size];
     }
     self.bannerView.frame = CGRectMake((self.view.width-size.width)/2.0, self.view.height-size.height-bottom, size.width, size.height);
-
+    
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.bannerView.delegate = self;
     [self.bannerView loadAdData];
     self.selectedView.promptStatus = BUDPromptStatusLoading;
@@ -157,13 +162,6 @@
 }
 
 - (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterwords {
-    [UIView animateWithDuration:0.25 animations:^{
-        bannerAdView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [bannerAdView removeFromSuperview];
-        self.bannerView = nil;
-    }];
-    self.selectedView.promptStatus = BUDPromptStatusDefault;
     [self pbud_logWithSEL:_cmd msg:@""];
 }
 
@@ -178,6 +176,25 @@
     }
     [self pbud_logWithSEL:_cmd msg:str];
 }
+
+- (void)nativeExpressBannerAdViewDidRemoved:(BUNativeExpressBannerView *)nativeExpressAdView {
+#ifdef DEBUG
+    [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view.window];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = @"温馨提示";
+    hud.detailsLabel.text = @"强制关闭广告，开发者请做好布局处理";
+    [hud hideAnimated:YES afterDelay:1.5];
+#endif
+    [UIView animateWithDuration:0.25 animations:^{
+        nativeExpressAdView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [nativeExpressAdView removeFromSuperview];
+        self.bannerView = nil;
+    }];
+    self.selectedView.promptStatus = BUDPromptStatusDefault;
+}
+
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
     BUD_Log(@"SDKDemoDelegate BUNativeExpressBannerView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
 }

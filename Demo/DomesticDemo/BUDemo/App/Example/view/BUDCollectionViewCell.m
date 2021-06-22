@@ -7,7 +7,8 @@
 //
 
 #import "BUDCollectionViewCell.h"
-#import "UIImageView+AFNetworking.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+//#import "UIImageView+WebCache.h"
 #import "NSString+LocalizedString.h"
 
 @interface BUDCollectionViewCell ()
@@ -105,7 +106,7 @@
         if (adMeta.imageAry.count > 0) {
             if (image.imageURL.length > 0) {
                 self.imageView.frame = rect;
-                [self.imageView setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
+                [self.imageView sd_setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
             }
         }
     }

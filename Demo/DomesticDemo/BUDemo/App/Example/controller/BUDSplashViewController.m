@@ -7,18 +7,20 @@
 //
 
 #import "BUDSplashViewController.h"
-#import <BUAdSDK/BUSplashAdView.h>
+#import "BUDSplashContainerViewController.h"
 #import "BUDNormalButton.h"
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 #import "UIView+Draw.h"
 #import "BUDAnimationTool.h"
+#import "UIColor+DarkMode.h"
 
 @interface BUDSplashViewController () <BUSplashAdDelegate,BUSplashZoomOutViewDelegate>
 
 @property (nonatomic, strong) BUSplashAdView *splashView;
 @property (nonatomic, strong) BUDNormalButton *button;
 @property (nonatomic, strong) BUDNormalButton *button1;
+@property (nonatomic, strong) BUDNormalButton *button2;
 
 @property (strong, nonatomic) UISlider *widthSlider;
 @property (strong, nonatomic) UISlider *heightSlider;
@@ -28,10 +30,7 @@
 
 @end
 
-@implementation BUDSplashViewController {
-    // Willie
-    UITextField *_textFiled;
-}
+@implementation BUDSplashViewController
 
 - (void)dealloc {}
 
@@ -48,14 +47,13 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    self.button.center = CGPointMake(self.view.center.x, self.view.center.y*0.8);
-    self.button1.center = CGPointMake(self.view.center.x, self.view.center.y*1.2);
-    // Willie
-    _textFiled.center = CGPointMake(self.view.center.x, self.view.center.y*0.2);
+    self.button.center = CGPointMake(self.view.center.x, self.view.center.y * 0.8);
+    self.button1.center = CGPointMake(self.view.center.x, self.button.center.y + 80);
+    self.button2.center = CGPointMake(self.view.center.x, self.button.center.y + 160);
 }
 
 - (void)buildView {
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     // 宽
     UILabel *lableWidth = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 60, 30)];
     lableWidth.textAlignment = NSTextAlignmentLeft;
@@ -94,14 +92,14 @@
     self.button1 = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.6, 0, 0)];
     self.button1.showRefreshIncon = YES;
     [self.button1 addTarget:self action:@selector(button1Tapped:) forControlEvents:UIControlEventTouchUpInside];
-    [self.button1 setTitle:[NSString localizedStringForKey:CustomCloseBtn]  forState:UIControlStateNormal];
+    [self.button1 setTitle:[NSString localizedStringForKey:SplashContainer]  forState:UIControlStateNormal];
     [self.view addSubview:self.button1];
-    
-    // Willie
-    _textFiled = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-    _textFiled.placeholder = @"超时间长(s)";
-//    _textFiled.keyboardType = UIKeyboardTypeDecimalPad;
-    [self.view addSubview:_textFiled];
+
+    self.button2 = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.6, 0, 0)];
+    self.button2.showRefreshIncon = YES;
+    [self.button2 addTarget:self action:@selector(button2Tapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.button2 setTitle:[NSString localizedStringForKey:CustomCloseBtn]  forState:UIControlStateNormal];
+    [self.view addSubview:self.button2];
 }
 
 - (void)sliderPositionWChanged {
@@ -120,16 +118,11 @@
     }
     
     BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:self.viewModel.slotID frame:self.splashFrame];
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     splashView.delegate = self;
     splashView.rootViewController = self;
-    
-    // Willie
-    //    splashView.tolerateTimeout = 3;
-    if (_textFiled.text.length) {
-        splashView.tolerateTimeout = _textFiled.text.doubleValue;
-    }
+    splashView.tolerateTimeout = 3;
     [splashView loadAdData];
-    
     [self.navigationController.view addSubview:splashView];
     self.splashView = splashView;
 }
@@ -150,9 +143,17 @@
     [custormSkipButton setTitle:[NSString localizedStringForKey:Skip] forState:UIControlStateNormal];
     [custormSkipButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     [custormSkipButton addTarget:self action:@selector(skipButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    custormSkipButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     CGFloat width = CGRectGetWidth(self.splashFrame);
     CGFloat height = CGRectGetHeight(self.splashFrame);
-    custormSkipButton.frame = CGRectMake(width - 56 - 12, height - 36 - 12, 56, 36);
+    CGFloat safeBottom = 12;
+    if (@available(iOS 11.0, *)) {
+        safeBottom = self.view.safeAreaInsets.bottom;
+    } else {
+        // Fallback on earlier versions
+    }
+    custormSkipButton.frame = CGRectMake(width - 56 - 12, height - 36 - safeBottom, 56, 36);
+
     [splashView addSubview:custormSkipButton];
     
     
@@ -170,12 +171,20 @@
 }
 
 - (void)button1Tapped:(UIButton *)sender {
+    BUDSplashContainerViewController *splashContainer = [[BUDSplashContainerViewController alloc] init];
+    splashContainer.appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [[UIApplication sharedApplication].keyWindow setRootViewController:splashContainer];
+}
+
+- (void)button2Tapped:(UIButton *)sender {
     [self buildupHideSkipButtonSplashView];
 }
 
 - (void)handleSplashDimiss:(BUSplashAdView *)splashAd {
     if (splashAd.zoomOutView) {
-        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView];
+        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
+            [splashAd removeFromSuperview];
+        }];
     } else{
         [splashAd removeFromSuperview];
     }
@@ -187,12 +196,27 @@
         self.splashView = nil;
     }
 }
+
+- (void)setUpSplashZoomOutAd:(BUSplashAdView *)splashAdView {
+    if (!splashAdView.zoomOutView) {
+        return;
+    }
+    [self.navigationController.view addSubview:splashAdView.zoomOutView];
+    [self.navigationController.view addSubview:splashAdView];
+    splashAdView.zoomOutView.rootViewController = self;
+    splashAdView.zoomOutView.delegate = self;
+    [[BUDAnimationTool sharedInstance] transitionFromView:splashAdView toView:splashAdView.zoomOutView splashCompletion:^{
+        [splashAdView removeFromSuperview];
+        [BUDAnimationTool sharedInstance].splashContainerVC = nil;
+    }];
+}
+
 #pragma mark - BUSplashAdDelegate
 - (void)splashAdDidLoad:(BUSplashAdView *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
+    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"mediaExt %@",splashAd.mediaExt]];
     if (splashAd.zoomOutView) {
         // Add this view to your container
-        [self.view addSubview:splashAd.zoomOutView];
+        [self.navigationController.view insertSubview:splashAd.zoomOutView belowSubview:splashAd];
         splashAd.zoomOutView.rootViewController = self;
         splashAd.zoomOutView.delegate = self;
     }

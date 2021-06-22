@@ -16,9 +16,12 @@
 #import "RRFPSBar.h"
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
-#import <Bugly/Bugly.h>
 #import "BUDTestToolsViewController.h"
 #import "BUDAnimationTool.h"
+
+#if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
+#import <BUAdTestMeasurement/BUAdTestMeasurement.h>
+#endif
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -36,9 +39,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    // private config for demo
-    [self configDemo];
-    
     // adaptor for Customer Event
     [self configCustomEvent];
 
@@ -51,7 +51,6 @@
     
     // initialize AD SDK
     [self setupBUAdSDK];
-
     
     return YES;
 }
@@ -96,6 +95,14 @@
 }
 
 - (void)setupBUAdSDK {
+
+#if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
+    #if DEBUG
+        // 测试工具
+        [BUAdTestMeasurementConfiguration configuration].debugMode = YES;
+    #endif
+#endif
+    
     BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
     ///optional
     ///CN china, NO_CN is not china
@@ -107,21 +114,24 @@
     //optional
     //Coppa 0 adult, 1 child
     configuration.coppa = @(0);
-    // you can set idfa by yourself, it is optional and maybe will never be used.
-    configuration.customIdfa = @"12345678-1234-1234-1234-123456789012";
 #if DEBUG
     // Whether to open log. default is none.
     configuration.logLevel = BUAdSDKLogLevelDebug;
 #endif
     //BUAdSDK requires iOS 9 and up
     configuration.appID = [BUDAdManager appKey];
-    
     [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // splash AD demo
-            [self addSplashAD];
-        });
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // splash AD demo
+                [self addSplashAD];
+                //
+                // private config for demo
+                [self configDemo];
+            });
+        }
     }];
+  
 }
 
 #pragma mark - Splash
@@ -130,8 +140,8 @@
     self.splashAdView = [[BUSplashAdView alloc] initWithSlotID:normal_splash_ID frame:frame];
     // tolerateTimeout = CGFLOAT_MAX , The conversion time to milliseconds will be equal to 0
     self.splashAdView.tolerateTimeout = 3;
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.splashAdView.delegate = self;
-
 
     UIWindow *keyWindow = self.window;
     self.startTime = CACurrentMediaTime();
@@ -149,10 +159,9 @@
 
 
 - (void)splashAdDidLoad:(BUSplashAdView *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:[NSString stringWithFormat:@"mediaExt %@",splashAd.mediaExt]];
     if (splashAd.zoomOutView) {
         UIViewController *parentVC = [UIApplication sharedApplication].keyWindow.rootViewController;
-        [parentVC.view addSubview:splashAd.zoomOutView];
-        [parentVC.view bringSubviewToFront:splashAd];
         //Add this view to your container
         [parentVC.view insertSubview:splashAd.zoomOutView belowSubview:splashAd];
         splashAd.zoomOutView.rootViewController = parentVC;
@@ -162,7 +171,9 @@
 
 - (void)splashAdDidClose:(BUSplashAdView *)splashAd {
     if (splashAd.zoomOutView) {
-        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView];
+        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
+            [splashAd removeFromSuperview];
+        }];
     } else{
         // Be careful not to say 'self.splashadview = nil' here.
         // Subsequent agent callbacks will not be triggered after the 'splashAdView' is released early.
@@ -183,7 +194,9 @@
 
 - (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd {
     if (splashAd.zoomOutView) {
-        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView];
+        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
+            [self removeSplashAdView];
+        }];
     } else{
         // Click Skip, there is no subsequent operation, completely remove 'splashAdView', avoid memory leak
         [self removeSplashAdView];

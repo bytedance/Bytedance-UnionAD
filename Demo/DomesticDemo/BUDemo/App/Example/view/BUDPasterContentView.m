@@ -7,12 +7,13 @@
 //
 
 #import "BUDPasterContentView.h"
-#import <BUAdSDK/BUNativeAdRelatedView.h>
+#import <BUAdSDK/BUAdSDK.h>
 #import "BUDVideoView.h"
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 #import "BUDFeedStyleHelper.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+//#import "UIImageView+WebCache.h"
 
 @interface BUDPasterContentView ()
 // 自定义播放器

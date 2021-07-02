@@ -13,10 +13,13 @@
 #import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
 #import "UIColor+DarkMode.h"
+#import "BUDExpressRewardedVideoAgainDelegateObj.h"
 
 @interface BUDExpressRewardedVideoViewController ()<BUNativeExpressRewardedVideoAdDelegate>
 @property (nonatomic, strong) BUNativeExpressRewardedVideoAd *rewardedAd;
 @property (nonatomic, strong) BUDSelectedView *selectedView;
+//optional
+@property (nonatomic, strong) BUDExpressRewardedVideoAgainDelegateObj *expressRewardedVideoAgainDelegateObj;
 @end
 
 @implementation BUDExpressRewardedVideoViewController
@@ -52,6 +55,9 @@
     self.rewardedAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:slotID rewardedVideoModel:model];
     // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.rewardedAd.delegate = self;
+    // optional
+    self.rewardedAd.rewardPlayAgainInteractionDelegate = self.expressRewardedVideoAgainDelegateObj;
+    
     [self.rewardedAd loadAdData];
     
     //为保证播放流畅建议可在收到视频下载完成回调后再展示视频。
@@ -148,4 +154,12 @@
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
     BUD_Log(@"SDKDemoDelegate BUNativeExpressRewardedVideoAd In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
 }
+
+- (BUDExpressRewardedVideoAgainDelegateObj *)expressRewardedVideoAgainDelegateObj {
+    if (!_expressRewardedVideoAgainDelegateObj) {
+        _expressRewardedVideoAgainDelegateObj = [[BUDExpressRewardedVideoAgainDelegateObj alloc] init];
+    }
+    return _expressRewardedVideoAgainDelegateObj;
+}
+
 @end

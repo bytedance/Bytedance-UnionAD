@@ -54,7 +54,6 @@
 		2B6DD2DD255D43DC00FF8CA5 /* BUDAdmobCustomEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD2D1255D43DC00FF8CA5 /* BUDAdmobCustomEventViewController.m */; };
 		2B6DD3F4255D46B400FF8CA5 /* BUDSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD3F3255D46B400FF8CA5 /* BUDSwitchView.m */; };
 		2B6DD400255D479C00FF8CA5 /* BUDPasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD3FA255D479C00FF8CA5 /* BUDPasterViewController.m */; };
-		2B6DD401255D479C00FF8CA5 /* BUDPasterBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD3FC255D479C00FF8CA5 /* BUDPasterBaseViewController.m */; };
 		2B8DC97F2555756F00B820D4 /* BUDBaseExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC97E2555756F00B820D4 /* BUDBaseExampleViewController.m */; };
 		2BA662CC24C823C000DDB519 /* BUDAnimationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA662CB24C823C000DDB519 /* BUDAnimationTool.m */; };
 		2BA662CE24C8244A00DDB519 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA662CD24C8244A00DDB519 /* libbz2.tbd */; };
@@ -63,8 +62,9 @@
 		2BBC0F5E250F4697001F29CC /* BUDVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC34E8324FFB7A900B91D91 /* BUDVideoView.m */; };
 		2BC34E8024FFB79700B91D91 /* BUDCustomVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC34E7E24FFB79700B91D91 /* BUDCustomVideoPlayerViewController.m */; };
 		2BCE62622553E4BD0020D172 /* BUDPasterBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCE625D2553E4BC0020D172 /* BUDPasterBaseViewController.m */; };
-		2BCE62632553E4BD0020D172 /* BUDPasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCE625E2553E4BC0020D172 /* BUDPasterViewController.m */; };
 		2BCFB79A255E759100074CFC /* BUDBannerAdListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCFB798255E759100074CFC /* BUDBannerAdListViewController.m */; };
+		2BD30D4726806A450054740C /* BUDRewardedVideoAgainDelegateObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD30D4426806A450054740C /* BUDRewardedVideoAgainDelegateObj.m */; };
+		2BD30D4826806A450054740C /* BUDExpressRewardedVideoAgainDelegateObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD30D4626806A450054740C /* BUDExpressRewardedVideoAgainDelegateObj.m */; };
 		2BEA4DDF2520869700FE5189 /* BUDPasterCustomPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEA4DDE2520869700FE5189 /* BUDPasterCustomPlayerViewController.m */; };
 		2BED9717257DDC2100EF5C1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9716257DDC2100EF5C1F /* libz.tbd */; };
 		2BED971C257DDC2600EF5C1F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED971B257DDC2600EF5C1F /* libiconv.tbd */; };
@@ -210,10 +210,8 @@
 		2B6DD2D1255D43DC00FF8CA5 /* BUDAdmobCustomEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmobCustomEventViewController.m; sourceTree = "<group>"; };
 		2B6DD2D2255D43DC00FF8CA5 /* BUDAdmobCustomEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmobCustomEventViewController.h; sourceTree = "<group>"; };
 		2B6DD3F3255D46B400FF8CA5 /* BUDSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSwitchView.m; sourceTree = "<group>"; };
-		2B6DD3F9255D479C00FF8CA5 /* BUDPasterBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDPasterBaseViewController.h; sourceTree = "<group>"; };
 		2B6DD3FA255D479C00FF8CA5 /* BUDPasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDPasterViewController.m; sourceTree = "<group>"; };
 		2B6DD3FB255D479C00FF8CA5 /* BUDPasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDPasterViewController.h; sourceTree = "<group>"; };
-		2B6DD3FC255D479C00FF8CA5 /* BUDPasterBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDPasterBaseViewController.m; sourceTree = "<group>"; };
 		2B8DC97D2555756F00B820D4 /* BUDBaseExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDBaseExampleViewController.h; sourceTree = "<group>"; };
 		2B8DC97E2555756F00B820D4 /* BUDBaseExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDBaseExampleViewController.m; sourceTree = "<group>"; };
 		2BA662CA24C823C000DDB519 /* BUDAnimationTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAnimationTool.h; sourceTree = "<group>"; };
@@ -227,12 +225,14 @@
 		2BC34E8224FFB7A900B91D91 /* BUDVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDVideoView.h; sourceTree = "<group>"; };
 		2BC34E8324FFB7A900B91D91 /* BUDVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDVideoView.m; sourceTree = "<group>"; };
 		2BC34E8424FFB7A900B91D91 /* BUDCustomPlayerAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDCustomPlayerAdView.h; sourceTree = "<group>"; };
-		2BCE62592553E4BC0020D172 /* BUDPasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDPasterViewController.h; sourceTree = "<group>"; };
 		2BCE625B2553E4BC0020D172 /* BUDPasterBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDPasterBaseViewController.h; sourceTree = "<group>"; };
 		2BCE625D2553E4BC0020D172 /* BUDPasterBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDPasterBaseViewController.m; sourceTree = "<group>"; };
-		2BCE625E2553E4BC0020D172 /* BUDPasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDPasterViewController.m; sourceTree = "<group>"; };
 		2BCFB798255E759100074CFC /* BUDBannerAdListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDBannerAdListViewController.m; sourceTree = "<group>"; };
 		2BCFB799255E759100074CFC /* BUDBannerAdListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDBannerAdListViewController.h; sourceTree = "<group>"; };
+		2BD30D4326806A450054740C /* BUDExpressRewardedVideoAgainDelegateObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDExpressRewardedVideoAgainDelegateObj.h; sourceTree = "<group>"; };
+		2BD30D4426806A450054740C /* BUDRewardedVideoAgainDelegateObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDRewardedVideoAgainDelegateObj.m; sourceTree = "<group>"; };
+		2BD30D4526806A450054740C /* BUDRewardedVideoAgainDelegateObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDRewardedVideoAgainDelegateObj.h; sourceTree = "<group>"; };
+		2BD30D4626806A450054740C /* BUDExpressRewardedVideoAgainDelegateObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDExpressRewardedVideoAgainDelegateObj.m; sourceTree = "<group>"; };
 		2BDEE0892552ACCD001AF902 /* BUDSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSwitchView.h; sourceTree = "<group>"; };
 		2BEA4DDD2520869700FE5189 /* BUDPasterCustomPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDPasterCustomPlayerViewController.h; sourceTree = "<group>"; };
 		2BEA4DDE2520869700FE5189 /* BUDPasterCustomPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDPasterCustomPlayerViewController.m; sourceTree = "<group>"; };
@@ -563,6 +563,10 @@
 		DE84BD2521A2E9600090D866 /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2BD30D4326806A450054740C /* BUDExpressRewardedVideoAgainDelegateObj.h */,
+				2BD30D4626806A450054740C /* BUDExpressRewardedVideoAgainDelegateObj.m */,
+				2BD30D4526806A450054740C /* BUDRewardedVideoAgainDelegateObj.h */,
+				2BD30D4426806A450054740C /* BUDRewardedVideoAgainDelegateObj.m */,
 				DE84BD2821A2E9600090D866 /* BUDMainViewModel.h */,
 				DE84BD2621A2E9600090D866 /* BUDMainViewModel.m */,
 				DE84BD2921A2E9600090D866 /* BUDSlotViewModel.h */,
@@ -588,8 +592,6 @@
 				2BCFB798255E759100074CFC /* BUDBannerAdListViewController.m */,
 				2BCE625B2553E4BC0020D172 /* BUDPasterBaseViewController.h */,
 				2BCE625D2553E4BC0020D172 /* BUDPasterBaseViewController.m */,
-				2BCE62592553E4BC0020D172 /* BUDPasterViewController.h */,
-				2BCE625E2553E4BC0020D172 /* BUDPasterViewController.m */,
 				2B8DC97D2555756F00B820D4 /* BUDBaseExampleViewController.h */,
 				2B8DC97E2555756F00B820D4 /* BUDBaseExampleViewController.m */,
 				2B600D4D250BA7770038662B /* BUDCoppaViewController.h */,
@@ -637,8 +639,6 @@
 				1200EF9724B8A43100E331DD /* BUDNativeFeedCollectionViewController.m */,
 				1200EF7024B8A42F00E331DD /* BUDNativeInterstitialViewController.h */,
 				1200EF7F24B8A43000E331DD /* BUDNativeInterstitialViewController.m */,
-				2B6DD3F9255D479C00FF8CA5 /* BUDPasterBaseViewController.h */,
-				2B6DD3FC255D479C00FF8CA5 /* BUDPasterBaseViewController.m */,
 				2BEA4DDD2520869700FE5189 /* BUDPasterCustomPlayerViewController.h */,
 				2BEA4DDE2520869700FE5189 /* BUDPasterCustomPlayerViewController.m */,
 				2B6DD3FB255D479C00FF8CA5 /* BUDPasterViewController.h */,
@@ -902,7 +902,6 @@
 				DE84BD9021A2E9600090D866 /* BUDMainViewModel.m in Sources */,
 				1200EFC224B8A43200E331DD /* BUDExpressDrawViewController.m in Sources */,
 				DE84BD8E21A2E9600090D866 /* RRFPSBar.m in Sources */,
-				2BCE62632553E4BD0020D172 /* BUDPasterViewController.m in Sources */,
 				1200EFB924B8A43200E331DD /* BUDPlayableToolViewController.m in Sources */,
 				2BFDA5AD263553AA00C17053 /* BUDSplashContainerViewController.m in Sources */,
 				DE84BDAF21A2E9600090D866 /* BUDExampleDefine.m in Sources */,
@@ -956,6 +955,7 @@
 				DED3324B239DF6B900E77551 /* BUDSelcetedItem.m in Sources */,
 				2B6DD2D7255D43DC00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m in Sources */,
 				DE84BDB221A2E9600090D866 /* BUDMainViewController.m in Sources */,
+				2BD30D4726806A450054740C /* BUDRewardedVideoAgainDelegateObj.m in Sources */,
 				2B6DD3F4255D46B400FF8CA5 /* BUDSwitchView.m in Sources */,
 				DE84BD8C21A2E9600090D866 /* UIView+Draw.m in Sources */,
 				2BC34E8024FFB79700B91D91 /* BUDCustomVideoPlayerViewController.m in Sources */,
@@ -966,9 +966,9 @@
 				DE84BDB021A2E9600090D866 /* BUDActionCellDefine.m in Sources */,
 				2B6DD2DA255D43DC00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m in Sources */,
 				1200EFAF24B8A43200E331DD /* BUDExpressSplashViewController.m in Sources */,
-				2B6DD401255D479C00FF8CA5 /* BUDPasterBaseViewController.m in Sources */,
 				1200EFC024B8A43200E331DD /* BUDNativeBannerViewController.m in Sources */,
 				DE84BDAA21A2E9600090D866 /* BUDNativeBannerTableViewCell.m in Sources */,
+				2BD30D4826806A450054740C /* BUDExpressRewardedVideoAgainDelegateObj.m in Sources */,
 				2B6DD2D3255D43DC00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */,
 				DECC5C9F21CF4BB100268877 /* BUDdemoDislikeCollectionCell.m in Sources */,
 				1A7165E72387D7AF00491A62 /* BUDConfigModel.m in Sources */,
@@ -1140,8 +1140,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/../PangleSDK",
-					"$(PROJECT_DIR)/BUAdTestMeasurement",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BUDemo/PrefixHeader.pch";
@@ -1151,7 +1149,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.7.0.2;
+				MARKETING_VERSION = 3.8.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.ADUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = ADUnionInHouseDist;
@@ -1170,8 +1168,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/../PangleSDK",
-					"$(PROJECT_DIR)/BUAdTestMeasurement",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BUDemo/PrefixHeader.pch";
@@ -1181,7 +1177,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.7.0.2;
+				MARKETING_VERSION = 3.8.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.ADUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = ADUnionInHouseDist;

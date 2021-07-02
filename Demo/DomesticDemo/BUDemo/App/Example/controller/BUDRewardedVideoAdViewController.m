@@ -13,10 +13,13 @@
 #import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
 #import "UIColor+DarkMode.h"
+#import "BUDRewardedVideoAgainDelegateObj.h"
 
 @interface BUDRewardedVideoAdViewController () <BURewardedVideoAdDelegate>
 @property (nonatomic, strong) BURewardedVideoAd *rewardedVideoAd;
 @property (nonatomic, strong) BUDSelectedView *selectedView;
+//optional
+@property (nonatomic, strong) BUDRewardedVideoAgainDelegateObj *rewardedVideoAgainDelegateObj;
 @end
 
 @implementation BUDRewardedVideoAdViewController
@@ -52,6 +55,8 @@
     self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:slotID rewardedVideoModel:model];
     // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.rewardedVideoAd.delegate = self;
+    // optional
+    self.rewardedVideoAd.rewardPlayAgainInteractionDelegate = self.rewardedVideoAgainDelegateObj;
     
     [self.rewardedVideoAd loadAdData];
     
@@ -132,4 +137,12 @@
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
+
+- (BUDRewardedVideoAgainDelegateObj *)rewardedVideoAgainDelegateObj {
+    if (!_rewardedVideoAgainDelegateObj) {
+        _rewardedVideoAgainDelegateObj = [[BUDRewardedVideoAgainDelegateObj alloc] init];
+    }
+    return _rewardedVideoAgainDelegateObj;;
+}
+
 @end

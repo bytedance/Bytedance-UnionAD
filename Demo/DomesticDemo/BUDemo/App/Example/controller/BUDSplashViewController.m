@@ -182,8 +182,9 @@
 
 - (void)handleSplashDimiss:(BUSplashAdView *)splashAd {
     if (splashAd.zoomOutView) {
+        __weak typeof(splashAd) weakSplashAdView = splashAd;
         [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
-            [splashAd removeFromSuperview];
+            [weakSplashAdView removeFromSuperview];
         }];
     } else{
         [splashAd removeFromSuperview];
@@ -191,10 +192,9 @@
 }
 
 - (void)removeSplashAdView {
-    if (self.splashView) {
-        [self.splashView removeFromSuperview];
-        self.splashView = nil;
-    }
+    [self.splashView removeFromSuperview];
+    self.splashView = nil;
+    [BUDAnimationTool sharedInstance].splashContainerVC = nil;
 }
 
 - (void)setUpSplashZoomOutAd:(BUSplashAdView *)splashAdView {
@@ -205,9 +205,9 @@
     [self.navigationController.view addSubview:splashAdView];
     splashAdView.zoomOutView.rootViewController = self;
     splashAdView.zoomOutView.delegate = self;
+    __weak typeof(splashAdView) weakSplashAdView = splashAdView;
     [[BUDAnimationTool sharedInstance] transitionFromView:splashAdView toView:splashAdView.zoomOutView splashCompletion:^{
-        [splashAdView removeFromSuperview];
-        [BUDAnimationTool sharedInstance].splashContainerVC = nil;
+        [weakSplashAdView removeFromSuperview];
     }];
 }
 
@@ -226,7 +226,7 @@
     if (splashAd.zoomOutView) {
         [splashAd.zoomOutView removeFromSuperview];
     }
-    [splashAd removeFromSuperview];
+    [self removeSplashAdView];
     [self pbud_logWithSEL:_cmd msg:@""];
 }
 
@@ -236,7 +236,6 @@
 }
 
 - (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd {
-    [self handleSplashDimiss:splashAd];
     // 'zoomOutView' is nil, there will be no subsequent operation to completely remove splashAdView and avoid memory leak
     // 'zoomOutView' is not nil，do nothing
     if (!splashAd.zoomOutView) {
@@ -268,7 +267,6 @@
 }
 
 - (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd {
-    [self handleSplashDimiss:splashAd];
     // 'zoomOutView' is nil, there will be no subsequent operation to completely remove splashAdView and avoid memory leak
     // 'zoomOutView' is not nil，do nothing
     if (!splashAd.zoomOutView) {
@@ -283,6 +281,7 @@
 
 #pragma mark - BUSplashZoomOutViewDelegate
 - (void)splashZoomOutViewAdDidClick:(BUSplashZoomOutView *)splashAd {
+    [self removeSplashAdView];
     [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
 }
 

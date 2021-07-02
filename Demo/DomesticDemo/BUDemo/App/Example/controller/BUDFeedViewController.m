@@ -93,7 +93,7 @@
     NSInteger datasCount = datas.count;
     if (datasCount > 3) {
        for (int i = 0; i < datasCount; i++) {
-           NSUInteger index = rand() % (datasCount - 3) + 2;
+           NSUInteger index = arc4random() % (datasCount - 3) + 2;
            BUDFeedNormalModel *model = [[BUDFeedNormalModel alloc]initWithDict:[datas objectAtIndex:index]];
            [self.dataSource addObject:model];
        }
@@ -328,7 +328,7 @@
 - (void)pbud_insertIntoDataSourceWithArray:(NSArray *)array {
     if (self.dataSource.count > 3) {
         for (id item in array) {
-            NSUInteger index = rand() % (self.dataSource.count - 3) + 2;
+            NSUInteger index = arc4random() % (self.dataSource.count - 3) + 2;
             [self.dataSource insertObject:item atIndex:index];
         }
     }

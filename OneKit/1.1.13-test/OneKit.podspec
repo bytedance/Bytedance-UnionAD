@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
     s.version          = '1.1.13-test'
     s.summary          = 'OneSDK Kit.'
     s.description      = 'an iOS base Framework.'
-    s.homepage         = "https://github.com/bytedance//OneKit"
+    s.homepage         = "https://github.com/bytedance/tree/master/OneKit"
     s.license          = {
       :type => 'Copyright',
       :text => <<-LICENSE

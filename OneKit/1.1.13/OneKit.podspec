@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
       LICENSE
     }
     s.author           = { 'chenyi' => 'chenyi.0@bytedance.com' }
-    s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/pangle-sdk-static/OneKit/1.1.13/OneKit.zip" }
+    s.source           = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/OneKit/1.1.13/OneKit.zip" }
     s.ios.deployment_target = '9.0'
     s.requires_arc = true
     s.static_framework = true

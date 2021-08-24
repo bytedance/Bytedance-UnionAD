@@ -248,7 +248,7 @@
     NSUInteger index = (NSUInteger) indexPath.row;
     id model = self.dataSource[index];
     if ([model isKindOfClass:[BUDBannerModel class]]) {
-        return [(BUDBannerModel *)model imgeViewHeight] + bottomHeight;
+        return [(BUDBannerModel *)model imgeViewHeight];
     } else if ([model isKindOfClass:[UIView class]]) {
            UIView *view = (UIView *)model;
            return view.bounds.size.height;

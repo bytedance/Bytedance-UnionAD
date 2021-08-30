@@ -53,7 +53,7 @@ class NativeAdCellTableViewCell: UITableViewCell {
         nativeAdRelatedView.refreshData(nativeAd)
         adLabel.text = nativeAdRelatedView.adLabel?.text
         
-        if (nativeAd.data?.imageMode == BUFeedADMode.videoAdModeImage || nativeAd.data?.imageMode == BUFeedADMode.videoAdModePortrait) {
+        if (nativeAd.data?.imageMode == BUFeedADMode.videoAdModeImage || nativeAd.data?.imageMode == BUFeedADMode.videoAdModePortrait || nativeAd.data?.imageMode == BUFeedADMode.adModeSquareVideo) {
             //This is a video ad
             if let videoView = nativeAdRelatedView.videoAdView {
                 let videoFrame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: containerView.frame.height)

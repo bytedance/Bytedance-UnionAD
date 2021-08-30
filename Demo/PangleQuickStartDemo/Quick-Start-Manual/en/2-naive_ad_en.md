@@ -85,7 +85,7 @@ extension YourNativeAdsViewController: BUNativeAdsManagerDelegate {
 
 `nativeAd`'s parameter `data` has parts like ad's title, description, images for displaying.
 
-if the parameter`imageMode` in the `data` is **BUFeedVideoAdModeImage** or **BUFeedADModeSquareVideo**, please init a `BUNativeAdRelatedView` and call `- (void)refreshData:(BUNativeAd *)nativeAd;` to get videoAdView parts for the ad.
+if the parameter`imageMode` in the `data` is **BUFeedVideoAdModeImage**, **BUFeedADModeSquareVideo** or **BUFeedADModeSquareVideo**, please init a `BUNativeAdRelatedView` and call `- (void)refreshData:(BUNativeAd *)nativeAd;` to get videoAdView parts for the ad.
 
 Please add `BUNativeAdRelatedView`'s `logoADImageView` on ad's view, this view will show the privacy information when been clicked.
 
@@ -116,7 +116,7 @@ class NativeAdCellTableViewCell: UITableViewCell {
         nativeAdRelatedView.refreshData(nativeAd)
         adLabel.text = nativeAdRelatedView.adLabel?.text
 
-        if (nativeAd.data?.imageMode == BUFeedADMode.videoAdModeImage || nativeAd.data?.imageMode == BUFeedADMode.videoAdModePortrait) {
+        if (nativeAd.data?.imageMode == BUFeedADMode.videoAdModeImage || nativeAd.data?.imageMode == BUFeedADMode.videoAdModePortrait || nativeAd.data?.imageMode == BUFeedADMode.adModeSquareVideo) {
             //This is a video ad
             if let videoView = nativeAdRelatedView.videoAdView {
                 let videoFrame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: containerView.frame.height)

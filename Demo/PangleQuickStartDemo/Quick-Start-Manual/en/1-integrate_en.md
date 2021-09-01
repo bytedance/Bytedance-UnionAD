@@ -121,7 +121,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     let configuration = BUAdSDKConfiguration()
         
     #if DEBUG
-    // Whether to open log. default is none.
+    // enable log print. default is none.
     configuration.logLevel = .debug
     #endif
         

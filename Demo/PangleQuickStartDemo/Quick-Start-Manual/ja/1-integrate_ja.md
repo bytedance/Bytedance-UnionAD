@@ -119,7 +119,7 @@ Pangle管理画面で作成した `APP ID` を引数に、 Pangle SDK を初期�
 に記述して下さい。
 
 
-非同期の初期化メソッド **+ (void)startWithAsyncCompletionHandler:(BUCompletionHandler)completionHandler;** の利用をおすすめします。 バックグラウンドの音声を干渉したくない場合は **allowModifyAudioSessionSetting** を `true` に設定してください。」
+非同期の初期化メソッド **+ (void)startWithAsyncCompletionHandler:(BUCompletionHandler)completionHandler;** の利用をお勧めします。 バックグラウンドの音声を干渉したくない場合は **allowModifyAudioSessionSetting** を `true` に設定してください。
 
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -127,7 +127,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     let configuration = BUAdSDKConfiguration()
         
     #if DEBUG
-    // Whether to open log. default is none.
+    // enable log print. default is none.
     configuration.logLevel = .debug
     #endif
         

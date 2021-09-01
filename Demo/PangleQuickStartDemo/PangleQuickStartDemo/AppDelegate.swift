@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = BUAdSDKConfiguration()
         
         #if DEBUG
-        // Whether to open log. default is none.
+        // enable log print. default is none.
         configuration.logLevel = .debug
         #endif
         

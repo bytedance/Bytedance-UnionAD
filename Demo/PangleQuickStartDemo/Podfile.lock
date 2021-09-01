@@ -1,11 +1,11 @@
 PODS:
-  - Ads-Global (3.4.4.3):
-    - Ads-Global/BUAdSDK (= 3.4.4.3)
-  - Ads-Global/BUAdSDK (3.4.4.3):
+  - Ads-Global (3.9.0.4):
+    - Ads-Global/BUAdSDK (= 3.9.0.4)
+  - Ads-Global/BUAdSDK (3.9.0.4):
     - Ads-Global/BUFoundation
     - Ads-Global/International
-  - Ads-Global/BUFoundation (3.4.4.3)
-  - Ads-Global/International (3.4.4.3)
+  - Ads-Global/BUFoundation (3.9.0.4)
+  - Ads-Global/International (3.9.0.4)
 
 DEPENDENCIES:
   - Ads-Global
@@ -15,7 +15,7 @@ SPEC REPOS:
     - Ads-Global
 
 SPEC CHECKSUMS:
-  Ads-Global: 68a120508b26bf1a23411cfbf95c8ecf80ba6bf2
+  Ads-Global: 371ecc237669dd564ead2ff8ea6b5255211f8d25
 
 PODFILE CHECKSUM: faab7e005e265dfea550171faf08811c058cc0fb
 

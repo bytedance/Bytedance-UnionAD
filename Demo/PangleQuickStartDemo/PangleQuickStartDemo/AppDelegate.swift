@@ -18,7 +18,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         checkTrackingAuthorization()
         
-        BUAdSDKManager.setAppID("5064663")
+        let configuration = BUAdSDKConfiguration()
+        
+        #if DEBUG
+            // Whether to open log. default is none.
+            configuration.logLevel = .debug
+        #endif
+        
+        configuration.appID = "5064663"
+        
+        //Set to true to NOT interrupt background app's audio playback
+        configuration.allowModifyAudioSessionSetting = true
+        
+        BUAdSDKManager.start(asyncCompletionHandler:) { (success, error) in
+            if ((error) != nil) {
+                //init failed
+            }
+        };
         
         return true
     }

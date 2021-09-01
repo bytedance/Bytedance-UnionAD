@@ -113,15 +113,30 @@ Initialize Pangle with the APP ID as the argument. Unless there is a particular 
 
 **UIApplicationDelegate application(_:didFinishLaunchingWithOptions:)**
 
+We recommand to use asynchronize initialization method **+ (void)startWithAsyncCompletionHandler:(BUCompletionHandler)completionHandler;** to init the SDK, and also set **allowModifyAudioSessionSetting** to `true` to not interrupt the background's audio playback.
+
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-    // Coppa 0: adult, 1: child
-    //BUAdSDKManager.setCoppa(1)
-    // GDPR 0: close privacy protection, 1: open privacy protection
-    //BUAdSDKManager.setGDPR(1)
-
-    BUAdSDKManager.setAppID("your_app_id")
+    let configuration = BUAdSDKConfiguration()
+        
+    #if DEBUG
+    // Whether to open log. default is none.
+    configuration.logLevel = .debug
+    #endif
+        
+    configuration.appID = "5064663"
+    configuration.coppa = 0
+    configuration.gdpr = 0
+        
+    //Set to true to NOT interrupt background app's audio playback
+    configuration.allowModifyAudioSessionSetting = true
+        
+    BUAdSDKManager.start(asyncCompletionHandler:) { (success, error) in
+        if ((error) != nil) {
+            //init failed
+        }
+    };
 
     return true
 }

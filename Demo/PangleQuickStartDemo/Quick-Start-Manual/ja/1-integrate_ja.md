@@ -119,16 +119,30 @@ Pangle管理画面で作成した `APP ID` を引数に、 Pangle SDK を初期�
 に記述して下さい。
 
 
+非同期の初期化メソッド **+ (void)startWithAsyncCompletionHandler:(BUCompletionHandler)completionHandler;** の利用をおすすめします。 バックグラウンドの音声を干渉したくない場合は **allowModifyAudioSessionSetting** を `true` に設定してください。」
 
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-    // Coppa 0: adult, 1: child
-    //BUAdSDKManager.setCoppa(1)
-    // GDPR 0: close privacy protection, 1: open privacy protection
-    //BUAdSDKManager.setGDPR(1)
-
-    BUAdSDKManager.setAppID("your_app_id")
+    let configuration = BUAdSDKConfiguration()
+        
+    #if DEBUG
+    // Whether to open log. default is none.
+    configuration.logLevel = .debug
+    #endif
+        
+    configuration.appID = "5064663"
+    configuration.coppa = 0
+    configuration.gdpr = 0
+        
+    //Set to true to NOT interrupt background app's audio playback
+    configuration.allowModifyAudioSessionSetting = true
+        
+    BUAdSDKManager.start(asyncCompletionHandler:) { (success, error) in
+        if ((error) != nil) {
+            //init failed
+        }
+    };
 
     return true
 }

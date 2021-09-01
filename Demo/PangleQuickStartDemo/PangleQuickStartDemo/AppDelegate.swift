@@ -21,11 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = BUAdSDKConfiguration()
         
         #if DEBUG
-            // Whether to open log. default is none.
-            configuration.logLevel = .debug
+        // Whether to open log. default is none.
+        configuration.logLevel = .debug
         #endif
         
         configuration.appID = "5064663"
+        configuration.coppa = 0
+        configuration.gdpr = 0
         
         //Set to true to NOT interrupt background app's audio playback
         configuration.allowModifyAudioSessionSetting = true

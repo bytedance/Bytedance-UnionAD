@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global-Beta'
-  s.version          = '3.9.0.3'
+  s.version          = '4.0.0.0'
   s.summary          = 'Ads-Global-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Global-Beta provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.author           = { 'bytedance-tech' => 'zywork@bytedance.com' }
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD.git'
-  s.source           = { :http => 'https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/3.9.0.3/PangleSDK.zip' }
+  s.source           = { :http => 'https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/4.0.0.0/PangleSDK.zip' }
   s.platform     = :ios, "9.0"  
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
@@ -28,8 +28,13 @@ Pod::Spec.new do |s|
   s.preserve_paths = 'PangleSDK/LICENSE'
   s.preserve_paths = 'PangleSDK/README.md'
 
-  s.default_subspec = 'BUAdSDK'
+  s.default_subspec = ['BUAdSDK','APM']
   
+  s.subspec 'APM' do |ss|
+    ss.dependency 'RangersAPM/Crash', '2.3.2-pangle'
+    ss.dependency 'RangersAPM/Global', '2.3.2-pangle'
+  end
+
   s.subspec 'International' do |ss|
     ss.preserve_paths = 'PangleSDK/BUVAAuxiliary.framework'
   	ss.vendored_frameworks = ['PangleSDK/BUVAAuxiliary.framework']

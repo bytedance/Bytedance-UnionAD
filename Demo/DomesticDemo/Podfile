@@ -17,6 +17,8 @@ abstract_target 'Demo' do
     pod 'SDWebImage'
     pod 'Ads-CN-Beta'
 
+    pod 'BUAdTestMeasurement'
+
     target 'BUADDemo' do
       project 'BUADDemo.xcodeproj'
 

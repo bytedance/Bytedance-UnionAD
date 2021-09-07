@@ -31,8 +31,8 @@ Pod::Spec.new do |s|
   s.default_subspec = ['BUAdSDK','APM']
   
   s.subspec 'APM' do |ss|
-    ss.dependency 'RangersAPM/Crash', '2.3.2-pangle'
-    ss.dependency 'RangersAPM/Global', '2.3.2-pangle'
+    ss.dependency 'RangersAPM-Pangle/Crash', '2.3.2-pangle'
+    ss.dependency 'RangersAPM-Pangle/Global', '2.3.2-pangle'
   end
 
   s.subspec 'International' do |ss|

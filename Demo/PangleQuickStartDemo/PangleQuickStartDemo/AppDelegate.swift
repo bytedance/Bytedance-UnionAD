@@ -8,35 +8,59 @@
 import UIKit
 import AdSupport
 import AppTrackingTransparency
+import MoPubSDK
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    public static let defaultAdUnitId = "4d828ebcb6594999ace41c95f296b4ae"
+    
     var window: UIWindow?
+    var mopub: MoPub?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         checkTrackingAuthorization()
-        
         let configuration = BUAdSDKConfiguration()
-        
+        /*
         #if DEBUG
         // enable log print. default is none.
         configuration.logLevel = .debug
         #endif
         
-        configuration.appID = "5064663"
+        configuration.territory = .CN
+        
+        configuration.appID = "5000546"
         configuration.coppa = 0
         configuration.gdpr = 0
         
+        
         //Set to true to NOT interrupt background app's audio playback
         configuration.allowModifyAudioSessionSetting = true
-        
-        BUAdSDKManager.start(asyncCompletionHandler:) { (success, error) in
+    BUAdSDKManager.start(asyncCompletionHandler:) { (success, error) in
             if ((error) != nil) {
                 //init failed
             }
         };
+ */
+        
+        BUAdSDKManager.setTerritory(BUAdSDKTerritory.CN)
+        BUAdSDKManager.setAppID("5000546")
+        
+
+        let sdkConfig = MPMoPubConfiguration(adUnitIdForAppInitialization: AppDelegate.defaultAdUnitId)
+                sdkConfig.globalMediationSettings = []
+        sdkConfig.loggingLevel = .debug
+        
+
+        
+        
+        mopub = MoPub.sharedInstance()
+        mopub?.initializeSdk(with: sdkConfig) {
+            
+        }
+        
+
         
         return true
     }

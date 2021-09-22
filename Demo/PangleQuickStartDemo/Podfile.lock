@@ -1,22 +1,47 @@
 PODS:
-  - Ads-Global (3.9.0.4):
-    - Ads-Global/BUAdSDK (= 3.9.0.4)
-  - Ads-Global/BUAdSDK (3.9.0.4):
+  - Ads-Global (3.6.1.7):
+    - Ads-Global/BUAdSDK (= 3.6.1.7)
+  - Ads-Global/BUAdSDK (3.6.1.7):
     - Ads-Global/BUFoundation
     - Ads-Global/International
-  - Ads-Global/BUFoundation (3.9.0.4)
-  - Ads-Global/International (3.9.0.4)
+  - Ads-Global/BUFoundation (3.6.1.7)
+  - Ads-Global/Domestic (3.6.1.7)
+  - Ads-Global/International (3.6.1.7)
+  - mopub-ios-sdk (5.17.0):
+    - mopub-ios-sdk/MoPubSDK (= 5.17.0)
+  - mopub-ios-sdk/Core (5.17.0)
+  - mopub-ios-sdk/MoPubSDK (5.17.0):
+    - mopub-ios-sdk/Core
+    - mopub-ios-sdk/NativeAds
+  - mopub-ios-sdk/NativeAds (5.17.0):
+    - mopub-ios-sdk/Core
+  - MoPub-Pangle-Adapters (3.6.1.7.0):
+    - MoPub-Pangle-Adapters/MoPub (= 3.6.1.7.0)
+    - MoPub-Pangle-Adapters/Network (= 3.6.1.7.0)
+  - MoPub-Pangle-Adapters/MoPub (3.6.1.7.0):
+    - mopub-ios-sdk/Core (~> 5.17.0)
+    - mopub-ios-sdk/NativeAds (~> 5.17.0)
+  - MoPub-Pangle-Adapters/Network (3.6.1.7.0):
+    - Ads-Global (= 3.6.1.7)
+    - mopub-ios-sdk/Core (~> 5.17.0)
+    - mopub-ios-sdk/NativeAds (~> 5.17.0)
 
 DEPENDENCIES:
-  - Ads-Global
+  - Ads-Global/Domestic (= 3.6.1.7)
+  - mopub-ios-sdk
+  - MoPub-Pangle-Adapters (= 3.6.1.7.0)
 
 SPEC REPOS:
   trunk:
     - Ads-Global
+    - mopub-ios-sdk
+    - MoPub-Pangle-Adapters
 
 SPEC CHECKSUMS:
-  Ads-Global: 371ecc237669dd564ead2ff8ea6b5255211f8d25
+  Ads-Global: 8e1135531a7f98b53b58768bdddeade9eab7c2d1
+  mopub-ios-sdk: 36d322902674b79b0560a1cb8d15af0548d364ea
+  MoPub-Pangle-Adapters: 29afcbe26b2bfdf31914f8611d1bc6958497cc34
 
-PODFILE CHECKSUM: faab7e005e265dfea550171faf08811c058cc0fb
+PODFILE CHECKSUM: ab1b2cbaff9daaf3048a4eae972dcea5d1493f5c
 
 COCOAPODS: 1.10.1

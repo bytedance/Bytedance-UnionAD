@@ -223,6 +223,7 @@
 				2CD261FE252DA4AD00115243 /* Frameworks */,
 				2CD261FF252DA4AD00115243 /* Resources */,
 				D7419CE54BD0D952466CBDE2 /* [CP] Copy Pods Resources */,
+				E48D8677A4E740216CA8AF0A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -261,6 +262,7 @@
 				2CD2621F252DA4B000115243 /* Frameworks */,
 				2CD26220252DA4B000115243 /* Resources */,
 				9F6E14A122B4890D0FC409FC /* [CP] Copy Pods Resources */,
+				59450545E5B16C252E68D786 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -344,6 +346,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		59450545E5B16C252E68D786 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests/Pods-PangleQuickStartDemo-PangleQuickStartDemoUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6E23B19F532B0145080B13DD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -420,6 +439,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo/Pods-PangleQuickStartDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E48D8677A4E740216CA8AF0A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo/Pods-PangleQuickStartDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo/Pods-PangleQuickStartDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PangleQuickStartDemo/Pods-PangleQuickStartDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EBB3D69ACBAE82A4310E0F21 /* [CP] Check Pods Manifest.lock */ = {

@@ -30,7 +30,8 @@ class RewardedVideoViewController: UIViewController {
         
         rewardedVideo = BURewardedVideoAd.init(slotID: placementID, rewardedVideoModel: rewardModel)
         rewardedVideo.delegate = self
-        rewardedVideo.loadData()
+        //rewardedVideo.loadData()
+        //rewardedVideo.setMopubAdMarkUp(<#T##adm: String##String#>)
     }
 }
 

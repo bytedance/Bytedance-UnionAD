@@ -6,7 +6,11 @@ target 'PangleQuickStartDemo' do
   use_frameworks!
 
   # This is for SDK v3.4.x.x and later
-  pod 'Ads-Global'
+  #pod 'Ads-Global','3.6.1.7'
+  pod 'mopub-ios-sdk'
+
+  pod 'MoPub-Pangle-Adapters', '3.6.1.7.0'
+  pod 'Ads-Global','3.6.1.7',:subspecs => ['Domestic']
 
   # This is for SDK v3.3.6.2 and before
   # pod 'Bytedance-UnionAD'

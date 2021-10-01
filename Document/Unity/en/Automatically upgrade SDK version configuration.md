@@ -1,8 +1,9 @@
 Open your project in the Unity editor and select Pangle->Manage SDKs->Upgrade to upgrade the version, see screenshot for details
 ![pangle_manage.png](https://sf-tb-sg.ibytedtos.com/obj/ad-penny-oversea-bucket/d8cc3e73218e448aa6b12ddb541b924d)
-![Pangle.png](https://sf-tb-sg.ibytedtos.com/obj/ad-penny-oversea-bucket/4cf574adb3f54809b9d3895b4493e727)
+![for details](https://sf-tb-sg.ibytedtos.com/obj/ad-penny-oversea-bucket/7dbf3d6405c44ea0a613e6652bee0c23)
+
 **Notice:**
-1. **Upgrade cannot be clicked when the current version is the latest version**, when the version is lower than the latest online version, you can use Upgrade to perform the version upgrade import operation, see the screenshot for details![import.png](https://sf-tb-sg.ibytedtos.com/obj/ad-penny-oversea-bucket/7dbf3d6405c44ea0a613e6652bee0c23)
-2. In addition, the Pangle Unity Adapter plugin no longer provides the dual-end PangleSDK resource package after version 3700, that is, the original [Example.unitypackage, PangleAdapterScripts.unitypackage, PangleSDK.unitypackage] becomes [Example.unitypackage, PangleAdapterScripts.unitypackage], Among them, Example.unitypackage is still our example Demo code, and PangleAdapterScripts.unitypackage is still our Adapter Plugin.
-3. We will pull online resources (Android from maven, iOS from Pod) when Unity exports the native project. Therefore, if you have not installed the Pod tool locally, you should first [install Pod](https://guides. cocoapods.org/using/getting-started.html).
-4. **[Strongly recommended]** After the SDK version is automatically upgraded, you need to find Link Binary With Libraries in TARGETS -> Unity- iPhone in the exported xcode project, and click "+" to add UnityFramework.framework![iOS自动升级补充.png](https://sf-tb-sg.ibytedtos.com/obj/ad-penny-oversea-bucket/e0f77e26b46c40d2bccc696c8849a427)
+1. Upgrade button should be disabled if there is no newer version.
+![Pangle.png](https://sf-tb-sg.ibytedtos.com/obj/ad-penny-oversea-bucket/4cf574adb3f54809b9d3895b4493e727)
+2. **[Strongly recommended]** After the SDK version is automatically upgraded, you need to find Link Binary With Libraries in TARGETS -> Unity- iPhone in the exported xcode project, and click "+" to add UnityFramework.framework![iOS自动升级补充.png](https://sf-tb-sg.ibytedtos.com/obj/ad-penny-oversea-bucket/e0f77e26b46c40d2bccc696c8849a427)
+3. In addition, we no longer provides PangleSDK.unitypackage after version 3700, Instead, PangleSDK is managed by CocoaPods [install CocoaPods](https://guides.cocoapods.org/using/getting-started.html).

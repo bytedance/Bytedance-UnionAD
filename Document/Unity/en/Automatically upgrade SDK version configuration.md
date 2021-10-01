@@ -1,4 +1,4 @@
-Open your project in the Unity editor and select Pangle->Mange SDKs->Upgrade to upgrade the version, see screenshot for details
+Open your project in the Unity editor and select Pangle->Manage SDKs->Upgrade to upgrade the version, see screenshot for details
 ![pangle_manage.png](https://sf-tb-sg.ibytedtos.com/obj/ad-penny-oversea-bucket/d8cc3e73218e448aa6b12ddb541b924d)
 ![Pangle.png](https://sf-tb-sg.ibytedtos.com/obj/ad-penny-oversea-bucket/4cf574adb3f54809b9d3895b4493e727)
 **Notice:**

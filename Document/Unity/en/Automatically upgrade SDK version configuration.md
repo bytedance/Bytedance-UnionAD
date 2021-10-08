@@ -5,7 +5,7 @@ Open your project in the Unity editor and select Pangle->Manage SDKs->Upgrade to
 **Notice:**
 1. Upgrade button should be disabled if there is no newer version.
 ![Pangle.png](https://sf-tb-sg.ibytedtos.com/obj/ad-penny-oversea-bucket/4cf574adb3f54809b9d3895b4493e727)
-2. **[Strongly recommended]**:  
+2. **[Strongly recommended]**  
     After the SDK version is automatically upgraded, DELETE following config string in ```OTHER_LDFLAGS``` from *.debug.xcconfig and *.release.xcconfig. (Also apply if there are any other build xcconfig file exist)
     ``` c
     -framework "BUAdSDK" -framework "BUFoundation" -framework "BUVAAuxiliary"

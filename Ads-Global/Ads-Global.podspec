@@ -22,7 +22,12 @@ Pod::Spec.new do |s|
 
   s.resource = 'PangleSDK/LICENSE'
 
-  s.default_subspec = 'BUAdSDK'
+  s.default_subspec = ['BUAdSDK','APM']
+
+  s.subspec 'APM' do |ss|
+    ss.dependency 'RangersAPM-Pangle/Crash', '2.3.2-pangle'
+    ss.dependency 'RangersAPM-Pangle/Global', '2.3.2-pangle'
+  end
   
   s.subspec 'International' do |ss|
   	ss.vendored_frameworks = ['PangleSDK/BUVAAuxiliary.framework']

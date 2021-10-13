@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global'
-  s.version          = '3.9.0.8'
+  s.version          = '4.0.0.1'
   s.summary          = 'Ads-Global is a SDK from Bytedance providing AD service.'
   s.description      = <<-DESC
   Ads-Global provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -22,7 +22,12 @@ Pod::Spec.new do |s|
 
   s.resource = 'PangleSDK/LICENSE'
 
-  s.default_subspec = 'BUAdSDK'
+  s.default_subspec = ['BUAdSDK','APM']
+
+  s.subspec 'APM' do |ss|
+    ss.dependency 'RangersAPM-Pangle/Crash', '2.3.2-pangle'
+    ss.dependency 'RangersAPM-Pangle/Global', '2.3.2-pangle'
+  end
   
   s.subspec 'International' do |ss|
   	ss.vendored_frameworks = ['PangleSDK/BUVAAuxiliary.framework']

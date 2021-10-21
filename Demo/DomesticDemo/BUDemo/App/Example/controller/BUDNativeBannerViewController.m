@@ -20,6 +20,9 @@
 #ifdef DEBUG
 #import <MBProgressHUD/MBProgressHUD.h>
 #endif
+
+static CGFloat const bottomHeight = 30;
+
 @interface BUDNativeBannerViewController () <BUNativeAdDelegate,UITableViewDelegate,UITableViewDataSource, BUDNativeBannerDelegate>
 @property (nonatomic, strong) BUDBannerModel *bannerModel;
 @property (nonatomic, strong) BUNativeAd *nativeAd_load;

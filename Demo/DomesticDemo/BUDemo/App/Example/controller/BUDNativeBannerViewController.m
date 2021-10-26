@@ -20,6 +20,10 @@
 #ifdef DEBUG
 #import <MBProgressHUD/MBProgressHUD.h>
 #endif
+
+
+static CGFloat const bottomHeight = 30;
+
 @interface BUDNativeBannerViewController () <BUNativeAdDelegate,UITableViewDelegate,UITableViewDataSource, BUDNativeBannerDelegate>
 @property (nonatomic, strong) BUDBannerModel *bannerModel;
 @property (nonatomic, strong) BUNativeAd *nativeAd_load;
@@ -248,7 +252,7 @@
     NSUInteger index = (NSUInteger) indexPath.row;
     id model = self.dataSource[index];
     if ([model isKindOfClass:[BUDBannerModel class]]) {
-        return [(BUDBannerModel *)model imgeViewHeight];
+        return [(BUDBannerModel *)model imgeViewHeight] + bottomHeight;
     } else if ([model isKindOfClass:[UIView class]]) {
            UIView *view = (UIView *)model;
            return view.bounds.size.height;

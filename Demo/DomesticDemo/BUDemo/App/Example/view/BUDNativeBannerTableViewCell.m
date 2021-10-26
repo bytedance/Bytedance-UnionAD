@@ -14,6 +14,8 @@
 #import "UIView+Draw.h"
 #import "BUDCustomDislikeViewController.h"
 
+static CGFloat const bottomHeight = 30;
+
 static CGSize const logoSize = {58, 22.5};
 
 @implementation BUDBannerModel
@@ -128,8 +130,8 @@ static CGSize const logoSize = {58, 22.5};
         adImageView.accessibilityIdentifier = @"banner_view";
     }
     self.horizontalScrollView.contentSize = CGSizeMake(x, model.imgeViewHeight);
-    self.closeButton.frame = CGRectMake(self.width-self.closeButton.width-5, self.horizontalScrollView.height +(self.closeButton.width)/2, self.closeButton.width, self.closeButton.height);
-    self.adLogo.frame = CGRectMake(self.closeButton.left-logoSize.width - 10, self.horizontalScrollView.height +(logoSize.height)/2, logoSize.width, logoSize.height);
+    self.closeButton.frame = CGRectMake(self.width-self.closeButton.width-5, self.horizontalScrollView.height +(bottomHeight-self.closeButton.width)/2, self.closeButton.width, self.closeButton.height);
+    self.adLogo.frame = CGRectMake(self.closeButton.left-logoSize.width - 10, self.horizontalScrollView.height +(bottomHeight-logoSize.height)/2, logoSize.width, logoSize.height);
 }
 
 #pragma mark - BUDCustomDislikeDelegate

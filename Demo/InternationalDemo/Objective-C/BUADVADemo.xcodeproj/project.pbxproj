@@ -109,6 +109,8 @@
 		2BED9720257DDC3300EF5C1F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2BED9724257DDC3700EF5C1F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		2BED9727257DDC3A00EF5C1F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6745FFA8EBA1C34E09490A64 /* Pods-Demo-BUADVADemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo.release.xcconfig"; sourceTree = "<group>"; };
+		679B62CD16A61D59C02E44C4 /* Pods-Demo-BUADVADemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo.debug.xcconfig"; sourceTree = "<group>"; };
 		780D5E3C2223CB8D0051EF1B /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		78E072CD21A2C03C006D71EE /* BUADVADemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUADVADemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78E073A421A2CFDB006D71EE /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -324,6 +326,8 @@
 		6C25FC835F24553C67AD4CC9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				679B62CD16A61D59C02E44C4 /* Pods-Demo-BUADVADemo.debug.xcconfig */,
+				6745FFA8EBA1C34E09490A64 /* Pods-Demo-BUADVADemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -676,6 +680,7 @@
 		};
 		78E072E121A2C03D006D71EE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 679B62CD16A61D59C02E44C4 /* Pods-Demo-BUADVADemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -693,7 +698,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.1.0;
+				MARKETING_VERSION = 4.1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.ADUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = ADUnionInHouseDist;
@@ -703,6 +708,7 @@
 		};
 		78E072E221A2C03D006D71EE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6745FFA8EBA1C34E09490A64 /* Pods-Demo-BUADVADemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -720,7 +726,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.1.0;
+				MARKETING_VERSION = 4.1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.ADUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = ADUnionInHouseDist;

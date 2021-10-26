@@ -63,9 +63,11 @@
             NSTimeInterval duration = view.watchedDurationOfCurrentItem;
             [reportor didBreakVideoWithCurrentDuration:duration];
         }
+            break;
         case BUDVideoViewStatusError: {
             [reportor didPlayFailedWithError:view.error];
         }
+            break;
         default:
             break;
     }

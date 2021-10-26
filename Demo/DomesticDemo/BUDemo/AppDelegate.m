@@ -18,6 +18,7 @@
 #import "BUDSlotID.h"
 #import "BUDTestToolsViewController.h"
 #import "BUDAnimationTool.h"
+#import "BUDPrivacyProvider.h"
 
 #if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
 #import <BUAdTestMeasurement/BUAdTestMeasurement.h>
@@ -120,6 +121,7 @@
 #endif
     //BUAdSDK requires iOS 9 and up
     configuration.appID = [BUDAdManager appKey];
+    configuration.privacyProvider = BUDPrivacyProvider.new;
     [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
         if (success) {
             dispatch_async(dispatch_get_main_queue(), ^{

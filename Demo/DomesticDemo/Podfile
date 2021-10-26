@@ -15,9 +15,10 @@ abstract_target 'Demo' do
     pod 'Crashlytics'
     pod 'MJRefresh'
     pod 'SDWebImage'
+    pod 'BUAdTestMeasurement'
+    
     pod 'Ads-CN-Beta'
 
-    pod 'BUAdTestMeasurement'
 
     target 'BUADDemo' do
       project 'BUADDemo.xcodeproj'

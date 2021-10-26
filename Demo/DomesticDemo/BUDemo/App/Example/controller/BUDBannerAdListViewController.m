@@ -10,6 +10,7 @@
 #import "BUDSlotViewModel.h"
 #import "BUDSlotID.h"
 #import "BUDExpressBannerViewController.h"
+#import "BUDExpressListBannerViewController.h"
 
 
 @implementation BUDBannerAdListViewController
@@ -33,8 +34,17 @@
         vc.viewModel = viewModel;
         [self.navigationController pushViewController:vc animated:YES];
     }];
+    
+    BUDActionModel *expressListBannerCellItem = [BUDActionModel plainTitleActionModel:@"Express List Banner" type:BUDCellType_native action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUDExpressListBannerViewController *vc = [[BUDExpressListBannerViewController alloc] init];
+        BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
+        viewModel.slotID = express_banner_ID;
+        vc.viewModel = viewModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
 
-    return @[@[nativeCellItem,expressCellItem]];
+    return @[@[nativeCellItem, expressCellItem, expressListBannerCellItem]];
 }
 
 @end

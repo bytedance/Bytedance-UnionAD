@@ -72,6 +72,7 @@
 - (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
     self.selectedView.promptStatus = BUDPromptStatusAdVideoLoadedSuccess;
     [self pbud_logWithSEL:_cmd msg:@""];
+
 }
 
 - (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {

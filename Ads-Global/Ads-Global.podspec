@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global'
-  s.version          = '4.0.0.2'
+  s.version          = '4.1.0.2'
   s.summary          = 'Ads-Global is a SDK from Bytedance providing AD service.'
   s.description      = <<-DESC
   Ads-Global provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   
   s.source           = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/#{s.version}/PangleSDK.zip" }
   s.platform     = :ios, "9.0"  
-  s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
+  s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText','AppTrackingTransparency'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   
   valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
@@ -27,6 +27,7 @@ Pod::Spec.new do |s|
   s.subspec 'APM' do |ss|
     ss.dependency 'RangersAPM-Pangle/Crash', '2.3.2-pangle'
     ss.dependency 'RangersAPM-Pangle/Global', '2.3.2-pangle'
+    ss.dependency 'RangersAPM-Pangle/SessionTracker', '2.3.2-pangle'
   end
   
   s.subspec 'International' do |ss|

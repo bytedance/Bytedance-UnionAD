@@ -14,6 +14,8 @@
 #import "UIView+Draw.h"
 #import "BUDCustomDislikeViewController.h"
 
+static CGFloat const bottomHeight = 30;
+
 static CGSize const logoSize = {58, 22.5};
 
 @implementation BUDBannerModel

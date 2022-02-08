@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global'
-  s.version          = '4.2.0.4'
+  s.version          = '4.2.5.3'
   s.summary          = 'Ads-Global is a SDK from Bytedance providing AD service.'
   s.description      = <<-DESC
   Ads-Global provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -40,6 +40,7 @@ Pod::Spec.new do |s|
   s.subspec 'International' do |ss|
   	ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
     ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
+    ss.dependency 'Ads-Global/BUFoundation'
   end
   
   s.subspec 'Domestic' do |ss|

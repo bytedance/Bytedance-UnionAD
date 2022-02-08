@@ -34,6 +34,7 @@ Pod::Spec.new do |s|
   s.subspec 'International' do |ss|
     ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
     ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
+    ss.dependency 'Ads-CN/BUFoundation'
   end
   
   s.subspec 'Domestic' do |ss|

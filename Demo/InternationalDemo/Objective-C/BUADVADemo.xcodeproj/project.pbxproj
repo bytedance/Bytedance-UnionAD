@@ -36,15 +36,25 @@
 		2BA662CE24C8244A00DDB519 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA662CD24C8244A00DDB519 /* libbz2.tbd */; };
 		2BAD9B61255BD97100B89E45 /* BUDNativeExampleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD9B60255BD97100B89E45 /* BUDNativeExampleView.m */; };
 		2BAD9B64255BD97600B89E45 /* BUDNativeExampleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BAD9B63255BD97600B89E45 /* BUDNativeExampleView.xib */; };
+		2BD5895A274612BD00CEC212 /* BUDAdmobTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD58959274612BD00CEC212 /* BUDAdmobTool.m */; };
 		2BED9721257DDC3300EF5C1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9720257DDC3300EF5C1F /* libz.tbd */; };
 		2BED9725257DDC3700EF5C1F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9724257DDC3700EF5C1F /* libiconv.tbd */; };
 		2BED9728257DDC3B00EF5C1F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9727257DDC3A00EF5C1F /* Security.framework */; };
+		2BF5FDF5279948C7001EFB81 /* BUDAppOpenAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5FDF3279948C6001EFB81 /* BUDAppOpenAdManager.m */; };
+		2BF5FDFD279956DC001EFB81 /* BUDAppOpenAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5FDFC279956DC001EFB81 /* BUDAppOpenAdViewController.m */; };
+		2BF5FE0C27995B64001EFB81 /* BUDSelectedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5FE0B27995B64001EFB81 /* BUDSelectedView.m */; };
+		2BF5FE0F27995BAC001EFB81 /* BUDSelcetedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5FE0E27995BAC001EFB81 /* BUDSelcetedItem.m */; };
+		2BF5FE1227995C55001EFB81 /* NSString+LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5FE1127995C55001EFB81 /* NSString+LocalizedString.m */; };
+		2BF5FE1527995CFC001EFB81 /* BUDNormalButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5FE1327995CFC001EFB81 /* BUDNormalButton.m */; };
+		2BF5FE1827995E7F001EFB81 /* UIView+Draw.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5FE1727995E7F001EFB81 /* UIView+Draw.m */; };
+		2BF5FE1B27995F8B001EFB81 /* BUDSelectedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5FE1A27995F8B001EFB81 /* BUDSelectedCollectionViewCell.m */; };
+		2BFDA5D6263557EA00C17053 /* UIColor+DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDA5D4263557EA00C17053 /* UIColor+DarkMode.m */; };
+		680E4728271EF60F001E50E7 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 680E4727271EF60F001E50E7 /* AppTrackingTransparency.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		780D5E3D2223CB8D0051EF1B /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D5E3C2223CB8D0051EF1B /* Photos.framework */; };
 		78E073A521A2CFDB006D71EE /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073A421A2CFDB006D71EE /* libc++.tbd */; };
 		78E073A721A2CFE2006D71EE /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073A621A2CFE1006D71EE /* libresolv.9.tbd */; };
 		78E073A921A2CFE9006D71EE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073A821A2CFE9006D71EE /* CoreMotion.framework */; };
 		78E073AB21A2CFF1006D71EE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E073AA21A2CFF1006D71EE /* AdSupport.framework */; };
-		9BED7398264A93CB00C48B17 /* BUDAdmob_PangleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BED7396264A93CB00C48B17 /* BUDAdmob_PangleTool.m */; };
 		DE0223AF234F0C89002C9D26 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0223AE234F0C89002C9D26 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,21 +116,41 @@
 		2BAD9B5F255BD97100B89E45 /* BUDNativeExampleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUDNativeExampleView.h; sourceTree = "<group>"; };
 		2BAD9B60255BD97100B89E45 /* BUDNativeExampleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUDNativeExampleView.m; sourceTree = "<group>"; };
 		2BAD9B63255BD97600B89E45 /* BUDNativeExampleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BUDNativeExampleView.xib; sourceTree = "<group>"; };
+		2BD58958274612BD00CEC212 /* BUDAdmobTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmobTool.h; sourceTree = "<group>"; };
+		2BD58959274612BD00CEC212 /* BUDAdmobTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmobTool.m; sourceTree = "<group>"; };
 		2BED9720257DDC3300EF5C1F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2BED9724257DDC3700EF5C1F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		2BED9727257DDC3A00EF5C1F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		6745FFA8EBA1C34E09490A64 /* Pods-Demo-BUADVADemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo.release.xcconfig"; sourceTree = "<group>"; };
-		679B62CD16A61D59C02E44C4 /* Pods-Demo-BUADVADemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo.debug.xcconfig"; sourceTree = "<group>"; };
+		2BF5FDF3279948C6001EFB81 /* BUDAppOpenAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAppOpenAdManager.m; sourceTree = "<group>"; };
+		2BF5FDF4279948C6001EFB81 /* BUDAppOpenAdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAppOpenAdManager.h; sourceTree = "<group>"; };
+		2BF5FDFB279956DC001EFB81 /* BUDAppOpenAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAppOpenAdViewController.h; sourceTree = "<group>"; };
+		2BF5FDFC279956DC001EFB81 /* BUDAppOpenAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAppOpenAdViewController.m; sourceTree = "<group>"; };
+		2BF5FE0927995AC6001EFB81 /* BUDMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDMacros.h; sourceTree = "<group>"; };
+		2BF5FE0A27995B64001EFB81 /* BUDSelectedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSelectedView.h; sourceTree = "<group>"; };
+		2BF5FE0B27995B64001EFB81 /* BUDSelectedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSelectedView.m; sourceTree = "<group>"; };
+		2BF5FE0D27995BAC001EFB81 /* BUDSelcetedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSelcetedItem.h; sourceTree = "<group>"; };
+		2BF5FE0E27995BAC001EFB81 /* BUDSelcetedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSelcetedItem.m; sourceTree = "<group>"; };
+		2BF5FE1027995C54001EFB81 /* NSString+LocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LocalizedString.h"; sourceTree = "<group>"; };
+		2BF5FE1127995C55001EFB81 /* NSString+LocalizedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LocalizedString.m"; sourceTree = "<group>"; };
+		2BF5FE1327995CFC001EFB81 /* BUDNormalButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDNormalButton.m; sourceTree = "<group>"; };
+		2BF5FE1427995CFC001EFB81 /* BUDNormalButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDNormalButton.h; sourceTree = "<group>"; };
+		2BF5FE1627995E7F001EFB81 /* UIView+Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Draw.h"; sourceTree = "<group>"; };
+		2BF5FE1727995E7F001EFB81 /* UIView+Draw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Draw.m"; sourceTree = "<group>"; };
+		2BF5FE1927995F8B001EFB81 /* BUDSelectedCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSelectedCollectionViewCell.h; sourceTree = "<group>"; };
+		2BF5FE1A27995F8B001EFB81 /* BUDSelectedCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSelectedCollectionViewCell.m; sourceTree = "<group>"; };
+		2BFDA5D4263557EA00C17053 /* UIColor+DarkMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DarkMode.m"; sourceTree = "<group>"; };
+		2BFDA5D5263557EA00C17053 /* UIColor+DarkMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DarkMode.h"; sourceTree = "<group>"; };
+		680E4727271EF60F001E50E7 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		6C51C58AE84614BBB69F69DE /* Pods-Demo-BUADVADemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo.debug.xcconfig"; sourceTree = "<group>"; };
 		780D5E3C2223CB8D0051EF1B /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		78E072CD21A2C03C006D71EE /* BUADVADemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUADVADemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78E073A421A2CFDB006D71EE /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		78E073A621A2CFE1006D71EE /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		78E073A821A2CFE9006D71EE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		78E073AA21A2CFF1006D71EE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		9BED7396264A93CB00C48B17 /* BUDAdmob_PangleTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_PangleTool.m; sourceTree = "<group>"; };
-		9BED7397264A93CB00C48B17 /* BUDAdmob_PangleTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_PangleTool.h; sourceTree = "<group>"; };
 		C69C285A694613E5BF80895F /* libPods-Demo-BUADVADemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo-BUADVADemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0223AE234F0C89002C9D26 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		FB26320690641F60B3BBA561 /* Pods-Demo-BUADVADemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				680E4728271EF60F001E50E7 /* AppTrackingTransparency.framework in Frameworks */,
 				2BED9728257DDC3B00EF5C1F /* Security.framework in Frameworks */,
 				2BED9725257DDC3700EF5C1F /* libiconv.tbd in Frameworks */,
 				2BED9721257DDC3300EF5C1F /* libz.tbd in Frameworks */,
@@ -212,6 +243,10 @@
 		2B3F58F5251DCF35000198D4 /* ExampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				2BF5FE0827995AC6001EFB81 /* Macros */,
+				2BF5FE0727995A80001EFB81 /* View */,
+				2BF5FE0627995A76001EFB81 /* Model */,
+				2BFDA5D3263557EA00C17053 /* Category */,
 				2B3F595A251DCF35000198D4 /* SubPage */,
 				2B3F59C6251DCF35000198D4 /* MainPage */,
 			);
@@ -221,6 +256,7 @@
 		2B3F595A251DCF35000198D4 /* SubPage */ = {
 			isa = PBXGroup;
 			children = (
+				2BF5FDEF27994305001EFB81 /* AppOpenAd */,
 				2B378192251DFA560020ABA2 /* Native */,
 				2B378195251DFA690020ABA2 /* Banner */,
 				2B378196251DFA750020ABA2 /* FullScreen */,
@@ -273,18 +309,18 @@
 		2B6DD278255D439F00FF8CA5 /* Adapter */ = {
 			isa = PBXGroup;
 			children = (
-				9BED7397264A93CB00C48B17 /* BUDAdmob_PangleTool.h */,
-				9BED7396264A93CB00C48B17 /* BUDAdmob_PangleTool.m */,
-				2B6DD27E255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.h */,
-				2B6DD27A255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */,
+				2BD58958274612BD00CEC212 /* BUDAdmobTool.h */,
+				2BD58959274612BD00CEC212 /* BUDAdmobTool.m */,
 				2B6DD279255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */,
-				2B6DD27F255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */,
+				2B6DD27A255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */,
 				2B6DD27B255D439F00FF8CA5 /* BUDAdmob_NativeFeedAd.h */,
-				2B6DD281255D439F00FF8CA5 /* BUDAdmob_NativeFeedAd.m */,
-				2B6DD27D255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */,
-				2B6DD282255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */,
 				2B6DD27C255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.h */,
+				2B6DD27D255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */,
+				2B6DD27E255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.h */,
+				2B6DD27F255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */,
 				2B6DD280255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */,
+				2B6DD281255D439F00FF8CA5 /* BUDAdmob_NativeFeedAd.m */,
+				2B6DD282255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -301,15 +337,15 @@
 		2B6DD284255D439F00FF8CA5 /* SubPage */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD286255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.h */,
-				2B6DD28C255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.m */,
-				2B6DD28D255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.h */,
-				2B6DD288255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m */,
-				2B6DD28B255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.h */,
-				2B6DD287255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m */,
 				2B6DD285255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.h */,
+				2B6DD286255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.h */,
+				2B6DD287255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m */,
+				2B6DD288255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m */,
 				2B6DD289255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m */,
 				2B6DD28A255D439F00FF8CA5 /* UnifiedNativeAdView.xib */,
+				2B6DD28B255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.h */,
+				2B6DD28C255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.m */,
+				2B6DD28D255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.h */,
 			);
 			path = SubPage;
 			sourceTree = "<group>";
@@ -317,17 +353,71 @@
 		2B6DD28E255D439F00FF8CA5 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD290255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.h */,
 				2B6DD28F255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.m */,
+				2B6DD290255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.h */,
 			);
 			path = MainPage;
+			sourceTree = "<group>";
+		};
+		2BF5FDEF27994305001EFB81 /* AppOpenAd */ = {
+			isa = PBXGroup;
+			children = (
+				2BF5FDFB279956DC001EFB81 /* BUDAppOpenAdViewController.h */,
+				2BF5FDFC279956DC001EFB81 /* BUDAppOpenAdViewController.m */,
+				2BF5FDF4279948C6001EFB81 /* BUDAppOpenAdManager.h */,
+				2BF5FDF3279948C6001EFB81 /* BUDAppOpenAdManager.m */,
+			);
+			path = AppOpenAd;
+			sourceTree = "<group>";
+		};
+		2BF5FE0627995A76001EFB81 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2BF5FE0D27995BAC001EFB81 /* BUDSelcetedItem.h */,
+				2BF5FE0E27995BAC001EFB81 /* BUDSelcetedItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2BF5FE0727995A80001EFB81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2BF5FE1927995F8B001EFB81 /* BUDSelectedCollectionViewCell.h */,
+				2BF5FE1A27995F8B001EFB81 /* BUDSelectedCollectionViewCell.m */,
+				2BF5FE1427995CFC001EFB81 /* BUDNormalButton.h */,
+				2BF5FE1327995CFC001EFB81 /* BUDNormalButton.m */,
+				2BF5FE0A27995B64001EFB81 /* BUDSelectedView.h */,
+				2BF5FE0B27995B64001EFB81 /* BUDSelectedView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2BF5FE0827995AC6001EFB81 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				2BF5FE0927995AC6001EFB81 /* BUDMacros.h */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
+		2BFDA5D3263557EA00C17053 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				2BF5FE1627995E7F001EFB81 /* UIView+Draw.h */,
+				2BF5FE1727995E7F001EFB81 /* UIView+Draw.m */,
+				2BF5FE1027995C54001EFB81 /* NSString+LocalizedString.h */,
+				2BF5FE1127995C55001EFB81 /* NSString+LocalizedString.m */,
+				2BFDA5D4263557EA00C17053 /* UIColor+DarkMode.m */,
+				2BFDA5D5263557EA00C17053 /* UIColor+DarkMode.h */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		6C25FC835F24553C67AD4CC9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				679B62CD16A61D59C02E44C4 /* Pods-Demo-BUADVADemo.debug.xcconfig */,
-				6745FFA8EBA1C34E09490A64 /* Pods-Demo-BUADVADemo.release.xcconfig */,
+				6C51C58AE84614BBB69F69DE /* Pods-Demo-BUADVADemo.debug.xcconfig */,
+				FB26320690641F60B3BBA561 /* Pods-Demo-BUADVADemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -335,8 +425,8 @@
 		78E0729C21A2BF41006D71EE = {
 			isa = PBXGroup;
 			children = (
-				2B6DD277255D439F00FF8CA5 /* CustomEventAdapter */,
 				2B3F58EE251DCF35000198D4 /* BUADVADemo */,
+				2B6DD277255D439F00FF8CA5 /* CustomEventAdapter */,
 				78E072A621A2BF41006D71EE /* Products */,
 				6C25FC835F24553C67AD4CC9 /* Pods */,
 				A9BB8904F5E2E508722AB9C2 /* Frameworks */,
@@ -354,6 +444,7 @@
 		A9BB8904F5E2E508722AB9C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				680E4727271EF60F001E50E7 /* AppTrackingTransparency.framework */,
 				2BED9727257DDC3A00EF5C1F /* Security.framework */,
 				2BED9724257DDC3700EF5C1F /* libiconv.tbd */,
 				2BED9720257DDC3300EF5C1F /* libz.tbd */,
@@ -382,7 +473,7 @@
 				78E072C921A2C03C006D71EE /* Sources */,
 				78E072CA21A2C03C006D71EE /* Frameworks */,
 				78E072CB21A2C03C006D71EE /* Resources */,
-				70FC6D337A14585EC00DF7B1 /* [CP] Copy Pods Resources */,
+				D156813ABAEF2CA9E491FFDE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -446,23 +537,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		70FC6D337A14585EC00DF7B1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D104421B1E67501A272790CF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -481,6 +555,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D156813ABAEF2CA9E491FFDE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo/Pods-Demo-BUADVADemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -488,22 +579,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BFDA5D6263557EA00C17053 /* UIColor+DarkMode.m in Sources */,
 				2B3F5A2C251DCF35000198D4 /* BUDFeedViewController.m in Sources */,
 				2B3F5A56251DCF35000198D4 /* AppDelegate.m in Sources */,
+				2BF5FE0F27995BAC001EFB81 /* BUDSelcetedItem.m in Sources */,
+				2BF5FDFD279956DC001EFB81 /* BUDAppOpenAdViewController.m in Sources */,
 				2B6DD292255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m in Sources */,
+				2BF5FE1B27995F8B001EFB81 /* BUDSelectedCollectionViewCell.m in Sources */,
 				2B3F5A24251DCF35000198D4 /* BUDExpressBannerViewController.m in Sources */,
+				2BD5895A274612BD00CEC212 /* BUDAdmobTool.m in Sources */,
 				2B6DD295255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m in Sources */,
 				2B6DD291255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */,
 				2B3F5A50251DCF35000198D4 /* BUDMainViewController.m in Sources */,
 				2B6DD29A255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.m in Sources */,
 				2B6DD293255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m in Sources */,
+				2BF5FE1527995CFC001EFB81 /* BUDNormalButton.m in Sources */,
 				2B6DD297255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m in Sources */,
-				9BED7398264A93CB00C48B17 /* BUDAdmob_PangleTool.m in Sources */,
+				2BF5FDF5279948C7001EFB81 /* BUDAppOpenAdManager.m in Sources */,
 				2B3F5A23251DCF35000198D4 /* BUDCustomEventViewController.m in Sources */,
 				2B6DD294255D439F00FF8CA5 /* BUDAdmob_NativeFeedAd.m in Sources */,
+				2BF5FE1827995E7F001EFB81 /* UIView+Draw.m in Sources */,
 				2BAD9B61255BD97100B89E45 /* BUDNativeExampleView.m in Sources */,
+				2BF5FE1227995C55001EFB81 /* NSString+LocalizedString.m in Sources */,
 				2B3F5A32251DCF35000198D4 /* BUDFullscreenViewController.m in Sources */,
 				2B6DD298255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m in Sources */,
+				2BF5FE0C27995B64001EFB81 /* BUDSelectedView.m in Sources */,
 				2B6DD29B255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.m in Sources */,
 				2B3F5A1B251DCF35000198D4 /* BUDRewardedVideoAdViewController.m in Sources */,
 				2B6DD296255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m in Sources */,
@@ -680,7 +780,7 @@
 		};
 		78E072E121A2C03D006D71EE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 679B62CD16A61D59C02E44C4 /* Pods-Demo-BUADVADemo.debug.xcconfig */;
+			baseConfigurationReference = 6C51C58AE84614BBB69F69DE /* Pods-Demo-BUADVADemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -689,6 +789,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../SDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BUADVADemo/PrefixHeader.pch";
@@ -698,7 +799,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.1.0.0;
+				MARKETING_VERSION = 4.3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.ADUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = ADUnionInHouseDist;
@@ -708,7 +809,7 @@
 		};
 		78E072E221A2C03D006D71EE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6745FFA8EBA1C34E09490A64 /* Pods-Demo-BUADVADemo.release.xcconfig */;
+			baseConfigurationReference = FB26320690641F60B3BBA561 /* Pods-Demo-BUADVADemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -717,6 +818,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../SDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BUADVADemo/PrefixHeader.pch";
@@ -726,7 +828,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.1.0.0;
+				MARKETING_VERSION = 4.3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.ADUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = ADUnionInHouseDist;

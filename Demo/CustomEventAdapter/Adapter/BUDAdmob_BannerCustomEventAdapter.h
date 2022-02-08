@@ -1,6 +1,6 @@
 //
 //  BUDAdmob_BannerCustomEventAdapter.h
-//  BUADVADemo
+//  AdmobAdapterDemo
 //
 //  Created by bytedance on 2020/9/28.
 //  Copyright © 2020 bytedance. All rights reserved.
@@ -15,3 +15,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+

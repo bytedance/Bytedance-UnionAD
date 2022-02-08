@@ -1,5 +1,5 @@
 //
-//  BUDAdmob_PangleInfo.h
+//  BUDAdmobInfo.h
 //  BUDemo
 //
 //  Created by Eason on 2021/2/2.
@@ -10,8 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BUDAdmob_PangleTool : NSObject
-+ (void)setPangleExtData;
+@interface BUDAdmobTool : NSObject
++ (void)setExtData;
 @end
 
 NS_ASSUME_NONNULL_END

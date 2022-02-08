@@ -96,7 +96,12 @@
     
     if ([_adView.imageView isKindOfClass:[UIImageView class]]) {
         UIImageView *imageView = (UIImageView *)_adView.imageView;
-        imageView.image = [self loadImage:_nativeAd.images.firstObject.imageURL];
+        GADNativeAdImage *gadImage = _nativeAd.images.firstObject;
+        if (gadImage.imageURL) {
+            imageView.image = [self loadImage:gadImage.imageURL];
+        } else if (gadImage.image) {
+            imageView.image = gadImage.image;
+        }
         imageView.hidden = _nativeAd.images==nil;
     }
     
@@ -108,7 +113,12 @@
     
     if ([_adView.iconView isKindOfClass:[UIImageView class]]) {
         UIImageView *iconView = (UIImageView *)_adView.iconView;
-        iconView.image = [self loadImage:_nativeAd.icon.imageURL];
+        GADNativeAdImage *gadImage = _nativeAd.icon;
+        if (gadImage.imageURL) {
+            iconView.image = [self loadImage:gadImage.imageURL];
+        } else if (gadImage.image) {
+            iconView.image = gadImage.image;
+        }
         iconView.hidden = _nativeAd.icon==nil;
     }
     

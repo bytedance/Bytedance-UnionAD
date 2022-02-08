@@ -40,6 +40,7 @@
                 @[
                     @{@"title":@"FullScreenVideo",@"class":@"BUDFullscreenViewController"},
                     @{@"title":@"RewardVideo",@"class":@"BUDRewardedVideoAdViewController"},
+                    @{@"title":@"AppOpenAd",@"class":@"BUDAppOpenAdViewController"},
                 ],
                 @[
                     @{@"title":@"CustomEventAdapter",@"class":@"BUDCustomEventViewController"},

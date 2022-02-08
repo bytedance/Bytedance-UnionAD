@@ -1,6 +1,6 @@
 //
 //  BUDAdmob_BannerCustomEventAdapter.m
-//  BUADVADemo
+//  AdmobAdapterDemo
 //
 //  Created by bytedance on 2020/9/28.
 //  Copyright © 2020 bytedance. All rights reserved.
@@ -9,7 +9,7 @@
 #import "BUDAdmob_BannerCustomEventAdapter.h"
 #import <BUAdSDK/BUAdSDK.h>
 #import <GoogleMobileAds/GADCustomEventBanner.h>
-#import "BUDAdmob_PangleTool.h"
+#import "BUDAdmobTool.h"
 
 @interface BUDAdmob_BannerCustomEventAdapter ()<GADCustomEventBanner, BUNativeExpressBannerViewDelegate>
 @property (strong, nonatomic) BUNativeExpressBannerView *nativeExpressBannerView;
@@ -18,16 +18,16 @@
 @implementation BUDAdmob_BannerCustomEventAdapter
 
 @synthesize delegate;
-NSString *const BANNER_PANGLE_PLACEMENT_ID = @"placementID";
+NSString *const BANNER_PLACEMENT_ID = @"placementID";
 
 #pragma mark - GADBannerView
 - (void)requestBannerAd:(GADAdSize)adSize parameter:(nullable NSString *)serverParameter label:(nullable NSString *)serverLabel request:(nonnull GADCustomEventRequest *)request {
     
-    NSString *placementID = [self processParams:serverParameter size:adSize.size];
+    NSString *placementID = [self processParams:serverParameter];
     if (placementID != nil){
         [self getTemplateBannerAd:placementID adSize:adSize];
     } else {
-        NSLog(@"no pangle placement ID for requesting.");
+        NSLog(@"no placement ID for requesting.");
         [self.delegate customEventBanner:self didFailAd:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
     }
 }
@@ -38,7 +38,7 @@ NSString *const BANNER_PANGLE_PLACEMENT_ID = @"placementID";
     NSLog(@"request ad size height = %f",adSize.size.height);
     
     /// tag
-    [BUDAdmob_PangleTool setPangleExtData];
+    [BUDAdmobTool setExtData];
     
     ///If this method is not available in your SDK version, use the annotated method below
     self.nativeExpressBannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:placementID rootViewController:self.delegate.viewControllerForPresentingModalView adSize:CGSizeMake(adSize.size.width, adSize.size.height)];
@@ -52,7 +52,6 @@ NSString *const BANNER_PANGLE_PLACEMENT_ID = @"placementID";
 #pragma mark BUNativeExpressBannerViewDelegate
 - (void)nativeExpressBannerAdViewDidLoad:(BUNativeExpressBannerView *)bannerAdView {
     NSLog(@"nativeExpressBannerAdViewDidLoad");
-    
 }
 
 - (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView didLoadFailWithError:(NSError *)error {
@@ -72,7 +71,6 @@ NSString *const BANNER_PANGLE_PLACEMENT_ID = @"placementID";
 
 - (void)nativeExpressBannerAdViewWillBecomVisible:(BUNativeExpressBannerView *)bannerAdView {
     NSLog(@"nativeExpressBannerAdViewWillBecomVisible");
-//    [self.delegate customEventBannerWillPresentModal:self];
 }
 
 - (void)nativeExpressBannerAdViewDidClick:(BUNativeExpressBannerView *)bannerAdView {
@@ -86,7 +84,7 @@ NSString *const BANNER_PANGLE_PLACEMENT_ID = @"placementID";
 }
 
 #pragma mark - private method
-- (NSString *)processParams:(NSString *)param size:(CGSize)size {
+- (NSString *)processParams:(NSString *)param {
     if (!(param && [param isKindOfClass:[NSString class]] && param.length > 0)) {
         return nil;
     }
@@ -108,7 +106,7 @@ NSString *const BANNER_PANGLE_PLACEMENT_ID = @"placementID";
         NSLog(@"Params Error");
         return nil;
     }
-    NSString *placementID = json[BANNER_PANGLE_PLACEMENT_ID];
+    NSString *placementID = json[BANNER_PLACEMENT_ID];
     return placementID;
 }
 @end

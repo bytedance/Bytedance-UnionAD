@@ -43,7 +43,6 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     [self.contentView addSubview:self.separatorLine];
     
     self.iv1 = [[UIImageView alloc] init];
-    self.iv1.userInteractionEnabled = YES;
     [self.contentView addSubview:self.iv1];
     
     self.adTitleLabel = [UILabel new];
@@ -220,7 +219,6 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.iv1.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
     [self.iv1 sd_setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
     self.nativeAdRelatedView.logoImageView.frame = CGRectMake(contentWidth - logoSize.width, imageHeight - logoSize.height, logoSize.width, logoSize.height);
-    
     y += imageHeight;
     y += 10;
     
@@ -419,7 +417,6 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
 - (void)refreshUIWithModel:(BUNativeAd *)model {
     [super refreshUIWithModel:model];
-    
     if (!self.nativeAdRelatedView.videoAdView.superview) {
         [self.contentView addSubview:self.nativeAdRelatedView.videoAdView];
         [self.contentView addSubview:self.nativeAdRelatedView.logoImageView];
@@ -530,7 +527,6 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
         [self.contentView addSubview:self.nativeAdRelatedView.videoAdView];
         [self.contentView addSubview:self.nativeAdRelatedView.logoImageView];
     }
-    
     if (self.creativeButton && !self.creativeButton.superview) {
         [self.contentView addSubview:self.creativeButton];
     }

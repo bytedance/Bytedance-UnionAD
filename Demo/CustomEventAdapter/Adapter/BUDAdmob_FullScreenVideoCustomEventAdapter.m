@@ -7,7 +7,7 @@
 
 #import "BUDAdmob_FullScreenVideoCustomEventAdapter.h"
 #import <BUAdSDK/BUAdSDK.h>
-#import "BUDAdmob_PangleTool.h"
+#import "BUDAdmobTool.h"
 
 @interface BUDAdmob_FullScreenVideoCustomEventAdapter() <BUFullscreenVideoAdDelegate>
 @property (nonatomic, strong) BUFullscreenVideoAd *fullScreenVideo;
@@ -15,18 +15,10 @@
 
 @implementation BUDAdmob_FullScreenVideoCustomEventAdapter
 @synthesize delegate;
-NSString *const INTERSTITIAL_PANGLE_PLACEMENT_ID = @"placementID";
+NSString *const INTERSTITIAL_PLACEMENT_ID = @"placementID";
 
 - (void)presentFromRootViewController:(nonnull UIViewController *)rootViewController {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored"-Wdeprecated-declarations"
-    if (self.fullScreenVideo.isAdValid) {
-        [self.fullScreenVideo showAdFromRootViewController:rootViewController];
-    } else {
-        NSLog(@"no ads to show");
-        [self.delegate customEventInterstitial:self didFailAd:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
-    }
-#pragma clang diagnostic pop
+    [self.fullScreenVideo showAdFromRootViewController:rootViewController];
 }
 
 - (void)requestInterstitialAdWithParameter:(nullable NSString *)serverParameter label:(nullable NSString *)serverLabel request:(nonnull GADCustomEventRequest *)request {
@@ -34,13 +26,14 @@ NSString *const INTERSTITIAL_PANGLE_PLACEMENT_ID = @"placementID";
     NSLog(@"placementID=%@",placementID);
     if (placementID != nil) {
         /// tag
-        [BUDAdmob_PangleTool setPangleExtData];
+        [BUDAdmobTool setExtData];
         
         self.fullScreenVideo = [[BUFullscreenVideoAd alloc] initWithSlotID:placementID];
         self.fullScreenVideo.delegate = self;
         [self.fullScreenVideo loadAdData];
     } else {
-        NSLog(@"no pangle placement ID for requesting.");
+        NSLog(@"no placement ID for requesting.");
+        [self.delegate customEventInterstitial:self didFailAd:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
     }
 }
 
@@ -114,7 +107,7 @@ NSString *const INTERSTITIAL_PANGLE_PLACEMENT_ID = @"placementID";
         NSLog(@"Params Error");
         return nil;
     }
-    NSString *placementID = json[INTERSTITIAL_PANGLE_PLACEMENT_ID];
+    NSString *placementID = json[INTERSTITIAL_PLACEMENT_ID];
     return placementID;
 }
 

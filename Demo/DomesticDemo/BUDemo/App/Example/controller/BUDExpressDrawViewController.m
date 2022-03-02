@@ -113,7 +113,7 @@
             expressView.rootViewController = self;
             // important: 此处会进行WKWebview的渲染，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
             [expressView render];
-            NSUInteger index = rand() % (self.dataSource.count-3)+2;
+            NSUInteger index = arc4random() % (self.dataSource.count-3)+2;
             [dataSources insertObject:expressView atIndex:index];
         }];
         self.dataSource = [dataSources copy];

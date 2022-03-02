@@ -11,6 +11,7 @@
 #import "BUDMainViewController.h"
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import <Bugly/Bugly.h>
+#import "BUDAppOpenAdManager.h"
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -67,28 +68,39 @@
 }
 
 - (void)setupBUAdSDK {
-    BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
-    ///optional
-    ///CN china, NO_CN is not china
-    ///you‘d better set Territory first,  if you need to set them
-//    [BUAdSDKManager setTerritory:BUAdSDKTerritory_CN];
-    //optional
-    //GDPR 0 close privacy protection, 1 open privacy protection
-    configuration.GDPR = @(0);
-    //optional
-    //Coppa 0 adult, 1 child
-    configuration.coppa = @(0);
     
+    BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
+    configuration.appID = @"5000546";
 #if DEBUG
-    // Whether to open log. default is none.
     configuration.logLevel = BUAdSDKLogLevelDebug;
 #endif
-    //BUAdSDK requires iOS 9 and up
-    configuration.appID = @"5000546";
-    
-    [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
-        
+    [BUAdSDKManager startWithSyncCompletionHandler:^(BOOL success, NSError *error) {
+        // TODO: //
+        if (success) {
+            [[BUDAppOpenAdManager sharedInstance] loadAdWithSlotId:@"890000021"];
+        }
     }];
+    
+//    ///optional
+//    ///CN china, NO_CN is not china
+//    ///you‘d better set Territory first,  if you need to set them
+////    [BUAdSDKManager setTerritory:BUAdSDKTerritory_CN];
+//    //optional
+//    //GDPR 0 close privacy protection, 1 open privacy protection
+//    [BUAdSDKManager setGDPR:0];
+//    //optional
+//    //Coppa 0 adult, 1 child
+//    [BUAdSDKManager setCoppa:0];
+//    
+//    [BUAdSDKManager setIsPaidApp:NO];
+//    
+//#if DEBUG
+//    // Whether to open log. default is none.
+//    [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
+////    [BUAdSDKManager setDisableSKAdNetwork:YES];
+//#endif
+//    //BUAdSDK requires iOS 9 and up
+//    [BUAdSDKManager setAppID:@"5000546"];
 }
 
 #pragma mark - UIApplicationDelegate
@@ -110,7 +122,8 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    UIViewController *rootViewController = application.keyWindow.rootViewController;
+    [BUDAppOpenAdManager.sharedInstance showAdIfAvailable:rootViewController];
 }
 
 

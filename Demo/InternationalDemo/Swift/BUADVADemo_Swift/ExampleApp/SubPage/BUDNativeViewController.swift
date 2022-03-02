@@ -82,7 +82,7 @@ extension BUDNativeViewController: BUNativeAdDelegate {
      @param error : the reason of error
      */
     func nativeAd(_ nativeAd: BUNativeAd, didFailWithError error: Error?) {
-        _statusLabel.text = "Ad loaded fail";
+        
     }
 
     /**

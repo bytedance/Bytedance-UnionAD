@@ -18,6 +18,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         ["title":"RewardVideo","class":"BUDRewardVideoAdViewController"],
                     ],
                     [
+                        ["title":"AppOpenAd","class":"BUDAppOpenAdViewController"],
+                    ],
+                    [
                         ["title":"CustomEventAdapter","class":"BUDCustomEventAdapterController"],
                     ],
                     [

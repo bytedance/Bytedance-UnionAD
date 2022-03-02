@@ -8,7 +8,7 @@
 
 #import "BUDAdmob_RewardCustomEventAdapter.h"
 #import <BUAdSDK/BUAdSDK.h>
-#import "BUDAdmob_PangleTool.h"
+#import "BUDAdmobTool.h"
 
 @interface BUDAdmob_RewardCustomEventAdapter ()<BURewardedVideoAdDelegate,GADMediationRewardedAd>
 {
@@ -24,12 +24,12 @@
 
 @implementation BUDAdmob_RewardCustomEventAdapter
 
-NSString *const REWARD_PANGLE_PLACEMENT_ID = @"placementID";
+NSString *const REWARD_PLACEMENT_ID = @"placementID";
 
 #pragma mark - GADMediationAdapter
 /// Returns the adapter version.
 + (GADVersionNumber)adapterVersion{
-    NSString *versionString = @"1.3.0";
+    NSString *versionString = @"1.4.0";
     NSArray *versionComponents = [versionString componentsSeparatedByString:@"."];
     GADVersionNumber version = {0};
     if (versionComponents.count == 3) {
@@ -70,14 +70,14 @@ NSString *const REWARD_PANGLE_PLACEMENT_ID = @"placementID";
     NSLog(@"placementID=%@",placementID);
     if (placementID != nil){
         /// tag
-        [BUDAdmob_PangleTool setPangleExtData];
+        [BUDAdmobTool setExtData];
         
         self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:placementID rewardedVideoModel:model];
         self.rewardedVideoAd.delegate = self;
         [self.rewardedVideoAd loadAdData];
         self.completionHandler = completionHandler;
     } else {
-        NSLog(@"no pangle placement ID for requesting.");
+        NSLog(@"no placement ID for requesting.");
         [self.delegate didFailToPresentWithError:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
     }
 }
@@ -85,19 +85,7 @@ NSString *const REWARD_PANGLE_PLACEMENT_ID = @"placementID";
 
 #pragma mark - GADMediationRewardedAd
 - (void)presentFromViewController:(nonnull UIViewController *)viewController{
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored"-Wdeprecated-declarations"
-    if ([_rewardedVideoAd isAdValid]) {
-        [_rewardedVideoAd showAdFromRootViewController:viewController ritScene:0 ritSceneDescribe:nil];
-    } else {
-        NSLog(@"No Pange reward ads to show.");
-        NSError *error =
-        [NSError errorWithDomain:@"GADMediationAdapterSampleAdNetwork"
-                            code:0
-                        userInfo:@{NSLocalizedDescriptionKey : @"Unable to display ad."}];
-        [self.delegate didFailToPresentWithError:error];
-    }
-#pragma clang diagnostic pop
+    [_rewardedVideoAd showAdFromRootViewController:viewController ritScene:0 ritSceneDescribe:nil];
 }
 
 #pragma mark BURewardedVideoAdDelegate
@@ -190,7 +178,7 @@ NSString *const REWARD_PANGLE_PLACEMENT_ID = @"placementID";
         NSLog(@"Params Error");
         return nil;
     }
-    NSString *placementID = json[REWARD_PANGLE_PLACEMENT_ID];
+    NSString *placementID = json[REWARD_PLACEMENT_ID];
     return placementID;
 }
 

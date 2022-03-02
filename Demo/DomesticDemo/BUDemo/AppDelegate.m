@@ -18,6 +18,7 @@
 #import "BUDSlotID.h"
 #import "BUDTestToolsViewController.h"
 #import "BUDAnimationTool.h"
+#import "BUDPrivacyProvider.h"
 
 #if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
 #import <BUAdTestMeasurement/BUAdTestMeasurement.h>
@@ -90,7 +91,7 @@
     // add appKey in info.plist (key:GADApplicationIdentifier)
     [[GADMobileAds sharedInstance] startWithCompletionHandler:^(GADInitializationStatus * _Nonnull status) {
         // This is a example to set GDPR. You can change GDPR at right scence
-//        [BUAdSDKManager setGDPR:0];
+        // [BUAdSDKManager setGDPR:0];
     }];
 }
 
@@ -120,6 +121,7 @@
 #endif
     //BUAdSDK requires iOS 9 and up
     configuration.appID = [BUDAdManager appKey];
+    configuration.privacyProvider = BUDPrivacyProvider.new;
     [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
         if (success) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -171,8 +173,9 @@
 
 - (void)splashAdDidClose:(BUSplashAdView *)splashAd {
     if (splashAd.zoomOutView) {
+        __weak typeof(splashAd) weakSplashAdView = splashAd;
         [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
-            [splashAd removeFromSuperview];
+            [weakSplashAdView removeFromSuperview];
         }];
     } else{
         // Be careful not to say 'self.splashadview = nil' here.
@@ -194,8 +197,9 @@
 
 - (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd {
     if (splashAd.zoomOutView) {
+        __weak typeof(self) weaSelf = self;
         [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
-            [self removeSplashAdView];
+            [weaSelf removeSplashAdView];
         }];
     } else{
         // Click Skip, there is no subsequent operation, completely remove 'splashAdView', avoid memory leak

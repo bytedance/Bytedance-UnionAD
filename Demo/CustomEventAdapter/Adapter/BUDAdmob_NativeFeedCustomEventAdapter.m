@@ -11,7 +11,7 @@
 #import <GoogleMobileAds/GADCustomEventNativeAd.h>
 #import <GoogleMobileAds/GADMultipleAdsAdLoaderOptions.h>
 #import "BUDAdmob_NativeFeedAd.h"
-#import "BUDAdmob_PangleTool.h"
+#import "BUDAdmobTool.h"
 
 @interface BUDAdmob_NativeFeedCustomEventAdapter ()<GADCustomEventNativeAd,BUNativeAdsManagerDelegate,BUNativeAdDelegate>
 
@@ -27,17 +27,16 @@
 
 @synthesize delegate;
 
-NSString *const FEED_PANGLE_PLACEMENT_ID = @"placementID";
+NSString *const FEED_PLACEMENT_ID = @"placementID";
 
 
 /// request ad with placementID  adn count
 - (void)getNativeAd:(NSString *)placementID count:(NSInteger)count {
     if (self.adManager == nil) {
         /// tag
-        [BUDAdmob_PangleTool setPangleExtData];
+        [BUDAdmobTool setExtData];
         
         BUAdSlot *slot = [[BUAdSlot alloc] init];
-        //slot.ID = @"945292641" for video
         slot.ID = placementID;
         slot.AdType = BUAdSlotAdTypeFeed;
         slot.position = BUAdSlotPositionTop;
@@ -71,7 +70,7 @@ NSString *const FEED_PANGLE_PLACEMENT_ID = @"placementID";
     if (placementID != nil){
         [self getNativeAd:placementID count:count];
     } else {
-        NSLog(@"no pangle placement ID for requesting.");
+        NSLog(@"no placement ID for requesting.");
         [self.delegate customEventNativeAd:self didFailToLoadWithError:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
     }
 }
@@ -89,7 +88,6 @@ NSString *const FEED_PANGLE_PLACEMENT_ID = @"placementID";
 
     for (BUNativeAd * nativeAd in nativeAdDataArray) {
         nativeAd.rootViewController = _root;
-//        nativeAd.delegate = self;
         BUDAdmob_NativeFeedAd *ad = [[BUDAdmob_NativeFeedAd alloc] initWithBUNativeAd:nativeAd disableImageLoading:_disableImageLoading];
         [self.delegate customEventNativeAd:self didReceiveMediatedUnifiedNativeAd:ad];
     }
@@ -122,55 +120,8 @@ NSString *const FEED_PANGLE_PLACEMENT_ID = @"placementID";
         NSLog(@"Params Error");
         return nil;
     }
-    NSString *placementID = json[FEED_PANGLE_PLACEMENT_ID];
+    NSString *placementID = json[FEED_PLACEMENT_ID];
     return placementID;
 }
-
-//
-///**
-// This method is called when native ad material loaded successfully.
-// */
-//- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
-//    NSLog(@"%s",__FUNCTION__);
-//}
-//
-///**
-// This method is called when native ad materia failed to load.
-// @param error : the reason of error
-// */
-//- (void)nativeAd:(BUNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error {
-//    NSLog(@"%s",__FUNCTION__);
-//}
-//
-///**
-// This method is called when native ad slot has been shown.
-// */
-//- (void)nativeAdDidBecomeVisible:(BUNativeAd *)nativeAd {
-//    NSLog(@"%s",__FUNCTION__);
-//}
-//
-///**
-// This method is called when another controller has been closed.
-// @param interactionType : open appstore in app or open the webpage or view video ad details page.
-// */
-//- (void)nativeAdDidCloseOtherController:(BUNativeAd *)nativeAd interactionType:(BUInteractionType)interactionType {
-//    NSLog(@"%s",__FUNCTION__);
-//}
-//
-///**
-// This method is called when native ad is clicked.
-// */
-//- (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *_Nullable)view {
-//    NSLog(@"%s",__FUNCTION__);
-//}
-//
-///**
-// This method is called when the user clicked dislike reasons.
-// Only used for dislikeButton in BUNativeAdRelatedView.h
-// @param filterWords : reasons for dislike
-// */
-//- (void)nativeAd:(BUNativeAd *_Nullable)nativeAd dislikeWithReason:(NSArray<BUDislikeWords *> *_Nullable)filterWords {
-//    NSLog(@"%s",__FUNCTION__);
-//}
 
 @end

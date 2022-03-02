@@ -24,6 +24,10 @@
 #import "BUDRewardedAdListViewController.h"
 #import "BUDStreamAdListViewController.h"
 #import "BUDAdManager.h"
+
+#if __has_include(<BUWebAd/BUWebAd.h>)
+#import "BUDWebViewController.h"
+#endif
 @interface BUDMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray<NSMutableArray *> *items;
@@ -98,18 +102,35 @@
         BUDCustomEventViewController *vc = [BUDCustomEventViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }];
+#if __has_include(<BUWebAd/BUWebAd.h>)
+    BUDActionModel *webAdItem = [BUDActionModel plainTitleActionModel:@"WebAd" type:BUDCellType_CustomEvent action:^{
+        BUDWebViewController *vc = [[BUDWebViewController alloc] init];
+        vc.url = @"https://sf3-fe-tos.pglstatp-toutiao.com/obj/ad-pattern/union-native-components/examples/native-ad-ios.html";
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+#endif
     
     BUDActionModel *toolsItem = [BUDActionModel plainTitleActionModel:@"Tools" type:BUDCellType_setting action:^{
         BUDToolsSettingViewController *vc = [BUDToolsSettingViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }];
 
+#if __has_include(<BUWebAd/BUWebAd.h>)
+    self.items = @[
+            @[feedAdVc, drawAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
+            @[waterfallItem],
+            @[adapterItem],
+            @[webAdItem],
+            @[toolsItem]
+    ];
+#else
     self.items = @[
             @[feedAdVc, drawAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
             @[waterfallItem],
             @[adapterItem],
             @[toolsItem]
     ];
+#endif
 
     CGFloat height = 22 * self.items.count;
     for (NSArray *subItem in self.items) {

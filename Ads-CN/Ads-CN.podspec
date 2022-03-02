@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN'
-  s.version          = '4.2.5.6'
+  s.version          = '4.3.0.2'
   s.summary          = 'Ads-CN is a SDK from Bytedance providing AD service.'
   s.description      = <<-DESC
   Ads-CN provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -53,6 +53,7 @@ Pod::Spec.new do |s|
   s.subspec 'BUFoundation' do |ss|
     ss.vendored_frameworks = ['SDK/BUFoundation.framework']
     ss.preserve_paths = 'SDK/BUFoundation.framework'
+    ss.dependency 'BURelyFoundation', '0.0.1.47'
   end
 
 

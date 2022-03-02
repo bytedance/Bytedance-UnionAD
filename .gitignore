@@ -1,0 +1,10 @@
+.DS_Store
+
+*.xcuserdatad
+xcuserdata
+
+#cocoa-pods
+*.lock
+Pods
+
+*.xcworkspace

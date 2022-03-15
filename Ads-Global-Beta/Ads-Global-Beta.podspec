@@ -61,7 +61,7 @@ Pod::Spec.new do |s|
     ss.preserve_paths = 'SDK/BUFoundation.framework'
     ss.vendored_frameworks = ['SDK/BUFoundation.framework']
     ss.preserve_paths = 'SDK/BUFoundation.framework'
-    ss.dependency 'BURelyFoundation_Global', '0.0.1.47'
+    ss.dependency 'BURelyFoundation_Global', '0.0.1.53'
   end
 
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }

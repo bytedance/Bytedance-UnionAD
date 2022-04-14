@@ -29,15 +29,16 @@ Pod::Spec.new do |s|
 
   s.resource = 'SDK/LICENSE'
 
-  s.default_subspec = ['BUAdSDK','APM']
-
-  s.subspec 'APM' do |ss|
-    ss.dependency 'RangersAPM-Pangle/Crash', '2.3.2-pangle'
-    ss.dependency 'RangersAPM-Pangle/Global', '2.3.2-pangle'
-    ss.dependency 'RangersAPM-Pangle/SessionTracker', '2.3.2-pangle'
-  end
+  s.default_subspec = ['BUAdSDK']
   
   s.subspec 'International' do |ss|
+  	ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
+    ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
+    ss.dependency 'Ads-Global/BUFoundation'
+    ss.dependency 'Ads-Global/APM'
+  end
+
+  s.subspec 'International-noAPM' do |ss|
   	ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
     ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
     ss.dependency 'Ads-Global/BUFoundation'
@@ -60,7 +61,13 @@ Pod::Spec.new do |s|
   s.subspec 'BUFoundation' do |ss|
     ss.vendored_frameworks = ['SDK/BUFoundation.framework']
     ss.preserve_paths = 'SDK/BUFoundation.framework'
-    ss.dependency 'BURelyFoundation_Global', '0.0.1.47'
+    ss.dependency 'BURelyFoundation_Global', '0.0.1.57'
+  end
+   
+  s.subspec 'APM' do |ss|
+    ss.dependency 'RangersAPM-Pangle/Crash', '2.3.2-pangle'
+    ss.dependency 'RangersAPM-Pangle/Global', '2.3.2-pangle'
+    ss.dependency 'RangersAPM-Pangle/SessionTracker', '2.3.2-pangle'
   end
 
 

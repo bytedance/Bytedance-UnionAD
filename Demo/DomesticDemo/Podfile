@@ -15,7 +15,7 @@ abstract_target 'Demo' do
     pod 'Crashlytics'
     pod 'MJRefresh'
     pod 'SDWebImage'
-    pod 'BUAdTestMeasurement'
+    pod 'BUAdTestMeasurement-Beta'
     
     pod 'Ads-CN-Beta'
 

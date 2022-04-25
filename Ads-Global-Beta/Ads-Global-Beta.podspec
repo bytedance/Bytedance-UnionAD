@@ -69,12 +69,14 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
     ss.preserve_paths = 'SDK/PAGAdSDK.framework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
+    ss.dependency 'Ads-Global-Beta/BUFoundation'
   end
   
   s.subspec 'CSJAdSDK' do |ss|
     ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
     ss.preserve_paths = 'SDK/CSJAdSDK.framework'
     ss.resource = 'SDK/CSJAdSDK.bundle'
+    ss.dependency 'Ads-Global-Beta/BUFoundation'
   end
 
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN-Beta'
-  s.version          = '4.4.0.6'
+  s.version          = '4.5.0.0'
   s.summary          = 'Ads-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   
-  s.weak_framework = 'AppTrackingTransparency'
+  s.weak_frameworks = 'AppTrackingTransparency', 'CoreML'
   
   valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
 
@@ -36,26 +36,30 @@ Pod::Spec.new do |s|
   	ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
     ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
     ss.dependency 'Ads-CN-Beta/BUFoundation'
+    ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
+    ss.preserve_paths = 'SDK/PAGAdSDK.framework'
+    ss.resource = 'SDK/PAGAdSDK.bundle'
   end
   
   s.subspec 'Domestic' do |ss|
-      ss.vendored_frameworks = ['SDK/BUCNAuxiliary.framework']
-      ss.preserve_paths = 'SDK/BUCNAuxiliary.framework'
-      ss.dependency 'Ads-CN-Beta/BUFoundation'
+    ss.vendored_frameworks = ['SDK/BUCNAuxiliary.framework']
+    ss.preserve_paths = 'SDK/BUCNAuxiliary.framework'
+    ss.dependency 'Ads-CN-Beta/BUFoundation'
+    ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
+    ss.preserve_paths = 'SDK/CSJAdSDK.framework'
+    ss.resource = 'SDK/CSJAdSDK.bundle'
   end
   
   s.subspec 'BUAdSDK' do |ss|
     ss.vendored_frameworks = ['SDK/BUAdSDK.framework']
     ss.preserve_paths = 'SDK/BUAdSDK.framework'
-    ss.dependency 'Ads-CN-Beta/BUFoundation'
     ss.dependency 'Ads-CN-Beta/Domestic'
-    ss.resource = 'SDK/BUAdSDK.bundle'
   end
   
   s.subspec 'BUFoundation' do |ss|
     ss.vendored_frameworks = ['SDK/BUFoundation.framework']
     ss.preserve_paths = 'SDK/BUFoundation.framework'
-    ss.dependency 'BURelyFoundation', '0.0.1.53'
+    ss.dependency 'BURelyFoundation', '0.0.1.58'
   end
     
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }

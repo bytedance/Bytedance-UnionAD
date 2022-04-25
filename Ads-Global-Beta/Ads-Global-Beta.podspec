@@ -41,9 +41,7 @@ Pod::Spec.new do |s|
   	ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
     ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
     ss.dependency 'Ads-Global-Beta/BUFoundation'
-    ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
-    ss.preserve_paths = 'SDK/PAGAdSDK.framework'
-    ss.resource = 'SDK/PAGAdSDK.bundle'
+    ss.dependency 'Ads-Global-Beta/PAGAdSDK'
     ss.dependency 'Ads-Global-Beta/APM'
   end
   
@@ -51,9 +49,7 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/BUCNAuxiliary.framework']
     ss.preserve_paths = 'SDK/BUCNAuxiliary.framework'
     ss.dependency 'Ads-Global-Beta/BUFoundation'
-    ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
-    ss.preserve_paths = 'SDK/CSJAdSDK.framework'
-    ss.resource = 'SDK/CSJAdSDK.bundle'
+    ss.dependency 'Ads-Global-Beta/CSJAdSDK'
   end
   
   s.subspec 'BUAdSDK' do |ss|
@@ -67,6 +63,18 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/BUFoundation.framework']
     ss.preserve_paths = 'SDK/BUFoundation.framework'
     ss.dependency 'BURelyFoundation_Global', '0.0.1.58'
+  end
+  
+  s.subspec 'PAGAdSDK' do |ss|
+    ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
+    ss.preserve_paths = 'SDK/PAGAdSDK.framework'
+    ss.resource = 'SDK/PAGAdSDK.bundle'
+  end
+  
+  s.subspec 'CSJAdSDK' do |ss|
+    ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
+    ss.preserve_paths = 'SDK/CSJAdSDK.framework'
+    ss.resource = 'SDK/CSJAdSDK.bundle'
   end
 
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }

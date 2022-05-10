@@ -36,7 +36,7 @@
     _statusLabel.text = @"Loading......";
     
     BUAdSlot *adslot = [[BUAdSlot alloc] init];
-    adslot.ID = @"900546910";
+    adslot.ID = @"980088216";
     adslot.AdType = BUAdSlotAdTypeFeed;
     adslot.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
     

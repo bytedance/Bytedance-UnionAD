@@ -69,11 +69,11 @@
 }
 
 - (void)loadPortraitAd:(UIButton *)sender {
-    [self loadRewardVideoAdWithSlotID:@"900546826"];
+    [self loadRewardVideoAdWithSlotID:@"980088192"];
 }
 
 - (void)loadLandscapeAd:(UIButton *)sender {
-    [self loadRewardVideoAdWithSlotID:@"900546319"];
+    [self loadRewardVideoAdWithSlotID:@"980099801"];
 }
 
 - (void)showAd:(UIButton *)sender {

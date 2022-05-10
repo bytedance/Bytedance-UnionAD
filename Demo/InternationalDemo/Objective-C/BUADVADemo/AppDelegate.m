@@ -70,14 +70,14 @@
 - (void)setupBUAdSDK {
     
     BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
-    configuration.appID = @"5000546";
+    configuration.appID = @"8025677";
 #if DEBUG
     configuration.logLevel = BUAdSDKLogLevelDebug;
 #endif
     [BUAdSDKManager startWithSyncCompletionHandler:^(BOOL success, NSError *error) {
         // TODO: //
         if (success) {
-            [[BUDAppOpenAdManager sharedInstance] loadAdWithSlotId:@"890000021"];
+            [[BUDAppOpenAdManager sharedInstance] loadAdWithSlotId:@"890000078"];
         }
     }];
     

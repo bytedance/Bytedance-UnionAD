@@ -18,11 +18,11 @@ class BUDFullscreenViewController: ViewController {
     }
     ///load Portrait Ad
     @objc func loadPortraitAd(_ sender:UIButton) -> Void {
-        loadFullscreenVideoAdWithSlotID(slotID: "900546299")
+        loadFullscreenVideoAdWithSlotID(slotID: "980088188")
     }
     ///load Landscape Ad
     @objc func loadLandscapeAd(_ sender:UIButton) -> Void {
-        loadFullscreenVideoAdWithSlotID(slotID: "900546154")
+        loadFullscreenVideoAdWithSlotID(slotID: "980099798")
     }
     ///show ad
     @objc func showAd(_ sender:UIButton) -> Void {

@@ -40,11 +40,11 @@
     self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     
     BUDSelcetedItem *selcetedItem1 = [[BUDSelcetedItem alloc] initWithDict:@{
-        @"slotID" : @"890000021",
+        @"slotID" : @"890000078",
         @"title" : [NSString localizedStringForKey:Vertical]
     }];
     BUDSelcetedItem *selcetedItem2 = [[BUDSelcetedItem alloc] initWithDict:@{
-        @"slotID" : @"890000022",
+        @"slotID" : @"890000079",
         @"title" : [NSString localizedStringForKey:Horizontal]
     }];
     

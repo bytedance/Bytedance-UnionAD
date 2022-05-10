@@ -18,11 +18,11 @@ class BUDRewardVideoAdViewController: ViewController {
     }
     ///load Portrait Ad
     @objc func loadPortraitAd(_ sender:UIButton) -> Void {
-        loadRewardVideoAdWithSlotID(slotID: "900546826")
+        loadRewardVideoAdWithSlotID(slotID: "980088192")
     }
     ///load Landscape Ad
     @objc func loadLandscapeAd(_ sender:UIButton) -> Void {
-        loadRewardVideoAdWithSlotID(slotID: "900546319")
+        loadRewardVideoAdWithSlotID(slotID: "980099801")
     }
     ///show ad
     @objc func showAd(_ sender:UIButton) -> Void {

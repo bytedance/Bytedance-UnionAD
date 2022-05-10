@@ -26,7 +26,7 @@ class BUDNativeViewController: ViewController {
         _statusLabel.text = "Loading......";
         
         let adslot = BUAdSlot.init();
-        adslot.id = "900546910";
+        adslot.id = "980088216";
         adslot.adType = .feed;
         adslot.imgSize = BUSize.init(by: .feed690_388);
         

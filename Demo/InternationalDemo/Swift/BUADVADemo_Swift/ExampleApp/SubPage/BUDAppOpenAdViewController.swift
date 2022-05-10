@@ -67,7 +67,7 @@ private extension BUDAppOpenAdViewController {
     @objc func onPortraitButton() {
         statusLabel.text = "Loading......";
         let adSlot = BUAdSlot()
-        adSlot.id = "890000021"
+        adSlot.id = "890000078"
         appOpenAd = .init(slot: adSlot)
         appOpenAd?.load(withTimeout: 3, completionHandler: { appOpenAd, error in
             if error != nil {
@@ -81,7 +81,7 @@ private extension BUDAppOpenAdViewController {
     @objc func onLandscapeButton() {
         statusLabel.text = "Loading......";
         let adSlot = BUAdSlot()
-        adSlot.id = "890000022"
+        adSlot.id = "890000079"
         appOpenAd = .init(slot: adSlot)
         appOpenAd?.load(withTimeout: 3, completionHandler: { appOpenAd, error in
             if error != nil {

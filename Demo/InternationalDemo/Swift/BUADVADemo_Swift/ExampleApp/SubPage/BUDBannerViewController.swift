@@ -18,11 +18,11 @@ class BUDBannerViewController: ViewController {
     }
     ///load Portrait Ad
     @objc func load320x50Ad(_ sender:UIButton) -> Void {
-        loadBannerWithSlotID(slotID: "900546833", size:CGSize.init(width: 320, height: 50))
+        loadBannerWithSlotID(slotID: "980099802", size:CGSize.init(width: 320, height: 50))
     }
     ///load Landscape Ad
     @objc func load300x250Ad(_ sender:UIButton) -> Void {
-        loadBannerWithSlotID(slotID: "945509778", size:CGSize.init(width: 300, height: 250))
+        loadBannerWithSlotID(slotID: "980088196", size:CGSize.init(width: 300, height: 250))
     }
     ///show ad
     @objc func showAd(_ sender:UIButton) -> Void {

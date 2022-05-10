@@ -70,11 +70,11 @@
 }
 
 - (void)load320x50Ad:(UIButton *)sender {
-    [self loadBannerWithSlotID:@"900546833" size:CGSizeMake(320, 50)];
+    [self loadBannerWithSlotID:@"980099802" size:CGSizeMake(320, 50)];
 }
 
 - (void)load300x250Ad:(UIButton *)sender {
-    [self loadBannerWithSlotID:@"945509778" size:CGSizeMake(300, 250)];
+    [self loadBannerWithSlotID:@"980088196" size:CGSizeMake(300, 250)];
 }
 
 - (void)showAd:(UIButton *)sender {

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.sharedInstance().start(completionHandler: nil);
         ///Pangle
         let pangleConfiguration = BUAdSDKConfiguration()
-        pangleConfiguration.appID = "5000546"
+        pangleConfiguration.appID = "8025677"
         #if DEBUG
         pangleConfiguration.logLevel = .debug
         #endif

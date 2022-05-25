@@ -45,6 +45,14 @@ Pod::Spec.new do |s|
     ss.dependency 'Ads-Global-Beta/BURelyAdSDK'
   end
 
+  s.subspec 'International-noAPM' do |ss|
+    ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
+    ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
+    ss.dependency 'Ads-Global-Beta/BUFoundation'
+    ss.dependency 'Ads-Global-Beta/PAGAdSDK'
+    ss.dependency 'Ads-Global-Beta/BURelyAdSDK'
+  end
+
   s.subspec 'BURelyAdSDK' do |ss|
      ss.preserve_paths = 'SDK/BURelyAdSDK.framework'
      ss.vendored_frameworks = ['SDK/BURelyAdSDK.framework']

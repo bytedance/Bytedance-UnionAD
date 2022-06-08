@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN'
-  s.version          = '4.4.0.7'
+  s.version          = '4.5.1.6'
   s.summary          = 'Ads-CN is a SDK from Bytedance providing AD service.'
   s.description      = <<-DESC
   Ads-CN provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/#{s.version}/SDK.zip" }
   s.platform     = :ios, "9.0"  
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
-  s.weak_framework = 'AppTrackingTransparency'
+  s.weak_frameworks = 'AppTrackingTransparency', 'CoreML'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   
   valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
@@ -31,30 +31,65 @@ Pod::Spec.new do |s|
 
   s.default_subspec = 'BUAdSDK'
   
+  s.subspec 'APM' do |ss|
+    ss.dependency 'RangersAPM-Pangle/Crash', '2.3.2-pangle'
+    ss.dependency 'RangersAPM-Pangle/Global', '2.3.2-pangle'
+    ss.dependency 'RangersAPM-Pangle/SessionTracker', '2.3.2-pangle'
+  end
+  
   s.subspec 'International' do |ss|
     ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
     ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
     ss.dependency 'Ads-CN/BUFoundation'
+    ss.dependency 'Ads-CN/PAGAdSDK'
+    ss.dependency 'Ads-CN/APM'
+    ss.dependency 'Ads-CN/BURelyAdSDK'
+  end
+  
+  s.subspec 'BURelyAdSDK' do |ss|
+     ss.preserve_paths = 'SDK/BURelyAdSDK.framework'
+     ss.vendored_frameworks = ['SDK/BURelyAdSDK.framework']
+  end
+  
+  s.subspec 'International-noAPM' do |ss|
+    ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
+    ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
+    ss.dependency 'Ads-CN/BUFoundation'
+    ss.dependency 'Ads-CN/PAGAdSDK'
+    ss.dependency 'Ads-CN/BURelyAdSDK'
   end
   
   s.subspec 'Domestic' do |ss|
     ss.vendored_frameworks = ['SDK/BUCNAuxiliary.framework']
     ss.preserve_paths = 'SDK/BUCNAuxiliary.framework'
     ss.dependency 'Ads-CN/BUFoundation'
+    ss.dependency 'Ads-CN/CSJAdSDK'
   end
   
   s.subspec 'BUAdSDK' do |ss|
     ss.vendored_frameworks = ['SDK/BUAdSDK.framework']
     ss.preserve_paths = 'SDK/BUAdSDK.framework'
-    ss.dependency 'Ads-CN/BUFoundation'
     ss.dependency 'Ads-CN/Domestic'
-    ss.resource = 'SDK/BUAdSDK.bundle'
   end
   
   s.subspec 'BUFoundation' do |ss|
     ss.vendored_frameworks = ['SDK/BUFoundation.framework']
     ss.preserve_paths = 'SDK/BUFoundation.framework'
-    ss.dependency 'BURelyFoundation', '0.0.1.47'
+    ss.dependency 'BURelyFoundation', '0.0.1.58'
+  end
+  
+  s.subspec 'PAGAdSDK' do |ss|
+    ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
+    ss.preserve_paths = 'SDK/PAGAdSDK.framework'
+    ss.resource = 'SDK/PAGAdSDK.bundle'
+    ss.dependency 'Ads-CN/BUFoundation'
+  end
+  
+  s.subspec 'CSJAdSDK' do |ss|
+    ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
+    ss.preserve_paths = 'SDK/CSJAdSDK.framework'
+    ss.resource = 'SDK/CSJAdSDK.bundle'
+    ss.dependency 'Ads-CN/BUFoundation'
   end
 
 

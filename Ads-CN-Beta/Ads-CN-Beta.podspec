@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN-Beta'
-  s.version          = '4.5.1.6'
+  s.version          = '4.6.0.0'
   s.summary          = 'Ads-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   
-  s.weak_frameworks = 'AppTrackingTransparency', 'CoreML'
+  s.weak_frameworks = 'AppTrackingTransparency'
   
   valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
 
@@ -32,12 +32,6 @@ Pod::Spec.new do |s|
 
   s.default_subspec = 'BUAdSDK'
   
-  s.subspec 'International' do |ss|
-  	ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
-    ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
-    ss.dependency 'Ads-CN-Beta/BUFoundation'
-    ss.dependency 'Ads-CN-Beta/PAGAdSDK'
-  end
   
   s.subspec 'Domestic' do |ss|
     ss.vendored_frameworks = ['SDK/BUCNAuxiliary.framework']
@@ -64,13 +58,7 @@ Pod::Spec.new do |s|
     ss.resource = 'SDK/CSJAdSDK.bundle'
     ss.dependency 'Ads-CN-Beta/BUFoundation'
   end
-  
-  s.subspec 'PAGAdSDK' do |ss|
-    ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
-    ss.preserve_paths = 'SDK/PAGAdSDK.framework'
-    ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-CN-Beta/BUFoundation'
-  end
+
   
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }

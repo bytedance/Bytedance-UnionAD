@@ -10,7 +10,7 @@
 @interface BUDListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray<NSMutableArray *> *items;
+@property (nonatomic, copy) NSArray<NSMutableArray *> *items;
 
 @end
 

@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BUDBaseExampleViewController.h"
-
+#import "NSString+LocalizedString.h"
 @class BUDActionModel;
 
 @interface BUDListViewController : BUDBaseExampleViewController

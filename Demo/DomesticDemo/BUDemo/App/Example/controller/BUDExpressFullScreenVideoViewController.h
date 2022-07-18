@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BUDExpressFullScreenVideoViewController : BUDBaseExampleViewController
-
+@property (nonatomic, assign) BOOL isInterstitialAd;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *gdprLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *territorySegment;
 @property (weak, nonatomic) IBOutlet UIButton *ClearCache;
+@property (weak, nonatomic) IBOutlet UISwitch *autoTestSwitch;
 
 @end
 
@@ -39,6 +40,7 @@
     [_coppaSwitch setOn:[BUAdSDKManager coppa]==1 animated:YES];
     [_gdprSwitch setOn:[BUAdSDKManager GDPR]==1 animated:YES];
     [_ccpaSwitch setOn:[BUAdSDKManager CCPA]==1 animated:YES];
+    [_autoTestSwitch setOn:[self autoDefaultValue] animated:YES];
     
     NSInteger territory = [[NSUserDefaults standardUserDefaults]integerForKey:@"territory"];
     _territorySegment.selectedSegmentIndex = (territory>0&&territory!=BUAdSDKTerritory_CN)?1:0;
@@ -55,6 +57,12 @@
     _coppaLabel.text = [NSString stringWithFormat:@"%d",(int)status];
     [BUAdSDKManager setCoppa:status];
 }
+
+- (IBAction)autoTestValueChange:(UISwitch *)sender {
+    NSInteger status = sender.isOn?1:0;
+    [[NSUserDefaults standardUserDefaults] setObject:@(status) forKey:@"bu_fl_debug_model"];
+}
+
 - (IBAction)gdprValueChange:(UISwitch *)sender {
     NSInteger status = sender.isOn?1:0;
     _gdprLabel.text = [NSString stringWithFormat:@"%d",(int)status];
@@ -164,6 +172,10 @@
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
     [vc addAction:action];
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (BOOL)autoDefaultValue {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"bu_fl_debug_model"];
 }
 /*
 #pragma mark - Navigation

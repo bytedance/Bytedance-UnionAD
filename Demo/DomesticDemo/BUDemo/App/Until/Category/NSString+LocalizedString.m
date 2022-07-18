@@ -60,7 +60,37 @@ NSString * const LoadedAd = @"LoadedAd";
 NSString * const ShowAd = @"ShowAd";
 NSString * const ScanQRCode = @"ScanQRCode";
 NSString * const IsEtOpen = @"IsEtOpen";
-
+NSString * const kFeedAd = @"feedAd" ;
+NSString * const kFeedAdNative = @"feedAdNative" ;
+NSString * const kFeedAdExpress = @"feedAdExpress" ;
+NSString * const kFeedAdExpressVideo = @"feedAdExpressVideo" ;
+NSString * const kDrawAd = @"drawAd" ;
+NSString * const kDrawAdNative = @"drawAdNative" ;
+NSString * const kDrawAdExpress = @"drawAdExpress" ;
+NSString * const kFullscreenAd = @"fullscreenAd" ;
+NSString * const kFullscreenAdNative = @"fullscreenAdNative" ;
+NSString * const kFullscreenAdExpress = @"fullscreenAdExpress" ;
+NSString * const kFullscreenAdInterstital  = @"fullscreenAdInterstital" ;
+NSString * const kSplashAd = @"splashAd" ;
+NSString * const kSplashAdNative = @"splashAdNative" ;
+NSString * const kSplashAdExpress = @"splashAdExpress" ;
+NSString * const kInterstitalAd = @"interstitalAd" ;
+NSString * const kInterstitalAdNative = @"interstitalAdNative" ;
+NSString * const kInterstitalAdExpress = @"interstitalAdExpress" ;
+NSString * const kBannerAd = @"bannerAd" ;
+NSString * const kBannerAdNative = @"bannerAdNative" ;
+NSString * const kBannerAdExpress = @"bannerAdExpress" ;
+NSString * const kBannerAdExpressList = @"bannerAdExpressList" ;
+NSString * const kRewardedAd = @"rewardedAd" ;
+NSString * const kRewardedAdNative = @"rewardedAdNative" ;
+NSString * const kRewardedAdExpress = @"rewardedAdExpress" ;
+NSString * const kStreamAd = @"streamAd" ;
+NSString * const kStreamAdNative = @"streamAdNative" ;
+NSString * const kStreamAdCustom = @"streamAdCutom" ;
+NSString * const kStreamAdSDK = @"streamAdSDK" ;
+NSString * const kWaterfallAd = @"waterfallAd";
+NSString * const kNewInterstitialfull = @"newInterstitialfull";
+NSString * const kNewInterstitialhalf = @"newInterstitialhalf";
 @implementation NSString (LocalizedString)
 
 + (NSString *)localizedStringForKey:(NSString *)key {

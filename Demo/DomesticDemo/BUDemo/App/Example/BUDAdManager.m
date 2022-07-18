@@ -22,4 +22,8 @@
     return @"5000546";
 }
 
++ (NSString *)secretKey {
+    return @"1c589c70f7bb2746027ce90c33d2544c";
+}
+
 @end

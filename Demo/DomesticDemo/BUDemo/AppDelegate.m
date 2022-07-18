@@ -19,6 +19,7 @@
 #import "BUDTestToolsViewController.h"
 #import "BUDAnimationTool.h"
 #import "BUDPrivacyProvider.h"
+#import <AVFoundation/AVFoundation.h>
 
 #if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
 #import <BUAdTestMeasurement/BUAdTestMeasurement.h>
@@ -31,9 +32,10 @@
 #define BUFPS_OPEN 0
 #endif
 
-@interface AppDelegate () <BUSplashAdDelegate, BUSplashZoomOutViewDelegate>
+@interface AppDelegate () <BUSplashAdDelegate, BUSplashCardDelegate, BUSplashZoomOutDelegate>
 @property (nonatomic, assign) CFTimeInterval startTime;
-@property (nonatomic, strong) BUSplashAdView *splashAdView;
+@property (nonatomic, strong) BUSplashAd *splashAd;
+@property (nonatomic, strong) AVAudioPlayer *audioPlay;
 @end
 
 @implementation AppDelegate
@@ -49,10 +51,9 @@
         self.window = keyWindow;
         self.window.rootViewController = [self rootViewController];
     }
-    
     // initialize AD SDK
     [self setupBUAdSDK];
-    
+   
     return YES;
 }
 
@@ -104,165 +105,153 @@
     #endif
 #endif
     
+//    NSInteger territory = [[NSUserDefaults standardUserDefaults]integerForKey:@"territory"];
+//    BOOL isNoCN = (territory>0&&territory!=BUAdSDKTerritory_CN);
+    
     BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
-    ///optional
-    ///CN china, NO_CN is not china
-    ///you must set Territory first,  if you need to set them
     configuration.territory = BUAdSDKTerritory_CN;
-    //optional
-    //GDPR 0 close privacy protection, 1 open privacy protection
     configuration.GDPR = @(0);
-    //optional
-    //Coppa 0 adult, 1 child
     configuration.coppa = @(0);
+    configuration.CCPA = @(1);
 #if DEBUG
-    // Whether to open log. default is none.
-    configuration.logLevel = BUAdSDKLogLevelDebug;
+    configuration.logLevel = BUAdSDKLogLevelVerbose;
 #endif
-    //BUAdSDK requires iOS 9 and up
     configuration.appID = [BUDAdManager appKey];
-    configuration.privacyProvider = BUDPrivacyProvider.new;
+    configuration.secretKey = [BUDAdManager secretKey];
+    configuration.privacyProvider = [[BUDPrivacyProvider alloc] init];
+    configuration.appLogoImage = [UIImage imageNamed:@"AppIcon"];
     [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
         if (success) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                // splash AD demo
+//                 splash AD demo
                 [self addSplashAD];
-                //
-                // private config for demo
+//                 private config for demo
                 [self configDemo];
             });
         }
     }];
+    
+    
+    
+//    [self playerCoustomAudio];
   
+}
+
+- (void)playerCoustomAudio {
+    NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"music" ofType:@"mp3"];
+    NSURL *soundUrl = [NSURL fileURLWithPath:soundPath];
+    //初始化播放器对象
+    self.audioPlay = [[AVAudioPlayer alloc]initWithContentsOfURL:soundUrl error:nil];
+    //设置声音的大小
+    self.audioPlay.volume = 0.5;//范围为（0到1）；
+    //设置循环次数，如果为负数，就是无限循环
+    self.audioPlay.numberOfLoops =-1;
+    //设置播放进度
+    self.audioPlay.currentTime = 0;
+    //准备播放
+    [self.audioPlay prepareToPlay];
+    [self.audioPlay play];
 }
 
 #pragma mark - Splash
 - (void)addSplashAD {
     CGRect frame = [UIScreen mainScreen].bounds;
-    self.splashAdView = [[BUSplashAdView alloc] initWithSlotID:normal_splash_ID frame:frame];
-    // tolerateTimeout = CGFLOAT_MAX , The conversion time to milliseconds will be equal to 0
-    self.splashAdView.tolerateTimeout = 3;
-    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
-    self.splashAdView.delegate = self;
 
-    UIWindow *keyWindow = self.window;
     self.startTime = CACurrentMediaTime();
-    [self.splashAdView loadAdData];
-    [keyWindow.rootViewController.view addSubview:self.splashAdView];
-    self.splashAdView.rootViewController = keyWindow.rootViewController;
+    
+    BUSplashAd *splashAd = [[BUSplashAd alloc] initWithSlotID:express_splash_ID adSize:frame.size];
+    splashAd.supportCardView = YES;
+    splashAd.supportZoomOutView = YES;
+    
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
+    splashAd.delegate = self;
+    splashAd.cardDelegate = self;
+    splashAd.zoomOutDelegate = self;
+    splashAd.tolerateTimeout = 3;
+    /***
+    广告加载成功的时候，会立即渲染WKWebView。
+    如果想预加载的话，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
+    */
+    self.splashAd = splashAd;
+    [self.splashAd loadAdData];
 }
 
-- (void)removeSplashAdView {
-    if (self.splashAdView) {
-        [self.splashAdView removeFromSuperview];
-        self.splashAdView = nil;
-    }
+- (void)splashAdLoadSuccess:(nonnull BUSplashAd *)splashAd {
+    UIWindow *keyWindow = self.window;
+    [splashAd showSplashViewInRootViewController:keyWindow.rootViewController];
 }
 
-
-- (void)splashAdDidLoad:(BUSplashAdView *)splashAd {
-    [self pbu_logWithSEL:_cmd msg:[NSString stringWithFormat:@"mediaExt %@",splashAd.mediaExt]];
-    if (splashAd.zoomOutView) {
-        UIViewController *parentVC = [UIApplication sharedApplication].keyWindow.rootViewController;
-        //Add this view to your container
-        [parentVC.view insertSubview:splashAd.zoomOutView belowSubview:splashAd];
-        splashAd.zoomOutView.rootViewController = parentVC;
-        splashAd.zoomOutView.delegate = self;
-    }
-}
-
-- (void)splashAdDidClose:(BUSplashAdView *)splashAd {
-    if (splashAd.zoomOutView) {
-        __weak typeof(splashAd) weakSplashAdView = splashAd;
-        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
-            [weakSplashAdView removeFromSuperview];
-        }];
-    } else{
-        // Be careful not to say 'self.splashadview = nil' here.
-        // Subsequent agent callbacks will not be triggered after the 'splashAdView' is released early.
-        [splashAd removeFromSuperview];
-    }
+- (void)splashAdLoadFail:(nonnull BUSplashAd *)splashAd error:(BUAdError * _Nullable)error {
     [self pbu_logWithSEL:_cmd msg:@""];
 }
 
-- (void)splashAdDidClick:(BUSplashAdView *)splashAd {
-    if (splashAd.zoomOutView) {
-        [splashAd.zoomOutView removeFromSuperview];
-    }
-    // Be careful not to say 'self.splashadview = nil' here.
-    // Subsequent agent callbacks will not be triggered after the 'splashAdView' is released early.
-    [splashAd removeFromSuperview];
-    [self pbu_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd {
-    if (splashAd.zoomOutView) {
-        __weak typeof(self) weaSelf = self;
-        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
-            [weaSelf removeSplashAdView];
-        }];
-    } else{
-        // Click Skip, there is no subsequent operation, completely remove 'splashAdView', avoid memory leak
-        [self removeSplashAdView];
-    }
-    [self pbu_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error {
-    // Display fails, completely remove 'splashAdView', avoid memory leak
-    [self removeSplashAdView];
-    [self pbu_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashAdWillVisible:(BUSplashAdView *)splashAd {
+- (void)splashAdRenderFail:(nonnull BUSplashAd *)splashAd error:(BUAdError * _Nullable)error {
     [self pbu_logWithSEL:_cmd msg:@""];
 }
 
 
-
-
-
-- (void)splashAdWillClose:(BUSplashAdView *)splashAd {
+- (void)splashAdRenderSuccess:(nonnull BUSplashAd *)splashAd {
     [self pbu_logWithSEL:_cmd msg:@""];
 }
 
-- (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType {
-    // No further action after closing the other Controllers, completely remove the 'splashAdView' and avoid memory leaks
-    [self removeSplashAdView];
+- (void)splashAdWillShow:(nonnull BUSplashAd *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashAdDidShow:(nonnull BUSplashAd *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashAdDidClick:(nonnull BUSplashAd *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashAdDidClose:(nonnull BUSplashAd *)splashAd closeType:(BUSplashAdCloseType)closeType {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashCardReadyToShow:(nonnull BUSplashAd *)splashAd {
+    UIWindow *keyWindow = self.window;
+    [splashAd showCardViewInRootViewController:keyWindow.rootViewController];
     
     [self pbu_logWithSEL:_cmd msg:@""];
 }
 
+- (void)splashCardViewDidClick:(nonnull BUSplashAd *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashCardViewDidClose:(nonnull BUSplashAd *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashDidCloseOtherController:(nonnull BUSplashAd *)splashAd interactionType:(BUInteractionType)interactionType {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
 
 
-- (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd {
-    // When the countdown is over, it is equivalent to clicking Skip to completely remove 'splashAdView' and avoid memory leak
-    if (!splashAd.zoomOutView) {    
-        [self removeSplashAdView];
+- (void)splashVideoAdDidPlayFinish:(nonnull BUSplashAd *)splashAd didFailWithError:(nonnull NSError *)error {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+
+- (void)splashZoomOutViewDidClick:(nonnull BUSplashAd *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+
+- (void)splashZoomOutViewDidClose:(nonnull BUSplashAd *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashZoomOutReadyToShow:(nonnull BUSplashAd *)splashAd {
+    
+    UIWindow *keyWindow = self.window;
+    
+    // 接入方法一：使用SDK提供动画接入
+    if (splashAd.zoomOutView) {
+        [splashAd showZoomOutViewInRootViewController:keyWindow.rootViewController];
     }
-    [self pbu_logWithSEL:_cmd msg:@""];
-}
-
-#pragma mark - BUSplashZoomOutViewDelegate
-- (void)splashZoomOutViewAdDidClick:(BUSplashZoomOutView *)splashAd {
-    [self pbu_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashZoomOutViewAdDidClose:(BUSplashZoomOutView *)splashAd {
-    // Click close, completely remove 'splashAdView', avoid memory leak
-    [self removeSplashAdView];
-    [self pbu_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashZoomOutViewAdDidAutoDimiss:(BUSplashZoomOutView *)splashAd {
-    // Back down at the end of the countdown to completely remove the 'splashAdView' to avoid memory leaks
-    [self removeSplashAdView];
-    [self pbu_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashZoomOutViewAdDidCloseOtherController:(BUSplashZoomOutView *)splashAd interactionType:(BUInteractionType)interactionType {
-    // No further action after closing the other Controllers, completely remove the 'splashAdView' and avoid memory leaks
-    [self removeSplashAdView];
     [self pbu_logWithSEL:_cmd msg:@""];
 }
 
@@ -271,6 +260,7 @@
     CFTimeInterval endTime = CACurrentMediaTime();
     BUD_Log(@"SplashAdView In AppDelegate (%@) total run time: %gs, extraMsg:%@", NSStringFromSelector(sel), endTime - self.startTime, msg);
 }
+
 
 #pragma mark - UIApplicationDelegate
 - (void)applicationWillResignActive:(UIApplication *)application {

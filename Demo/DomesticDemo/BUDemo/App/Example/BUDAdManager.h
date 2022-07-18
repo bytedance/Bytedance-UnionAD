@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface BUDAdManager : NSObject
+
 + (NSString *)appKey;
++ (NSString *)secretKey;
 
 @end

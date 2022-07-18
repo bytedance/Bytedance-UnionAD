@@ -23,7 +23,7 @@
 - (NSArray<NSArray<BUDActionModel *> *> *)itemsForList {
     __weak typeof(self) weakSelf = self;
     
-    BUDActionModel *nativeCell1Item = [BUDActionModel plainTitleActionModel:@"Native Custom Player (Allow List)" type:BUDCellType_native action:^{
+    BUDActionModel *nativeCell1Item = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kStreamAdNative] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDCustomVideoPlayerViewController *vc = [BUDCustomVideoPlayerViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
@@ -32,7 +32,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *nativeCell2Item = [BUDActionModel plainTitleActionModel:@"Native Stream Custom  Player" type:BUDCellType_native action:^{
+    BUDActionModel *nativeCell2Item = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kStreamAdCustom] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDPasterCustomPlayerViewController *vc = [BUDPasterCustomPlayerViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
@@ -41,7 +41,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *nativeCell3Item = [BUDActionModel plainTitleActionModel:@"Native Stream SDK Player" type:BUDCellType_native action:^{
+    BUDActionModel *nativeCell3Item = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kStreamAdSDK] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDPasterViewController *vc = [BUDPasterViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];

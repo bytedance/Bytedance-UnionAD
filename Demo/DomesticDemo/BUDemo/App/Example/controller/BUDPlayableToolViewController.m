@@ -165,7 +165,7 @@
 #pragma mark - BURewardedVideoAdDelegate
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored"-Wdeprecated-declarations"
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self.rewardedVideoAd isAdValid]) {
         [self.rewardedVideoAd showAdFromRootViewController:self];
     }

@@ -50,7 +50,8 @@
 #define express_full_landscape_ID_both    @"945113165"
 #define express_reward_ID_both            @"945113162"
 #define express_reward_landscape_ID_both  @"945113163"
-
+#define express_new_interstitial_half     @"947877457"
+#define express_new_interstitial_full     @"947866846"
 
 // custom Event
 #define mopub_AD_APPID                     @"e1cbce0838a142ec9bc2ee48123fd470"

@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) UIButton *creativeBtn;
 /// paster image
 @property (nonatomic, strong, readonly) UIImageView *pasterImageView;
-/// pangle video view
-@property (nonatomic, strong, readonly) BUVideoAdView *pangleVideoView;
+/// SDK video view
+@property (nonatomic, strong, readonly) BUVideoAdView *SDKVideoView;
 /// custom video view
 @property (nonatomic, strong, readonly) BUDVideoView *customVideoView;
 

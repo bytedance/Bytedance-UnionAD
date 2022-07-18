@@ -75,7 +75,7 @@
     NSArray *titlesAndIDS = @[@[item1,item2,item3],@[item4,item5,item6],@[item7,item8]];
 
     __weak typeof(self) weakself = self;
-    self.selectedView = [[BUDSelectedView alloc] initWithAdName:@"Express Banner" SelectedTitlesAndIDS:titlesAndIDS loadAdAction:^(NSString * _Nullable slotId) {
+    self.selectedView = [[BUDSelectedView alloc] initWithAdName:self.adName SelectedTitlesAndIDS:titlesAndIDS loadAdAction:^(NSString * _Nullable slotId) {
         __strong typeof(self) strongself = weakself;
         [strongself loadBannerWithSlotID:slotId];
     } showAdAction:^{

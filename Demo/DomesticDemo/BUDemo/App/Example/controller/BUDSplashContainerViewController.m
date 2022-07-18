@@ -16,9 +16,9 @@
 #import "BUDAnimationTool.h"
 #import "BUDSlotID.h"
 
-@interface BUDSplashContainerViewController () <BUSplashAdDelegate>
+@interface BUDSplashContainerViewController () <BUSplashAdDelegate, BUSplashCardDelegate, BUSplashZoomOutDelegate>
 
-@property (nonatomic, strong) BUSplashAdView *splashView;
+@property (nonatomic, strong) BUSplashAd *splashAd;
 @property (nonatomic, assign) BOOL isDidClick;
 
 @end
@@ -37,76 +37,70 @@
 
 - (void)buildupDefaultSplashView {
     self.isDidClick = NO;
-    BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:normal_splash_ID frame:self.view.bounds];
+    BUSplashAd *splashAd = [[BUSplashAd alloc] initWithSlotID:express_splash_ID adSize:self.view.bounds.size];
+    splashAd.supportCardView = YES;
+    splashAd.supportZoomOutView = YES;
+    
     // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
-    splashView.delegate = self;
-    splashView.rootViewController = self;
-    splashView.tolerateTimeout = 3;
-    [splashView loadAdData];
-    [self.view addSubview:splashView];
-    self.splashView = splashView;
+    splashAd.delegate = self;
+    splashAd.cardDelegate = self;
+    splashAd.zoomOutDelegate = self;
+    splashAd.tolerateTimeout = 3;
+    /***
+    广告加载成功的时候，会立即渲染WKWebView。
+    如果想预加载的话，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
+    */
+    [splashAd loadAdData];
+    self.splashAd = splashAd;
 }
 
-- (void)handleSplashAnimation {
-    if (self.splashView.zoomOutView) {
-        [BUDAnimationTool sharedInstance].splashContainerVC = self;
-        BUDSplashViewController *splashVC = nil;
-        if ([self.appRootVC isKindOfClass:[UINavigationController class]]) {
-            UINavigationController *nav = (UINavigationController *)self.appRootVC;
-            UIViewController *topVC = nav.topViewController;
-            if ([topVC isKindOfClass:[BUDSplashViewController class]]) {
-                splashVC = (BUDSplashViewController *)topVC;
-            }
-        }
-        [splashVC setUpSplashZoomOutAd:self.splashView];
-    } else{
-        if (self.splashView) {
-            [self.splashView removeFromSuperview];
-            self.splashView = nil;
-        }
-    }
+- (void)dismiss {
+    [self removeFromParentViewController];
+    [self.view removeFromSuperview];
+    
     if (self.appRootVC) {
         [[UIApplication sharedApplication].keyWindow setRootViewController:self.appRootVC];
     }
 }
 
-- (void)removeSplashAdView {
-    if (self.splashView) {
-        [self.splashView removeFromSuperview];
-        self.splashView = nil;
-    }
-    if (self.appRootVC) {
-        [[UIApplication sharedApplication].keyWindow setRootViewController:self.appRootVC];
-    }
-}
-#pragma mark - BUSplashAdDelegate
-- (void)splashAdDidLoad:(BUSplashAdView *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
+#pragma mark - BUSplashOldDelegate
+
+- (void)splashAdLoadSuccess:(BUSplashAd *)splashAd {
+    [splashAd showSplashViewInRootViewController:self];
 }
 
-- (void)splashAdDidClick:(BUSplashAdView *)splashAd {
-    self.isDidClick = YES;
-    [self pbud_logWithSEL:_cmd msg:@""];
+
+- (void)splashAdLoadFail:(BUSplashAd *)splashAd error:(BUAdError * _Nullable)error {
+    [self dismiss];
 }
 
-- (void)splashAdDidClose:(BUSplashAdView *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-    if (!self.isDidClick) {
-        [self handleSplashAnimation];
-    }
+- (void)splashAdRenderSuccess:(BUSplashAd *)splashAd {
+    
 }
 
-- (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd {
-//    [self handleSplashAnimation];
-    [self pbud_logWithSEL:_cmd msg:@""];
+- (void)splashAdRenderFail:(BUSplashAd *)splashAd error:(BUAdError * _Nullable)error {
+    [self dismiss];
 }
 
-- (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error {
-    [self removeSplashAdView];
-    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
+
+- (void)splashAdWillShow:(BUSplashAd *)splashAd {
+    
 }
 
-- (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType {
+- (void)splashAdDidShow:(BUSplashAd *)splashAd {
+    
+}
+
+- (void)splashAdDidClick:(BUSplashAd *)splashAd {
+    
+}
+
+
+- (void)splashAdDidClose:(BUSplashAd *)splashAd closeType:(BUSplashAdCloseType)closeType {
+    [self dismiss];
+}
+
+- (void)splashDidCloseOtherController:(nonnull BUSplashAd *)splashAd interactionType:(BUInteractionType)interactionType {
     NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
@@ -116,14 +110,45 @@
         str = @"appstoreInApp";
     }
     
-    // After closing the other controllers, there will be no further action, so 'splashView' needs to be released to avoid memory leaks
-    [self removeSplashAdView];
     [self pbud_logWithSEL:_cmd msg:str];
 }
 
-- (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
+
+- (void)splashVideoAdDidPlayFinish:(BUSplashAd *)splashAd didFailWithError:(nonnull NSError *)error {
+    
 }
+
+#pragma mark - BUSplashCardDelegate
+
+- (void)splashCardReadyToShow:(BUSplashAd *)splashAd {
+    [splashAd showCardViewInRootViewController:self.appRootVC];
+}
+
+- (void)splashCardViewDidClick:(BUSplashAd *)splashAd {
+    
+}
+
+- (void)splashCardViewDidClose:(BUSplashAd *)splashAd {
+    
+}
+
+#pragma mark - BUSplashZoomOutDelegate
+
+- (void)splashZoomOutReadyToShow:(BUSplashAd *)splashAd {
+    
+    [splashAd showCardViewInRootViewController:self.appRootVC];
+}
+
+- (void)splashZoomOutViewDidClick:(BUSplashAd *)splashAd {
+    
+}
+
+- (void)splashZoomOutViewDidClose:(BUSplashAd *)splashAd {
+    
+}
+
+
+
 
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
     BUD_Log(@"SDKDemoDelegate BUSplashAdView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);

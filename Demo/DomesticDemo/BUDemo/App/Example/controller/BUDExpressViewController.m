@@ -17,12 +17,12 @@
 #import "BUDExpressFullScreenVideoViewController.h"
 #import "BUDExpressRewardedVideoViewController.h"
 #import "BUDExpressDrawViewController.h"
-#import "BUDExpressSplashViewController.h"
+#import "BUDBiddingSplashViewController.h"
 
 @interface BUDExpressViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray<NSMutableArray *> *items;
+@property (nonatomic, copy) NSArray<NSMutableArray *> *items;
 
 @end
 
@@ -89,7 +89,7 @@
     
     BUDActionModel *splashCell = [BUDActionModel plainTitleActionModel:@"Express Splash" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
-        BUDExpressSplashViewController *vc = [BUDExpressSplashViewController new];
+        BUDBiddingSplashViewController *vc = [BUDBiddingSplashViewController new];
         BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
         viewModel.slotID = express_splash_ID;
         vc.viewModel = viewModel;

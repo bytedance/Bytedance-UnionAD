@@ -15,7 +15,7 @@
 
 - (NSArray<NSArray<BUDActionModel *> *> *)itemsForList {
     __weak typeof(self) weakSelf = self;
-    BUDActionModel *nativeCellItem = [BUDActionModel plainTitleActionModel:@"Native Draw" type:BUDCellType_native action:^{
+    BUDActionModel *nativeCellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kDrawAdNative] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDDrawVideoViewController *vc = [[BUDDrawVideoViewController alloc] init];
         BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
@@ -25,7 +25,7 @@
         [self presentViewController:vc animated:YES completion:nil];
     }];
 
-    BUDActionModel *expressCellItem = [BUDActionModel plainTitleActionModel:@"Express Draw" type:BUDCellType_native action:^{
+    BUDActionModel *expressCellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kDrawAdExpress] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDExpressDrawViewController *vc = [[BUDExpressDrawViewController alloc] init];
         BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];

@@ -1,5 +1,5 @@
 //
-//  BUDExpressSplashViewController.h
+//  BUDBiddingSplashViewController.h
 //  BUDemo
 //
 //  Created by Bytedance on 2019/10/17.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BUDExpressSplashViewController : BUDBaseExampleViewController
+@interface BUDBiddingSplashViewController : BUDBaseExampleViewController
 
 @end
 

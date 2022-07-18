@@ -8,7 +8,6 @@
 
 #import "BUDCustomDislikeViewController.h"
 #import <BUAdSDK/BUAdSDK.h>
-#import <BUFoundation/BUFoundation.h>
 #import "BUDPersonalPromptsWebViewController.h"
 @interface BUDCustomDislikeViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 @property (nonatomic, strong) BUNativeAd *nativeAd;

@@ -34,12 +34,16 @@ Pod::Spec.new do |s|
   
     
   s.subspec 'BUAdSDK' do |ss|
-    ss.dependency 'Ads-CN-Beta/CSJAdSDK'
+    ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
+    ss.preserve_paths = 'SDK/CSJAdSDK.framework'
+    ss.resource = 'SDK/CSJAdSDK.bundle'
     ss.dependency 'Ads-CN-Beta/Dep_Accurate'
   end
 
   s.subspec 'BUAdSDK_Compatible' do |ss|
-    ss.dependency 'Ads-CN-Beta/CSJAdSDK'
+    ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
+    ss.preserve_paths = 'SDK/CSJAdSDK.framework'
+    ss.resource = 'SDK/CSJAdSDK.bundle'
     ss.dependency 'Ads-CN-Beta/Dep_Compatible'
   end
   

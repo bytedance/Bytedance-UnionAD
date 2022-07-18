@@ -51,12 +51,12 @@ Pod::Spec.new do |s|
   
   ## 依赖版本为指定版本号
   s.subspec 'Dep_Accurate' do |ss|
-    ss.dependency 'BURelyFoundation', '0.0.2.10'
+    ss.dependency 'BURelyFoundation/CSJ', '0.0.2.10'
     ss.dependency 'BUAdSDK', '0.1.0.18'
   end
   ## 依赖版本为指定版本范围
   s.subspec 'Dep_Compatible' do |ss|
-    ss.dependency 'BURelyFoundation', '~> 0.0.2.10'
+    ss.dependency 'BURelyFoundation/CSJ', '~> 0.0.2.10'
     ss.dependency 'BUAdSDK', '~> 0.1.0.18'
   end
 

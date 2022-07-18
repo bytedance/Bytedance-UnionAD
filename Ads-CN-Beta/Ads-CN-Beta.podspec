@@ -47,12 +47,6 @@ Pod::Spec.new do |s|
     ss.dependency 'Ads-CN-Beta/Dep_Compatible'
   end
   
-  s.subspec 'CSJAdSDK' do |ss|
-    ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
-    ss.preserve_paths = 'SDK/CSJAdSDK.framework'
-    ss.resource = 'SDK/CSJAdSDK.bundle'
-  end
-  
   ## 依赖版本为指定版本号
   s.subspec 'Dep_Accurate' do |ss|
     ss.dependency 'BURelyFoundation/CSJ', '0.0.2.10'

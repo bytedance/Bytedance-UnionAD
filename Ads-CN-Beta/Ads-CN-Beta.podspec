@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN-Beta'
-  s.version          = '4.6.0.7'
+  s.version          = '4.7.0.0'
   s.summary          = 'Ads-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -32,34 +32,34 @@ Pod::Spec.new do |s|
 
   s.default_subspec = 'BUAdSDK'
   
-  
-  s.subspec 'Domestic' do |ss|
-    ss.vendored_frameworks = ['SDK/BUCNAuxiliary.framework']
-    ss.preserve_paths = 'SDK/BUCNAuxiliary.framework'
-    ss.dependency 'Ads-CN-Beta/BUFoundation'
-    ss.dependency 'Ads-CN-Beta/CSJAdSDK'
-  end
-  
+    
   s.subspec 'BUAdSDK' do |ss|
-    ss.vendored_frameworks = ['SDK/BUAdSDK.framework']
-    ss.preserve_paths = 'SDK/BUAdSDK.framework'
-    ss.dependency 'Ads-CN-Beta/Domestic'
-  end
-  
-  s.subspec 'BUFoundation' do |ss|
-    ss.vendored_frameworks = ['SDK/BUFoundation.framework']
-    ss.preserve_paths = 'SDK/BUFoundation.framework'
-    ss.dependency 'BURelyFoundation', '0.0.1.58'
+    ss.dependency 'Ads-CN-Beta/CSJAdSDK'
+    ss.dependency 'Ads-CN-Beta/Dep_Accurate'
   end
 
+  s.subspec 'BUAdSDK_Compatible' do |ss|
+    ss.dependency 'Ads-CN-Beta/CSJAdSDK'
+    ss.dependency 'Ads-CN-Beta/Dep_Compatible'
+  end
+  
   s.subspec 'CSJAdSDK' do |ss|
     ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
     ss.preserve_paths = 'SDK/CSJAdSDK.framework'
     ss.resource = 'SDK/CSJAdSDK.bundle'
-    ss.dependency 'Ads-CN-Beta/BUFoundation'
+  end
+  
+  ## 依赖版本为指定版本号
+  s.subspec 'Dep_Accurate' do |ss|
+    ss.dependency 'BURelyFoundation', '0.0.2.10'
+    ss.dependency 'BUAdSDK', '0.1.0.18'
+  end
+  ## 依赖版本为指定版本范围
+  s.subspec 'Dep_Compatible' do |ss|
+    ss.dependency 'BURelyFoundation', '~> 0.0.2.10'
+    ss.dependency 'BUAdSDK', '~> 0.1.0.18'
   end
 
-  
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   

@@ -70,7 +70,6 @@
 		2BD5BB5926C40AE4008A19D3 /* BUDNativeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5BB5326C40AE4008A19D3 /* BUDNativeBannerView.m */; };
 		2BD5BB5A26C40AE4008A19D3 /* BUDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5BB5426C40AE4008A19D3 /* BUDWebViewController.m */; };
 		2BD5BB5B26C40AE4008A19D3 /* BUDFeedAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5BB5526C40AE4008A19D3 /* BUDFeedAdView.m */; };
-		2BDCDE882807D5E400E874AD /* BUDAdmobTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDCDE862807D5E400E874AD /* BUDAdmobTool.m */; };
 		2BE9E6F32881718900C86DDE /* BUDBiddingSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE9E6F22881718900C86DDE /* BUDBiddingSplashViewController.m */; };
 		2BEA4DDF2520869700FE5189 /* BUDPasterCustomPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEA4DDE2520869700FE5189 /* BUDPasterCustomPlayerViewController.m */; };
 		2BED9717257DDC2100EF5C1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9716257DDC2100EF5C1F /* libz.tbd */; };
@@ -252,8 +251,6 @@
 		2BD5BB5626C40AE4008A19D3 /* BUDWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDWebViewController.h; sourceTree = "<group>"; };
 		2BD5BB5726C40AE4008A19D3 /* BUDNativeBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDNativeBannerView.h; sourceTree = "<group>"; };
 		2BD5BB5826C40AE4008A19D3 /* BUDFeedAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDFeedAdView.h; sourceTree = "<group>"; };
-		2BDCDE862807D5E400E874AD /* BUDAdmobTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmobTool.m; sourceTree = "<group>"; };
-		2BDCDE872807D5E400E874AD /* BUDAdmobTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmobTool.h; sourceTree = "<group>"; };
 		2BDEE0892552ACCD001AF902 /* BUDSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSwitchView.h; sourceTree = "<group>"; };
 		2BE9E6F12881718900C86DDE /* BUDBiddingSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDBiddingSplashViewController.h; sourceTree = "<group>"; };
 		2BE9E6F22881718900C86DDE /* BUDBiddingSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDBiddingSplashViewController.m; sourceTree = "<group>"; };
@@ -463,14 +460,6 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		2BD589432745FA1600CEC212 /* SDK */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = SDK;
-			path = ../SDK;
-			sourceTree = "<group>";
-		};
 		2BD5BB5226C40AE4008A19D3 /* WebAd */ = {
 			isa = PBXGroup;
 			children = (
@@ -505,7 +494,6 @@
 		78E0729C21A2BF41006D71EE = {
 			isa = PBXGroup;
 			children = (
-				2BD589432745FA1600CEC212 /* SDK */,
 				2B6DD2B9255D43DC00FF8CA5 /* CustomEventAdapter */,
 				DE84BD0C21A2E9600090D866 /* BUDemo */,
 				78E072A621A2BF41006D71EE /* Products */,

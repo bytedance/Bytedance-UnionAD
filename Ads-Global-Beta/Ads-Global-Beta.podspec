@@ -34,17 +34,17 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
     ss.preserve_paths = 'SDK/PAGAdSDK.framework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global-Betaa/APM'
-    ss.dependency 'Ads-Global-Betaa/BURelyAdSDK'
-    ss.dependency 'Ads-Global-Betaa/Dep_Accurate'
+    ss.dependency 'Ads-Global-Beta/APM'
+    ss.dependency 'Ads-Global-Beta/BURelyAdSDK'
+    ss.dependency 'Ads-Global-Beta/Dep_Accurate'
   end
 
   s.subspec 'BUAdSDK_Compatible' do |ss|
     ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
     ss.preserve_paths = 'SDK/PAGAdSDK.framework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global-Betaa/APM'
-    ss.dependency 'Ads-Global-Betaa/BURelyAdSDK'
+    ss.dependency 'Ads-Global-Beta/APM'
+    ss.dependency 'Ads-Global-Beta/BURelyAdSDK'
     ss.dependency 'Ads-Global-Beta/Dep_Compatible'
   end
   

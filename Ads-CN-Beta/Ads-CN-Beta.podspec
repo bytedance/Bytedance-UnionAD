@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN-Beta'
-  s.version      = '4.7.0.8'
+  s.version      = '4.8.0.0'
   s.summary          = 'Ads-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -24,8 +24,6 @@ Pod::Spec.new do |s|
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   
   s.weak_frameworks = 'AppTrackingTransparency'
-  
-  valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
 
   s.resource = 'SDK/LICENSE'
   s.preserve_paths = 'SDK/README.md'

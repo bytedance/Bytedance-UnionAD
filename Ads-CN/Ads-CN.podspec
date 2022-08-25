@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN'
-  s.version      = '4.6.2.0'
-  s.summary          = 'Ads-CN is a SDK from Bytedance providing AD service.'
+  s.version          = '4.7.0.8'
+  s.summary          = 'Ads-CN is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN provides ADs which include native、banner、feed、splash、RewardVideo etc.
                        DESC
@@ -20,78 +20,39 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD'
   
   s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/#{s.version}/SDK.zip" }
-  s.platform     = :ios, "9.0"  
+  s.platform     = :ios, "9.0"
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
-  s.weak_frameworks = 'AppTrackingTransparency', 'CoreML'
+  s.weak_frameworks = 'AppTrackingTransparency'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
-  
-  valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
 
   s.resource = 'SDK/LICENSE'
 
   s.default_subspec = 'BUAdSDK'
   
-  s.subspec 'APM' do |ss|
-    ss.dependency 'RangersAPM-Pangle/Crash', '2.3.2-pangle'
-    ss.dependency 'RangersAPM-Pangle/Global', '2.3.2-pangle'
-    ss.dependency 'RangersAPM-Pangle/SessionTracker', '2.3.2-pangle'
-  end
-  
-  s.subspec 'International' do |ss|
-    ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
-    ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
-    ss.dependency 'Ads-CN/BUFoundation'
-    ss.dependency 'Ads-CN/PAGAdSDK'
-    ss.dependency 'Ads-CN/APM'
-    ss.dependency 'Ads-CN/BURelyAdSDK'
-  end
-  
-  s.subspec 'BURelyAdSDK' do |ss|
-     ss.preserve_paths = 'SDK/BURelyAdSDK.framework'
-     ss.vendored_frameworks = ['SDK/BURelyAdSDK.framework']
-  end
-  
-  s.subspec 'International-noAPM' do |ss|
-    ss.preserve_paths = 'SDK/BUVAAuxiliary.framework'
-    ss.vendored_frameworks = ['SDK/BUVAAuxiliary.framework']
-    ss.dependency 'Ads-CN/BUFoundation'
-    ss.dependency 'Ads-CN/PAGAdSDK'
-    ss.dependency 'Ads-CN/BURelyAdSDK'
-  end
-  
-  s.subspec 'Domestic' do |ss|
-    ss.vendored_frameworks = ['SDK/BUCNAuxiliary.framework']
-    ss.preserve_paths = 'SDK/BUCNAuxiliary.framework'
-    ss.dependency 'Ads-CN/BUFoundation'
-    ss.dependency 'Ads-CN/CSJAdSDK'
-  end
-  
   s.subspec 'BUAdSDK' do |ss|
-    ss.vendored_frameworks = ['SDK/BUAdSDK.framework']
-    ss.preserve_paths = 'SDK/BUAdSDK.framework'
-    ss.dependency 'Ads-CN/Domestic'
-  end
-  
-  s.subspec 'BUFoundation' do |ss|
-    ss.vendored_frameworks = ['SDK/BUFoundation.framework']
-    ss.preserve_paths = 'SDK/BUFoundation.framework'
-    ss.dependency 'BURelyFoundation', '0.0.1.58'
-  end
-  
-  s.subspec 'PAGAdSDK' do |ss|
-    ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
-    ss.preserve_paths = 'SDK/PAGAdSDK.framework'
-    ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-CN/BUFoundation'
-  end
-  
-  s.subspec 'CSJAdSDK' do |ss|
     ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
     ss.preserve_paths = 'SDK/CSJAdSDK.framework'
     ss.resource = 'SDK/CSJAdSDK.bundle'
-    ss.dependency 'Ads-CN/BUFoundation'
+    ss.dependency 'Ads-CN/Dep_Accurate'
   end
 
+  s.subspec 'BUAdSDK_Compatible' do |ss|
+    ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
+    ss.preserve_paths = 'SDK/CSJAdSDK.framework'
+    ss.resource = 'SDK/CSJAdSDK.bundle'
+    ss.dependency 'Ads-CN/Dep_Compatible'
+  end
+  
+  ## 依赖版本为指定版本号
+  s.subspec 'Dep_Accurate' do |ss|
+    ss.dependency 'BURelyFoundation/CSJ', '0.0.3.6'
+    ss.dependency 'BUAdSDK', '0.1.0.24'
+  end
+  ## 依赖版本为指定版本范围
+  s.subspec 'Dep_Compatible' do |ss|
+    ss.dependency 'BURelyFoundation/CSJ', '~> 0.0.3.6'
+    ss.dependency 'BUAdSDK', '~> 0.1.0.24'
+  end
 
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }

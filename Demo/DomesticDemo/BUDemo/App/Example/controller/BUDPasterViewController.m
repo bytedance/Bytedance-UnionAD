@@ -25,7 +25,7 @@
 
 #pragma mark - override
 - (BUDPasterPlayerStyle)playerStyle {
-    return BUDPasterPlayerStylePangle;
+    return BUDPasterPlayerStyleSDK;
 }
 
 

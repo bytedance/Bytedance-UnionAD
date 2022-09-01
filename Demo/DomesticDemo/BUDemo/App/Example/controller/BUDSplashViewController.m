@@ -15,18 +15,26 @@
 #import "BUDAnimationTool.h"
 #import "UIColor+DarkMode.h"
 
-@interface BUDSplashViewController () <BUSplashAdDelegate,BUSplashZoomOutViewDelegate>
 
-@property (nonatomic, strong) BUSplashAdView *splashView;
+@interface BUDSplashViewController () <BUSplashAdDelegate, BUSplashCardDelegate, BUSplashZoomOutDelegate>
+
+@property (nonatomic, strong) BUSplashAd *splashAd;
 @property (nonatomic, strong) BUDNormalButton *button;
 @property (nonatomic, strong) BUDNormalButton *button1;
 @property (nonatomic, strong) BUDNormalButton *button2;
+@property (nonatomic, strong) BUDNormalButton *button3;
 
 @property (strong, nonatomic) UISlider *widthSlider;
 @property (strong, nonatomic) UISlider *heightSlider;
 @property (strong, nonatomic) UILabel *widthLabel;
 @property (strong, nonatomic) UILabel *heightLabel;
 @property (nonatomic, assign) CGRect splashFrame;
+@property (nonatomic, assign) BOOL showBottomView;
+@property (nonatomic, strong) UIView *bottomView;
+
+@property (nonatomic, strong) UIViewController *rootViewController;
+@property (nonatomic, strong) BUDSplashContainerViewController *customSplashVC;
+@property (nonatomic, strong) BUSplashZoomOutView *zoomOutView;
 
 @end
 
@@ -39,6 +47,7 @@
     [self buildView];
 
     self.splashFrame = self.view.bounds;
+    self.rootViewController = [[[UIApplication sharedApplication] delegate] window].rootViewController;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -50,6 +59,7 @@
     self.button.center = CGPointMake(self.view.center.x, self.view.center.y * 0.8);
     self.button1.center = CGPointMake(self.view.center.x, self.button.center.y + 80);
     self.button2.center = CGPointMake(self.view.center.x, self.button.center.y + 160);
+    self.button3.center = CGPointMake(self.view.center.x, self.button.center.y + 240);
 }
 
 - (void)buildView {
@@ -83,6 +93,7 @@
     [self.heightSlider addTarget:self action:@selector(sliderPositionHChanged) forControlEvents:UIControlEventValueChanged];
     
     CGSize size = [UIScreen mainScreen].bounds.size;
+    //
     self.button = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.75, 0, 0)];
     self.button.showRefreshIncon = YES;
     [self.button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -100,6 +111,12 @@
     [self.button2 addTarget:self action:@selector(button2Tapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.button2 setTitle:[NSString localizedStringForKey:CustomCloseBtn]  forState:UIControlStateNormal];
     [self.view addSubview:self.button2];
+    
+    self.button3 = [[BUDNormalButton alloc] initWithFrame:CGRectMake(0, size.height*0.6, 0, 0)];
+    self.button3.showRefreshIncon = YES;
+    [self.button3 addTarget:self action:@selector(button3Tapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.button3 setTitle:[NSString localizedStringForKey:@"显示底部bottomView"]  forState:UIControlStateNormal];
+    [self.view addSubview:self.button3];
 }
 
 - (void)sliderPositionWChanged {
@@ -111,59 +128,109 @@
 }
 
 - (void)buildupDefaultSplashView {
+    _showBottomView = NO;
     if (self.widthSlider.value && self.heightSlider.value) {
         CGFloat width = self.widthSlider.value;
         CGFloat height = self.heightSlider.value;
         self.splashFrame = CGRectMake(0, 0, width, height);
     }
     
-    BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:self.viewModel.slotID frame:self.splashFrame];
+    // 创建splashAd对象
+    _splashAd = [[BUSplashAd alloc] initWithSlotID:self.viewModel.slotID adSize:self.splashFrame.size];
     // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
-    splashView.delegate = self;
-    splashView.rootViewController = self;
-    splashView.tolerateTimeout = 3;
-    [splashView loadAdData];
-    [self.navigationController.view addSubview:splashView];
-    self.splashView = splashView;
+    _splashAd.delegate = self;
+    _splashAd.cardDelegate = self;
+    _splashAd.zoomOutDelegate = self;
+    
+    _splashAd.supportCardView = YES;
+    _splashAd.supportZoomOutView = YES;
+    _splashAd.tolerateTimeout = 3.0;
+
+    // 加载广告
+    [_splashAd loadAdData];
+}
+
+// 半屏样式
+- (void)buildupSplashViewWithBottomView {
+    _showBottomView = YES;
+
+    self.splashFrame = CGRectMake(0, 0, _rootViewController.view.size.width, _rootViewController.view.size.height - 100);
+    
+    _splashAd = [[BUSplashAd alloc] initWithSlotID:self.viewModel.slotID adSize:self.splashFrame.size];
+    // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
+    _splashAd.delegate = self;
+    _splashAd.cardDelegate = self;
+    _splashAd.zoomOutDelegate = self;
+    
+    _splashAd.supportCardView = YES;
+    _splashAd.supportZoomOutView = YES;
+    _splashAd.tolerateTimeout = 3;
+
+    [_splashAd loadAdData];
+    
+    // 自定义底部视图
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.splashFrame.size.height, self.splashFrame.size.width, 100)];
+    _bottomView.backgroundColor = [UIColor brownColor];
 }
 
 - (void)buildupHideSkipButtonSplashView {
+    _showBottomView = NO;
     if (self.widthSlider.value && self.heightSlider.value) {
         CGFloat width = self.widthSlider.value;
         CGFloat height = self.heightSlider.value;
         self.splashFrame = CGRectMake(0, 0, width, height);
     }
     
-    BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:self.viewModel.slotID frame:self.splashFrame];
-    splashView.hideSkipButton = YES;
-    splashView.delegate = self;
-    splashView.rootViewController = self;
+    _splashAd = [[BUSplashAd alloc] initWithSlotID:self.viewModel.slotID adSize:self.splashFrame.size];
+    _splashAd.delegate = self;
+    _splashAd.cardDelegate = self;
+    _splashAd.zoomOutDelegate = self;
     
+    _splashAd.supportCardView = YES;
+    _splashAd.supportZoomOutView = YES;
+    _splashAd.hideSkipButton = YES;
+    _splashAd.tolerateTimeout = 3;
+    [_splashAd loadAdData];
+}
+
+- (UIButton *)p_custormSkipButton {
     UIButton *custormSkipButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [custormSkipButton setTitle:[NSString localizedStringForKey:Skip] forState:UIControlStateNormal];
     [custormSkipButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     [custormSkipButton addTarget:self action:@selector(skipButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    custormSkipButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     CGFloat width = CGRectGetWidth(self.splashFrame);
     CGFloat height = CGRectGetHeight(self.splashFrame);
-    CGFloat safeBottom = 12;
+    CGFloat safeBottomMargin = 12.0;
     if (@available(iOS 11.0, *)) {
-        safeBottom = self.view.safeAreaInsets.bottom;
-    } else {
-        // Fallback on earlier versions
+        safeBottomMargin = self.view.safeAreaInsets.bottom;
     }
-    custormSkipButton.frame = CGRectMake(width - 56 - 12, height - 36 - safeBottom, 56, 36);
-
-    [splashView addSubview:custormSkipButton];
+    custormSkipButton.frame = CGRectMake(width - 56 - 12, height - 36 - safeBottomMargin, 56, 36);
     
-    
-    [splashView loadAdData];
-    [self.navigationController.view addSubview:splashView];
-    self.splashView = splashView;
+    return custormSkipButton;
 }
 
 - (void)skipButtonTapped:(UIButton *)sender {
-    [self handleSplashDimiss:self.splashView];
+    
+    if (self.splashAd.hideSkipButton) {
+        //
+        UIView *splashViewSnapshot = [self.splashAd.splashView snapshotViewAfterScreenUpdates:YES];
+        [self.splashAd removeSplashView];
+        // 展示点睛
+        if (self.splashAd.zoomOutView) {
+            self.splashAd.zoomOutView.rootViewController = self.navigationController;
+            [self.navigationController.view addSubview:self.splashAd.zoomOutView];
+            [self.navigationController.view addSubview:splashViewSnapshot];
+            [[BUDAnimationTool sharedInstance] transitionFromView:splashViewSnapshot toView:self.splashAd.zoomOutView splashCompletion:^{
+                [splashViewSnapshot removeFromSuperview];
+            }];
+        }
+        // 展示卡片
+        if (self.splashAd.cardView) {
+            [self.splashAd showCardViewInRootViewController:self.navigationController];
+        }
+    } else {
+        [self.splashAd removeSplashView];
+    }
 }
 
 - (void)buttonTapped:(UIButton *)sender {
@@ -171,144 +238,149 @@
 }
 
 - (void)button1Tapped:(UIButton *)sender {
-    BUDSplashContainerViewController *splashContainer = [[BUDSplashContainerViewController alloc] init];
-    splashContainer.appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
-    [[UIApplication sharedApplication].keyWindow setRootViewController:splashContainer];
+    _customSplashVC = [[BUDSplashContainerViewController alloc] init];
+    [_customSplashVC loadSplashAd];
 }
 
 - (void)button2Tapped:(UIButton *)sender {
     [self buildupHideSkipButtonSplashView];
 }
 
-- (void)handleSplashDimiss:(BUSplashAdView *)splashAd {
-    if (splashAd.zoomOutView) {
-        __weak typeof(splashAd) weakSplashAdView = splashAd;
-        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd toView:splashAd.zoomOutView splashCompletion:^{
-            [weakSplashAdView removeFromSuperview];
-        }];
-    } else{
-        [splashAd removeFromSuperview];
-    }
+- (void)button3Tapped:(UIButton *)sender {
+    [self buildupSplashViewWithBottomView];
 }
 
-- (void)removeSplashAdView {
-    [self.splashView removeFromSuperview];
-    self.splashView = nil;
-    [BUDAnimationTool sharedInstance].splashContainerVC = nil;
-}
-
-- (void)setUpSplashZoomOutAd:(BUSplashAdView *)splashAdView {
-    if (!splashAdView.zoomOutView) {
+- (void)setUpSplashZoomOutAd:(BUSplashAd *)splashAd {
+    if (!splashAd.zoomOutView) {
         return;
     }
-    [self.navigationController.view addSubview:splashAdView.zoomOutView];
-    [self.navigationController.view addSubview:splashAdView];
-    splashAdView.zoomOutView.rootViewController = self;
-    splashAdView.zoomOutView.delegate = self;
-    __weak typeof(splashAdView) weakSplashAdView = splashAdView;
-    [[BUDAnimationTool sharedInstance] transitionFromView:splashAdView toView:splashAdView.zoomOutView splashCompletion:^{
-        [weakSplashAdView removeFromSuperview];
+    [self.navigationController.view addSubview:splashAd.zoomOutView];
+    [self.navigationController.view addSubview:splashAd.splashViewSnapshot];
+    splashAd.zoomOutView.rootViewController = self;
+    [[BUDAnimationTool sharedInstance] transitionFromView:splashAd.splashViewSnapshot toView:splashAd.zoomOutView splashCompletion:^{
+        [splashAd.splashViewSnapshot removeFromSuperview];
     }];
 }
 
 #pragma mark - BUSplashAdDelegate
-- (void)splashAdDidLoad:(BUSplashAdView *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"mediaExt %@",splashAd.mediaExt]];
-    if (splashAd.zoomOutView) {
-        // Add this view to your container
-        [self.navigationController.view insertSubview:splashAd.zoomOutView belowSubview:splashAd];
-        splashAd.zoomOutView.rootViewController = self;
-        splashAd.zoomOutView.delegate = self;
-    }
-}
 
-- (void)splashAdDidClick:(BUSplashAdView *)splashAd {
-    if (splashAd.zoomOutView) {
-        [splashAd.zoomOutView removeFromSuperview];
-    }
-    [self removeSplashAdView];
+- (void)splashAdLoadSuccess:(nonnull BUSplashAd *)splashAd {
     [self pbud_logWithSEL:_cmd msg:@""];
+    // 使用应用keyWindow的rootViewController（接入简单，推荐）
+    [splashAd showSplashViewInRootViewController:_rootViewController];
+    
 }
 
-- (void)splashAdDidClose:(BUSplashAdView *)splashAd {
+- (void)splashAdLoadFail:(nonnull BUSplashAd *)splashAd error:(BUAdError * _Nullable)error {
     [self pbud_logWithSEL:_cmd msg:@""];
-    [self handleSplashDimiss:splashAd];
+ 
 }
 
-- (void)splashAdDidClickSkip:(BUSplashAdView *)splashAd {
-    // 'zoomOutView' is nil, there will be no subsequent operation to completely remove splashAdView and avoid memory leak
-    // 'zoomOutView' is not nil，do nothing
-    if (!splashAd.zoomOutView) {
-        [self removeSplashAdView];
-    }
+- (void)splashAdRenderSuccess:(nonnull BUSplashAd *)splashAd {
+    
     [self pbud_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError *)error {
-    [self handleSplashDimiss:splashAd];
-    // Display failed, no subsequent operation, completely remove 'splashAdView', avoid memory leak
-    [self removeSplashAdView];
-    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
-}
-
-- (void)splashAdDidCloseOtherController:(BUSplashAdView *)splashAd interactionType:(BUInteractionType)interactionType {
-    NSString *str;
-    if (interactionType == BUInteractionTypePage) {
-        str = @"ladingpage";
-    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
-        str = @"videoDetail";
-    } else {
-        str = @"appstoreInApp";
+    
+    if (splashAd.hideSkipButton) { // 自定义跳过按钮
+        [splashAd.splashView addSubview:[self p_custormSkipButton]];
     }
     
-    // After closing the other controllers, there will be no further action, so 'splashView' needs to be released to avoid memory leaks
-    [self removeSplashAdView];
-    [self pbud_logWithSEL:_cmd msg:str];
+    if (self.showBottomView) { // 自定义底部视图
+        [splashAd.splashRootViewController.view addSubview:_bottomView];
+    }
 }
 
-- (void)splashAdCountdownToZero:(BUSplashAdView *)splashAd {
-    // 'zoomOutView' is nil, there will be no subsequent operation to completely remove splashAdView and avoid memory leak
-    // 'zoomOutView' is not nil，do nothing
-    if (!splashAd.zoomOutView) {
-        [self removeSplashAdView];
-    }
+- (void)splashAdRenderFail:(nonnull BUSplashAd *)splashAd error:(BUAdError * _Nullable)error {
     [self pbud_logWithSEL:_cmd msg:@""];
 }
+
+- (void)splashAdWillShow:(nonnull BUSplashAd *)splashAd {
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashAdDidShow:(nonnull BUSplashAd *)splashAd {
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashAdDidClick:(nonnull BUSplashAd *)splashAd {
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashAdDidClose:(nonnull BUSplashAd *)splashAd closeType:(BUSplashAdCloseType)closeType {
+    [self pbud_logWithSEL:_cmd msg:@""];
+    
+    if (self.showBottomView) {
+        [self.bottomView removeFromSuperview];
+    }
+}
+
+- (void)splashAdViewControllerDidClose:(BUSplashAd *)splashAd {
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashDidCloseOtherController:(nonnull BUSplashAd *)splashAd interactionType:(BUInteractionType)interactionType {
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashVideoAdDidPlayFinish:(nonnull BUSplashAd *)splashAd didFailWithError:(nonnull NSError *)error {
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+
+#pragma mark - BUSplashCardDelegate
+- (void)splashCardReadyToShow:(nonnull BUSplashAd *)splashAd {
+    [self pbud_logWithSEL:_cmd msg:@""];
+    [splashAd showCardViewInRootViewController:[[[UIApplication sharedApplication] delegate] window].rootViewController];
+}
+
+- (void)splashCardViewDidClick:(nonnull BUSplashAd *)splashAd {
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashCardViewDidClose:(nonnull BUSplashAd *)splashAd {
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+#pragma mark - BUSplashZoomOutDelegate
+
+- (void)splashZoomOutReadyToShow:(nonnull BUSplashAd *)splashAd {
+    [self pbud_logWithSEL:_cmd msg:@""];
+    // 接入方法一：使用SDK提供动画接入
+     if (splashAd.zoomOutView) {
+         [splashAd showZoomOutViewInRootViewController:[[[UIApplication sharedApplication] delegate] window].rootViewController];
+     }
+    
+    // 接入方法二：自定义动画接入
+//    if (splashAd.zoomOutView) {
+//        __weak typeof(self) weakSelf = self;
+//        UIViewController *rootViewController = [[[UIApplication sharedApplication] delegate] window].rootViewController;
+//        splashAd.zoomOutView.rootViewController = rootViewController;
+//        [rootViewController.view addSubview:splashAd.zoomOutView];
+//        [rootViewController.view addSubview:splashAd.splashViewSnapshot];
+//        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd.splashViewSnapshot toView:splashAd.zoomOutView splashCompletion:^{
+//            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            [strongSelf.splashAd.splashViewSnapshot removeFromSuperview];
+//        }];
+//    }
+}
+
+- (void)splashZoomOutViewDidClick:(nonnull BUSplashAd *)splashAd {
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashZoomOutViewDidClose:(nonnull BUSplashAd *)splashAd {
+    [self pbud_logWithSEL:_cmd msg:@""];
+}
+
+
 
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
     BUD_Log(@"SDKDemoDelegate BUSplashAdView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
 }
 
-#pragma mark - BUSplashZoomOutViewDelegate
-- (void)splashZoomOutViewAdDidClick:(BUSplashZoomOutView *)splashAd {
-    [self removeSplashAdView];
-    [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashZoomOutViewAdDidClose:(BUSplashZoomOutView *)splashAd {
-    // Click close, completely remove 'splashAdView', avoid memory leak
-    [self removeSplashAdView];
-    [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashZoomOutViewAdDidAutoDimiss:(BUSplashZoomOutView *)splashAd {
-    // Back down at the end of the countdown to completely remove the 'splashAdView' to avoid memory leaks
-    [self removeSplashAdView];
-    [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashZoomOutViewAdDidCloseOtherController:(BUSplashZoomOutView *)splashAd interactionType:(BUInteractionType)interactionType {
-    // No further action after closing the other Controllers, completely remove the 'splashAdView' and avoid memory leaks
-    [self removeSplashAdView];
-    [self pbud_splashzoomout_logWithSEL:_cmd msg:@""];
-}
-
-- (void)pbud_splashzoomout_logWithSEL:(SEL)sel msg:(NSString *)msg {
-    BUD_Log(@"SDKDemoDelegate BUSplashZoomOutView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

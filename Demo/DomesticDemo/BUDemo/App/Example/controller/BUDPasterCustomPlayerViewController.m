@@ -30,8 +30,8 @@
 
 #pragma mark - Report
 
-- (void)reportPangleWithStatus:(BUDVideoViewStatus)status {
-    [super reportPangleWithStatus:status];
+- (void)reportWithStatus:(BUDVideoViewStatus)status {
+    [super reportWithStatus:status];
     if (self.currentAdIndex >= self.currentAds.count) {
         return;
     }

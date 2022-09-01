@@ -23,14 +23,24 @@
 #import "BUDFullScreenVideoAdListViewController.h"
 #import "BUDRewardedAdListViewController.h"
 #import "BUDStreamAdListViewController.h"
+#import "BUDSlotABViewController.h"
 #import "BUDAdManager.h"
+#if __has_include(<QRCodeReaderViewController/QRCodeReader.h>)
+#import <QRCodeReaderViewController/QRCodeReader.h>
+#endif
+#if __has_include(<QRCodeReaderViewController/QRCodeReaderViewController.h>)
+#import <QRCodeReaderViewController/QRCodeReaderViewController.h>
+#endif
+#import "BUDSanWebViewController.h"
 
 #if __has_include(<BUWebAd/BUWebAd.h>)
 #import "BUDWebViewController.h"
 #endif
+
+#import "NSString+LocalizedString.h"
 @interface BUDMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray<NSMutableArray *> *items;
+@property (nonatomic, copy) NSArray<NSMutableArray *> *items;
 @end
 
 @implementation BUDMainViewController
@@ -47,6 +57,11 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
+    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [rightButton addTarget:self action:@selector(openScanFun) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton setTitle:@"Scan" forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    
     self.title = @"BytedanceUnion Demo";
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -59,51 +74,61 @@
     [self.tableView registerClass:plainActionCellClass forCellReuseIdentifier:NSStringFromClass(plainActionCellClass)];
 
     __weak typeof(self) weakSelf = self;
-    BUDActionModel *feedAdVc = [BUDActionModel plainTitleActionModel:@"Feed Ad" type:BUDCellType_native action:^{
+    BUDActionModel *feedAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kFeedAd] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDFeedAdListViewController alloc] init] sender:nil];
     }];
-    BUDActionModel *drawAdVc = [BUDActionModel plainTitleActionModel:@"Draw Ad" type:BUDCellType_native action:^{
+    BUDActionModel *drawAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kDrawAd] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDDrawAdListViewController alloc] init] sender:nil];
     }];
-    BUDActionModel *bannerAdVc = [BUDActionModel plainTitleActionModel:@"Banner Ad" type:BUDCellType_native action:^{
+    BUDActionModel *bannerAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kBannerAd] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDBannerAdListViewController alloc] init] sender:nil];
     }];
-    BUDActionModel *interstitialAdVc = [BUDActionModel plainTitleActionModel:@"Interstitial Ad" type:BUDCellType_native action:^{
+    BUDActionModel *interstitialAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kInterstitalAd] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDInterstitialAdListViewController alloc] init] sender:nil];
     }];
-    BUDActionModel *splashAdVc = [BUDActionModel plainTitleActionModel:@"Splash Ad" type:BUDCellType_native action:^{
+    BUDActionModel *splashAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kSplashAd] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDSplashAdListViewController alloc] init] sender:nil];
     }];
-    BUDActionModel *rewardedAdVc = [BUDActionModel plainTitleActionModel:@"Rewarded Ad" type:BUDCellType_native action:^{
+    BUDActionModel *rewardedAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kRewardedAd] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDRewardedAdListViewController alloc] init] sender:nil];
     }];
-    BUDActionModel *fullScreenVideoAdVc = [BUDActionModel plainTitleActionModel:@"FullScreenVideo Ad" type:BUDCellType_native action:^{
+    BUDActionModel *fullScreenVideoAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kFullscreenAd] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDFullScreenVideoAdListViewController alloc] init] sender:nil];
     }];
     
-    BUDActionModel *streamAdVc = [BUDActionModel plainTitleActionModel:@"Stream Ad" type:BUDCellType_native action:^{
+    BUDActionModel *streamAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kStreamAd] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDStreamAdListViewController alloc] init] sender:nil];
     }];
     
-    BUDActionModel *waterfallItem = [BUDActionModel plainTitleActionModel:@"Waterfall Ad" type:BUDCellType_video action:^{
+    BUDActionModel *waterfallItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kWaterfallAd] type:BUDCellType_video action:^{
+        __strong typeof(weakSelf) self = weakSelf;
         BUDWaterfallViewController *vc = [BUDWaterfallViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
     BUDActionModel *adapterItem = [BUDActionModel plainTitleActionModel:@"CustomEventAdapter" type:BUDCellType_CustomEvent action:^{
+        __strong typeof(weakSelf) self = weakSelf;
         BUDCustomEventViewController *vc = [BUDCustomEventViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }];
+
+    BUDActionModel *slotABItem = [BUDActionModel plainTitleActionModel:@"Slot AB" type:BUDCellType_CustomEvent action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUDSlotABViewController *vc = [BUDSlotABViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+
 #if __has_include(<BUWebAd/BUWebAd.h>)
     BUDActionModel *webAdItem = [BUDActionModel plainTitleActionModel:@"WebAd" type:BUDCellType_CustomEvent action:^{
+        __strong typeof(weakSelf) self = weakSelf;
         BUDWebViewController *vc = [[BUDWebViewController alloc] init];
         vc.url = @"https://sf3-fe-tos.pglstatp-toutiao.com/obj/ad-pattern/union-native-components/examples/native-ad-ios.html";
         [self.navigationController pushViewController:vc animated:YES];
@@ -111,6 +136,7 @@
 #endif
     
     BUDActionModel *toolsItem = [BUDActionModel plainTitleActionModel:@"Tools" type:BUDCellType_setting action:^{
+        __strong typeof(weakSelf) self = weakSelf;
         BUDToolsSettingViewController *vc = [BUDToolsSettingViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }];
@@ -118,7 +144,7 @@
 #if __has_include(<BUWebAd/BUWebAd.h>)
     self.items = @[
             @[feedAdVc, drawAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
-            @[waterfallItem],
+            @[waterfallItem, slotABItem],
             @[adapterItem],
             @[webAdItem],
             @[toolsItem]
@@ -126,7 +152,7 @@
 #else
     self.items = @[
             @[feedAdVc, drawAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
-            @[waterfallItem],
+            @[waterfallItem, slotABItem],
             @[adapterItem],
             @[toolsItem]
     ];
@@ -160,6 +186,33 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:NO forKey:@"kCustomDislikeIsOn"];
     [userDefaults synchronize];
+}
+
+- (void)openScanFun {
+#if __has_include(<QRCodeReaderViewController/QRCodeReader.h>)
+    #if DEBUG
+    QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
+
+        // Instantiate the view controller
+        QRCodeReaderViewController *vc = [QRCodeReaderViewController readerWithCancelButtonTitle:@"Cancel" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:YES showTorchButton:YES];
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
+        @weakify(self);
+        [vc setCompletionWithBlock:^(NSString * _Nullable resultAsString) {
+            @strongify(self);
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (resultAsString) {
+                    BUDSanWebViewController *webVC = [BUDSanWebViewController openURLString:resultAsString];
+                    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:webVC];
+                    nav.modalPresentationStyle = UIModalPresentationFullScreen;
+                    [self presentViewController:nav animated:YES completion:^{
+
+                    }];
+                }
+            }];
+        }];
+        [self presentViewController:vc animated:YES completion:nil];
+    #endif
+#endif
 }
 
 -(BOOL)shouldAutorotate

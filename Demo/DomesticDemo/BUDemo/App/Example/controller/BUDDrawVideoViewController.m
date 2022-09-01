@@ -135,7 +135,7 @@
 
 - (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView {
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored"-Wdeprecated-declarations"
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finishView is clicked" message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
 #pragma clang diagnostic pop

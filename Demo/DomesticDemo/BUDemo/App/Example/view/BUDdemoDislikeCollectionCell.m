@@ -8,6 +8,7 @@
 
 #import "BUDdemoDislikeCollectionCell.h"
 #import "BUDMacros.h"
+#import <BUAdSDK/BUDislikeWords.h>
 
 static CGSize const nextImgSize = {20, 20};
 

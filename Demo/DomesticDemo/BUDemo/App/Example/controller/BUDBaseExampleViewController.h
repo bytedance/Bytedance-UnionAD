@@ -13,7 +13,7 @@
 
 @interface BUDBaseExampleViewController : UIViewController <BUDExampleViewControl>
 @property (nonatomic, strong) id<BUDExampleViewModel> viewModel;
-
+@property (nonatomic, copy) NSString *adName;
 @property (nonatomic, assign) BOOL haveRenderSwitchView;
 @property (nonatomic, strong, readonly) BUDSwitchView *renderSwitchView;
 

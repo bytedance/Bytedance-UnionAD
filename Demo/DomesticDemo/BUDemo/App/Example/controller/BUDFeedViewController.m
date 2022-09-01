@@ -114,7 +114,6 @@
     nad.delegate = self;
     nad.nativeExpressAdViewDelegate = self;
     self.adManager = nad;
-    
     [nad loadAdDataWithCount:3];
 }
 - (void)viewDidDisappear:(BOOL)animated {

@@ -139,7 +139,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     if (self.isCustomPlayer) {
         [self customPlayerLayoutWithY:y andWidth:contentWidth];
     } else {
-        [self panglePlayerLayoutWithY:y andWidth:contentWidth];
+        [self SDKPlayerLayoutWithY:y andWidth:contentWidth];
     }
     
     const CGFloat imageHeight = contentWidth * (9.0 / 16.0);
@@ -188,7 +188,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     }
 }
 
-- (void)panglePlayerLayoutWithY:(CGFloat)y andWidth:(CGFloat)contentWidth {
+- (void)SDKPlayerLayoutWithY:(CGFloat)y andWidth:(CGFloat)contentWidth {
     // 广告展位图
     const CGFloat imageHeight = contentWidth * (9.0 / 16.0);
     if ([self isVideoAd]) {
@@ -259,7 +259,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     return self.buCustomVideoView;
 }
 
-- (BUVideoAdView *)pangleVideoView {
+- (BUVideoAdView *)SDKVideoView {
     if (self.nativeAdRelatedView) {
         return self.nativeAdRelatedView.videoAdView;
     }

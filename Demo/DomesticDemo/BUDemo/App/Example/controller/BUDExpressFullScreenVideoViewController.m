@@ -26,12 +26,18 @@
     self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
     NSString *verticalTitle = [NSString localizedStringForKey:Vertical];
     NSString *horizontalTitle = [NSString localizedStringForKey:Horizontal];
-    BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_full_ID_both,@"title":[NSString stringWithFormat:@"%@-both",verticalTitle]}];
-    BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_full_landscape_ID_both,@"title":[NSString stringWithFormat:@"%@-both",horizontalTitle]}];
-    NSArray *titlesAndIDS = @[@[item1,item2]];
-    
+    NSArray *titlesAndIDS;
+    if (self.isInterstitialAd) {
+        BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_new_interstitial_full,@"title":[NSString localizedStringForKey:kNewInterstitialfull]}];
+        BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_new_interstitial_half,@"title":[NSString localizedStringForKey:kNewInterstitialhalf]}];
+        titlesAndIDS = @[@[item1,item2]];
+    } else {
+        BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_full_ID_both,@"title":[NSString stringWithFormat:@"%@-both",verticalTitle]}];
+        BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":express_full_landscape_ID_both,@"title":[NSString stringWithFormat:@"%@-both",horizontalTitle]}];
+        titlesAndIDS = @[@[item1,item2]];
+    }
     __weak typeof(self) weakself = self;
-    self.selectedView = [[BUDSelectedView alloc] initWithAdName:@"Express FullScreenVideo" SelectedTitlesAndIDS:titlesAndIDS loadAdAction:^(NSString * _Nullable slotId) {
+    self.selectedView = [[BUDSelectedView alloc] initWithAdName:self.adName SelectedTitlesAndIDS:titlesAndIDS loadAdAction:^(NSString * _Nullable slotId) {
         __strong typeof(self) strongself = weakself;
         [strongself loadFullscreenVideoAdWithSlotID:slotId];
     } showAdAction:^{

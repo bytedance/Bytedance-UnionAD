@@ -6,9 +6,9 @@
 //  Copyright © 2018年 bytedance. All rights reserved.
 //
 
-#import <BUAdSDK/BUAdSDK.h>
+#import <UIKit/UIKit.h>
 static const int margin = 15;
-
+@class BUDislikeWords;
 @interface BUDdemoDislikeCollectionCell : UICollectionViewCell
 - (void)refleshUIWithModel:(BUDislikeWords *)dislikeWord;
 @end

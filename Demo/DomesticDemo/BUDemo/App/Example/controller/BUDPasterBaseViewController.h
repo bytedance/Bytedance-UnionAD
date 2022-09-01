@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, BUDPasterPlayerStyle) {
     BUDPasterPlayerStyleCustom = 0,
-    BUDPasterPlayerStylePangle = 1
+    BUDPasterPlayerStyleSDK = 1
 };
 
 @class BUNativeAd;
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, BUDPasterPlayerStyle) {
 
 @property (nonatomic, assign) NSInteger currentAdIndex;
 
-- (void)reportPangleWithStatus:(BUDVideoViewStatus)status;
+- (void)reportWithStatus:(BUDVideoViewStatus)status;
 - (BUDPasterPlayerStyle)playerStyle;
 @end
 

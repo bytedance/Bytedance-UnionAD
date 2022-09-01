@@ -20,6 +20,9 @@
 
 @property(nonatomic, strong) BUDCustomPlayerAdView *adView;
 
+@property (nonatomic, strong) BUNativeAdsManager *nad ;
+
+
 @end
 
 @implementation BUDCustomVideoPlayerViewController
@@ -35,7 +38,6 @@
     [self changeVideoAd];
 }
 
-/// load ads from Pangle
 - (void)loadAdData {
     BUNativeAdsManager *nad = [BUNativeAdsManager new];
     BUAdSlot *slot = [[BUAdSlot alloc] init];
@@ -46,6 +48,7 @@
     nad.adslot = slot;
     nad.delegate = self;
     [nad loadAdDataWithCount:1];
+    self.nad = nad;
 }
 
 /// build views display in view controller
@@ -111,7 +114,7 @@
 
 #pragma mark - Report
 
-- (void)reportPangleWithStatus:(BUDVideoViewStatus)status {
+- (void)reportWithStatus:(BUDVideoViewStatus)status {
     id <BUVideoAdReportor> reportor = self.adView.videoAdReportor;
     NSString *slotId = self.currentAd.adslot.ID;
     BUDVideoView *view = self.adView.videoView;
@@ -174,12 +177,12 @@
 #pragma mark - observer
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey, id> *)change context:(void *)context {
-    // observer the status change of video player, reporting infos to Pangle
+    // observer the status change of video player, reporting infos
     BOOL isVideoStatusChanged = object == self.adView.videoView && [keyPath isEqualToString:@"status"];
     if (!isVideoStatusChanged) return;
 
     BUDVideoViewStatus status = (BUDVideoViewStatus)[change[NSKeyValueChangeNewKey] integerValue];
-    [self reportPangleWithStatus:status];
+    [self reportWithStatus:status];
 }
 
 #pragma mark - Toast

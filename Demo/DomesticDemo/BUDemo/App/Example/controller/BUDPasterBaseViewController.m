@@ -26,6 +26,9 @@
 @property (nonatomic, assign) NSTimeInterval remainingTime;
 /// 定时器初始化时刻，在定时器暂停时计算剩余时间
 @property (nonatomic, strong) NSDate *timerScheduleDate;
+
+@property (nonatomic, strong)  BUNativeAdsManager *nad;
+
 @end
 
 @implementation BUDPasterBaseViewController
@@ -52,7 +55,6 @@
     self.adViews = [NSMutableArray array];
 }
 
-/// load ads from Pangle
 - (void)loadAdData {
     self.currentAdIndex = 0;
     
@@ -65,6 +67,7 @@
     nad.adslot = slot;
     nad.delegate = self;
     [nad loadAdDataWithCount:3];
+    self.nad = nad;
 }
 
 /// build views display in view controller
@@ -89,9 +92,9 @@
     [self.view addSubview:currentAdView];
     
     ad.delegate = self;
-    if (self.playerStyle == BUDPasterPlayerStylePangle) {
+    if (self.playerStyle == BUDPasterPlayerStyleSDK) {
         // SDK播放器的代理，此示例中用于定时器的resume
-        self.currentPasterContentView.pangleVideoView.delegate = self;
+        self.currentPasterContentView.SDKVideoView.delegate = self;
     }
     // 注册点击事件
     [ad registerContainer:currentAdView withClickableViews:@[currentAdView.creativeBtn]];
@@ -128,7 +131,7 @@
         return;
     }
     
-    // observer the status change of video player, reporting infos to Pangle
+    // observer the status change of video player, reporting infos
     BUDVideoView *videoView = self.adViews[self.currentAdIndex].customVideoView;
     BOOL isVideoStatusChanged = object == videoView && [keyPath isEqualToString:@"status"];
     if (!isVideoStatusChanged) return;
@@ -136,11 +139,11 @@
     BUDVideoViewStatus status = (BUDVideoViewStatus)[change[NSKeyValueChangeNewKey] integerValue];
     // 状态改变是上传埋点
     // 开发者根据情况决定
-    [self reportPangleWithStatus:status];
+    [self reportWithStatus:status];
 }
 
 // 在子类中实现了此方法
-- (void)reportPangleWithStatus:(BUDVideoViewStatus)status {
+- (void)reportWithStatus:(BUDVideoViewStatus)status {
     
 }
 
@@ -316,8 +319,8 @@
 
 #pragma mark - Actions
 // 当前SDK播放器
-- (BUVideoAdView *)currentPangleVideoView {
-    BUVideoAdView *videoV = self.adViews[self.currentAdIndex].pangleVideoView;
+- (BUVideoAdView *)currentSDKVideoView {
+    BUVideoAdView *videoV = self.adViews[self.currentAdIndex].SDKVideoView;
     if (videoV.hidden) {
         return nil;
     }
@@ -350,7 +353,7 @@
     } else {
         // SDK 播放器，配置控制是否静音
         // SDK 播放器，配置控制是否自动播放
-        [[self currentPangleVideoView] play];
+        [[self currentSDKVideoView] play];
     }
 }
 
@@ -358,7 +361,7 @@
     if (self.playerStyle == BUDPasterPlayerStyleCustom) {
         [[self currentCustomVideoView] pause];
     } else {
-        [[self currentPangleVideoView] pause];
+        [[self currentSDKVideoView] pause];
     }
 }
 

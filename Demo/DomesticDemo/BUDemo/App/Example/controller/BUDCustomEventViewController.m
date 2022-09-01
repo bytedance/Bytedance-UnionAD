@@ -13,7 +13,7 @@
 
 @interface BUDCustomEventViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray<NSMutableArray *> *items;
+@property (nonatomic, copy) NSArray<NSMutableArray *> *items;
 @end
 
 @implementation BUDCustomEventViewController

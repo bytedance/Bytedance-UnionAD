@@ -5,7 +5,7 @@
 
 #import "BUDSplashAdListViewController.h"
 #import "BUDActionCellView.h"
-#import "BUDExpressSplashViewController.h"
+#import "BUDBiddingSplashViewController.h"
 #import "BUDSlotViewModel.h"
 #import "BUDSlotID.h"
 #import "BUDSplashViewController.h"
@@ -15,18 +15,18 @@
 
 - (NSArray<NSArray<BUDActionModel *> *> *)itemsForList {
     __weak typeof(self) weakSelf = self;
-    BUDActionModel *normalCellItem = [BUDActionModel plainTitleActionModel:@"Normal Splash" type:BUDCellType_native action:^{
+    BUDActionModel *normalCellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kSplashAdNative] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDSplashViewController *vc = [[BUDSplashViewController alloc] init];
         BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
-        viewModel.slotID = normal_splash_ID;
+        viewModel.slotID = express_splash_ID;
         vc.viewModel = viewModel;
         [self.navigationController pushViewController:vc animated:YES];
     }];
 
-    BUDActionModel *expressCellItem = [BUDActionModel plainTitleActionModel:@"Express Splash" type:BUDCellType_native action:^{
+    BUDActionModel *expressCellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kSplashAdExpress] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
-        BUDExpressSplashViewController *vc = [[BUDExpressSplashViewController alloc] init];
+        BUDBiddingSplashViewController *vc = [[BUDBiddingSplashViewController alloc] init];
         BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
         viewModel.slotID = express_splash_ID;
         vc.viewModel = viewModel;

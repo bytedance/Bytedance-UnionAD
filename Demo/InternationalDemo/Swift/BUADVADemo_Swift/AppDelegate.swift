@@ -17,15 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ///Google
         GADMobileAds.sharedInstance().start(completionHandler: nil);
         ///Pangle
-        let pangleConfiguration = BUAdSDKConfiguration()
-        pangleConfiguration.appID = "8025677"
-        #if DEBUG
-        pangleConfiguration.logLevel = .debug
-        #endif
-        // 使用异步初始化
-        BUAdSDKManager.start(asyncCompletionHandler: { (result, error: Error?) in
-            // TODO:
-        })
+        let config = PAGConfig.share()
+        config.appID = "8025677"
+#if DEBUG
+        config.debugLog = true;
+#endif
+        PAGSdk.start(with: config, completionHandler: nil);
 //        ///Pangle
 //        ///optional
 //        ///CN china, NO_CN is not china

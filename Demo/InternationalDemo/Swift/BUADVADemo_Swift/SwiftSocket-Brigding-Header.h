@@ -9,6 +9,9 @@
 #define SwiftSocket_Brigding_Header_h
 
 #import <BUAdSDK/BUAdSDK.h>
+
+#import <PAGAdSDK/PAGAdSDK.h>
+
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import "BUDAdmobCustomEventViewController.h"
 

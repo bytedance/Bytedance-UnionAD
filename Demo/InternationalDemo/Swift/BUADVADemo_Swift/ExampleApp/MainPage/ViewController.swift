@@ -14,7 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         ["title":"Banner","class":"BUDBannerViewController"],
                     ],
                     [
-                        ["title":"FullScreenVideo","class":"BUDFullscreenViewController"],
+                        ["title":"InterstitialVideo","class":"BUDInterstitialViewController"],
                         ["title":"RewardVideo","class":"BUDRewardVideoAdViewController"],
                     ],
                     [
@@ -22,9 +22,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     ],
                     [
                         ["title":"CustomEventAdapter","class":"BUDCustomEventAdapterController"],
-                    ],
-                    [
-                        ["title":"Pangle-Owned GDPR Consent Dialog","class":""],
                     ],
                 ];
     

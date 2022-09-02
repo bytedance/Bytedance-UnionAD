@@ -37,7 +37,7 @@ class BUDAppOpenAdViewController: UIViewController {
         return button
     }()
     
-    var appOpenAd: BUAppOpenAd?
+    var appOpenAd: PAGLAppOpenAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,56 +62,55 @@ class BUDAppOpenAdViewController: UIViewController {
     }
 }
 
-private extension BUDAppOpenAdViewController {
+extension BUDAppOpenAdViewController :PAGLAppOpenAdDelegate{
     
     @objc func onPortraitButton() {
         statusLabel.text = "Loading......";
-        let adSlot = BUAdSlot()
-        adSlot.id = "890000078"
-        appOpenAd = .init(slot: adSlot)
-        appOpenAd?.load(withTimeout: 3, completionHandler: { appOpenAd, error in
+        PAGLAppOpenAd.load(withSlotID: "890000078", request: PAGAppOpenRequest(), completionHandler: { appOpenAd, error in
             if error != nil {
                 self.statusLabel.text = "Ad loaded fail";
             } else {
                 self.statusLabel.text = "Ad loaded";
+            }
+            if let openAd = appOpenAd {
+                openAd.delegate = self
+                self.appOpenAd = openAd
             }
         })
     }
     
     @objc func onLandscapeButton() {
         statusLabel.text = "Loading......";
-        let adSlot = BUAdSlot()
-        adSlot.id = "890000079"
-        appOpenAd = .init(slot: adSlot)
-        appOpenAd?.load(withTimeout: 3, completionHandler: { appOpenAd, error in
+        PAGLAppOpenAd.load(withSlotID: "890000079", request: PAGAppOpenRequest(), completionHandler: { appOpenAd, error in
             if error != nil {
                 self.statusLabel.text = "Ad loaded fail";
             } else {
                 self.statusLabel.text = "Ad loaded";
             }
+            if let openAd = appOpenAd {
+                openAd.delegate = self
+                self.appOpenAd = openAd
+            }
         })
     }
     
     @objc func onShowButton() {
-        appOpenAd?.present(fromRootViewController: self)
+        self.appOpenAd?.present(fromRootViewController: self)
+    }
+    
+    func adDidShow(_ ad: PAGAdProtocol) {
+        print("BUDAppOpenAdViewController | adDidShow:")
+    }
+    
+    func adDidClick(_ ad: PAGAdProtocol) {
+        print("BUDAppOpenAdViewController | adDidClick:")
+    }
+    
+    func adDidDismiss(_ ad: PAGAdProtocol) {
+        print("BUDAppOpenAdViewController | adDidDismiss:")
+        self.appOpenAd = nil
+        self.statusLabel.text = "Tap button to load Ad"
     }
 }
 
-extension BUDAppOpenAdViewController: BUAppOpenAdDelegate {
-    
-    func didPresent(for appOpenAd: BUAppOpenAd) {
-        
-    }
-    
-    func didClick(for appOpenAd: BUAppOpenAd) {
-        
-    }
-    
-    func didClickSkip(for appOpenAd: BUAppOpenAd) {
-        
-    }
-    
-    func countdownToZero(for appOpenAd: BUAppOpenAd) {
-        
-    }
-}
+

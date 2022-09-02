@@ -1,5 +1,5 @@
 //
-//  BUDNativeViewController.swift
+//  BUDInterstitialViewController.swift
 //  BUADVADemo_Swift
 //
 //  Created by bytedance on 2020/11/6.
@@ -7,122 +7,65 @@
 
 import Foundation
 
-class BUDFullscreenViewController: ViewController {
-    private var _fullscreenAd:BUFullscreenVideoAd?;
+class BUDInterstitialViewController: ViewController {
+    private var interstitialAd:PAGLInterstitialAd?;
     private lazy var _statusLabel = UILabel();
     
     override func viewDidLoad() {
-        self.navigationItem.title = "Fullscreen"
+        self.navigationItem.title = "InterstitialAd"
         self.view.backgroundColor = .white;
         creatView()
     }
     ///load Portrait Ad
     @objc func loadPortraitAd(_ sender:UIButton) -> Void {
-        loadFullscreenVideoAdWithSlotID(slotID: "980088188")
+        loadInterstitialVideoAdWithSlotID(slotID: "980088188")
     }
     ///load Landscape Ad
     @objc func loadLandscapeAd(_ sender:UIButton) -> Void {
-        loadFullscreenVideoAdWithSlotID(slotID: "980099798")
+        loadInterstitialVideoAdWithSlotID(slotID: "980099798")
     }
     ///show ad
     @objc func showAd(_ sender:UIButton) -> Void {
-        _fullscreenAd?.show(fromRootViewController: self)
+        interstitialAd?.present(fromRootViewController: self)
         
         _statusLabel.text = "Tap left button to load Ad";
     }
-    func loadFullscreenVideoAdWithSlotID(slotID:String) -> Void {
-        // important:----- Every time the data is requested, a new one BUFullscreenVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
-        _fullscreenAd = BUFullscreenVideoAd.init(slotID: slotID)
-        _fullscreenAd?.delegate = self
-        _fullscreenAd?.loadData()
-        
+    func loadInterstitialVideoAdWithSlotID(slotID:String) -> Void {
+        // important:----- Every time the data is requested, a new one PAGLInterstitialAd needs to be initialized. Duplicate request data by the same PAGLInterstitialAd ad is not allowed.
         _statusLabel.text = "Loading......";
+        PAGLInterstitialAd.load(withSlotID: slotID,
+                                                request: PAGInterstitialRequest()) { [weak self] interstitialAd, error in
+                                  if let error = error {
+                                      print(error.localizedDescription)
+                                      self?._statusLabel.text = "Ad loaded fail";
+                                      return
+                                  }
+                                  self?._statusLabel.text = "Ad loaded";
+                                  if let interstitialAd = interstitialAd {
+                                      self?.interstitialAd = interstitialAd
+                                      interstitialAd.delegate = self
+                                  }
+                              }
+        
     }
 }
-///BUFullscreenVideoAdDelegate
-extension BUDFullscreenViewController: BUFullscreenVideoAdDelegate {
-    /**
-     This method is called when video ad material loaded successfully.
-     */
-    func fullscreenVideoMaterialMetaAdDidLoad(_ fullscreenVideoAd: BUFullscreenVideoAd) {
-        _statusLabel.text = "Ad loaded";
-    }
+///PAGLInterstitialAdDelegate
+extension BUDInterstitialViewController: PAGLInterstitialAdDelegate {
 
-    /**
-     This method is called when video ad materia failed to load.
-     @param error : the reason of error
-     */
-    func fullscreenVideoAd(_ fullscreenVideoAd: BUFullscreenVideoAd, didFailWithError error: Error?) {
-        _statusLabel.text = "Ad loaded fail";
-    }
-
-    /**
-     This method is called when video cached successfully.
-     */
-    func fullscreenVideoAdVideoDataDidLoad(_ fullscreenVideoAd: BUFullscreenVideoAd) {
-        _statusLabel.text = "Video caching complete";
-    }
-
-    /**
-     This method is called when video ad slot will be showing.
-     */
-    func fullscreenVideoAdWillVisible(_ fullscreenVideoAd: BUFullscreenVideoAd) {
+    func adDidShow(_ ad: PAGAdProtocol) {
         
     }
-
-    /**
-     This method is called when video ad slot has been shown.
-     */
-    func fullscreenVideoAdDidVisible(_ fullscreenVideoAd: BUFullscreenVideoAd) {
+    
+    func adDidClick(_ ad: PAGAdProtocol) {
         
     }
-
-    /**
-     This method is called when video ad is clicked.
-     */
-    func fullscreenVideoAdDidClick(_ fullscreenVideoAd: BUFullscreenVideoAd) {
-        
-    }
-
-    /**
-     This method is called when video ad is about to close.
-     */
-    func fullscreenVideoAdWillClose(_ fullscreenVideoAd: BUFullscreenVideoAd) {
-        
-    }
-
-    /**
-     This method is called when video ad is closed.
-     */
-    func fullscreenVideoAdDidClose(_ fullscreenVideoAd: BUFullscreenVideoAd) {
-        
-    }
-
-
-    /**
-     This method is called when video ad play completed or an error occurred.
-     @param error : the reason of error
-     */
-    func fullscreenVideoAdDidPlayFinish(_ fullscreenVideoAd: BUFullscreenVideoAd, didFailWithError error: Error?) {
-        
-    }
-
-    /**
-     This method is called when the user clicked skip button.
-     */
-    func fullscreenVideoAdDidClickSkip(_ fullscreenVideoAd: BUFullscreenVideoAd) {
-        
-    }
-
-    /**
-    this method is used to get the type of fullscreen video ad
-     */
-    func fullscreenVideoAdCallback(_ fullscreenVideoAd: BUFullscreenVideoAd, with fullscreenVideoAdType: BUFullScreenVideoAdType) {
-        
+    
+    func adDidDismiss(_ ad: PAGAdProtocol) {
+        interstitialAd = nil
     }
 }
 ///Exmple UI
-extension BUDFullscreenViewController {
+extension BUDInterstitialViewController {
     func creatView() -> Void {
         let color = UIColor.init(red: 1.0, green: 0, blue: 23.0/255.0, alpha: 1);
         

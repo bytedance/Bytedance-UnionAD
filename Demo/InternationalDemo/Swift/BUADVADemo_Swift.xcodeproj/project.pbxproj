@@ -7,14 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B0D2EB128584E0C00676DE9 /* BUAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0D2EA628584E0B00676DE9 /* BUAdSDK.framework */; };
-		2B0D2EB228584E0C00676DE9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2B0D2EA728584E0C00676DE9 /* LICENSE */; };
-		2B0D2EB328584E0C00676DE9 /* BURelyAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0D2EA828584E0C00676DE9 /* BURelyAdSDK.framework */; };
-		2B0D2EB528584E0C00676DE9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2B0D2EAA28584E0C00676DE9 /* README.md */; };
-		2B0D2EB628584E0C00676DE9 /* BUVAAuxiliary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0D2EAB28584E0C00676DE9 /* BUVAAuxiliary.framework */; };
-		2B0D2EB728584E0C00676DE9 /* BUFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0D2EAC28584E0C00676DE9 /* BUFoundation.framework */; };
-		2B0D2EB828584E0D00676DE9 /* PAGAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0D2EAD28584E0C00676DE9 /* PAGAdSDK.framework */; };
-		2B0D2EBA28584E0D00676DE9 /* PAGAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B0D2EAF28584E0C00676DE9 /* PAGAdSDK.bundle */; };
 		2B1171B228157A3700180E61 /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1171B128157A3700180E61 /* CoreML.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2B1D7D59255D236400787A7F /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1D7D58255D236400787A7F /* libc++abi.tbd */; };
 		2B6DD269255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD252255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */; };
@@ -60,14 +52,6 @@
 
 /* Begin PBXFileReference section */
 		22919F329070FB9117C15102 /* Pods-Demo-BUADVADemo_Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; path = "../ExampleProject/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; sourceTree = "<group>"; };
-		2B0D2EA628584E0B00676DE9 /* BUAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUAdSDK.framework; sourceTree = "<group>"; };
-		2B0D2EA728584E0C00676DE9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		2B0D2EA828584E0C00676DE9 /* BURelyAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BURelyAdSDK.framework; sourceTree = "<group>"; };
-		2B0D2EAA28584E0C00676DE9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		2B0D2EAB28584E0C00676DE9 /* BUVAAuxiliary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUVAAuxiliary.framework; sourceTree = "<group>"; };
-		2B0D2EAC28584E0C00676DE9 /* BUFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUFoundation.framework; sourceTree = "<group>"; };
-		2B0D2EAD28584E0C00676DE9 /* PAGAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PAGAdSDK.framework; sourceTree = "<group>"; };
-		2B0D2EAF28584E0C00676DE9 /* PAGAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PAGAdSDK.bundle; sourceTree = "<group>"; };
 		2B1171B128157A3700180E61 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		2B1D7D58255D236400787A7F /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		2B6DD251255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FullScreenVideoCustomEventAdapter.h; sourceTree = "<group>"; };
@@ -135,17 +119,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B1171B228157A3700180E61 /* CoreML.framework in Frameworks */,
-				2B0D2EB328584E0C00676DE9 /* BURelyAdSDK.framework in Frameworks */,
 				680E472A271EF89B001E50E7 /* AppTrackingTransparency.framework in Frameworks */,
 				2BED9731257DDC5200EF5C1F /* Security.framework in Frameworks */,
 				2BED972E257DDC4F00EF5C1F /* libiconv.tbd in Frameworks */,
-				2B0D2EB628584E0C00676DE9 /* BUVAAuxiliary.framework in Frameworks */,
 				2BED972A257DDC4800EF5C1F /* libz.tbd in Frameworks */,
 				2B1D7D59255D236400787A7F /* libc++abi.tbd in Frameworks */,
 				2B8DC7E72555601000B820D4 /* libc++.tbd in Frameworks */,
-				2B0D2EB828584E0D00676DE9 /* PAGAdSDK.framework in Frameworks */,
 				2B8DC7E42555600300B820D4 /* libresolv.9.tbd in Frameworks */,
-				2B0D2EB128584E0C00676DE9 /* BUAdSDK.framework in Frameworks */,
 				2B8DC7DD25555FD600B820D4 /* CoreMotion.framework in Frameworks */,
 				2B8DC7DB25555FC900B820D4 /* AdSupport.framework in Frameworks */,
 				2B8DC7D925555FB900B820D4 /* Photos.framework in Frameworks */,
@@ -153,7 +133,6 @@
 				2B8DC7D325555E2C00B820D4 /* libxml2.tbd in Frameworks */,
 				2B8DC7D025555E2500B820D4 /* libbz2.tbd in Frameworks */,
 				75F3854921D2A9CF63A5C007 /* libPods-Demo-BUADVADemo_Swift.a in Frameworks */,
-				2B0D2EB728584E0C00676DE9 /* BUFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,22 +147,6 @@
 			);
 			name = Pods;
 			path = ../../../Pods;
-			sourceTree = "<group>";
-		};
-		2B0D2EA428584E0B00676DE9 /* SDK */ = {
-			isa = PBXGroup;
-			children = (
-				2B0D2EA628584E0B00676DE9 /* BUAdSDK.framework */,
-				2B0D2EA728584E0C00676DE9 /* LICENSE */,
-				2B0D2EA828584E0C00676DE9 /* BURelyAdSDK.framework */,
-				2B0D2EAA28584E0C00676DE9 /* README.md */,
-				2B0D2EAB28584E0C00676DE9 /* BUVAAuxiliary.framework */,
-				2B0D2EAC28584E0C00676DE9 /* BUFoundation.framework */,
-				2B0D2EAD28584E0C00676DE9 /* PAGAdSDK.framework */,
-				2B0D2EAF28584E0C00676DE9 /* PAGAdSDK.bundle */,
-			);
-			name = SDK;
-			path = ../../../SDK;
 			sourceTree = "<group>";
 		};
 		2B6DD24F255D439000FF8CA5 /* CustomEventAdapter */ = {
@@ -271,7 +234,6 @@
 		2B8DC78B2555438200B820D4 /* BUADVADemo_Swift */ = {
 			isa = PBXGroup;
 			children = (
-				2B0D2EA428584E0B00676DE9 /* SDK */,
 				2B8DC78C2555438200B820D4 /* AppDelegate.swift */,
 				2B8DC7952555438400B820D4 /* Assets.xcassets */,
 				2BF7EE55255BCC090069B650 /* ExampleApp */,
@@ -407,13 +369,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B0D2EB528584E0C00676DE9 /* README.md in Resources */,
 				2B6DD271255D439000FF8CA5 /* UnifiedNativeAdView.xib in Resources */,
 				2B8DC7992555438400B820D4 /* LaunchScreen.storyboard in Resources */,
 				2B8DC7962555438400B820D4 /* Assets.xcassets in Resources */,
 				2B8DC7942555438200B820D4 /* Main.storyboard in Resources */,
-				2B0D2EBA28584E0D00676DE9 /* PAGAdSDK.bundle in Resources */,
-				2B0D2EB228584E0C00676DE9 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

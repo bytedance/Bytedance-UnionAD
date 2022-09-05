@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global-Beta'
-  s.version      = '4.7.0.2'
+  s.version      = '4.8.0.0'
   s.summary          = 'Ads-Global-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Global-Beta provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -23,7 +23,6 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   s.weak_frameworks = 'AppTrackingTransparency', 'CoreML'
-  valid_archs = ['armv7', 'i386', 'x86_64', 'arm64']
 
   s.preserve_paths = 'SDK/LICENSE'
   s.preserve_paths = 'SDK/README.md'
@@ -50,13 +49,13 @@ Pod::Spec.new do |s|
   
   ## 依赖版本为指定版本号
   s.subspec 'Dep_Accurate' do |ss|
-    ss.dependency 'BURelyFoundation/Pangle', '0.0.3.7'
+    ss.dependency 'BURelyFoundation_Global/Pangle', '0.0.3.13'
     ss.dependency 'BUAdSDK', '0.1.0.19'
   end
 
   ## 依赖版本为指定版本范围
   s.subspec 'Dep_Compatible' do |ss|
-    ss.dependency 'BURelyFoundation/Pangle', '~> 0.0.3.7'
+    ss.dependency 'BURelyFoundation_Global/Pangle', '~> 0.0.3.13'
     ss.dependency 'BUAdSDK', '~> 0.1.0.19'
   end
 

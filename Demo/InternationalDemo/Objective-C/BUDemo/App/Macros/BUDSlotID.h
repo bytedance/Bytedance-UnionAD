@@ -1,10 +1,8 @@
 //
-//  BUDSlotID.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by Bytedance on 2019/11/27.
-//  Copyright © 2019 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #ifndef BUDSlotID_h
 #define BUDSlotID_h

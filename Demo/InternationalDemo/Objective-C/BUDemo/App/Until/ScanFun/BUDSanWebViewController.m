@@ -1,10 +1,8 @@
 //
-//  BUDSanViewController.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by bytedance on 2021/9/14.
-//  Copyright © 2021 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDSanWebViewController.h"
 #import <WebKit/WebKit.h>

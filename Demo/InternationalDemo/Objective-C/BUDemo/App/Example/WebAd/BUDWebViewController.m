@@ -1,7 +1,8 @@
 //
-// Created by bytedance on 2020/9/22.
-// Copyright (c) 2020 makaiwen. All rights reserved.
+//  BUADVADemo
 //
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #if __has_include(<BUWebAd/BUWebAd.h>)
 #import "BUDWebViewController.h"

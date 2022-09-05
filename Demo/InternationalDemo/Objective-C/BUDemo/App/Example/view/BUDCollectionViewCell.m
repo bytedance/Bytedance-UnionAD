@@ -1,10 +1,8 @@
 //
-//  BUDCollectionViewCell.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by 李盛 on 2019/3/1.
-//  Copyright © 2019 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDCollectionViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>

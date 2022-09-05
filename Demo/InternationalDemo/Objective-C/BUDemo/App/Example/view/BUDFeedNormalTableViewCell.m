@@ -1,10 +1,8 @@
 //
-//  BUDFeedNormalTableViewCell.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by iCuiCui on 2018/10/28.
-//  Copyright © 2018年 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDFeedNormalTableViewCell.h"
 #import "BUDFeedStyleHelper.h"

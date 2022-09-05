@@ -1,10 +1,8 @@
 //
-//  BUDSelectedView.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by Bytedance on 2019/12/1.
-//  Copyright © 2019 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import <UIKit/UIKit.h>
 #import "UIView+Draw.h"

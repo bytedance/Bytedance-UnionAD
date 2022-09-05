@@ -1,10 +1,8 @@
 //
-//  BUDPersonalPromptsWebViewController.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by bytedance on 2020/12/15.
-//  Copyright © 2020 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDPersonalPromptsWebViewController.h"
 #import <BUAdSDK/BUAdSDK.h>

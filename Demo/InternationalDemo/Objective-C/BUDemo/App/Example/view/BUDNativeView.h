@@ -1,9 +1,8 @@
 //
-//  BUDNativeView.h
-//  PAGAdSDK
+//  BUADVADemo
 //
-//  Created by bytedance on 2022/4/11.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import <UIKit/UIKit.h>
 

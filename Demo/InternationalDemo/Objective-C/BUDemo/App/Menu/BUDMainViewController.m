@@ -1,10 +1,8 @@
 //
-//  MainViewController.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by jiacy on 2017/6/6.
-//  Copyright © 2017年 chenren. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDMainViewController.h"
 #import "BUDActionCellDefine.h"

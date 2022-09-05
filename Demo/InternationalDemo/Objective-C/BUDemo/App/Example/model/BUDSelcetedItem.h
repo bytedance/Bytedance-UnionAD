@@ -1,10 +1,8 @@
 //
-//  BUDSelcetedItem.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by cuiyanan on 2019/12/4.
-//  Copyright © 2019 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import <Foundation/Foundation.h>
 

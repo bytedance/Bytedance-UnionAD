@@ -1,10 +1,8 @@
 //
-//  BUDRewardedVideoAgainDelegateObj.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by wangyanlin on 2021/6/8.
-//  Copyright © 2021 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDRewardedVideoAgainDelegateObj.h"
 #import "BUDMacros.h"

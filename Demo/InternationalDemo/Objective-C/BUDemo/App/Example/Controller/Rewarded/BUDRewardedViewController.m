@@ -1,10 +1,8 @@
 //
-//  BUDRewardedViewController.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by ByteDance on 2022/5/11.
+//  Created by bytedance in 2022.
 //  Copyright © 2022 bytedance. All rights reserved.
-//
 
 #import "BUDRewardedViewController.h"
 #import <PAGAdSDK/PAGRewardedAdDelegate.h>
@@ -52,7 +50,12 @@
 
 - (void)loadRewardVideoAdWithSlotID:(NSString *)slotID {
     self.selectedView.promptStatus = BUDPromptStatusLoading;
+    __weak typeof(self) weakself = self;
     [PAGRewardedAd loadAdWithSlotID:slotID request:[PAGRewardedRequest request] completionHandler:^(PAGRewardedAd * _Nullable rewardedAd, NSError * _Nullable error) {
+        if (!weakself) {
+            return;
+        }
+        __strong typeof(weakself) self = weakself;
         self.rewardedAd = rewardedAd;
         self.rewardedAd.delegate = self;
         if (error) {

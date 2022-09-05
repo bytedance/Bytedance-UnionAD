@@ -1,10 +1,8 @@
 //
-//  BUDSwitchView.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by Rush.D.Xzj on 2020/10/22.
-//  Copyright © 2020 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import <UIKit/UIKit.h>
 

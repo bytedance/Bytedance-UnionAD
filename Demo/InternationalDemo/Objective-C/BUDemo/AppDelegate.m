@@ -1,10 +1,8 @@
 //
-//  AppDelegate.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by chenren on 10/05/2017.
-//  Copyright © 2017 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "AppDelegate.h"
 #import "BUDAdManager.h"

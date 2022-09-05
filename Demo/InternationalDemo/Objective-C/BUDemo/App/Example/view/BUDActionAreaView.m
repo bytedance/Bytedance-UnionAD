@@ -1,10 +1,8 @@
 //
-//  BUDActionAreaView.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by carl on 2017/12/4.
-//  Copyright © 2017年 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDActionAreaView.h"
 #import <BUAdSDK/BUAdSDK.h>

@@ -1,10 +1,8 @@
 //
-//  BUDNativeViewController.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by Willie on 2022/4/24.
+//  Created by bytedance in 2022.
 //  Copyright © 2022 bytedance. All rights reserved.
-//
 
 #import <PAGAdSDK/PAGLNativeAd.h>
 #import <PAGAdSDK/PAGNativeRequest.h>
@@ -53,6 +51,7 @@
         
         UIButton *customButton = [UIButton buttonWithType:UIButtonTypeSystem];
         customButton.frame = CGRectMake(self.view.frame.size.width - 80, 480, 70, 20);
+        customButton.backgroundColor = [UIColor orangeColor];
         [customButton setTitle:@"see more" forState:UIControlStateNormal];
         [weakView addSubview:customButton];
         

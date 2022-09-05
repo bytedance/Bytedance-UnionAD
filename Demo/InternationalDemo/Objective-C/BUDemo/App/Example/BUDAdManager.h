@@ -1,10 +1,8 @@
 //
-//  BUAdManager.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by carlliu on 2017/7/27.
-//  Copyright © 2017年 chenren. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import <Foundation/Foundation.h>
 

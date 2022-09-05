@@ -1,10 +1,8 @@
 //
-//  BUDExpressFullScreenVideoViewController.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by Bytedance on 2019/7/29.
-//  Copyright © 2019 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDBaseExampleViewController.h"
 

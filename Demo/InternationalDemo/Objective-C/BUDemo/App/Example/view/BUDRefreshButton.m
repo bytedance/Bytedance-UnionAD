@@ -1,10 +1,8 @@
 //
-//  BUDRefreshButton.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by iCuiCui on 2018/11/1.
-//  Copyright © 2018年 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDRefreshButton.h"
 #import "BUDMacros.h"

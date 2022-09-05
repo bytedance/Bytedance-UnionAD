@@ -1,10 +1,8 @@
 //
-//  UIColor+DarkMode.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by Willie on 2021/3/22.
-//  Copyright © 2021 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import <UIKit/UIKit.h>
 

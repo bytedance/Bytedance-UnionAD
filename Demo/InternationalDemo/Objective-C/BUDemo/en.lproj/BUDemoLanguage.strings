@@ -1,10 +1,8 @@
-/* 
-  BUDemoLanguage.strings
-  BUDemo
-
-  Created by 李盛 on 2019/1/10.
-  Copyright © 2019 bytedance. All rights reserved.
-*/
+//
+//  BUADVADemo
+//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 "test ads" = "Test ads";
 "adsTitle" = "Ads title";

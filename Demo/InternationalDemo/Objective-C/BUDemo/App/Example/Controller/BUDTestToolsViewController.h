@@ -1,10 +1,8 @@
 //
-//  BUDTestToolsViewController.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by wangyanlin on 2020/4/14.
-//  Copyright © 2020 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDBaseExampleViewController.h"
 

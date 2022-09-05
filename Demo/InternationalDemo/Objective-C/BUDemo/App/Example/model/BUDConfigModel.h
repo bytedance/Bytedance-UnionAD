@@ -1,10 +1,8 @@
 //
-//  BUDConfigModel.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by 李盛 on 2019/10/21.
-//  Copyright © 2019 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import <Foundation/Foundation.h>
 

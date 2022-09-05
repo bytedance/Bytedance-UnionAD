@@ -1,10 +1,8 @@
 //
-//  BUDNativeViewController.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by Willie on 2022/4/24.
+//  Created by bytedance in 2022.
 //  Copyright © 2022 bytedance. All rights reserved.
-//
 
 #import "BUDBaseExampleViewController.h"
 

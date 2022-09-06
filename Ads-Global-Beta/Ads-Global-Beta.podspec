@@ -61,9 +61,9 @@ Pod::Spec.new do |s|
 
   ## HM
   s.subspec 'APM' do |ss|
-    ss.dependency 'RangersAPM-Pangle/Crash', '2.3.2-Fix-pangle'
-    ss.dependency 'RangersAPM-Pangle/Global', '2.3.2-Fix-pangle'
-    ss.dependency 'RangersAPM-Pangle/SessionTracker', '2.3.2-Fix-pangle'
+    ss.dependency 'RangersAPM-Pangle/Crash', '2.13.0'
+    ss.dependency 'RangersAPM-Pangle/Global', '2.13.0'
+    ss.dependency 'RangersAPM-Pangle/SessionTracker', '2.13.0'
   end
 
   ## RE

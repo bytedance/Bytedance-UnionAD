@@ -6,7 +6,9 @@ workspace 'BUADVADemo.xcworkspace'
 abstract_target 'Demo' do
     pod 'Google-Mobile-Ads-SDK'
     pod 'Bugly'
-    pod 'Ads-Global'
+    pod 'SDWebImage'
+    pod 'Ads-Global', '~> 4.6.2.2'
+ 
 
     target 'BUADVADemo' do
       project 'BUADVADemo.xcodeproj'

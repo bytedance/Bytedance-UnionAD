@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B06A8AE25581E6B00ABF425 /* BUDNativeExampleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B06A8AD25581E6B00ABF425 /* BUDNativeExampleView.xib */; };
+		2B1171B228157A3700180E61 /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1171B128157A3700180E61 /* CoreML.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2B1D7D59255D236400787A7F /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1D7D58255D236400787A7F /* libc++abi.tbd */; };
 		2B6DD269255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD252255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */; };
 		2B6DD26A255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD257255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */; };
@@ -20,10 +20,6 @@
 		2B6DD271255D439000FF8CA5 /* UnifiedNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B6DD262255D439000FF8CA5 /* UnifiedNativeAdView.xib */; };
 		2B6DD272255D439000FF8CA5 /* BUDAdmob_BannerCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD264255D439000FF8CA5 /* BUDAdmob_BannerCusEventVC.m */; };
 		2B6DD273255D439000FF8CA5 /* BUDAdmobCustomEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD267255D439000FF8CA5 /* BUDAdmobCustomEventViewController.m */; };
-		2B6DD2A4255D43AF00FF8CA5 /* BUAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6DD29F255D43AF00FF8CA5 /* BUAdSDK.framework */; };
-		2B6DD2A6255D43AF00FF8CA5 /* BUVAAuxiliary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6DD2A1255D43AF00FF8CA5 /* BUVAAuxiliary.framework */; };
-		2B6DD2A7255D43AF00FF8CA5 /* BUFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6DD2A2255D43AF00FF8CA5 /* BUFoundation.framework */; };
-		2B6DD2A8255D43AF00FF8CA5 /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B6DD2A3255D43AF00FF8CA5 /* BUAdSDK.bundle */; };
 		2B8DC78D2555438200B820D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC78C2555438200B820D4 /* AppDelegate.swift */; };
 		2B8DC78F2555438200B820D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC78E2555438200B820D4 /* SceneDelegate.swift */; };
 		2B8DC7942555438200B820D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B8DC7922555438200B820D4 /* Main.storyboard */; };
@@ -32,7 +28,7 @@
 		2B8DC7A62555489D00B820D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC7A52555489D00B820D4 /* ViewController.swift */; };
 		2B8DC7AD2555572F00B820D4 /* BUDNativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC7AC2555572F00B820D4 /* BUDNativeViewController.swift */; };
 		2B8DC7B325555A6A00B820D4 /* BUDCustomEventAdapterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC7AF25555A6A00B820D4 /* BUDCustomEventAdapterController.swift */; };
-		2B8DC7B425555A6A00B820D4 /* BUDFullscreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC7B025555A6A00B820D4 /* BUDFullscreenViewController.swift */; };
+		2B8DC7B425555A6A00B820D4 /* BUDInterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC7B025555A6A00B820D4 /* BUDInterstitialViewController.swift */; };
 		2B8DC7B525555A6A00B820D4 /* BUDRewardVideoAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC7B125555A6A00B820D4 /* BUDRewardVideoAdViewController.swift */; };
 		2B8DC7B625555A6A00B820D4 /* BUDBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC7B225555A6A00B820D4 /* BUDBannerViewController.swift */; };
 		2B8DC7D025555E2500B820D4 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8DC7CF25555E2500B820D4 /* libbz2.tbd */; };
@@ -43,21 +39,20 @@
 		2B8DC7DD25555FD600B820D4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8DC7DC25555FD600B820D4 /* CoreMotion.framework */; };
 		2B8DC7E42555600300B820D4 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8DC7E32555600300B820D4 /* libresolv.9.tbd */; };
 		2B8DC7E72555601000B820D4 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8DC7E62555601000B820D4 /* libc++.tbd */; };
-		2BC9DD18255800A60080366B /* BUDNativeExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC9DD17255800A60080366B /* BUDNativeExampleView.swift */; };
 		2BD5895D274612D400CEC212 /* BUDAdmobTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5895C274612D400CEC212 /* BUDAdmobTool.m */; };
 		2BED972A257DDC4800EF5C1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9729257DDC4800EF5C1F /* libz.tbd */; };
 		2BED972E257DDC4F00EF5C1F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED972D257DDC4F00EF5C1F /* libiconv.tbd */; };
 		2BED9731257DDC5200EF5C1F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9730257DDC5200EF5C1F /* Security.framework */; };
 		2BFDA5DA2635583A00C17053 /* UIColor+DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDA5D82635583A00C17053 /* UIColor+DarkMode.m */; };
-		365BC27F279A59EA001C1DBB /* BURelyFoundation_Global.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365BC27E279A59EA001C1DBB /* BURelyFoundation_Global.framework */; };
 		365BC281279A5A78001C1DBB /* BUDAppOpenAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365BC280279A5A78001C1DBB /* BUDAppOpenAdViewController.swift */; };
+		36774C62282BBE6500B859FC /* BUDNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36774C61282BBE6500B859FC /* BUDNativeView.swift */; };
 		680E472A271EF89B001E50E7 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 680E4729271EF89B001E50E7 /* AppTrackingTransparency.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		75F3854921D2A9CF63A5C007 /* libPods-Demo-BUADVADemo_Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA995E4CA1F0A21A38A6448 /* libPods-Demo-BUADVADemo_Swift.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22919F329070FB9117C15102 /* Pods-Demo-BUADVADemo_Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; path = "../ExampleProject/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; sourceTree = "<group>"; };
-		2B06A8AD25581E6B00ABF425 /* BUDNativeExampleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BUDNativeExampleView.xib; sourceTree = "<group>"; };
+		2B1171B128157A3700180E61 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		2B1D7D58255D236400787A7F /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		2B6DD251255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FullScreenVideoCustomEventAdapter.h; sourceTree = "<group>"; };
 		2B6DD252255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_BannerCustomEventAdapter.m; sourceTree = "<group>"; };
@@ -80,10 +75,6 @@
 		2B6DD265255D439000FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FeedNativeCusEventVC.h; sourceTree = "<group>"; };
 		2B6DD267255D439000FF8CA5 /* BUDAdmobCustomEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmobCustomEventViewController.m; sourceTree = "<group>"; };
 		2B6DD268255D439000FF8CA5 /* BUDAdmobCustomEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmobCustomEventViewController.h; sourceTree = "<group>"; };
-		2B6DD29F255D43AF00FF8CA5 /* BUAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUAdSDK.framework; sourceTree = "<group>"; };
-		2B6DD2A1255D43AF00FF8CA5 /* BUVAAuxiliary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUVAAuxiliary.framework; sourceTree = "<group>"; };
-		2B6DD2A2255D43AF00FF8CA5 /* BUFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUFoundation.framework; sourceTree = "<group>"; };
-		2B6DD2A3255D43AF00FF8CA5 /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BUAdSDK.bundle; sourceTree = "<group>"; };
 		2B8DC7892555438200B820D4 /* BUADVADemo_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUADVADemo_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B8DC78C2555438200B820D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B8DC78E2555438200B820D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,7 +85,7 @@
 		2B8DC7A52555489D00B820D4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2B8DC7AC2555572F00B820D4 /* BUDNativeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUDNativeViewController.swift; sourceTree = "<group>"; };
 		2B8DC7AF25555A6A00B820D4 /* BUDCustomEventAdapterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BUDCustomEventAdapterController.swift; sourceTree = "<group>"; };
-		2B8DC7B025555A6A00B820D4 /* BUDFullscreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BUDFullscreenViewController.swift; sourceTree = "<group>"; };
+		2B8DC7B025555A6A00B820D4 /* BUDInterstitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BUDInterstitialViewController.swift; sourceTree = "<group>"; };
 		2B8DC7B125555A6A00B820D4 /* BUDRewardVideoAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BUDRewardVideoAdViewController.swift; sourceTree = "<group>"; };
 		2B8DC7B225555A6A00B820D4 /* BUDBannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BUDBannerViewController.swift; sourceTree = "<group>"; };
 		2B8DC7C625555C0400B820D4 /* SwiftSocket-Brigding-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftSocket-Brigding-Header.h"; sourceTree = "<group>"; };
@@ -108,7 +99,6 @@
 		2B8DC7E32555600300B820D4 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		2B8DC7E62555601000B820D4 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		2B8DC83D25556DFA00B820D4 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework-Current/GoogleMobileAds.framework"; sourceTree = "<group>"; };
-		2BC9DD17255800A60080366B /* BUDNativeExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUDNativeExampleView.swift; sourceTree = "<group>"; };
 		2BD5895B274612D400CEC212 /* BUDAdmobTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmobTool.h; sourceTree = "<group>"; };
 		2BD5895C274612D400CEC212 /* BUDAdmobTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmobTool.m; sourceTree = "<group>"; };
 		2BED9729257DDC4800EF5C1F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -116,8 +106,8 @@
 		2BED9730257DDC5200EF5C1F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2BFDA5D82635583A00C17053 /* UIColor+DarkMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DarkMode.m"; sourceTree = "<group>"; };
 		2BFDA5D92635583A00C17053 /* UIColor+DarkMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DarkMode.h"; sourceTree = "<group>"; };
-		365BC27E279A59EA001C1DBB /* BURelyFoundation_Global.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BURelyFoundation_Global.framework; sourceTree = "<group>"; };
 		365BC280279A5A78001C1DBB /* BUDAppOpenAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUDAppOpenAdViewController.swift; sourceTree = "<group>"; };
+		36774C61282BBE6500B859FC /* BUDNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUDNativeView.swift; sourceTree = "<group>"; };
 		680E4729271EF89B001E50E7 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		8BA995E4CA1F0A21A38A6448 /* libPods-Demo-BUADVADemo_Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo-BUADVADemo_Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B994B77066A45CC3D2E80677 /* Pods-Demo-BUADVADemo_Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.release.xcconfig"; path = "../ExampleProject/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,20 +118,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B1171B228157A3700180E61 /* CoreML.framework in Frameworks */,
 				680E472A271EF89B001E50E7 /* AppTrackingTransparency.framework in Frameworks */,
 				2BED9731257DDC5200EF5C1F /* Security.framework in Frameworks */,
 				2BED972E257DDC4F00EF5C1F /* libiconv.tbd in Frameworks */,
 				2BED972A257DDC4800EF5C1F /* libz.tbd in Frameworks */,
 				2B1D7D59255D236400787A7F /* libc++abi.tbd in Frameworks */,
 				2B8DC7E72555601000B820D4 /* libc++.tbd in Frameworks */,
-				2B6DD2A4255D43AF00FF8CA5 /* BUAdSDK.framework in Frameworks */,
 				2B8DC7E42555600300B820D4 /* libresolv.9.tbd in Frameworks */,
-				2B6DD2A6255D43AF00FF8CA5 /* BUVAAuxiliary.framework in Frameworks */,
-				2B6DD2A7255D43AF00FF8CA5 /* BUFoundation.framework in Frameworks */,
 				2B8DC7DD25555FD600B820D4 /* CoreMotion.framework in Frameworks */,
 				2B8DC7DB25555FC900B820D4 /* AdSupport.framework in Frameworks */,
 				2B8DC7D925555FB900B820D4 /* Photos.framework in Frameworks */,
-				365BC27F279A59EA001C1DBB /* BURelyFoundation_Global.framework in Frameworks */,
 				2B8DC7D725555FAE00B820D4 /* Accelerate.framework in Frameworks */,
 				2B8DC7D325555E2C00B820D4 /* libxml2.tbd in Frameworks */,
 				2B8DC7D025555E2500B820D4 /* libbz2.tbd in Frameworks */,
@@ -225,25 +212,11 @@
 			path = MainPage;
 			sourceTree = "<group>";
 		};
-		2B6DD29E255D43AF00FF8CA5 /* SDK */ = {
-			isa = PBXGroup;
-			children = (
-				365BC27E279A59EA001C1DBB /* BURelyFoundation_Global.framework */,
-				2B6DD29F255D43AF00FF8CA5 /* BUAdSDK.framework */,
-				2B6DD2A1255D43AF00FF8CA5 /* BUVAAuxiliary.framework */,
-				2B6DD2A2255D43AF00FF8CA5 /* BUFoundation.framework */,
-				2B6DD2A3255D43AF00FF8CA5 /* BUAdSDK.bundle */,
-			);
-			name = SDK;
-			path = ../../SDK;
-			sourceTree = "<group>";
-		};
 		2B8DC7802555438200B820D4 = {
 			isa = PBXGroup;
 			children = (
 				2B8DC78B2555438200B820D4 /* BUADVADemo_Swift */,
 				2B6DD24F255D439000FF8CA5 /* CustomEventAdapter */,
-				2B6DD29E255D43AF00FF8CA5 /* SDK */,
 				2B8DC78A2555438200B820D4 /* Products */,
 				2B8DC7CE25555E2500B820D4 /* Frameworks */,
 				228CC2983B6D02FCAC9A3FB8 /* Pods */,
@@ -279,9 +252,8 @@
 				365BC280279A5A78001C1DBB /* BUDAppOpenAdViewController.swift */,
 				2B8DC7B225555A6A00B820D4 /* BUDBannerViewController.swift */,
 				2B8DC7AF25555A6A00B820D4 /* BUDCustomEventAdapterController.swift */,
-				2B8DC7B025555A6A00B820D4 /* BUDFullscreenViewController.swift */,
-				2BC9DD17255800A60080366B /* BUDNativeExampleView.swift */,
-				2B06A8AD25581E6B00ABF425 /* BUDNativeExampleView.xib */,
+				2B8DC7B025555A6A00B820D4 /* BUDInterstitialViewController.swift */,
+				36774C61282BBE6500B859FC /* BUDNativeView.swift */,
 				2B8DC7AC2555572F00B820D4 /* BUDNativeViewController.swift */,
 				2B8DC7B125555A6A00B820D4 /* BUDRewardVideoAdViewController.swift */,
 			);
@@ -291,6 +263,7 @@
 		2B8DC7CE25555E2500B820D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B1171B128157A3700180E61 /* CoreML.framework */,
 				680E4729271EF89B001E50E7 /* AppTrackingTransparency.framework */,
 				2BED9730257DDC5200EF5C1F /* Security.framework */,
 				2BED972D257DDC4F00EF5C1F /* libiconv.tbd */,
@@ -396,11 +369,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B06A8AE25581E6B00ABF425 /* BUDNativeExampleView.xib in Resources */,
 				2B6DD271255D439000FF8CA5 /* UnifiedNativeAdView.xib in Resources */,
 				2B8DC7992555438400B820D4 /* LaunchScreen.storyboard in Resources */,
 				2B8DC7962555438400B820D4 /* Assets.xcassets in Resources */,
-				2B6DD2A8255D43AF00FF8CA5 /* BUAdSDK.bundle in Resources */,
 				2B8DC7942555438200B820D4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +417,7 @@
 				365BC281279A5A78001C1DBB /* BUDAppOpenAdViewController.swift in Sources */,
 				2B6DD26D255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m in Sources */,
 				2B6DD269255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */,
+				36774C62282BBE6500B859FC /* BUDNativeView.swift in Sources */,
 				2B8DC7B325555A6A00B820D4 /* BUDCustomEventAdapterController.swift in Sources */,
 				2B6DD272255D439000FF8CA5 /* BUDAdmob_BannerCusEventVC.m in Sources */,
 				2B6DD26B255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m in Sources */,
@@ -456,9 +428,8 @@
 				2B8DC7B525555A6A00B820D4 /* BUDRewardVideoAdViewController.swift in Sources */,
 				2B6DD270255D439000FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m in Sources */,
 				2B6DD273255D439000FF8CA5 /* BUDAdmobCustomEventViewController.m in Sources */,
-				2B8DC7B425555A6A00B820D4 /* BUDFullscreenViewController.swift in Sources */,
+				2B8DC7B425555A6A00B820D4 /* BUDInterstitialViewController.swift in Sources */,
 				2B6DD26E255D439000FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m in Sources */,
-				2BC9DD18255800A60080366B /* BUDNativeExampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,9 +579,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = XXHND5J98K;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/../../SDK",
@@ -621,11 +592,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.3.0.1;
+				MARKETING_VERSION = 4.6.0.1;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.ADUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ADUnionInHouseDist;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT)/SwiftSocket-Brigding-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -638,9 +609,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = XXHND5J98K;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/../../SDK",
@@ -651,11 +622,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.3.0.1;
+				MARKETING_VERSION = 4.6.0.1;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.ADUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ADUnionInHouseDist;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT)/SwiftSocket-Brigding-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
                        DESC
 
   s.license          = { :type => 'MIT', :file => 'SDK/LICENSE' }
-  s.author           = { 'bytedance-tech' => 'zywork@bytedance.com' }
+  s.author           = { 'Siwant' => 'yuanhuan@bytedance.com' }
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD.git'
   s.source           = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/#{s.version}/SDK.zip" }
@@ -23,9 +23,8 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   s.weak_frameworks = 'AppTrackingTransparency', 'CoreML'
-
-  s.preserve_paths = 'SDK/LICENSE'
-  s.preserve_paths = 'SDK/README.md'
+  
+  s.resource = 'SDK/LICENSE'
 
   s.default_subspec = ['BUAdSDK']
   
@@ -49,13 +48,13 @@ Pod::Spec.new do |s|
   
   ## 依赖版本为指定版本号
   s.subspec 'Dep_Accurate' do |ss|
-    ss.dependency 'BURelyFoundation_Global/Pangle', '0.0.3.13'
+    ss.dependency 'BURelyFoundation/Pangle', '0.0.3.10'
     ss.dependency 'BUAdSDK', '0.1.0.19'
   end
 
   ## 依赖版本为指定版本范围
   s.subspec 'Dep_Compatible' do |ss|
-    ss.dependency 'BURelyFoundation_Global/Pangle', '~> 0.0.3.13'
+    ss.dependency 'BURelyFoundation/Pangle', '~> 0.0.3.10'
     ss.dependency 'BUAdSDK', '~> 0.1.0.19'
   end
 

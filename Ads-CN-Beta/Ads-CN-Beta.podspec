@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN-Beta'
-  s.version      = '4.8.0.4'
+  s.version      = '4.9.0.1'
   s.summary          = 'Ads-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText','DeviceCheck'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   
-  s.weak_frameworks = 'AppTrackingTransparency'
+  s.weak_frameworks = 'AppTrackingTransparency','DeviceCheck'
 
   s.resource = 'SDK/LICENSE'
   s.preserve_paths = 'SDK/README.md'
@@ -47,12 +47,12 @@ Pod::Spec.new do |s|
   
   ## 依赖版本为指定版本号
   s.subspec 'Dep_Accurate' do |ss|
-    ss.dependency 'BURelyFoundation/CSJ', '0.0.3.11'
+    ss.dependency 'BURelyFoundation/CSJ', '0.0.3.13'
     ss.dependency 'BUAdSDK', '0.1.0.24'
   end
   ## 依赖版本为指定版本范围
   s.subspec 'Dep_Compatible' do |ss|
-    ss.dependency 'BURelyFoundation/CSJ', '~> 0.0.3.11'
+    ss.dependency 'BURelyFoundation/CSJ', '~> 0.0.3.13'
     ss.dependency 'BUAdSDK', '~> 0.1.0.24'
   end
 

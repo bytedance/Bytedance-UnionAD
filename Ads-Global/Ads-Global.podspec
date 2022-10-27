@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.platform         = :ios, "9.0"
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
-  s.weak_frameworks = 'AppTrackingTransparency', 'CoreML'
+  s.weak_frameworks = 'AppTrackingTransparency', 'CoreML', 'DeviceCheck'
   
   s.resource = 'SDK/LICENSE'
 

@@ -28,7 +28,7 @@
 
 @interface AppDelegate () 
 @property (nonatomic, assign) CFTimeInterval startTime;
-@property (nonatomic, strong) BUSplashAdView *splashAdView;
+@property (nonatomic, strong) BUSplashView *splashAdView;
 @property (nonatomic, strong) AVAudioPlayer *audioPlay;
 @end
 

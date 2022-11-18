@@ -20,7 +20,7 @@ class BUDNativeViewController: UIViewController {
         view.addSubview(nativeView)
         
         weak var weakView = nativeView
-        PAGLNativeAd.load(withSlotID: "900546910",
+        PAGLNativeAd.load(withSlotID: "980088216",
                           request: PAGNativeRequest()) { [weak self] nativeAd, error in
             
             if let error = error {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,10 +20,6 @@
 		2B6DD271255D439000FF8CA5 /* UnifiedNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B6DD262255D439000FF8CA5 /* UnifiedNativeAdView.xib */; };
 		2B6DD272255D439000FF8CA5 /* BUDAdmob_BannerCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD264255D439000FF8CA5 /* BUDAdmob_BannerCusEventVC.m */; };
 		2B6DD273255D439000FF8CA5 /* BUDAdmobCustomEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD267255D439000FF8CA5 /* BUDAdmobCustomEventViewController.m */; };
-		2B6DD2A4255D43AF00FF8CA5 /* BUAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6DD29F255D43AF00FF8CA5 /* BUAdSDK.framework */; };
-		2B6DD2A6255D43AF00FF8CA5 /* BUVAAuxiliary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6DD2A1255D43AF00FF8CA5 /* BUVAAuxiliary.framework */; };
-		2B6DD2A7255D43AF00FF8CA5 /* BUFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6DD2A2255D43AF00FF8CA5 /* BUFoundation.framework */; };
-		2B6DD2A8255D43AF00FF8CA5 /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B6DD2A3255D43AF00FF8CA5 /* BUAdSDK.bundle */; };
 		2B8DC78D2555438200B820D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC78C2555438200B820D4 /* AppDelegate.swift */; };
 		2B8DC78F2555438200B820D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DC78E2555438200B820D4 /* SceneDelegate.swift */; };
 		2B8DC7942555438200B820D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B8DC7922555438200B820D4 /* Main.storyboard */; };
@@ -49,14 +45,13 @@
 		2BED972E257DDC4F00EF5C1F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED972D257DDC4F00EF5C1F /* libiconv.tbd */; };
 		2BED9731257DDC5200EF5C1F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9730257DDC5200EF5C1F /* Security.framework */; };
 		2BFDA5DA2635583A00C17053 /* UIColor+DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDA5D82635583A00C17053 /* UIColor+DarkMode.m */; };
-		365BC27F279A59EA001C1DBB /* BURelyFoundation_Global.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365BC27E279A59EA001C1DBB /* BURelyFoundation_Global.framework */; };
 		365BC281279A5A78001C1DBB /* BUDAppOpenAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365BC280279A5A78001C1DBB /* BUDAppOpenAdViewController.swift */; };
 		680E472A271EF89B001E50E7 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 680E4729271EF89B001E50E7 /* AppTrackingTransparency.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		75F3854921D2A9CF63A5C007 /* libPods-Demo-BUADVADemo_Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA995E4CA1F0A21A38A6448 /* libPods-Demo-BUADVADemo_Swift.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		22919F329070FB9117C15102 /* Pods-Demo-BUADVADemo_Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; path = "../ExampleProject/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; sourceTree = "<group>"; };
+		22919F329070FB9117C15102 /* Pods-Demo-BUADVADemo_Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; path = "../Demo/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		2B06A8AD25581E6B00ABF425 /* BUDNativeExampleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BUDNativeExampleView.xib; sourceTree = "<group>"; };
 		2B1D7D58255D236400787A7F /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		2B6DD251255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FullScreenVideoCustomEventAdapter.h; sourceTree = "<group>"; };
@@ -80,10 +75,6 @@
 		2B6DD265255D439000FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FeedNativeCusEventVC.h; sourceTree = "<group>"; };
 		2B6DD267255D439000FF8CA5 /* BUDAdmobCustomEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmobCustomEventViewController.m; sourceTree = "<group>"; };
 		2B6DD268255D439000FF8CA5 /* BUDAdmobCustomEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmobCustomEventViewController.h; sourceTree = "<group>"; };
-		2B6DD29F255D43AF00FF8CA5 /* BUAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUAdSDK.framework; sourceTree = "<group>"; };
-		2B6DD2A1255D43AF00FF8CA5 /* BUVAAuxiliary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUVAAuxiliary.framework; sourceTree = "<group>"; };
-		2B6DD2A2255D43AF00FF8CA5 /* BUFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUFoundation.framework; sourceTree = "<group>"; };
-		2B6DD2A3255D43AF00FF8CA5 /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BUAdSDK.bundle; sourceTree = "<group>"; };
 		2B8DC7892555438200B820D4 /* BUADVADemo_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUADVADemo_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B8DC78C2555438200B820D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B8DC78E2555438200B820D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,11 +107,10 @@
 		2BED9730257DDC5200EF5C1F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2BFDA5D82635583A00C17053 /* UIColor+DarkMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DarkMode.m"; sourceTree = "<group>"; };
 		2BFDA5D92635583A00C17053 /* UIColor+DarkMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DarkMode.h"; sourceTree = "<group>"; };
-		365BC27E279A59EA001C1DBB /* BURelyFoundation_Global.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BURelyFoundation_Global.framework; sourceTree = "<group>"; };
 		365BC280279A5A78001C1DBB /* BUDAppOpenAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUDAppOpenAdViewController.swift; sourceTree = "<group>"; };
 		680E4729271EF89B001E50E7 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		8BA995E4CA1F0A21A38A6448 /* libPods-Demo-BUADVADemo_Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo-BUADVADemo_Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B994B77066A45CC3D2E80677 /* Pods-Demo-BUADVADemo_Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.release.xcconfig"; path = "../ExampleProject/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.release.xcconfig"; sourceTree = "<group>"; };
+		B994B77066A45CC3D2E80677 /* Pods-Demo-BUADVADemo_Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.release.xcconfig"; path = "../Demo/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,14 +124,10 @@
 				2BED972A257DDC4800EF5C1F /* libz.tbd in Frameworks */,
 				2B1D7D59255D236400787A7F /* libc++abi.tbd in Frameworks */,
 				2B8DC7E72555601000B820D4 /* libc++.tbd in Frameworks */,
-				2B6DD2A4255D43AF00FF8CA5 /* BUAdSDK.framework in Frameworks */,
 				2B8DC7E42555600300B820D4 /* libresolv.9.tbd in Frameworks */,
-				2B6DD2A6255D43AF00FF8CA5 /* BUVAAuxiliary.framework in Frameworks */,
-				2B6DD2A7255D43AF00FF8CA5 /* BUFoundation.framework in Frameworks */,
 				2B8DC7DD25555FD600B820D4 /* CoreMotion.framework in Frameworks */,
 				2B8DC7DB25555FC900B820D4 /* AdSupport.framework in Frameworks */,
 				2B8DC7D925555FB900B820D4 /* Photos.framework in Frameworks */,
-				365BC27F279A59EA001C1DBB /* BURelyFoundation_Global.framework in Frameworks */,
 				2B8DC7D725555FAE00B820D4 /* Accelerate.framework in Frameworks */,
 				2B8DC7D325555E2C00B820D4 /* libxml2.tbd in Frameworks */,
 				2B8DC7D025555E2500B820D4 /* libbz2.tbd in Frameworks */,
@@ -225,25 +211,11 @@
 			path = MainPage;
 			sourceTree = "<group>";
 		};
-		2B6DD29E255D43AF00FF8CA5 /* SDK */ = {
-			isa = PBXGroup;
-			children = (
-				365BC27E279A59EA001C1DBB /* BURelyFoundation_Global.framework */,
-				2B6DD29F255D43AF00FF8CA5 /* BUAdSDK.framework */,
-				2B6DD2A1255D43AF00FF8CA5 /* BUVAAuxiliary.framework */,
-				2B6DD2A2255D43AF00FF8CA5 /* BUFoundation.framework */,
-				2B6DD2A3255D43AF00FF8CA5 /* BUAdSDK.bundle */,
-			);
-			name = SDK;
-			path = ../../SDK;
-			sourceTree = "<group>";
-		};
 		2B8DC7802555438200B820D4 = {
 			isa = PBXGroup;
 			children = (
 				2B8DC78B2555438200B820D4 /* BUADVADemo_Swift */,
 				2B6DD24F255D439000FF8CA5 /* CustomEventAdapter */,
-				2B6DD29E255D43AF00FF8CA5 /* SDK */,
 				2B8DC78A2555438200B820D4 /* Products */,
 				2B8DC7CE25555E2500B820D4 /* Frameworks */,
 				228CC2983B6D02FCAC9A3FB8 /* Pods */,
@@ -349,6 +321,7 @@
 				2B8DC7852555438200B820D4 /* Sources */,
 				2B8DC7862555438200B820D4 /* Frameworks */,
 				2B8DC7872555438200B820D4 /* Resources */,
+				E248018C4F29885F4D0623A9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -400,7 +373,6 @@
 				2B6DD271255D439000FF8CA5 /* UnifiedNativeAdView.xib in Resources */,
 				2B8DC7992555438400B820D4 /* LaunchScreen.storyboard in Resources */,
 				2B8DC7962555438400B820D4 /* Assets.xcassets in Resources */,
-				2B6DD2A8255D43AF00FF8CA5 /* BUAdSDK.bundle in Resources */,
 				2B8DC7942555438200B820D4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,6 +380,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		E248018C4F29885F4D0623A9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F1A743802F485C2A1943EA95 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

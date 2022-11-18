@@ -6,7 +6,7 @@
 
 #import "BUDCustomDislikeViewController.h"
 #import <BUAdSDK/BUAdSDK.h>
-#import <BUFoundation/BUFoundation.h>
+#import <BURelyFoundation_Global/BURelyFoundation_Global.h>
 #import "BUDPersonalPromptsWebViewController.h"
 @interface BUDCustomDislikeViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 @property (nonatomic, strong) BUNativeAd *nativeAd;
@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0];
-    CGFloat width = BUMINScreenSide - 40.0;
+    CGFloat width = PAGMINScreenSide - 40.0;
     CGFloat height = 320.0;
     if (![self.nativeAd.data.personalPrompts validPersonalPrompts]) {
         height = height - 35.0;
@@ -57,7 +57,7 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    self.dislikeTableView.frame  = CGRectMake(0, 0, BUMINScreenSide - 40.0, 320.0);
+    self.dislikeTableView.frame  = CGRectMake(0, 0, PAGMINScreenSide - 40.0, 320.0);
     self.dislikeTableView.center = CGPointMake(size.width * 0.5, size.height * 0.5);
 }
 

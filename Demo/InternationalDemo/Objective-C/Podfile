@@ -7,7 +7,7 @@ abstract_target 'Demo' do
     pod 'Google-Mobile-Ads-SDK'
     pod 'Bugly'
     pod 'SDWebImage'
-    pod 'Ads-Global', '~> 4.6.2.2'
+    pod 'Ads-Global'
  
 
     target 'BUADVADemo' do

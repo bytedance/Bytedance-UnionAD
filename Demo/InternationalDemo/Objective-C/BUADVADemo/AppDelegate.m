@@ -20,9 +20,8 @@
 #define BUFPS_OPEN 0
 #endif
 
-@interface AppDelegate () <BUSplashAdDelegate>
+@interface AppDelegate ()
 @property (nonatomic, assign) CFTimeInterval startTime;
-@property (nonatomic, strong) BUSplashAdView *splashAdView;
 @end
 
 @implementation AppDelegate

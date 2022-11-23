@@ -16,12 +16,10 @@
 
 @interface BUDSlotABViewController ()
 <
-BUNativeExpresInterstitialAdDelegate,
 BUNativeExpressFullscreenVideoAdDelegate
 >
 
 @property (nonatomic, strong) BUDSelectedView *selectedView;
-@property (nonatomic, strong) BUNativeExpressInterstitialAd *interstitialAd;
 @property (nonatomic, strong) BUNativeExpressFullscreenVideoAd *fullscreenAd;
 @property (nonatomic, copy) NSString *slotId;
 @property (nonatomic, assign) BUAdSlotAdType slotType;
@@ -46,9 +44,7 @@ BUNativeExpressFullscreenVideoAdDelegate
     } showAdAction:^{
         __strong typeof(self) strongself = weakself;
         BUAdSlotAdType slotType = strongself.slotType;
-        if (slotType == BUAdSlotAdTypeInterstitial) {
-            [strongself showInterstitial];
-        } else if (slotType == BUAdSlotAdTypeFullscreenVideo) {
+        if (slotType == BUAdSlotAdTypeFullscreenVideo) {
             [strongself showFullscreenVideoAd];
         } else {
             [self pbud_logWithSEL:_cmd msg:@"illegal action"];
@@ -66,8 +62,7 @@ BUNativeExpressFullscreenVideoAdDelegate
     [[BUSlotABManager sharedInstance] fetchSlotWithCodeGroupId:codeGroupId
                                                     completion:^(NSString *slotId, BUAdSlotAdType slotType, NSError *error) {
         if (error != nil ||
-            (slotType != BUAdSlotAdTypeInterstitial &&
-            slotType != BUAdSlotAdTypeFullscreenVideo)) {
+            (slotType != BUAdSlotAdTypeFullscreenVideo)) {
             // 无效返回, 使用客户端默认配置兜底
             self.slotType = BUAdSlotAdTypeFullscreenVideo;
             self.slotId = BUDefaultFullscreenSlotID;
@@ -76,10 +71,7 @@ BUNativeExpressFullscreenVideoAdDelegate
             self.slotId = slotId;
         }
         
-        if (self.slotType == BUAdSlotAdTypeInterstitial) {
-            // 旧插屏广告的加载流程, 可参考对应广告的接入文档
-            [self loadInterstitialWithSlotID:self.slotId];
-        } else if (self.slotType == BUAdSlotAdTypeFullscreenVideo) {
+        if (self.slotType == BUAdSlotAdTypeFullscreenVideo) {
             // 新插屏广告加载流程, 可参考对应广告的接入文档
             [self loadFullscreenVideoAdWithSlotID:self.slotId];
         }
@@ -89,23 +81,6 @@ BUNativeExpressFullscreenVideoAdDelegate
 }
 
 #pragma mark - test
-- (void)loadInterstitialWithSlotID:(NSString *)slotID {
-    CGSize size = CGSizeMake(300, 300);
-    CGFloat width = CGRectGetWidth([UIScreen mainScreen].bounds)-40;
-    CGFloat height = width/size.width*size.height;
-    self.interstitialAd = [[BUNativeExpressInterstitialAd alloc] initWithSlotID:slotID adSize:CGSizeMake(width, height)];
-    self.interstitialAd.delegate = self;
-    [self.interstitialAd loadAdData];
-    self.selectedView.promptStatus = BUDPromptStatusLoading;
-}
-
-- (void)showInterstitial {
-    if (self.interstitialAd) {
-        [self.interstitialAd showAdFromRootViewController:self];
-    }
-    self.selectedView.promptStatus = BUDPromptStatusDefault;
-}
-
 - (void)loadFullscreenVideoAdWithSlotID:(NSString *)slotID {
     self.fullscreenAd = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:slotID];
     self.fullscreenAd.delegate = self;
@@ -118,55 +93,6 @@ BUNativeExpressFullscreenVideoAdDelegate
         [self.fullscreenAd showAdFromRootViewController:self];
     }
     self.selectedView.promptStatus = BUDPromptStatusDefault;
-}
-
-#pragma ---BUNativeExpresInterstitialAdDelegate
-- (void)nativeExpresInterstitialAdDidLoad:(BUNativeExpressInterstitialAd *)interstitialAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-}
-
-- (void)nativeExpresInterstitialAd:(BUNativeExpressInterstitialAd *)interstitialAd didFailWithError:(NSError *)error {
-    self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
-    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
-}
-
-- (void)nativeExpresInterstitialAdRenderSuccess:(BUNativeExpressInterstitialAd *)interstitialAd {
-    self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
-    [self pbud_logWithSEL:_cmd msg:@""];
-}
-
-- (void)nativeExpresInterstitialAdRenderFail:(BUNativeExpressInterstitialAd *)interstitialAd error:(NSError *)error {
-    self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
-    [self pbud_logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@", error]];
-}
-
-- (void)nativeExpresInterstitialAdWillVisible:(BUNativeExpressInterstitialAd *)interstitialAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-}
-
-- (void)nativeExpresInterstitialAdDidClick:(BUNativeExpressInterstitialAd *)interstitialAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-}
-
-- (void)nativeExpresInterstitialAdWillClose:(BUNativeExpressInterstitialAd *)interstitialAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-}
-
-- (void)nativeExpresInterstitialAdDidClose:(BUNativeExpressInterstitialAd *)interstitialAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-    self.interstitialAd = nil;
-}
-
-- (void)nativeExpresInterstitialAdDidCloseOtherController:(BUNativeExpressInterstitialAd *)interstitialAd interactionType:(BUInteractionType)interactionType {
-    NSString *str;
-    if (interactionType == BUInteractionTypePage) {
-        str = @"ladingpage";
-    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
-        str = @"videoDetail";
-    } else {
-        str = @"appstoreInApp";
-    }
-    [self pbud_logWithSEL:_cmd msg:str];
 }
 
 #pragma mark - BUNativeExpressFullscreenVideoAdDelegate

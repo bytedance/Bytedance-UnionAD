@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN-Beta'
-  s.version      = '4.9.0.4'
+  s.version      = '5.0.0.0'
   s.summary          = 'Ads-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -47,13 +47,13 @@ Pod::Spec.new do |s|
   
   ## 依赖版本为指定版本号
   s.subspec 'Dep_Accurate' do |ss|
-    ss.dependency 'BURelyFoundation/CSJ', '0.0.3.13'
-    ss.dependency 'BUAdSDK', '0.1.0.24'
+    ss.dependency 'BURelyFoundation/CSJ', '0.0.3.19'
+    ss.dependency 'BUAdSDK', '0.1.1.2'
   end
   ## 依赖版本为指定版本范围
   s.subspec 'Dep_Compatible' do |ss|
-    ss.dependency 'BURelyFoundation/CSJ', '~> 0.0.3.13'
-    ss.dependency 'BUAdSDK', '~> 0.1.0.24'
+    ss.dependency 'BURelyFoundation/CSJ', '~> 0.0.3.19'
+    ss.dependency 'BUAdSDK', '~> 0.1.1.2'
   end
 
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }

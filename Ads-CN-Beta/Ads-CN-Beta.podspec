@@ -32,15 +32,15 @@ Pod::Spec.new do |s|
   
     
   s.subspec 'BUAdSDK' do |ss|
-    ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
-    ss.preserve_paths = 'SDK/CSJAdSDK.framework'
+    ss.vendored_frameworks = ['SDK/CSJAdSDK.xcframework']
+    ss.preserve_paths = 'SDK/CSJAdSDK.xcframework'
     ss.resource = 'SDK/CSJAdSDK.bundle'
     ss.dependency 'Ads-CN-Beta/Dep_Accurate'
   end
 
   s.subspec 'BUAdSDK_Compatible' do |ss|
-    ss.vendored_frameworks = ['SDK/CSJAdSDK.framework']
-    ss.preserve_paths = 'SDK/CSJAdSDK.framework'
+    ss.vendored_frameworks = ['SDK/CSJAdSDK.xcframework']
+    ss.preserve_paths = 'SDK/CSJAdSDK.xcframework'
     ss.resource = 'SDK/CSJAdSDK.bundle'
     ss.dependency 'Ads-CN-Beta/Dep_Compatible'
   end
@@ -55,8 +55,5 @@ Pod::Spec.new do |s|
     ss.dependency 'BURelyFoundation/CSJ', '~> 0.0.3.19'
     ss.dependency 'BUAdSDK', '~> 0.1.1.2'
   end
-
-  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   
 end

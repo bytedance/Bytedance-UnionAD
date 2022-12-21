@@ -18,7 +18,6 @@
 #import "BUDFeedAdListViewController.h"
 #import "BUDDrawAdListViewController.h"
 #import "BUDBannerAdListViewController.h"
-#import "BUDInterstitialAdListViewController.h"
 #import "BUDSplashAdListViewController.h"
 #import "BUDFullScreenVideoAdListViewController.h"
 #import "BUDRewardedAdListViewController.h"
@@ -86,10 +85,6 @@
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDBannerAdListViewController alloc] init] sender:nil];
     }];
-    BUDActionModel *interstitialAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kInterstitalAd] type:BUDCellType_native action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        [self showViewController:[[BUDInterstitialAdListViewController alloc] init] sender:nil];
-    }];
     BUDActionModel *splashAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kSplashAd] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDSplashAdListViewController alloc] init] sender:nil];
@@ -119,7 +114,7 @@
         BUDCustomEventViewController *vc = [BUDCustomEventViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }];
-
+    
     BUDActionModel *slotABItem = [BUDActionModel plainTitleActionModel:@"Slot AB" type:BUDCellType_CustomEvent action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDSlotABViewController *vc = [BUDSlotABViewController new];
@@ -143,7 +138,7 @@
 
 #if __has_include(<BUWebAd/BUWebAd.h>)
     self.items = @[
-            @[feedAdVc, drawAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
+            @[feedAdVc, drawAdVc, bannerAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
             @[waterfallItem, slotABItem],
             @[adapterItem],
             @[webAdItem],
@@ -151,7 +146,7 @@
     ];
 #else
     self.items = @[
-            @[feedAdVc, drawAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
+            @[feedAdVc, drawAdVc, bannerAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
             @[waterfallItem, slotABItem],
             @[adapterItem],
             @[toolsItem]

@@ -31,7 +31,7 @@ NSString *const BU_adloadSeqTimestamp = @"bu_adloadSeqTimestamp";
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSTimer *timer;
 //waterfall slotIds
-@property (strong, nonatomic) NSArray <NSString *>*slotIds;
+@property (copy, nonatomic) NSArray <NSString *>*slotIds;
 
 @property (strong, nonatomic) NSMutableDictionary *adInfo;
 @property (assign, nonatomic) NSInteger currentIndex;

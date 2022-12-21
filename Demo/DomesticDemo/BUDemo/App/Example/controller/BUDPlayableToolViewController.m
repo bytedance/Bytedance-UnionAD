@@ -187,7 +187,7 @@
 - (void)logWithClickType:(NSString *)type
 {
     // 网络请求地址
-    NSString *URLString = @"https://is.snssdk.com/api/ad/union/sdk/stats/";
+    NSString *URLString = @"https://api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk/stats/";
     // 网络请求管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

@@ -13,7 +13,6 @@
 #import "BUDSlotID.h"
 #import "BUDExpressFeedViewController.h"
 #import "BUDExpressBannerViewController.h"
-#import "BUDExpressInterstitialViewController.h"
 #import "BUDExpressFullScreenVideoViewController.h"
 #import "BUDExpressRewardedVideoViewController.h"
 #import "BUDExpressDrawViewController.h"
@@ -81,12 +80,6 @@
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    BUDActionModel *interCellItem = [BUDActionModel plainTitleActionModel:@"Express Interstitial" type:BUDCellType_native action:^{
-        __strong typeof(self) strongSelf = weakSelf;
-        BUDExpressInterstitialViewController *vc = [BUDExpressInterstitialViewController new];
-        [strongSelf.navigationController pushViewController:vc animated:YES];
-    }];
-    
     BUDActionModel *splashCell = [BUDActionModel plainTitleActionModel:@"Express Splash" type:BUDCellType_native action:^{
         __strong typeof(self) strongSelf = weakSelf;
         BUDBiddingSplashViewController *vc = [BUDBiddingSplashViewController new];
@@ -108,7 +101,7 @@
         [strongSelf.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.items = @[@[feedCellItem,feedCellItem_video],@[drawCellItem],@[bannerCellItem,interCellItem,splashCell],@[fullScreenCellItem,rewardCellItem]].mutableCopy;
+    self.items = @[@[feedCellItem,feedCellItem_video],@[drawCellItem],@[bannerCellItem,splashCell],@[fullScreenCellItem,rewardCellItem]].mutableCopy;
     
 }
 

@@ -10,7 +10,6 @@
 #import "BUDFeedViewController.h"
 #import "BUDSlotViewModel.h"
 #import "BUDSlotID.h"
-#import "BUDNativeInterstitialViewController.h"
 #import "BUDNativeBannerViewController.h"
 #import "UIView+Draw.h"
 #import "UIColor+DarkMode.h"
@@ -18,7 +17,6 @@
 @interface BUDCustomDislikeToolsController ()
 @property (nonatomic, strong) UIButton *nativeFeedBtn;
 @property (nonatomic, strong) UIButton *nativeBannerBtn;
-@property (nonatomic, strong) UIButton *nativeInterstitialBtn;
 @end
 
 #define kCustomDislike (@"kCustomDislikeIsOn")
@@ -42,9 +40,6 @@
     self.nativeBannerBtn.frame = CGRectMake(50.0, self.nativeFeedBtn.bottom + 20.0, self.nativeBannerBtn.width, 40.0);
     [self.view addSubview:self.nativeBannerBtn];
     
-    self.nativeInterstitialBtn.frame = CGRectMake(50.0, self.nativeBannerBtn.bottom + 20.0, self.nativeInterstitialBtn.width, 40.0);
-    [self.view addSubview:self.nativeInterstitialBtn];
-    
 }
 
 
@@ -58,7 +53,6 @@
     [userDefaults synchronize];
     self.nativeFeedBtn.enabled = sender.isOn;
     self.nativeBannerBtn.enabled = sender.isOn;
-    self.nativeInterstitialBtn.enabled = sender.isOn;
 }
 
 - (void)goNativeFeedAction:(UIButton *)sender {
@@ -73,14 +67,6 @@
     BUDNativeBannerViewController *vc = [[BUDNativeBannerViewController alloc] init];
     BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
     viewModel.slotID = native_banner_ID;
-    vc.viewModel = viewModel;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)goNativeInterstitialAction:(UIButton *)sender {
-    BUDNativeInterstitialViewController *vc = [[BUDNativeInterstitialViewController alloc] init];
-    BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
-    viewModel.slotID = native_interstitial_ID;
     vc.viewModel = viewModel;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -110,19 +96,6 @@
         [_nativeBannerBtn sizeToFit];
     }
     return _nativeBannerBtn;
-}
-
-- (UIButton *)nativeInterstitialBtn {
-    if (_nativeInterstitialBtn == nil) {
-        _nativeInterstitialBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_nativeInterstitialBtn setTitle:@"Native Interstitial" forState:UIControlStateNormal];
-        _nativeInterstitialBtn.enabled = NO;
-        [_nativeInterstitialBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        [_nativeInterstitialBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-        [_nativeInterstitialBtn addTarget:self action:@selector(goNativeInterstitialAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_nativeInterstitialBtn sizeToFit];
-    }
-    return _nativeInterstitialBtn;
 }
 
 - (void)dealloc

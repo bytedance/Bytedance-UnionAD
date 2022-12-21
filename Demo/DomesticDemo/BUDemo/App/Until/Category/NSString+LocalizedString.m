@@ -74,9 +74,6 @@ NSString * const kFullscreenAdInterstital  = @"fullscreenAdInterstital" ;
 NSString * const kSplashAd = @"splashAd" ;
 NSString * const kSplashAdNative = @"splashAdNative" ;
 NSString * const kSplashAdExpress = @"splashAdExpress" ;
-NSString * const kInterstitalAd = @"interstitalAd" ;
-NSString * const kInterstitalAdNative = @"interstitalAdNative" ;
-NSString * const kInterstitalAdExpress = @"interstitalAdExpress" ;
 NSString * const kBannerAd = @"bannerAd" ;
 NSString * const kBannerAdNative = @"bannerAdNative" ;
 NSString * const kBannerAdExpress = @"bannerAdExpress" ;
@@ -91,6 +88,13 @@ NSString * const kStreamAdSDK = @"streamAdSDK" ;
 NSString * const kWaterfallAd = @"waterfallAd";
 NSString * const kNewInterstitialfull = @"newInterstitialfull";
 NSString * const kNewInterstitialhalf = @"newInterstitialhalf";
+NSString * const kUgenoLUPage = @"聚合页1-imageMode16";
+NSString * const kUgenoLUPage2 = @"聚合页2-imageMode3";
+NSString * const kUgenoLUPage3 = @"聚合页3-imageMode15";
+NSString * const kUgenoStreet1 = @"逛街页1-直播";
+NSString * const kUgenoStreet2 = @"逛街页2-优惠券";
+NSString * const kUgenoStreet3 = @"逛街页3";
+
 @implementation NSString (LocalizedString)
 
 + (NSString *)localizedStringForKey:(NSString *)key {

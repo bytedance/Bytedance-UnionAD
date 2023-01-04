@@ -25,9 +25,6 @@ Pod::Spec.new do |s|
   
   s.weak_frameworks = 'AppTrackingTransparency','DeviceCheck'
 
-  s.resource = 'SDK/LICENSE'
-  s.preserve_paths = 'SDK/README.md'
-
   s.default_subspec = 'BUAdSDK'
   
     

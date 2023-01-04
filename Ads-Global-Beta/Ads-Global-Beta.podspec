@@ -24,9 +24,6 @@ Pod::Spec.new do |s|
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   s.weak_frameworks = 'AppTrackingTransparency', 'CoreML', 'DeviceCheck'
 
-  s.preserve_paths = 'SDK/LICENSE'
-  s.preserve_paths = 'SDK/README.md'
-
   s.default_subspec = ['BUAdSDK']
   
   s.subspec 'BUAdSDK' do |ss|

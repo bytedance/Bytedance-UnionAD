@@ -33,8 +33,9 @@ BUNativeExpressFullscreenVideoAdDelegate
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
 
-    BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":@"20001",@"title":@"全屏1-全屏2"}];
-    NSArray *titlesAndIDS = @[@[item1]];
+    BUDSelcetedItem *item1 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":@"20002",@"title":@"旧插屏-新插屏"}];
+    BUDSelcetedItem *item2 = [[BUDSelcetedItem alloc] initWithDict:@{@"slotID":@"20001",@"title":@"Banner-信息流"}];
+    NSArray *titlesAndIDS = @[@[item1,item2]];
     
     __weak typeof(self) weakself = self;
     self.selectedView = [[BUDSelectedView alloc] initWithAdName:@"Slot AB Test" SelectedTitlesAndIDS:titlesAndIDS loadAdAction:^(NSString * _Nullable codeGroup) {
@@ -61,7 +62,7 @@ BUNativeExpressFullscreenVideoAdDelegate
     [[BUSlotABManager sharedInstance] fetchSlotWithCodeGroupId:codeGroupId
                                                     completion:^(NSString *slotId, BUAdSlotAdType slotType, NSError *error) {
         if (error != nil ||
-            slotType != BUAdSlotAdTypeFullscreenVideo) {
+            (slotType != BUAdSlotAdTypeFullscreenVideo)) {
             // 无效返回, 使用客户端默认配置兜底
             self.slotType = BUAdSlotAdTypeFullscreenVideo;
             self.slotId = BUDefaultFullscreenSlotID;

@@ -33,7 +33,6 @@
 @property (nonatomic, strong) UIView *bottomView;
 
 @property (nonatomic, strong) UIViewController *rootViewController;
-@property (nonatomic, strong) BUDSplashContainerViewController *customSplashVC;
 @property (nonatomic, strong) BUSplashZoomOutView *zoomOutView;
 
 @end
@@ -47,7 +46,7 @@
     [self buildView];
 
     self.splashFrame = self.view.bounds;
-    self.rootViewController = [[[UIApplication sharedApplication] delegate] window].rootViewController;
+    self.rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -238,8 +237,9 @@
 }
 
 - (void)button1Tapped:(UIButton *)sender {
-    _customSplashVC = [[BUDSplashContainerViewController alloc] init];
-    [_customSplashVC loadSplashAd];
+    BUDSplashContainerViewController *splashContainer = [[BUDSplashContainerViewController alloc] init];
+    splashContainer.appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [[UIApplication sharedApplication].keyWindow setRootViewController:splashContainer];
 }
 
 - (void)button2Tapped:(UIButton *)sender {
@@ -266,14 +266,13 @@
 
 - (void)splashAdLoadSuccess:(nonnull BUSplashAd *)splashAd {
     [self pbud_logWithSEL:_cmd msg:@""];
-    // 使用应用keyWindow的rootViewController（接入简单，推荐）
+    //
     [splashAd showSplashViewInRootViewController:_rootViewController];
     
 }
 
 - (void)splashAdLoadFail:(nonnull BUSplashAd *)splashAd error:(BUAdError * _Nullable)error {
     [self pbud_logWithSEL:_cmd msg:@""];
- 
 }
 
 - (void)splashAdRenderSuccess:(nonnull BUSplashAd *)splashAd {
@@ -313,13 +312,10 @@
     }
 }
 
-- (void)splashAdViewControllerDidClose:(BUSplashAd *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-}
-
 - (void)splashDidCloseOtherController:(nonnull BUSplashAd *)splashAd interactionType:(BUInteractionType)interactionType {
     [self pbud_logWithSEL:_cmd msg:@""];
 }
+
 
 - (void)splashVideoAdDidPlayFinish:(nonnull BUSplashAd *)splashAd didFailWithError:(nonnull NSError *)error {
     [self pbud_logWithSEL:_cmd msg:@""];
@@ -329,7 +325,8 @@
 #pragma mark - BUSplashCardDelegate
 - (void)splashCardReadyToShow:(nonnull BUSplashAd *)splashAd {
     [self pbud_logWithSEL:_cmd msg:@""];
-    [splashAd showCardViewInRootViewController:[[[UIApplication sharedApplication] delegate] window].rootViewController];
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    [splashAd showCardViewInRootViewController:keyWindow.rootViewController];
 }
 
 - (void)splashCardViewDidClick:(nonnull BUSplashAd *)splashAd {
@@ -346,16 +343,15 @@
     [self pbud_logWithSEL:_cmd msg:@""];
     // 接入方法一：使用SDK提供动画接入
      if (splashAd.zoomOutView) {
-         [splashAd showZoomOutViewInRootViewController:[[[UIApplication sharedApplication] delegate] window].rootViewController];
+         [splashAd showZoomOutViewInRootViewController:self.navigationController];
      }
     
     // 接入方法二：自定义动画接入
 //    if (splashAd.zoomOutView) {
 //        __weak typeof(self) weakSelf = self;
-//        UIViewController *rootViewController = [[[UIApplication sharedApplication] delegate] window].rootViewController;
-//        splashAd.zoomOutView.rootViewController = rootViewController;
-//        [rootViewController.view addSubview:splashAd.zoomOutView];
-//        [rootViewController.view addSubview:splashAd.splashViewSnapshot];
+//        splashAd.zoomOutView.rootViewController = self.navigationController;
+//        [self.navigationController.view addSubview:splashAd.zoomOutView];
+//        [self.navigationController.view addSubview:splashAd.splashViewSnapshot];
 //        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd.splashViewSnapshot toView:splashAd.zoomOutView splashCompletion:^{
 //            __strong typeof(weakSelf) strongSelf = weakSelf;
 //            [strongSelf.splashAd.splashViewSnapshot removeFromSuperview];

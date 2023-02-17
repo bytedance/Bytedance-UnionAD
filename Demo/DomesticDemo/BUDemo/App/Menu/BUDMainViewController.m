@@ -114,7 +114,7 @@
         BUDCustomEventViewController *vc = [BUDCustomEventViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }];
-    
+
     BUDActionModel *slotABItem = [BUDActionModel plainTitleActionModel:@"Slot AB" type:BUDCellType_CustomEvent action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDSlotABViewController *vc = [BUDSlotABViewController new];

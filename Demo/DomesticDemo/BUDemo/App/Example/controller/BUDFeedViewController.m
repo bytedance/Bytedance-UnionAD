@@ -509,10 +509,6 @@
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"interactionType:%ld", (long)interactionType]];
 }
 
-- (void)videoAdView:(BUVideoAdView *)videoAdView
- rewardDidCountDown:(NSInteger)countDown {
-    [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"videoAdView:rewardDidCountDown:%ld", (long)countDown]];
-}
 
 #pragma mark - Log
 - (void)pbud_logWithSEL:(SEL)sel prefix:(NSString *)prefix msg:(NSString *)msg {

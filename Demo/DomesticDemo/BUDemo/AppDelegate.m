@@ -216,10 +216,6 @@
     [self pbu_logWithSEL:_cmd msg:@""];
 }
 
-- (void)splashAdViewControllerDidClose:(BUSplashAd *)splashAd {
-    [self pbu_logWithSEL:_cmd msg:@""];
-}
-
 - (void)splashDidCloseOtherController:(nonnull BUSplashAd *)splashAd interactionType:(BUInteractionType)interactionType {
     [self pbu_logWithSEL:_cmd msg:@""];
 }

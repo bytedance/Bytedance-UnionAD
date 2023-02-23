@@ -71,9 +71,6 @@
 "splashAd" = "开屏广告";
 "splashAdNative" = "普通开屏广告";
 "splashAdExpress" = "Bidding开屏广告";
-"interstitalAd" = "插屏广告";
-"interstitalAdNative" = "原生渲染插屏广告";
-"interstitalAdExpress" = "模板渲染插屏广告";
 "bannerAd" = "Banner广告";
 "bannerAdNative" = "原生渲染Banner广告";
 "bannerAdExpress" = "模板渲染Banner广告";

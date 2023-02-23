@@ -20,6 +20,8 @@
 #import "BUDAnimationTool.h"
 #import "BUDPrivacyProvider.h"
 #import <AVFoundation/AVFoundation.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+#import <AdSupport/ASIdentifierManager.h>
 
 #if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
 #import <BUAdTestMeasurement/BUAdTestMeasurement.h>
@@ -91,8 +93,6 @@
     // admob adaptor config
     // add appKey in info.plist (key:GADApplicationIdentifier)
     [[GADMobileAds sharedInstance] startWithCompletionHandler:^(GADInitializationStatus * _Nonnull status) {
-        // This is a example to set GDPR. You can change GDPR at right scence
-        // [BUAdSDKManager setGDPR:0];
     }];
 }
 
@@ -104,18 +104,8 @@
         [BUAdTestMeasurementConfiguration configuration].debugMode = YES;
     #endif
 #endif
-    
-//    NSInteger territory = [[NSUserDefaults standardUserDefaults]integerForKey:@"territory"];
-//    BOOL isNoCN = (territory>0&&territory!=BUAdSDKTerritory_CN);
-    
+
     BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
-    configuration.territory = BUAdSDKTerritory_CN;
-    configuration.GDPR = @(0);
-    configuration.coppa = @(0);
-    configuration.CCPA = @(1);
-#if DEBUG
-    configuration.logLevel = BUAdSDKLogLevelVerbose;
-#endif
     configuration.appID = [BUDAdManager appKey];
     configuration.secretKey = [BUDAdManager secretKey];
     configuration.privacyProvider = [[BUDPrivacyProvider alloc] init];
@@ -134,7 +124,33 @@
     
     
 //    [self playerCoustomAudio];
-  
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self requestIDFATracking];
+    });
+}
+
+- (void)requestIDFATracking {
+    if (@available(iOS 14, *)) {
+        // iOS14及以上版本需要先请求权限
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            // 获取到权限后，依然使用老方法获取idfa
+            if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
+                NSString *idfa = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
+                    NSLog(@"%@",idfa);
+            } else {
+                NSLog(@"请在设置-隐私-跟踪中允许App请求跟踪");
+            }
+        }];
+    } else {
+        // iOS14以下版本依然使用老方法
+        // 判断在设置-隐私里用户是否打开了广告跟踪
+        if ([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]) {
+            NSString *idfa = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
+            NSLog(@"%@",idfa);
+        } else {
+            NSLog(@"请在设置-隐私-广告中打开广告跟踪功能");
+        }
+    }
 }
 
 - (void)playerCoustomAudio {
@@ -222,6 +238,10 @@
 }
 
 - (void)splashCardViewDidClose:(nonnull BUSplashAd *)splashAd {
+    [self pbu_logWithSEL:_cmd msg:@""];
+}
+
+- (void)splashAdViewControllerDidClose:(BUSplashAd *)splashAd {
     [self pbu_logWithSEL:_cmd msg:@""];
 }
 

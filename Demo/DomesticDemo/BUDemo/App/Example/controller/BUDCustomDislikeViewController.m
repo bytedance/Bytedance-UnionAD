@@ -8,7 +8,6 @@
 
 #import "BUDCustomDislikeViewController.h"
 #import <BUAdSDK/BUAdSDK.h>
-#import "BUDPersonalPromptsWebViewController.h"
 @interface BUDCustomDislikeViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 @property (nonatomic, strong) BUNativeAd *nativeAd;
 @property (nonatomic, strong) id<BUDislikeReportorDelegate> dislikeReportor;
@@ -32,10 +31,7 @@
     
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0];
     CGFloat width = BUMINScreenSide - 40.0;
-    CGFloat height = 320.0;
-    if (![self.nativeAd.data.personalPrompts validPersonalPrompts]) {
-        height = height - 35.0;
-    }
+    CGFloat height = 285.0;
     self.dislikeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
     
     self.dislikeTableView.contentInset = UIEdgeInsetsMake(5.0, 0, 0, 0);
@@ -51,10 +47,6 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction)];
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
-    
-    if ([self.nativeAd.data.personalPrompts validPersonalPrompts]) {
-        [self.dislikeReportor dislikeDidShowPersonalizationPrompts:self.nativeAd.data.personalPrompts];
-    }
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -67,7 +59,7 @@
 }
 
 - (NSInteger)totalSections {
-    return (NSInteger)[self.nativeAd.data.personalPrompts validPersonalPrompts] + self.nativeAd.data.filterWords.count;
+    return self.nativeAd.data.filterWords.count;
 }
 
 - (id<BUDislikeReportorDelegate>)dislikeReportor {
@@ -90,15 +82,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    BOOL validPersonalPrompts = [self.nativeAd.data.personalPrompts validPersonalPrompts];
-    if (section == 0 && validPersonalPrompts) {
-        return 1;
-    } else {
-        NSArray<BUDislikeWords *> *options = self.nativeAd.data.filterWords[section - validPersonalPrompts].options;
-        return options.count == 0 ? 1 : options.count;
-    }
-    
-    return 0;
+    NSArray<BUDislikeWords *> *options = self.nativeAd.data.filterWords[section].options;
+    return options.count == 0 ? 1 : options.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,20 +93,15 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"kDislikeWordIdentifier"];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    BOOL validPersonalPrompts = [self.nativeAd.data.personalPrompts validPersonalPrompts];
-    
-    if (indexPath.section == 0 && validPersonalPrompts) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = self.nativeAd.data.personalPrompts.personalizationName;
+        
+    NSArray<BUDislikeWords *> *options = self.nativeAd.data.filterWords[indexPath.section].options;
+    if (options.count == 0) {
+        cell.textLabel.text = self.nativeAd.data.filterWords[indexPath.section].name;
     } else {
-        NSArray<BUDislikeWords *> *options = self.nativeAd.data.filterWords[indexPath.section - validPersonalPrompts].options;
-        if (options.count == 0) {
-            cell.textLabel.text = self.nativeAd.data.filterWords[indexPath.section].name;
-        } else {
-            cell.textLabel.text = [NSString stringWithFormat:@"     %@", options[indexPath.row].name];
-        }
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.textLabel.text = [NSString stringWithFormat:@"     %@", options[indexPath.row].name];
     }
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
     cell.textLabel.font = [UIFont systemFontOfSize:15.0];
     
     return cell;
@@ -129,27 +109,16 @@
 
 #pragma mark - UItableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    BOOL validPersonalPrompts = [self.nativeAd.data.personalPrompts validPersonalPrompts];
-    
-    if (validPersonalPrompts && indexPath.section == 0) {
-        [self.dislikeReportor dislikeDidSelectedPersonalizationPrompts:self.nativeAd.data.personalPrompts];
-        [self dismissViewControllerAnimated:NO completion:^{
-            BUDPersonalPromptsWebViewController *webVC = [[BUDPersonalPromptsWebViewController alloc] initWithNativeAd:self.nativeAd];
-            webVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
-            [self.nativeAd.rootViewController.navigationController pushViewController:webVC animated:YES];
-        }];
-    } else {
-        BUDislikeWords *dislikeWord = self.nativeAd.data.filterWords[indexPath.section - validPersonalPrompts];
-        NSArray<BUDislikeWords *> *options = dislikeWord.options;
-        if (options.count > 0) {
-            dislikeWord = options[indexPath.row];
-        }
-        if (self.delegate && [self.delegate respondsToSelector:@selector(customDislike:withNativeAd:didSelected:)]) {
-            [self.delegate customDislike:self withNativeAd:self.nativeAd didSelected:dislikeWord];
-        }
-        [self.dislikeReportor dislikeDidSelected:@[dislikeWord]];
-        [self dismissViewControllerAnimated:YES completion:nil];
+    BUDislikeWords *dislikeWord = self.nativeAd.data.filterWords[indexPath.section];
+    NSArray<BUDislikeWords *> *options = dislikeWord.options;
+    if (options.count > 0) {
+        dislikeWord = options[indexPath.row];
     }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(customDislike:withNativeAd:didSelected:)]) {
+        [self.delegate customDislike:self withNativeAd:self.nativeAd didSelected:dislikeWord];
+    }
+    [self.dislikeReportor dislikeDidSelected:@[dislikeWord]];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

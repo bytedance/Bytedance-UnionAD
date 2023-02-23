@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BUDSplashContainerViewController : UIViewController
 
-@property (nonatomic, strong) UIViewController *appRootVC;
+- (void)loadSplashAd;
 
 @end
 

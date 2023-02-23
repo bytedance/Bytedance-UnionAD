@@ -23,6 +23,10 @@
 #import "BUDRewardedAdListViewController.h"
 #import "BUDStreamAdListViewController.h"
 #import "BUDSlotABViewController.h"
+#if TARGET==1
+#import "BUDUGenoDemoViewController.h"
+#endif
+
 #import "BUDAdManager.h"
 #if __has_include(<QRCodeReaderViewController/QRCodeReader.h>)
 #import <QRCodeReaderViewController/QRCodeReader.h>
@@ -39,13 +43,15 @@
 #import "NSString+LocalizedString.h"
 @interface BUDMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, copy) NSArray<NSMutableArray *> *items;
+@property (nonatomic, strong) NSMutableArray<NSArray *> *items;
 @end
 
 @implementation BUDMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.items = [NSMutableArray array];
     
     if (self.viewModel.custormNavigation) {
         self.navigationController.navigationBarHidden = YES;
@@ -115,6 +121,14 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
 
+#if TARGET==1
+    BUDActionModel *ugenoItem = [BUDActionModel plainTitleActionModel:@"UGenoDemo" type:BUDCellType_CustomEvent action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUDUGenoDemoViewController *vc = [BUDUGenoDemoViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+#endif
+    
     BUDActionModel *slotABItem = [BUDActionModel plainTitleActionModel:@"Slot AB" type:BUDCellType_CustomEvent action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDSlotABViewController *vc = [BUDSlotABViewController new];
@@ -136,22 +150,22 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
 
+    NSArray *normalItems = @[
+        @[feedAdVc, drawAdVc, bannerAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
+        @[waterfallItem, slotABItem],
+        @[adapterItem]];
+    
+    [self.items addObjectsFromArray:normalItems];
+    
 #if __has_include(<BUWebAd/BUWebAd.h>)
-    self.items = @[
-            @[feedAdVc, drawAdVc, bannerAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
-            @[waterfallItem, slotABItem],
-            @[adapterItem],
-            @[webAdItem],
-            @[toolsItem]
-    ];
-#else
-    self.items = @[
-            @[feedAdVc, drawAdVc, bannerAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
-            @[waterfallItem, slotABItem],
-            @[adapterItem],
-            @[toolsItem]
-    ];
+    [self.items addObject:@[webAdItem]];
 #endif
+    
+#if TARGET==1
+    [self.items addObject:@[ugenoItem]];
+#endif
+    
+    [self.items addObject:@[toolsItem]];
 
     CGFloat height = 22 * self.items.count;
     for (NSArray *subItem in self.items) {

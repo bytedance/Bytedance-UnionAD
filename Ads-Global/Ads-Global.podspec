@@ -27,49 +27,35 @@ Pod::Spec.new do |s|
   s.default_subspec = ['BUAdSDK']
   
   s.subspec 'BUAdSDK' do |ss|
-    ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
-    ss.preserve_paths = 'SDK/PAGAdSDK.framework'
+    ss.vendored_frameworks = ['SDK/PAGAdSDK.xcframework']
+    ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global/APM'
     ss.dependency 'Ads-Global/BURelyAdSDK'
     ss.dependency 'Ads-Global/Dep_Accurate'
   end
 
   s.subspec 'BUAdSDK_Compatible' do |ss|
-    ss.vendored_frameworks = ['SDK/PAGAdSDK.framework']
-    ss.preserve_paths = 'SDK/PAGAdSDK.framework'
+    ss.vendored_frameworks = ['SDK/PAGAdSDK.xcframework']
+    ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global/APM'
     ss.dependency 'Ads-Global/BURelyAdSDK'
     ss.dependency 'Ads-Global/Dep_Compatible'
   end
   
   ## 依赖版本为指定版本号
   s.subspec 'Dep_Accurate' do |ss|
-    ss.dependency 'BURelyFoundation_Global/Pangle', '0.0.4.2'
-    ss.dependency 'BUAdSDK', '0.1.1.3'
+    ss.dependency 'BURelyFoundation_Global/Pangle', '0.1.0.4'
   end
 
   ## 依赖版本为指定版本范围
   s.subspec 'Dep_Compatible' do |ss|
-    ss.dependency 'BURelyFoundation_Global/Pangle', '~> 0.0.4.2'
-    ss.dependency 'BUAdSDK', '~> 0.1.1.3'
-  end
-
-  ## HM
-  s.subspec 'APM' do |ss|
-    ss.dependency 'RangersAPM-Pangle/Crash', '3.0.2'
-    ss.dependency 'RangersAPM-Pangle/Global', '3.0.2'
-    ss.dependency 'RangersAPM-Pangle/SessionTracker', '3.0.2'
+    ss.dependency 'BURelyFoundation_Global/Pangle', '~> 0.1.0.4'
   end
 
   ## RE
   s.subspec 'BURelyAdSDK' do |ss|
-     ss.preserve_paths = 'SDK/BURelyAdSDK.framework'
-     ss.vendored_frameworks = ['SDK/BURelyAdSDK.framework']
+     ss.preserve_paths = 'SDK/BURelyAdSDK.xcframework'
+     ss.vendored_frameworks = ['SDK/BURelyAdSDK.xcframework']
   end
-
-  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   
 end

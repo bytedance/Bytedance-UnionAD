@@ -119,18 +119,10 @@
     NSLog(@"error code : %ld , error message : %@",(long)error.code,error.description);
 }
 
+- (void)nativeAdDidClick:(BUNativeAd *)nativeAd withView:(UIView *)view {
+    BUD_Log(@"DrawVideo %s",__func__);
+}
 #pragma mark --- BUVideoAdViewDelegate
-- (void)videoAdView:(BUVideoAdView *)videoAdView stateDidChanged:(BUPlayerPlayState)playerState {
-
-}
-
-- (void)videoAdView:(BUVideoAdView *)videoAdView didLoadFailWithError:(NSError *)error {
-    BUD_Log(@"videoAdView didLoadFailWithError");
-}
-
-- (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView {
-    BUD_Log(@"videoAdView didPlayFinish");
-}
 
 - (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView {
 #pragma clang diagnostic push
@@ -138,6 +130,60 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finishView is clicked" message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
     [alert show];
 #pragma clang diagnostic pop
+}
+/**
+ This method is called when videoadview failed to play.
+ @param error : the reason of error
+ */
+- (void)videoAdView:(BUVideoAdView *)videoAdView didLoadFailWithError:(NSError *_Nullable)error {
+    BUD_Log(@"DrawVideo %s",__func__);
+}
+
+/**
+ This method is called when videoadview ready to play.
+ */
+- (void)playerReadyToPlay:(BUVideoAdView *)videoAdView {
+    BUD_Log(@"DrawVideo %s",__func__);
+}
+
+/**
+ This method is called when videoadview playback status changed.
+ @param playerState : player state after changed
+ */
+- (void)videoAdView:(BUVideoAdView *)videoAdView stateDidChanged:(BUPlayerPlayState)playerState {
+    BUD_Log(@"DrawVideo %s",__func__);
+}
+
+/**
+ This method is called when the countdown of reward video rewards starts
+ @param countDown : countdown of reward video rewards
+ @Note : This method is only useful in China area.
+ */
+- (void)videoAdView:(BUVideoAdView *)videoAdView rewardDidCountDown:(NSInteger)countDown {
+    BUD_Log(@"DrawVideo %s",__func__);
+}
+
+
+/**
+ This method is called when videoadview end of play.
+ */
+- (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView {
+    BUD_Log(@"DrawVideo %s",__func__);
+}
+
+/**
+ This method is called when videoadview is clicked.
+ */
+- (void)videoAdViewDidClick:(BUVideoAdView *)videoAdView {
+    BUD_Log(@"DrawVideo %s",__func__);
+}
+
+/**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)videoAdViewDidCloseOtherController:(BUVideoAdView *)videoAdView interactionType:(BUInteractionType)interactionType {
+    BUD_Log(@"DrawVideo %s",__func__);
 }
 
 #pragma mark --- tableView dataSource&delegate
@@ -151,10 +197,12 @@
     if ([model isKindOfClass:[BUNativeAd class]]) {
         BUNativeAd *nativeAd = (BUNativeAd *)model;
         nativeAd.rootViewController = self;
+        nativeAd.delegate = self;
         BUDDrawAdTableViewCell *cell = nil;
         cell = [tableView dequeueReusableCellWithIdentifier:@"BUDDrawAdTableViewCell" forIndexPath:indexPath];
         cell.nativeAdRelatedView.videoAdView.delegate = self;
         [cell refreshUIWithModel:nativeAd];
+        cell.nativeAdRelatedView.videoAdView.delegate = self;
         [model registerContainer:cell withClickableViews:@[cell.creativeButton,cell.titleLabel,cell.descriptionLabel,cell.headImg]];
         
         return cell;

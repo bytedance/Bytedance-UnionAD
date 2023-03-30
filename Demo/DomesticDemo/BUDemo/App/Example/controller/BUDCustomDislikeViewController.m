@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0];
-    CGFloat width = BUMINScreenSide - 40.0;
+    CGFloat width = BUDMINScreenSide - 40.0;
     CGFloat height = 285.0;
     self.dislikeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
     
@@ -50,7 +50,7 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    self.dislikeTableView.frame  = CGRectMake(0, 0, BUMINScreenSide - 40.0, 320.0);
+    self.dislikeTableView.frame  = CGRectMake(0, 0, BUDMINScreenSide - 40.0, 320.0);
     self.dislikeTableView.center = CGPointMake(size.width * 0.5, size.height * 0.5);
 }
 

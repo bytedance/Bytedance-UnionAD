@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN'
-  s.version      = '5.1.1.0'
+  s.version      = '5.1.1.3'
   s.summary          = 'Ads-CN is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -43,12 +43,12 @@ Pod::Spec.new do |s|
   
   ## 依赖版本为指定版本号
   s.subspec 'Dep_Accurate' do |ss|
-    ss.dependency 'BURelyFoundation/CSJ', '0.1.0.17'
+    ss.dependency 'BURelyFoundation/CSJ', '0.1.0.21'
     ss.dependency 'BUAdSDK', '0.2.0.1'
   end
   ## 依赖版本为指定版本范围
   s.subspec 'Dep_Compatible' do |ss|
-    ss.dependency 'BURelyFoundation/CSJ', '~> 0.1.0.17'
+    ss.dependency 'BURelyFoundation/CSJ', '~> 0.1.0.21'
     ss.dependency 'BUAdSDK', '~> 0.2.0.1'
   end
 

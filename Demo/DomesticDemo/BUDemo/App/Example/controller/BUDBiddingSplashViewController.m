@@ -303,12 +303,12 @@
      
      // 接入方法二：自定义动画接入
      if (splashAd.zoomOutView) {
-         bu_weakify(self);
+         BUD_weakify(self);
          splashAd.zoomOutView.rootViewController = self.navigationController;
          [self.navigationController.view addSubview:splashAd.zoomOutView];
          [self.navigationController.view addSubview:splashAd.splashViewSnapshot];
          [[BUDAnimationTool sharedInstance] transitionFromView:splashAd.splashViewSnapshot toView:splashAd.zoomOutView splashCompletion:^{
-             bu_strongify(self);
+             BUD_strongify(self);
              [self.splashAd.splashViewSnapshot removeFromSuperview];
          }];
      }

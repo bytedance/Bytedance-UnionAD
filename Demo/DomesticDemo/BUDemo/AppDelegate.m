@@ -107,7 +107,6 @@
 
     BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
     configuration.appID = [BUDAdManager appKey];
-    configuration.secretKey = [BUDAdManager secretKey];
     configuration.privacyProvider = [[BUDPrivacyProvider alloc] init];
     configuration.appLogoImage = [UIImage imageNamed:@"AppIcon"];
     [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {

@@ -158,7 +158,7 @@
             cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdLargeTableViewCell" forIndexPath:indexPath];
         } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdGroupTableViewCell" forIndexPath:indexPath];
-        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait) {
+        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait || nativeAd.data.imageMode ==  BUFeedADModeLiveStream) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedVideoAdTableViewCell" forIndexPath:indexPath];
             // Set the delegate to listen for status of video
             isVideoCell = YES;
@@ -173,7 +173,7 @@
         if (cell) {
             [cell refreshUIWithModel:nativeAd];
             if (isVideoCell) {
-                if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait) {
+                if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait || nativeAd.data.imageMode ==  BUFeedADModeLiveStream) {
                     BUDFeedVideoAdTableViewCell *videoCell = (BUDFeedVideoAdTableViewCell *)cell;
                     videoCell.nativeAdRelatedView.videoAdView.delegate = self;
                     [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
@@ -264,7 +264,7 @@
     if ([model isKindOfClass:[BUNativeAd class]]) {
         BUNativeAd *nativeAd = (BUNativeAd *)model;
         CGFloat width = CGRectGetWidth(self.tableView.bounds);
-        if (width == BUMAXScreenSide && BUiPhoneX) {
+        if (width == BUDMAXScreenSide && BUDiPhoneX) {
             // 横屏刘海，减去左右安全区域
             if (@available(iOS 11.0, *)) {
                 width = width - self.view.safeAreaInsets.left - self.view.safeAreaInsets.right;
@@ -278,7 +278,7 @@
             return [BUDFeedAdLargeTableViewCell cellHeightWithModel:nativeAd width:width];
         } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
             return [BUDFeedAdGroupTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode == BUFeedVideoAdModePortrait) {
+        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode == BUFeedVideoAdModePortrait || nativeAd.data.imageMode == BUFeedADModeLiveStream) {
             return [BUDFeedVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
         } else if (nativeAd.data.imageMode == BUFeedADModeSquareImage) {
             return [BUDFeedAdSquareImgTableViewCell cellHeightWithModel:nativeAd width:width];

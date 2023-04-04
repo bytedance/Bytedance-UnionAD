@@ -11,6 +11,5 @@
 @interface BUDAdManager : NSObject
 
 + (NSString *)appKey;
-+ (NSString *)secretKey;
 
 @end

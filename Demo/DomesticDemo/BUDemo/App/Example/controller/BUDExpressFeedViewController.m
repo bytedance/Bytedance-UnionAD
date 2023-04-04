@@ -121,7 +121,7 @@
     [self.view addSubview:self.freshButton];
     
     CGFloat tableViewY = CGRectGetMaxY(self.freshButton.frame) + 2*spaceY;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, tableViewY, CGRectGetWidth(self.view.frame), BUScreenHeight - kBUDefaultNavigationBarHeight - tableViewY) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, tableViewY, CGRectGetWidth(self.view.frame), BUDScreenHeight - kBUDDefaultNavigationBarHeight - tableViewY) style:UITableViewStylePlain];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"BUDNativeExpressCell"];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"BUDSplitNativeExpressCell"];
     self.tableView.delegate = self;

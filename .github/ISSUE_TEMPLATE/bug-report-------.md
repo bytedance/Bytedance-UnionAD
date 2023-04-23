@@ -11,6 +11,7 @@ assignees: ''
 A clear and concise description of what the bug is. | 请简明清晰地描述你遇到的问题。
 
 ## Environmental information | 环境信息
+ - SDK name: | SDK 名称： [e.g. Ads-CN or Ads-Global | 比如：Ads-CN 或者 Ads-Global]
  - SDK version: | SDK 版本： [e.g. 3.3.0.0 | 比如：3.3.0.0]
  - Date and time: | 日期与时间： [e.g. 2020-01-01 21:00 | 比如 2020-01-01 21:00]
  - Device model: | 设备型号： [e.g. iPhone X | 比如：iPhone X]

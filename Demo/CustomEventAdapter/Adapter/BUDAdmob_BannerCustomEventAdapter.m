@@ -1,112 +1,91 @@
 //
-//  BUDAdmob_BannerCustomEventAdapter.m
-//  AdmobAdapterDemo
+//  BUADVADemo
 //
-//  Created by bytedance on 2020/9/28.
-//  Copyright © 2020 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDAdmob_BannerCustomEventAdapter.h"
-#import <BUAdSDK/BUAdSDK.h>
 #import <GoogleMobileAds/GADCustomEventBanner.h>
 #import "BUDAdmobTool.h"
+#import <PAGAdSDK/PAGBannerAd.h>
+#import <PAGAdSDK/PAGBannerAdDelegate.h>
 
-@interface BUDAdmob_BannerCustomEventAdapter ()<GADCustomEventBanner, BUNativeExpressBannerViewDelegate>
-@property (strong, nonatomic) BUNativeExpressBannerView *nativeExpressBannerView;
+@interface BUDAdmob_BannerCustomEventAdapter ()<GADMediationBannerAd, PAGBannerAdDelegate>
+
+//@property (strong, nonatomic) BUNativeExpressBannerView *nativeExpressBannerView;
+
+@property (nonatomic, strong) PAGBannerAd *bannerAd;
+@property (nonatomic, strong) UIView *bannerView;
+@property (nonatomic, weak, nullable) id<GADMediationBannerAdEventDelegate> delegate;
+
 @end
 
 @implementation BUDAdmob_BannerCustomEventAdapter
 
-@synthesize delegate;
 NSString *const BANNER_PLACEMENT_ID = @"placementID";
 
-#pragma mark - GADBannerView
-- (void)requestBannerAd:(GADAdSize)adSize parameter:(nullable NSString *)serverParameter label:(nullable NSString *)serverLabel request:(nonnull GADCustomEventRequest *)request {
-    
-    NSString *placementID = [self processParams:serverParameter];
+- (void)loadBannerForAdConfiguration:(GADMediationBannerAdConfiguration *)adConfiguration completionHandler:(GADMediationBannerLoadCompletionHandler)completionHandler {
+    NSDictionary<NSString *, id> *credentials = adConfiguration.credentials.settings;
+    NSString *placementID = credentials[@"parameter"];
     if (placementID != nil){
-        [self getTemplateBannerAd:placementID adSize:adSize];
+        GADAdSize adSize = adConfiguration.adSize;
+        NSLog(@"placementID=%@",placementID);
+        NSLog(@"request ad size width = %f",adSize.size.width);
+        NSLog(@"request ad size height = %f",adSize.size.height);
+        
+        /// tag
+        [BUDAdmobTool setExtData];
+    
+        CGFloat bottom = 0.0;
+        PAGBannerAdSize size = (PAGBannerAdSize){(CGSize){adSize.size.width, adSize.size.height}};
+        
+        __weak typeof(self) weakSelf = self;
+        [PAGBannerAd loadAdWithSlotID:placementID request:[PAGBannerRequest requestWithBannerSize:size] completionHandler:^(PAGBannerAd * _Nullable bannerAd, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"banner ad load fail : %@",error);
+                return;
+            }
+            weakSelf.bannerAd = bannerAd;
+            weakSelf.bannerAd.delegate = weakSelf;
+            weakSelf.bannerView = weakSelf.bannerAd.bannerView;
+            weakSelf.bannerView.frame = CGRectMake((weakSelf.view.frame.size.width-size.size.width)/2.0, weakSelf.view.frame.size.height-size.size.height-bottom, size.size.width, size.size.height);
+            
+            weakSelf.delegate = completionHandler(weakSelf, nil);
+        }];
+        
     } else {
         NSLog(@"no placement ID for requesting.");
-        [self.delegate customEventBanner:self didFailAd:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
+        [self.delegate didFailToPresentWithError:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
+        [self _logWithSEL:_cmd msg:@"called didFailToPresentWithError:code:userInfo:"];
     }
 }
 
-- (void)getTemplateBannerAd:(NSString *)placementID adSize:(GADAdSize)adSize {
-    NSLog(@"placementID=%@",placementID);
-    NSLog(@"request ad size width = %f",adSize.size.width);
-    NSLog(@"request ad size height = %f",adSize.size.height);
-    
-    /// tag
-    [BUDAdmobTool setExtData];
-    
-    ///If this method is not available in your SDK version, use the annotated method below
-    self.nativeExpressBannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:placementID rootViewController:self.delegate.viewControllerForPresentingModalView adSize:CGSizeMake(adSize.size.width, adSize.size.height)];
-//    self.nativeExpressBannerView = [[BUNativeExpressBannerView alloc] initWithSlotID:placementID rootViewController:self.delegate.viewControllerForPresentingModalView adSize:CGSizeMake(adSize.size.width, adSize.size.height) IsSupportDeepLink:YES];
-    
-    self.nativeExpressBannerView.frame = CGRectMake(0, 0, adSize.size.width, adSize.size.height);
-    self.nativeExpressBannerView.delegate = self;
-    [self.nativeExpressBannerView loadAdData];
+- (UIView *)view {
+    return self.bannerAd.bannerView;
 }
 
-#pragma mark BUNativeExpressBannerViewDelegate
-- (void)nativeExpressBannerAdViewDidLoad:(BUNativeExpressBannerView *)bannerAdView {
-    NSLog(@"nativeExpressBannerAdViewDidLoad");
+# pragma mark - PAGBannerAdDelegate
+
+- (void)adDidShow:(id<PAGAdProtocol>)ad {
+    [self.delegate willPresentFullScreenView];
+    [self.delegate reportImpression];
+    [self _logWithSEL:_cmd msg:@"called willPresentFullScreenView: and reportImpression:"];
 }
 
-- (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView didLoadFailWithError:(NSError *)error {
-    NSLog(@"nativeExpressAdFailToLoad with error %@", error.description);
-    [self.delegate customEventBanner:self didFailAd:error];
+- (void)adDidClick:(id<PAGAdProtocol>)ad {
+    [self.delegate reportClick];
+    [self _logWithSEL:_cmd msg:@"called reportClick:"];
 }
 
-- (void)nativeExpressBannerAdViewRenderSuccess:(BUNativeExpressBannerView *)bannerAdView {
-    NSLog(@"nativeExpressBannerAdViewRenderSuccess");
-    [self.delegate customEventBanner:self didReceiveAd:bannerAdView];
-}
-
-- (void)nativeExpressBannerAdViewRenderFail:(BUNativeExpressBannerView *)bannerAdView error:(NSError *)error {
-    NSLog(@"nativeExpressBannerAdViewRenderFail");
-    [self.delegate customEventBanner:self didFailAd:error];
-}
-
-- (void)nativeExpressBannerAdViewWillBecomVisible:(BUNativeExpressBannerView *)bannerAdView {
-    NSLog(@"nativeExpressBannerAdViewWillBecomVisible");
-}
-
-- (void)nativeExpressBannerAdViewDidClick:(BUNativeExpressBannerView *)bannerAdView {
-    NSLog(@"nativeExpressBannerAdViewDidClick");
-    [self.delegate customEventBannerWasClicked:self];
-}
-
-- (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterwords {
-    NSLog(@"nativeExpressBannerAdView dislikeWithReason");
-    [self.delegate customEventBannerDidDismissModal:self];
+- (void)adDidDismiss:(id<PAGAdProtocol>)ad {
+    [self.delegate willDismissFullScreenView];
+    [self.delegate didDismissFullScreenView];
+    [self _logWithSEL:_cmd msg:@"called willDismissFullScreenView: and didDismissFullScreenView:"];
 }
 
 #pragma mark - private method
-- (NSString *)processParams:(NSString *)param {
-    if (!(param && [param isKindOfClass:[NSString class]] && param.length > 0)) {
-        return nil;
-    }
-    NSError *jsonReadingError;
-    NSData *data = [param dataUsingEncoding:NSUTF8StringEncoding];
-    if (!data) {
-        return nil;
-    }
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingAllowFragments
-                                                           error:&jsonReadingError];
-    
-    if (jsonReadingError && [jsonReadingError isKindOfClass:[NSError class]]) {
-        NSLog(@"jsonReadingError. error=[%@]", jsonReadingError);
-        return nil;
-    }
-    
-    if (!(json && [json isKindOfClass:[NSDictionary class]] && [NSJSONSerialization isValidJSONObject:json])) {
-        NSLog(@"Params Error");
-        return nil;
-    }
-    NSString *placementID = json[BANNER_PLACEMENT_ID];
-    return placementID;
+- (void)_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    NSLog(@"BUDAdmob_BannerCustomEventAdapter | %@ | %@", NSStringFromSelector(sel), msg);
 }
+
 @end

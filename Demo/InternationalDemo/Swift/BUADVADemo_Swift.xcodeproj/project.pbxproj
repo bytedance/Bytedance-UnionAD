@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,6 @@
 		2B6DD269255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD252255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */; };
 		2B6DD26A255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD257255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */; };
 		2B6DD26B255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD258255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */; };
-		2B6DD26C255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD259255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.m */; };
 		2B6DD26D255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD25A255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */; };
 		2B6DD26E255D439000FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD25F255D439000FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m */; };
 		2B6DD26F255D439000FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD260255D439000FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m */; };
@@ -51,18 +50,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		22919F329070FB9117C15102 /* Pods-Demo-BUADVADemo_Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; path = "../ExampleProject/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; sourceTree = "<group>"; };
+		22919F329070FB9117C15102 /* Pods-Demo-BUADVADemo_Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; path = "../Demo/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		2B1171B128157A3700180E61 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		2B1D7D58255D236400787A7F /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		2B6DD251255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FullScreenVideoCustomEventAdapter.h; sourceTree = "<group>"; };
 		2B6DD252255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_BannerCustomEventAdapter.m; sourceTree = "<group>"; };
-		2B6DD253255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_NativeFeedAd.h; sourceTree = "<group>"; };
 		2B6DD254255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_RewardCustomEventAdapter.h; sourceTree = "<group>"; };
 		2B6DD255255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_NativeFeedCustomEventAdapter.h; sourceTree = "<group>"; };
 		2B6DD256255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_BannerCustomEventAdapter.h; sourceTree = "<group>"; };
 		2B6DD257255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_FullScreenVideoCustomEventAdapter.m; sourceTree = "<group>"; };
 		2B6DD258255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_RewardCustomEventAdapter.m; sourceTree = "<group>"; };
-		2B6DD259255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_NativeFeedAd.m; sourceTree = "<group>"; };
 		2B6DD25A255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_NativeFeedCustomEventAdapter.m; sourceTree = "<group>"; };
 		2B6DD25D255D439000FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_RewardVideoCusEventVC.h; sourceTree = "<group>"; };
 		2B6DD25E255D439000FF8CA5 /* BUDAdmob_BannerCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_BannerCusEventVC.h; sourceTree = "<group>"; };
@@ -110,7 +107,7 @@
 		36774C61282BBE6500B859FC /* BUDNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUDNativeView.swift; sourceTree = "<group>"; };
 		680E4729271EF89B001E50E7 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		8BA995E4CA1F0A21A38A6448 /* libPods-Demo-BUADVADemo_Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo-BUADVADemo_Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B994B77066A45CC3D2E80677 /* Pods-Demo-BUADVADemo_Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.release.xcconfig"; path = "../ExampleProject/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.release.xcconfig"; sourceTree = "<group>"; };
+		B994B77066A45CC3D2E80677 /* Pods-Demo-BUADVADemo_Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-BUADVADemo_Swift.release.xcconfig"; path = "../Demo/InternationalDemo/Swift/Pods/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,18 +159,16 @@
 		2B6DD250255D439000FF8CA5 /* Adapter */ = {
 			isa = PBXGroup;
 			children = (
+				2B6DD256255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.h */,
+				2B6DD252255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */,
+				2B6DD251255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */,
+				2B6DD257255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */,
+				2B6DD255255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */,
+				2B6DD25A255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */,
+				2B6DD254255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.h */,
+				2B6DD258255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */,
 				2BD5895B274612D400CEC212 /* BUDAdmobTool.h */,
 				2BD5895C274612D400CEC212 /* BUDAdmobTool.m */,
-				2B6DD251255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */,
-				2B6DD252255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */,
-				2B6DD253255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.h */,
-				2B6DD254255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.h */,
-				2B6DD255255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */,
-				2B6DD256255D439000FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.h */,
-				2B6DD257255D439000FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */,
-				2B6DD258255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */,
-				2B6DD259255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.m */,
-				2B6DD25A255D439000FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -190,15 +185,15 @@
 		2B6DD25C255D439000FF8CA5 /* SubPage */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD25D255D439000FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.h */,
 				2B6DD25E255D439000FF8CA5 /* BUDAdmob_BannerCusEventVC.h */,
-				2B6DD25F255D439000FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m */,
-				2B6DD260255D439000FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m */,
-				2B6DD261255D439000FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m */,
-				2B6DD262255D439000FF8CA5 /* UnifiedNativeAdView.xib */,
-				2B6DD263255D439000FF8CA5 /* BUDAdmob_FullScreenCusEventVC.h */,
 				2B6DD264255D439000FF8CA5 /* BUDAdmob_BannerCusEventVC.m */,
 				2B6DD265255D439000FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.h */,
+				2B6DD260255D439000FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m */,
+				2B6DD263255D439000FF8CA5 /* BUDAdmob_FullScreenCusEventVC.h */,
+				2B6DD25F255D439000FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m */,
+				2B6DD25D255D439000FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.h */,
+				2B6DD261255D439000FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m */,
+				2B6DD262255D439000FF8CA5 /* UnifiedNativeAdView.xib */,
 			);
 			path = SubPage;
 			sourceTree = "<group>";
@@ -322,6 +317,7 @@
 				2B8DC7852555438200B820D4 /* Sources */,
 				2B8DC7862555438200B820D4 /* Frameworks */,
 				2B8DC7872555438200B820D4 /* Resources */,
+				E2BF127D94A5668E56129569 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -379,6 +375,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		E2BF127D94A5668E56129569 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Demo-BUADVADemo_Swift/Pods-Demo-BUADVADemo_Swift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F1A743802F485C2A1943EA95 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,7 +436,6 @@
 				2B6DD26B255D439000FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m in Sources */,
 				2B6DD26F255D439000FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m in Sources */,
 				2B8DC78F2555438200B820D4 /* SceneDelegate.swift in Sources */,
-				2B6DD26C255D439000FF8CA5 /* BUDAdmob_NativeFeedAd.m in Sources */,
 				2B8DC7A62555489D00B820D4 /* ViewController.swift in Sources */,
 				2B8DC7B525555A6A00B820D4 /* BUDRewardVideoAdViewController.swift in Sources */,
 				2B6DD270255D439000FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m in Sources */,

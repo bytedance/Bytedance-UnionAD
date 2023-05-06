@@ -13,8 +13,6 @@
 "coordinate" = " Longitude:%f, latitude:%f";
 "LocationFailure" = "Location failed";
 "unknown" = "Unknown display type";
-"drawTitle" = "Page【%lu】, [Draw] stimulate video title";
-"drawDescription" = "Immersive video, you deserve it";
 "testDescription" = "Test copy description";
 "Download" = "Download now";
 "loadCollectionView" = "Load the Collection style";
@@ -56,9 +54,6 @@
 "feedAdNative" = "Native Feed";
 "feedAdExpress" = "Express Feed";
 "feedAdExpressVideo" = "Express Feed Video";
-"drawAd" = "Draw Ad";
-"drawAdNative" = "Native Draw";
-"drawAdExpress" = "Express Draw";
 "fullscreenAd" = "FullScreenVideo Ad";
 "fullscreenAdNative" = "Normal Fullscreen";
 "fullscreenAdExpress" = "Express Fullscreen";

@@ -1,78 +1,101 @@
 //
-//  BUDAdmob_NativeFeedCustomEventAdapter.m
-//  AdmobAdapterDemo
+//  BUADVADemo
 //
-//  Created by Gu Chan on 2020/07/03.
-//  Copyright © 2020 GuChan. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDAdmob_NativeFeedCustomEventAdapter.h"
-#import <BUAdSDK/BUAdSDK.h>
 #import <GoogleMobileAds/GADCustomEventNativeAd.h>
 #import <GoogleMobileAds/GADMultipleAdsAdLoaderOptions.h>
-#import "BUDAdmob_NativeFeedAd.h"
+#import <PAGAdSDK/PAGLNativeAd.h>
+#import <PAGAdSDK/PAGLNativeAdDelegate.h>
+#import <PAGAdSDK/PAGLNativeAdRelatedView.h>
+#import <PAGAdSDK/PAGNativeRequest.h>
 #import "BUDAdmobTool.h"
+#import <PAGAdSDK/PAGLMaterialMeta.h>
+#import <PAGAdSDK/PAGLImage.h>
 
-@interface BUDAdmob_NativeFeedCustomEventAdapter ()<GADCustomEventNativeAd,BUNativeAdsManagerDelegate,BUNativeAdDelegate>
 
-@property (nonatomic, strong, getter=getNativeAd)BUNativeAdsManager *adManager;
+@interface BUDAdmob_NativeFeedCustomEventAdapter ()<GADMediationNativeAd,PAGLNativeAdDelegate>
+
+@property (nonatomic, strong) PAGLNativeAd *nativeAd;
+@property (nonatomic, strong) PAGLNativeAdRelatedView *relatedView;
+//@property (nonatomic, strong) BUDNativeView *nativeView;
 @property (nonatomic, assign) BOOL disableImageLoading;
 @property (nonatomic, weak) UIViewController *root;
+@property (nonatomic, weak, nullable) id<GADMediationNativeAdEventDelegate> delegate;
+
 
 @end
 
 
-
 @implementation BUDAdmob_NativeFeedCustomEventAdapter
 
-@synthesize delegate;
+NSString *const FEED_PLACEMENT_ID = @"placementid";
 
-NSString *const FEED_PLACEMENT_ID = @"placementID";
-
-
-/// request ad with placementID  adn count
-- (void)getNativeAd:(NSString *)placementID count:(NSInteger)count {
-    if (self.adManager == nil) {
-        /// tag
-        [BUDAdmobTool setExtData];
-        
-        BUAdSlot *slot = [[BUAdSlot alloc] init];
-        slot.ID = placementID;
-        slot.AdType = BUAdSlotAdTypeFeed;
-        slot.position = BUAdSlotPositionTop;
-        slot.imgSize = [BUSize sizeBy:BUProposalSize_Banner600_400];
-        self.adManager = [[BUNativeAdsManager alloc] initWithSlot:slot];
-        self.adManager.delegate = self;
-    }
-    [self.adManager loadAdDataWithCount:count];
-}
-
-#pragma mark - GADCustomEventNativeAd
-- (void)requestNativeAdWithParameter:(NSString *)serverParameter
-                             request:(GADCustomEventRequest *)request
-                             adTypes:(NSArray *)adTypes
-                             options:(NSArray *)options
-                  rootViewController:(UIViewController *)rootViewController {
-    NSInteger count = 1;
-    _root = rootViewController;
-    for (id obj in options) {
-        
-        if ([obj isKindOfClass:[GADNativeAdImageAdLoaderOptions class]]) {
-            _disableImageLoading = ((GADNativeAdImageAdLoaderOptions *)obj).disableImageLoading;
-        }
-        //Ad loader options for requesting multiple ads. Requesting multiple ads in a single request is currently only available for native app install ads and native content ads
-        if ([obj isKindOfClass:[GADMultipleAdsAdLoaderOptions class]]) {
-            count = ((GADMultipleAdsAdLoaderOptions *)obj).numberOfAds;
-        }
-    }
-    NSString *placementID = [self processParams:serverParameter];
-    NSLog(@"placementID=%@",placementID);
+- (void)loadNativeAdForAdConfiguration:(GADMediationNativeAdConfiguration *)adConfiguration completionHandler:(GADMediationNativeLoadCompletionHandler)completionHandler {
+    NSDictionary<NSString *, id> *credentials = adConfiguration.credentials.settings;
+    NSString *placementID = credentials[@"parameter"];
+    
     if (placementID != nil){
-        [self getNativeAd:placementID count:count];
+        [BUDAdmobTool setExtData];
+        __weak typeof(self) weakSelf = self;
+        __weak typeof(PAGLNativeAdRelatedView) *weakView = [self getRelatedView];
+        [PAGLNativeAd loadAdWithSlotID:placementID
+                               request:[PAGNativeRequest request]
+                     completionHandler:^(PAGLNativeAd * _Nullable nativeAd, NSError * _Nullable error) {
+
+            if (!weakSelf) {
+                return;
+            }
+            __strong typeof(weakSelf) self = weakSelf;
+
+            if (error) {
+                NSLog(@"native ad load fail : %@", error);
+                return;
+            }
+            self.nativeAd = nativeAd;
+            
+            [weakView refreshWithNativeAd:nativeAd];
+            nativeAd.rootViewController = adConfiguration.topViewController;
+            nativeAd.delegate = self;
+            self.delegate = completionHandler(self, nil);
+        }];
     } else {
         NSLog(@"no placement ID for requesting.");
-        [self.delegate customEventNativeAd:self didFailToLoadWithError:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
+        [self.delegate didFailToPresentWithError:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
+        [self _logWithSEL:_cmd msg:@"called didFailToPresentWithError:code:userInfo:"];
     }
+}
+
+- (NSArray<GADNativeAdImage *> *)images {
+    return nil;
+}
+
+- (GADNativeAdImage *)icon {
+    if (self.nativeAd.data.icon && self.nativeAd.data.icon.imageURL){
+        GADNativeAdImage *icon = [self imageWithUrlString:self.nativeAd.data.icon.imageURL];
+        return icon;
+    }
+    return nil;
+}
+
+- (GADNativeAdImage *)imageWithUrlString:(NSString *)urlString {
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [UIImage imageWithData: data];
+    return [[GADNativeAdImage alloc] initWithImage:image];
+}
+
+- (PAGLNativeAdRelatedView *)getRelatedView {
+    if (!_relatedView) {
+        _relatedView = [[PAGLNativeAdRelatedView alloc] init];
+    }
+    return _relatedView;
+}
+
+- (UIView *)mediaView {
+    return (UIView *)[self getRelatedView].mediaView;
 }
 
 - (BOOL)handlesUserClicks {
@@ -83,45 +106,85 @@ NSString *const FEED_PLACEMENT_ID = @"placementID";
     return NO;
 }
 
-#pragma mark - BUNativeAdsManagerDelegate
-- (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
+- (BOOL)hasVideoContent {
+    return YES;
+}
 
-    for (BUNativeAd * nativeAd in nativeAdDataArray) {
-        nativeAd.rootViewController = _root;
-        BUDAdmob_NativeFeedAd *ad = [[BUDAdmob_NativeFeedAd alloc] initWithBUNativeAd:nativeAd disableImageLoading:_disableImageLoading];
-        [self.delegate customEventNativeAd:self didReceiveMediatedUnifiedNativeAd:ad];
+- (NSString *)headline {
+    if (self.nativeAd && self.nativeAd.data) {
+        return self.nativeAd.data.AdTitle;
+    }
+    return nil;
+}
+
+- (NSString *)body {
+    if (self.nativeAd && self.nativeAd.data) {
+        return self.nativeAd.data.AdDescription;
+    }
+    return nil;
+}
+
+
+- (NSString *)callToAction {
+    if (self.nativeAd && self.nativeAd.data) {
+        return self.nativeAd.data.buttonText;
+    }
+    return nil;
+}
+
+- (NSDecimalNumber *)starRating {
+    return nil;
+}
+
+- (NSString *)price {
+    return nil;
+}
+
+- (NSString *)store {
+    return nil;
+}
+
+- (UIView *)adChoicesView {
+    return self.relatedView.logoADImageView;
+}
+
+- (NSString *)advertiser {
+    if (self.nativeAd && self.nativeAd.data) {
+        return self.nativeAd.data.AdTitle;
+    }
+    return nil;
+}
+
+- (NSDictionary *)extraAssets {
+    return nil;
+}
+
+- (void)didRenderInView:(nonnull UIView *)view
+    clickableAssetViews:(nonnull NSDictionary<GADNativeAssetIdentifier, UIView *> *)clickableAssetViews
+ nonclickableAssetViews:(nonnull NSDictionary<GADNativeAssetIdentifier, UIView *> *)nonclickableAssetViews
+         viewController:(nonnull UIViewController *)viewController {
+    if (self.nativeAd && view) {
+        [self.nativeAd registerContainer:view withClickableViews:clickableAssetViews.allValues];
     }
 }
 
-- (void)nativeAdsManager:(BUNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error {
-    NSLog(@"nativeAdsManager with error %@", error.description);
-    [self.delegate customEventNativeAd:self didFailToLoadWithError:error];
+- (void)adDidShow:(id<PAGAdProtocol>)ad {
+    [self.delegate willPresentFullScreenView];
+    [self.delegate reportImpression];
+    [self _logWithSEL:_cmd msg:@"called willPresentFullScreenView: and reportImpression:"];
 }
 
+- (void)adDidClick:(id<PAGAdProtocol>)ad {
+    [self.delegate reportClick];
+    [self _logWithSEL:_cmd msg:@"called reportClick:"];
+}
 
-- (NSString *)processParams:(NSString *)param {
-    if (!(param && [param isKindOfClass:[NSString class]] && param.length > 0)) {
-        return nil;
-    }
-    NSError *jsonReadingError;
-    NSData *data = [param dataUsingEncoding:NSUTF8StringEncoding];
-    if (!data) {
-        return nil;
-    }
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingAllowFragments
-                                                           error:&jsonReadingError];
-    if (jsonReadingError && [jsonReadingError isKindOfClass:[NSError class]]) {
-        NSLog(@"jsonReadingError. error=[%@]", jsonReadingError);
-        return nil;
-    }
-    
-    if (!(json && [json isKindOfClass:[NSDictionary class]] && [NSJSONSerialization isValidJSONObject:json])) {
-        NSLog(@"Params Error");
-        return nil;
-    }
-    NSString *placementID = json[FEED_PLACEMENT_ID];
-    return placementID;
+- (void)adDidDismiss:(id<PAGAdProtocol>)ad {
+    [self _logWithSEL:_cmd msg:nil];
+}
+
+- (void)_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    NSLog(@"BUDAdmob_NativeFeedCustomEventAdapter | %@ | %@", NSStringFromSelector(sel), msg);
 }
 
 @end

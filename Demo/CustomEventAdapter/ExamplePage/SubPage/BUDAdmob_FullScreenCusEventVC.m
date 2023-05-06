@@ -1,10 +1,8 @@
 //
-//  BUDAdmob_FullScreenCusEventVC.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by wangyanlin on 2020/3/10.
-//  Copyright © 2020 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDAdmob_FullScreenCusEventVC.h"
 #import <GoogleMobileAds/GADInterstitialAd.h>
@@ -62,7 +60,7 @@
 
 - (void)loadAd:(UIButton *)sender {
     GADRequest *request = [GADRequest request];
-    [GADInterstitialAd loadWithAdUnitID:@"ca-app-pub-2547387438729744/4725602169"
+    [GADInterstitialAd loadWithAdUnitID:@"ca-app-pub-5978360902462520/9490268595"
                               request:request
                     completionHandler:^(GADInterstitialAd *ad, NSError *error) {
         if (error) {
@@ -94,7 +92,7 @@ didFailToPresentFullScreenContentWithError:(nonnull NSError *)error {
 }
 
 /// Tells the delegate that the ad presented full screen content.
-- (void)adDidPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
+- (void)adWillPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
     
 }
 

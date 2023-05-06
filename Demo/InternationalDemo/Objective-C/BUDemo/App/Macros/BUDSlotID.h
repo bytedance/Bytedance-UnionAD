@@ -25,24 +25,22 @@
 #define normal_reward_landscape_ID        @"900546319"
 #define normal_fullscreen_ID              @"900546299"
 #define normal_fullscreen_landscape_ID    @"900546154"
-#define normal_splash_ID                  @"800546808"
+//#define normal_splash_ID                  @"800546808"
 //#define normal_appOpen_ID                 @"890000021"
 //#define normal_appOpen_landscape_ID       @"890000022"
 
 //#define native_feed_ID                    @"900546910"
 #define native_feed_image_ID              @"945019352" //This id 
-#define native_draw_ID                    @"900546588"
 #define native_banner_ID                  @"900546687"
-#define native_interstitial_ID            @"900546829"
+//#define native_interstitial_ID            @"900546829"
 #define native_imagePortrait_ID           @"900546264"
 #define native_feed_custom_player_ID      @"900546910"
-#define native_paster_player_ID           @"945593048"
+//#define native_paster_player_ID           @"945593048"
 
 /// 带_both代表海外国内通用的rit
 #define express_feed_ID                   @"945113159"
 //#define express_feed_video_ID             @"900546510"
 #define express_feed_video_ID             @"945294189"
-#define express_draw_ID                   @"900546881"
 #define express_banner_ID                 @"900546269"
 #define express_banner_ID_60090           @"900546269"
 //#define express_banner_ID_640100          @"900546833"
@@ -52,11 +50,11 @@
 #define express_banner_ID_600300          @"945509789" ///3400 change
 #define express_banner_ID_600400_both     @"945509785" ///3400 change
 //#define express_banner_ID_600500_both     @"945509778" ///3400 change
-#define express_interstitial_ID           @"900546270"
-#define express_interstitial_ID_1_1_both  @"945509762" ///3400 change
-#define express_interstitial_ID_2_3_both  @"945509769" ///3400 change
-#define express_interstitial_ID_3_2_both  @"945509825" ///3400 change
-#define express_splash_ID                 @"800546851"
+//#define express_interstitial_ID           @"900546270"
+//#define express_interstitial_ID_1_1_both  @"945509762" ///3400 change
+//#define express_interstitial_ID_2_3_both  @"945509769" ///3400 change
+//#define express_interstitial_ID_3_2_both  @"945509825" ///3400 change
+//#define express_splash_ID                 @"800546851"
 //#define express_full_ID_both              @"945113164"
 //#define express_full_landscape_ID_both    @"945113165"
 //#define express_reward_ID_both            @"945113162"

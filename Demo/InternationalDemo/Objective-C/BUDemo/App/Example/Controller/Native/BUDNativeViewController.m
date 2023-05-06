@@ -18,6 +18,7 @@
 @property (nonatomic, strong) PAGLNativeAd *nativeAd;
 @property (nonatomic, strong) BUDNativeView *nativeView;
 
+
 @end
 
 @implementation BUDNativeViewController
@@ -51,7 +52,6 @@
         
         UIButton *customButton = [UIButton buttonWithType:UIButtonTypeSystem];
         customButton.frame = CGRectMake(self.view.frame.size.width - 80, 480, 70, 20);
-        customButton.backgroundColor = [UIColor orangeColor];
         [customButton setTitle:@"see more" forState:UIControlStateNormal];
         [weakView addSubview:customButton];
         

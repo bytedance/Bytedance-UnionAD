@@ -12,4 +12,11 @@
 //#import "NSString+LocalizedString.h"
 #import <UIKit/UIKit.h>
 
+
+#if __has_include(<BURelyFoundation_Global/BURelyFoundation_Global.h>)
+#import <BURelyFoundation_Global/BURelyFoundation_Global.h>
+#else
+#import "BURelyFoundation_Global.h"
+#endif
+
 #endif /* PrefixHeader_pch */

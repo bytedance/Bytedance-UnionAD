@@ -1,10 +1,8 @@
 //
-//  BUDAdmob_BannerCusEventVC.m
 //  BUADVADemo
 //
-//  Created by bytedance on 2020/9/28.
-//  Copyright © 2020 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDAdmob_BannerCusEventVC.h"
 #import <GoogleMobileAds/GoogleMobileAds.h>
@@ -71,11 +69,11 @@
 }
 
 - (void)load320x50Ad:(UIButton *)sender {
-    [self loadBannerWithID:@"ca-app-pub-2547387438729744/5631782273" size:CGSizeMake(320, 50)];
+    [self loadBannerWithID:@"ca-app-pub-5978360902462520/5995830429" size:CGSizeMake(320, 50)];
 }
 
 - (void)load300x250Ad:(UIButton *)sender {
-    [self loadBannerWithID:@"ca-app-pub-2547387438729744/3823584037" size:CGSizeMake(300, 250)];
+    [self loadBannerWithID:@"ca-app-pub-5978360902462520/7055676948" size:CGSizeMake(300, 250)];
 }
 
 - (void)showAd:(UIButton *)sender {

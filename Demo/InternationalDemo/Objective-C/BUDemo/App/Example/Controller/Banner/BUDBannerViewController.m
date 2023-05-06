@@ -114,12 +114,18 @@ typedef NS_ENUM(NSUInteger, PAGBannerAdSizeType) {
         default:
             break;
     }
+    
+    __weak typeof(self) weakself = self;
     [PAGBannerAd loadAdWithSlotID:slotID
                           request:[PAGBannerRequest requestWithBannerSize:size]
                 completionHandler:^(PAGBannerAd * _Nullable bannerAd, NSError * _Nullable error) {
-        
+        __strong typeof(weakself) self = weakself;
         if (error) {
+            self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
             NSLog(@"banner ad load fail : %@",error);
+            return;
+        }
+        if (!weakself) {
             return;
         }
         self.selectedView.promptStatus = BUDPromptStatusAdLoaded;

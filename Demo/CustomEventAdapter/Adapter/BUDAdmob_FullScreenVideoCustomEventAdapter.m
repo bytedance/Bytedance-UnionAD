@@ -1,114 +1,82 @@
 //
-//  BUDAdmob_FullScreenVideoCustomEventAdapter.m
-//  AdmobAdapterDemo
+//  BUADVADemo
 //
-//  Created by Gu Chan on 2020/07/03.
-//  Copyright © 2020 GuChan. All rights reserved.
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDAdmob_FullScreenVideoCustomEventAdapter.h"
-#import <BUAdSDK/BUAdSDK.h>
 #import "BUDAdmobTool.h"
+#import <PAGAdSDK/PAGLInterstitialAd.h>
+#import <PAGAdSDK/PAGLInterstitialAdDelegate.h>
 
-@interface BUDAdmob_FullScreenVideoCustomEventAdapter() <BUFullscreenVideoAdDelegate>
-@property (nonatomic, strong) BUFullscreenVideoAd *fullScreenVideo;
+@interface BUDAdmob_FullScreenVideoCustomEventAdapter() <GADMediationInterstitialAd, PAGLInterstitialAdDelegate>
+@property (nonatomic, strong) PAGLInterstitialAd *fullScreenVideo;
+@property (nonatomic, weak, nullable) id<GADMediationInterstitialAdEventDelegate> delegate;
 @end
 
 @implementation BUDAdmob_FullScreenVideoCustomEventAdapter
-@synthesize delegate;
+
 NSString *const INTERSTITIAL_PLACEMENT_ID = @"placementID";
 
-- (void)presentFromRootViewController:(nonnull UIViewController *)rootViewController {
-    [self.fullScreenVideo showAdFromRootViewController:rootViewController];
-}
-
-- (void)requestInterstitialAdWithParameter:(nullable NSString *)serverParameter label:(nullable NSString *)serverLabel request:(nonnull GADCustomEventRequest *)request {
-    NSString *placementID = [self processParams:serverParameter];
+- (void)loadInterstitialForAdConfiguration:(GADMediationInterstitialAdConfiguration *)adConfiguration completionHandler:(GADMediationInterstitialLoadCompletionHandler)completionHandler {
+    // Look for the "parameter" key to fetch the parameter you defined in the AdMob UI.
+    NSDictionary<NSString *, id> *credentials = adConfiguration.credentials.settings;
+    NSString *placementID = credentials[@"parameter"];
     NSLog(@"placementID=%@",placementID);
-    if (placementID != nil) {
+    if (placementID != nil){
         /// tag
         [BUDAdmobTool setExtData];
-        
-        self.fullScreenVideo = [[BUFullscreenVideoAd alloc] initWithSlotID:placementID];
-        self.fullScreenVideo.delegate = self;
-        [self.fullScreenVideo loadAdData];
+        __weak typeof(self) weakSelf = self;
+        [PAGLInterstitialAd loadAdWithSlotID:placementID request:[PAGInterstitialRequest request] completionHandler:^(PAGLInterstitialAd * _Nullable interstitialAd, NSError * _Nullable error) {
+            weakSelf.fullScreenVideo = interstitialAd;
+            weakSelf.fullScreenVideo.delegate = weakSelf;
+            weakSelf.delegate = completionHandler(weakSelf, nil);
+        }];
     } else {
         NSLog(@"no placement ID for requesting.");
-        [self.delegate customEventInterstitial:self didFailAd:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
+        [self.delegate didFailToPresentWithError:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
+        [self _logWithSEL:_cmd msg:@"called didFailToPresentWithError:code:userInfo:"];
     }
 }
 
-#pragma mark - <BUFullscreenVideoAdDelegate>
-
-- (void)fullscreenVideoMaterialMetaAdDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    [self.delegate customEventInterstitialDidReceiveAd:self];
-}
-
-- (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error{
-    [self.delegate customEventInterstitial:self didFailAd:error];
-    NSLog(@"interstitialAd with error %@", error.description);
-}
-
-- (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    NSLog(@"%s",__func__);
-}
-
-- (void)fullscreenVideoAdWillVisible:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    [self.delegate customEventInterstitialWillPresent:self];
-}
-
-- (void)fullscreenVideoAdDidVisible:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    NSLog(@"%s",__func__);
-}
-
-- (void)fullscreenVideoAdDidClick:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    [self.delegate customEventInterstitialWasClicked:self];
-}
-
-- (void)fullscreenVideoAdWillClose:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    [self.delegate customEventInterstitialWillDismiss:self];
-}
-
-- (void)fullscreenVideoAdDidClose:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    [self.delegate customEventInterstitialDidDismiss:self];
-}
-
-- (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error{
-    NSLog(@"%s",__func__);
-}
-
-- (void)fullscreenVideoAdDidClickSkip:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    NSLog(@"%s",__func__);
-}
-
-- (void)fullscreenVideoAdCallback:(BUFullscreenVideoAd *)fullscreenVideoAd withType:(BUFullScreenVideoAdType)fullscreenVideoAdType{
-    NSLog(@"%s",__func__);
-}
-
-- (NSString *)processParams:(NSString *)param {
-    if (!(param && [param isKindOfClass:[NSString class]] && param.length > 0)) {
-        return nil;
+#pragma mark - GADMediationInterstitialAd
+- (void)presentFromViewController:(nonnull UIViewController *)viewController{
+    if (self.fullScreenVideo) {
+        [self.fullScreenVideo presentFromRootViewController:viewController];
     }
-    NSError *jsonReadingError;
-    NSData *data = [param dataUsingEncoding:NSUTF8StringEncoding];
-    if (!data) {
-        return nil;
+    else {
+        NSError *error =
+              [NSError errorWithDomain:@"GADMediationAdapterSampleAdNetwork"
+                                  code:0
+                              userInfo:@{NSLocalizedDescriptionKey : @"Unable to display ad."}];
+        [self.delegate didFailToPresentWithError:error];
     }
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingAllowFragments
-                                                           error:&jsonReadingError];
-    
-    
-    if (jsonReadingError && [jsonReadingError isKindOfClass:[NSError class]]) {
-        NSLog(@"jsonReadingError. error=[%@]", jsonReadingError);
-        return nil;
-    }
-    
-    if (!(json && [json isKindOfClass:[NSDictionary class]] && [NSJSONSerialization isValidJSONObject:json])) {
-        NSLog(@"Params Error");
-        return nil;
-    }
-    NSString *placementID = json[INTERSTITIAL_PLACEMENT_ID];
-    return placementID;
 }
+
+#pragma mark - PAGLInterstitialAdDelegate
+
+- (void)adDidShow:(id<PAGAdProtocol>)ad {
+    [self.delegate willPresentFullScreenView];
+    [self.delegate reportImpression];
+    [self _logWithSEL:_cmd msg:@"called willPresentFullScreenView: and reportImpression:"];
+}
+
+- (void)adDidClick:(id<PAGAdProtocol>)ad {
+    [self.delegate reportClick];
+    [self _logWithSEL:_cmd msg:@"called reportClick:"];
+}
+
+- (void)adDidDismiss:(id<PAGAdProtocol>)ad {
+    [self.delegate willDismissFullScreenView];
+    [self.delegate didDismissFullScreenView];
+    [self _logWithSEL:_cmd msg:@"called willDismissFullScreenView: and didDismissFullScreenView:"];
+}
+
+#pragma mark - private
+
+- (void)_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    NSLog(@"BUDAdmob_FullScreenVideoCustomEventAdapter | %@ | %@", NSStringFromSelector(sel), msg);
+}
+
 
 @end

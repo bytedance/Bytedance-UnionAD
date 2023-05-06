@@ -1,10 +1,8 @@
 //
-//  BUDAdmob_FeedNativeCusEventVC.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by liudonghui on 2020/1/3.
-//  Copyright © 2020 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDAdmob_FeedNativeCusEventVC.h"
 #import <GoogleMobileAds/GADAdLoader.h>
@@ -58,6 +56,48 @@
 }
 
 - (void)creatAdView {
+   
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (object==_adView.imageView) {
+        UIImage * new = (UIImage *)[change objectForKey:NSKeyValueChangeNewKey];
+        CGSize imageSize = new.size;
+        CGSize viewSize = self.view.frame.size;
+        CGFloat w = viewSize.width;
+        CGFloat h = ((w-20)*(imageSize.height/imageSize.width))+120;
+        _scrollView.contentSize = CGSizeMake(w, h);
+        _adView.frame = CGRectMake(0, 0, w, h);
+    }
+}
+
+- (GADAdLoader *)getAdLoader {
+    if (_adLoader == nil) {
+        GADMultipleAdsAdLoaderOptions *multipleAdsOptions =
+            [[GADMultipleAdsAdLoaderOptions alloc] init];
+        GADNativeMuteThisAdLoaderOptions *muteOptions = [GADNativeMuteThisAdLoaderOptions new];
+        multipleAdsOptions.numberOfAds = 1;
+        _adLoader = [[GADAdLoader alloc] initWithAdUnitID:@"ca-app-pub-5978360902462520/2635169913" rootViewController:self adTypes:@[kGADAdLoaderAdTypeNative] options:@[multipleAdsOptions,muteOptions]];
+        _adLoader.delegate = self;
+    }
+    return _adLoader;
+}
+
+#pragma mark - GADNativeAdLoaderDelegate
+
+/// Called when a native ad is received.
+- (void)adLoader:(nonnull GADAdLoader *)adLoader didReceiveNativeAd:(nonnull GADNativeAd *)nativeAd {
+    _nativeAd = nativeAd;
+//    GADMediaContent *mediaContent = [[GADMediaContent alloc] init];
+//    _nativeAd.mediaContent = mediaContent;
+    _statusLabel.text = @"Ad loaded";
+    
+    
+    
+    
+    
+    
+    
     _adView = [[NSBundle mainBundle]loadNibNamed:@"UnifiedNativeAdView" owner:nil options:nil].lastObject;
     [_adView.imageView addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
     
@@ -68,6 +108,10 @@
     }
     _scrollView.contentSize = CGSizeZero;
     [_scrollView addSubview:_adView];
+    
+    
+    _adView.mediaView.hidden = NO;
+    [_adView.mediaView setMediaContent:_nativeAd.mediaContent];
     
     // set delegate and rootVC of nativeAd
     _nativeAd.delegate = self;
@@ -142,39 +186,6 @@
 
     // In order for the SDK to process touch events properly, user interaction should be disabled.
     _adView.callToActionView.userInteractionEnabled = false;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    if (object==_adView.imageView) {
-        UIImage * new = (UIImage *)[change objectForKey:NSKeyValueChangeNewKey];
-        CGSize imageSize = new.size;
-        CGSize viewSize = self.view.frame.size;
-        CGFloat w = viewSize.width;
-        CGFloat h = ((w-20)*(imageSize.height/imageSize.width))+120;
-        _scrollView.contentSize = CGSizeMake(w, h);
-        _adView.frame = CGRectMake(0, 0, w, h);
-    }
-}
-
-- (GADAdLoader *)getAdLoader {
-    if (_adLoader == nil) {
-        GADMultipleAdsAdLoaderOptions *multipleAdsOptions =
-            [[GADMultipleAdsAdLoaderOptions alloc] init];
-        GADNativeMuteThisAdLoaderOptions *muteOptions = [GADNativeMuteThisAdLoaderOptions new];
-        multipleAdsOptions.numberOfAds = 1;
-        _adLoader = [[GADAdLoader alloc] initWithAdUnitID:@"ca-app-pub-2547387438729744/8145972422" rootViewController:self adTypes:@[kGADAdLoaderAdTypeNative] options:@[multipleAdsOptions,muteOptions]];
-        _adLoader.delegate = self;
-    }
-    return _adLoader;
-}
-
-#pragma mark - GADNativeAdLoaderDelegate
-
-/// Called when a native ad is received.
-- (void)adLoader:(nonnull GADAdLoader *)adLoader didReceiveNativeAd:(nonnull GADNativeAd *)nativeAd {
-    _nativeAd = nativeAd;
-    _statusLabel.text = @"Ad loaded";
-    [self showAd];
 }
 
 /// Called when adLoader fails to load an ad.

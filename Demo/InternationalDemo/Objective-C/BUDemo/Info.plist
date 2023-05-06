@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AppLovinSdkKey</key>
+	<string>sdZp0O-l2m0Stx9OZ67-c2tZ6p7VyvJFp2lyGbLnTTFyCHJ0Qbp4uyW2mSexmsFuGGP6IZLUTNimt_VmnsbDOf</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -46,7 +48,7 @@
 		</array>
 	</dict>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-2547387438729744~7982320892</string>
+	<string>ca-app-pub-6619867688122247~5241609771</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>

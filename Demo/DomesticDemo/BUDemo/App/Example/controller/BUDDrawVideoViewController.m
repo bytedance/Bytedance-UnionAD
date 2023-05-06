@@ -87,7 +87,6 @@
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeDrawVideo; //required
-    slot1.isOriginAd = YES; //required
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_DrawFullScreen];
     nad.adslot = slot1;
     // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。

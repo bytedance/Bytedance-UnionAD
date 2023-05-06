@@ -104,7 +104,6 @@ static CGFloat const bottomHeight = 30;
         slot1.ID = self.viewModel.slotID;
         slot1.AdType = BUAdSlotAdTypeBanner;
         slot1.imgSize = imgSize1;
-        slot1.isOriginAd = YES;
         slot1.supportRenderControl = self.renderSwitchView.on;
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         slot1.adSize = CGSizeMake(width, width / 2.0f);

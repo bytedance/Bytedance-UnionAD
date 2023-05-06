@@ -164,12 +164,7 @@
 
 #pragma mark - BURewardedVideoAdDelegate
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    if ([self.rewardedVideoAd isAdValid]) {
-        [self.rewardedVideoAd showAdFromRootViewController:self];
-    }
-#pragma clang diagnostic pop
+    [self.rewardedVideoAd showAdFromRootViewController:self];
 }
 
 - (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
@@ -187,7 +182,7 @@
 - (void)logWithClickType:(NSString *)type
 {
     // 网络请求地址
-    NSString *URLString = @"https://is.snssdk.com/api/ad/union/sdk/stats/";
+    NSString *URLString = @"https://api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk/stats/";
     // 网络请求管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

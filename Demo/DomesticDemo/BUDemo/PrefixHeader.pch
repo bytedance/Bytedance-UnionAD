@@ -9,11 +9,13 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+
 #if __has_include(<BURelyFoundation/BURelyFoundation.h>)
 #import <BURelyFoundation/BURelyFoundation.h>
-#elif __has_include("BURelyFoundation.h")
-#import "BURelyFoundation.h"
+#elif __has_include(<BURelyFoundation_Global/BURelyFoundation.h>)
+#import <BURelyFoundation_Global/BURelyFoundation.h>
 #else
+#import "BURelyFoundation.h"
 #endif
 
 #endif

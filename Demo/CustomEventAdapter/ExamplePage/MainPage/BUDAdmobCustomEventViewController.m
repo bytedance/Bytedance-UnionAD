@@ -1,10 +1,8 @@
 //
-//  BUDAdmobCustomEventViewController.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by Bytedance on 2019/11/26.
-//  Copyright © 2019 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDAdmobCustomEventViewController.h"
 #import "BUDAdmob_RewardVideoCusEventVC.h"
@@ -14,7 +12,7 @@
 
 @interface BUDAdmobCustomEventViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray<NSArray *> *items;
+@property (nonatomic, copy) NSArray<NSArray *> *items;
 
 @end
 

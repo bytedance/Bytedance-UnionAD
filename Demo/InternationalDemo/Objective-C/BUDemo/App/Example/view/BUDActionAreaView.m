@@ -5,7 +5,6 @@
 //  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDActionAreaView.h"
-#import <BUAdSDK/BUAdSDK.h>
 #import "NSString+LocalizedString.h"
 
 @implementation BUDActionAreaView
@@ -18,10 +17,7 @@
     return self;
 }
 
-- (void)configWitModel:(BUMaterialMeta *)model {
-    if (![model isKindOfClass:[BUMaterialMeta class]]) {
-        return;
-    }
+- (void)configWitModel:(id)model {
     self.subTitleLabel.text = [NSString localizedStringForKey:TestDescription];
     [self.actionButton setTitle:[NSString localizedStringForKey:Download] forState:UIControlStateNormal];
     [self.actionButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];

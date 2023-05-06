@@ -13,11 +13,13 @@
 #import "RRFPSBar.h"
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
-#import "BUDTestToolsViewController.h"
-#import "BUDAnimationTool.h"
-#import "BUDPrivacyProvider.h"
 #import <AVFoundation/AVFoundation.h>
 #import <PAGAdSDK/PAGAdSDK.h>
+
+#import <AdSupport/AdSupport.h>
+#if defined(__IPHONE_14_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_0
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+#endif
 
 #pragma mark - show FPS
 #ifdef DEBUG
@@ -28,7 +30,6 @@
 
 @interface AppDelegate () 
 @property (nonatomic, assign) CFTimeInterval startTime;
-@property (nonatomic, strong) BUSplashView *splashAdView;
 @property (nonatomic, strong) AVAudioPlayer *audioPlay;
 @end
 
@@ -37,7 +38,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // adaptor for Customer Event
-    [self configCustomEvent];
 
     if (self.window == nil) {
         UIWindow *keyWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -46,50 +46,18 @@
         self.window.rootViewController = [self rootViewController];
     }
     
-    // initialize AD SDK
     [self setupPangleSDK];
+
    
     return YES;
 }
+
 
 
 - (UIViewController *)rootViewController {
     BUDMainViewController *mainViewController = [[BUDMainViewController alloc] init];
     UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     return navigationVC;
-}
-
-- (void)configDemo {
-    [self configTestData];
-    [self configFPS];
-}
-
-- (void)configTestData {
-    // initialize test data
-    [BUDTestToolsViewController initializeTestSetting];
-}
-
-- (void)configFPS {
-    // show FPS
-    if (BUFPS_OPEN == 1) {
-        [RRFPSBar sharedInstance].showsAverage = YES;
-        [[RRFPSBar sharedInstance] setHidden:NO];
-    }
-}
-
-- (void)configCustomEvent {
-    /**
-     admob和mopub各个代码位所对应的adapter请去admob和mopub的对应官网申请(demo的对应关系参见BUDSlotID类)。
-     demo只是给出一个接入参考，具体的使用请结合业务场景。
-     The adapter corresponding to each code bit of admob and mopub can be applied to the corresponding official website of admob and mopub (see BUDSlotID class for the corresponding relation of demo).
-     The demo only provides an access reference, please combine the specific use of the business scenario.
-     */
-    // admob adaptor config
-    // add appKey in info.plist (key:GADApplicationIdentifier)
-    [[GADMobileAds sharedInstance] startWithCompletionHandler:^(GADInitializationStatus * _Nonnull status) {
-        // This is a example to set GDPR. You can change GDPR at right scence
-        // [BUAdSDKManager setGDPR:0];
-    }];
 }
 
 - (void)setupPangleSDK {
@@ -104,6 +72,26 @@
             //load ad data
         }
     }];
+}
+
+- (void)getIDFA {
+    if (@available(iOS 14, *)) {
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
+                NSString *IDFA = ASIdentifierManager.sharedManager.advertisingIdentifier.UUIDString;
+                NSLog(@"IDFA: %@", IDFA);
+            } else {
+                NSLog(@"ATTrackingManagerAuthorizationStatus not authorized");
+            }
+        }];
+    } else {
+        if (ASIdentifierManager.sharedManager.isAdvertisingTrackingEnabled) {
+            NSString *IDFA = ASIdentifierManager.sharedManager.advertisingIdentifier.UUIDString;
+            NSLog(@"IDFA: %@", IDFA);
+        } else {
+            NSLog(@"advertising tracking not enabled");
+        }
+    }
 }
 
 #pragma mark - UIApplicationDelegate

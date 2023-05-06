@@ -13,8 +13,6 @@
 "coordinate" = "  経度:%f,緯度:%f";
 "LocationFailure" = "位置情報の取得に失敗";
 "unknown" = "未知の表示タイプ";
-"drawTitle" = "【%lu】ページ目、[Draw] アナログ動画タイトル";
-"drawDescription" = "全画面でより快適に動画を楽しもう";
 "testDescription" = "テストディスクリプション";
 "Download" = "今すぐダウンロード";
 "loadCollectionView" = "CollectionView形式をロード";
@@ -56,9 +54,6 @@
 "feedAdNative" = "Native Feed";
 "feedAdExpress" = "Express Feed";
 "feedAdExpressVideo" = "Express Feed Video";
-"drawAd" = "Draw Ad";
-"drawAdNative" = "Native Draw";
-"drawAdExpress" = "Express Draw";
 "fullscreenAd" = "FullScreenVideo Ad";
 "fullscreenAdNative" = "Normal Fullscreen";
 "fullscreenAdExpress" = "Express Fullscreen";

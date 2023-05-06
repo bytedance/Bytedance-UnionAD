@@ -1,185 +1,107 @@
 //
-//  BUDAdmob_RewardCustomEventAdapter.m
-//  AdmobAdapterDemo
+//  BUADVADemo
 //
-//  Created by Gu Chan on 2020/07/03.
-//  Copyright © 2020 GuChan. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDAdmob_RewardCustomEventAdapter.h"
-#import <BUAdSDK/BUAdSDK.h>
 #import "BUDAdmobTool.h"
+#import <PAGAdSDK/PAGRewardedAd.h>
+#import <PAGAdSDK/PAGRewardModel.h>
 
-@interface BUDAdmob_RewardCustomEventAdapter ()<BURewardedVideoAdDelegate,GADMediationRewardedAd>
+@interface BUDAdmob_RewardCustomEventAdapter ()<PAGRewardedAdDelegate,GADMediationRewardedAd>
 {
 }
 
 @property (nonatomic, weak, nullable) id<GADMediationRewardedAdEventDelegate> delegate;
-@property (nonatomic, strong) BURewardedVideoAd *rewardedVideoAd;
-@property (nonatomic, copy) GADMediationRewardedLoadCompletionHandler completionHandler;
+@property (nonatomic, strong) PAGRewardedAd *rewardedAd;
 
 @end
-
 
 
 @implementation BUDAdmob_RewardCustomEventAdapter
 
 NSString *const REWARD_PLACEMENT_ID = @"placementID";
 
-#pragma mark - GADMediationAdapter
-/// Returns the adapter version.
-+ (GADVersionNumber)adapterVersion{
-    NSString *versionString = @"1.4.0";
-    NSArray *versionComponents = [versionString componentsSeparatedByString:@"."];
-    GADVersionNumber version = {0};
-    if (versionComponents.count == 3) {
-        version.majorVersion = [versionComponents[0] integerValue];
-        version.minorVersion = [versionComponents[1] integerValue];
-        version.patchVersion = [versionComponents[2] integerValue];
-    }
-    return version;
-}
-
-/// Returns the ad SDK version.
-+ (GADVersionNumber)adSDKVersion{
-    NSString *versionString = BUAdSDKManager.SDKVersion;
-    NSArray *versionComponents = [versionString componentsSeparatedByString:@"."];
-    GADVersionNumber version = {0};
-    if (versionComponents.count == 4) {
-        version.majorVersion = [versionComponents[0] integerValue];
-        version.minorVersion = [versionComponents[1] integerValue];
-        version.patchVersion = [versionComponents[2] integerValue];
-    }
-    return version;
-}
-
-/// The extras class that is used to specify additional parameters for a request to this ad network.
-/// Returns Nil if the network doesn't have publisher provided extras.
-+ (nullable Class<GADAdNetworkExtras>)networkExtrasClass {
-    return Nil;
-}
-
 - (void)loadRewardedAdForAdConfiguration:
 (nonnull GADMediationRewardedAdConfiguration *)adConfiguration
                        completionHandler:
 (nonnull GADMediationRewardedLoadCompletionHandler)completionHandler {
     // Look for the "parameter" key to fetch the parameter you defined in the AdMob UI.
-    BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     NSDictionary<NSString *, id> *credentials = adConfiguration.credentials.settings;
-    NSString *placementID = [self processParams:(credentials[@"parameter"])];
+    NSString *placementID = credentials[@"parameter"];
     NSLog(@"placementID=%@",placementID);
     if (placementID != nil){
         /// tag
         [BUDAdmobTool setExtData];
-        
-        self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:placementID rewardedVideoModel:model];
-        self.rewardedVideoAd.delegate = self;
-        [self.rewardedVideoAd loadAdData];
-        self.completionHandler = completionHandler;
+        __weak typeof(self) weakSelf = self;
+        [PAGRewardedAd loadAdWithSlotID:placementID request:[PAGRewardedRequest request] completionHandler:^(PAGRewardedAd * _Nullable rewardedAd, NSError * _Nullable error) {
+            if(rewardedAd) {
+                
+            }
+            weakSelf.rewardedAd = rewardedAd;
+            weakSelf.rewardedAd.delegate = weakSelf;
+            weakSelf.delegate = completionHandler(weakSelf, nil);
+        }];
     } else {
         NSLog(@"no placement ID for requesting.");
         [self.delegate didFailToPresentWithError:[NSError errorWithDomain:@"error placementID" code:-1 userInfo:nil]];
+        [self _logWithSEL:_cmd msg:@"called didFailToPresentWithError:code:userInfo:"];
     }
 }
-
 
 #pragma mark - GADMediationRewardedAd
 - (void)presentFromViewController:(nonnull UIViewController *)viewController{
-    [_rewardedVideoAd showAdFromRootViewController:viewController ritScene:0 ritSceneDescribe:nil];
-}
-
-#pragma mark BURewardedVideoAdDelegate
-- (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"%s", __func__);
-}
-
-- (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-    if (self.completionHandler) {
-        self.delegate = self.completionHandler(self, nil);
+    if (self.rewardedAd) {
+        [self.rewardedAd presentFromRootViewController:viewController];
     }
-    NSLog(@"%s", __func__);
-}
-
-- (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
-    if (self.completionHandler) {
-        self.completionHandler(nil, error);
+    else {
+        NSError *error =
+              [NSError errorWithDomain:@"GADMediationAdapterSampleAdNetwork"
+                                  code:0
+                              userInfo:@{NSLocalizedDescriptionKey : @"Unable to display ad."}];
+        [self.delegate didFailToPresentWithError:error];
     }
-    NSLog(@"rewardedVideoAd with error %@", error.description);
 }
 
-- (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd {
+#pragma mark - PAGRewardedAdDelegate
+
+- (void)adDidShow:(PAGRewardedAd *)ad {
     [self.delegate willPresentFullScreenView];
-    NSLog(@"%s", __func__);
-}
-
-- (void)rewardedVideoAdDidVisible:(BURewardedVideoAd *)rewardedVideoAd {
     [self.delegate reportImpression];
-    [self.delegate didStartVideo];
-    NSLog(@"%s", __func__);
+    [self _logWithSEL:_cmd msg:@"called willPresentFullScreenView: and reportImpression:"];
 }
 
-- (void)rewardedVideoAdWillClose:(BURewardedVideoAd *)rewardedVideoAd{
-    [self.delegate willDismissFullScreenView];
-    NSLog(@"%s", __func__);
-}
-
-- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
-    [self.delegate didDismissFullScreenView];
-    NSLog(@"%s", __func__);
-}
-
-- (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd {
+- (void)adDidClick:(PAGRewardedAd *)ad {
     [self.delegate reportClick];
-    NSLog(@"%s", __func__);
+    [self _logWithSEL:_cmd msg:@"called reportClick:"];
 }
 
-- (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
-    [self.delegate didEndVideo];
-    NSLog(@"%s", __func__);
+- (void)adDidDismiss:(PAGRewardedAd *)ad {
+    [self.delegate willDismissFullScreenView];
+    [self.delegate didDismissFullScreenView];
+    [self _logWithSEL:_cmd msg:@"called willDismissFullScreenView: and didDismissFullScreenView:"];
 }
 
-- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd error:(NSError *)error {
-    NSLog(@"%s", __func__);
+- (void)rewardedAd:(PAGRewardedAd *)rewardedAd userDidEarnReward:(PAGRewardModel *)rewardModel {
+    NSString *amountStr = [NSString stringWithFormat:@"%ld", rewardModel.rewardAmount];
+    NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithString:amountStr];
+    GADAdReward *aReward =
+          [[GADAdReward alloc] initWithRewardType:@""
+                                     rewardAmount:amount];
+    [self.delegate didRewardUserWithReward:aReward];
+    [self _logWithSEL:_cmd msg:[NSString stringWithFormat:@"called didRewardUserWithReward, rewardName:%@ rewardMount:%ld",rewardModel.rewardName,(long)rewardModel.rewardAmount]];
 }
 
-- (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {
-    if (verify) {
-        NSNumber *amount = [NSDecimalNumber numberWithInteger:rewardedVideoAd.rewardedVideoModel.rewardAmount];
-        
-        GADAdReward *aReward =
-        [[GADAdReward alloc] initWithRewardType:@""
-                                   rewardAmount:[NSDecimalNumber decimalNumberWithDecimal:[amount decimalValue]]];
-        
-        [self.delegate didRewardUserWithReward:aReward];
-    }
-    NSLog(@"%s", __func__);
+- (void)rewardedAd:(PAGRewardedAd *)rewardedAd userEarnRewardFailWithError:(NSError *)error {
+    [self _logWithSEL:_cmd msg:[NSString stringWithFormat:@"error:%@",error]];
 }
 
+#pragma mark - private
 
-- (NSString *)processParams:(NSString *)param {
-    if (!(param && [param isKindOfClass:[NSString class]] && param.length > 0)) {
-        return nil;
-    }
-    NSError *jsonReadingError;
-    NSData *data = [param dataUsingEncoding:NSUTF8StringEncoding];
-    if (!data) {
-        return nil;
-    }
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingAllowFragments
-                                                           error:&jsonReadingError];
-    
-    if (jsonReadingError && [jsonReadingError isKindOfClass:[NSError class]]) {
-        NSLog(@"jsonReadingError. error=[%@]", jsonReadingError);
-        return nil;
-    }
-    
-    if (!(json && [json isKindOfClass:[NSDictionary class]] && [NSJSONSerialization isValidJSONObject:json])) {
-        NSLog(@"Params Error");
-        return nil;
-    }
-    NSString *placementID = json[REWARD_PLACEMENT_ID];
-    return placementID;
+- (void)_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    NSLog(@"BUDAdmob_RewardCustomEventAdapter | %@ | %@", NSStringFromSelector(sel), msg);
 }
+
 
 @end

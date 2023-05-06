@@ -68,10 +68,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let viewControllerClass = cls as! UIViewController.Type
             let viewController = viewControllerClass.init()
             self.navigationController?.pushViewController(viewController, animated: true)
-        } else {
-            BUAdSDKManager.openGDPRPrivacy(fromRootViewController: self) { (isAgreed) in
-                BUAdSDKManager.setGDPR(isAgreed ?0:1)
-            }
         }
     }
 

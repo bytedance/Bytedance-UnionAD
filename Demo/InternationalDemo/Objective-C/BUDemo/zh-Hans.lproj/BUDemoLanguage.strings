@@ -14,8 +14,6 @@
 "coordinate" = "  经度:%f,纬度:%f";
 "LocationFailure" = "定位失败";
 "unknown" = "未知的展示类型";
-"drawTitle" = "第 【%lu】 页，[Draw]模拟视频标题";
-"drawDescription" = "沉浸式视频，超强体验，你值得拥有。";
 "testDescription" = "测试文案描述";
 "Download" = "立即下载";
 "loadCollectionView" = "加载Collection样式";
@@ -59,9 +57,6 @@
 "feedAdNative" = "原生信息流广告";
 "feedAdExpress" = "模板信息流广告";
 "feedAdExpressVideo" = "模板信息流视频广告";
-"drawAd" = "Draw信息流广告";
-"drawAdNative" = "原生渲染Draw信息流广告";
-"drawAdExpress" = "模版渲染Draw信息流广告";
 "fullscreenAd" = "全屏视频广告";
 "fullscreenAdNative" = "原生渲染全屏视频广告";
 "fullscreenAdExpress" = "模板渲染全屏视频广告";

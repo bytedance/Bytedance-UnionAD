@@ -1,10 +1,8 @@
 //
-//  BUDAdmob_RewardVideoCusEventVC.m
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by bytedance_yuanhuan on 2018/4/13.
-//  Copyright © 2018年 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import "BUDAdmob_RewardVideoCusEventVC.h"
 #import <GoogleMobileAds/GADRewardedAd.h>
@@ -64,7 +62,7 @@
 - (void)loadAd:(UIButton *)sender {
     __weak typeof(self) weakself = self;
     GADRequest *request = [GADRequest request];
-    [GADRewardedAd loadWithAdUnitID:@"ca-app-pub-2547387438729744/1033769165"
+    [GADRewardedAd loadWithAdUnitID:@"ca-app-pub-5978360902462520/4237941915"
                           request:request
                 completionHandler:^(GADRewardedAd *ad, NSError *error) {
         __strong typeof(self) strongself = weakself;
@@ -99,7 +97,7 @@ didFailToPresentFullScreenContentWithError:(nonnull NSError *)error {
 }
 
 /// Tells the delegate that the ad presented full screen content.
-- (void)adDidPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
+- (void)adWillPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
     
 }
 

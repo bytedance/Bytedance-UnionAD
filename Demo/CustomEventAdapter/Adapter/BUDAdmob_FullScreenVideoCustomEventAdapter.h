@@ -1,16 +1,17 @@
 //
-//  BUDAdmob_FullScreenVideoCustomEventAdapter.h
-//  AdmobAdapterDemo
+//  BUADVADemo
 //
-//  Created by Gu Chan on 2020/07/03.
-//  Copyright © 2020 GuChan. All rights reserved.
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BUDAdmob_FullScreenVideoCustomEventAdapter : NSObject <GADCustomEventInterstitial>
+@interface BUDAdmob_FullScreenVideoCustomEventAdapter : NSObject
+
+- (void)loadInterstitialForAdConfiguration:(GADMediationInterstitialAdConfiguration *)adConfiguration completionHandler:(GADMediationInterstitialLoadCompletionHandler)completionHandler;
 
 @end
 

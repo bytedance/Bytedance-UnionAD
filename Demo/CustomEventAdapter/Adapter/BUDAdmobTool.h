@@ -1,14 +1,14 @@
 //
-//  BUDAdmobInfo.h
-//  BUDemo
+//  BUADVADemo
 //
-//  Created by Eason on 2021/2/2.
-//  Copyright © 2021 bytedance. All rights reserved.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+static NSString * const PAGAdmobCustomEventAdapterVersion = @"2.0.4";
 
 @interface BUDAdmobTool : NSObject
 + (void)setExtData;

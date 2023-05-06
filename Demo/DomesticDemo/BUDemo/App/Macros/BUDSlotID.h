@@ -41,10 +41,6 @@
 #define express_banner_ID_600300          @"945509789" ///3400 change
 #define express_banner_ID_600400_both     @"945509785" ///3400 change
 #define express_banner_ID_600500_both     @"945509778" ///3400 change
-#define express_interstitial_ID           @"900546270"
-#define express_interstitial_ID_1_1_both  @"945509762" ///3400 change
-#define express_interstitial_ID_2_3_both  @"945509769" ///3400 change
-#define express_interstitial_ID_3_2_both  @"945509825" ///3400 change
 #define express_splash_ID                 @"800546851"
 #define express_full_ID_both              @"945113164"
 #define express_full_landscape_ID_both    @"945113165"

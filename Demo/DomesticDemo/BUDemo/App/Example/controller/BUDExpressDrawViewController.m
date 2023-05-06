@@ -85,7 +85,6 @@
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeDrawVideo; //required
-    slot1.isOriginAd = YES; //required
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_DrawFullScreen];
     
     if (!self.nativeExpressAdManager) {

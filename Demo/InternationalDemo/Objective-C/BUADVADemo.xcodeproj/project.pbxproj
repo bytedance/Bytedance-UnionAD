@@ -64,18 +64,19 @@
 		2B4479C4282B7D6E0074BAD2 /* index1.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B447981282B7D6E0074BAD2 /* index1.js */; };
 		2B4479C5282B7D6E0074BAD2 /* feedInfo.cactus in Resources */ = {isa = PBXBuildFile; fileRef = 2B447983282B7D6E0074BAD2 /* feedInfo.cactus */; };
 		2B4479C6282B7D6E0074BAD2 /* index1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2B447984282B7D6E0074BAD2 /* index1.html */; };
-		2B6DD291255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD27A255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */; };
-		2B6DD292255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD27F255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */; };
-		2B6DD293255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD280255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */; };
-		2B6DD295255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD282255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */; };
-		2B6DD296255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD287255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m */; };
-		2B6DD297255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD288255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m */; };
-		2B6DD298255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD289255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m */; };
-		2B6DD299255D439F00FF8CA5 /* UnifiedNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B6DD28A255D439F00FF8CA5 /* UnifiedNativeAdView.xib */; };
-		2B6DD29A255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD28C255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.m */; };
-		2B6DD29B255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DD28F255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.m */; };
 		2BA662CE24C8244A00DDB519 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA662CD24C8244A00DDB519 /* libbz2.tbd */; };
-		2BD5895A274612BD00CEC212 /* BUDAdmobTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD58959274612BD00CEC212 /* BUDAdmobTool.m */; };
+		2BB040F32A066D9B00DF95A1 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040DA2A066D9B00DF95A1 /* BUDAdmob_BannerCustomEventAdapter.m */; };
+		2BB040F42A066D9B00DF95A1 /* BUDAdmobTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040DE2A066D9B00DF95A1 /* BUDAdmobTool.m */; };
+		2BB040F52A066D9B00DF95A1 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040E02A066D9B00DF95A1 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */; };
+		2BB040F62A066D9B00DF95A1 /* BUDAdmob_RewardCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040E12A066D9B00DF95A1 /* BUDAdmob_RewardCustomEventAdapter.m */; };
+		2BB040F72A066D9B00DF95A1 /* BUDAdmob_CustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040E22A066D9B00DF95A1 /* BUDAdmob_CustomEventAdapter.m */; };
+		2BB040F82A066D9B00DF95A1 /* BUDAdmob_NativeFeedCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040E42A066D9B00DF95A1 /* BUDAdmob_NativeFeedCustomEventAdapter.m */; };
+		2BB040F92A066D9B00DF95A1 /* BUDAdmob_FullScreenCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040E92A066D9B00DF95A1 /* BUDAdmob_FullScreenCusEventVC.m */; };
+		2BB040FA2A066D9B00DF95A1 /* BUDAdmob_FeedNativeCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040EA2A066D9B00DF95A1 /* BUDAdmob_FeedNativeCusEventVC.m */; };
+		2BB040FB2A066D9B00DF95A1 /* BUDAdmob_RewardVideoCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040EB2A066D9B00DF95A1 /* BUDAdmob_RewardVideoCusEventVC.m */; };
+		2BB040FC2A066D9B00DF95A1 /* UnifiedNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BB040EC2A066D9B00DF95A1 /* UnifiedNativeAdView.xib */; };
+		2BB040FD2A066D9B00DF95A1 /* BUDAdmob_BannerCusEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040EE2A066D9B00DF95A1 /* BUDAdmob_BannerCusEventVC.m */; };
+		2BB040FE2A066D9B00DF95A1 /* BUDAdmobCustomEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB040F12A066D9B00DF95A1 /* BUDAdmobCustomEventViewController.m */; };
 		2BED9721257DDC3300EF5C1F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9720257DDC3300EF5C1F /* libz.tbd */; };
 		2BED9725257DDC3700EF5C1F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9724257DDC3700EF5C1F /* libiconv.tbd */; };
 		2BED9728257DDC3B00EF5C1F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BED9727257DDC3A00EF5C1F /* Security.framework */; };
@@ -195,28 +196,30 @@
 		2B447984282B7D6E0074BAD2 /* index1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index1.html; sourceTree = "<group>"; };
 		2B447985282B7D6E0074BAD2 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		2B447986282B7D6E0074BAD2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2B6DD279255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FullScreenVideoCustomEventAdapter.h; sourceTree = "<group>"; };
-		2B6DD27A255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_BannerCustomEventAdapter.m; sourceTree = "<group>"; };
-		2B6DD27C255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_RewardCustomEventAdapter.h; sourceTree = "<group>"; };
-		2B6DD27D255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_NativeFeedCustomEventAdapter.h; sourceTree = "<group>"; };
-		2B6DD27E255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_BannerCustomEventAdapter.h; sourceTree = "<group>"; };
-		2B6DD27F255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_FullScreenVideoCustomEventAdapter.m; sourceTree = "<group>"; };
-		2B6DD280255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_RewardCustomEventAdapter.m; sourceTree = "<group>"; };
-		2B6DD282255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_NativeFeedCustomEventAdapter.m; sourceTree = "<group>"; };
-		2B6DD285255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_RewardVideoCusEventVC.h; sourceTree = "<group>"; };
-		2B6DD286255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_BannerCusEventVC.h; sourceTree = "<group>"; };
-		2B6DD287255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_FullScreenCusEventVC.m; sourceTree = "<group>"; };
-		2B6DD288255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_FeedNativeCusEventVC.m; sourceTree = "<group>"; };
-		2B6DD289255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_RewardVideoCusEventVC.m; sourceTree = "<group>"; };
-		2B6DD28A255D439F00FF8CA5 /* UnifiedNativeAdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnifiedNativeAdView.xib; sourceTree = "<group>"; };
-		2B6DD28B255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FullScreenCusEventVC.h; sourceTree = "<group>"; };
-		2B6DD28C255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_BannerCusEventVC.m; sourceTree = "<group>"; };
-		2B6DD28D255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FeedNativeCusEventVC.h; sourceTree = "<group>"; };
-		2B6DD28F255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmobCustomEventViewController.m; sourceTree = "<group>"; };
-		2B6DD290255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmobCustomEventViewController.h; sourceTree = "<group>"; };
 		2BA662CD24C8244A00DDB519 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
-		2BD58958274612BD00CEC212 /* BUDAdmobTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmobTool.h; sourceTree = "<group>"; };
-		2BD58959274612BD00CEC212 /* BUDAdmobTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmobTool.m; sourceTree = "<group>"; };
+		2BB040D92A066D9B00DF95A1 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FullScreenVideoCustomEventAdapter.h; sourceTree = "<group>"; };
+		2BB040DA2A066D9B00DF95A1 /* BUDAdmob_BannerCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_BannerCustomEventAdapter.m; sourceTree = "<group>"; };
+		2BB040DB2A066D9B00DF95A1 /* BUDAdmob_CustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_CustomEventAdapter.h; sourceTree = "<group>"; };
+		2BB040DC2A066D9B00DF95A1 /* BUDAdmob_RewardCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_RewardCustomEventAdapter.h; sourceTree = "<group>"; };
+		2BB040DD2A066D9B00DF95A1 /* BUDAdmob_NativeFeedCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_NativeFeedCustomEventAdapter.h; sourceTree = "<group>"; };
+		2BB040DE2A066D9B00DF95A1 /* BUDAdmobTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmobTool.m; sourceTree = "<group>"; };
+		2BB040DF2A066D9B00DF95A1 /* BUDAdmob_BannerCustomEventAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_BannerCustomEventAdapter.h; sourceTree = "<group>"; };
+		2BB040E02A066D9B00DF95A1 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_FullScreenVideoCustomEventAdapter.m; sourceTree = "<group>"; };
+		2BB040E12A066D9B00DF95A1 /* BUDAdmob_RewardCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_RewardCustomEventAdapter.m; sourceTree = "<group>"; };
+		2BB040E22A066D9B00DF95A1 /* BUDAdmob_CustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_CustomEventAdapter.m; sourceTree = "<group>"; };
+		2BB040E32A066D9B00DF95A1 /* BUDAdmobTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmobTool.h; sourceTree = "<group>"; };
+		2BB040E42A066D9B00DF95A1 /* BUDAdmob_NativeFeedCustomEventAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_NativeFeedCustomEventAdapter.m; sourceTree = "<group>"; };
+		2BB040E72A066D9B00DF95A1 /* BUDAdmob_RewardVideoCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_RewardVideoCusEventVC.h; sourceTree = "<group>"; };
+		2BB040E82A066D9B00DF95A1 /* BUDAdmob_BannerCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_BannerCusEventVC.h; sourceTree = "<group>"; };
+		2BB040E92A066D9B00DF95A1 /* BUDAdmob_FullScreenCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_FullScreenCusEventVC.m; sourceTree = "<group>"; };
+		2BB040EA2A066D9B00DF95A1 /* BUDAdmob_FeedNativeCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_FeedNativeCusEventVC.m; sourceTree = "<group>"; };
+		2BB040EB2A066D9B00DF95A1 /* BUDAdmob_RewardVideoCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_RewardVideoCusEventVC.m; sourceTree = "<group>"; };
+		2BB040EC2A066D9B00DF95A1 /* UnifiedNativeAdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnifiedNativeAdView.xib; sourceTree = "<group>"; };
+		2BB040ED2A066D9B00DF95A1 /* BUDAdmob_FullScreenCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FullScreenCusEventVC.h; sourceTree = "<group>"; };
+		2BB040EE2A066D9B00DF95A1 /* BUDAdmob_BannerCusEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmob_BannerCusEventVC.m; sourceTree = "<group>"; };
+		2BB040EF2A066D9B00DF95A1 /* BUDAdmob_FeedNativeCusEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmob_FeedNativeCusEventVC.h; sourceTree = "<group>"; };
+		2BB040F12A066D9B00DF95A1 /* BUDAdmobCustomEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDAdmobCustomEventViewController.m; sourceTree = "<group>"; };
+		2BB040F22A066D9B00DF95A1 /* BUDAdmobCustomEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDAdmobCustomEventViewController.h; sourceTree = "<group>"; };
 		2BED9720257DDC3300EF5C1F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2BED9724257DDC3700EF5C1F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		2BED9727257DDC3A00EF5C1F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -530,63 +533,65 @@
 			path = drawVideo;
 			sourceTree = "<group>";
 		};
-		2B6DD277255D439F00FF8CA5 /* CustomEventAdapter */ = {
+		2BB040D72A066D9B00DF95A1 /* CustomEventAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD278255D439F00FF8CA5 /* Adapter */,
-				2B6DD283255D439F00FF8CA5 /* ExamplePage */,
+				2BB040D82A066D9B00DF95A1 /* Adapter */,
+				2BB040E52A066D9B00DF95A1 /* ExamplePage */,
 			);
 			name = CustomEventAdapter;
-			path = ../../CustomEventAdapter;
+			path = ../CustomEventAdapter;
 			sourceTree = "<group>";
 		};
-		2B6DD278255D439F00FF8CA5 /* Adapter */ = {
+		2BB040D82A066D9B00DF95A1 /* Adapter */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD27E255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.h */,
-				2B6DD27A255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m */,
-				2B6DD279255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */,
-				2B6DD27F255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */,
-				2B6DD27D255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.h */,
-				2B6DD282255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m */,
-				2B6DD27C255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.h */,
-				2B6DD280255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m */,
-				2BD58958274612BD00CEC212 /* BUDAdmobTool.h */,
-				2BD58959274612BD00CEC212 /* BUDAdmobTool.m */,
+				2BB040D92A066D9B00DF95A1 /* BUDAdmob_FullScreenVideoCustomEventAdapter.h */,
+				2BB040DA2A066D9B00DF95A1 /* BUDAdmob_BannerCustomEventAdapter.m */,
+				2BB040DB2A066D9B00DF95A1 /* BUDAdmob_CustomEventAdapter.h */,
+				2BB040DC2A066D9B00DF95A1 /* BUDAdmob_RewardCustomEventAdapter.h */,
+				2BB040DD2A066D9B00DF95A1 /* BUDAdmob_NativeFeedCustomEventAdapter.h */,
+				2BB040DE2A066D9B00DF95A1 /* BUDAdmobTool.m */,
+				2BB040DF2A066D9B00DF95A1 /* BUDAdmob_BannerCustomEventAdapter.h */,
+				2BB040E02A066D9B00DF95A1 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m */,
+				2BB040E12A066D9B00DF95A1 /* BUDAdmob_RewardCustomEventAdapter.m */,
+				2BB040E22A066D9B00DF95A1 /* BUDAdmob_CustomEventAdapter.m */,
+				2BB040E32A066D9B00DF95A1 /* BUDAdmobTool.h */,
+				2BB040E42A066D9B00DF95A1 /* BUDAdmob_NativeFeedCustomEventAdapter.m */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
 		};
-		2B6DD283255D439F00FF8CA5 /* ExamplePage */ = {
+		2BB040E52A066D9B00DF95A1 /* ExamplePage */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD284255D439F00FF8CA5 /* SubPage */,
-				2B6DD28E255D439F00FF8CA5 /* MainPage */,
+				2BB040E62A066D9B00DF95A1 /* SubPage */,
+				2BB040F02A066D9B00DF95A1 /* MainPage */,
 			);
 			path = ExamplePage;
 			sourceTree = "<group>";
 		};
-		2B6DD284255D439F00FF8CA5 /* SubPage */ = {
+		2BB040E62A066D9B00DF95A1 /* SubPage */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD286255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.h */,
-				2B6DD28C255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.m */,
-				2B6DD28D255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.h */,
-				2B6DD288255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m */,
-				2B6DD28B255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.h */,
-				2B6DD287255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m */,
-				2B6DD285255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.h */,
-				2B6DD289255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m */,
-				2B6DD28A255D439F00FF8CA5 /* UnifiedNativeAdView.xib */,
+				2BB040E72A066D9B00DF95A1 /* BUDAdmob_RewardVideoCusEventVC.h */,
+				2BB040E82A066D9B00DF95A1 /* BUDAdmob_BannerCusEventVC.h */,
+				2BB040E92A066D9B00DF95A1 /* BUDAdmob_FullScreenCusEventVC.m */,
+				2BB040EA2A066D9B00DF95A1 /* BUDAdmob_FeedNativeCusEventVC.m */,
+				2BB040EB2A066D9B00DF95A1 /* BUDAdmob_RewardVideoCusEventVC.m */,
+				2BB040EC2A066D9B00DF95A1 /* UnifiedNativeAdView.xib */,
+				2BB040ED2A066D9B00DF95A1 /* BUDAdmob_FullScreenCusEventVC.h */,
+				2BB040EE2A066D9B00DF95A1 /* BUDAdmob_BannerCusEventVC.m */,
+				2BB040EF2A066D9B00DF95A1 /* BUDAdmob_FeedNativeCusEventVC.h */,
 			);
 			path = SubPage;
 			sourceTree = "<group>";
 		};
-		2B6DD28E255D439F00FF8CA5 /* MainPage */ = {
+		2BB040F02A066D9B00DF95A1 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				2B6DD28F255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.m */,
-				2B6DD290255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.h */,
+				2BB040F12A066D9B00DF95A1 /* BUDAdmobCustomEventViewController.m */,
+				2BB040F22A066D9B00DF95A1 /* BUDAdmobCustomEventViewController.h */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -603,8 +608,8 @@
 		78E0729C21A2BF41006D71EE = {
 			isa = PBXGroup;
 			children = (
+				2BB040D72A066D9B00DF95A1 /* CustomEventAdapter */,
 				2B4478F2282B7D6D0074BAD2 /* BUDemo */,
-				2B6DD277255D439F00FF8CA5 /* CustomEventAdapter */,
 				A9BB8904F5E2E508722AB9C2 /* Frameworks */,
 				6C25FC835F24553C67AD4CC9 /* Pods */,
 				78E072A621A2BF41006D71EE /* Products */,
@@ -709,6 +714,7 @@
 				2B447987282B7D6E0074BAD2 /* BUDemoLanguage.strings in Resources */,
 				2B447988282B7D6E0074BAD2 /* DevInfo.plist in Resources */,
 				2B4479BD282B7D6E0074BAD2 /* Main.storyboard in Resources */,
+				2BB040FC2A066D9B00DF95A1 /* UnifiedNativeAdView.xib in Resources */,
 				2B4479BB282B7D6E0074BAD2 /* Main.strings in Resources */,
 				2B4479C3282B7D6E0074BAD2 /* index1.css in Resources */,
 				2B4479BC282B7D6E0074BAD2 /* LaunchScreen.storyboard in Resources */,
@@ -716,7 +722,6 @@
 				2B4479BA282B7D6E0074BAD2 /* LaunchScreen.strings in Resources */,
 				2B4479C6282B7D6E0074BAD2 /* index1.html in Resources */,
 				2B4479C0282B7D6E0074BAD2 /* Assets.xcassets in Resources */,
-				2B6DD299255D439F00FF8CA5 /* UnifiedNativeAdView.xib in Resources */,
 				2B4479C2282B7D6E0074BAD2 /* 1111.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -766,56 +771,57 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B6DD292255D439F00FF8CA5 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m in Sources */,
-				2BD5895A274612BD00CEC212 /* BUDAdmobTool.m in Sources */,
 				2B0D2E9028584BCC00676DE9 /* BUDExampleDefine.m in Sources */,
+				2BB040FE2A066D9B00DF95A1 /* BUDAdmobCustomEventViewController.m in Sources */,
+				2BB040F92A066D9B00DF95A1 /* BUDAdmob_FullScreenCusEventVC.m in Sources */,
 				2B0D2E6628584BB500676DE9 /* BUDVideoView.m in Sources */,
 				2B4479BE282B7D6E0074BAD2 /* main.m in Sources */,
 				2B0D2E6128584BB500676DE9 /* BUDSwitchView.m in Sources */,
 				2B0D2E9128584BCC00676DE9 /* BUDActionCellDefine.m in Sources */,
+				2BB040F42A066D9B00DF95A1 /* BUDAdmobTool.m in Sources */,
 				2B0D2E9328584BCC00676DE9 /* BUDMainViewController.m in Sources */,
 				2B0D2E5128584BB500676DE9 /* BUDBannerViewController.m in Sources */,
 				2B0D2E5F28584BB500676DE9 /* BUDFeedStyleHelper.m in Sources */,
 				2B0D2E9B28584BCC00676DE9 /* BUDSanWebViewController.m in Sources */,
 				2B0D2E9A28584BCC00676DE9 /* RRFPSBar.m in Sources */,
 				2B0D2E9828584BCC00676DE9 /* NSString+LocalizedString.m in Sources */,
+				2BB040F82A066D9B00DF95A1 /* BUDAdmob_NativeFeedCustomEventAdapter.m in Sources */,
 				2B0D2E9228584BCC00676DE9 /* BUDActionCellView.m in Sources */,
 				2B0D2E4828584BB500676DE9 /* BUDSlotViewModel.m in Sources */,
 				2B0D2E5928584BB500676DE9 /* BUDRefreshButton.m in Sources */,
 				2B0D2E5528584BB500676DE9 /* BUDFeedNormalModel.m in Sources */,
+				2BB040F72A066D9B00DF95A1 /* BUDAdmob_CustomEventAdapter.m in Sources */,
 				2B0D2E9728584BCC00676DE9 /* NSString+Json.m in Sources */,
 				2B0D2E6A28584BB500676DE9 /* BUDNativeBannerView.m in Sources */,
+				2BB040FD2A066D9B00DF95A1 /* BUDAdmob_BannerCusEventVC.m in Sources */,
+				2BB040F32A066D9B00DF95A1 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */,
 				2B0D2E9F28584C2800676DE9 /* BUDInterstitialViewController.m in Sources */,
-				2B6DD295255D439F00FF8CA5 /* BUDAdmob_NativeFeedCustomEventAdapter.m in Sources */,
 				2B0D2E6828584BB500676DE9 /* BUDActionAreaView.m in Sources */,
+				2BB040FA2A066D9B00DF95A1 /* BUDAdmob_FeedNativeCusEventVC.m in Sources */,
 				2B0D2E5A28584BB500676DE9 /* BUDNormalButton.m in Sources */,
 				2B0D2E6C28584BB500676DE9 /* BUDFeedAdView.m in Sources */,
-				2B6DD291255D439F00FF8CA5 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */,
 				2B0D2E5628584BB500676DE9 /* BUDSelcetedItem.m in Sources */,
 				2B0D2E9528584BCC00676DE9 /* UIColor+DarkMode.m in Sources */,
-				2B6DD29A255D439F00FF8CA5 /* BUDAdmob_BannerCusEventVC.m in Sources */,
 				2B0D2E5B28584BB500676DE9 /* BUDSelectedCollectionViewCell.m in Sources */,
-				2B6DD293255D439F00FF8CA5 /* BUDAdmob_RewardCustomEventAdapter.m in Sources */,
+				2BB040F62A066D9B00DF95A1 /* BUDAdmob_RewardCustomEventAdapter.m in Sources */,
 				2B0D2E5328584BB500676DE9 /* BUDAdManager.m in Sources */,
 				2B0D2E5D28584BB500676DE9 /* BUDNativeView.m in Sources */,
 				2B0D2E6228584BB500676DE9 /* BUDSelectedView.m in Sources */,
-				2B6DD297255D439F00FF8CA5 /* BUDAdmob_FeedNativeCusEventVC.m in Sources */,
 				2B0D2E4628584BB500676DE9 /* BUDMainViewModel.m in Sources */,
 				2B0D2E6B28584BB500676DE9 /* BUDWebViewController.m in Sources */,
 				2B0D2E5028584BB500676DE9 /* BULOpenAppViewController.m in Sources */,
 				2B0D2E4C28584BB500676DE9 /* BUDSettingViewController.m in Sources */,
+				2BB040FB2A066D9B00DF95A1 /* BUDAdmob_RewardVideoCusEventVC.m in Sources */,
 				2B0D2E5728584BB500676DE9 /* BUDFeedNormalTableViewCell.m in Sources */,
-				2B6DD298255D439F00FF8CA5 /* BUDAdmob_RewardVideoCusEventVC.m in Sources */,
 				2B0D2E4A28584BB500676DE9 /* BUDNativeViewController.m in Sources */,
 				2B0D2E4B28584BB500676DE9 /* BUDBaseExampleViewController.m in Sources */,
 				2B0D2E5E28584BB500676DE9 /* BUDSettingTableView.m in Sources */,
 				2B0D2E4F28584BB500676DE9 /* BUDRewardedViewController.m in Sources */,
 				2B0D2E9428584BCC00676DE9 /* BUDBase64.m in Sources */,
-				2B6DD29B255D439F00FF8CA5 /* BUDAdmobCustomEventViewController.m in Sources */,
+				2BB040F52A066D9B00DF95A1 /* BUDAdmob_FullScreenVideoCustomEventAdapter.m in Sources */,
 				2B0D2E5428584BB500676DE9 /* BUDConfigModel.m in Sources */,
 				2B4479BF282B7D6E0074BAD2 /* AppDelegate.m in Sources */,
 				2B0D2E9628584BCC00676DE9 /* UIView+Draw.m in Sources */,
-				2B6DD296255D439F00FF8CA5 /* BUDAdmob_FullScreenCusEventVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

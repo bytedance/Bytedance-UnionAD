@@ -8,21 +8,9 @@
 #import "BUDActionCellDefine.h"
 #import "BUDActionCellView.h"
 #import "BUDNativeViewController.h"
-//#import "BUDFeedViewController.h"
-//#import "BUDCustomEventViewController.h"
-//#import "BUDToolsSettingViewController.h"
+#import "BUDAdmobCustomEventViewController.h"
 #import "BUDMacros.h"
-#import <BUAdSDK/BUAdSDK.h>
-//#import "BUDWaterfallViewController.h"
-//#import "BUDFeedAdListViewController.h"
-//#import "BUDDrawAdListViewController.h"
-//#import "BUDBannerAdListViewController.h"
-//#import "BUDInterstitialAdListViewController.h"
-//#import "BUDAppOpenAdViewController.h"
-//#import "BUDFullScreenVideoAdListViewController.h"
 #import "BUDRewardedViewController.h"
-//#import "BUDStreamAdListViewController.h"
-//#import "BUDSlotABViewController.h"
 #import "BUDInterstitialViewController.h"
 #import "BULOpenAppViewController.h"
 #import "BUDBannerViewController.h"
@@ -40,6 +28,8 @@
 #endif
 
 #import "NSString+LocalizedString.h"
+#import <PAGAdSDK/PAGSdk.h>
+
 @interface BUDMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSArray<NSMutableArray *> *items;
@@ -80,19 +70,11 @@
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDNativeViewController alloc] init] sender:nil];
     }];
-    BUDActionModel *drawAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kDrawAd] type:BUDCellType_native action:^{
-        //__strong typeof(weakSelf) self = weakSelf;
-       // [self showViewController:[[BUDDrawAdListViewController alloc] init] sender:nil];
-    }];
     BUDActionModel *bannerAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kBannerAd] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDBannerViewController alloc] init] sender:nil];
     }];
-    BUDActionModel *interstitialAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kInterstitalAd] type:BUDCellType_native action:^{
-        //__strong typeof(weakSelf) self = weakSelf;
-        //[self showViewController:[[BUDInterstitialAdListViewController alloc] init] sender:nil];
-    }];
-    BUDActionModel *splashAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kSplashAd] type:BUDCellType_native action:^{
+    BUDActionModel *appOpenAdVc = [BUDActionModel plainTitleActionModel:@"AppOpen Ad" type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BULOpenAppViewController alloc] init] sender:nil];
     }];
@@ -104,28 +86,11 @@
         __strong typeof(weakSelf) self = weakSelf;
         [self showViewController:[[BUDInterstitialViewController alloc] init] sender:nil];
     }];
-    
-    BUDActionModel *streamAdVc = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kStreamAd] type:BUDCellType_native action:^{
-       //__strong typeof(weakSelf) self = weakSelf;
-      //  [self showViewController:[[BUDStreamAdListViewController alloc] init] sender:nil];
-    }];
-    
-    BUDActionModel *waterfallItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kWaterfallAd] type:BUDCellType_video action:^{
-        //__strong typeof(weakSelf) self = weakSelf;
-//        BUDWaterfallViewController *vc = [BUDWaterfallViewController new];
-//        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    
+        
     BUDActionModel *adapterItem = [BUDActionModel plainTitleActionModel:@"CustomEventAdapter" type:BUDCellType_CustomEvent action:^{
-       // __strong typeof(weakSelf) self = weakSelf;
-//        BUDCustomEventViewController *vc = [BUDCustomEventViewController new];
-//        [self.navigationController pushViewController:vc animated:YES];
-    }];
-
-    BUDActionModel *slotABItem = [BUDActionModel plainTitleActionModel:@"Slot AB" type:BUDCellType_CustomEvent action:^{
-        //__strong typeof(weakSelf) self = weakSelf;
-//        BUDSlotABViewController *vc = [BUDSlotABViewController new];
-//        [self.navigationController pushViewController:vc animated:YES];
+        __strong typeof(weakSelf) self = weakSelf;
+        BUDAdmobCustomEventViewController *vc = [BUDAdmobCustomEventViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
 
 #if __has_include(<BUWebAd/BUWebAd.h>)
@@ -136,27 +101,17 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
 #endif
-    
-    BUDActionModel *toolsItem = [BUDActionModel plainTitleActionModel:@"Tools" type:BUDCellType_setting action:^{
-       // __strong typeof(weakSelf) self = weakSelf;
-//        BUDToolsSettingViewController *vc = [BUDToolsSettingViewController new];
-//        [self.navigationController pushViewController:vc animated:YES];
-    }];
 
 #if __has_include(<BUWebAd/BUWebAd.h>)
     self.items = @[
-            @[nativeAdVc, drawAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
-            @[waterfallItem, slotABItem],
+            @[nativeAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
             @[adapterItem],
             @[webAdItem],
-            @[toolsItem]
     ];
 #else
     self.items = @[
-            @[nativeAdVc, drawAdVc, bannerAdVc, interstitialAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
-            @[waterfallItem, slotABItem],
+            @[nativeAdVc, bannerAdVc, appOpenAdVc, rewardedAdVc, fullScreenVideoAdVc],
             @[adapterItem],
-            @[toolsItem]
     ];
 #endif
 
@@ -167,7 +122,7 @@
     height += 30;
     UILabel *versionLable = [[UILabel alloc]initWithFrame:CGRectMake(0, height, self.tableView.frame.size.width, 40)];
     versionLable.textAlignment = NSTextAlignmentCenter;
-    versionLable.text = [NSString stringWithFormat:@"v%@",[BUAdSDKManager SDKVersion]];
+    versionLable.text = [NSString stringWithFormat:@"v%@",[PAGSdk SDKVersion]];
     versionLable.textColor = [UIColor grayColor];
     [self.tableView addSubview:versionLable];
 }

@@ -7,7 +7,6 @@
 #import "BUDInterstitialViewController.h"
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
-#import <BUAdSDK/BUAdSDK.h>
 #import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
 #import "UIColor+DarkMode.h"
@@ -53,7 +52,9 @@
 
 - (void)loadFullscreenVideoAdWithSlotID:(NSString *)slotID {
     PAGInterstitialRequest *request = [[PAGInterstitialRequest alloc] init];
+    bu_weakify(self)
     [PAGLInterstitialAd loadAdWithSlotID:slotID request:request completionHandler:^(PAGLInterstitialAd * _Nullable interstitialAd, NSError * _Nullable error) {
+        bu_strongify(self)
         self.interstitialAd = interstitialAd;
         self.interstitialAd.delegate = self;
         if (!error) {
@@ -87,20 +88,4 @@
     
 }
 
-- (void)nativeExpressFullscreenVideoAdDidCloseOtherController:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd interactionType:(BUInteractionType)interactionType {
-    NSString *str;
-    if (interactionType == BUInteractionTypePage) {
-        str = @"ladingpage";
-    } else if (interactionType == BUInteractionTypeVideoAdDetail) {
-        str = @"videoDetail";
-    } else {
-        str = @"appstoreInApp";
-    }
-    [self pbud_logWithSEL:_cmd msg:str];
-}
-
-#pragma mark - Log
-- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
-    BUD_Log(@"SDKDemoDelegate BUNativeExpressFullscreenVideoAd In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
-}
 @end

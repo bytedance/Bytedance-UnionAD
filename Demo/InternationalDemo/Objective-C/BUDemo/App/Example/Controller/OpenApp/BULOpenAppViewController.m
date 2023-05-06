@@ -12,7 +12,6 @@
 #import "BUDSlotID.h"
 #import "NSString+LocalizedString.h"
 #import "BUDMacros.h"
-#import <BUAdSDK/BUAdSDK.h>
 
 @interface BULOpenAppViewController ()<PAGLAppOpenAdDelegate>
 @property (nonatomic, strong) PAGLAppOpenAd *openAd;
@@ -76,14 +75,14 @@
     } showAdAction:^{
         [weakSelf _showAppOpenAd];
     }];
-    [self.view addSubview:_selectedView];
-    _selectedView.promptStatus = BUDPromptStatusDefault;
+    [self.view addSubview:self.selectedView];
+    self.selectedView.promptStatus = BUDPromptStatusDefault;
 }
 
 - (void)_handleOpenAd:(PAGLAppOpenAd * _Nullable)appOpenAd withErr:(NSError * _Nullable)error {
     if (error) {
         [self _logWithSEL:_cmd msg:error.localizedDescription];
-        self->_selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
+        self.selectedView.promptStatus = BUDPromptStatusAdLoadedFail;
         return;
     }
     self.openAd = appOpenAd;
@@ -95,7 +94,7 @@
 - (void)_showAppOpenAd {
     if(self.openAd) {
         [self.openAd presentFromRootViewController:self];
-        _selectedView.promptStatus = BUDPromptStatusDefault;
+        self.selectedView.promptStatus = BUDPromptStatusDefault;
     }
 }
 

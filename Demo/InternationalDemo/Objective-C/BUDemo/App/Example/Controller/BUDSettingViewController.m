@@ -6,11 +6,9 @@
 
 #import "BUDSettingViewController.h"
 #import "BUDActionCellView.h"
-#import <CoreLocation/CoreLocation.h>
 #import <AdSupport/AdSupport.h>
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
-#import <BUAdSDK/BUAdSDK.h>
 #import "UIColor+DarkMode.h"
 
 #define LeftMargin 10
@@ -18,22 +16,15 @@
 #define Top_Margin 20
 
 
-@interface BUDSettingViewController () <CLLocationManagerDelegate>
-@property (nonatomic, strong) CLLocationManager *locationManager;
+@interface BUDSettingViewController ()
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray<BUDActionModel *> *items;
-
-@property (nonatomic, strong) UIButton *locationBtn;
-@property (nonatomic, strong) UITextField *locationText;
 
 @property (nonatomic, strong) UIButton *idfaBtn;
 @property (nonatomic, strong) UITextField *idfaText;
 
-@property (nonatomic, strong) UIButton *noneBtn;
-@property (nonatomic, strong) UIButton *wkWebBtn;
 @property (nonatomic, strong) UITextField *statusText;
 
-@property (nonatomic, strong) UIButton *tsBtn;
 @property (nonatomic, strong) UITextField *tsText;
 @end
 
@@ -48,102 +39,27 @@
 }
 
 - (void)buildupView {
-    [self.view addSubview:self.locationBtn];
-    [self.view addSubview:self.locationText];
     [self.view addSubview:self.idfaBtn];
     [self.view addSubview:self.idfaText];
     
-    [self.view addSubview:self.noneBtn];
-    [self.view addSubview:self.wkWebBtn];
     [self.view addSubview:self.statusText];
     
-    [self.view addSubview:self.tsBtn];
     [self.view addSubview:self.tsText];
 }
 
 #pragma mark - Target
-- (void)authoid {
-    self.locationText.text = [NSString localizedStringForKey:StartLocation];
-//    if (![self serviceEnable]) {
-//        self.locationText.text = [NSString localizedStringForKey:PermissionDenied];
-//        return;
-//    }
-    CLLocationManager *locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    [locationManager startUpdatingLocation];
-    self.locationManager = locationManager;
-}
 
 - (void)setIDFA {
     self.idfaText.text = [NSString stringWithFormat:@"  %@",[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
-}
-
-- (void)setNone {
-    [BUAdSDKManager setOfflineType:BUOfflineTypeNone];
-    _statusText.text = @"None";
-}
-
-- (void)setWkWeb {
-    [BUAdSDKManager setOfflineType:BUOfflineTypeWebview];
-    _statusText.text = @"WKWebview";
-}
-
-- (void)outputTimeStamp {
-    self.tsText.text = [BUAdSDKTestToolManager sharedInstance].testTimeStamp;
-}
-
-#pragma mark - Private methed
-- (BOOL)serviceEnable {
-    if (![CLLocationManager locationServicesEnabled]) {
-        return NO;
-    }
-    CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
-    if (authorizationStatus != kCLAuthorizationStatusAuthorizedAlways
-        && authorizationStatus != kCLAuthorizationStatusAuthorizedWhenInUse) {
-        return NO;
-    }
-    return YES;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
-#pragma mark - CLLocationManagerDelegate
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    CLLocationCoordinate2D coordinate = locations.firstObject.coordinate;
-    self.locationText.text = [NSString localizedStringWithFormat:
-                              [NSString localizedStringForKey:Coordinate],
-                              coordinate.longitude,
-                              coordinate.latitude];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    self.locationText.text = [NSString localizedStringForKey:LocationFailure];
-}
-
-- (UIButton *)locationBtn {
-    if (!_locationBtn) {
-        _locationBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, NavigationBarHeight + Top_Margin, 100, 30)];
-        [_locationBtn setTitle:[NSString localizedStringForKey:StartLocation] forState:UIControlStateNormal];
-        [_locationBtn addTarget:self action:@selector(authoid) forControlEvents:UIControlEventTouchUpInside];
-        [self designButton:_locationBtn];
-    }
-    return _locationBtn;
-}
-
-- (UITextField *)locationText {
-    if (!_locationText) {
-        _locationText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.locationBtn.frame) + 10, NavigationBarHeight + Top_Margin, self.view.frame.size.width - CGRectGetMaxX(self.locationBtn.frame) - LeftMargin-RightMargin, 30)];
-        _locationText  .font = [UIFont systemFontOfSize:10];
-        [self designLayer:[_locationText layer]];
-    }
-    return _locationText;
-}
-
 - (UIButton *)idfaBtn {
     if (!_idfaBtn) {
-        _idfaBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.locationBtn.frame) + 10, 100, 30)];
+        _idfaBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, NavigationBarHeight + Top_Margin, 100, 30)];
         [_idfaBtn setTitle:[NSString localizedStringForKey:GetIDFA] forState:UIControlStateNormal];
         [_idfaBtn addTarget:self action:@selector(setIDFA) forControlEvents:UIControlEventTouchUpInside];
         [self designButton:_idfaBtn];
@@ -153,36 +69,16 @@
 
 - (UITextField *)idfaText {
     if (!_idfaText) {
-        _idfaText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.locationBtn.frame) + 10, CGRectGetMaxY(self.locationBtn.frame) + 10, self.view.frame.size.width - CGRectGetMaxX(self.locationBtn.frame) - LeftMargin-RightMargin, 30)];
+        _idfaText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.idfaBtn.frame) + 10, NavigationBarHeight + Top_Margin, self.view.frame.size.width - CGRectGetMaxX(self.idfaBtn.frame) - LeftMargin-RightMargin, 30)];
         _idfaText.font = [UIFont systemFontOfSize:10];
         [self designLayer:[_idfaText layer]];
     }
     return _idfaText;
 }
 
-- (UIButton *)noneBtn {
-    if (!_noneBtn) {
-        _noneBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.idfaBtn.frame) + 10, 200, 30)];
-        [_noneBtn setTitle:@"Set None" forState:UIControlStateNormal];
-        [_noneBtn addTarget:self action:@selector(setNone) forControlEvents:UIControlEventTouchUpInside];
-        [self designButton:_noneBtn];
-    }
-    return _noneBtn;
-}
-
-- (UIButton *)wkWebBtn {
-    if (!_wkWebBtn) {
-        _wkWebBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.noneBtn.frame) + 10, 200, 30)];
-        [_wkWebBtn setTitle:@"Set WKWebview" forState:UIControlStateNormal];
-        [_wkWebBtn addTarget:self action:@selector(setWkWeb) forControlEvents:UIControlEventTouchUpInside];
-        [self designButton:_wkWebBtn];
-    }
-    return _wkWebBtn;
-}
-
 - (UITextField *)statusText {
     if (!_statusText) {
-        _statusText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.noneBtn.frame) + 10, self.noneBtn.frame.origin.y, self.view.frame.size.width - CGRectGetMaxX(self.noneBtn.frame) - LeftMargin-RightMargin, 70)];
+        _statusText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.idfaText.frame) + 10, self.idfaText.frame.origin.y, self.view.frame.size.width - CGRectGetMaxX(self.idfaText.frame) - LeftMargin-RightMargin, 70)];
         _statusText.font = [UIFont systemFontOfSize:15];
         _statusText.text = @"Hello World";
         _statusText.textAlignment = NSTextAlignmentCenter;
@@ -191,19 +87,9 @@
      return _statusText;
 }
 
-- (UIButton *)tsBtn {
-    if (!_tsBtn) {
-        _tsBtn = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.statusText.frame) + 10, 100, 30)];
-        [_tsBtn setTitle:@"Get TS" forState:UIControlStateNormal];
-        [_tsBtn addTarget:self action:@selector(outputTimeStamp) forControlEvents:UIControlEventTouchUpInside];
-        [self designButton:_tsBtn];
-    }
-    return _tsBtn;
-}
-
 - (UITextField *)tsText {
     if (!_tsText) {
-        _tsText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.locationBtn.frame) + 10, CGRectGetMaxY(self.statusText.frame) + 10, self.view.frame.size.width - CGRectGetMaxX(self.locationBtn.frame) - LeftMargin-RightMargin, 30)];
+        _tsText = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.idfaBtn.frame) + 10, CGRectGetMaxY(self.statusText.frame) + 10, self.view.frame.size.width - CGRectGetMaxX(self.idfaBtn.frame) - LeftMargin-RightMargin, 30)];
         _tsText.font = [UIFont systemFontOfSize:10];
         [self designLayer:[_tsText layer]];
      }

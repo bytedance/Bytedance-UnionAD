@@ -1,15 +1,15 @@
 //
-//  BUDNativeViewController.swift
 //  BUADVADemo_Swift
 //
-//  Created by bytedance on 2020/11/6.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 import Foundation
 
-class BUDRewardVideoAdViewController: ViewController {
-    private var _rewardedVideoAd:BURewardedVideoAd?;
+class BUDRewardVideoAdViewController: UIViewController {
+    private var _rewardedVideoAd:PAGRewardedAd?;
     private lazy var _statusLabel = UILabel();
+    
     
     override func viewDidLoad() {
         self.navigationItem.title = "Reward"
@@ -19,6 +19,7 @@ class BUDRewardVideoAdViewController: ViewController {
     ///load Portrait Ad
     @objc func loadPortraitAd(_ sender:UIButton) -> Void {
         loadRewardVideoAdWithSlotID(slotID: "980088192")
+        
     }
     ///load Landscape Ad
     @objc func loadLandscapeAd(_ sender:UIButton) -> Void {
@@ -26,117 +27,47 @@ class BUDRewardVideoAdViewController: ViewController {
     }
     ///show ad
     @objc func showAd(_ sender:UIButton) -> Void {
-        _rewardedVideoAd?.show(fromRootViewController: self)
+        _rewardedVideoAd?.present(fromRootViewController: self)
         
         _statusLabel.text = "Tap left button to load Ad";
     }
     func loadRewardVideoAdWithSlotID(slotID:String) -> Void {
-        // important: Every time the data is requested, a new one BURewardedVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
-        let rewardModel = BURewardedVideoModel()
-        _rewardedVideoAd = BURewardedVideoAd.init(slotID: slotID, rewardedVideoModel: rewardModel)
-        _rewardedVideoAd?.delegate = self
-        _rewardedVideoAd?.loadData()
-        
+        PAGRewardedAd.load(withSlotID: slotID, request: PAGRewardedRequest(), completionHandler: { rewardedAd, error in
+            if error != nil {
+                self._statusLabel.text = "Ad loaded fail";
+            } else {
+                self._statusLabel.text = "Ad loaded";
+            }
+            if let ad = rewardedAd {
+                ad.delegate = self
+                self._rewardedVideoAd = ad
+            }
+        })
         _statusLabel.text = "Loading......";
     }
 }
 ///BURewardedVideoAdDelegate
-extension BUDRewardVideoAdViewController: BURewardedVideoAdDelegate {
-    /**
-     This method is called when video ad material loaded successfully.
-     */
-    func rewardedVideoAdDidLoad(_ rewardedVideoAd: BURewardedVideoAd) {
-        _statusLabel.text = "Ad loaded";
-    }
-
-    /**
-     This method is called when video ad materia failed to load.
-     @param error : the reason of error
-     */
-    func rewardedVideoAd(_ rewardedVideoAd: BURewardedVideoAd, didFailWithError error: Error?) {
-        _statusLabel.text = "Ad loaded fail";
-    }
-
-    /**
-     This method is called when cached successfully.
-     */
-    func rewardedVideoAdVideoDidLoad(_ rewardedVideoAd: BURewardedVideoAd) {
-        _statusLabel.text = "Video caching complete";
-    }
-
-    /**
-     This method is called when video ad slot will be showing.
-     */
-    func rewardedVideoAdWillVisible(_ rewardedVideoAd: BURewardedVideoAd) {
-        
-    }
-
-    /**
-     This method is called when video ad slot has been shown.
-     */
-    func rewardedVideoAdDidVisible(_ rewardedVideoAd: BURewardedVideoAd) {
-        
-    }
-
-    /**
-     This method is called when video ad is about to close.
-     */
-    func rewardedVideoAdWillClose(_ rewardedVideoAd: BURewardedVideoAd) {
-        
-    }
-
-    /**
-     This method is called when video ad is closed.
-     */
-    func rewardedVideoAdDidClose(_ rewardedVideoAd: BURewardedVideoAd) {
-        
-    }
-
-    /**
-     This method is called when video ad is clicked.
-     */
-    func rewardedVideoAdDidClick(_ rewardedVideoAd: BURewardedVideoAd) {
-        
-    }
-
-
-    /**
-     This method is called when video ad play completed or an error occurred.
-     @param error : the reason of error
-     */
-    func rewardedVideoAdDidPlayFinish(_ rewardedVideoAd: BURewardedVideoAd, didFailWithError error: Error?) {
-        
-    }
-
-    /**
-     Server verification which is requested asynchronously is succeeded.
-     @param verify :return YES when return value is 2000.
-     */
-    func rewardedVideoAdServerRewardDidSucceed(_ rewardedVideoAd: BURewardedVideoAd, verify: Bool) {
-        
-    }
-
-    /**
-      Server verification which is requested asynchronously is failed.
-      @param rewardedVideoAd rewarded Video ad
-      @param error request error info
-     */
-    func rewardedVideoAdServerRewardDidFail(_ rewardedVideoAd: BURewardedVideoAd, error: Error) {
-        
+extension BUDRewardVideoAdViewController: PAGRewardedAdDelegate {
+    func adDidShow(_ ad: PAGAdProtocol) {
+        print("BUDRewardedVideoAdViewController | adDidShow:")
     }
     
-    /**
-     This method is called when the user clicked skip button.
-     */
-    func rewardedVideoAdDidClickSkip(_ rewardedVideoAd: BURewardedVideoAd) {
-        
+    func adDidClick(_ ad: PAGAdProtocol) {
+        print("BUDRewardedVideoAdViewController | adDidClick:")
     }
-
-    /**
-     this method is used to get type of rewarded video Ad
-     */
-    func rewardedVideoAdCallback(_ rewardedVideoAd: BURewardedVideoAd, with rewardedVideoAdType: BURewardedVideoAdType) {
-        
+    
+    func adDidDismiss(_ ad: PAGAdProtocol) {
+        print("BUDRewardedVideoAdViewController | adDidDismiss:")
+        self._rewardedVideoAd = nil
+        self._statusLabel.text = "Tap left button to load Ad";
+    }
+    
+    func rewardedAd(_ rewardedAd: PAGRewardedAd, userDidEarnReward rewardModel: PAGRewardModel) {
+        print("BUDRewardedVideoAdViewController | reward earned")
+    }
+    
+    func rewardedAd(_ rewardedAd: PAGRewardedAd, userEarnRewardFailWithError error: Error) {
+        print("BUDRewardedVideoAdViewController | reward earn failed:", error.localizedDescription)
     }
 }
 ///Exmple UI

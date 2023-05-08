@@ -1,12 +1,14 @@
 # Uncomment the next line to define a global platform for your project
+
 platform :ios, '9.0'
 
 workspace 'BUADVADemo_Swift.xcworkspace'
 
 abstract_target 'Demo' do
-    pod 'Google-Mobile-Ads-SDK'
+    pod 'Google-Mobile-Ads-SDK','8.0.0'
+    pod 'SDWebImage'
     pod 'Ads-Global-Beta'
-
+    
     target 'BUADVADemo_Swift' do
       project 'BUADVADemo_Swift.xcodeproj'
 

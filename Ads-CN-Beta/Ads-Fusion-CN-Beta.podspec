@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Fusion-CN-Beta'
-  s.version          = '5.1.6.1'
+  s.version          = '5.1.7.0'
   s.summary          = 'Ads-Fusion-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Fusion-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -40,11 +40,11 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'BURelyFoundation' do |ss|
-    ss.dependency 'BURelyFoundation/CSJ', '0.1.0.21'
+    ss.dependency 'BURelyFoundation/CSJ', '0.1.0.24'
   end
 
   s.subspec 'BUAdSDK' do |ss|
-    ss.dependency 'BUAdSDK', '0.3.0.2'
+    ss.dependency 'BUAdSDK', '0.3.0.6'
   end
 
   s.subspec 'CSJMediation' do |ss|

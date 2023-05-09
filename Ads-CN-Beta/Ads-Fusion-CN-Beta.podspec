@@ -40,7 +40,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'BURelyFoundation' do |ss|
-    ss.dependency 'BURelyFoundation/CSJ', '0.1.0.24'
+    ss.dependency 'BURelyFoundation/CSJ', '0.1.0.21'
   end
 
   s.subspec 'BUAdSDK' do |ss|

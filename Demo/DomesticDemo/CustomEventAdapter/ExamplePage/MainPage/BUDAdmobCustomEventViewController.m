@@ -14,7 +14,7 @@
 
 @interface BUDAdmobCustomEventViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray<NSArray *> *items;
+@property (nonatomic, copy) NSArray<NSArray *> *items;
 
 @end
 

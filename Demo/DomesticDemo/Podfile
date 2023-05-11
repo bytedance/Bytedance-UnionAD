@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 workspace 'BUADDemo.xcworkspace'
 
@@ -7,7 +7,7 @@ abstract_target 'Demo' do
     pod 'AFNetworking', '~> 3.0', :subspecs => ['UIKit'], :inhibit_warnings => false
     pod 'KVOController'
     pod 'Masonry'
-    pod 'Google-Mobile-Ads-SDK'
+    pod 'Google-Mobile-Ads-SDK', '8.0.0'
     pod 'MBProgressHUD'
     pod 'libwebp', '~> 0.5.1'  
     pod 'Bugly'

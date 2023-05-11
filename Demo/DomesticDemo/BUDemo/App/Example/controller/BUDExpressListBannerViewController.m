@@ -100,9 +100,9 @@
     self.slotSwitchView.frame = frame2;
     [self.collectionHeaderView addSubview:self.slotSwitchView];
     
-    self.collectionHeaderView.bu_size = CGSizeMake(BUScreenWidth, self.slotSwitchView.bu_bottom);
+    self.collectionHeaderView.bud_size = CGSizeMake(BUDScreenWidth, self.slotSwitchView.bud_bottom);
     
-    self.collectionView.frame = CGRectMake(0, 0, BUScreenWidth, BUScreenHeight - (BUiPhoneX ? 44 : 0));
+    self.collectionView.frame = CGRectMake(0, 0, BUDScreenWidth, BUDScreenHeight - (BUDiPhoneX ? 44 : 0));
     [self.view addSubview:self.collectionView];
 }
 
@@ -231,8 +231,8 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     BUDBannerCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BUDBannerCollectionViewCell" forIndexPath:indexPath];
-    BUNativeExpressBannerView *bannerView = [self.bannerViewArray bu_objectAtIndexSafely:indexPath.row];
-    bannerView.bu_x = (BUScreenWidth - bannerView.bu_width) / 2.0;
+    BUNativeExpressBannerView *bannerView = [self.bannerViewArray objectAtIndex:indexPath.row];
+    bannerView.bu_x = (BUDScreenWidth - bannerView.bu_width) / 2.0;
     bannerView.bu_y = (BannerCellHeight - bannerView.bu_height) / 2.0;
     [cell addSubview:bannerView];
     return cell;
@@ -251,11 +251,11 @@
     if (self.bannerViewArray.count <= indexPath.row) {
         return CGSizeZero;
     }
-    return CGSizeMake(BUScreenWidth, BannerCellHeight);
+    return CGSizeMake(BUDScreenWidth, BannerCellHeight);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return self.collectionHeaderView.bu_size;
+    return self.collectionHeaderView.bud_size;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

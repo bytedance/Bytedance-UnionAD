@@ -26,7 +26,7 @@
 #define BUDMAXScreenSide                   MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)
 #endif
 
-#define BUDiPhoneX BUIsNotchScreen
+#define BUDiPhoneX BUDIsNotchScreen
 #define NavigationBarHeight (BUDiPhoneX? 88: 64)      // 导航条高度
 #define TopMargin        (BUDiPhoneX? 24: 0)
 #define BottomMargin     (BUDiPhoneX? 40: 0)      // 状态栏高度

@@ -11,7 +11,7 @@
 #import <GoogleMobileAds/GADAdLoaderDelegate.h>
 #import <GoogleMobileAds/GADNativeAdDelegate.h>
 #import <GoogleMobileAds/GADNativeAd.h>
-
+#import <GoogleMobileAds/GADAdLoaderAdTypes.h>
 @interface BUDAdmob_FeedNativeCusEventVC () <GADAdLoaderDelegate,GADNativeAdDelegate,GADVideoControllerDelegate,GADNativeAdLoaderDelegate>
 
 @property (nonatomic, strong, getter=getAdLoader) GADAdLoader *adLoader;

@@ -41,6 +41,13 @@ Pod::Spec.new do |s|
     ss.dependency 'Ads-Global/BURelyAdSDK'
     ss.dependency 'Ads-Global/Dep_Compatible'
   end
+
+  s.subspec 'BUAdSDK_Lite' do |ss|
+    ss.vendored_frameworks = ['SDK/PAGAdSDK.xcframework']
+    ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
+    ss.resource = 'SDK/PAGAdSDK.bundle'
+    ss.dependency 'Ads-Global/Dep_Accurate'
+  end
   
   ## 依赖版本为指定版本号
   s.subspec 'Dep_Accurate' do |ss|

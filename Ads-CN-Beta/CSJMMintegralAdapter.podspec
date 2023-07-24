@@ -11,13 +11,13 @@ Pod::Spec.new do |spec|
   spec.license      = { :type => 'MIT', :file => 'LICENSE' }
   spec.author       = { 'guanguan' => 'guanfengyi.gc@bytedance.com' }
   
-  spec.platform     = :ios, '9.0'
+  spec.platform     = :ios, '10.0'
 
   spec.source       = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/GroMore/Release/CSJMMintegralAdapter/#{spec.version}/SDK.zip" }
 
   spec.requires_arc = true
   
-  spec.ios.deployment_target = '9.0'
+  spec.ios.deployment_target = '10.0'
 
   valid_archs = ['arm64', 'armv7', 'x86_64', 'i386']
 

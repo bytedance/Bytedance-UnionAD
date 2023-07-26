@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN'
-  s.version         = '5.3.1.7'
+  s.version         = '5.4.1.0'
   s.summary          = 'Ads-CN is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN provides ADs which include native、banner、feed、splash、RewardVideo etc.

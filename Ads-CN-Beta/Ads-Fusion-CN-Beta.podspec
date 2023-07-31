@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Fusion-CN-Beta'
-  s.version          = '5.3.6.0'
+  s.version          = '5.3.6.1'
   s.summary          = 'Ads-Fusion-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Fusion-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -31,18 +31,11 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/BUAdSDK.xcframework']
     ss.preserve_paths = 'SDK/BUAdSDK.xcframework'
     ss.resource = 'SDK/CSJAdSDK.bundle'
-    ss.dependency 'BURelyFoundation/CSJ', '0.3.0.3'
+    ss.dependency 'BURelyFoundation/CSJ', '0.3.0.4'
   end
 
   s.subspec 'CSJMediation' do |ss|
     ss.ios.vendored_frameworks = 'SDK/CSJMediation/CSJMediation.xcframework'
-    ss.dependency 'Ads-Fusion-CN-Beta/BUAdSDK'
-  end
-
-  s.subspec 'CSJMDebugTools' do |ss|
-    ss.vendored_frameworks = ['SDK/CSJMDebugTools/CSJMDebugTools.xcframework']
-    ss.preserve_paths = 'SDK/CSJMDebugTools/CSJMDebugTools.xcframework'
-    ss.resource = 'SDK/CSJMDebugTools/CSJMDebugTools.bundle'
     ss.dependency 'Ads-Fusion-CN-Beta/BUAdSDK'
   end
 

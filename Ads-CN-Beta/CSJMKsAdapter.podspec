@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = 'CSJMKsAdapter'
-  spec.version      = '3.3.49.1'
+  spec.version      = '3.3.51.1.0'
   spec.summary      = 'CSJMKsAdapter is a adapter SDK from Bytedance providing media union AD service.'
   spec.homepage     = 'https://www.csjplatform.com/gromore'
   spec.description  = <<-DESC   
@@ -22,6 +22,6 @@ Pod::Spec.new do |spec|
   valid_archs = ['arm64', 'armv7', 'x86_64', 'i386']
 
   spec.vendored_frameworks = ['CSJMKsAdapter/CSJMKsAdapter.xcframework']
-  spec.dependency 'Ads-Fusion-CN-Beta/CSJMediation','>= 5.6.0.2'
+  spec.dependency 'Ads-Fusion-CN-Beta/CSJMediation','>= 5.3.6.2'
 
 end

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN-Beta'
-  s.version         = '5.7.0.2'
+  s.version         = '5.7.0.6'
   s.summary          = 'Ads-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/BUAdSDK.xcframework']
     ss.preserve_paths = 'SDK/BUAdSDK.xcframework'
     ss.resource = 'SDK/CSJAdSDK.bundle'
-    ss.dependency 'BURelyFoundation/CSJ', '0.3.0.4'
+    ss.dependency 'BURelyFoundation/CSJ', '0.3.0.7'
   end
   
 end

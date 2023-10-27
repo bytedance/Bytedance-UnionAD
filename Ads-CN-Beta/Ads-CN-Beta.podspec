@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint BUPlayableAd.podspec' to ensure this is a
+# Be sure to run `pod lib lint Ads-CN-Beta.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -32,7 +32,6 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/BUAdSDK.xcframework']
     ss.preserve_paths = 'SDK/BUAdSDK.xcframework'
     ss.resource = 'SDK/CSJAdSDK.bundle'
-    ss.dependency 'BURelyFoundation/CSJ', '0.3.0.7'
   end
   
 end

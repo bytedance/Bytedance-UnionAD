@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global'
-  s.version         = '5.6.0.8'
+  s.version         = '5.6.0.9'
   s.summary          = 'Ads-Global is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Global provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -51,12 +51,12 @@ Pod::Spec.new do |s|
   
   ## 依赖版本为指定版本号
   s.subspec 'Dep_Accurate' do |ss|
-    ss.dependency 'BURelyFoundation_Global/Pangle', '0.1.3.2'
+    ss.dependency 'BURelyFoundation_Global/Pangle', '0.1.3.3'
   end
 
   ## 依赖版本为指定版本范围
   s.subspec 'Dep_Compatible' do |ss|
-    ss.dependency 'BURelyFoundation_Global/Pangle', '~> 0.1.3.2'
+    ss.dependency 'BURelyFoundation_Global/Pangle', '~> 0.1.3.3'
   end
 
   ## RE

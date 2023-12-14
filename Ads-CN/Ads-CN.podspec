@@ -31,7 +31,6 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/BUAdSDK.xcframework']
     ss.preserve_paths = 'SDK/BUAdSDK.xcframework'
     ss.resource = 'SDK/CSJAdSDK.bundle'
-    ss.dependency 'BURelyFoundation/CSJ', '0.3.0.7'
   end
 
 end

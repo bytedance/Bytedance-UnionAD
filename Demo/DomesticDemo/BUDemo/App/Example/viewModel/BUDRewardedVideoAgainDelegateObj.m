@@ -49,7 +49,7 @@
     BUD_Log(@"BUDRewardedVideoAgainDelegateObj %s",__func__);
 }
 
-- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd error:(nonnull NSError *)error {
+- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd error:(nullable NSError *)error {
     BUD_Log(@"BUDRewardedVideoAgainDelegateObj %s error = %@",__func__,error);
 }
 

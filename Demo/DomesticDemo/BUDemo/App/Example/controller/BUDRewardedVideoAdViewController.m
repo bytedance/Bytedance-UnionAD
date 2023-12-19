@@ -115,7 +115,7 @@
     BUD_Log(@"%s",__func__);
 }
 
-- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd error:(nonnull NSError *)error {
+- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd error:(nullable NSError *)error {
     BUD_Log(@"%s error = %@",__func__,error);
 }
 

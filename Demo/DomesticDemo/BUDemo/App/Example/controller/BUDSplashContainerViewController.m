@@ -105,7 +105,7 @@
 }
 
 
-- (void)splashVideoAdDidPlayFinish:(BUSplashAd *)splashAd didFailWithError:(nonnull NSError *)error {
+- (void)splashVideoAdDidPlayFinish:(BUSplashAd *)splashAd didFailWithError:(nullable NSError *)error {
     
 }
 

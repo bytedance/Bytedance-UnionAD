@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = 'CSJMBaiduAdapter'
-  spec.version      = '5.33.0'
+  spec.version      = '5.325.2  '
   spec.summary      = 'CSJMBaiduAdapter is a adapter SDK from Bytedance providing media union AD service.'
   spec.homepage     = 'https://www.csjplatform.com/gromore'
   spec.description  = <<-DESC   
@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   
   spec.platform     = :ios, '10.0'
 
-  spec.source       = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/GroMore/Release/CSJMBaiduAdapter/#{spec.version}/SDK.zip" }
+  spec.source       = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/GroMore/Release/CSJMBaiduAdapter/#{spec.version}/SDK_1.zip" }
   spec.requires_arc = true
   
   spec.ios.deployment_target = '10.0'
@@ -22,6 +22,6 @@ Pod::Spec.new do |spec|
 
 
   spec.vendored_frameworks = ['CSJMBaiduAdapter/CSJMBaiduAdapter.xcframework']
-  spec.dependency 'Ads-Fusion-CN-Beta/CSJMediation','>= 5.9.0.1'
+  spec.dependency 'Ads-Fusion-CN-Beta/CSJMediation','>= 5.8.1.0'
 
 end

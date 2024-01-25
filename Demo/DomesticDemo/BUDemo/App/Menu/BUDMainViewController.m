@@ -28,13 +28,6 @@
 #endif
 
 #import "BUDAdManager.h"
-#if __has_include(<QRCodeReaderViewController/QRCodeReader.h>)
-#import <QRCodeReaderViewController/QRCodeReader.h>
-#endif
-#if __has_include(<QRCodeReaderViewController/QRCodeReaderViewController.h>)
-#import <QRCodeReaderViewController/QRCodeReaderViewController.h>
-#endif
-#import "BUDSanWebViewController.h"
 
 #if __has_include(<BUWebAd/BUWebAd.h>)
 #import "BUDWebViewController.h"
@@ -61,11 +54,6 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [rightButton addTarget:self action:@selector(openScanFun) forControlEvents:UIControlEventTouchUpInside];
-    [rightButton setTitle:@"Scan" forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     self.title = @"BytedanceUnion Demo";
     
@@ -195,33 +183,6 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:NO forKey:@"kCustomDislikeIsOn"];
     [userDefaults synchronize];
-}
-
-- (void)openScanFun {
-#if __has_include(<QRCodeReaderViewController/QRCodeReader.h>)
-    #if DEBUG
-    QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
-
-        // Instantiate the view controller
-        QRCodeReaderViewController *vc = [QRCodeReaderViewController readerWithCancelButtonTitle:@"Cancel" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:YES showTorchButton:YES];
-        vc.modalPresentationStyle = UIModalPresentationFullScreen;
-        @weakify(self);
-        [vc setCompletionWithBlock:^(NSString * _Nullable resultAsString) {
-            @strongify(self);
-            [self dismissViewControllerAnimated:YES completion:^{
-                if (resultAsString) {
-                    BUDSanWebViewController *webVC = [BUDSanWebViewController openURLString:resultAsString];
-                    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:webVC];
-                    nav.modalPresentationStyle = UIModalPresentationFullScreen;
-                    [self presentViewController:nav animated:YES completion:^{
-
-                    }];
-                }
-            }];
-        }];
-        [self presentViewController:vc animated:YES completion:nil];
-    #endif
-#endif
 }
 
 -(BOOL)shouldAutorotate

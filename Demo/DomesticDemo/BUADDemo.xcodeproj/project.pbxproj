@@ -80,7 +80,6 @@
 		2BFDA5AE263553AA00C17053 /* BUDCustomDislikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDA5A9263553AA00C17053 /* BUDCustomDislikeViewController.m */; };
 		2BFDA5AF263553AA00C17053 /* BUDStreamAdListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDA5AA263553AA00C17053 /* BUDStreamAdListViewController.m */; };
 		2BFDA5B2263553B900C17053 /* UIColor+DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDA5B1263553B900C17053 /* UIColor+DarkMode.m */; };
-		2BFDCF872774AE27005D8B41 /* BUDSanWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFDCF862774AE27005D8B41 /* BUDSanWebViewController.m */; };
 		5A8B1A022271A25A0048DE10 /* BUDemoLanguage.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A8B1A002271A25A0048DE10 /* BUDemoLanguage.strings */; };
 		5A988611221AAE16006459BD /* NSString+LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A98860F221AAE16006459BD /* NSString+LocalizedString.m */; };
 		5AB9E06722295644001B15CE /* BUDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9E06522295644001B15CE /* BUDCollectionViewCell.m */; };
@@ -268,8 +267,6 @@
 		2BFDA5AA263553AA00C17053 /* BUDStreamAdListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDStreamAdListViewController.m; sourceTree = "<group>"; };
 		2BFDA5B0263553B800C17053 /* UIColor+DarkMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DarkMode.h"; sourceTree = "<group>"; };
 		2BFDA5B1263553B900C17053 /* UIColor+DarkMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DarkMode.m"; sourceTree = "<group>"; };
-		2BFDCF852774AE27005D8B41 /* BUDSanWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSanWebViewController.h; sourceTree = "<group>"; };
-		2BFDCF862774AE27005D8B41 /* BUDSanWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSanWebViewController.m; sourceTree = "<group>"; };
 		5A8B1A012271A25A0048DE10 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BUDemoLanguage.strings; sourceTree = "<group>"; };
 		5A8B1A032271A2650048DE10 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/BUDemoLanguage.strings; sourceTree = "<group>"; };
 		5A8B1A042271A26E0048DE10 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BUDemoLanguage.strings"; sourceTree = "<group>"; };
@@ -470,15 +467,6 @@
 			path = WebAd;
 			sourceTree = "<group>";
 		};
-		2BFDCF842774AE27005D8B41 /* ScanFun */ = {
-			isa = PBXGroup;
-			children = (
-				2BFDCF852774AE27005D8B41 /* BUDSanWebViewController.h */,
-				2BFDCF862774AE27005D8B41 /* BUDSanWebViewController.m */,
-			);
-			path = ScanFun;
-			sourceTree = "<group>";
-		};
 		6C25FC835F24553C67AD4CC9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,7 +547,6 @@
 		DE84BD1721A2E9600090D866 /* Until */ = {
 			isa = PBXGroup;
 			children = (
-				2BFDCF842774AE27005D8B41 /* ScanFun */,
 				2B55590D271DB6B300C06E4C /* BUDPrivacyProvider.h */,
 				2B55590C271DB6B300C06E4C /* BUDPrivacyProvider.m */,
 				DE84BD2221A2E9600090D866 /* BUDBase64.h */,
@@ -966,7 +953,6 @@
 				2B790F612A06AABA00EFD887 /* BUDAdmobTool.m in Sources */,
 				2B790F602A06AABA00EFD887 /* BUDAdmob_BannerCustomEventAdapter.m in Sources */,
 				DE84BDA121A2E9600090D866 /* BUDAdManager.m in Sources */,
-				2BFDCF872774AE27005D8B41 /* BUDSanWebViewController.m in Sources */,
 				DE84BDAC21A2E9600090D866 /* BUDActionAreaView.m in Sources */,
 				2BA95F662552B02B00692DCB /* BUDPasterContentView.m in Sources */,
 				2B790F672A06AABA00EFD887 /* BUDAdmob_FeedNativeCusEventVC.m in Sources */,

@@ -67,6 +67,7 @@
 		2BD5BB5926C40AE4008A19D3 /* BUDNativeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5BB5326C40AE4008A19D3 /* BUDNativeBannerView.m */; };
 		2BD5BB5A26C40AE4008A19D3 /* BUDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5BB5426C40AE4008A19D3 /* BUDWebViewController.m */; };
 		2BD5BB5B26C40AE4008A19D3 /* BUDFeedAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5BB5526C40AE4008A19D3 /* BUDFeedAdView.m */; };
+		2BD7543D29D5367F00EEA9D0 /* BUDVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7543B29D5367F00EEA9D0 /* BUDVideoPlayerView.m */; };
 		2BD7544429D5388700EEA9D0 /* UIView+BUDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7544029D5388700EEA9D0 /* UIView+BUDAdditions.m */; };
 		2BD7544529D5388700EEA9D0 /* UIWindow+BUDUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7544129D5388700EEA9D0 /* UIWindow+BUDUtilities.m */; };
 		2BD7544829D5408600EEA9D0 /* BUDCommonMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7544629D5408600EEA9D0 /* BUDCommonMacros.m */; };
@@ -243,6 +244,8 @@
 		2BD5BB5626C40AE4008A19D3 /* BUDWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDWebViewController.h; sourceTree = "<group>"; };
 		2BD5BB5726C40AE4008A19D3 /* BUDNativeBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDNativeBannerView.h; sourceTree = "<group>"; };
 		2BD5BB5826C40AE4008A19D3 /* BUDFeedAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDFeedAdView.h; sourceTree = "<group>"; };
+		2BD7543B29D5367F00EEA9D0 /* BUDVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDVideoPlayerView.m; sourceTree = "<group>"; };
+		2BD7543C29D5367F00EEA9D0 /* BUDVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDVideoPlayerView.h; sourceTree = "<group>"; };
 		2BD7544029D5388700EEA9D0 /* UIView+BUDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BUDAdditions.m"; sourceTree = "<group>"; };
 		2BD7544129D5388700EEA9D0 /* UIWindow+BUDUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+BUDUtilities.m"; sourceTree = "<group>"; };
 		2BD7544229D5388700EEA9D0 /* UIWindow+BUDUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+BUDUtilities.h"; sourceTree = "<group>"; };
@@ -628,6 +631,8 @@
 		DE84BD2B21A2E9600090D866 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				2BD7543C29D5367F00EEA9D0 /* BUDVideoPlayerView.h */,
+				2BD7543B29D5367F00EEA9D0 /* BUDVideoPlayerView.m */,
 				2B00D15728850748004FDC86 /* BUDBiddingSplashViewController.h */,
 				2B00D15828850748004FDC86 /* BUDBiddingSplashViewController.m */,
 				68A08422273D45A500A916C7 /* BUDSlotABViewController.h */,
@@ -976,6 +981,7 @@
 				2BD5BB5926C40AE4008A19D3 /* BUDNativeBannerView.m in Sources */,
 				2B6D7A5826CCA7B6005E34D5 /* BUDExpressListBannerViewController.m in Sources */,
 				1200EFBA24B8A43200E331DD /* BUDRewardedVideoAdViewController.m in Sources */,
+				2BD7543D29D5367F00EEA9D0 /* BUDVideoPlayerView.m in Sources */,
 				2BD5BB5B26C40AE4008A19D3 /* BUDFeedAdView.m in Sources */,
 				1200EFBB24B8A43200E331DD /* BUDNativeFeedCollectionViewController.m in Sources */,
 				2B5C0200253FF98C003EE4FB /* BUDListViewController.m in Sources */,

@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   
   spec.platform     = :ios, '10.0'
 
-  spec.source       = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/GroMore/Release/CSJMKsAdapter/#{spec.version}/SDK_1.zip" }
+  spec.source       = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/GroMore/Release/CSJMKsAdapter/#{spec.version}/SDK.zip" }
 
   spec.requires_arc = true
   

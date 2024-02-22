@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = 'CSJMBaiduAdapter'
-  spec.version      = '5.332.0'
+  spec.version      = '5.332.1'
   spec.summary      = 'CSJMBaiduAdapter is a adapter SDK from Bytedance providing media union AD service.'
   spec.homepage     = 'https://www.csjplatform.com/gromore'
   spec.description  = <<-DESC   
@@ -22,6 +22,6 @@ Pod::Spec.new do |spec|
 
 
   spec.vendored_frameworks = ['CSJMBaiduAdapter/CSJMBaiduAdapter.xcframework']
-  spec.dependency 'Ads-Fusion-CN-Beta/CSJMediation','>= 5.9.0.7'
+  spec.dependency 'Ads-Fusion-CN-Beta/CSJMediation','>= 6.0.0.2'
 
 end

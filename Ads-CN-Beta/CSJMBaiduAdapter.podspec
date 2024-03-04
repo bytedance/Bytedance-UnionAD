@@ -22,6 +22,6 @@ Pod::Spec.new do |spec|
 
 
   spec.vendored_frameworks = ['CSJMBaiduAdapter/CSJMBaiduAdapter.xcframework']
-  spec.dependency 'Ads-Fusion-CN-Beta/CSJMediation','>= 6.0.0.2'
+  spec.dependency 'Ads-Fusion-CN-Beta/CSJMediation','>= 6.0.0.5'
 
 end

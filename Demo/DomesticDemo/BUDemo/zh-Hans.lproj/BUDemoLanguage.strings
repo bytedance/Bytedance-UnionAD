@@ -61,6 +61,7 @@
 "feedAdNative" = "原生信息流广告";
 "feedAdExpress" = "模板信息流广告";
 "feedAdExpressVideo" = "模板信息流视频广告";
+"feedAdExpressIcon" = "模版信息流icon广告";
 "drawAd" = "Draw信息流广告";
 "drawAdNative" = "原生渲染Draw信息流广告";
 "drawAdExpress" = "模版渲染Draw信息流广告";
@@ -85,3 +86,11 @@
 "waterfallAd" = "瀑布流广告";
 "newInterstitialfull" = "全屏";
 "newInterstitialhalf" = "半屏";
+
+
+"m_splashAd" = "聚合开屏广告";
+"m_rewardVideoAd" = "聚合激励视频广告";
+"m_bannerAd" = "聚合Banner广告";
+"m_feedAd" = "聚合信息流广告";
+"m_drawAd" = "聚合draw广告";
+"gm_interstitialProAd" = "聚合插全屏广告";

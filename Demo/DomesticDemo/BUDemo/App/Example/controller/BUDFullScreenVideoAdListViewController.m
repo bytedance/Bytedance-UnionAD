@@ -4,24 +4,17 @@
 //
 
 #import "BUDFullScreenVideoAdListViewController.h"
-#import "BUDFullscreenViewController.h"
 #import "BUDSlotViewModel.h"
 #import "BUDActionCellView.h"
 #import "BUDSlotID.h"
 #import "BUDExpressFullScreenVideoViewController.h"
-
+#import "BUMDExpressFullScreenVideoViewController.h"
 
 @implementation BUDFullScreenVideoAdListViewController
 
 - (NSArray<NSArray<BUDActionModel *> *> *)itemsForList {
     __weak typeof(self) weakSelf = self;
-    BUDActionModel *normalCellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kFullscreenAdNative] type:BUDCellType_native action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        BUDFullscreenViewController *vc = [[BUDFullscreenViewController alloc] init];
-        vc.adName = [NSString localizedStringForKey:kFullscreenAdNative];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-
+    
     BUDActionModel *expressCellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kFullscreenAdExpress] type:BUDCellType_native action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDExpressFullScreenVideoViewController *vc = [[BUDExpressFullScreenVideoViewController alloc] init];
@@ -36,8 +29,15 @@
         vc.adName = [NSString localizedStringForKey:kFullscreenAdInterstital];
         [self.navigationController pushViewController:vc animated:YES];
     }];
-
-    return @[@[normalCellItem,expressCellItem,interstitalCellItem]];
+    
+    BUDActionModel *gmCellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kGMInterstitialProAd] type:BUDCellType_native action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUMDExpressFullScreenVideoViewController *vc = [[BUMDExpressFullScreenVideoViewController alloc] init];
+        vc.adName = [NSString localizedStringForKey:kGMInterstitialProAd];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    return @[@[expressCellItem,interstitalCellItem,gmCellItem]];
 }
 
 @end

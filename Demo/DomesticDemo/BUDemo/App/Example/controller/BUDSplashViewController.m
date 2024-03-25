@@ -321,7 +321,7 @@
     [self pbud_logWithSEL:_cmd msg:@""];
 }
 
-- (void)splashVideoAdDidPlayFinish:(nonnull BUSplashAd *)splashAd didFailWithError:(nonnull NSError *)error {
+- (void)splashVideoAdDidPlayFinish:(nonnull BUSplashAd *)splashAd didFailWithError:(nullable NSError *)error {
     [self pbud_logWithSEL:_cmd msg:@""];
 }
 

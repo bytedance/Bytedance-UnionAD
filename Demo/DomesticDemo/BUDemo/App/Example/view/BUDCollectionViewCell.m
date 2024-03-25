@@ -73,8 +73,8 @@
     // add video view
     [_customview addSubview:self.relatedView.videoAdView];
     // add logo view
-    self.relatedView.logoImageView.frame = CGRectZero;
-    [_customview addSubview:self.relatedView.logoImageView];
+    self.relatedView.logoADImageView.frame = CGRectZero;
+    [_customview addSubview:self.relatedView.logoADImageView];
     // add dislike view
     self.relatedView.dislikeButton.frame = CGRectMake(CGRectGetMaxX(_infoLabel.frame) - 20 +4, CGRectGetMaxY(_infoLabel.frame)+5, 20, 20);
     [_customview addSubview:self.relatedView.dislikeButton];
@@ -92,7 +92,7 @@
     BUImage *image = adMeta.imageAry.firstObject;
     const CGFloat imageHeight = contentWidth * (image.height / image.width);
     CGRect rect = CGRectMake(25, CGRectGetMaxY(_actionButton.frame) + 5, contentWidth, imageHeight);
-    self.relatedView.logoImageView.frame = CGRectMake(CGRectGetMaxX(rect) - 15 , CGRectGetMaxY(rect) - 15, 15, 15);
+    self.relatedView.logoADImageView.frame = CGRectMake(CGRectGetMaxX(rect) - 15 , CGRectGetMaxY(rect) - 15, 15, 15);
     self.relatedView.adLabel.frame = CGRectMake(CGRectGetMinX(rect), CGRectGetMaxY(rect) - 14, 26, 14);
     [self.relatedView refreshData:nativeAd];
     // imageMode decides whether to show video or not

@@ -58,13 +58,12 @@
 - (void)loadAdData {
     self.currentAdIndex = 0;
     
-    BUNativeAdsManager *nad = [BUNativeAdsManager new];
     BUAdSlot *slot = [[BUAdSlot alloc] init];
     slot.ID = self.viewModel.slotID;
     slot.AdType = BUAdSlotAdTypePaster;
     slot.position = BUAdSlotPositionTop;
     slot.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388]; // 690*388
-    nad.adslot = slot;
+    BUNativeAdsManager *nad = [[BUNativeAdsManager alloc]initWithSlot:slot];
     nad.delegate = self;
     [nad loadAdDataWithCount:3];
     self.nad = nad;

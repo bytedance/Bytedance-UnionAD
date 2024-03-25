@@ -27,6 +27,18 @@
 #define native_feed_custom_player_ID      @"900546910"
 #define native_paster_player_ID           @"945593048"
 
+// 聚合测试广告位ID
+#define gromore_reward_landscape_ID       @"945494739" //聚合激励视频广告位（BURewardedVideoAd && BUNativeExpressRewardedVideoAd）
+#define gromore_splash_ID_2               @"887383142"
+#define gromore_reward_ID                 @"945494739" //聚合激励视频广告位（BURewardedVideoAd && BUNativeExpressRewardedVideoAd）
+#define gromore_splash_ID                 @"100000307" //聚合开屏广告位（BUSplashAd）
+#define gromore_feed_ID                   @"945494759" //聚合feed广告位，用于测试模版 （BUNativeAdsManager）
+#define gromore_feed_ID_2                 @"945494760" //聚合feed广告位2，用于测试自渲染 （BUNativeAdsManager）
+#define gromore_draw_ID                   @"948423177" //聚合draw广告位，用于测试模版（BUNativeAdsManager）
+#define gromore_draw_ID_2                 @"948423181" //聚合draw广告位2，用于测试自渲染（BUNativeAdsManager）
+#define gromore_newInterstitial_ID        @"948070210" //聚合插全屏广告位（BUNativeExpressFullscreenVideoAd）
+#define gromore_banner_ID                 @"945494753" //聚合banner广告位 （BUNativeExpressBannerView）
+
 /// 带_both代表海外国内通用的rit
 #define express_feed_ID                   @"945113159"
 //#define express_feed_video_ID             @"900546510"

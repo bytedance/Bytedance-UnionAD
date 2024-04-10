@@ -30,7 +30,6 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/PAGAdSDK.xcframework']
     ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global-Beta/BURelyAdSDK'
     ss.dependency 'Ads-Global-Beta/Dep_Accurate'
   end
 
@@ -38,7 +37,6 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/PAGAdSDK.xcframework']
     ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global-Beta/BURelyAdSDK'
     ss.dependency 'Ads-Global-Beta/Dep_Compatible'
   end
   
@@ -50,13 +48,6 @@ Pod::Spec.new do |s|
   ## 依赖版本为指定版本范围
   s.subspec 'Dep_Compatible' do |ss|
     ss.dependency 'BURelyFoundation_Global/Pangle', '~> 0.2.1.4'
-  end
-
-
-  ## RE
-  s.subspec 'BURelyAdSDK' do |ss|
-     ss.preserve_paths = 'SDK/BURelyAdSDK.xcframework'
-     ss.vendored_frameworks = ['SDK/BURelyAdSDK.xcframework']
   end
   
 end

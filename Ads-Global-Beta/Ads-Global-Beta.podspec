@@ -31,6 +31,9 @@ Pod::Spec.new do |s|
     ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
     ss.dependency 'Ads-Global-Beta/Dep_Accurate'
+    ss.resource_bundles = {
+        'AdsGlobalBetaSDK' => ['SDK/PAGAdSDK.xcframework/ios-arm64/PAGAdSDK.framework/PrivacyInfo.xcprivacy']
+    }
   end
 
   s.subspec 'BUAdSDK_Compatible' do |ss|
@@ -38,6 +41,9 @@ Pod::Spec.new do |s|
     ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
     ss.dependency 'Ads-Global-Beta/Dep_Compatible'
+    ss.resource_bundles = {
+        'AdsGlobalBetaSDK' => ['SDK/PAGAdSDK.xcframework/ios-arm64/PAGAdSDK.framework/PrivacyInfo.xcprivacy']
+    }
   end
   
   ## 依赖版本为指定版本号

@@ -10,7 +10,6 @@
 #import "BUDActionCellDefine.h"
 #import "BUDActionCellView.h"
 #import "BUDFeedViewController.h"
-#import "BUDCustomEventViewController.h"
 #import "BUDToolsSettingViewController.h"
 #import "BUDMacros.h"
 #import <BUAdSDK/BUAdSDK.h>
@@ -102,12 +101,6 @@
         BUDWaterfallViewController *vc = [BUDWaterfallViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }];
-    
-    BUDActionModel *adapterItem = [BUDActionModel plainTitleActionModel:@"CustomEventAdapter" type:BUDCellType_CustomEvent action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        BUDCustomEventViewController *vc = [BUDCustomEventViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
 
 #if TARGET==1
     BUDActionModel *ugenoItem = [BUDActionModel plainTitleActionModel:@"UGenoDemo" type:BUDCellType_CustomEvent action:^{
@@ -140,8 +133,7 @@
 
     NSArray *normalItems = @[
         @[feedAdVc, drawAdVc, bannerAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
-        @[waterfallItem, slotABItem],
-        @[adapterItem]];
+        @[waterfallItem, slotABItem]];
     
     [self.items addObjectsFromArray:normalItems];
     

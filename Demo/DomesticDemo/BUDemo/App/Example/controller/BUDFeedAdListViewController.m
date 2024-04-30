@@ -12,6 +12,7 @@
 #import "BUDCustomVideoPlayerViewController.h"
 #import "BUDPasterCustomPlayerViewController.h"
 #import "BUDPasterViewController.h"
+#import "BUMDFeedViewController.h"
 
 @implementation BUDFeedAdListViewController
 
@@ -46,8 +47,28 @@
         vc.adName = [NSString localizedStringForKey:kFeedAdExpressVideo];
         [self.navigationController pushViewController:vc animated:YES];
     }];
-
-    return @[@[nativeCell1Item, expressCell1Item, expressCell2Item]];
+    
+    BUDActionModel *expressCell3Item = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kFeedAdExpressIcon] type:BUDCellType_native action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUDFeedIconViewController *vc = [[BUDFeedIconViewController alloc] init];
+        BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
+        viewModel.slotID = express_feed_ID;
+        vc.viewModel = viewModel;
+        vc.adName = [NSString localizedStringForKey:kFeedAdExpressIcon];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    BUDActionModel *gm_CellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kMFeedAd] type:BUDCellType_native action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUMDFeedViewController *vc = [[BUMDFeedViewController alloc] init];
+        BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
+        viewModel.slotID = gromore_feed_ID;
+        vc.viewModel = viewModel;
+        vc.adName = [NSString localizedStringForKey:kMFeedAd];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    return @[@[nativeCell1Item, expressCell1Item, expressCell2Item, expressCell3Item, gm_CellItem]];
 }
 
 @end

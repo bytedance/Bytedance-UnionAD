@@ -9,7 +9,7 @@
 #import "BUDExpressDrawViewController.h"
 #import "BUDSlotID.h"
 #import "BUDActionCellView.h"
-
+#import "BUMDDrawAdViewController.h"
 
 @implementation BUDDrawAdListViewController
 
@@ -34,8 +34,19 @@
         vc.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:vc animated:YES completion:nil];
     }];
+    
+    BUDActionModel *gm_CellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kMDrawAd] type:BUDCellType_native action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUMDDrawAdViewController *vc = [[BUMDDrawAdViewController alloc] init];
+        BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
+        viewModel.slotID = gromore_draw_ID;
+        vc.viewModel = viewModel;
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:vc animated:YES completion:nil];
+    }];
+    
+    return @[@[nativeCellItem,expressCellItem,gm_CellItem]];
 
-    return @[@[nativeCellItem,expressCellItem]];
 }
 
 @end

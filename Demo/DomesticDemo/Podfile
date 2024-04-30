@@ -5,24 +5,56 @@ workspace 'BUADDemo.xcworkspace'
 
 abstract_target 'Demo' do
     pod 'AFNetworking', '~> 3.0', :subspecs => ['UIKit'], :inhibit_warnings => false
-    pod 'KVOController'
     pod 'Masonry'
-    pod 'Google-Mobile-Ads-SDK', '8.0.0'
     pod 'MBProgressHUD'
-    pod 'libwebp', '~> 0.5.1'  
-    pod 'Bugly'
-    pod 'Fabric'
-    pod 'Crashlytics'
     pod 'MJRefresh'
     pod 'SDWebImage'
-    pod 'BUAdTestMeasurement'
-    pod 'Ads-CN'
-
 
     target 'BUADDemo' do
       project 'BUADDemo.xcodeproj'
+      # 本target相较于BUADDemo Target多了聚合维度功能展示
+      # 穿山甲
+      pod 'Ads-CN'
+      pod 'BUAdTestMeasurement'
 
-    end
-    
+      # 聚合维度其他家ADN的引入 版本支持请以”接入文档->前置说明“中为准，请不要更换GroMoreSDK不支持的三方sdk版本，引用了哪些adapter, 请相应地引入这些adapter对应的adn的广告SDK
+      # UnityAds
+      pod 'UnityAds', '4.3.0'
+      # Admob/GoogleAd
+      pod 'Google-Mobile-Ads-SDK', '10.0.0'
+      # 百度SDK
+      pod 'BaiduMobAdSDK', '5.35'
+      # 广点通/优量汇
+      pod 'GDTMobSDK', '4.14.71'
+      # SigmobAd
+      pod 'SigmobAd-iOS', '4.12.3'
+      # 快手
+      pod 'KSAdSDK', '3.3.61'
+      # 游可赢
+      pod 'KlevinAdSDK', '2.11.0.211'
+      # MintegralAdSDK 使用时请务必使用cocoapod源
+      pod 'MintegralAdSDK', '7.6.3', :subspecs => [
+        'SplashAd',
+        'NewInterstitialAd',
+        'InterstitialVideoAd',
+        'RewardVideoAd',
+        'NativeAd',
+        'NativeAdvancedAd',
+        'BannerAd',
+        'BidNativeAd',
+        'BidNewInterstitialAd',
+        'BidInterstitialVideoAd',
+        'BidRewardVideoAd'
+      ]
+
+  
+      end
 end
 
+post_install do |pi|
+    pi.pods_project.targets.each do |t|
+        t.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+        end
+    end
+end

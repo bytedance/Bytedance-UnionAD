@@ -97,8 +97,6 @@
                    customDislike
                     ].mutableCopy;
 #endif
-    
-    
 }
 
 -(BOOL)shouldAutorotate

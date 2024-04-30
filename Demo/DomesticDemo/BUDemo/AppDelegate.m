@@ -12,7 +12,6 @@
 #import "BUDSettingViewController.h"
 #import "BUDMainViewController.h"
 #import "BUDMainViewModel.h"
-#import <GoogleMobileAds/GoogleMobileAds.h>
 #import "RRFPSBar.h"
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
@@ -22,7 +21,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #import <AdSupport/ASIdentifierManager.h>
-
+#if __has_include(<BUAdLive/BUAdLive.h>)
+#import <BUAdLive/BUAdLive.h>
+#endif
 #if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
 #import <BUAdTestMeasurement/BUAdTestMeasurement.h>
 #endif
@@ -43,9 +44,6 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    // adaptor for Customer Event
-    [self configCustomEvent];
 
     if (self.window == nil) {
         UIWindow *keyWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -55,7 +53,7 @@
     }
     // initialize AD SDK
     [self setupBUAdSDK];
-   
+    
     return YES;
 }
 
@@ -83,19 +81,6 @@
     }
 }
 
-- (void)configCustomEvent {
-    /**
-     admob和mopub各个代码位所对应的adapter请去admob和mopub的对应官网申请(demo的对应关系参见BUDSlotID类)。
-     demo只是给出一个接入参考，具体的使用请结合业务场景。
-     The adapter corresponding to each code bit of admob and mopub can be applied to the corresponding official website of admob and mopub (see BUDSlotID class for the corresponding relation of demo).
-     The demo only provides an access reference, please combine the specific use of the business scenario.
-     */
-    // admob adaptor config
-    // add appKey in info.plist (key:GADApplicationIdentifier)
-    [[GADMobileAds sharedInstance] startWithCompletionHandler:^(GADInitializationStatus * _Nonnull status) {
-    }];
-}
-
 - (void)setupBUAdSDK {
 
 #if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
@@ -109,18 +94,30 @@
     configuration.appID = [BUDAdManager appKey];
     configuration.privacyProvider = [[BUDPrivacyProvider alloc] init];
     configuration.appLogoImage = [UIImage imageNamed:@"AppIcon"];
+    configuration.debugLog = @(1);
+    
+    // 如果使用聚合维度功能，则务必将以下字段设置为YES
+    // 并检查工程有引用CSJMediation.framework，这样SDK初始化时将启动聚合相关必要组件
+    configuration.useMediation = NO;
+    [self useMediationSettings];
+    
     [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
         if (success) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                // 聚合维度首次预缓存
+                [self useMediationPreload];
 //                 splash AD demo
                 [self addSplashAD];
 //                 private config for demo
                 [self configDemo];
+//                 Setup live stream ad
+#if __has_include(<BUAdLive/BUAdLive.h>)
+                [BUAdSDKManager setUpLiveAdSDK];
+#endif
+                
             });
         }
     }];
-    
-    
     
 //    [self playerCoustomAudio];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -152,6 +149,49 @@
     }
 }
 
+// 关于使用聚合功能的相关设置
+- (void)useMediationSettings {
+    BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
+    // 聚合流量分组
+    BUMUserInfoForSegment *segment = [[BUMUserInfoForSegment alloc] init];
+    segment.user_id = @"Please enter your user's Id";
+    segment.user_value_group = @"group1";
+    segment.age = 19;
+    segment.gender = BUUserInfoGenderMale;
+    segment.channel = @"Apple";
+    segment.sub_channel = @"Apple store";
+    segment.customized_id = @{@(1):@"345",// key非string,不合规
+                              @"key2":@"good",// 合规,上报
+                              @"key3":@(1),// value非string,不合规
+                              @"key4":@"123aA-_",// 合规,上报
+                              @"key5":@"123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_1",// 长度超100,不合规
+                              @"key6":@"123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_123456aA-_",// 合规,上报
+                              @"key7":@"123aA-_*",// value包含特殊字符,不合规
+    };
+    configuration.mediation.userInfoForSegment = segment;
+    // 隐私合规
+    configuration.mediation.limitPersonalAds = @(0);
+    configuration.mediation.limitProgrammaticAds = @(0);
+    configuration.mediation.forbiddenCAID = @(0);
+    // 提前导入配置
+    configuration.mediation.advanceSDKConfigPath = [[NSBundle mainBundle]pathForResource:@"GroMore-config-ios-5000546" ofType:@"json"];
+    // 其他设置
+    configuration.mediation.extraDeviceMap = @{ @"device_id": @"1234567" };
+}
+
+// 聚合维度首次预缓存
+- (void)useMediationPreload {
+    /**
+
+    Call this method after SDK inited.
+
+    */
+    BUNativeExpressFullscreenVideoAd *fullscreenAd = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:gromore_newInterstitial_ID];
+
+    // 预缓存广告对象，是否能够成功预缓存依赖于后台配置中是否开启广告位的预缓存功能！！！
+    [BUAdSDKManager.mediation preloadAdsWithInfos:@[fullscreenAd] andInterval:2 andConcurrent:1];
+}
+
 - (void)playerCoustomAudio {
     NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"music" ofType:@"mp3"];
     NSURL *soundUrl = [NSURL fileURLWithPath:soundPath];
@@ -174,6 +214,7 @@
 
     self.startTime = CACurrentMediaTime();
     
+    // 穿山甲开屏广告
     BUSplashAd *splashAd = [[BUSplashAd alloc] initWithSlotID:express_splash_ID adSize:frame.size];
     splashAd.supportCardView = YES;
     splashAd.supportZoomOutView = YES;

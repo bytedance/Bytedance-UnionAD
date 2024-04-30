@@ -58,6 +58,7 @@
 "feedAdNative" = "Native Feed";
 "feedAdExpress" = "Express Feed";
 "feedAdExpressVideo" = "Express Feed Video";
+"feedAdExpressIcon" = "Express Feed Icon";
 "drawAd" = "Draw Ad";
 "drawAdNative" = "Native Draw";
 "drawAdExpress" = "Express Draw";
@@ -82,3 +83,11 @@
 "waterfallAd" = "Waterfall Ad";
 "newInterstitialfull" = "FullScreen";
 "newInterstitialhalf" = "HalfScreen";
+
+
+"m_splashAd" = "Mediation Splash";
+"m_rewardVideoAd" = "Mediation RewardVideoAd";
+"m_bannerAd" = "Mediation Banner";
+"m_feedAd" = "Mediation feedAd";
+"m_drawAd" = "Mediation drawAd";
+"gm_interstitialProAd" = "Mediation Interstitial Pro Ad";

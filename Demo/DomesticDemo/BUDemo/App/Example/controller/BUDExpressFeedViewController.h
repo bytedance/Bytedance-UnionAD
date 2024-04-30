@@ -14,4 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface BUDFeedIconViewController : BUDBaseExampleViewController
+
+@end
+
 NS_ASSUME_NONNULL_END

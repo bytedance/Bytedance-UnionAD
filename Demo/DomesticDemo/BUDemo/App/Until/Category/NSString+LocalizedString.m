@@ -64,6 +64,7 @@ NSString * const kFeedAd = @"feedAd" ;
 NSString * const kFeedAdNative = @"feedAdNative" ;
 NSString * const kFeedAdExpress = @"feedAdExpress" ;
 NSString * const kFeedAdExpressVideo = @"feedAdExpressVideo" ;
+NSString * const kFeedAdExpressIcon = @"feedAdExpressIcon" ;
 NSString * const kDrawAd = @"drawAd" ;
 NSString * const kDrawAdNative = @"drawAdNative" ;
 NSString * const kDrawAdExpress = @"drawAdExpress" ;
@@ -94,6 +95,13 @@ NSString * const kUgenoLUPage3 = @"聚合页3-imageMode15";
 NSString * const kUgenoStreet1 = @"feed-4627";
 NSString * const kUgenoStreet2 = @"feed-4628";
 NSString * const kUgenoStreet3 = @"feed-4915";
+
+NSString * const kMSplashAd = @"m_splashAd" ;
+NSString * const kMRewardVideoAd = @"m_rewardVideoAd" ;
+NSString * const kMFeedAd = @"m_feedAd" ;
+NSString *const kMBannerAd = @"m_bannerAd";
+NSString * const kMDrawAd = @"m_drawAd" ;
+NSString * const kGMInterstitialProAd = @"gm_interstitialProAd";
 
 @implementation NSString (LocalizedString)
 

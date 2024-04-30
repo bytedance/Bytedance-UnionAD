@@ -227,6 +227,7 @@
 }
 
 - (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
+    
     [self.tableView reloadData];
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -379,4 +380,55 @@
 - (void)removeAccessibilityIdentifier:(UIView *)adView {
     adView.accessibilityIdentifier = nil;
 }
+@end
+
+@interface BUDFeedIconViewController () <BUNativeExpressAdViewDelegate>
+
+@property (strong, nonatomic) BUNativeExpressAdManager *nativeExpressAdManager;
+
+@end
+
+@implementation BUDFeedIconViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.view.backgroundColor = UIColor.bud_systemBackgroundColor;
+    [self loadData];
+}
+
+- (void)loadData {
+    BUAdSlot *slot1 = [[BUAdSlot alloc] init];
+    NSString *slotId = self.viewModel.slotID;
+    slot1.ID = slotId;
+    slot1.AdType = BUAdSlotAdTypeFeed;
+    slot1.supportIconStyle = YES;
+    slot1.supportRenderControl = YES;
+    BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Feed228_150];
+    slot1.imgSize = imgSize;
+    slot1.position = BUAdSlotPositionFeed;
+    self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:CGSizeMake(100, 0)];
+    //不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
+    self.nativeExpressAdManager.delegate = self;
+    [self.nativeExpressAdManager loadAdDataWithCount:1];
+}
+
+- (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
+    BUD_Log(@"SDKDemoDelegate BUNativeExpressFeedAdView icon In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
+}
+
+#pragma mark - BUNativeExpressAdViewDelegate
+- (void)nativeExpressAdSuccessToLoad:(BUNativeExpressAdManager *)nativeExpressAd views:(NSArray<__kindof BUNativeExpressAdView *> *)views {
+    [self pbud_logWithSEL:_cmd msg:@""];
+    BUNativeExpressAdView *view = views.firstObject;
+    if (view) {
+        //初始位置，开发者需要自行设置
+        view.bu_x = 200;
+        view.bu_y = 400;
+        view.rootViewController = self;
+        [view render];
+        [self.view addSubview:view];
+    }
+}
+
 @end

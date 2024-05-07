@@ -9,7 +9,7 @@
 #import "BUDSlotViewModel.h"
 #import "BUDSlotID.h"
 #import "BUDSplashViewController.h"
-
+#import "BUMDSplashViewController.h"
 
 @implementation BUDSplashAdListViewController
 
@@ -32,8 +32,17 @@
         vc.viewModel = viewModel;
         [self.navigationController pushViewController:vc animated:YES];
     }];
+    
+    BUDActionModel *gm_CellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kMSplashAd] type:BUDCellType_native action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUMDSplashViewController *vc = [[BUMDSplashViewController alloc] init];
+        BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
+        viewModel.slotID = gromore_splash_ID;
+        vc.viewModel = viewModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
 
-    return @[@[normalCellItem,expressCellItem]];
+    return @[@[normalCellItem,expressCellItem,gm_CellItem]];
 }
 
 @end

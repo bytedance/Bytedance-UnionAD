@@ -83,6 +83,26 @@
     [self pbud_logWithSEL:_cmd msg:str];
 }
 
+// 再看多个
+//- (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd rewardAgainConfiguration:(BUNativeExpressRewardedAgainConfiguration _Nullable)configuration {
+//    BURewardedVideoModel *rewarded = [[BURewardedVideoModel alloc] init];
+//    rewarded.allowPlayAgain = YES;
+//    rewarded.rewardName = @"金币";
+//    rewarded.rewardAmount = 300 * 3;
+//    NSMutableDictionary *extraInfo = [NSMutableDictionary dictionary];
+//    NSString *customTitle = [NSString stringWithFormat:@"再看%ld个视频可得", 3];
+//    [extraInfo setObject:customTitle forKey:@"again_custom_title"];
+//
+//    NSData *extraData = [NSJSONSerialization dataWithJSONObject:extraInfo options:NSJSONWritingFragmentsAllowed error:nil];
+//    NSString *extraStr = [[NSString alloc] initWithData:extraData encoding:NSUTF8StringEncoding];
+//    rewarded.extra = extraStr;
+//
+//    if (configuration) {
+//        configuration(rewarded);
+//    }
+//}
+
+
 #pragma mark - Log
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
     BUD_Log(@"SDKDemoDelegate BUDExpressRewardedVideoAgainDelegateObj (%@) extraMsg:%@", NSStringFromSelector(sel), msg);

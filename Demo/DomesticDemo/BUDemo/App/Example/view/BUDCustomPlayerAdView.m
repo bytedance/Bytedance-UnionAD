@@ -99,7 +99,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
     NSString *url = model.data.videoUrl;
     [self.videoView loadURL:[NSURL URLWithString:url]];
-    [self addSubview:self.nativeAdRelatedView.logoImageView];
+    [self addSubview:self.nativeAdRelatedView.logoADImageView];
 
     if (self.creativeButton && !self.creativeButton.superview) {
         [self addSubview:self.creativeButton];
@@ -121,8 +121,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     BUImage *image = model.data.imageAry.firstObject;
     const CGFloat imageHeight = contentWidth * (image.height / image.width);
 
-    self.videoView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
-    self.nativeAdRelatedView.logoImageView.frame = CGRectMake(CGRectGetMaxX(self.videoView.frame) - logoSize.width, CGRectGetMaxY(self.videoView.frame) - logoSize.height, logoSize.width, logoSize.height);
+  //  self.videoView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
+    self.nativeAdRelatedView.logoADImageView.frame = CGRectMake(CGRectGetMaxX(self.videoView.frame) - logoSize.width, CGRectGetMaxY(self.videoView.frame) - logoSize.height, logoSize.width, logoSize.height);
     y += imageHeight;
 
     self.bgView.frame = CGRectMake(padding.left, y, contentWidth, self.creativeButton.frame.size.height + 20);
@@ -148,7 +148,6 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     CGFloat dislikeX = width - 24 - padding.right;
     self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 24, 20);
 }
-
 
 #pragma mark addAccessibilityIdentifier
 

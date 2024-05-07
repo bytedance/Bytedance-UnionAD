@@ -27,7 +27,9 @@
 @property (nonatomic, strong) BUDNormalButton *loadButton;
 @property (nonatomic, strong) BUDNormalButton *showButton;
 
-@property (nonatomic, copy) loadAd loadAdBlock;
+@property (nonatomic, strong) BUDSelcetedItem *currentItem;
+
+@property (nonatomic, copy) BUDLoadAction loadItemBlock;
 @property (nonatomic, copy) dispatch_block_t showAdBlock;
 
 @property (nonatomic, copy) NSArray<NSArray *> *titlesArr;
@@ -36,13 +38,19 @@
 @implementation BUDSelectedView
 
 - (instancetype)initWithAdName:(NSString*)adName SelectedTitlesAndIDS:(nonnull NSArray<NSArray *> *)titlesAndIDS loadAdAction:(nonnull loadAd)loadAd showAdAction:(nonnull dispatch_block_t)showAd {
+    return [self initWithAdName:adName SelectedTitlesAndIDS:titlesAndIDS loadItemAction:^(BUDSelcetedItem * _Nonnull item) {
+        if (loadAd) loadAd(item.slotID);
+    } showAction:showAd];
+}
+
+- (instancetype)initWithAdName:(NSString*)adName SelectedTitlesAndIDS:(NSArray<NSArray *> *)titlesAndIDS loadItemAction:(nonnull BUDLoadAction)loadItem showAction:(nonnull dispatch_block_t)showAd {
     self = [super init];
     if (self) {
         CGFloat mainHeight = adTypeHeight + promptHeight + titlesAndIDS.count*(margin+collectionCellHeight) + buttonHeight + margin*4;
         self.frame = CGRectMake(0, 0, mainWidth, mainHeight);
         self.titlesArr = titlesAndIDS;
         self.promptStatus = BUDPromptStatusDefault;
-        self.loadAdBlock = loadAd;
+        self.loadItemBlock = loadItem;
         self.showAdBlock = showAd;
         [self buildupView];
         self.adTypetLable.text = adName;
@@ -69,7 +77,7 @@
     [self.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     NSArray *items = [self.titlesArr objectAtIndex:indexPath.section];
     BUDSelcetedItem *item = [items objectAtIndex:0];
-    self.currentID = item.slotID;
+    self.currentItem = item;
 }
 
 #pragma mark getter && setter
@@ -150,8 +158,8 @@
 }
 
 - (void)loadAd {
-    if (self.loadAdBlock) {
-        self.loadAdBlock(self.currentID);
+    if (self.loadItemBlock) {
+        self.loadItemBlock(self.currentItem);
     }
 }
 
@@ -206,7 +214,11 @@
         self.showButton.isValid = NO;
         self.promptStatus = BUDPromptStatusDefault;
     }
-    self.currentID = item.slotID;
+    self.currentItem = item;
+}
+
+- (NSString *)currentID {
+    return self.currentItem.slotID;
 }
 
 @end

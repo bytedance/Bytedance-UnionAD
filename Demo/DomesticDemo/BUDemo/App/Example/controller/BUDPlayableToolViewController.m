@@ -16,7 +16,7 @@
 #import "AFHTTPSessionManager.h"
 #import "UIColor+DarkMode.h"
 
-@interface BUDPlayableToolViewController ()<BURewardedVideoAdDelegate>
+@interface BUDPlayableToolViewController ()<BUNativeExpressRewardedVideoAdDelegate>
 @property (nonatomic, strong) UITextField *playableUrlTextView;
 @property (nonatomic, strong) UITextField *downloadUrlTextView;
 @property (nonatomic, strong) UITextField *deeplinkUrlTextView;
@@ -26,7 +26,7 @@
 @property (nonatomic, assign) BOOL isPlayableUrlValid;
 @property (nonatomic, assign) BOOL isDownloadUrlValid;
 @property (nonatomic, assign) BOOL isDeeplinkUrlValid;
-@property (nonatomic, strong) BURewardedVideoAd *rewardedVideoAd;
+@property (nonatomic, strong) BUNativeExpressRewardedVideoAd *rewardedVideoAd;
 @end
 
 @implementation BUDPlayableToolViewController
@@ -41,7 +41,7 @@
     [self.view addSubview:self.isLandscapeSwitch];
     [self.view addSubview:self.showButton];
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
-    self.rewardedVideoAd = [[BURewardedVideoAd alloc] initWithSlotID:self.viewModel.slotID rewardedVideoModel:model];
+    self.rewardedVideoAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:self.viewModel.slotID rewardedVideoModel:model];
     self.rewardedVideoAd.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:self.playableUrlTextView];
@@ -162,17 +162,12 @@
     self.showButton.isValid = self.isPlayableUrlValid && self.isDownloadUrlValid;
 }
 
-#pragma mark - BURewardedVideoAdDelegate
-- (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    if ([self.rewardedVideoAd isAdValid]) {
-        [self.rewardedVideoAd showAdFromRootViewController:self];
-    }
-#pragma clang diagnostic pop
+#pragma mark - BUNativeExpressRewardedVideoAdDelegate
+- (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    [self.rewardedVideoAd showAdFromRootViewController:self];
 }
 
-- (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
+- (void)nativeExpressRewardedVideoAdDidClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     [self logClose_playable_test_tool];
 }
 
@@ -187,7 +182,7 @@
 - (void)logWithClickType:(NSString *)type
 {
     // 网络请求地址
-    NSString *URLString = @"https://is.snssdk.com/api/ad/union/sdk/stats/";
+    NSString *URLString = @"https://api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk/stats/";
     // 网络请求管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

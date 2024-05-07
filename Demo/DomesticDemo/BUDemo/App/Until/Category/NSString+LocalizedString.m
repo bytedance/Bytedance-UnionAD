@@ -64,6 +64,7 @@ NSString * const kFeedAd = @"feedAd" ;
 NSString * const kFeedAdNative = @"feedAdNative" ;
 NSString * const kFeedAdExpress = @"feedAdExpress" ;
 NSString * const kFeedAdExpressVideo = @"feedAdExpressVideo" ;
+NSString * const kFeedAdExpressIcon = @"feedAdExpressIcon" ;
 NSString * const kDrawAd = @"drawAd" ;
 NSString * const kDrawAdNative = @"drawAdNative" ;
 NSString * const kDrawAdExpress = @"drawAdExpress" ;
@@ -74,9 +75,6 @@ NSString * const kFullscreenAdInterstital  = @"fullscreenAdInterstital" ;
 NSString * const kSplashAd = @"splashAd" ;
 NSString * const kSplashAdNative = @"splashAdNative" ;
 NSString * const kSplashAdExpress = @"splashAdExpress" ;
-NSString * const kInterstitalAd = @"interstitalAd" ;
-NSString * const kInterstitalAdNative = @"interstitalAdNative" ;
-NSString * const kInterstitalAdExpress = @"interstitalAdExpress" ;
 NSString * const kBannerAd = @"bannerAd" ;
 NSString * const kBannerAdNative = @"bannerAdNative" ;
 NSString * const kBannerAdExpress = @"bannerAdExpress" ;
@@ -91,6 +89,20 @@ NSString * const kStreamAdSDK = @"streamAdSDK" ;
 NSString * const kWaterfallAd = @"waterfallAd";
 NSString * const kNewInterstitialfull = @"newInterstitialfull";
 NSString * const kNewInterstitialhalf = @"newInterstitialhalf";
+NSString * const kUgenoLUPage = @"聚合页1-imageMode16";
+NSString * const kUgenoLUPage2 = @"聚合页2-imageMode3";
+NSString * const kUgenoLUPage3 = @"聚合页3-imageMode15";
+NSString * const kUgenoStreet1 = @"feed-4627";
+NSString * const kUgenoStreet2 = @"feed-4628";
+NSString * const kUgenoStreet3 = @"feed-4915";
+
+NSString * const kMSplashAd = @"m_splashAd" ;
+NSString * const kMRewardVideoAd = @"m_rewardVideoAd" ;
+NSString * const kMFeedAd = @"m_feedAd" ;
+NSString *const kMBannerAd = @"m_bannerAd";
+NSString * const kMDrawAd = @"m_drawAd" ;
+NSString * const kGMInterstitialProAd = @"gm_interstitialProAd";
+
 @implementation NSString (LocalizedString)
 
 + (NSString *)localizedStringForKey:(NSString *)key {

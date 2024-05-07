@@ -117,7 +117,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     } else {
         self.nativeAdRelatedView.videoAdView.materialMeta = model.data;
     }
-    [self addSubview:self.nativeAdRelatedView.logoImageView];
+    [self addSubview:self.nativeAdRelatedView.logoADImageView];
 
     if (self.creativeButton && !self.creativeButton.superview) {
         [self addSubview:self.creativeButton];
@@ -143,8 +143,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     }
     
     const CGFloat imageHeight = contentWidth * (9.0 / 16.0);
-    self.nativeAdRelatedView.logoImageView.frame = CGRectMake(padding.left + contentWidth - logoSize.width, y + imageHeight - logoSize.height, logoSize.width, logoSize.height);
-    [self bringSubviewToFront:self.nativeAdRelatedView.logoImageView];
+    self.nativeAdRelatedView.logoADImageView.frame = CGRectMake(padding.left + contentWidth - logoSize.width, y + imageHeight - logoSize.height, logoSize.width, logoSize.height);
+    [self bringSubviewToFront:self.nativeAdRelatedView.logoADImageView];
     
     y += imageHeight;
 

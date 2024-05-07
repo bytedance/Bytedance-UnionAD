@@ -1,9 +1,8 @@
 //
-//  ViewController.swift
 //  BUADVADemo_Swift
 //
-//  Created by bytedance on 2020/11/6.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 import UIKit
 
@@ -14,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         ["title":"Banner","class":"BUDBannerViewController"],
                     ],
                     [
-                        ["title":"FullScreenVideo","class":"BUDFullscreenViewController"],
+                        ["title":"InterstitialVideo","class":"BUDInterstitialViewController"],
                         ["title":"RewardVideo","class":"BUDRewardVideoAdViewController"],
                     ],
                     [
@@ -22,9 +21,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     ],
                     [
                         ["title":"CustomEventAdapter","class":"BUDCustomEventAdapterController"],
-                    ],
-                    [
-                        ["title":"Pangle-Owned GDPR Consent Dialog","class":""],
                     ],
                 ];
     
@@ -72,10 +68,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let viewControllerClass = cls as! UIViewController.Type
             let viewController = viewControllerClass.init()
             self.navigationController?.pushViewController(viewController, animated: true)
-        } else {
-            BUAdSDKManager.openGDPRPrivacy(fromRootViewController: self) { (isAgreed) in
-                BUAdSDKManager.setGDPR(isAgreed ?0:1)
-            }
         }
     }
 

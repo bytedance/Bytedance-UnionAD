@@ -11,7 +11,7 @@
 #import "BUDSlotID.h"
 #import "BUDExpressBannerViewController.h"
 #import "BUDExpressListBannerViewController.h"
-
+#import "BUMDBannerViewController.h"
 
 @implementation BUDBannerAdListViewController
 
@@ -47,7 +47,17 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
 
-    return @[@[nativeCellItem, expressCellItem, expressListBannerCellItem]];
+    BUDActionModel *gmCellItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kMBannerAd] type:BUDCellType_native action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUMDBannerViewController *vc = [[BUMDBannerViewController alloc] init];
+        BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
+        viewModel.slotID = gromore_banner_ID;
+        vc.viewModel = viewModel;
+        vc.adName = [NSString localizedStringForKey:kMBannerAd];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    return @[@[nativeCellItem, expressCellItem, expressListBannerCellItem, gmCellItem]];
+
 }
 
 @end

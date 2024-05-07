@@ -1,0 +1,22 @@
+//
+//  PrefixHeader.pch
+//  BUDemo
+//
+//  Created by 李盛 on 2019/1/14.
+//  Copyright © 2019 bytedance. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+//#import "NSString+LocalizedString.h"
+#import <UIKit/UIKit.h>
+
+
+#if __has_include(<BURelyFoundation_Global/BURelyFoundation_Global.h>)
+#import <BURelyFoundation_Global/BURelyFoundation_Global.h>
+#else
+#import "BURelyFoundation_Global.h"
+#endif
+
+#endif /* PrefixHeader_pch */

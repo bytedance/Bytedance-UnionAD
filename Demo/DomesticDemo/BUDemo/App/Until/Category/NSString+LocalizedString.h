@@ -64,6 +64,7 @@ extern NSString * const kFeedAd ;
 extern NSString * const kFeedAdNative ;
 extern NSString * const kFeedAdExpress ;
 extern NSString * const kFeedAdExpressVideo ;
+extern NSString * const kFeedAdExpressIcon ;
 extern NSString * const kDrawAd ;
 extern NSString * const kDrawAdNative ;
 extern NSString * const kDrawAdExpress ;
@@ -74,9 +75,6 @@ extern NSString * const kFullscreenAdInterstital  ;
 extern NSString * const kSplashAd ;
 extern NSString * const kSplashAdNative ;
 extern NSString * const kSplashAdExpress ;
-extern NSString * const kInterstitalAd ;
-extern NSString * const kInterstitalAdNative ;
-extern NSString * const kInterstitalAdExpress ;
 extern NSString * const kBannerAd ;
 extern NSString * const kBannerAdNative ;
 extern NSString * const kBannerAdExpress ;
@@ -91,6 +89,20 @@ extern NSString * const kStreamAdSDK ;
 extern NSString * const kWaterfallAd;
 extern NSString * const kNewInterstitialfull;
 extern NSString * const kNewInterstitialhalf;
+extern NSString * const kUgenoLUPage;
+extern NSString * const kUgenoLUPage2;
+extern NSString * const kUgenoLUPage3;
+extern NSString * const kUgenoStreet1;
+extern NSString * const kUgenoStreet2;
+extern NSString * const kUgenoStreet3;
+
+extern NSString * const kMSplashAd;
+extern NSString * const kMBannerAd;
+extern NSString * const kMRewardVideoAd;
+extern NSString * const kMFeedAd;
+extern NSString * const kMDrawAd;
+extern NSString * const kGMInterstitialProAd;
+
 @interface NSString (LocalizedString)
 
 + (NSString *)localizedStringForKey:(NSString *)key;

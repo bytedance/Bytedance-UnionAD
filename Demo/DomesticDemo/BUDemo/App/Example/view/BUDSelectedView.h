@@ -20,14 +20,19 @@ typedef NS_ENUM(NSInteger, BUDPromptStatus) {
 
 typedef void(^loadAd)(NSString * _Nullable slotId);
 
+typedef void(^BUDLoadAction)(BUDSelcetedItem * _Nonnull item);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BUDSelectedView : UIView
 
 @property (nonatomic, assign) BUDPromptStatus promptStatus;
-@property (nonatomic, copy) NSString *currentID;
+@property (nonatomic, copy, readonly) NSString *currentID;
 
 - (instancetype)initWithAdName:(NSString*)adName SelectedTitlesAndIDS:(NSArray<NSArray *> *)titlesAndIDS loadAdAction:(nonnull loadAd)loadAd showAdAction:(nonnull dispatch_block_t)showAd;
+
+- (instancetype)initWithAdName:(NSString*)adName SelectedTitlesAndIDS:(NSArray<NSArray *> *)titlesAndIDS loadItemAction:(nonnull BUDLoadAction)loadItem showAction:(nonnull dispatch_block_t)showAd;
+
 @end
 
 NS_ASSUME_NONNULL_END

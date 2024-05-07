@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = 'CSJMMintegralAdapter'
-  spec.version      = '7.5.8.0'
+  spec.version      = '7.6.3.0'
   spec.summary      = 'CSJMMintegralAdapter is a adapter SDK from Bytedance providing media union AD service.'
   spec.homepage     = 'https://www.csjplatform.com/gromore'
   spec.description  = <<-DESC   
@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   
   spec.platform     = :ios, '10.0'
 
-  spec.source       = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/GroMore/Release/CSJMMintegralAdapter/#{spec.version}/SDK.zip" }
+  spec.source       = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/Public/CSJMMintegralAdapter/7.6.3.0/CSJMMintegralAdapter.zip" }
 
   spec.requires_arc = true
   
@@ -22,6 +22,6 @@ Pod::Spec.new do |spec|
   valid_archs = ['arm64', 'armv7', 'x86_64', 'i386']
 
   spec.vendored_frameworks = ['CSJMMintegralAdapter/CSJMMintegralAdapter.xcframework']
-  spec.dependency 'Ads-Fusion-CN-Beta/CSJMediation','>= 6.1.0.2'
+  spec.dependency 'Ads-Fusion-CN-Beta/CSJMediation','>= 6.1.1.0'
 
 end

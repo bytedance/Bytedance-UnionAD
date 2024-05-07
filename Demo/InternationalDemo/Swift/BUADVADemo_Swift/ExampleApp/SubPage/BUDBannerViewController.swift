@@ -1,14 +1,14 @@
 //
-//  BUDNativeViewController.swift
 //  BUADVADemo_Swift
 //
-//  Created by bytedance on 2020/11/6.
-//
+//  Created by bytedance in 2022.
+//  Copyright © 2022 bytedance. All rights reserved.
 
 import Foundation
 
 class BUDBannerViewController: ViewController {
-    private var _bannerView:BUNativeExpressBannerView?;
+    private var bannerAd : PAGBannerAd?
+    private var bannerAdSize : CGSize?
     private lazy var _statusLabel = UILabel();
     
     override func viewDidLoad() {
@@ -18,23 +18,31 @@ class BUDBannerViewController: ViewController {
     }
     ///load Portrait Ad
     @objc func load320x50Ad(_ sender:UIButton) -> Void {
-        loadBannerWithSlotID(slotID: "980099802", size:CGSize.init(width: 320, height: 50))
+        loadBannerWithSlotID(slotID: "980099802", size:kPAGBannerSize320x50)
     }
     ///load Landscape Ad
     @objc func load300x250Ad(_ sender:UIButton) -> Void {
-        loadBannerWithSlotID(slotID: "980088196", size:CGSize.init(width: 300, height: 250))
+        loadBannerWithSlotID(slotID: "980088196", size:kPAGBannerSize300x250)
     }
     ///show ad
     @objc func showAd(_ sender:UIButton) -> Void {
-        if !(_bannerView==nil) {
-            self.view.addSubview(_bannerView!)
+        if (bannerAd != nil) {
+            bannerAd!.bannerView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(bannerAd!.bannerView)
+            view.addConstraint(NSLayoutConstraint.init(item: bannerAd!.bannerView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1.0, constant: bannerAdSize!.width))
+            view.addConstraint(NSLayoutConstraint.init(item: bannerAd!.bannerView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1.0, constant: bannerAdSize!.height))
+            view.addConstraint(NSLayoutConstraint.init(item: bannerAd!.bannerView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1.0, constant: -30))
+            view.addConstraint(NSLayoutConstraint.init(item: bannerAd!.bannerView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1.0, constant: 0))
+            
             _statusLabel.text = "Tap left button to load Ad";
         }
     }
-    func loadBannerWithSlotID(slotID:String, size:CGSize) -> Void {
-        _bannerView?.removeFromSuperview()
-        _bannerView = nil;
-        
+    func loadBannerWithSlotID(slotID:String, size:PAGBannerAdSize) -> Void {
+        if (bannerAd != nil) {
+            bannerAd?.bannerView.removeFromSuperview()
+            bannerAd = nil;
+        }
+        bannerAdSize = size.size
         var window = UIApplication.shared.delegate?.window
         if window==nil {
             window = UIApplication.shared.keyWindow;
@@ -42,79 +50,42 @@ class BUDBannerViewController: ViewController {
         if window==nil {
             window = UIApplication.shared.windows.first
         }
-
-        let bottom = (window!!).safeAreaInsets.bottom;
-
-        _bannerView = BUNativeExpressBannerView.init(slotID: slotID, rootViewController: self, adSize: size)
-        _bannerView?.frame = CGRect.init(x: (self.view.frame.size.width-size.width)/2.0, y: self.view.frame.size.height-size.height-bottom, width: size.width, height: size.height)
-        _bannerView?.delegate = self;
-        _bannerView?.loadAdData();
+        let bottom = (window!!).safeAreaInsets.bottom
         
         _statusLabel.text = "Loading......";
+        PAGBannerAd.load(withSlotID: slotID, request: PAGBannerRequest.init(bannerSize: size), completionHandler: { [weak self] bannerAd, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            if let bannerAd = bannerAd {
+                bannerAd.rootViewController = self
+                bannerAd.delegate = self
+                self?.bannerAd = bannerAd
+                self?._statusLabel.text = "Tap showAd button to show Ad"
+            }
+        });
+
+        
+        
     }
 }
-extension BUDBannerViewController:BUNativeExpressBannerViewDelegate {
-    /**
-     This method is called when bannerAdView ad slot loaded successfully.
-     @param bannerAdView : view for bannerAdView
-     */
-    func nativeExpressBannerAdViewDidLoad(_ bannerAdView: BUNativeExpressBannerView) {
-        
+extension BUDBannerViewController:PAGBannerAdDelegate {
+    
+    func adDidShow(_ ad: PAGAdProtocol) {
+        print("bannerAd | adDidShow:")
     }
     
-    /**
-     This method is called when bannerAdView ad slot failed to load.
-     @param error : the reason of error
-     */
-    func nativeExpressBannerAdView(_ bannerAdView: BUNativeExpressBannerView, didLoadFailWithError error: Error?) {
-        _statusLabel.text = "Ad loaded fail";
+    func adDidClick(_ ad: PAGAdProtocol) {
+        print("bannerAd | adDidClick:")
     }
-
-    /**
-     This method is called when rendering a nativeExpressAdView successed.
-     */
-    func nativeExpressBannerAdViewRenderSuccess(_ bannerAdView: BUNativeExpressBannerView) {
-        _statusLabel.text = "Ad loaded";
+    
+    func adDidDismiss(_ ad: PAGAdProtocol) {
+        bannerAd?.bannerView.removeFromSuperview()
+        bannerAd = nil
+        print("bannerAd | adDidDismiss:")
     }
-
-    /**
-     This method is called when a nativeExpressAdView failed to render.
-     @param error : the reason of error
-     */
-    func nativeExpressBannerAdViewRenderFail(_ bannerAdView: BUNativeExpressBannerView, error: Error?) {
-        _statusLabel.text = "Ad loaded fail";
-    }
-
-    /**
-     This method is called when bannerAdView ad slot showed new ad.
-     */
-    func nativeExpressBannerAdViewWillBecomVisible(_ bannerAdView: BUNativeExpressBannerView) {
-        
-    }
-
-    /**
-     This method is called when bannerAdView is clicked.
-     */
-    func nativeExpressBannerAdViewDidClick(_ bannerAdView: BUNativeExpressBannerView) {
-        
-    }
-
-    /**
-     This method is called when the user clicked dislike button and chose dislike reasons.
-     @param filterwords : the array of reasons for dislike.
-     */
-    func nativeExpressBannerAdView(_ bannerAdView: BUNativeExpressBannerView, dislikeWithReason filterwords: [BUDislikeWords]?) {
-        _bannerView?.removeFromSuperview();
-        _bannerView = nil;
-    }
-
-    /**
-     This method is called when another controller has been closed.
-     @param interactionType : open appstore in app or open the webpage or view video ad details page.
-     */
-    func nativeExpressBannerAdViewDidCloseOtherController(_ bannerAdView: BUNativeExpressBannerView, interactionType: BUInteractionType) {
-        
-    }
+   
 }
 ///Exmple UI
 extension BUDBannerViewController {

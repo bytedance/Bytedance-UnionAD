@@ -25,6 +25,8 @@
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
+@property (nonatomic, assign) NSInteger insertIndex;
+
 @end
 
 @implementation BUDFeedViewController
@@ -98,17 +100,18 @@
            [self.dataSource addObject:model];
        }
     }
+    
+    self.insertIndex = 3;
 }
 
 - (void)loadNativeAds {
     [self pbud_resetDemoData];
-    BUNativeAdsManager *nad = [BUNativeAdsManager new];
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self.viewModel.slotID;
     slot1.AdType = BUAdSlotAdTypeFeed;
     slot1.supportRenderControl = self.renderSwitchView.on;
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
-    nad.adslot = slot1;
+    BUNativeAdsManager *nad = [[BUNativeAdsManager alloc]initWithSlot:slot1];
     nad.adSize = CGSizeMake(self.tableView.frame.size.width, 0);
     // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     nad.delegate = self;
@@ -134,108 +137,180 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - tableView
+#pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // For ad cells just as the ad cell provider, for normal cells do whatever you would do.
-    BOOL isVideoCell = NO;
     NSUInteger index = indexPath.row;
     if (index >= self.dataSource.count) {
         return [UITableViewCell new];
     }
+    UITableViewCell *resultCell = nil;
     id model = self.dataSource[index];
     if ([model isKindOfClass:[BUNativeAd class]]) {
-        BUNativeAd *nativeAd = (BUNativeAd *)model;
-        nativeAd.rootViewController = self;
-        nativeAd.delegate = self;
-        UITableViewCell<BUDFeedCellProtocol> *cell = nil;
-        if (nativeAd.data.imageMode == BUFeedADModeSmallImage) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdLeftTableViewCell" forIndexPath:indexPath];
-        } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage || nativeAd.data.imageMode == BUFeedADModeImagePortrait) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdLargeTableViewCell" forIndexPath:indexPath];
-        } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdGroupTableViewCell" forIndexPath:indexPath];
-        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedVideoAdTableViewCell" forIndexPath:indexPath];
-            // Set the delegate to listen for status of video
-            isVideoCell = YES;
-        } else if (nativeAd.data.imageMode == BUFeedADModeSquareImage) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdSquareImgTableViewCell" forIndexPath:indexPath];
-        } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedSquareVideoAdTableViewCell" forIndexPath:indexPath];
-            isVideoCell = YES;
-        }
-        
-        BUInteractionType type = nativeAd.data.interactionType;
-        if (cell) {
-            [cell refreshUIWithModel:nativeAd];
-            if (isVideoCell) {
-                if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait) {
-                    BUDFeedVideoAdTableViewCell *videoCell = (BUDFeedVideoAdTableViewCell *)cell;
-                    videoCell.nativeAdRelatedView.videoAdView.delegate = self;
-                    [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
-                } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
-                    BUDFeedSquareVideoAdTableViewCell *videoCell = (BUDFeedSquareVideoAdTableViewCell *)cell;
-                    videoCell.nativeAdRelatedView.videoAdView.delegate = self;
-                    [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
-                }
-            } else {
-                if (type == BUInteractionTypeDownload) {
-                    [cell.customBtn setTitle:[NSString localizedStringForKey:ClickDownload] forState:UIControlStateNormal];
-                    [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
-                } else if (type == BUInteractionTypePhone) {
-                    [cell.customBtn setTitle:[NSString localizedStringForKey:Call] forState:UIControlStateNormal];
-                    [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
-                } else if (type == BUInteractionTypeURL) {
-                    [cell.customBtn setTitle:[NSString localizedStringForKey:ExternalLink] forState:UIControlStateNormal];
-                    [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
-                } else if (type == BUInteractionTypePage) {
-                    [cell.customBtn setTitle:[NSString localizedStringForKey:InternalLink] forState:UIControlStateNormal];
-                    [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
-                } else {
-                    [cell.customBtn setTitle:[NSString localizedStringForKey:NoClick] forState:UIControlStateNormal];
-                    [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
-                }
-            }
-            cell.delegate = self;
-            return cell;
-        }
-    }else if ([model isKindOfClass:[BUDFeedNormalModel class]]){
-        NSString *clazz=[self classNameWithCellType:[(BUDFeedNormalModel *)model type]];
-        BUDFeedNormalTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:clazz forIndexPath:indexPath];
-        if(!cell){
-            cell = [(BUDFeedNormalTableViewCell *)[NSClassFromString(clazz) alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:clazz];
-        }
-        if (indexPath.row == 0) {
-            cell.separatorLine.hidden = YES;
-        }
-        [cell refreshUIWithModel:model];
-        return cell;
-        
+        resultCell = [self pbud_cellWithTableView:self.tableView indexPath:indexPath nativeAd:model];
+    } else if ([model isKindOfClass:[BUDFeedNormalModel class]]) {
+        resultCell = [self pbud_cellWithTableView:self.tableView indexPath:indexPath feedNormalModel:model];
     } else if ([model isKindOfClass:[UIView class]]) {
-        
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        // 重用BUNativeExpressAdView，先把之前的广告试图取下来，再添加上当前视图
-        UIView *subView = (UIView *)[cell.contentView viewWithTag:1000];
-        if ([subView superview]) {
-            [subView removeFromSuperview];
-        }
-        
-        UIView *view = (UIView *)model;
-        view.tag = 1000;
-        [cell.contentView addSubview:view];
-        return cell;
+        resultCell = [self pbud_cellWithTableView:self.tableView indexPath:indexPath customView:model];
     }
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = [NSString localizedStringForKey:Unknown];
+    if (resultCell == nil) {
+        resultCell = [[UITableViewCell alloc] init];
+        resultCell.textLabel.text = [NSString localizedStringForKey:Unknown];
+    }
+    return resultCell;
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+}
+
+
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // The ad cell provider knows the height of ad cells based on its configuration
+    CGFloat resultHeight = 0;
+    NSUInteger index = indexPath.row;
+    id model = self.dataSource[index];
+    if ([model isKindOfClass:[BUNativeAd class]]) {
+        resultHeight = [self pbud_heightWithTableView:self.tableView indexPath:indexPath nativeAd:model];
+    } else if ([model isKindOfClass:[BUDFeedNormalModel class]]){
+        resultHeight = [(BUDFeedNormalModel *)model cellHeight];
+    } else if ([model isKindOfClass:[UIView class]]) {
+        UIView *view = (UIView *)model;
+        resultHeight = view.bounds.size.height;
+    }
+    return resultHeight;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
+
+
+#pragma mark - UITableView DataSource & Delegate auxiliary
+- (CGFloat)pbud_heightWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath nativeAd:(BUNativeAd *)nativeAd {
+    CGFloat width = CGRectGetWidth(self.tableView.bounds);
+    if (width == BUDMAXScreenSide && BUDiPhoneX) {
+        // 横屏刘海，减去左右安全区域
+        if (@available(iOS 11.0, *)) {
+            width = width - self.view.safeAreaInsets.left - self.view.safeAreaInsets.right;
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    if (nativeAd.data.imageMode == BUFeedADModeSmallImage) {
+        return [BUDFeedAdLeftTableViewCell cellHeightWithModel:nativeAd width:width];
+    } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage || nativeAd.data.imageMode == BUFeedADModeImagePortrait) {
+        return [BUDFeedAdLargeTableViewCell cellHeightWithModel:nativeAd width:width];
+    } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
+        return [BUDFeedAdGroupTableViewCell cellHeightWithModel:nativeAd width:width];
+    } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode == BUFeedVideoAdModePortrait || nativeAd.data.imageMode == BUFeedADModeLiveStream) {
+        return [BUDFeedVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
+    } else if (nativeAd.data.imageMode == BUFeedADModeSquareImage) {
+        return [BUDFeedAdSquareImgTableViewCell cellHeightWithModel:nativeAd width:width];
+    } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
+        return [BUDFeedSquareVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
+    }
+    return 80;
+}
+
+- (UITableViewCell *)pbud_cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath customView:(UIView *)customView {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    // 重用BUNativeExpressAdView，先把之前的广告试图取下来，再添加上当前视图
+    UIView *subView = (UIView *)[cell.contentView viewWithTag:1000];
+    if ([subView superview]) {
+        [subView removeFromSuperview];
+    }
+    
+    UIView *view = (UIView *)customView;
+    view.tag = 1000;
+    [cell.contentView addSubview:view];
     return cell;
 }
-- (NSString *)classNameWithCellType:(NSString *)type {
+- (UITableViewCell *)pbud_cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath nativeAd:(BUNativeAd *)nativeAd {
+    BOOL isVideoCell = NO;
+    nativeAd.rootViewController = self;
+    nativeAd.delegate = self;
+    UITableViewCell<BUDFeedCellProtocol> *cell = nil;
+    if (nativeAd.data.imageMode == BUFeedADModeSmallImage) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdLeftTableViewCell" forIndexPath:indexPath];
+    } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage || nativeAd.data.imageMode == BUFeedADModeImagePortrait) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdLargeTableViewCell" forIndexPath:indexPath];
+    } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdGroupTableViewCell" forIndexPath:indexPath];
+    } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait || nativeAd.data.imageMode ==  BUFeedADModeLiveStream) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedVideoAdTableViewCell" forIndexPath:indexPath];
+        // Set the delegate to listen for status of video
+        isVideoCell = YES;
+    } else if (nativeAd.data.imageMode == BUFeedADModeSquareImage) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdSquareImgTableViewCell" forIndexPath:indexPath];
+    } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedSquareVideoAdTableViewCell" forIndexPath:indexPath];
+        isVideoCell = YES;
+    }
+    
+    BUInteractionType type = nativeAd.data.interactionType;
+    if (cell) {
+        [cell refreshUIWithModel:nativeAd];
+        if (isVideoCell) {
+            if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait || nativeAd.data.imageMode ==  BUFeedADModeLiveStream) {
+                BUDFeedVideoAdTableViewCell *videoCell = (BUDFeedVideoAdTableViewCell *)cell;
+                videoCell.nativeAdRelatedView.videoAdView.delegate = self;
+                [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
+            } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
+                BUDFeedSquareVideoAdTableViewCell *videoCell = (BUDFeedSquareVideoAdTableViewCell *)cell;
+                videoCell.nativeAdRelatedView.videoAdView.delegate = self;
+                [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
+            }
+        } else {
+            if (type == BUInteractionTypeDownload) {
+                [cell.customBtn setTitle:[NSString localizedStringForKey:ClickDownload] forState:UIControlStateNormal];
+                [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
+            } else if (type == BUInteractionTypePhone) {
+                [cell.customBtn setTitle:[NSString localizedStringForKey:Call] forState:UIControlStateNormal];
+                [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
+            } else if (type == BUInteractionTypeURL) {
+                [cell.customBtn setTitle:[NSString localizedStringForKey:ExternalLink] forState:UIControlStateNormal];
+                [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
+            } else if (type == BUInteractionTypePage) {
+                [cell.customBtn setTitle:[NSString localizedStringForKey:InternalLink] forState:UIControlStateNormal];
+                [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
+            } else {
+                [cell.customBtn setTitle:[NSString localizedStringForKey:NoClick] forState:UIControlStateNormal];
+                [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
+            }
+        }
+        cell.delegate = self;
+    }
+    return cell;
+}
+- (UITableViewCell *)pbud_cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath feedNormalModel:(BUDFeedNormalModel *)feedNormalModel {
+    NSString *clazz=[self pbud_classNameWithCellType:[feedNormalModel type]];
+    BUDFeedNormalTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:clazz forIndexPath:indexPath];
+    if(!cell){
+        cell = [(BUDFeedNormalTableViewCell *)[NSClassFromString(clazz) alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:clazz];
+    }
+    if (indexPath.row == 0) {
+        cell.separatorLine.hidden = YES;
+    }
+    [cell refreshUIWithModel:feedNormalModel];
+    return cell;
+}
+
+
+- (NSString *)pbud_classNameWithCellType:(NSString *)type {
     if ([type isEqualToString: @"title"]) {
         return @"BUDFeedNormalTitleTableViewCell";
     }else if ([type isEqualToString: @"titleImg"]){
@@ -248,90 +323,21 @@
         return @"unkownCell";
     }
 }
-- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-}
 
-#pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // The ad cell provider knows the height of ad cells based on its configuration
-    NSUInteger index = indexPath.row;
-    id model = self.dataSource[index];
-    if ([model isKindOfClass:[BUNativeAd class]]) {
-        BUNativeAd *nativeAd = (BUNativeAd *)model;
-        CGFloat width = CGRectGetWidth(self.tableView.bounds);
-        if (width == BUMAXScreenSide && BUiPhoneX) {
-            // 横屏刘海，减去左右安全区域
-            if (@available(iOS 11.0, *)) {
-                width = width - self.view.safeAreaInsets.left - self.view.safeAreaInsets.right;
-            } else {
-                // Fallback on earlier versions
-            }
-        }
-        if (nativeAd.data.imageMode == BUFeedADModeSmallImage) {
-            return [BUDFeedAdLeftTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage || nativeAd.data.imageMode == BUFeedADModeImagePortrait) {
-            return [BUDFeedAdLargeTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
-            return [BUDFeedAdGroupTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode == BUFeedVideoAdModePortrait) {
-            return [BUDFeedVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedADModeSquareImage) {
-            return [BUDFeedAdSquareImgTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
-            return [BUDFeedSquareVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
-        }
-    }else if ([model isKindOfClass:[BUDFeedNormalModel class]]){
-        return [(BUDFeedNormalModel *)model cellHeight];
-    } else if ([model isKindOfClass:[UIView class]]) {
-        UIView *view = (UIView *)model;
-        return view.bounds.size.height;
-    }
-    return 80;
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSUInteger index = indexPath.row;
-    id model = self.dataSource[index];
-    if ([model isKindOfClass:[BUNativeAd class]]) {
-        BUNativeAd *nativeAd = (BUNativeAd *)model;
-        CGFloat width = CGRectGetWidth(self.tableView.bounds);
-        if (nativeAd.data.imageMode == BUFeedADModeSmallImage) {
-            return [BUDFeedAdLeftTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage || nativeAd.data.imageMode == BUFeedADModeImagePortrait) {
-            return [BUDFeedAdLargeTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
-            return [BUDFeedAdGroupTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode == BUFeedVideoAdModePortrait) {
-            return [BUDFeedVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedADModeSquareImage) {
-            return [BUDFeedAdSquareImgTableViewCell cellHeightWithModel:nativeAd width:width];
-        } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
-            return [BUDFeedSquareVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
-        }
-    }else if ([model isKindOfClass:[BUDFeedNormalModel class]]){
-        return [(BUDFeedNormalModel *)model cellHeight];
-    } else if ([model isKindOfClass:[UIView class]]) {
-           UIView *view = (UIView *)model;
-           return view.bounds.size.height;
-       }
-    return 80;
-}
-
-
-- (void)pbud_insertIntoDataSourceWithArray:(NSArray *)array {
+- (void)pbud_insertIntoDataSourceWithArray:(NSArray<BUNativeAd *> *)array {
     if (self.dataSource.count > 3) {
-        for (id item in array) {
-            NSUInteger index = arc4random() % (self.dataSource.count - 3) + 2;
-            [self.dataSource insertObject:item atIndex:index];
+        for (BUNativeAd *item in array) {
+            if (item.isNativeExpress) {
+                item.nativeExpressAdView.rootViewController = self;
+                [self.dataSource insertObject:item.nativeExpressAdView atIndex:self.insertIndex];
+            } else {
+                [self.dataSource insertObject:item atIndex:self.insertIndex];
+            }
+            self.insertIndex += 3;
         }
     }
 }
+
 
 #pragma mark - BUDFeedCustomDislikeDelgate
 - (void)feedCustomDislike:(BUDFeedAdBaseTableViewCell *)cell withNativeAd:(BUNativeAd *)nativeAd didSlected:(BUDislikeWords *)dislikeWord {
@@ -349,6 +355,9 @@
     [self pbud_insertIntoDataSourceWithArray:nativeAdDataArray];
     [self.tableView.mj_header endRefreshing];
     [self.tableView reloadData];
+    for (BUNativeAd *nativeAd in nativeAdDataArray) {
+        [nativeAd render];
+    }
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdsManagerDelegate" msg:[NSString stringWithFormat:@"native-count:%ld", (long)nativeAdDataArray.count]];
 }
 
@@ -359,25 +368,6 @@
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdsManagerDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 #pragma mark - BUNativeExpressAdViewDelegate
-- (void)nativeExpressAdSuccessToLoad:(BUNativeExpressAdManager *)nativeExpressAd views:(NSArray<__kindof BUNativeExpressAdView *> *)views {
-    [self.tableView.mj_header endRefreshing];
-    [self pbud_insertIntoDataSourceWithArray:views];
-    if (views.count) {
-        [views enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            BUNativeExpressAdView *expressView = (BUNativeExpressAdView *)obj;
-            expressView.rootViewController = self;
-            // important: 此处会进行WKWebview的渲染，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
-            [expressView render];
-        }];
-    }
-    [self.tableView reloadData];
-    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:@""];
-}
-
-- (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error {
-    [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
-}
-
 - (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
     [self.tableView reloadData];
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:[NSString stringWithFormat:@"nativeExpressAdView.videoDuration:%ld", (long)nativeExpressAdView.videoDuration]];
@@ -389,6 +379,8 @@
 }
 
 - (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
+    [self.dataSource removeObject:nativeExpressAdView];
+    [self.tableView reloadData];
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeExpressAdViewDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
@@ -509,6 +501,10 @@
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"interactionType:%ld", (long)interactionType]];
 }
 
+- (void)videoAdView:(BUVideoAdView *)videoAdView
+ rewardDidCountDown:(NSInteger)countDown {
+    [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"videoAdView:rewardDidCountDown:%ld", (long)countDown]];
+}
 
 #pragma mark - Log
 - (void)pbud_logWithSEL:(SEL)sel prefix:(NSString *)prefix msg:(NSString *)msg {

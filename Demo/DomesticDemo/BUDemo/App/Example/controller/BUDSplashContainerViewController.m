@@ -19,24 +19,17 @@
 @interface BUDSplashContainerViewController () <BUSplashAdDelegate, BUSplashCardDelegate, BUSplashZoomOutDelegate>
 
 @property (nonatomic, strong) BUSplashAd *splashAd;
-@property (nonatomic, assign) BOOL isDidClick;
 
 @end
 
 @implementation BUDSplashContainerViewController
 
-- (void)dealloc {
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    [self buildupDefaultSplashView];
+    self.view.backgroundColor = [UIColor clearColor];
 }
 
-- (void)buildupDefaultSplashView {
-    self.isDidClick = NO;
+- (void)loadSplashAd {
     BUSplashAd *splashAd = [[BUSplashAd alloc] initWithSlotID:express_splash_ID adSize:self.view.bounds.size];
     splashAd.supportCardView = YES;
     splashAd.supportZoomOutView = YES;
@@ -46,10 +39,7 @@
     splashAd.cardDelegate = self;
     splashAd.zoomOutDelegate = self;
     splashAd.tolerateTimeout = 3;
-    /***
-    广告加载成功的时候，会立即渲染WKWebView。
-    如果想预加载的话，建议一次最多预加载三个广告，如果超过3个会很大概率导致WKWebview渲染失败。
-    */
+
     [splashAd loadAdData];
     self.splashAd = splashAd;
 }
@@ -57,10 +47,6 @@
 - (void)dismiss {
     [self removeFromParentViewController];
     [self.view removeFromSuperview];
-    
-    if (self.appRootVC) {
-        [[UIApplication sharedApplication].keyWindow setRootViewController:self.appRootVC];
-    }
 }
 
 #pragma mark - BUSplashOldDelegate
@@ -71,15 +57,16 @@
 
 
 - (void)splashAdLoadFail:(BUSplashAd *)splashAd error:(BUAdError * _Nullable)error {
-    [self dismiss];
 }
 
 - (void)splashAdRenderSuccess:(BUSplashAd *)splashAd {
-    
+    // 渲染成功再展示视图控制器
+    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+    [keyWindow.rootViewController addChildViewController:self];
+    [keyWindow.rootViewController.view addSubview:self.view];
 }
 
 - (void)splashAdRenderFail:(BUSplashAd *)splashAd error:(BUAdError * _Nullable)error {
-    [self dismiss];
 }
 
 
@@ -95,12 +82,16 @@
     
 }
 
-
 - (void)splashAdDidClose:(BUSplashAd *)splashAd closeType:(BUSplashAdCloseType)closeType {
+
+}
+
+- (void)splashAdViewControllerDidClose:(BUSplashAd *)splashAd {
     [self dismiss];
 }
 
 - (void)splashDidCloseOtherController:(nonnull BUSplashAd *)splashAd interactionType:(BUInteractionType)interactionType {
+    
     NSString *str;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
@@ -114,14 +105,14 @@
 }
 
 
-- (void)splashVideoAdDidPlayFinish:(BUSplashAd *)splashAd didFailWithError:(nonnull NSError *)error {
+- (void)splashVideoAdDidPlayFinish:(BUSplashAd *)splashAd didFailWithError:(nullable NSError *)error {
     
 }
 
 #pragma mark - BUSplashCardDelegate
 
 - (void)splashCardReadyToShow:(BUSplashAd *)splashAd {
-    [splashAd showCardViewInRootViewController:self.appRootVC];
+    [splashAd showCardViewInRootViewController:[[[UIApplication sharedApplication] delegate] window].rootViewController];
 }
 
 - (void)splashCardViewDidClick:(BUSplashAd *)splashAd {
@@ -136,7 +127,7 @@
 
 - (void)splashZoomOutReadyToShow:(BUSplashAd *)splashAd {
     
-    [splashAd showCardViewInRootViewController:self.appRootVC];
+    [splashAd showCardViewInRootViewController:[[[UIApplication sharedApplication] delegate] window].rootViewController];
 }
 
 - (void)splashZoomOutViewDidClick:(BUSplashAd *)splashAd {

@@ -22,4 +22,8 @@
     return 120;
 }
 
+- (BOOL)canUseWiFiBSSID {
+    return YES;
+}
+
 @end

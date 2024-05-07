@@ -15,7 +15,6 @@
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
 #import "BUDTestToolsViewController.h"
-#import "BUDCoppaViewController.h"
 #import "BUDCustomDislikeToolsController.h"
 #if __has_include(<BUAdTestMeasurement/BUAdTestMeasurement.h>)
 #import <BUAdTestMeasurement/BUAdTestMeasurement.h>
@@ -74,10 +73,6 @@
         BUDTestToolsViewController *vc = [BUDTestToolsViewController new];
         [weakself.navigationController pushViewController:vc animated:YES];
     }];
-    BUDActionModel *coppaTools = [BUDActionModel plainTitleActionModel:@"Coppa & GDPR & CCPA Tool" type:BUDCellType_setting action:^{
-        BUDCoppaViewController *vc = [[BUDCoppaViewController alloc] initWithNibName:@"BUDCoppaViewController" bundle:[NSBundle mainBundle]];
-        [weakself.navigationController pushViewController:vc animated:YES];
-    }];
     
     BUDActionModel *customDislike = [BUDActionModel plainTitleActionModel:@"Custom Dislike" type:BUDCellType_setting action:^{
         BUDCustomDislikeToolsController *customDislikeVC = [[BUDCustomDislikeToolsController alloc] init];
@@ -92,7 +87,6 @@
     self.items = @[normalTools,
                    playableTools,
                    testTools,
-                   coppaTools,
                    customDislike,
                    testMeasurement
                     ].mutableCopy;
@@ -100,12 +94,9 @@
     self.items = @[normalTools,
                    playableTools,
                    testTools,
-                   coppaTools,
                    customDislike
                     ].mutableCopy;
 #endif
-    
-    
 }
 
 -(BOOL)shouldAutorotate

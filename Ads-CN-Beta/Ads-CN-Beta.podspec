@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN-Beta'
-  s.version         = '6.1.1.0'
+  s.version         = '6.2.0.0'
   s.summary          = 'Ads-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -25,6 +25,10 @@ Pod::Spec.new do |s|
   
   s.weak_frameworks = 'AppTrackingTransparency','DeviceCheck'
 
+  s.pod_target_xcconfig = {
+    'OTHER_LDFLAGS' => '-ObjC'
+  }
+  
   s.default_subspec = 'BUAdSDK'
   
     
@@ -37,6 +41,11 @@ Pod::Spec.new do |s|
   s.subspec 'CSJMediation' do |ss|
     ss.vendored_frameworks = ['SDK/CSJMediation.xcframework']
     ss.dependency 'Ads-CN-Beta/BUAdSDK'
+  end
+  
+  s.subspec 'BUAdLive' do |ss|
+    ss.vendored_frameworks = ['SDK/BUAdLive.xcframework']
+    ss.preserve_paths = 'SDK/BUAdLive.xcframework'
   end
   
 end

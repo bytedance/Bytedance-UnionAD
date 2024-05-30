@@ -30,7 +30,6 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/PAGAdSDK.xcframework']
     ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global/BURelyAdSDK'
     ss.dependency 'Ads-Global/Dep_Accurate'
     ss.resource_bundles = {
         'AdsGlobalSDK' => ['SDK/PAGAdSDK.xcframework/ios-arm64/PAGAdSDK.framework/PrivacyInfo.xcprivacy']
@@ -41,18 +40,7 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/PAGAdSDK.xcframework']
     ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global/BURelyAdSDK'
     ss.dependency 'Ads-Global/Dep_Compatible'
-    ss.resource_bundles = {
-        'AdsGlobalSDK' => ['SDK/PAGAdSDK.xcframework/ios-arm64/PAGAdSDK.framework/PrivacyInfo.xcprivacy']
-    }
-  end
-
-  s.subspec 'BUAdSDK_Lite' do |ss|
-    ss.vendored_frameworks = ['SDK/PAGAdSDK.xcframework']
-    ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
-    ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global/Dep_Accurate'
     ss.resource_bundles = {
         'AdsGlobalSDK' => ['SDK/PAGAdSDK.xcframework/ios-arm64/PAGAdSDK.framework/PrivacyInfo.xcprivacy']
     }
@@ -66,12 +54,6 @@ Pod::Spec.new do |s|
   ## 依赖版本为指定版本范围
   s.subspec 'Dep_Compatible' do |ss|
     ss.dependency 'BURelyFoundation_Global/Pangle', '~> 0.2.1.4'
-  end
-
-  ## RE
-  s.subspec 'BURelyAdSDK' do |ss|
-     ss.preserve_paths = 'SDK/BURelyAdSDK.xcframework'
-     ss.vendored_frameworks = ['SDK/BURelyAdSDK.xcframework']
   end
   
 end

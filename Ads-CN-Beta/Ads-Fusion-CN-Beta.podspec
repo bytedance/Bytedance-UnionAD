@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Fusion-CN-Beta'
-  s.version          = '6.1.1.0'
+  s.version          = '6.1.2.8'
   s.summary          = 'Ads-Fusion-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Fusion-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.

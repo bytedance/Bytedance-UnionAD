@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Fusion-CN-Beta'
-  s.version          = '6.1.3.4'
+  s.version          = '6.2.0.9'
   s.summary          = 'Ads-Fusion-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Fusion-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -19,10 +19,10 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD'
   
-  s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/Public/SDK/#{s.version}/SDK.zip" }
+  s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/Public/SDK/6.2.0.9/SDK.zip" }
   s.platform     = :ios, "10.0"
   s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
-  s.weak_frameworks = 'AppTrackingTransparency', 'DeviceCheck'
+  s.weak_frameworks = 'AppTrackingTransparency', 'DeviceCheck', 'CoreML'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   s.pod_target_xcconfig = {
     'OTHER_LDFLAGS' => '-ObjC'
@@ -40,5 +40,11 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/CSJMediation.xcframework']
     ss.dependency 'Ads-Fusion-CN-Beta/BUAdSDK'
   end
+
+  s.subspec 'BUAdLive' do |ss|
+    ss.vendored_frameworks = ['SDK/BUAdLive.xcframework']
+    ss.preserve_paths = 'SDK/BUAdLive.xcframework'
+  end
+
 
 end

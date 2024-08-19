@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.source           = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/#{s.version}/SDK.zip" }
   s.platform         = :ios, "12.0"
   s.frameworks = 'UIKit', 'WebKit', 'MediaPlayer', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','AudioToolbox','CoreGraphics'
-  s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
+  s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi', 'iconv'
   s.weak_frameworks = 'AppTrackingTransparency', 'CoreML'
 
   s.default_subspec = ['BUAdSDK']
@@ -30,30 +30,9 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = ['SDK/PAGAdSDK.xcframework']
     ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
     ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global-Beta/Dep_Accurate'
     ss.resource_bundles = {
         'AdsGlobalBetaSDK' => ['SDK/PAGAdSDK.xcframework/ios-arm64/PAGAdSDK.framework/PrivacyInfo.xcprivacy']
     }
-  end
-
-  s.subspec 'BUAdSDK_Compatible' do |ss|
-    ss.vendored_frameworks = ['SDK/PAGAdSDK.xcframework']
-    ss.preserve_paths = 'SDK/PAGAdSDK.xcframework'
-    ss.resource = 'SDK/PAGAdSDK.bundle'
-    ss.dependency 'Ads-Global-Beta/Dep_Compatible'
-    ss.resource_bundles = {
-        'AdsGlobalBetaSDK' => ['SDK/PAGAdSDK.xcframework/ios-arm64/PAGAdSDK.framework/PrivacyInfo.xcprivacy']
-    }
-  end
-  
-  ## 依赖版本为指定版本号
-  s.subspec 'Dep_Accurate' do |ss|
-    ss.dependency 'BURelyFoundation_Global/Pangle', '1.0.0.6'
-  end
-
-  ## 依赖版本为指定版本范围
-  s.subspec 'Dep_Compatible' do |ss|
-    ss.dependency 'BURelyFoundation_Global/Pangle', '~> 1.0.0.6'
   end
   
 end

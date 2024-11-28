@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN'
-  s.version          = '6.4.4.0'
+  s.version          = '6.5.0.9'
   s.summary          = 'Ads-CN is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -19,8 +19,8 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD'
   
-  s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/Public/SDK/6.4.4.0/SDK.zip" }
-  s.platform         = :ios, "10.0"
+  s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/Public/SDK/6.5.0.9/SDK.zip" }
+  s.platform         = :ios, "11.0"
   s.frameworks       = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
   s.weak_frameworks  = 'AppTrackingTransparency', 'DeviceCheck', 'CoreML'
   s.libraries        = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
@@ -49,7 +49,13 @@ Pod::Spec.new do |s|
   s.subspec 'BUAdLive-Lib' do |ss|
     ss.vendored_frameworks = ['SDK/BUAdLive.xcframework']
     ss.preserve_paths = 'SDK/BUAdLive.xcframework'
-    ss.dependency 'BUTTSDK/LivePull', '1.37.3.22.onlypull-premium'
+    ss.dependency 'BUTTSDK/LivePull-Lite', '1.44.2.7-premium'
   end
-  
+
+  s.subspec 'BUAdLive-Framework' do |ss|
+    ss.vendored_frameworks = ['SDK/BUAdLive.xcframework']
+    ss.preserve_paths = 'SDK/BUAdLive.xcframework'
+    ss.dependency 'BUTTSDKFramework/LivePull-Lite', '1.44.2.7-premium'
+  end
+
 end

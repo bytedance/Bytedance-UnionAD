@@ -1,6 +1,10 @@
+*.DS_Store
+
+*.xcuserdatad
 xcuserdata
-.DS_Store
+
 #cocoa-pods
-Podfile.lock
+*.lock
 Pods
-xcshareddata
+
+*.xcworkspace

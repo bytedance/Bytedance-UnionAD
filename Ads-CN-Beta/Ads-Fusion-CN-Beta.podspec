@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Fusion-CN-Beta'
-  s.version          = '6.4.2.7'
+  s.version          = '6.5.0.9'
   s.summary          = 'Ads-Fusion-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Fusion-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -19,16 +19,16 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD'
   
-  s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/Public/SDK/6.4.2.7/SDK.zip" }
-  s.platform     = :ios, "10.0"
-  s.frameworks = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
-  s.weak_frameworks = 'AppTrackingTransparency', 'DeviceCheck', 'CoreML'
-  s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
+  s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/Public/SDK/6.5.0.9/SDK.zip" }
+  s.platform         = :ios, "11.0"
+  s.frameworks       = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
+  s.weak_frameworks  = 'AppTrackingTransparency', 'DeviceCheck', 'CoreML'
+  s.libraries        = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
   s.pod_target_xcconfig = {
     'OTHER_LDFLAGS' => '-ObjC'
   }
   
-  s.default_subspec = 'BUAdSDK'
+  s.default_subspec  = 'BUAdSDK'
     
   s.subspec 'BUAdSDK' do |ss|
     ss.vendored_frameworks = ['SDK/BUAdSDK.xcframework']
@@ -46,5 +46,16 @@ Pod::Spec.new do |s|
     ss.preserve_paths = 'SDK/BUAdLive.xcframework'
   end
 
+  s.subspec 'BUAdLive-Lib' do |ss|
+    ss.vendored_frameworks = ['SDK/BUAdLive.xcframework']
+    ss.preserve_paths = 'SDK/BUAdLive.xcframework'
+    ss.dependency 'BUTTSDK/LivePull-Lite', '1.44.2.7-premium'
+  end
+
+  s.subspec 'BUAdLive-Framework' do |ss|
+    ss.vendored_frameworks = ['SDK/BUAdLive.xcframework']
+    ss.preserve_paths = 'SDK/BUAdLive.xcframework'
+    ss.dependency 'BUTTSDKFramework/LivePull-Lite', '1.44.2.7-premium'
+  end
 
 end

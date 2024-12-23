@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.requires_arc = true
   
-  spec.ios.deployment_target = '10.0'
+  spec.ios.deployment_target = '11.0'
 
   valid_archs = ['arm64', 'armv7', 'x86_64', 'i386']
 

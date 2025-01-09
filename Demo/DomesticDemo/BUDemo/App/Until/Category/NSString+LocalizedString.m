@@ -95,7 +95,7 @@ NSString * const kUgenoLUPage3 = @"聚合页3-imageMode15";
 NSString * const kUgenoStreet1 = @"feed-4627";
 NSString * const kUgenoStreet2 = @"feed-4628";
 NSString * const kUgenoStreet3 = @"feed-4915";
-
+NSString * const kECMallView = @"商城页";
 NSString * const kMSplashAd = @"m_splashAd" ;
 NSString * const kMRewardVideoAd = @"m_rewardVideoAd" ;
 NSString * const kMFeedAd = @"m_feedAd" ;

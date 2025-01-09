@@ -26,7 +26,7 @@
 #define native_imagePortrait_ID           @"900546264"
 #define native_feed_custom_player_ID      @"900546910"
 #define native_paster_player_ID           @"945593048"
-
+#define native_feed_ecmall_ID             @"960119237" // 商城页
 // 聚合测试广告位ID
 #define gromore_reward_landscape_ID       @"945494739" //聚合激励视频广告位（BURewardedVideoAd && BUNativeExpressRewardedVideoAd）
 #define gromore_splash_ID_2               @"887383142"

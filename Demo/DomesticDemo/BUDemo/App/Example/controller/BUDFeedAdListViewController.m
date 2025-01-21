@@ -13,6 +13,7 @@
 #import "BUDPasterCustomPlayerViewController.h"
 #import "BUDPasterViewController.h"
 #import "BUMDFeedViewController.h"
+#import "BUDECMallViewController.h"
 
 @implementation BUDFeedAdListViewController
 
@@ -68,7 +69,24 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    return @[@[nativeCell1Item, expressCell1Item, expressCell2Item, expressCell3Item, gm_CellItem]];
+    BUDActionModel *ecMallCell = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kECMallView] type:BUDCellType_native action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        BUDECMallViewController *vc = [[BUDECMallViewController alloc] init];
+        vc.title = @"商城页";
+        BUDSlotViewModel *viewModel = [[BUDSlotViewModel alloc] init];
+        viewModel.slotID = native_feed_ecmall_ID;
+        vc.viewModel = viewModel;
+        vc.adName = [NSString localizedStringForKey:kECMallView];
+        
+        UITabBarController *tabVc = [[UITabBarController alloc] init];
+        tabVc.tabBar.tintColor = [UIColor blueColor];
+        UIViewController *otherVc = [UIViewController new];
+        otherVc.title = @"其他页面";
+        tabVc.viewControllers = @[vc,otherVc];
+        [self.navigationController pushViewController:tabVc animated:YES];
+    }];
+    
+    return @[@[nativeCell1Item, expressCell1Item, expressCell2Item, expressCell3Item, gm_CellItem,ecMallCell]];
 }
 
 @end

@@ -21,7 +21,6 @@
 #import "BUDFullScreenVideoAdListViewController.h"
 #import "BUDRewardedAdListViewController.h"
 #import "BUDStreamAdListViewController.h"
-#import "BUDSlotABViewController.h"
 #if TARGET==1
 #import "BUDUGenoDemoViewController.h"
 #endif
@@ -109,12 +108,6 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
 #endif
-    
-    BUDActionModel *slotABItem = [BUDActionModel plainTitleActionModel:@"Slot AB" type:BUDCellType_CustomEvent action:^{
-        __strong typeof(weakSelf) self = weakSelf;
-        BUDSlotABViewController *vc = [BUDSlotABViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
 
 #if __has_include(<BUWebAd/BUWebAd.h>)
     BUDActionModel *webAdItem = [BUDActionModel plainTitleActionModel:@"WebAd" type:BUDCellType_CustomEvent action:^{
@@ -133,7 +126,7 @@
 
     NSArray *normalItems = @[
         @[feedAdVc, drawAdVc, bannerAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
-        @[waterfallItem, slotABItem]];
+        @[waterfallItem]];
     
     [self.items addObjectsFromArray:normalItems];
     

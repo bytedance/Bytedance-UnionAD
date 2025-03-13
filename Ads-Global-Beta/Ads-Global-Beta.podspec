@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global-Beta'
-  s.version         = '7.1.0.4'
+  s.version         = '7.1.0.5'
   s.summary          = 'Ads-Global-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Global-Beta provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.author           = { 'bytedance-tech' => 'zywork@bytedance.com' }
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD.git'
-  s.source       = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/#{s.version}/SDK.zip", :sha256 => "e7d38f6f090c0db57d9e69ac0177cca51b3630b5d3dfe7c260e5a991f3fd7fda" }
+  s.source       = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/#{s.version}/SDK.zip", :sha256 => "fc3709db82fec077f1d99375609fe8d103b94c55772e0e270657a8d6e5199605" }
   s.platform         = :ios, "12.0"
   s.frameworks = 'UIKit', 'WebKit', 'MediaPlayer', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','AudioToolbox','CoreGraphics'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi', 'iconv'

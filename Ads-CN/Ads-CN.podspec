@@ -49,13 +49,13 @@ Pod::Spec.new do |s|
   s.subspec 'BUAdLive-Lib' do |ss|
     ss.vendored_frameworks = ['SDK/BUAdLive.xcframework']
     ss.preserve_paths = 'SDK/BUAdLive.xcframework'
-    ss.dependency 'BUTTSDK/LivePull-Lite', '1.46.2.7-premium'
+    ss.dependency 'BUTTSDK/LivePull-Lite', '1.45.1.8-premium'
   end
 
   s.subspec 'BUAdLive-Framework' do |ss|
     ss.vendored_frameworks = ['SDK/BUAdLive.xcframework']
     ss.preserve_paths = 'SDK/BUAdLive.xcframework'
-    ss.dependency 'BUTTSDKFramework/LivePull-Lite', '1.46.2.7-premium'
+    ss.dependency 'BUTTSDKFramework/LivePull-Lite', '1.45.1.8-premium'
   end
 
 end

@@ -278,9 +278,6 @@
             if (type == BUInteractionTypeDownload) {
                 [cell.customBtn setTitle:[NSString localizedStringForKey:ClickDownload] forState:UIControlStateNormal];
                 [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
-            } else if (type == BUInteractionTypePhone) {
-                [cell.customBtn setTitle:[NSString localizedStringForKey:Call] forState:UIControlStateNormal];
-                [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];
             } else if (type == BUInteractionTypeURL) {
                 [cell.customBtn setTitle:[NSString localizedStringForKey:ExternalLink] forState:UIControlStateNormal];
                 [nativeAd registerContainer:cell withClickableViews:@[cell.customBtn]];

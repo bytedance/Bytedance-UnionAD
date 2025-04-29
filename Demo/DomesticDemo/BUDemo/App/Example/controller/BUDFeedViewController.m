@@ -19,6 +19,7 @@
 #ifdef DEBUG
 #import <MBProgressHUD/MBProgressHUD.h>
 #endif
+#import "NSBundle+BUDemo.h"
 @interface BUDFeedViewController () <UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate,BUNativeExpressAdViewDelegate, BUDFeedCustomDislikeDelgate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) BUNativeAdsManager *adManager;
@@ -83,7 +84,7 @@
 
 // 重置测试数据，非广告数据
 - (void)pbud_resetDemoData {
-    NSString *feedPath = [[NSBundle mainBundle] pathForResource:@"feedInfo" ofType:@"cactus"];
+    NSString *feedPath = [NSBundle csjDemoResource_pathForResource:@"feedInfo" ofType:@"cactus"];
     NSString *s = [NSString stringWithContentsOfFile:feedPath encoding:NSUTF8StringEncoding error:nil];
     NSArray *datas = [s objectFromJSONString];
 
@@ -267,11 +268,11 @@
         if (isVideoCell) {
             if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait || nativeAd.data.imageMode ==  BUFeedADModeLiveStream) {
                 BUDFeedVideoAdTableViewCell *videoCell = (BUDFeedVideoAdTableViewCell *)cell;
-                videoCell.nativeAdRelatedView.videoAdView.delegate = self;
+                videoCell.nativeAdRelatedView.mediaAdView.delegate = self;
                 [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
             } else if (nativeAd.data.imageMode == BUFeedADModeSquareVideo) {
                 BUDFeedSquareVideoAdTableViewCell *videoCell = (BUDFeedSquareVideoAdTableViewCell *)cell;
-                videoCell.nativeAdRelatedView.videoAdView.delegate = self;
+                videoCell.nativeAdRelatedView.mediaAdView.delegate = self;
                 [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
             }
         } else {
@@ -472,33 +473,33 @@
 
 #pragma mark - BUVideoAdViewDelegate
 
-- (void)videoAdView:(BUVideoAdView *)videoAdView stateDidChanged:(BUPlayerPlayState)playerState {
+- (void)videoAdView:(BUMediaAdView *)adView stateDidChanged:(BUPlayerPlayState)playerState {
     
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"playerState:%ld", (long)playerState]];
 }
 
-- (void)videoAdView:(BUVideoAdView *)videoAdView didLoadFailWithError:(NSError *)error {
+- (void)videoAdView:(BUMediaAdView *)adView didLoadFailWithError:(NSError *)error {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
-- (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView {
+- (void)playerDidPlayFinish:(BUMediaAdView *)adView {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:@""];
 }
 
-- (void)videoAdViewDidClick:(BUVideoAdView *)videoAdView {
+- (void)videoAdViewDidClick:(BUMediaAdView *)adView {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:@""];
 }
 
-- (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView {
+- (void)videoAdViewFinishViewDidClick:(BUMediaAdView *)adView {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:@""];
 }
 
 
-- (void)videoAdViewDidCloseOtherController:(BUVideoAdView *)videoAdView interactionType:(BUInteractionType)interactionType {
+- (void)videoAdViewDidCloseOtherController:(BUMediaAdView *)adView interactionType:(BUInteractionType)interactionType {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"interactionType:%ld", (long)interactionType]];
 }
 
-- (void)videoAdView:(BUVideoAdView *)videoAdView
+- (void)videoAdView:(BUMediaAdView *)videoAdView
  rewardDidCountDown:(NSInteger)countDown {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"videoAdView:rewardDidCountDown:%ld", (long)countDown]];
 }

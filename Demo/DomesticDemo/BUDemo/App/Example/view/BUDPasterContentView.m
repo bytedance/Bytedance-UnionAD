@@ -27,7 +27,7 @@
 
 @property (nonatomic, strong) UILabel *adTitleLabel;
 
-@property (nonatomic, strong) UILabel *adDescriptionLabel;
+@property (nonatomic, strong) UILabel *infoLabel;
 // SDK播放器
 @property (nonatomic, strong) BUNativeAdRelatedView *nativeAdRelatedView;
 
@@ -57,7 +57,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
 - (void)addAccessibilityIdentifier {
     self.adTitleLabel.accessibilityIdentifier = @"feed_title";
-    self.adDescriptionLabel.accessibilityIdentifier = @"feed_des";
+    self.infoLabel.accessibilityIdentifier = @"feed_info";
     self.nativeAdRelatedView.dislikeButton.accessibilityIdentifier = @"dislike";
     self.customBtn.accessibilityIdentifier = @"feed_button";
 }
@@ -74,11 +74,11 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.adTitleLabel.textAlignment = NSTextAlignmentLeft;
     [self addSubview:self.adTitleLabel];
 
-    self.adDescriptionLabel = [UILabel new];
-    self.adDescriptionLabel.numberOfLines = 0;
-    self.adDescriptionLabel.textColor = BUD_RGB(0x55, 0x55, 0x55);
-    self.adDescriptionLabel.font = [UIFont systemFontOfSize:14];
-    [self addSubview:self.adDescriptionLabel];
+    self.infoLabel = [UILabel new];
+    self.infoLabel.numberOfLines = 0;
+    self.infoLabel.textColor = BUD_RGB(0x55, 0x55, 0x55);
+    self.infoLabel.font = [UIFont systemFontOfSize:14];
+    [self addSubview:self.infoLabel];
 
     // Add custom button
     [self addSubview:self.customBtn];
@@ -96,7 +96,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
         self.buCustomVideoView = videoView;
     } else {    
         // 创建播放器视图
-        [self addSubview:self.nativeAdRelatedView.videoAdView];
+        [self addSubview:self.nativeAdRelatedView.mediaAdView];
     }
     
     UIImageView *imgV = [[UIImageView alloc] init];
@@ -115,7 +115,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
         NSString *url = model.data.videoUrl;
         [self.buCustomVideoView loadURL:[NSURL URLWithString:url]];
     } else {
-        self.nativeAdRelatedView.videoAdView.materialMeta = model.data;
+        self.nativeAdRelatedView.mediaAdView.materialMeta = model.data;
     }
     [self addSubview:self.nativeAdRelatedView.logoADImageView];
 
@@ -160,8 +160,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
     // source
     CGFloat maxInfoWidth = width - 2 * margin - buttonSize.width - 10 - 15;
-    self.adDescriptionLabel.frame = CGRectMake(padding.left + 5, y + 2, maxInfoWidth, 20);
-    self.adDescriptionLabel.text = model.data.AdDescription;
+    self.infoLabel.frame = CGRectMake(padding.left + 5, y + 2, maxInfoWidth, 20);
+    self.infoLabel.text = model.data.AdSource;
     y += buttonSize.height;
 
     y += 15;
@@ -192,11 +192,11 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     // 广告展位图
     const CGFloat imageHeight = contentWidth * (9.0 / 16.0);
     if ([self isVideoAd]) {
-        self.nativeAdRelatedView.videoAdView.hidden = NO;
+        self.nativeAdRelatedView.mediaAdView.hidden = NO;
         self.adImageView.hidden = YES;
-        self.nativeAdRelatedView.videoAdView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
+        self.nativeAdRelatedView.mediaAdView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
     } else if ([self isImageAd]) {
-        self.nativeAdRelatedView.videoAdView.hidden = YES;
+        self.nativeAdRelatedView.mediaAdView.hidden = YES;
         self.adImageView.hidden = NO;
         NSURL *url = [NSURL URLWithString:self.nativeAd.data.imageAry.firstObject.imageURL];
         [self.adImageView sd_setImageWithURL:url];
@@ -259,9 +259,9 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     return self.buCustomVideoView;
 }
 
-- (BUVideoAdView *)SDKVideoView {
+- (BUMediaAdView *)SDKVideoView {
     if (self.nativeAdRelatedView) {
-        return self.nativeAdRelatedView.videoAdView;
+        return self.nativeAdRelatedView.mediaAdView;
     }
     return nil;
 }

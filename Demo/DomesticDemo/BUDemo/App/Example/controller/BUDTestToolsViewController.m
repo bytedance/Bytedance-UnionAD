@@ -39,8 +39,6 @@ NSString *const HttpPrefixString = @"http://";
 @property (nonatomic, strong) UIButton *saveButton2;
 @property (nonatomic, strong) UIButton *clearButton2;
 
-@property (nonatomic, strong) UIButton *clearCache;
-
 @end
 
 @implementation BUDTestToolsViewController
@@ -79,7 +77,6 @@ NSString *const HttpPrefixString = @"http://";
     [self.view addSubview:self.clearButton];
     [self.view addSubview:self.saveButton2];
     [self.view addSubview:self.clearButton2];
-    [self.view addSubview:self.clearCache];
 }
 
 - (void)resetAction{
@@ -135,16 +132,6 @@ NSString *const HttpPrefixString = @"http://";
     }
     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:TestToolDictCachePath];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)clearSlotABCacheAction {
-    Class class = NSClassFromString(@"BUSlotABManager");
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-    if (class && [class respondsToSelector:@selector(removeAllCache)]) {
-        [class performSelector:@selector(removeAllCache)];
-#pragma clang diagnostic pop
-    }
 }
 
 #pragma mark - Target
@@ -275,19 +262,6 @@ NSString *const HttpPrefixString = @"http://";
     }
     return _clearButton2;
 }
-
-- (UIButton *)clearCache{
-    if (!_clearCache) {
-        _clearCache = [[UIButton alloc] initWithFrame:CGRectMake(LeftMargin, CGRectGetMaxY(self.saveButton2.frame) + Top_Margin, 180, 30)];
-        [_clearCache setTitle:@"Clear SlotAB Cache" forState:UIControlStateNormal];
-        [_clearCache setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_clearCache setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
-        [_clearCache addTarget:self action:@selector(clearSlotABCacheAction) forControlEvents:UIControlEventTouchUpInside];
-        [self designLayer:_clearCache.layer];
-    }
-    return _clearCache;
-}
-
 
 - (void)designLayer:(CALayer *)layer {
     CALayer *btnLayer = layer;

@@ -50,11 +50,11 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.adTitleLabel.textAlignment = NSTextAlignmentLeft;
     [self.contentView addSubview:self.adTitleLabel];
     
-    self.adDescriptionLabel = [UILabel new];
-    self.adDescriptionLabel.numberOfLines = 0;
-    self.adDescriptionLabel.textColor = BUD_RGB(0x55, 0x55, 0x55);
-    self.adDescriptionLabel.font = [UIFont systemFontOfSize:14];
-    [self.contentView addSubview:self.adDescriptionLabel];
+    self.infoLabel = [UILabel new];
+    self.infoLabel.numberOfLines = 0;
+    self.infoLabel.textColor = BUD_RGB(0x55, 0x55, 0x55);
+    self.infoLabel.font = [UIFont systemFontOfSize:14];
+    [self.contentView addSubview:self.infoLabel];
     
     // Add custom button
     [self.contentView addSubview:self.customBtn];
@@ -130,7 +130,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 #pragma mark addAccessibilityIdentifier
 - (void)addAccessibilityIdentifier {
     self.adTitleLabel.accessibilityIdentifier = @"feed_title";
-    self.adDescriptionLabel.accessibilityIdentifier = @"feed_des";
+    self.infoLabel.accessibilityIdentifier = @"feed_des";
     self.nativeAdRelatedView.dislikeButton.accessibilityIdentifier = @"dislike";
     self.customBtn.accessibilityIdentifier = @"feed_button";
     self.iv1.accessibilityIdentifier = @"feed_view";
@@ -184,8 +184,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
     
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10;
-    self.adDescriptionLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
-    self.adDescriptionLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
+    self.infoLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
+    self.infoLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdSource];
 }
 
 + (CGFloat)cellHeightWithModel:(BUNativeAd *_Nonnull)model width:(CGFloat)width {
@@ -232,8 +232,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
     
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10 - 100;
-    self.adDescriptionLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
-    self.adDescriptionLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
+    self.infoLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
+    self.infoLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdSource];
     
     CGFloat customBtnWidth = 100;
     self.customBtn.frame = CGRectMake(dislikeX - customBtnWidth, y, customBtnWidth, 20);
@@ -288,8 +288,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
     
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10 - 100;
-    self.adDescriptionLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
-    self.adDescriptionLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
+    self.infoLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
+    self.infoLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdSource];
     
     CGFloat customBtnWidth = 100;
     self.customBtn.frame = CGRectMake(dislikeX - customBtnWidth, y, customBtnWidth, 20);
@@ -383,8 +383,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.nativeAdRelatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
     
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10;
-    self.adDescriptionLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
-    self.adDescriptionLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
+    self.infoLabel.frame = CGRectMake(originInfoX , y , maxInfoWidth, 20);
+    self.infoLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdSource];
 }
 
 + (CGFloat)cellHeightWithModel:(BUNativeAd *_Nonnull)model width:(CGFloat)width {
@@ -417,8 +417,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
 - (void)refreshUIWithModel:(BUNativeAd *)model {
     [super refreshUIWithModel:model];
-    if (!self.nativeAdRelatedView.videoAdView.superview) {
-        [self.contentView addSubview:self.nativeAdRelatedView.videoAdView];
+    if (!self.nativeAdRelatedView.mediaAdView.superview) {
+        [self.contentView addSubview:self.nativeAdRelatedView.mediaAdView];
         [self.contentView addSubview:self.nativeAdRelatedView.logoADImageView];
     }
     
@@ -442,8 +442,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 //    BUImage *image = model.data.imageAry.firstObject;
     const CGFloat imageHeight = contentWidth;
     
-    self.nativeAdRelatedView.videoAdView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
-    self.nativeAdRelatedView.logoADImageView.frame = CGRectMake(CGRectGetMaxX(self.nativeAdRelatedView.videoAdView.frame) - logoSize.width, CGRectGetMaxY(self.nativeAdRelatedView.videoAdView.frame) - logoSize.height, logoSize.width, logoSize.height);
+    self.nativeAdRelatedView.mediaAdView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
+    self.nativeAdRelatedView.logoADImageView.frame = CGRectMake(CGRectGetMaxX(self.nativeAdRelatedView.mediaAdView.frame) - logoSize.width, CGRectGetMaxY(self.nativeAdRelatedView.mediaAdView.frame) - logoSize.height, logoSize.width, logoSize.height);
     y += imageHeight;
     
     self.bgView.frame = CGRectMake(padding.left, y, contentWidth, self.creativeButton.frame.size.height + 20);
@@ -458,9 +458,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     
     // source
     CGFloat maxInfoWidth = width - 2 * margin - buttonSize.width - 10 - 15;
-    self.adDescriptionLabel.frame = CGRectMake(padding.left + 5 , y+2 , maxInfoWidth, 20);
-//    self.adDescriptionLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
-    self.adDescriptionLabel.text = model.data.AdDescription;
+    self.infoLabel.frame = CGRectMake(padding.left + 5 , y+2 , maxInfoWidth, 20);
+    self.infoLabel.text = model.data.AdSource;
     y += buttonSize.height;
     
     y += 15;
@@ -523,8 +522,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 - (void)refreshUIWithModel:(BUNativeAd *)model {
     [super refreshUIWithModel:model];
     
-    if (!self.nativeAdRelatedView.videoAdView.superview) {
-        [self.contentView addSubview:self.nativeAdRelatedView.videoAdView];
+    if (!self.nativeAdRelatedView.mediaAdView.superview) {
+        [self.contentView addSubview:self.nativeAdRelatedView.mediaAdView];
         [self.contentView addSubview:self.nativeAdRelatedView.logoADImageView];
     }
     if (self.creativeButton && !self.creativeButton.superview) {
@@ -548,8 +547,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     CGFloat resloution = (model.data.videoResolutionHeight * 1.0) / (model.data.videoResolutionWidth * 1.0);
     const CGFloat imageHeight = contentWidth * resloution;
     
-    self.nativeAdRelatedView.videoAdView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
-    self.nativeAdRelatedView.logoADImageView.frame = CGRectMake(CGRectGetMaxX(self.nativeAdRelatedView.videoAdView.frame) - logoSize.width, CGRectGetMaxY(self.nativeAdRelatedView.videoAdView.frame) - logoSize.height, logoSize.width, logoSize.height);
+    self.nativeAdRelatedView.mediaAdView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
+    self.nativeAdRelatedView.logoADImageView.frame = CGRectMake(CGRectGetMaxX(self.nativeAdRelatedView.mediaAdView.frame) - logoSize.width, CGRectGetMaxY(self.nativeAdRelatedView.mediaAdView.frame) - logoSize.height, logoSize.width, logoSize.height);
     y += imageHeight;
     
     self.bgView.frame = CGRectMake(padding.left, y, contentWidth, self.creativeButton.frame.size.height + 20);
@@ -564,9 +563,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     
     // source
     CGFloat maxInfoWidth = width - 2 * margin - buttonSize.width - 10 - 15;
-    self.adDescriptionLabel.frame = CGRectMake(padding.left + 5 , y+2 , maxInfoWidth, 20);
-//    self.adDescriptionLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
-    self.adDescriptionLabel.text = model.data.AdDescription;
+    self.infoLabel.frame = CGRectMake(padding.left + 5 , y+2 , maxInfoWidth, 20);
+    self.infoLabel.text = model.data.AdSource;
     y += buttonSize.height;
     
     y += 15;

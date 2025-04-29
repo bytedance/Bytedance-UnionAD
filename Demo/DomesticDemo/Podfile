@@ -23,15 +23,15 @@ abstract_target 'Demo' do
       # Admob/GoogleAd
       pod 'Google-Mobile-Ads-SDK', '10.0.0'
       # 百度SDK
-      pod 'BaiduMobAdSDK', '5.370'
+      pod 'BaiduMobAdSDK', '5.38'
       # 广点通/优量汇
-      pod 'GDTMobSDK', '4.15.10'
+      pod 'GDTMobSDK', '4.15.30'
       # SigmobAd
-      pod 'SigmobAd-iOS', '4.15.3'
+      pod 'SigmobAd-iOS', '4.17.0'
       # 快手
-      pod 'KSAdSDK', '3.3.71'
+      pod 'KSAdSDK', '3.3.75'
       # MintegralAdSDK 使用时请务必使用cocoapod源
-      pod 'MintegralAdSDK', '7.7.3', :subspecs => [
+      pod 'MintegralAdSDK', '7.7.7', :subspecs => [
         'SplashAd',
         'NewInterstitialAd',
         'InterstitialVideoAd',

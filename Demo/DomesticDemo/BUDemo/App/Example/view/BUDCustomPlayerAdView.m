@@ -29,7 +29,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
 @property(nonatomic, strong) UILabel *adTitleLabel;
 
-@property(nonatomic, strong) UILabel *adDescriptionLabel;
+@property(nonatomic, strong) UILabel *infoLabel;
 
 @property(nonatomic, strong) BUNativeAdRelatedView *nativeAdRelatedView;
 
@@ -70,11 +70,11 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     self.adTitleLabel.textAlignment = NSTextAlignmentLeft;
     [self addSubview:self.adTitleLabel];
 
-    self.adDescriptionLabel = [UILabel new];
-    self.adDescriptionLabel.numberOfLines = 0;
-    self.adDescriptionLabel.textColor = BUD_RGB(0x55, 0x55, 0x55);
-    self.adDescriptionLabel.font = [UIFont systemFontOfSize:14];
-    [self addSubview:self.adDescriptionLabel];
+    self.infoLabel = [UILabel new];
+    self.infoLabel.numberOfLines = 0;
+    self.infoLabel.textColor = BUD_RGB(0x55, 0x55, 0x55);
+    self.infoLabel.font = [UIFont systemFontOfSize:14];
+    [self addSubview:self.infoLabel];
 
     // Add custom button
     [self addSubview:self.customBtn];
@@ -137,8 +137,8 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
     // source
     CGFloat maxInfoWidth = width - 2 * margin - buttonSize.width - 10 - 15;
-    self.adDescriptionLabel.frame = CGRectMake(padding.left + 5, y + 2, maxInfoWidth, 20);
-    self.adDescriptionLabel.text = model.data.AdDescription;
+    self.infoLabel.frame = CGRectMake(padding.left + 5, y + 2, maxInfoWidth, 20);
+    self.infoLabel.text = model.data.AdSource;
     y += buttonSize.height;
 
     y += 15;
@@ -153,7 +153,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
 - (void)addAccessibilityIdentifier {
     self.adTitleLabel.accessibilityIdentifier = @"feed_title";
-    self.adDescriptionLabel.accessibilityIdentifier = @"feed_des";
+    self.infoLabel.accessibilityIdentifier = @"feed_des";
     self.nativeAdRelatedView.dislikeButton.accessibilityIdentifier = @"dislike";
     self.customBtn.accessibilityIdentifier = @"feed_button";
 }

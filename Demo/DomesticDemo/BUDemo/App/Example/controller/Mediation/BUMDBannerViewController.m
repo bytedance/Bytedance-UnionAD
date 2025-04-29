@@ -80,8 +80,8 @@
     // 轮播相关配置需要在平台配置
     
     // 开始加载广告
-    [self.bannerView loadAdData];
     self.selectedView.promptStatus = BUDPromptStatusLoading;
+    [self.bannerView loadAdData];
 }
 
 - (void)showBanner {
@@ -133,7 +133,7 @@
 }
 
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
-    BUD_Log(@"kevin SDKDemoDelegate BUNativeExpressBannerView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
+    BUD_Log(@"SDKDemoDelegate BUNativeExpressBannerView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);
 }
 
 - (void)nativeExpressBannerAdNeedLayoutUI:(BUNativeExpressBannerView *)bannerAd canvasView:(BUMCanvasView *)canvasView {

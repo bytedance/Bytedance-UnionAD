@@ -47,12 +47,12 @@
     self.titleLabel.textColor = bu_textColor;
     [self.contentView addSubview:self.titleLabel];
     
-    self.descriptionLabel = [UILabel new];
-    self.descriptionLabel.frame = CGRectMake(13, GlobleHeight-180+40, GlobleWidth-26, 50);
-    self.descriptionLabel.font = [UIFont systemFontOfSize:16];
-    self.descriptionLabel.numberOfLines = 0;
-    self.descriptionLabel.textColor = bu_textColor;
-    [self.contentView addSubview:self.descriptionLabel];
+    self.infoLabel = [UILabel new];
+    self.infoLabel.frame = CGRectMake(13, GlobleHeight-180+40, GlobleWidth-26, 50);
+    self.infoLabel.font = [UIFont systemFontOfSize:16];
+    self.infoLabel.numberOfLines = 0;
+    self.infoLabel.textColor = bu_textColor;
+    [self.contentView addSubview:self.infoLabel];
     
     _headImg = [[UIImageView alloc] initWithFrame:CGRectMake(GlobleWidth-inconWidth-13, GlobleHeight*0.3, inconWidth, inconWidth)];
     _headImg.image = [UIImage imageNamed:@"head"];
@@ -119,7 +119,7 @@
 
 -(void)refreshUIAtIndex:(NSUInteger)index {
     self.titleLabel.text = [NSString localizedStringWithFormat:[NSString localizedStringForKey:DrawTitle],(unsigned long)index];
-    self.descriptionLabel.text = [NSString localizedStringForKey:DrawDescription];
+    self.infoLabel.text = [NSString localizedStringForKey:DrawDescription];
     UIColor *color1 = [UIColor grayColor];
     UIColor *color2 = titleBGColor;
     if (index%2) {
@@ -146,12 +146,12 @@
 - (void)buildupVideoView{
     self.nativeAdRelatedView = [[BUNativeAdRelatedView alloc] init];
     
-    if (!self.nativeAdRelatedView.videoAdView.superview) {
-        self.nativeAdRelatedView.videoAdView.frame = CGRectMake(0, 0, GlobleWidth, GlobleHeight);
-        [self.nativeAdRelatedView.videoAdView playerPlayIncon:[UIImage imageNamed:@"adPlay.png"] playInconSize:CGSizeMake(60, 60)];
+    if (!self.nativeAdRelatedView.mediaAdView.superview) {
+        self.nativeAdRelatedView.mediaAdView.frame = CGRectMake(0, 0, GlobleWidth, GlobleHeight);
+        [self.nativeAdRelatedView.mediaAdView playerPlayIncon:[UIImage imageNamed:@"adPlay.png"] playInconSize:CGSizeMake(60, 60)];
         //Whether to support click pause
-        self.nativeAdRelatedView.videoAdView.drawVideoClickEnable = YES;
-        [self.contentView insertSubview:self.nativeAdRelatedView.videoAdView atIndex:0];
+        self.nativeAdRelatedView.mediaAdView.drawVideoClickEnable = YES;
+        [self.contentView insertSubview:self.nativeAdRelatedView.mediaAdView atIndex:0];
     }
     
     if (!self.nativeAdRelatedView.adLabel.superview) {
@@ -179,7 +179,7 @@
 
 -(void)refreshUIWithModel:(BUNativeAd *)model{
     self.titleLabel.text = model.data.AdTitle;
-    self.descriptionLabel.text = model.data.AdDescription;
+    self.infoLabel.text = model.data.AdSource;
     [self.creativeButton setTitle:model.data.buttonText forState:UIControlStateNormal];
     [self.nativeAdRelatedView refreshData:model];
 }
@@ -187,9 +187,9 @@
 #pragma mark addAccessibilityIdentifier
 - (void)addAccessibilityIdentifier {
     self.creativeButton.accessibilityIdentifier = @"button";
-    self.nativeAdRelatedView.videoAdView.accessibilityIdentifier = @"draw_view";
+    self.nativeAdRelatedView.mediaAdView.accessibilityIdentifier = @"draw_view";
     self.titleLabel.accessibilityIdentifier = @"draw_appname";
-    self.descriptionLabel.accessibilityIdentifier = @"draw_appdetial";
+    self.infoLabel.accessibilityIdentifier = @"draw_appdetial";
 }
 
 

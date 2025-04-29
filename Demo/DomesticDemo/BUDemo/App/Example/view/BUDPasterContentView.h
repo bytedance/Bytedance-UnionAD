@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// paster image
 @property (nonatomic, strong, readonly) UIImageView *pasterImageView;
 /// SDK video view
-@property (nonatomic, strong, readonly) BUVideoAdView *SDKVideoView;
+@property (nonatomic, strong, readonly) BUMediaAdView *SDKVideoView;
 /// custom video view
 @property (nonatomic, strong, readonly) BUDVideoView *customVideoView;
 

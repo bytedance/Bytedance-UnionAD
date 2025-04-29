@@ -10,7 +10,7 @@
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 #import "BUDFeedStyleHelper.h"
-#import "UIImageView+AFNetworking.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 static CGFloat const margin = 15;
 static CGSize const logoSize = { 15, 15 };
@@ -202,8 +202,8 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
         originY = CGRectGetMinY(adLogoV.frame);
     }
     self.drawAdView.mediation.canvasView.descLabel.frame = CGRectMake(padding.left + 5 + CGRectGetWidth(adLogoV.frame), originY, maxInfoWidth, 20);
-    self.drawAdView.mediation.canvasView.descLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
-    self.drawAdView.mediation.canvasView.descLabel.text = model.data.AdDescription;
+    self.drawAdView.mediation.canvasView.descLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdSource];
+    self.drawAdView.mediation.canvasView.descLabel.text = model.data.AdSource;
     
     //物料里的price，score，source等信息;开发者可根据原始信息自定义表现形式
     CGRect frame = CGRectMake(padding.left, CGRectGetMaxY(self.drawAdView.mediation.canvasView.descLabel.frame)-5, 260, 20);

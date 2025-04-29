@@ -10,7 +10,6 @@
 #import "BUDActionCellView.h"
 #import "BUDSettingTableView.h"
 #import "BUDSettingViewController.h"
-#import "BUDPlayableToolViewController.h"
 #import "BUDSlotViewModel.h"
 #import "BUDMacros.h"
 #import "BUDSlotID.h"
@@ -61,14 +60,7 @@
         BUDSettingViewController *vc = [BUDSettingViewController new];
         [weakself.navigationController pushViewController:vc animated:YES];
     }];
-    
-    BUDActionModel *playableTools = [BUDActionModel plainTitleActionModel:@"Playable Tool" type:BUDCellType_setting action:^{
-        BUDSlotViewModel *viewModel = [BUDSlotViewModel new];
-        viewModel.slotID = normal_reward_ID;
-        BUDPlayableToolViewController *vc = [BUDPlayableToolViewController new];
-        vc.viewModel = viewModel;
-        [weakself.navigationController pushViewController:vc animated:YES];
-    }];
+
     BUDActionModel *testTools = [BUDActionModel plainTitleActionModel:@"Test Tool" type:BUDCellType_setting action:^{
         BUDTestToolsViewController *vc = [BUDTestToolsViewController new];
         [weakself.navigationController pushViewController:vc animated:YES];
@@ -85,14 +77,12 @@
         [BUAdTestMeasurementManager showTestMeasurementWithController:strongSelf];
     }];
     self.items = @[normalTools,
-                   playableTools,
                    testTools,
                    customDislike,
                    testMeasurement
                     ].mutableCopy;
 #else
     self.items = @[normalTools,
-                   playableTools,
                    testTools,
                    customDislike
                     ].mutableCopy;

@@ -123,7 +123,7 @@
 }
 #pragma mark --- BUVideoAdViewDelegate
 
-- (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView {
+- (void)videoAdViewFinishViewDidClick:(BUMediaAdView *)adView {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"finishView is clicked" message:[NSString stringWithFormat:@"%s",__func__] delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
@@ -131,25 +131,25 @@
 #pragma clang diagnostic pop
 }
 /**
- This method is called when videoadview failed to play.
+ This method is called when video failed to play.
  @param error : the reason of error
  */
-- (void)videoAdView:(BUVideoAdView *)videoAdView didLoadFailWithError:(NSError *_Nullable)error {
+- (void)videoAdView:(BUMediaAdView *)adView didLoadFailWithError:(NSError *_Nullable)error {
     BUD_Log(@"DrawVideo %s",__func__);
 }
 
 /**
- This method is called when videoadview ready to play.
+ This method is called when video ready to play.
  */
-- (void)playerReadyToPlay:(BUVideoAdView *)videoAdView {
+- (void)playerReadyToPlay:(BUMediaAdView *)adView {
     BUD_Log(@"DrawVideo %s",__func__);
 }
 
 /**
- This method is called when videoadview playback status changed.
+ This method is called when video playback status changed.
  @param playerState : player state after changed
  */
-- (void)videoAdView:(BUVideoAdView *)videoAdView stateDidChanged:(BUPlayerPlayState)playerState {
+- (void)videoAdView:(BUMediaAdView *)adView stateDidChanged:(BUPlayerPlayState)playerState {
     BUD_Log(@"DrawVideo %s",__func__);
 }
 
@@ -158,22 +158,22 @@
  @param countDown : countdown of reward video rewards
  @Note : This method is only useful in China area.
  */
-- (void)videoAdView:(BUVideoAdView *)videoAdView rewardDidCountDown:(NSInteger)countDown {
+- (void)videoAdView:(BUMediaAdView *)adView rewardDidCountDown:(NSInteger)countDown {
     BUD_Log(@"DrawVideo %s",__func__);
 }
 
 
 /**
- This method is called when videoadview end of play.
+ This method is called when video end of play.
  */
-- (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView {
+- (void)playerDidPlayFinish:(BUMediaAdView *)adView {
     BUD_Log(@"DrawVideo %s",__func__);
 }
 
 /**
- This method is called when videoadview is clicked.
+ This method is called when mediaAdView is clicked.
  */
-- (void)videoAdViewDidClick:(BUVideoAdView *)videoAdView {
+- (void)videoAdViewDidClick:(BUMediaAdView *)adView {
     BUD_Log(@"DrawVideo %s",__func__);
 }
 
@@ -181,7 +181,7 @@
  This method is called when another controller has been closed.
  @param interactionType : open appstore in app or open the webpage or view video ad details page.
  */
-- (void)videoAdViewDidCloseOtherController:(BUVideoAdView *)videoAdView interactionType:(BUInteractionType)interactionType {
+- (void)videoAdViewDidCloseOtherController:(BUMediaAdView *)adView interactionType:(BUInteractionType)interactionType {
     BUD_Log(@"DrawVideo %s",__func__);
 }
 
@@ -199,10 +199,10 @@
         nativeAd.delegate = self;
         BUDDrawAdTableViewCell *cell = nil;
         cell = [tableView dequeueReusableCellWithIdentifier:@"BUDDrawAdTableViewCell" forIndexPath:indexPath];
-        cell.nativeAdRelatedView.videoAdView.delegate = self;
+        cell.nativeAdRelatedView.mediaAdView.delegate = self;
         [cell refreshUIWithModel:nativeAd];
-        cell.nativeAdRelatedView.videoAdView.delegate = self;
-        [model registerContainer:cell withClickableViews:@[cell.creativeButton,cell.titleLabel,cell.descriptionLabel,cell.headImg]];
+        cell.nativeAdRelatedView.mediaAdView.delegate = self;
+        [model registerContainer:cell withClickableViews:@[cell.creativeButton,cell.titleLabel,cell.infoLabel,cell.headImg]];
         
         return cell;
     }else{

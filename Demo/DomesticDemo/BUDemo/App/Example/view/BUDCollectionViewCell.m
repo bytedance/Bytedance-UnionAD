@@ -71,7 +71,7 @@
     [_customview addSubview:_imageView];
     
     // add video view
-    [_customview addSubview:self.relatedView.videoAdView];
+    [_customview addSubview:self.relatedView.mediaAdView];
     // add logo view
     self.relatedView.logoADImageView.frame = CGRectZero;
     [_customview addSubview:self.relatedView.logoADImageView];
@@ -84,7 +84,7 @@
 }
 
 - (void)setNativeAd:(BUNativeAd *)nativeAd {
-    self.infoLabel.text = nativeAd.data.AdDescription;
+    self.infoLabel.text = nativeAd.data.AdSource;
     self.titleLabel.text = nativeAd.data.AdTitle;
     self.imageView.hidden = YES;
     BUMaterialMeta *adMeta = nativeAd.data;
@@ -98,11 +98,11 @@
     // imageMode decides whether to show video or not
     if (adMeta.imageMode == BUFeedVideoAdModeImage) {
         self.imageView.hidden = YES;
-        self.relatedView.videoAdView.hidden = NO;
-        self.relatedView.videoAdView.frame = rect;
+        self.relatedView.mediaAdView.hidden = NO;
+        self.relatedView.mediaAdView.frame = rect;
     } else {
         self.imageView.hidden = NO;
-        self.relatedView.videoAdView.hidden = YES;
+        self.relatedView.mediaAdView.hidden = YES;
         if (adMeta.imageAry.count > 0) {
             if (image.imageURL.length > 0) {
                 self.imageView.frame = rect;

@@ -21,6 +21,7 @@
 #import "BUDFullScreenVideoAdListViewController.h"
 #import "BUDRewardedAdListViewController.h"
 #import "BUDStreamAdListViewController.h"
+
 #if TARGET==1
 #import "BUDUGenoDemoViewController.h"
 #endif
@@ -108,7 +109,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
 #endif
-
+    
 #if __has_include(<BUWebAd/BUWebAd.h>)
     BUDActionModel *webAdItem = [BUDActionModel plainTitleActionModel:@"WebAd" type:BUDCellType_CustomEvent action:^{
         __strong typeof(weakSelf) self = weakSelf;
@@ -129,6 +130,29 @@
         @[waterfallItem]];
     
     [self.items addObjectsFromArray:normalItems];
+    
+    Class cls = NSClassFromString(@"BUDUgenPreviewViewController");
+    if (cls != nil && [[cls new] isKindOfClass:[UIViewController class]]) {
+        BUDActionModel *ugenPreviewItem = [BUDActionModel plainTitleActionModel:@"Ugen-Preview" type:BUDCellType_CustomEvent action:^{
+            __strong typeof(weakSelf) self = weakSelf;
+            UIViewController *vc = [cls new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        
+        [self.items addObject:@[ugenPreviewItem]];
+    }
+    
+    Class cls2 = NSClassFromString(@"BUDJSBDebugViewController");
+    if (cls2 != nil && [[cls2 new] isKindOfClass:[UIViewController class]]) {
+        BUDActionModel *item = [BUDActionModel plainTitleActionModel:@"JSB-Debug" type:BUDCellType_CustomEvent action:^{
+            __strong typeof(weakSelf) self = weakSelf;
+            UIViewController *vc = [cls2 new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        
+        [self.items addObject:@[item]];
+    }
+    
     
 #if __has_include(<BUWebAd/BUWebAd.h>)
     [self.items addObject:@[webAdItem]];

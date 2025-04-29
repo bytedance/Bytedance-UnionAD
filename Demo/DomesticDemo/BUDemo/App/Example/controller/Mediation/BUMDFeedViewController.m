@@ -13,6 +13,7 @@
 #import "BUDSlotID.h"
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
+#import "NSBundle+BUDemo.h"
 
 @interface BUMDFeedViewController ()<UITableViewDataSource, UITableViewDelegate, BUMNativeAdsManagerDelegate, BUMNativeAdDelegate>
 
@@ -21,7 +22,6 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) UIButton *showAndRefreshAd;
 @property (nonatomic, strong) NSArray<BUNativeAd *> *nativeAdDataArray;
-
 @end
 
 @implementation BUMDFeedViewController
@@ -39,6 +39,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 弹幕功能使用相关
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveWidgetNotification:) name:BUMMediaAdWidgetViewCreateNotificationName object:nil];
     
     CGFloat width  = 300;
     CGFloat height = 60;
@@ -84,7 +87,7 @@
 
 - (void)refreshAdAndShow {
 
-    NSString *feedPath = [[NSBundle mainBundle] pathForResource:@"feedInfo" ofType:@"cactus"];
+    NSString *feedPath = [NSBundle csjDemoResource_pathForResource:@"feedInfo" ofType:@"cactus"];
     NSString *s = [NSString stringWithContentsOfFile:feedPath encoding:NSUTF8StringEncoding error:nil];
     NSData *data = [s dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *datas = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -170,8 +173,58 @@
 
         [self.dataSource insertObject:model atIndex:index];
     }
-
+    
     [self.tableView reloadData];
+}
+
+- (void)didReceiveWidgetNotification:(NSNotification *)notify {
+    BUMAdViewWidget *widget = notify.userInfo[BUMMediaAdBarrageViewCreator];
+    if (widget) {
+        CGFloat x1 = 6;
+        CGFloat y1 = widget.adView.frame.size.height - 20;
+        CGRect newFrame1;
+        newFrame1.origin.x = x1;
+        newFrame1.origin.y = y1;
+        newFrame1.size.height = 100;
+        newFrame1.size.width = self.view.frame.size.width;
+        
+        UIView *barrageView = [widget renderWithFrame:newFrame1];
+        if (barrageView) {
+            [widget.adView addSubview:barrageView];
+        }
+    }
+    
+    
+    BUMAdViewWidget *suspensionWidget = notify.userInfo[BUMMediaAdCouponSuspensionViewCreator];
+    if (suspensionWidget) {
+        BUMCouponType type1 = suspensionWidget.couponType;
+        // 调整尺寸 & 位置,添加到页面
+        CGFloat x2 = 6;
+        CGFloat y2 = widget.adView.frame.size.height - (type1 == BUMCouponSuspensionCard ?  124 : type1 == BUMCouponSuspensionIcon ? 102 : 102) - 20;
+        CGRect newFrame2 = widget.adView.frame;
+        newFrame2.origin.x = x2;
+        newFrame2.origin.y = y2;
+        
+        UIView *suspensionView = [suspensionWidget renderWithFrame:newFrame2];
+        if (suspensionView) {
+            [widget.adView addSubview:suspensionView];
+        }
+    }
+    
+    
+    BUMAdViewWidget *flipWidget = notify.userInfo[BUMMediaAdCouponFlipViewCreator];
+    if (flipWidget) {
+        // 调整尺寸 & 位置,添加到页面
+        CGFloat x = flipWidget.adView.frame.size.width - 154;
+        CGFloat y = flipWidget.adView.frame.size.height - 154;
+        CGRect newFrame = flipWidget.adView.frame;
+        newFrame.origin.x = x;
+        newFrame.origin.y = y;
+        UIView *flipView = [flipWidget renderWithFrame:newFrame];
+        if (flipView) {        
+            [widget.adView addSubview:flipView];
+        }
+    }
 }
 
 - (void)nativeAdsManager:(BUNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error {

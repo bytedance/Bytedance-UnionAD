@@ -20,6 +20,7 @@
 #ifdef DEBUG
 #import <MBProgressHUD/MBProgressHUD.h>
 #endif
+#import "NSBundle+BUDemo.h"
 
 
 static CGFloat const bottomHeight = 30;
@@ -80,7 +81,7 @@ static CGFloat const bottomHeight = 30;
 }
 
 - (void)resetDataArray {
-    NSString *feedPath = [[NSBundle mainBundle] pathForResource:@"feedInfo" ofType:@"cactus"];
+    NSString *feedPath = [NSBundle csjDemoResource_pathForResource:@"feedInfo" ofType:@"cactus"];
     NSString *s = [NSString stringWithContentsOfFile:feedPath encoding:NSUTF8StringEncoding error:nil];
     NSArray *datas = [s objectFromJSONString];
     

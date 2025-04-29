@@ -12,7 +12,6 @@
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDSelectedView.h"
 #import "NSString+LocalizedString.h"
-#import "AppDelegate.h"
 #import "UIColor+DarkMode.h"
 #ifdef DEBUG
 #import <MBProgressHUD/MBProgressHUD.h>

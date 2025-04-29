@@ -70,9 +70,8 @@
     // [可选]配置：激励再得的回调
     self.rewardedVideoAd.rewardPlayAgainInteractionDelegate = self.rewardedVideoAgainDelegateObj;
     
-    [self.rewardedVideoAd loadAdData];
-    
     self.selectedView.promptStatus = BUDPromptStatusLoading;
+    [self.rewardedVideoAd loadAdData];
 }
 
 - (void)showRewardVideoAd {
@@ -108,7 +107,6 @@
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     self.selectedView.promptStatus = BUDPromptStatusAdLoaded;
     BUD_Log(@"%st",__func__);
-    BUD_Log(@"mediaExt-%@",rewardedVideoAd.mediaExt);
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
@@ -130,6 +128,8 @@
     BUD_Log(@"%s",__func__);
     // 展示后可获取信息如下
     BUD_Log(@"%@", [rewardedVideoAd.mediation getShowEcpmInfo]);
+    
+    BUD_Log(@"mediaExt-%@",rewardedVideoAd.mediaExt);
 }
 
 - (void)nativeExpressRewardedVideoAdDidClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {

@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) UIView *separatorLine;
 @property (nonatomic, strong, nullable) UIImageView *iv1;
 @property (nonatomic, strong, nullable) UILabel *adTitleLabel;
-@property (nonatomic, strong, nullable) UILabel *adDescriptionLabel;
+@property (nonatomic, strong, nullable) UILabel *infoLabel;
 @property (nonatomic, strong) BUNativeAd *nativeAd;
 @property (nonatomic, strong) UIButton *customBtn;
 @property (nonatomic, strong) BUNativeAdRelatedView *nativeAdRelatedView;

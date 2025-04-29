@@ -10,7 +10,7 @@
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
-#import "UIImageView+AFNetworking.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 #import "BUDFeedStyleHelper.h"
 
 static CGFloat const margin = 15;
@@ -199,7 +199,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
         originY = CGRectGetMinY(adLogoV.frame);
     }
     self.nativeAdView.mediation.canvasView.descLabel.frame = CGRectMake(padding.left, originY, maxInfoWidth, 20);
-    self.nativeAdView.mediation.canvasView.descLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
+    self.nativeAdView.mediation.canvasView.descLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdSource];
 
     // 注册点击事件
     [self.nativeAdView registerContainer:model.mediation.canvasView withClickableViews:@[
@@ -301,7 +301,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
         originY = CGRectGetMinY(adLogoV.frame);
     }
     self.nativeAdView.mediation.canvasView.descLabel.frame = CGRectMake(originInfoX+30, originY, maxInfoWidth, 20);
-    self.nativeAdView.mediation.canvasView.descLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
+    self.nativeAdView.mediation.canvasView.descLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdSource];
 
     if (self.nativeAdView.mediation.canvasView.hasSupportActionBtn) {
         CGFloat customBtnWidth = 100;
@@ -459,7 +459,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
         originY = CGRectGetMinY(adLogoV.frame);
     }
     self.nativeAdView.mediation.canvasView.descLabel.frame = CGRectMake(originInfoX+30, originY, maxInfoWidth, 20);
-    self.nativeAdView.mediation.canvasView.descLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
+    self.nativeAdView.mediation.canvasView.descLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdSource];
 
     //物料里的price，score，source等信息;开发者可根据原始信息自定义表现形式
     CGRect frame = CGRectMake(padding.left, CGRectGetMaxY(self.nativeAdView.mediation.canvasView.descLabel.frame)-5, 260, 20);
@@ -599,8 +599,8 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
         originY = CGRectGetMinY(adLogoV.frame);
     }
     self.nativeAdView.mediation.canvasView.descLabel.frame = CGRectMake(padding.left + 5 + CGRectGetWidth(adLogoV.frame), originY, maxInfoWidth, 20);
-    self.nativeAdView.mediation.canvasView.descLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdDescription];
-    self.nativeAdView.mediation.canvasView.descLabel.text = model.data.AdDescription;
+    self.nativeAdView.mediation.canvasView.descLabel.attributedText = [BUDFeedStyleHelper subtitleAttributeText:model.data.AdSource];
+    self.nativeAdView.mediation.canvasView.descLabel.text = model.data.AdSource;
     
     //物料里的price，score，source等信息;开发者可根据原始信息自定义表现形式
     CGRect frame = CGRectMake(padding.left, CGRectGetMaxY(self.nativeAdView.mediation.canvasView.descLabel.frame)-5, 260, 20);

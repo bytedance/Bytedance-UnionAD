@@ -34,9 +34,11 @@
     if (!window) {
         if (@available(iOS 13.0, *)) {
             for (UIWindowScene *scene in [UIApplication sharedApplication].connectedScenes) {
-                for (UIWindow *subWindow in scene.windows) {
-                    if (subWindow.isKeyWindow) {
-                        return subWindow;
+                if ([scene isKindOfClass:[UIWindowScene class]]) {
+                    for (UIWindow *subWindow in scene.windows) {
+                        if (subWindow.isKeyWindow) {
+                            return subWindow;
+                        }
                     }
                 }
             }

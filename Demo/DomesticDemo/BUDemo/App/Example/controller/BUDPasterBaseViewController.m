@@ -204,11 +204,11 @@
 
 #pragma mark - BUVideoAdViewDelegate
 // 点击SDK播放器，弹出落地页
-- (void)videoAdViewDidClick:(BUVideoAdView *)videoAdView {
+- (void)videoAdViewDidClick:(BUMediaAdView *)adView {
     [self showLandingPage];
 }
 // 点击SDK播放器，弹出落地页后关闭落地页
-- (void)videoAdViewDidCloseOtherController:(BUVideoAdView *)videoAdView interactionType:(BUInteractionType)interactionType {
+- (void)videoAdViewDidCloseOtherController:(BUMediaAdView *)adView interactionType:(BUInteractionType)interactionType {
     [self hideLandingPage];
 }
 
@@ -318,8 +318,8 @@
 
 #pragma mark - Actions
 // 当前SDK播放器
-- (BUVideoAdView *)currentSDKVideoView {
-    BUVideoAdView *videoV = self.adViews[self.currentAdIndex].SDKVideoView;
+- (BUMediaAdView *)currentSDKVideoView {
+    BUMediaAdView *videoV = self.adViews[self.currentAdIndex].SDKVideoView;
     if (videoV.hidden) {
         return nil;
     }

@@ -157,33 +157,33 @@
 
 #pragma mark - BUVideoAdViewDelegate
 
-- (void)videoAdView:(BUVideoAdView *)videoAdView stateDidChanged:(BUPlayerPlayState)playerState {
+- (void)videoAdView:(BUMediaAdView *)adView stateDidChanged:(BUPlayerPlayState)playerState {
     
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"playerState:%ld", (long)playerState]];
 }
 
-- (void)videoAdView:(BUVideoAdView *)videoAdView didLoadFailWithError:(NSError *)error {
+- (void)videoAdView:(BUMediaAdView *)adView didLoadFailWithError:(NSError *)error {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 
-- (void)playerDidPlayFinish:(BUVideoAdView *)videoAdView {
+- (void)playerDidPlayFinish:(BUMediaAdView *)adView {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:@""];
 }
 
-- (void)videoAdViewDidClick:(BUVideoAdView *)videoAdView {
+- (void)videoAdViewDidClick:(BUMediaAdView *)adView {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:@""];
 }
 
-- (void)videoAdViewFinishViewDidClick:(BUVideoAdView *)videoAdView {
+- (void)videoAdViewFinishViewDidClick:(BUMediaAdView *)adView {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:@""];
 }
 
 
-- (void)videoAdViewDidCloseOtherController:(BUVideoAdView *)videoAdView interactionType:(BUInteractionType)interactionType {
+- (void)videoAdViewDidCloseOtherController:(BUMediaAdView *)adView interactionType:(BUInteractionType)interactionType {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"interactionType:%ld", (long)interactionType]];
 }
 
-- (void)videoAdView:(BUVideoAdView *)videoAdView
+- (void)videoAdView:(BUMediaAdView *)videoAdView
  rewardDidCountDown:(NSInteger)countDown {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"videoAdView:rewardDidCountDown:%ld", (long)countDown]];
 }

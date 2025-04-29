@@ -40,11 +40,11 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     self.adTitleLabel.textAlignment = NSTextAlignmentLeft;
     [self addSubview:self.adTitleLabel];
 
-    self.adDescriptionLabel = [UILabel new];
-    self.adDescriptionLabel.numberOfLines = 0;
-    self.adDescriptionLabel.textColor = [UIColor colorWithWhite:0.333 alpha:1];
-    self.adDescriptionLabel.font = [UIFont systemFontOfSize:14];
-    [self addSubview:self.adDescriptionLabel];
+    self.infoLabel = [UILabel new];
+    self.infoLabel.numberOfLines = 0;
+    self.infoLabel.textColor = [UIColor colorWithWhite:0.333 alpha:1];
+    self.infoLabel.font = [UIFont systemFontOfSize:14];
+    [self addSubview:self.infoLabel];
 
     // Add custom button
     [self addSubview:self.customBtn];
@@ -116,7 +116,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     NSAttributedString *attributedText = [self.class titleAttributeText:model.data.AdTitle];
     self.adTitleLabel.attributedText = attributedText;
 
-    self.adDescriptionLabel.attributedText = [self.class subtitleAttributeText:model.data.AdDescription];
+    self.infoLabel.attributedText = [self.class subtitleAttributeText:model.data.AdSource];
 
     [self layoutUI];
 }
@@ -155,7 +155,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     self.relatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
 
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10;
-    self.adDescriptionLabel.frame = CGRectMake(originInfoX, y, maxInfoWidth, 20);
+    self.infoLabel.frame = CGRectMake(originInfoX, y, maxInfoWidth, 20);
 }
 
 @end
@@ -175,7 +175,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     BUImage *image = model.data.imageAry.firstObject;
     [self.iv1 sd_setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
 
-    self.adDescriptionLabel.attributedText = [self.class subtitleAttributeText:model.data.AdDescription];
+    self.infoLabel.attributedText = [self.class subtitleAttributeText:model.data.AdSource];
     [self layoutUI];
 }
 
@@ -212,7 +212,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     self.relatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
 
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10 - 100;
-    self.adDescriptionLabel.frame = CGRectMake(originInfoX, y, maxInfoWidth, 20);
+    self.infoLabel.frame = CGRectMake(originInfoX, y, maxInfoWidth, 20);
 
     CGFloat customBtnWidth = 100;
     self.customBtn.frame = CGRectMake(dislikeX - customBtnWidth, y, customBtnWidth, 20);
@@ -235,7 +235,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     BUImage *image = model.data.imageAry.firstObject;
     [self.iv1 sd_setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
 
-    self.adDescriptionLabel.attributedText = [self.class subtitleAttributeText:model.data.AdDescription];
+    self.infoLabel.attributedText = [self.class subtitleAttributeText:model.data.AdSource];
     [self layoutUI];
 }
 
@@ -269,7 +269,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     self.relatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
 
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10 - 100;
-    self.adDescriptionLabel.frame = CGRectMake(originInfoX, y, maxInfoWidth, 20);
+    self.infoLabel.frame = CGRectMake(originInfoX, y, maxInfoWidth, 20);
 
     CGFloat customBtnWidth = 100;
     self.customBtn.frame = CGRectMake(dislikeX - customBtnWidth, y, customBtnWidth, 20);
@@ -315,7 +315,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     [self.iv2 sd_setImageWithURL:[NSURL URLWithString:model.data.imageAry[1].imageURL] placeholderImage:nil];
     [self.iv3 sd_setImageWithURL:[NSURL URLWithString:model.data.imageAry[2].imageURL] placeholderImage:nil];
 
-    self.adDescriptionLabel.attributedText = [self.class subtitleAttributeText:model.data.AdDescription];
+    self.infoLabel.attributedText = [self.class subtitleAttributeText:model.data.AdSource];
     [self layoutUI];
 }
 
@@ -361,7 +361,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     self.relatedView.dislikeButton.frame = CGRectMake(dislikeX, y, 20, 20);
 
     CGFloat maxInfoWidth = width - 2 * margin - 24 - 24 - 10;
-    self.adDescriptionLabel.frame = CGRectMake(originInfoX, y, maxInfoWidth, 20);
+    self.infoLabel.frame = CGRectMake(originInfoX, y, maxInfoWidth, 20);
 }
 
 @end
@@ -406,7 +406,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     [self.creativeButton setTitle:self.nativeAd.data.buttonText forState:UIControlStateNormal];
 
     // source
-    self.adDescriptionLabel.text = model.data.AdDescription;
+    self.infoLabel.text = model.data.AdSource;
     [self layoutUI];
 }
 
@@ -444,9 +444,8 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
 
     // source
     CGFloat maxInfoWidth = width - 2 * margin - buttonSize.width - 10 - 15;
-    self.adDescriptionLabel.frame = CGRectMake(padding.left + 5, y + 2, maxInfoWidth, 20);
-//    self.adDescriptionLabel.attributedText = [self.class subtitleAttributeText:model.data.AdDescription];
-    self.adDescriptionLabel.text = model.data.AdDescription;
+    self.infoLabel.frame = CGRectMake(padding.left + 5, y + 2, maxInfoWidth, 20);
+    self.infoLabel.text = model.data.AdSource;
     y += buttonSize.height;
 
     y += 15;
@@ -515,7 +514,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     [self.creativeButton setTitle:self.nativeAd.data.buttonText forState:UIControlStateNormal];
 
     // source
-    self.adDescriptionLabel.text = model.data.AdDescription;
+    self.infoLabel.text = model.data.AdSource;
     [self layoutUI];
 }
 
@@ -558,8 +557,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
 
     // source
     CGFloat maxInfoWidth = width - 2 * margin - buttonSize.width - 10 - 15;
-    self.adDescriptionLabel.frame = CGRectMake(padding.left + 5, y + 2, maxInfoWidth, 20);
-//    self.adDescriptionLabel.attributedText = [self.class subtitleAttributeText:model.data.AdDescription];
+    self.infoLabel.frame = CGRectMake(padding.left + 5, y + 2, maxInfoWidth, 20);
     y += buttonSize.height;
 
     y += 15;
@@ -627,9 +625,6 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     } else {
         if (type == BUInteractionTypeDownload) {
             [view.customBtn setTitle:@"点击下载" forState:UIControlStateNormal];
-            [ad registerContainer:view withClickableViews:@[view.customBtn]];
-        } else if (type == BUInteractionTypePhone) {
-            [view.customBtn setTitle:@"拨打电话" forState:UIControlStateNormal];
             [ad registerContainer:view withClickableViews:@[view.customBtn]];
         } else if (type == BUInteractionTypeURL) {
             [view.customBtn setTitle:@"外部拉起" forState:UIControlStateNormal];

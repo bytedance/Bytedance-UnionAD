@@ -63,11 +63,11 @@
         model;
     });
     
-    // 开始加载广告
-    [self.fullscreenAd loadAdData];
-    
     //为保证播放流畅建议可在收到视频下载完成回调后再展示视频。
     self.selectedView.promptStatus = BUDPromptStatusLoading;
+    
+    // 开始加载广告
+    [self.fullscreenAd loadAdData];
 }
 
 // important:show的时候会进行WKWebview的渲染，建议一次最多展示三个广告，如果超过3个会很大概率导致WKWebview渲染失败。当然一般情况下全屏视频一次只会show一个

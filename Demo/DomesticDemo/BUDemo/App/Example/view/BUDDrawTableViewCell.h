@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BUDDrawBaseTableViewCell : UITableViewCell<BUDDrawCellProtocol>
 @property (nonatomic, strong, nullable) UILabel *titleLabel;
-@property (nonatomic, strong, nullable) UILabel *descriptionLabel;
+@property (nonatomic, strong, nullable) UILabel *infoLabel;
 @property (nonatomic, strong, nullable) UIImageView *headImg;
 @end
 

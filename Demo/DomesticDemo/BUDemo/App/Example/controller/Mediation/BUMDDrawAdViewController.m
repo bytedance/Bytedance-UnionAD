@@ -17,6 +17,8 @@
 @property (nonatomic, strong) BUMDDrawAdView <BUMDDrawAdViewProtocol> *drawAdBackView;
 
 @property (nonatomic, strong) UIButton *showAndRefreshAd;
+
+@property (nonatomic, strong) NSArray<BUNativeAd *> *drawAdDataArray;
 @end
 
 @implementation BUMDDrawAdViewController
@@ -95,6 +97,8 @@
 
 # pragma mark ---<BUMNativeAdsManagerDelegate>---
 - (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *)nativeAdDataArray {
+    
+    _drawAdDataArray = nativeAdDataArray;
     
     /// 注意,demo仅处理了首个广告
     BUNativeAd *model = nativeAdDataArray.firstObject;
@@ -178,7 +182,7 @@
 }
 
 /**
- This method is called when videoadview playback status changed.
+ This method is called when video playback status changed.
  @param playerState : player state after changed
  */
 - (void)nativeAdVideo:(BUNativeAd *)nativeAd stateDidChanged:(BUPlayerPlayState)playerState {
@@ -193,7 +197,7 @@
 }
 
 /**
- This method is called when videoadview end of play.
+ This method is called when video end of play.
  */
 - (void)nativeAdVideoDidPlayFinish:(BUNativeAd *_Nullable)nativeAd {
     BUD_Log(@"%s", __func__);

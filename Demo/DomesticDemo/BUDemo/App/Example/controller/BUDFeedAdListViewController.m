@@ -14,7 +14,6 @@
 #import "BUDPasterViewController.h"
 #import "BUMDFeedViewController.h"
 #import "BUDECMallViewController.h"
-
 @implementation BUDFeedAdListViewController
 
 - (NSArray<NSArray<BUDActionModel *> *> *)itemsForList {

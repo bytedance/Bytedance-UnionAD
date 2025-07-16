@@ -39,18 +39,6 @@ Pod::Spec.new do |s|
   s.subspec 'CSJMediation' do |ss|
     ss.vendored_frameworks = ['SDK/CSJMediation.xcframework']
     ss.dependency 'Ads-CN-Beta/BUAdSDK'
-    ss.dependency 'Ads-CN-Beta/BUAdLive-Framework'
-  end
-
-  s.subspec 'CSJMediation-Lib' do |ss|
-    ss.vendored_frameworks = ['SDK/CSJMediation.xcframework']
-    ss.dependency 'Ads-CN-Beta/BUAdSDK'
-    ss.dependency 'Ads-CN-Beta/BUAdLive-Lib'
-  end
-
-  s.subspec 'CSJMediation-Only' do |ss|
-    ss.vendored_frameworks = ['SDK/CSJMediation.xcframework']
-    ss.dependency 'Ads-CN-Beta/BUAdSDK'
   end
 
   s.subspec 'BUAdLive' do |ss|

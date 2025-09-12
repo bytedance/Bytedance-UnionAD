@@ -4,24 +4,24 @@
 #
 # Any lines starting with a # are optional, but their use is encouraged
 # To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
-#
+# 
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global'
-  s.version         = '7.5.0.7'
+  s.version          = '7.5.0.8'
   s.summary          = 'Ads-Global is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Global provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
                        DESC
 
   s.license          = { :type => 'MIT', :file => 'SDK/LICENSE' }
-  s.author           = { 'Siwant' => 'yuanhuan@bytedance.com' }
+  s.author           = { 'bytedance' => 'xxxx@bytedance.com' }
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD.git'
-  s.source       = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/#{s.version}/SDK.zip", :sha256 => "efc06b3820aef942530d171531ff7dd25637833e78b81f5554a6ed97aba6236b" }
+  s.source           = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/7.5.0.8/SDK.zip", :sha256 => "74c380a94f87f3d3cd8df0560a2666fb2ac5053772cbe8340df42ea6ba2c8852" }
   s.platform         = :ios, "12.0"
-  s.frameworks = 'UIKit', 'WebKit', 'MediaPlayer', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
-  s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi'
+  s.frameworks = 'UIKit', 'WebKit', 'MediaPlayer', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox'
+  s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi', 'iconv'
   s.weak_frameworks = 'AppTrackingTransparency', 'CoreML', 'DeviceCheck'
 
   s.default_subspec = ['BUAdSDK']

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-CN-Beta'
-  s.version          = '7.2.0.2'
+  s.version          = '6.9.2.4'
   s.summary          = 'Ads-CN-Beta is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-CN-Beta provides ADs which include native、banner、feed、splash、RewardVideo etc.
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD'
   
-  s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/Public/SDK/7.2.0.2/SDK.zip" }
+  s.source           = { :http => "https://sf3-fe-tos.pglstatp-toutiao.com/obj/csj-sdk-static/Public/SDK/6.9.2.4/SDK.zip" }
   s.platform         = :ios, "11.0"
   s.frameworks       = 'UIKit', 'MapKit', 'WebKit', 'MediaPlayer', 'CoreLocation', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox','ImageIO','QuartzCore','CoreGraphics','CoreText'
   s.weak_frameworks  = 'AppTrackingTransparency', 'DeviceCheck', 'CoreML', 'CoreHaptics'
@@ -37,16 +37,6 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CSJMediation' do |ss|
-    ss.dependency 'Ads-CN-Beta/CSJMediation-Only'
-    ss.dependency 'Ads-CN-Beta/BUAdLive-Framework'
-  end
-
-  s.subspec 'CSJMediation-Lib' do |ss|
-    ss.dependency 'Ads-CN-Beta/CSJMediation-Only'
-    ss.dependency 'Ads-CN-Beta/BUAdLive-Lib'
-  end
-
-  s.subspec 'CSJMediation-Only' do |ss|
     ss.vendored_frameworks = ['SDK/CSJMediation.xcframework']
     ss.dependency 'Ads-CN-Beta/BUAdSDK'
   end
@@ -57,12 +47,14 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'BUAdLive-Lib' do |ss|
-    ss.dependency 'Ads-CN-Beta/BUAdLive'
+    ss.vendored_frameworks = ['SDK/BUAdLive.xcframework']
+    ss.preserve_paths = 'SDK/BUAdLive.xcframework'
     ss.dependency 'BUTTSDK/LivePull-Lite', '1.46.2.7-premium'
   end
 
   s.subspec 'BUAdLive-Framework' do |ss|
-    ss.dependency 'Ads-CN-Beta/BUAdLive'
+    ss.vendored_frameworks = ['SDK/BUAdLive.xcframework']
+    ss.preserve_paths = 'SDK/BUAdLive.xcframework'
     ss.dependency 'BUTTSDKFramework/LivePull-Lite', '1.46.2.7-premium'
   end
 

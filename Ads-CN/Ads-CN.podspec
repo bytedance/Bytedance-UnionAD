@@ -58,12 +58,12 @@ Pod::Spec.new do |s|
 
   s.subspec 'BUAdLive-Lib' do |ss|
     ss.dependency 'Ads-CN/BUAdLive'
-    ss.dependency 'BUTTSDK/LivePull-Lite', '1.48.2.3-premium'
+    ss.dependency 'BUTTSDK/LivePull-Lite', '1.46.2.7-premium'
   end
 
   s.subspec 'BUAdLive-Framework' do |ss|
     ss.dependency 'Ads-CN/BUAdLive'
-    ss.dependency 'BUTTSDKFramework/LivePull-Lite', '1.48.2.3-premium'
+    ss.dependency 'BUTTSDKFramework/LivePull-Lite', '1.46.2.7-premium'
   end
 
   s.subspec 'BUAdTestMeasurement' do |ss|

@@ -2,21 +2,15 @@
 
 This chapter will introduce mediation adnetworks which support Panlge.
 
-* [Mopub](#mopub)
-* [ironSource](#ironsource)
+* [Unity LevelPlay](#ironsource)
 * [MAX](#max)
 * [Admob](#admob)
 
 
-<a name="mopub"></a>
-## Mopub
-
-Mopub official support Pangle via the mediation. You can find details from [Mediation Panlge](https://developers.mopub.com/publishers/mediation/networks/pangle/).
-
 <a name="ironsource"></a>
-## ironSource
+## Unity LevelPlay
 
-ironSource official support Pangle via the mediation. You can find details from [Pangle Integration Guide](https://developers.ironsrc.com/ironsource-mobile/ios/pangle-integration-guide/#step-1).
+Unity LevelPlay supports Pangle via mediation. See the current [Pangle integration guide](https://docs.unity.com/en-us/grow/levelplay/sdk/ios/networks/guides/pangle).
 
 <a name="max"></a>
 ## MAX

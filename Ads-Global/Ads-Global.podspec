@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global'
-  s.version          = '8.3.0.6'
+  s.version          = '8.2.1.2'
   s.summary          = 'Ads-Global is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Global provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -18,8 +18,14 @@ Pod::Spec.new do |s|
   s.author           = { 'bytedance' => 'xxxx@bytedance.com' }
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD.git'
-  s.source           = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/8.3.0.6/SDK.zip", :sha256 => "53624540cc6ef7ac3afe034f627f7f09edc35d442d04f3022386ee0bff62b7fa" }
+  s.source           = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/8.2.1.2/SDK.zip", :sha256 => "e858e0f1069d57054d7ec2a0301691872db9feec71a5aa8d92c643d3a5dbac8f" }
   s.platform         = :ios, "12.0"
+
+  base_version = s.version.to_s.split('-').first
+  if Gem::Version.new(base_version) >= Gem::Version.new('8.4.0.0')
+    s.swift_versions = ['5.0']
+  end
+
   s.frameworks = 'UIKit', 'WebKit', 'MediaPlayer', 'AdSupport', 'CoreMedia', 'AVFoundation', 'CoreTelephony', 'StoreKit', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion', 'Accelerate','AudioToolbox','JavaScriptCore','Security','CoreImage','AudioToolbox'
   s.libraries = 'c++', 'resolv', 'z', 'sqlite3', 'bz2', 'xml2', 'iconv', 'c++abi', 'iconv'
   s.weak_frameworks = 'AppTrackingTransparency', 'CoreML', 'DeviceCheck'

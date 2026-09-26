@@ -10,7 +10,7 @@
 
 <a name="start/ios14"></a>
 ## iOS 14の対応
-[iOS 14 actions](https://www.pangleglobal.com/help/doc/5f4dc4271de305000ece82aa)に従って、`SKAdNetwork`と`App Tracking Transparency`の対応をしてください。
+[iOS 14 actions](https://www.pangleglobal.com/integration/ios14-readiness)に従って、`SKAdNetwork`と`App Tracking Transparency`の対応をしてください。
 
 - PangleのSKAdNetwork IDをアプリのinfo.plistに必ず追加してください。
 ```xml

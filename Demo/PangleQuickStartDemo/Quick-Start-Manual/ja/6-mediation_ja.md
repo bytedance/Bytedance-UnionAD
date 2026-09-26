@@ -2,21 +2,15 @@
 
 本章ではPangle iOS SDKとメディエーションできる他のアドネットワークとについて記述します。
 
-* [Mopub](#mopub)
-* [ironSource](#ironsource)
+* [Unity LevelPlay](#ironsource)
 * [MAX](#max)
 * [Admob](#admob)
 
 
-<a name="mopub"></a>
-## Mopub
-
-Mopubメディエーションはオフィシャルサポートされています。詳細はMopubでの[Mediation Panlge](https://developers.mopub.com/publishers/mediation/networks/pangle/)をご参考ください。
-
 <a name="ironsource"></a>
-## ironSource
+## Unity LevelPlay
 
-ironSourceメディエーションはオフィシャルサポートされています。詳細は[Pangle Integration Guide](https://developers.ironsrc.com/ironsource-mobile/ios/pangle-integration-guide/#step-1)をご参考ください。
+Unity LevelPlayではPangleメディエーションがサポートされています。詳細は現在の[Pangle Integration Guide](https://docs.unity.com/en-us/grow/levelplay/sdk/ios/networks/guides/pangle)をご参考ください。
 
 <a name="max"></a>
 ## MAX

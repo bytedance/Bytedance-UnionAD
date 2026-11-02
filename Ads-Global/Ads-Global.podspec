@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Ads-Global'
-  s.version          = '8.4.0.7'
+  s.version          = '8.3.1.1'
   s.summary          = 'Ads-Global is a SDK from Bytedance providing union AD service.'
   s.description      = <<-DESC
   Ads-Global provides ADs which include native、banner、RewardVideo、FullscreenVideo etc.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.author           = { 'bytedance' => 'xxxx@bytedance.com' }
 
   s.homepage         = 'https://github.com/bytedance/Bytedance-UnionAD.git'
-  s.source           = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/8.4.0.7/SDK.zip", :sha256 => "e27cb6aa8fc080dbbe344f460874ad932728b8b2c2d7eb5343c2da28c9fe8991" }
+  s.source           = { :http => "https://sf16-fe-tos-sg.i18n-pglstatp.com/obj/pangle-sdk-static-va/8.3.1.1/SDK.zip", :sha256 => "5900de3945db8f61c85471d359de4034e10825a238e3eaeaf0b9a1488648f2c2" }
   s.platform         = :ios, "12.0"
 
   base_version = s.version.to_s.split('-').first

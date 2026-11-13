@@ -10,7 +10,7 @@ This chapter will explain the procedure for integrating and Initializing the Pan
 
 <a name="start/ios14"></a>
 ## About iOS 14
-Please follow [iOS 14 actions](https://www.pangleglobal.com/help/doc/5f4dc4271de305000ece82aa) to enable SKAdNetwork and include App Tracking Transparency.
+Please follow [iOS 14 actions](https://www.pangleglobal.com/integration/ios14-readiness) to enable SKAdNetwork and include App Tracking Transparency.
 
 - Please make sure to add Pangle's SKAdNetwork IDs to your app's info.plist.
 ```xml

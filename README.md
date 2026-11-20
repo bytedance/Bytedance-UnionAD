@@ -5,8 +5,8 @@ Pod for Bytedance-UnionAD only support **x86_64, armv7, arm64, i386**.
 ## How To Get Started
 
 + [Download Bytedance-UnionAD](https://github.com/bytedance/Bytedance-UnionAD/tree/master) and try out the included [example app](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Demo)
-+ Check out the [documentation](https://www.pangle.cn/help/doc/5fc4f25f7b550100157c01d0) for a comprehensive look at all of the APIs available in Bytedance-UnionAD
-+ If you have other questions, please read [FAQ](https://www.pangle.cn/help/doc/5dd0fe618507820012088272) first
++ Check out the [documentation](https://www.csjplatform.com/supportcenter/28721) for a comprehensive look at all of the APIs available in Bytedance-UnionAD
++ If you have other questions, please read [FAQ](https://www.csjplatform.com/supportcenter/5415) first
 + We provide a [**Quick Start**](https://github.com/bytedance/Bytedance-UnionAD/tree/master/Demo/PangleQuickStartDemo) to help you to easily integrate and use the SDK.
 
 ## Installation with CocoaPods
@@ -54,8 +54,8 @@ Bytedance-UnionAD is available under the MIT license. See the LICENSE file for m
 
 ## FAQ & feedback channel
 Chinese developers could refer to the documentation on the Pangle whenever encountered any problems during the integration process:
-- FAQ document:  https://www.pangle.cn/help/doc/5dd0fe618507820012088272
-- Error code reference document:https://www.pangle.cn/help/doc/5de4cc6d78c8690012a90aa5
+- FAQ document:  https://www.csjplatform.com/supportcenter/5415
+- Error code reference document:https://www.csjplatform.com/supportcenter/5421
 
 
 Global developers can refer to the help center: https://www.pangleglobal.com/help
@@ -66,4 +66,4 @@ If the content of the document cannot solve your problem, you can try to give fe
 - Pangle will invite some developers to grayscale the new version of the SDK, please pay attention to the notice in the station. You can send an email to union_tech_support@bytedance.com to apply for the new version of the Pangle SDK. Your participation is highly appreciated!
 
 
-[Change Log](https://www.pangle.cn/help/doc/5fbdb6811ee5c2001d3f0ca5)
+[Change Log](https://www.csjplatform.com/supportcenter/5373)

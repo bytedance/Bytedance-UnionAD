@@ -5,6 +5,7 @@
 //  Created by Chan Gu on 2020/10/07.
 //
 
+import Foundation
 import XCTest
 @testable import PangleQuickStartDemo
 
@@ -21,6 +22,23 @@ class PangleQuickStartDemoTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+
+    func testSKAdNetworkItemsHaveIdentifiers() throws {
+        let testBundleURL = Bundle(for: PangleQuickStartDemoTests.self).bundleURL
+        let appBundleURL = testBundleURL
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let appBundle = try XCTUnwrap(Bundle(url: appBundleURL))
+        let items = try XCTUnwrap(
+            appBundle.object(forInfoDictionaryKey: "SKAdNetworkItems") as? [[String: Any]]
+        )
+
+        XCTAssertFalse(items.isEmpty)
+        for item in items {
+            let identifier = try XCTUnwrap(item["SKAdNetworkIdentifier"] as? String)
+            XCTAssertFalse(identifier.isEmpty)
+        }
     }
 
     func testPerformanceExample() throws {

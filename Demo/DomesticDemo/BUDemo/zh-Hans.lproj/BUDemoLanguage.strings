@@ -44,7 +44,6 @@
 "detail" = "查看详情 >";
 "downloadLinks" = "下载跳转";
 "URLLinks" = "URL跳转";
-"ShowPlayable" = "测试playable页面";
 "IsLandScape" = "是否横屏:";
 "Carousel" = "轮播:";
 "Vertical" = "竖屏";
@@ -86,7 +85,7 @@
 "waterfallAd" = "瀑布流广告";
 "newInterstitialfull" = "全屏";
 "newInterstitialhalf" = "半屏";
-
+"easyPlay" = "原生福利广告";
 
 "m_splashAd" = "聚合开屏广告";
 "m_rewardVideoAd" = "聚合激励视频广告";

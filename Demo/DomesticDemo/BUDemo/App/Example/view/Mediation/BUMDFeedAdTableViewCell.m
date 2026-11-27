@@ -10,7 +10,7 @@
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
-#import <AFNetworking/UIImageView+AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "BUDFeedStyleHelper.h"
 
 static CGFloat const margin = 15;
@@ -134,7 +134,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     const CGFloat imageHeight = imageWidth * (image.height / image.width);
     CGFloat imageX = width - margin - imageWidth;
     self.nativeAdView.mediation.canvasView.imageView.frame = CGRectMake(imageX, y, imageWidth, imageHeight);
-    [self.nativeAdView.mediation.canvasView.imageView setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
+    [self.nativeAdView.mediation.canvasView.imageView sd_setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:nil];
 
     CGFloat maxTitleWidth =  contentWidth - imageWidth - margin;
     NSAttributedString *attributedText = [BUDFeedStyleHelper titleAttributeText:model.data.AdTitle];
@@ -148,7 +148,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     // 广告标识
     if (model.data.mediation.adLogo.imageURL) {
         UIImageView *adLogoV = [[UIImageView alloc] initWithFrame:CGRectMake(width-20, y, 20, 20)];
-        [adLogoV setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
+        [adLogoV sd_setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
         [self.nativeAdView.mediation.canvasView addSubview:adLogoV];
     }
 
@@ -179,7 +179,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
             [adLogoV setImage:model.data.mediation.adLogo.mediation.image];
         } else if (model.data.mediation.adLogo.imageURL) {
             // image不存在使用url
-            [adLogoV setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
+            [adLogoV sd_setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
         }
         
         if (adLogoV.image) {
@@ -243,7 +243,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     // 广告标识
     if (model.data.mediation.adLogo.imageURL) {
         UIImageView *adLogoV = [[UIImageView alloc] initWithFrame:CGRectMake(width-20, y, 20, 20)];
-        [adLogoV setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
+        [adLogoV sd_setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
         [self.nativeAdView.mediation.canvasView addSubview:adLogoV];
     }
     
@@ -254,7 +254,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     CGFloat imageHeight = self.nativeAdView.mediation.canvasView.imageView.frame.size.height ? : 300;
     if (image) {
         imageHeight = contentWidth * (image.height / image.width);
-        [self.nativeAdView.mediation.canvasView.imageView setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:image.mediation.image];
+        [self.nativeAdView.mediation.canvasView.imageView sd_setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:image.mediation.image];
     }
     
     self.nativeAdView.mediation.canvasView.imageView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
@@ -281,7 +281,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
             [adLogoV setImage:model.data.mediation.adLogo.mediation.image];
         } else if (model.data.mediation.adLogo.imageURL) {
             // image不存在使用url
-            [adLogoV setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
+            [adLogoV sd_setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
         }
         
         if (adLogoV.image) {
@@ -376,7 +376,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     // 广告标识
     if (model.data.mediation.adLogo.imageURL) {
         UIImageView *adLogoV = [[UIImageView alloc] initWithFrame:CGRectMake(width-20, y, 20, 20)];
-        [adLogoV setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
+        [adLogoV sd_setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
         [self.nativeAdView.mediation.canvasView addSubview:adLogoV];
     }
         
@@ -389,18 +389,18 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
 
     CGFloat originX = padding.left;
     self.nativeAdView.mediation.canvasView.imageView.frame = CGRectMake(originX, y, imageWidth, imageHeight);
-    [self.nativeAdView.mediation.canvasView.imageView setImageWithURL:[NSURL URLWithString:model.data.imageAry[0].imageURL] placeholderImage:nil];
+    [self.nativeAdView.mediation.canvasView.imageView sd_setImageWithURL:[NSURL URLWithString:model.data.imageAry[0].imageURL] placeholderImage:nil];
 
     if (model.data.imageAry.count > 1) {
         originX += (imageWidth + 5);
         self.iv2.frame = CGRectMake(originX, y, imageWidth, imageHeight);
-        [self.iv2 setImageWithURL:[NSURL URLWithString:model.data.imageAry[1].imageURL] placeholderImage:nil];
+        [self.iv2 sd_setImageWithURL:[NSURL URLWithString:model.data.imageAry[1].imageURL] placeholderImage:nil];
     }
 
     if (model.data.imageAry.count > 2) {
         originX += (imageWidth + 5);
         self.iv3.frame = CGRectMake(originX, y, imageWidth, imageHeight);
-        [self.iv3 setImageWithURL:[NSURL URLWithString:model.data.imageAry[2].imageURL] placeholderImage:nil];
+        [self.iv3 sd_setImageWithURL:[NSURL URLWithString:model.data.imageAry[2].imageURL] placeholderImage:nil];
     }
 
     self.nativeAdView.mediation.canvasView.iconImageView.frame = CGRectMake(imageWidth - logoSize.width, imageHeight - logoSize.height, logoSize.width, logoSize.height);
@@ -441,7 +441,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
             [adLogoV setImage:model.data.mediation.adLogo.mediation.image];
         } else if (model.data.mediation.adLogo.imageURL) {
             // image不存在使用url
-            [adLogoV setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
+            [adLogoV sd_setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
         }
         if (adLogoV.image) {
             CGFloat width = 20;
@@ -536,7 +536,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     // 广告标识
     if (model.data.mediation.adLogo.imageURL) {
         UIImageView *adLogoV = [[UIImageView alloc] initWithFrame:CGRectMake(width-20, y, 20, 20)];
-        [adLogoV setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
+        [adLogoV sd_setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
         [self.nativeAdView.mediation.canvasView addSubview:adLogoV];
     }
     
@@ -581,7 +581,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
             [adLogoV setImage:model.data.mediation.adLogo.mediation.image];
         } else if (model.data.mediation.adLogo.imageURL) {
             // image不存在使用url
-            [adLogoV setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
+            [adLogoV sd_setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
         }
         if (adLogoV.image) {
             CGFloat width = 20;

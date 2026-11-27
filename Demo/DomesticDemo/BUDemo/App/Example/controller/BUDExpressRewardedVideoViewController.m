@@ -15,7 +15,7 @@
 #import "UIColor+DarkMode.h"
 #import "BUDExpressRewardedVideoAgainDelegateObj.h"
 
-@interface BUDExpressRewardedVideoViewController ()<BUNativeExpressRewardedVideoAdDelegate>
+@interface BUDExpressRewardedVideoViewController ()<BUNativeExpressRewardedVideoAdDelegate,BUCustomEventProtocol>
 @property (nonatomic, strong) BUNativeExpressRewardedVideoAd *rewardedAd;
 @property (nonatomic, strong) BUDSelectedView *selectedView;
 //optional
@@ -59,8 +59,6 @@
     self.rewardedAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:slotID rewardedVideoModel:model];
     // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.rewardedAd.delegate = self;
-    // optional
-    self.rewardedAd.rewardPlayAgainInteractionDelegate = self.expressRewardedVideoAgainDelegateObj;
     
     [self.rewardedAd loadAdData];
     
@@ -153,6 +151,10 @@
         str = @"appstoreInApp";
     }
     [self pbud_logWithSEL:_cmd msg:str];
+}
+
+- (void)onCustomEventCode:(NSInteger)code info:(NSDictionary *)info {
+    NSLog(@"Custom Event code = %ld info = %@",code,info);
 }
 #pragma mark - Log
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {

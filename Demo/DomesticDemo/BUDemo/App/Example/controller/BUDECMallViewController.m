@@ -8,9 +8,22 @@
 #import "BUDECMallViewController.h"
 #import <BUAdSDK/BUAdSDK.h>
 #import "BUDSlotID.h"
+#import "NSString+LocalizedString.h"
+
+typedef NS_ENUM(NSInteger, BUDECMallActionState) {
+    BUDECMallActionStateReadyToPreload,
+    BUDECMallActionStateLoading,
+    BUDECMallActionStateReadyToShow,
+};
+
 @interface BUDECMallViewController ()
 @property (nonatomic, strong) BUNativeAdsManager *adManager;
 @property (nonatomic, strong) BUNativeAdRelatedView *relatedView;
+@property (nonatomic, strong) UIView *ecMallAdView;
+@property (nonatomic, strong) UIBarButtonItem *loadAndShowButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *preloadShowButtonItem;
+@property (nonatomic, assign) BUDECMallActionState actionState;
+@property (nonatomic, assign) BOOL shouldShowECMallViewAfterLoad;
 @end
 
 @implementation BUDECMallViewController
@@ -18,11 +31,65 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self loadNativeAds];
+    [self setupNavigationBarButtons];
+    [self updatePreloadShowButtonWithState:BUDECMallActionStateReadyToPreload];
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self attachNavigationBarButtons];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self detachNavigationBarButtons];
+}
+
+- (void)setupNavigationBarButtons {
+    self.loadAndShowButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"加载并展示"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(loadAndShowButtonDidClick:)];
+    self.preloadShowButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"预加载"
+                                                                  style:UIBarButtonItemStylePlain
+                                                                 target:self
+                                                                 action:@selector(preloadShowButtonDidClick:)];
+}
+
+- (UINavigationItem *)activeNavigationItem {
+    return self.tabBarController.navigationItem ?: self.navigationItem;
+}
+
+- (void)attachNavigationBarButtons {
+    self.activeNavigationItem.rightBarButtonItems = @[self.loadAndShowButtonItem, self.preloadShowButtonItem];
+}
+
+- (void)detachNavigationBarButtons {
+    UINavigationItem *navigationItem = self.activeNavigationItem;
+    NSArray<UIBarButtonItem *> *rightBarButtonItems = navigationItem.rightBarButtonItems;
+    if ([rightBarButtonItems containsObject:self.loadAndShowButtonItem] || [rightBarButtonItems containsObject:self.preloadShowButtonItem]) {
+        navigationItem.rightBarButtonItems = nil;
+    }
+}
+
+- (void)loadAndShowButtonDidClick:(UIBarButtonItem *)sender {
+    self.shouldShowECMallViewAfterLoad = YES;
+    [self loadNativeAds];
+}
+
+- (void)preloadShowButtonDidClick:(UIBarButtonItem *)sender {
+    if (self.actionState == BUDECMallActionStateReadyToPreload) {
+        self.shouldShowECMallViewAfterLoad = NO;
+        [self loadNativeAds];
+    } else if (self.actionState == BUDECMallActionStateReadyToShow) {
+        [self showECMallView];
+    }
+}
+
 - (void)loadNativeAds {
+    [self resetECMallViewState];
+    [self updatePreloadShowButtonWithState:BUDECMallActionStateLoading];
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = native_feed_ecmall_ID;
     slot1.AdType = BUAdSlotAdTypeFeed;
@@ -37,20 +104,79 @@
     [nad loadAdDataWithCount:1];
 }
 
+- (void)resetECMallViewState {
+    [self.relatedView setECMallViewVisiable:NO];
+    [self.ecMallAdView removeFromSuperview];
+    self.ecMallAdView = nil;
+    self.relatedView = nil;
+}
+
+- (void)preloadECMallView {
+    UIView *adView = nil;
+    if ([self.relatedView isECMallValid]) {
+        adView = self.relatedView.ecMallView;
+    }
+    if (adView == nil) {
+        adView = [BUNativeAdRelatedView defaultECMallView];
+    }
+    if (adView == nil) {
+        [self updatePreloadShowButtonWithState:BUDECMallActionStateReadyToPreload];
+        return;
+    }
+    [self.relatedView setECMallViewVisiable:NO];
+    self.ecMallAdView = adView;
+    [self updatePreloadShowButtonWithState:BUDECMallActionStateReadyToShow];
+}
+
+- (void)showECMallView {
+    if (self.ecMallAdView == nil) {
+        [self updatePreloadShowButtonWithState:BUDECMallActionStateReadyToPreload];
+        return;
+    }
+    [self.relatedView setECMallViewVisiable:YES];
+    [self.ecMallAdView removeFromSuperview];
+    [self.view addSubview:self.ecMallAdView];
+    self.ecMallAdView.frame = self.view.bounds;
+    [self updatePreloadShowButtonWithState:BUDECMallActionStateReadyToPreload];
+}
+
+- (void)updatePreloadShowButtonWithState:(BUDECMallActionState)state {
+    self.actionState = state;
+    switch (state) {
+        case BUDECMallActionStateReadyToPreload:
+            self.preloadShowButtonItem.title = @"预加载";
+            self.preloadShowButtonItem.enabled = YES;
+            self.loadAndShowButtonItem.enabled = YES;
+            break;
+        case BUDECMallActionStateLoading:
+            self.preloadShowButtonItem.title = @"预加载";
+            self.preloadShowButtonItem.enabled = NO;
+            self.loadAndShowButtonItem.enabled = NO;
+            break;
+        case BUDECMallActionStateReadyToShow:
+            self.preloadShowButtonItem.title = @"展示";
+            self.preloadShowButtonItem.enabled = YES;
+            self.loadAndShowButtonItem.enabled = YES;
+            break;
+    }
+}
 
 - (void)nativeAdsManagerSuccessToLoad:(BUNativeAdsManager *)adsManager nativeAds:(NSArray<BUNativeAd *> *_Nullable)nativeAdDataArray {
    
-    UIView *adView;
+    BUNativeAdRelatedView *relatedView = nil;
     for (BUNativeAd *nativeAd in nativeAdDataArray) {
-        _relatedView = [[BUNativeAdRelatedView alloc] init];
-        [_relatedView refreshData:nativeAd];
-        adView = _relatedView.ecMallView;
+        relatedView = [[BUNativeAdRelatedView alloc] init];
+        [relatedView refreshData:nativeAd];
+        if ([relatedView isECMallValid]) {
+            break;
+        }
     }
-    if (adView == nil) {
-        adView == [BUNativeAdRelatedView defaultECMallView];
+    self.relatedView = relatedView;
+    [self preloadECMallView];
+    if (self.shouldShowECMallViewAfterLoad && self.ecMallAdView) {
+        [self showECMallView];
     }
-    [self.view addSubview:adView];
-    adView.bounds = self.view.bounds;
+    self.shouldShowECMallViewAfterLoad = NO;
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdsManagerDelegate" msg:[NSString stringWithFormat:@"native-count:%ld", (long)nativeAdDataArray.count]];
 
 }
@@ -59,6 +185,8 @@
 
 - (void)nativeAdsManager:(BUNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error {
     
+    self.shouldShowECMallViewAfterLoad = NO;
+    [self updatePreloadShowButtonWithState:BUDECMallActionStateReadyToPreload];
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdsManagerDelegate" msg:[NSString stringWithFormat:@"error:%@", error]];
 }
 #pragma mark - BUNativeExpressAdViewDelegate
@@ -126,7 +254,7 @@
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
 }
-- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd view:view {
+- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd view:(UIView *_Nullable)view {
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
 }
 

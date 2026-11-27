@@ -13,19 +13,16 @@
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 #import "UIView+Draw.h"
-#import "BUDAnimationTool.h"
 #import "UIColor+DarkMode.h"
 
 
-@interface BUMDSplashViewController () <BUMSplashAdDelegate, BUSplashCardDelegate, BUSplashZoomOutDelegate>
+@interface BUMDSplashViewController () <BUMSplashAdDelegate>
 
 @property (nonatomic, strong) BUSplashAd *splashAd;
 @property (nonatomic, strong) BUDNormalButton *button;
 @property (nonatomic, strong) BUDNormalButton *button1;
 
 @property (nonatomic, assign) CGRect splashFrame;
-
-@property (nonatomic, strong) BUSplashZoomOutView *zoomOutView;
 
 @end
 
@@ -84,13 +81,6 @@
     _splashAd = [[BUSplashAd alloc] initWithSlot:slot adSize:[UIScreen mainScreen].bounds.size];
     // // 配置：回调代理对象。不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     _splashAd.delegate = self;
-    _splashAd.cardDelegate = self;
-    _splashAd.zoomOutDelegate = self;
-    
-    // [可选]配置：是否展示卡片视图，默认不开启，仅支持穿山甲广告
-    _splashAd.supportCardView = YES;
-    // [可选]配置：是否支持ZoomOut
-    _splashAd.supportZoomOutView = YES;
 }
 
 - (void)buildupSplashViewWithBottomView {
@@ -173,36 +163,4 @@
 - (void)splashAdDidShowFailed:(BUSplashAd *_Nonnull)splashAd error:(NSError *)error {
     [self _pbud_logWithSEL:_cmd msg:@""];
 }
-
-#pragma mark - BUSplashCardDelegate
-- (void)splashCardReadyToShow:(nonnull BUSplashAd *)splashAd {
-    [self _pbud_logWithSEL:_cmd msg:@""];
-    [splashAd showCardViewInRootViewController:[[[UIApplication sharedApplication] delegate] window].rootViewController];
-}
-
-- (void)splashCardViewDidClick:(nonnull BUSplashAd *)splashAd {
-    [self _pbud_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashCardViewDidClose:(nonnull BUSplashAd *)splashAd {
-    [self _pbud_logWithSEL:_cmd msg:@""];
-}
-
-#pragma mark - BUSplashZoomOutDelegate
-- (void)splashZoomOutReadyToShow:(nonnull BUSplashAd *)splashAd {
-    [self _pbud_logWithSEL:_cmd msg:@""];
-     if (splashAd.zoomOutView) {
-         [splashAd showZoomOutViewInRootViewController:[[[UIApplication sharedApplication] delegate] window].rootViewController];
-     }
-}
-
-- (void)splashZoomOutViewDidClick:(nonnull BUSplashAd *)splashAd {
-    [self _pbud_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashZoomOutViewDidClose:(nonnull BUSplashAd *)splashAd {
-    [self _pbud_logWithSEL:_cmd msg:@""];
-}
-
 @end
-

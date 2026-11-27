@@ -79,38 +79,10 @@
 #define mopub_official_banner_UnitID         @"edc1f2d5f0554c7389bfdb272c798adb"
 #define mopub_official_reward_UnitID         @"07fbb1924348482b8b3fc02ec115faf5"
 
-#if googleUnit //使用google官方默认的unitId(use admob's default unitID)
-//#define admob_reward_UnitID               @"ca-app-pub-3940256099942544/1712485313"
-//#define admob_expressReward_UnitID        @"ca-app-pub-3940256099942544/1712485313"
-//#define admob_expressFullscreen_UnitID    @"ca-app-pub-3940256099942544/4411468910"
-//#define admob_expressBanner_UnitID        @"ca-app-pub-3940256099942544/2934735716"
-//#define admob_expressInterstitial_UnitID  @"ca-app-pub-3940256099942544/4411468910"
-//#define admob_native_UnitID               @"ca-app-pub-3940256099942544/3986624511"
-//#define admob_normalFullscreen_UnitID     @"ca-app-pub-3940256099942544/4411468910"
-
-#else
-//#define admob_reward_UnitID               @"ca-app-pub-2547387438729744/9313502870"
-//#define admob_native_UnitID               @"ca-app-pub-2547387438729744/4062704877"
-//#define admob_normalFullscreen_UnitID     @"ca-app-pub-2547387438729744/6878911221"
-//#define admob_expressReward_UnitID        @"ca-app-pub-9206388280072239/3833766591"
-//#define admob_expressFullscreen_UnitID    @"ca-app-pub-9206388280072239/7953469846"
-//#define admob_Banner_UnitID_640_100       @"ca-app-pub-2547387438729744/3823584037"
-//#define admob_Banner_UnitID_600_500       @"ca-app-pub-2547387438729744/3823584037"
-//#define admob_expressInterstitial_UnitID  @"ca-app-pub-9206388280072239/8309048289"
-#endif
 
 #endif /* BUDSlotID_h */
 
 /*
- admob广告位与adapter对应表：
- 广告类型                        adaper类                                        展示的VC
- NormalRewardVideo :           BUDAdmob_RewardCustomEventAdapter             BUDAdmob_RewardVideoCusEventVC
- NormalFullscreenVideo         BUDAdmob_NormalFullScreenCustomEventAdapter       BUDAdmob_FullScreenCusEventVC
- ExpressRewardVideo:           BUDAdmob_RewardExpressCustomEventAdapter      BUDAdmob_RewardExpressCusEventVC
- ExpressFullscreenVideo:       BUDAdmob_FullScreenCustomEventAdapter         BUDAdmob_FullScreenExpressCusEventVC
- ExpressBanner:                BUDAdmob_BannerCustomEventAdapter             BUDAdmob_BannerExpressCusEventVC
- ExpressInterstitial:          BUDAdmob_InterstitialCustomEventAdapter       BUDAdmob_InterstitialExpressCusEventVC
- 
  mopub广告位与adapter对应表：
  广告类型                        adaper类                                        展示的VC
  NormalRewardVideo:            BUDMopub_RewardedVideoCustomEvent             BUDMopub_RewardVideoCusEventVC

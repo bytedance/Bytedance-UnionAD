@@ -15,36 +15,18 @@ abstract_target 'Demo' do
       # 本target相较于BUADDemo Target多了聚合维度功能展示
       # 穿山甲
       pod 'Ads-CN'
-      pod 'BUAdTestMeasurement'
 
       # 聚合维度其他家ADN的引入 版本支持请以”接入文档->前置说明“中为准，请不要更换GroMoreSDK不支持的三方sdk版本，引用了哪些adapter, 请相应地引入这些adapter对应的adn的广告SDK
       # UnityAds
       pod 'UnityAds', '4.3.0'
-      # Admob/GoogleAd
-      pod 'Google-Mobile-Ads-SDK', '10.0.0'
       # 百度SDK
-      pod 'BaiduMobAdSDK', '5.38'
+      pod 'BaiduMobAdSDK', '10.060'
       # 广点通/优量汇
-      pod 'GDTMobSDK', '4.15.30'
+      pod 'GDTMobSDK', '4.16.10'
       # SigmobAd
-      pod 'SigmobAd-iOS', '4.17.0'
+      pod 'SigmobAd-iOS', '5.1.4'
       # 快手
-      pod 'KSAdSDK', '3.3.75'
-      # MintegralAdSDK 使用时请务必使用cocoapod源
-      pod 'MintegralAdSDK', '7.7.7', :subspecs => [
-        'SplashAd',
-        'NewInterstitialAd',
-        'InterstitialVideoAd',
-        'RewardVideoAd',
-        'NativeAd',
-        'NativeAdvancedAd',
-        'BannerAd',
-        'BidNativeAd',
-        'BidNewInterstitialAd',
-        'BidInterstitialVideoAd',
-        'BidRewardVideoAd'
-      ]
-
+      pod 'KSAdSDK', '5.7.20.1'
   
       end
 end

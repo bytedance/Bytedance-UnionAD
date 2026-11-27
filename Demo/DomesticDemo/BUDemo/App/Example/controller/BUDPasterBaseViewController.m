@@ -256,7 +256,7 @@
             continue;
         }
 
-        BOOL isCustom = self.playerStyle == BUDPasterPlayerStyleCustom;
+        BOOL isCustom = self.playerStyle == BUDPasterPlayerStyleCustom && nativeAd.data.videoUrl.length > 0;
         BUDPasterContentView *pasterConainerView = [[BUDPasterContentView alloc] initWithPasterContentWith:isCustom];
         [self.currentAds addObject:nativeAd];
         [self.adViews addObject:pasterConainerView];

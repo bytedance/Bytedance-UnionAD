@@ -13,7 +13,6 @@
 #import "BUDSlotID.h"
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
-#import "NSBundle+BUDemo.h"
 
 @interface BUMDFeedViewController ()<UITableViewDataSource, UITableViewDelegate, BUMNativeAdsManagerDelegate, BUMNativeAdDelegate>
 
@@ -135,8 +134,17 @@
     self.adManager.mediation.rootViewController = self;
     // 配置：回调代理对象
     self.adManager.delegate = self;
+    [self.adManager.mediation addParam:@(NO) withKey:BUMMediaAdRotateViewEnable];
     // 开始加载广告
     [self.adManager loadAdDataWithCount:3];
+}
+
+- (BOOL)isVideoAd:(BUNativeAd *)ad {
+    return ad.data.imageMode == BUFeedVideoAdModeImage ||
+           ad.data.imageMode == BUFeedVideoAdModePortrait ||
+           ad.data.imageMode == BUFeedADModeSquareVideo ||
+           ad.data.imageMode == BUFeedADModeCreativeVideoImage ||
+           ad.data.imageMode == BUFeedADModeCreativeVideoImagePortrait;
 }
 
 # pragma mark ---<BUMNativeAdsManagerDelegate>---
@@ -223,6 +231,41 @@
         UIView *flipView = [flipWidget renderWithFrame:newFrame];
         if (flipView) {        
             [widget.adView addSubview:flipView];
+        }
+    }
+    
+    BUMAdViewWidget *rotateWidget = notify.userInfo[BUMMediaAdRotateViewCreator];
+    if (rotateWidget) {
+        CGFloat x1 = 6;
+        CGFloat y1 = rotateWidget.adView.frame.size.height - 20;
+        CGRect newFrame1;
+        newFrame1.origin.x = x1;
+        newFrame1.origin.y = y1;
+        newFrame1.size.height = 100;
+        newFrame1.size.width = self.view.frame.size.width;
+        
+        UIView *rotateView = [rotateWidget renderWithFrame:newFrame1];
+        rotateView.backgroundColor = [UIColor greenColor];
+        if (rotateView) {
+            [rotateWidget.adView addSubview:rotateView];
+        }
+    }
+    
+    BUMAdViewWidget *eCommerceWidget = notify.userInfo[BUMMediaAdECommerceViewCreator];
+    if (eCommerceWidget) {
+        UIView *eCommerceView = [eCommerceWidget renderWithFrame:eCommerceWidget.adView.frame];
+        eCommerceView.backgroundColor = [UIColor grayColor];
+        if (eCommerceView) {
+            [eCommerceWidget.adView addSubview:eCommerceView];
+        }
+    }
+
+    BUMAdViewWidget *discountMagneticWidget = notify.userInfo[BUMMediaAdDiscountMagneticViewCreator];
+    if (discountMagneticWidget) {
+        UIView *discountMagneticView = [discountMagneticWidget renderWithFrame:discountMagneticWidget.adView.frame];
+        discountMagneticView.backgroundColor = [UIColor orangeColor];
+        if (discountMagneticView) {
+            [discountMagneticWidget.adView addSubview:discountMagneticView];
         }
     }
 }
@@ -344,15 +387,14 @@
             return cell;
         } else {
             // 自渲染
-            if (nativeAd.data.imageMode == BUMFeedADModeSmallImage) {
+            if (nativeAd.data.imageMode == BUFeedADModeSmallImage) {
                 cell = [tableView dequeueReusableCellWithIdentifier:@"BUMDFeedAdLeftTableViewCell" forIndexPath:indexPath];
-            } else if (nativeAd.data.imageMode == BUMFeedADModeLargeImage ||
-                       nativeAd.data.imageMode == BUMFeedADModeImagePortrait) {
+            } else if (nativeAd.data.imageMode == BUFeedADModeLargeImage ||
+                       nativeAd.data.imageMode == BUFeedADModeImagePortrait) {
                 cell = [tableView dequeueReusableCellWithIdentifier:@"BUMDFeedAdLargeTableViewCell" forIndexPath:indexPath];
-            } else if (nativeAd.data.imageMode == BUMFeedADModeGroupImage) {
+            } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
                 cell = [tableView dequeueReusableCellWithIdentifier:@"BUMDFeedAdGroupTableViewCell" forIndexPath:indexPath];
-            } else if (nativeAd.data.imageMode == BUMFeedVideoAdModeImage ||
-                       nativeAd.data.imageMode == BUMFeedVideoAdModePortrait) {
+            } else if ([self isVideoAd:nativeAd]) {
                 cell = [tableView dequeueReusableCellWithIdentifier:@"BUMDFeedVideoAdTableViewCell" forIndexPath:indexPath];
                 // Set the delegate to listen for status of video
                 isVideoCell = YES;
@@ -431,13 +473,13 @@
         if (nativeAdView.mediation.isExpressAd) {
             height = nativeAdView.mediation.canvasView.bounds.size.height;
         } else {
-            if (nativeAdView.data.imageMode == BUMFeedADModeSmallImage) {
+            if (nativeAdView.data.imageMode == BUFeedADModeSmallImage) {
                 height = [BUMDFeedAdLeftTableViewCell cellHeightWithModel:nativeAdView width:width];
-            } else if (nativeAdView.data.imageMode == BUMFeedADModeLargeImage || nativeAdView.data.imageMode == BUMFeedADModeImagePortrait) {
+            } else if (nativeAdView.data.imageMode == BUFeedADModeLargeImage || nativeAdView.data.imageMode == BUFeedADModeImagePortrait) {
                 height = [BUMDFeedAdLargeTableViewCell cellHeightWithModel:nativeAdView width:width];
-            } else if (nativeAdView.data.imageMode == BUMFeedADModeGroupImage) {
+            } else if (nativeAdView.data.imageMode == BUFeedADModeGroupImage) {
                 height = [BUMDFeedAdGroupTableViewCell cellHeightWithModel:nativeAdView width:width];
-            } else if (nativeAdView.data.imageMode == BUMFeedVideoAdModeImage) {
+            } else if ([self isVideoAd:nativeAdView]) {
                 height = [BUMDFeedVideoAdTableViewCell cellHeightWithModel:nativeAdView width:width];
             }
         }
@@ -464,14 +506,14 @@
         if (nativeAdView.mediation.isExpressAd) {
             height = nativeAdView.mediation.canvasView.bounds.size.height;
         } else {
-            if (nativeAdView.data.imageMode == BUMFeedADModeSmallImage) {
+            if (nativeAdView.data.imageMode == BUFeedADModeSmallImage) {
                 height =  [BUMDFeedAdLeftTableViewCell cellHeightWithModel:nativeAdView width:width];
-            } else if (nativeAdView.data.imageMode == BUMFeedADModeLargeImage ||
-                       nativeAdView.data.imageMode == BUMFeedADModeImagePortrait) {
+            } else if (nativeAdView.data.imageMode == BUFeedADModeLargeImage ||
+                       nativeAdView.data.imageMode == BUFeedADModeImagePortrait) {
                 height =  [BUMDFeedAdLargeTableViewCell cellHeightWithModel:nativeAdView width:width];
-            } else if (nativeAdView.data.imageMode == BUMFeedADModeGroupImage) {
+            } else if (nativeAdView.data.imageMode == BUFeedADModeGroupImage) {
                 height =  [BUMDFeedAdGroupTableViewCell cellHeightWithModel:nativeAdView width:width];
-            } else if (nativeAdView.data.imageMode == BUMFeedVideoAdModeImage) {
+            } else if ([self isVideoAd:nativeAdView]) {
                 height =  [BUMDFeedVideoAdTableViewCell cellHeightWithModel:nativeAdView width:width];
             }
         }

@@ -65,11 +65,39 @@
     model.rewardAmount = 100;
 
     self.rewardedVideoAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlot:adslot rewardedVideoModel:model];
+    
+    // 配置百度二段激励信息(仅支持百度)
+    // 构建两组激励配置列表：同时支持膨胀奖励(Type 1)和翻倍奖励(Type 2)
+    NSMutableArray *twoStageInfoList = [NSMutableArray array];
+    
+    // 方式1：膨胀奖励 (Type 1)
+    NSDictionary *inflationConfig = @{
+        @"two_stage_reward_type": @"1",
+        @"two_stage_basic_reward": @"888",
+        @"two_stage_basic_unit": @"元",
+        @"two_stage_advanced_reward": @"33333",
+        @"two_stage_advanced_unit": @"元"
+    };
+    [twoStageInfoList addObject:inflationConfig];
+    
+    // 方式2：翻倍奖励 (Type 2)
+    NSDictionary *doublingConfig = @{
+        @"two_stage_reward_type": @"2",
+        @"two_stage_basic_reward": @"999",
+        @"two_stage_basic_unit": @"元",
+        @"two_stage_advanced_reward": @"1776",
+        @"two_stage_advanced_unit": @"元",
+        @"two_stage_multiple": @"2"
+    };
+    [twoStageInfoList addObject:doublingConfig];
+    
+    // 将配置列表传入
+    [self.rewardedVideoAd.mediation addParam:twoStageInfoList withKey:BUMAdLoadingParamRVTwoStageInfoList];
+
     // 配置：回调代理对象。不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     self.rewardedVideoAd.delegate = self;
     // [可选]配置：激励再得的回调
     self.rewardedVideoAd.rewardPlayAgainInteractionDelegate = self.rewardedVideoAgainDelegateObj;
-    
     self.selectedView.promptStatus = BUDPromptStatusLoading;
     [self.rewardedVideoAd loadAdData];
 }
@@ -158,6 +186,18 @@
     BUD_Log(@"rewardInfo.tradeId-%@",self.rewardedVideoAd.rewardedVideoModel.mediation.tradeId);
     BUD_Log(@"rewardInfo.adnName-%@",self.rewardedVideoAd.rewardedVideoModel.mediation.adnName);
     BUD_Log(@"rewardInfo verifyByGroMoreS2S-%@",self.rewardedVideoAd.rewardedVideoModel.mediation.verifyByGroMoreS2S?@"true":@"false");
+    
+    // 区分二段激励类型(仅支持百度)
+    // rewardType: 0-普通奖励, 1-膨胀奖励, 2-翻倍奖励
+    NSInteger rewardType = self.rewardedVideoAd.rewardedVideoModel.rewardType;
+    BUD_Log(@"rewardInfo.rewardType-%ld", (long)rewardType);
+    if (rewardType == 1) {
+         BUD_Log(@"这是膨胀奖励");
+    } else if (rewardType == 2) {
+         BUD_Log(@"这是翻倍奖励");
+    } else {
+         BUD_Log(@"这是普通奖励");
+    }
 }
 
 - (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
@@ -167,4 +207,3 @@
 }
 
 @end
-

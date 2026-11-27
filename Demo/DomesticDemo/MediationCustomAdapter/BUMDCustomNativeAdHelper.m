@@ -65,7 +65,7 @@
     return self.adLogo;
 }
 
-- (BUMMediatedNativeAdMode)imageMode {
-    return BUMMediatedNativeAdModeLargeImage;
+- (BUFeedADMode)imageMode {
+    return BUFeedADModeLargeImage;
 }
 @end

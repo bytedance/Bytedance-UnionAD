@@ -22,6 +22,7 @@
 #import "BUDRewardedAdListViewController.h"
 #import "BUDStreamAdListViewController.h"
 
+#import "BUDIncentiveViewController.h"
 #if TARGET==1
 #import "BUDUGenoDemoViewController.h"
 #endif
@@ -96,11 +97,17 @@
         [self showViewController:[[BUDStreamAdListViewController alloc] init] sender:nil];
     }];
     
+    BUDActionModel *easyPlayItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kEasyPlay] type:BUDCellType_native action:^{
+        __strong typeof(weakSelf) self = weakSelf;
+        [self showViewController:[[BUDIncentiveViewController alloc] init] sender:nil];
+    }];
+    
     BUDActionModel *waterfallItem = [BUDActionModel plainTitleActionModel:[NSString localizedStringForKey:kWaterfallAd] type:BUDCellType_video action:^{
         __strong typeof(weakSelf) self = weakSelf;
         BUDWaterfallViewController *vc = [BUDWaterfallViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }];
+    
 
 #if TARGET==1
     BUDActionModel *ugenoItem = [BUDActionModel plainTitleActionModel:@"UGenoDemo" type:BUDCellType_CustomEvent action:^{
@@ -126,33 +133,24 @@
     }];
 
     NSArray *normalItems = @[
-        @[feedAdVc, drawAdVc, bannerAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc],
+        @[feedAdVc, drawAdVc, bannerAdVc, splashAdVc, rewardedAdVc, fullScreenVideoAdVc, streamAdVc, easyPlayItem],
         @[waterfallItem]];
     
     [self.items addObjectsFromArray:normalItems];
     
-    Class cls = NSClassFromString(@"BUDUgenPreviewViewController");
-    if (cls != nil && [[cls new] isKindOfClass:[UIViewController class]]) {
-        BUDActionModel *ugenPreviewItem = [BUDActionModel plainTitleActionModel:@"Ugen-Preview" type:BUDCellType_CustomEvent action:^{
+    // 研发实验室聚合入口：仅内部工程（集成调试扩展 pod）实现并注册对应类。
+    // 对外 demo 未链接该类，运行时查找返回 nil，入口不出现。
+    Class devLabClass = NSClassFromString(@"BUDDevLabViewController");
+    if (devLabClass != nil && [[devLabClass new] isKindOfClass:[UIViewController class]]) {
+        BUDActionModel *devLabItem = [BUDActionModel plainTitleActionModel:@"Dev Lab" type:BUDCellType_CustomEvent action:^{
             __strong typeof(weakSelf) self = weakSelf;
-            UIViewController *vc = [cls new];
+            UIViewController *vc = [devLabClass new];
             [self.navigationController pushViewController:vc animated:YES];
         }];
-        
-        [self.items addObject:@[ugenPreviewItem]];
+
+        [self.items addObject:@[devLabItem]];
     }
-    
-    Class cls2 = NSClassFromString(@"BUDJSBDebugViewController");
-    if (cls2 != nil && [[cls2 new] isKindOfClass:[UIViewController class]]) {
-        BUDActionModel *item = [BUDActionModel plainTitleActionModel:@"JSB-Debug" type:BUDCellType_CustomEvent action:^{
-            __strong typeof(weakSelf) self = weakSelf;
-            UIViewController *vc = [cls2 new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }];
-        
-        [self.items addObject:@[item]];
-    }
-    
+
     
 #if __has_include(<BUWebAd/BUWebAd.h>)
     [self.items addObject:@[webAdItem]];
@@ -164,16 +162,14 @@
     
     [self.items addObject:@[toolsItem]];
 
-    CGFloat height = 22 * self.items.count;
-    for (NSArray *subItem in self.items) {
-        height += 44 * subItem.count;
-    }
-    height += 30;
-    UILabel *versionLable = [[UILabel alloc]initWithFrame:CGRectMake(0, height, self.tableView.frame.size.width, 40)];
-    versionLable.textAlignment = NSTextAlignmentCenter;
-    versionLable.text = [NSString stringWithFormat:@"v%@",[BUAdSDKManager SDKVersion]];
-    versionLable.textColor = [UIColor grayColor];
-    [self.tableView addSubview:versionLable];
+    UIView *versionFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 70)];
+    UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, versionFooterView.bounds.size.width, 40)];
+    versionLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    versionLabel.textAlignment = NSTextAlignmentCenter;
+    versionLabel.text = [NSString stringWithFormat:@"v%@", [BUAdSDKManager SDKVersion]];
+    versionLabel.textColor = [UIColor grayColor];
+    [versionFooterView addSubview:versionLabel];
+    self.tableView.tableFooterView = versionFooterView;
 }
 
 - (void)viewDidLayoutSubviews {

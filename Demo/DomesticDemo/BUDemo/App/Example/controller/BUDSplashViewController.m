@@ -12,11 +12,10 @@
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 #import "UIView+Draw.h"
-#import "BUDAnimationTool.h"
 #import "UIColor+DarkMode.h"
 
 
-@interface BUDSplashViewController () <BUSplashAdDelegate, BUSplashCardDelegate, BUSplashZoomOutDelegate>
+@interface BUDSplashViewController () <BUSplashAdDelegate>
 
 @property (nonatomic, strong) BUSplashAd *splashAd;
 @property (nonatomic, strong) BUDNormalButton *button;
@@ -34,7 +33,6 @@
 
 @property (nonatomic, strong) UIViewController *rootViewController;
 @property (nonatomic, strong) BUDSplashContainerViewController *customSplashVC;
-@property (nonatomic, strong) BUSplashZoomOutView *zoomOutView;
 
 @end
 
@@ -139,11 +137,6 @@
     _splashAd = [[BUSplashAd alloc] initWithSlotID:self.viewModel.slotID adSize:self.splashFrame.size];
     // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     _splashAd.delegate = self;
-    _splashAd.cardDelegate = self;
-    _splashAd.zoomOutDelegate = self;
-    
-    _splashAd.supportCardView = YES;
-    _splashAd.supportZoomOutView = YES;
     _splashAd.tolerateTimeout = 3.0;
 
     // 加载广告
@@ -159,11 +152,6 @@
     _splashAd = [[BUSplashAd alloc] initWithSlotID:self.viewModel.slotID adSize:self.splashFrame.size];
     // 不支持中途更改代理，中途更改代理会导致接收不到广告相关回调，如若存在中途更改代理场景，需自行处理相关逻辑，确保广告相关回调正常执行。
     _splashAd.delegate = self;
-    _splashAd.cardDelegate = self;
-    _splashAd.zoomOutDelegate = self;
-    
-    _splashAd.supportCardView = YES;
-    _splashAd.supportZoomOutView = YES;
     _splashAd.tolerateTimeout = 3;
 
     [_splashAd loadAdData];
@@ -183,11 +171,6 @@
     
     _splashAd = [[BUSplashAd alloc] initWithSlotID:self.viewModel.slotID adSize:self.splashFrame.size];
     _splashAd.delegate = self;
-    _splashAd.cardDelegate = self;
-    _splashAd.zoomOutDelegate = self;
-    
-    _splashAd.supportCardView = YES;
-    _splashAd.supportZoomOutView = YES;
     _splashAd.hideSkipButton = YES;
     _splashAd.tolerateTimeout = 3;
     [_splashAd loadAdData];
@@ -213,21 +196,7 @@
     
     if (self.splashAd.hideSkipButton) {
         //
-        UIView *splashViewSnapshot = [self.splashAd.splashView snapshotViewAfterScreenUpdates:YES];
         [self.splashAd removeSplashView];
-        // 展示点睛
-        if (self.splashAd.zoomOutView) {
-            self.splashAd.zoomOutView.rootViewController = self.navigationController;
-            [self.navigationController.view addSubview:self.splashAd.zoomOutView];
-            [self.navigationController.view addSubview:splashViewSnapshot];
-            [[BUDAnimationTool sharedInstance] transitionFromView:splashViewSnapshot toView:self.splashAd.zoomOutView splashCompletion:^{
-                [splashViewSnapshot removeFromSuperview];
-            }];
-        }
-        // 展示卡片
-        if (self.splashAd.cardView) {
-            [self.splashAd showCardViewInRootViewController:self.navigationController];
-        }
     } else {
         [self.splashAd removeSplashView];
     }
@@ -248,18 +217,6 @@
 
 - (void)button3Tapped:(UIButton *)sender {
     [self buildupSplashViewWithBottomView];
-}
-
-- (void)setUpSplashZoomOutAd:(BUSplashAd *)splashAd {
-    if (!splashAd.zoomOutView) {
-        return;
-    }
-    [self.navigationController.view addSubview:splashAd.zoomOutView];
-    [self.navigationController.view addSubview:splashAd.splashViewSnapshot];
-    splashAd.zoomOutView.rootViewController = self;
-    [[BUDAnimationTool sharedInstance] transitionFromView:splashAd.splashViewSnapshot toView:splashAd.zoomOutView splashCompletion:^{
-        [splashAd.splashViewSnapshot removeFromSuperview];
-    }];
 }
 
 #pragma mark - BUSplashAdDelegate
@@ -324,54 +281,6 @@
 - (void)splashVideoAdDidPlayFinish:(nonnull BUSplashAd *)splashAd didFailWithError:(nullable NSError *)error {
     [self pbud_logWithSEL:_cmd msg:@""];
 }
-
-
-#pragma mark - BUSplashCardDelegate
-- (void)splashCardReadyToShow:(nonnull BUSplashAd *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-    [splashAd showCardViewInRootViewController:[[[UIApplication sharedApplication] delegate] window].rootViewController];
-}
-
-- (void)splashCardViewDidClick:(nonnull BUSplashAd *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashCardViewDidClose:(nonnull BUSplashAd *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-}
-
-#pragma mark - BUSplashZoomOutDelegate
-
-- (void)splashZoomOutReadyToShow:(nonnull BUSplashAd *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-    // 接入方法一：使用SDK提供动画接入
-     if (splashAd.zoomOutView) {
-         [splashAd showZoomOutViewInRootViewController:[[[UIApplication sharedApplication] delegate] window].rootViewController];
-     }
-    
-    // 接入方法二：自定义动画接入
-//    if (splashAd.zoomOutView) {
-//        __weak typeof(self) weakSelf = self;
-//        UIViewController *rootViewController = [[[UIApplication sharedApplication] delegate] window].rootViewController;
-//        splashAd.zoomOutView.rootViewController = rootViewController;
-//        [rootViewController.view addSubview:splashAd.zoomOutView];
-//        [rootViewController.view addSubview:splashAd.splashViewSnapshot];
-//        [[BUDAnimationTool sharedInstance] transitionFromView:splashAd.splashViewSnapshot toView:splashAd.zoomOutView splashCompletion:^{
-//            __strong typeof(weakSelf) strongSelf = weakSelf;
-//            [strongSelf.splashAd.splashViewSnapshot removeFromSuperview];
-//        }];
-//    }
-}
-
-- (void)splashZoomOutViewDidClick:(nonnull BUSplashAd *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-}
-
-- (void)splashZoomOutViewDidClose:(nonnull BUSplashAd *)splashAd {
-    [self pbud_logWithSEL:_cmd msg:@""];
-}
-
-
 
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {
     BUD_Log(@"SDKDemoDelegate BUSplashAdView In VC (%@) extraMsg:%@", NSStringFromSelector(sel), msg);

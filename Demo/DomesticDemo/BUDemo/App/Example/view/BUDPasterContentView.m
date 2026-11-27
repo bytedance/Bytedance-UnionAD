@@ -143,7 +143,11 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     }
     
     const CGFloat imageHeight = contentWidth * (9.0 / 16.0);
-    self.nativeAdRelatedView.logoADImageView.frame = CGRectMake(padding.left + contentWidth - logoSize.width, y + imageHeight - logoSize.height, logoSize.width, logoSize.height);
+    CGSize logoImageSize = self.nativeAdRelatedView.logoADImageView.image.size;
+    if (logoImageSize.width == 0 || logoImageSize.height == 0) {
+        logoImageSize = logoSize;
+    }
+    self.nativeAdRelatedView.logoADImageView.frame = CGRectMake(padding.left + contentWidth - logoImageSize.width, y + imageHeight - logoImageSize.height, logoImageSize.width, logoImageSize.height);
     [self bringSubviewToFront:self.nativeAdRelatedView.logoADImageView];
     
     y += imageHeight;
@@ -208,7 +212,13 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
 - (CGSize)sizeThatFits:(CGSize)size {
     CGFloat width = self.frame.size.width;
-    CGFloat height = [[self class] heightWithModel:self.nativeAd width:width];
+    CGFloat height = 0;
+    if (self.isCustomPlayer) {
+        height = [[self class] heightWithModel:self.nativeAd width:width];
+    } else {
+        height = self.nativeAdRelatedView.mediaAdView.frame.size.height;
+    }
+     
     return CGSizeMake(width, height);
 }
 
@@ -268,7 +278,7 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
 
 - (BOOL)isVideoAd {
     BUNativeAd *ad = self.nativeAd;
-    return ad.data.imageMode == BUFeedVideoAdModeImage || ad.data.imageMode == BUFeedVideoAdModePortrait || ad.data.imageMode == BUFeedADModeSquareVideo;
+    return ad.data.imageMode == BUFeedVideoAdModeImage || ad.data.imageMode == BUFeedVideoAdModePortrait || ad.data.imageMode == BUFeedADModeSquareVideo || ad.data.imageMode == BUFeedADModeCreativeVideoImage || ad.data.imageMode == BUFeedADModeCreativeVideoImagePortrait;
 }
 
 - (BOOL)isImageAd {

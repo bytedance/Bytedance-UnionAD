@@ -10,7 +10,7 @@
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 #import "BUDFeedStyleHelper.h"
-#import <AFNetworking/UIImageView+AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 static CGFloat const margin = 15;
 static CGSize const logoSize = { 15, 15 };
@@ -135,7 +135,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     // 广告标识
     if (model.data.mediation.adLogo.imageURL) {
         UIImageView *adLogoV = [[UIImageView alloc] initWithFrame:CGRectMake(width-20, y, 20, 20)];
-        [adLogoV setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
+        [adLogoV sd_setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
         [self.drawAdView.mediation.canvasView addSubview:adLogoV];
     }
     
@@ -149,7 +149,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
     if (image.width > 0) {
         imageHeight = contentWidth * (image.height / image.width);
         if (!self.drawAdView.mediation.canvasView.mediaView) {
-            [self.drawAdView.mediation.canvasView.imageView setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:image.mediation.image];
+            [self.drawAdView.mediation.canvasView.imageView sd_setImageWithURL:[NSURL URLWithString:image.imageURL] placeholderImage:image.mediation.image];
             self.drawAdView.mediation.canvasView.imageView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
         }
     }
@@ -184,7 +184,7 @@ static UIEdgeInsets const padding = { 10, 15, 10, 15 };
             [adLogoV setImage:model.data.mediation.adLogo.mediation.image];
         } else if (model.data.mediation.adLogo.imageURL) {
             // image不存在使用url
-            [adLogoV setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
+            [adLogoV sd_setImageWithURL:[NSURL URLWithString:model.data.mediation.adLogo.imageURL]];
         }
         if (adLogoV.image) {
             CGFloat width = 20;

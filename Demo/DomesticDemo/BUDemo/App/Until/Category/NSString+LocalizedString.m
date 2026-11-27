@@ -86,6 +86,7 @@ NSString * const kStreamAdNative = @"streamAdNative" ;
 NSString * const kStreamAdCustom = @"streamAdCutom" ;
 NSString * const kStreamAdSDK = @"streamAdSDK" ;
 NSString * const kWaterfallAd = @"waterfallAd";
+NSString * const kEasyPlay = @"easyPlay";
 NSString * const kNewInterstitialfull = @"newInterstitialfull";
 NSString * const kNewInterstitialhalf = @"newInterstitialhalf";
 NSString * const kUgenoLUPage = @"聚合页1-imageMode16";

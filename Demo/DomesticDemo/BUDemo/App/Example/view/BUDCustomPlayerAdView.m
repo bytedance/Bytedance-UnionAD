@@ -122,7 +122,11 @@ static UIEdgeInsets const padding = {10, 15, 10, 15};
     const CGFloat imageHeight = contentWidth * (image.height / image.width);
 
   //  self.videoView.frame = CGRectMake(padding.left, y, contentWidth, imageHeight);
-    self.nativeAdRelatedView.logoADImageView.frame = CGRectMake(CGRectGetMaxX(self.videoView.frame) - logoSize.width, CGRectGetMaxY(self.videoView.frame) - logoSize.height, logoSize.width, logoSize.height);
+    CGSize logoImageSize = self.nativeAdRelatedView.logoADImageView.image.size;
+    if (logoImageSize.width == 0 || logoImageSize.height == 0) {
+        logoImageSize = logoSize;
+    }
+    self.nativeAdRelatedView.logoADImageView.frame = CGRectMake(CGRectGetMaxX(self.videoView.frame) - logoImageSize.width, CGRectGetMaxY(self.videoView.frame) - logoImageSize.height, logoImageSize.width, logoImageSize.height);
     y += imageHeight;
 
     self.bgView.frame = CGRectMake(padding.left, y, contentWidth, self.creativeButton.frame.size.height + 20);

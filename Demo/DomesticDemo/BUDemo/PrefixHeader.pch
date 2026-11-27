@@ -13,6 +13,7 @@
 
 #import "BUDCommonMacros.h"
 #import "UIView+BUDAdditions.h"
+#import "NSBundle+BUDemo.h"
 
 #endif
 

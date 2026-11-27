@@ -101,6 +101,7 @@ extern NSString * const kMRewardVideoAd;
 extern NSString * const kMFeedAd;
 extern NSString * const kMDrawAd;
 extern NSString * const kGMInterstitialProAd;
+extern NSString * const kEasyPlay;
 
 @interface NSString (LocalizedString)
 

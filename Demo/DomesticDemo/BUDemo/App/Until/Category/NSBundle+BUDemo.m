@@ -10,8 +10,7 @@
 @implementation NSBundle (BUDemo)
 
 + (NSString *)csjDemoResource_pathForResource:(nullable NSString *)name ofType:(nullable NSString *)ext {
-    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"CSJDemoResource" ofType:@"bundle"];
-    NSString *config = [[NSBundle bundleWithPath:bundlePath] pathForResource:name ofType:ext];
+    NSString *config = [[NSBundle mainBundle] pathForResource:name ofType:ext];
     return config;
 }
 

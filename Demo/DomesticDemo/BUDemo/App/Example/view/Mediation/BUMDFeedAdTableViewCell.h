@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^CellClose)(NSInteger index, BUMDFeedAdBaseTableViewCell *cell);
+typedef void (^BUMDCellClose)(NSInteger index, BUMDFeedAdBaseTableViewCell *cell);
 
 @protocol BUMDFeedCellProtocol <NSObject>
 
@@ -23,7 +23,7 @@ typedef void (^CellClose)(NSInteger index, BUMDFeedAdBaseTableViewCell *cell);
 - (void)refreshUIWithModel:(BUNativeAd *_Nonnull)model;
 + (CGFloat)cellHeightWithModel:(BUNativeAd *_Nonnull)model width:(CGFloat)width;
 
-@property (nonatomic, copy) CellClose cellClose;
+@property (nonatomic, copy) BUMDCellClose cellClose;
 
 @end
 

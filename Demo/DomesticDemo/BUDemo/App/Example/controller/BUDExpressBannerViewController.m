@@ -192,6 +192,7 @@
         self.bannerView = nil;
     }];
     self.selectedView.promptStatus = BUDPromptStatusDefault;
+    [self pbud_logWithSEL:_cmd msg:@""];
 }
 
 - (void)pbud_logWithSEL:(SEL)sel msg:(NSString *)msg {

@@ -19,8 +19,7 @@
 #ifdef DEBUG
 #import <MBProgressHUD/MBProgressHUD.h>
 #endif
-#import "NSBundle+BUDemo.h"
-@interface BUDFeedViewController () <UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate,BUNativeExpressAdViewDelegate, BUDFeedCustomDislikeDelgate>
+@interface BUDFeedViewController () <UITableViewDataSource, UITableViewDelegate, BUNativeAdsManagerDelegate, BUVideoAdViewDelegate,BUNativeAdDelegate,BUNativeExpressAdViewDelegate, BUDFeedCustomDislikeDelgate,BUCustomEventProtocol>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) BUNativeAdsManager *adManager;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -215,7 +214,7 @@
         return [BUDFeedAdLargeTableViewCell cellHeightWithModel:nativeAd width:width];
     } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
         return [BUDFeedAdGroupTableViewCell cellHeightWithModel:nativeAd width:width];
-    } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode == BUFeedVideoAdModePortrait || nativeAd.data.imageMode == BUFeedADModeLiveStream) {
+    } else if ([self pbud_isVideoMode:nativeAd.data.imageMode]) {
         return [BUDFeedVideoAdTableViewCell cellHeightWithModel:nativeAd width:width];
     } else if (nativeAd.data.imageMode == BUFeedADModeSquareImage) {
         return [BUDFeedAdSquareImgTableViewCell cellHeightWithModel:nativeAd width:width];
@@ -251,7 +250,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdLargeTableViewCell" forIndexPath:indexPath];
     } else if (nativeAd.data.imageMode == BUFeedADModeGroupImage) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedAdGroupTableViewCell" forIndexPath:indexPath];
-    } else if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait || nativeAd.data.imageMode ==  BUFeedADModeLiveStream) {
+    } else if ([self pbud_isVideoMode:nativeAd.data.imageMode]) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"BUDFeedVideoAdTableViewCell" forIndexPath:indexPath];
         // Set the delegate to listen for status of video
         isVideoCell = YES;
@@ -266,7 +265,7 @@
     if (cell) {
         [cell refreshUIWithModel:nativeAd];
         if (isVideoCell) {
-            if (nativeAd.data.imageMode == BUFeedVideoAdModeImage || nativeAd.data.imageMode ==  BUFeedVideoAdModePortrait || nativeAd.data.imageMode ==  BUFeedADModeLiveStream) {
+            if ([self pbud_isVideoMode:nativeAd.data.imageMode]) {
                 BUDFeedVideoAdTableViewCell *videoCell = (BUDFeedVideoAdTableViewCell *)cell;
                 videoCell.nativeAdRelatedView.mediaAdView.delegate = self;
                 [nativeAd registerContainer:videoCell withClickableViews:@[videoCell.creativeButton]];
@@ -307,6 +306,9 @@
     return cell;
 }
 
+- (BOOL)pbud_isVideoMode:(BUFeedADMode)imageMode {
+    return imageMode == BUFeedVideoAdModeImage || imageMode == BUFeedVideoAdModePortrait || imageMode == BUFeedADModeLiveStream || imageMode == BUFeedADModeCreativeVideoImage || imageMode == BUFeedADModeCreativeVideoImagePortrait;
+}
 
 - (NSString *)pbud_classNameWithCellType:(NSString *)type {
     if ([type isEqualToString: @"title"]) {
@@ -431,7 +433,7 @@
 - (void)nativeAdDidLoad:(BUNativeAd *)nativeAd {
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
 }
-- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd view:view {
+- (void)nativeAdDidLoad:(BUNativeAd *)nativeAd view:(UIView *_Nullable)view {
     [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
 }
 
@@ -469,6 +471,7 @@
     [dataSources removeObject:nativeAd];
     self.dataSource = [dataSources copy];
     [self.tableView reloadData];
+    [self pbud_logWithSEL:_cmd prefix:@"BUNativeAdDelegate" msg:@""];
 }
 
 #pragma mark - BUVideoAdViewDelegate
@@ -502,6 +505,10 @@
 - (void)videoAdView:(BUMediaAdView *)videoAdView
  rewardDidCountDown:(NSInteger)countDown {
     [self pbud_logWithSEL:_cmd prefix:@"BUVideoAdViewDelegate" msg:[NSString stringWithFormat:@"videoAdView:rewardDidCountDown:%ld", (long)countDown]];
+}
+
+- (void)nativeAd:(BUNativeAd *_Nullable)nativeAd onEventCode:(NSInteger)code info:(NSDictionary *)info {
+    [self pbud_logWithSEL:_cmd prefix:@"BUCustomEventProtocol" msg:[NSString stringWithFormat:@"code = %ld info = %@",code,info]];
 }
 
 #pragma mark - Log

@@ -76,17 +76,47 @@
         __strong typeof(weakself) strongSelf = weakself;
         [BUAdTestMeasurementManager showTestMeasurementWithController:strongSelf];
     }];
+
     self.items = @[normalTools,
                    testTools,
                    customDislike,
                    testMeasurement
                     ].mutableCopy;
+
+#if DEBUG
+    //仅demo支持
+    BUDActionModel *quickPreview = [BUDActionModel plainTitleActionModel:@"Quick Preview" type:BUDCellType_setting action:^{
+        __strong typeof(weakself) strongSelf = weakself;
+        if ([BUAdTestMeasurementManager respondsToSelector:@selector(showQuickPreviewWithController:)]) {
+            [BUAdTestMeasurementManager performSelector:@selector(showQuickPreviewWithController:) withObject:strongSelf];
+        }
+    }];
+    
+    self.items = @[normalTools,
+                   testTools,
+                   customDislike,
+                   testMeasurement,
+                   quickPreview
+                    ].mutableCopy;
+
+#endif
+
+
 #else
     self.items = @[normalTools,
                    testTools,
-                   customDislike
+                   customDislike,
                     ].mutableCopy;
 #endif
+    
+    Class adCls = NSClassFromString(@"BUDAdTabBarViewController");
+    if (adCls != nil && [[adCls new] isKindOfClass:[UIViewController class]]) {
+        BUDActionModel *adItem = [BUDActionModel plainTitleActionModel:@"AdTabBar Debug" type:BUDCellType_setting action:^{
+            UIViewController *adItemVC = [adCls new];
+            [weakself.navigationController pushViewController:adItemVC animated:YES];
+        }];
+        [self.items addObject:adItem];
+    }
 }
 
 -(BOOL)shouldAutorotate

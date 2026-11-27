@@ -20,7 +20,6 @@
 #ifdef DEBUG
 #import <MBProgressHUD/MBProgressHUD.h>
 #endif
-#import "NSBundle+BUDemo.h"
 
 
 static CGFloat const bottomHeight = 30;

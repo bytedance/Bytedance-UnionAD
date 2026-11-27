@@ -229,7 +229,7 @@
 #pragma mark - Getter & Setter
 
 - (BOOL)isVideoAd:(BUNativeAd *)ad {
-    return ad.data.imageMode == BUFeedVideoAdModeImage || ad.data.imageMode == BUFeedVideoAdModePortrait || ad.data.imageMode == BUFeedADModeSquareVideo;
+    return ad.data.imageMode == BUFeedVideoAdModeImage || ad.data.imageMode == BUFeedVideoAdModePortrait || ad.data.imageMode == BUFeedADModeSquareVideo || ad.data.imageMode == BUFeedADModeCreativeVideoImage || ad.data.imageMode == BUFeedADModeCreativeVideoImagePortrait;
 }
 
 @end

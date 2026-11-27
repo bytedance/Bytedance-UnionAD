@@ -12,6 +12,4 @@
 
 @interface BUDSplashViewController : BUDBaseExampleViewController
 
-- (void)setUpSplashZoomOutAd:(BUSplashAd *)splashAdView;
-
 @end
